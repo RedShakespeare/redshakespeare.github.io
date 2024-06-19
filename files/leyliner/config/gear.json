@@ -1,0 +1,91 @@
+[
+    {
+      "name": "spellDamHelm",
+      "className": "GearDamageHelm",
+      "slot": "head",
+      "rarity": "common",
+      "bonusSpellDamage": 2,
+      "description": "A basic damage for boosting spell power",
+      "prod": true
+    },
+    {
+      "name": "spellDamChest",
+      "className": "GearDamageChest",
+      "bonusSpellDamage": 1,
+      "slot": "chest",
+      "rarity": "common",
+      "description": "A basic damage for boosting spell power",
+      "prod": true
+    },
+    {
+      "name": "spellDamShoulders",
+      "className": "GearDamageShoulders",
+      "bonusSpellDamage": 1,
+      "slot": "shoulders",
+      "rarity": "common",
+      "description": "A basic damage for boosting spell power",
+      "prod": true
+    },
+    {
+      "name": "spellDamHands",
+      "className": "GearDamageHands",
+      "bonusSpellDamage": 1,
+      "slot": "hands",
+      "rarity": "common",
+      "description": "A basic damage for boosting spell power",
+      "prod": true
+    },
+    {
+      "name": "spellDamLegs",
+      "className": "GearDamageLegs",
+      "slot": "legs",
+      "rarity": "common",
+      "description": "A basic damage for boosting spell power",
+      "prod": true
+    },
+    {
+      "name": "spellDamFeet",
+      "className": "GearDamageFeet",
+      "bonusSpellDamage": 1,
+      "slot": "feet",
+      "rarity": "common",
+      "description": "A basic damage for boosting spell power",
+      "prod": true
+    },
+    {
+      "name": "spellDamWeapon1",
+      "className": "GearDamageLeft",
+      "bonusSpellDamage": 1,
+      "slot": "left",
+      "rarity": "common",
+      "description": "A basic damage for boosting spell power",
+      "prod": true
+    },
+    {
+      "name": "spellDamWeapon2",
+      "className": "GearDamageRight",
+      "bonusSpellDamage": 1,
+      "slot": "right",
+      "rarity": "common",
+      "description": "A basic damage for boosting spell power",
+      "prod": true
+    },
+    {
+      "name": "spellDamRing",
+      "className": "GearDamageRing",
+      "bonusSpellDamage": 1,
+      "slot": "ring",
+      "rarity": "common",
+      "description": "A basic damage for boosting spell power",
+      "prod": true
+    },
+    {
+      "name": "spellDamFamiliar",
+      "className": "GearDamageFamiliar",
+      "bonusSpellDamage": 1,
+      "slot": "familiar",
+      "rarity": "common",
+      "description": "A basic damage for boosting spell power",
+      "prod": true
+    }
+  ]

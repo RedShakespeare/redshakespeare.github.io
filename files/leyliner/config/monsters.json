@@ -1,0 +1,604 @@
+[
+	{
+		"name": "Leyliner",
+		"description": "Bends mana to his will.",
+		"sprite": 221,
+		"level": 999,
+		"hp": 50,
+		"damage":1
+	},
+	{
+		"name": "Hawk",
+		"description": "Moves twice per turn.",
+		"sprite": 73,
+		"level": 1,
+		"hp": 1.5,
+		"damage": 3,
+		"moveSpeed": 2
+	},
+	{
+		"name": "Spider",
+		"description": "Weak, but shoots a web.",
+		"sprite": 109,
+		"level": 1,
+		"hp": 1.5,
+		"damage": 2,
+		"range": 2,
+		"properties": {
+			"swarm": 2
+		}
+	},
+	{
+		"name": "Wolf",
+		"description": "Woof woof.",
+		"sprite": 1,
+		"level": 2,
+		"hp": 8,
+		"damage": 3
+	},
+	{
+		"name": "Werewolf",
+		"description": "The Moon Howls Back",
+		"sprite": 10,
+		"level": 300,
+		"hp": 12,
+		"damage": 4,
+		"DELETEDspecial":"Lunge",
+		"cooldown": 3
+	},
+	{
+		"name": "Crystal Warrior",
+		"description": "Vulnerable only to attack damage.",
+		"sprite": 72,
+		"level": 4,
+		"hp": 0.5,
+		"damage": 8,
+		"range": 2,
+		"properties": {
+			"crystal": true
+		}
+	},
+	{
+		"name": "Magma Golem",
+		"description": "The heat that won't quit.",
+		"sprite": 71,
+		"level": 6,
+		"hp": 20,
+		"damage": 8,
+		"range": 2,
+		"properties": {
+			"burn": true
+		}
+	},
+	{
+		"name": "Blood Polyp",
+		"description": "Its lifeblood is mana",
+		"sprite": 107,
+		"level": 300,
+		"hp": 27.77,
+		"damage": 5,
+		"startHalfHp": true,
+		"properties": {
+			"startsWithStatuses":[{
+				"type": "Vigor",
+				"stacks": 1
+			}]
+		}
+		
+	},
+	{
+		"name": "Blood Clot",
+		"description": "More a walking wound than a semblance of life.",
+		"sprite": 143,
+		"level": 300,
+		"hp": 11.11,
+		"damage": 2
+	},
+	{
+		"name": "Blood Droplet",
+		"description": "Mostly blind, it instead hunts by smell alone.",
+		"sprite": 142,
+		"level": 300,
+		"hp": 10,
+		"damage": 6,
+		"hunter":true
+	},
+	{
+		"name": "Blood Slinger",
+		"description": "Fires spears of crystallized blood from afar.",
+		"sprite": 111,
+		"level": 300,
+		"hp": 10,
+		"damage": 4,
+		"range":4
+	},
+	{
+		"name": "Blood Golem",
+		"description": "Berserks when it attacks.",
+		"sprite": 108,
+		"level": 300,
+		"hp": 60,
+		"damage": 5,
+		"properties": {
+			"startsWithStatuses":[{
+				"type": "Vigor",
+				"stacks": 1
+			}]
+		},
+		"berserker": true
+	},
+	{
+		"name": "Son of Lycaon",
+		"description": "The Firstborn",
+		"sprite": 11,
+		"level": 400,
+		"hp": 45,
+		"damage": 10,
+		"DELETEDspecial":"Moon Cleave"
+	},
+	{
+		"name": "Ghost",
+		"description": "Spooky spirit.",
+		"sprite": 4,
+		"level": 1,
+		"hp": 2.5,
+		"damage": 1,
+		"properties": {
+			"ghostly": true
+		}
+	},
+	{
+		"name": "Green Dragon",
+		"description": "Fire breathing dragon.",
+		"sprite": 5,
+		"level": 5,
+		"hp": 30,
+		"range": 2,
+		"onHitStatus": "Burning",
+		"damage": 16
+	},
+	{
+		"name": "Dragon Egg",
+		"description": "Eager to become more.",
+		"sprite": 70,
+		"level": 3,
+		"hp": 8,
+		"properties": {
+			"static": true,
+			"startsWithStatuses":[{
+				"type": "Dragonspawn",
+				"stacks": 5
+			}]
+		}
+	},
+	{
+		"name": "Dragon",
+		"description": "Fire breathing dragon.",
+		"sprite": 110,
+		"level": 500,
+		"hp": 40,
+		"range": 2,
+		"onHitStatus": "Burning",
+		"damage": 8
+	},
+	{
+		"name": "Gnome",
+		"description": "Looks to be in a hurry",
+		"sprite": 6,
+		"level": 2,
+		"hp": 2,
+		"damage": 8,
+		"range": 2
+	},
+	{
+		"name": "Thunderbird",
+		"description": "Zaps Enemies 4 units away",
+		"sprite": 7,
+		"level": 3,
+		"hp": 8,
+		"range": 4,
+		"onHitStatus": "Shocked",
+		"damage": 6
+	},
+	{
+		"name": "Nikola's Engine",
+		"description": "Applies SHOCKED to ALL units within 4 tiles.",
+		"sprite": 8,
+		"level": 999,
+		"hp": 30,
+		"DELETEDspecial": "Nikola",
+		"damage": 0
+	},
+	{
+		"name": "Firestarter Totem",
+		"description": "While active adds spell damage when fire mana is consumed after spell cost.",
+		"sprite": 140,
+		"level": 999,
+		"hp": 1,
+		"damage": 0,
+		"totem":true
+	},
+	{
+		"name": "Raiju",
+		"description": "Faster than lightning itself.",
+		"sprite": 9,
+		"level": 999,
+		"hp": 75,
+		"damage": 10
+	},
+	{
+		"name": "Feral Pig",
+		"description": "Oink is the last thing some hear.",
+		"sprite": 44,
+		"level": 2,
+		"hp": 5,
+		"damage": 2
+	},
+	{
+		"name": "Battle Mage",
+		"description": "Magically enhanced steel.",
+		"sprite": 12,
+		"level": 4,
+		"hp": 18,
+		"damage": 5
+	},
+	{
+		"name": "Red Assassin",
+		"description": "Teleports to the Leyliner when struck.",
+		"sprite": 138,
+		"level": 5,
+		"hp": 25,
+		"damage": 15,
+		"properties": {
+			"startsWithStatuses":[{
+				"type": "Vengeful",
+				"stacks": 1
+			}]
+		}
+	},
+	{
+		"name": "Chaos Butterfly",
+		"description": "That which cannot be.",
+		"sprite": 14,
+		"level": 5,
+		"hp": 12,
+		"damage": 11
+	},
+	{
+		"name": "Brutal monk",
+		"description": "Gains BERSERK each turn.",
+		"sprite": 15,
+		"level": 4,
+		"hp": 10,
+		"damage": 5,
+		"properties": {
+			"gainsBerserk": true
+		}
+	},
+	{
+		"name": "Leyliner Hunter",
+		"description": "Too late, it sees you.",
+		"sprite": 13,
+		"level": 6,
+		"hp": 40,
+		"damage": 11
+	},
+	{
+		"name": "Madness Incarnate",
+		"description": "Its form shifts eerily.",
+		"sprite": 42,
+		"level": 6,
+		"hp": 16,
+		"damage": 12
+	},
+	{
+		"name": "Venomous Snake",
+		"description": "The rattle is not a toy.",
+		"sprite": 43,
+		"level": 3,
+		"hp": 8,
+		"damage": 4
+	},
+	{
+		"name": "Phoenix",
+		"description": "Origin of Fire.",
+		"sprite": 45,
+		"level": 7,
+		"hp": 20,
+		"damage": 19,
+		"properties": {
+			"spawnMonsterOnDeath": "Ash"
+		}
+	},
+	{
+		"name": "Ash",
+		"description": "Remnants of a great spirit.",
+		"sprite": 141,
+		"level": 999,
+		"hp": 5,
+		"properties": {
+			"static": true,
+			"startsWithStatuses":[{
+				"type": "Phoenixspawn",
+				"stacks": 3
+			}]
+		}
+	},
+	{
+		"name": "Abomination",
+		"description": "Flesh grows like boils.",
+		"sprite": 46,
+		"level": 7,
+		"hp": 80,
+		"damage": 5
+	},
+	{
+		"name": "Watcher",
+		"description": "Who watches it?",
+		"sprite": 47,
+		"level": 8,
+		"hp": 90,
+		"damage": 6
+	},
+	{
+		"name": "Shinigami",
+		"description": "Bringer of Death.",
+		"sprite": 74,
+		"level": 8,
+		"hp": 26,
+		"damage": 22
+	},
+	{
+		"name": "Cyclops Skeleton",
+		"description": "It towers to the ceiling.",
+		"sprite": 75,
+		"level": 9,
+		"hp": 99,
+		"damage": 8
+	},
+	{
+		"name": "Chaos Lich",
+		"description": "What are its secrets?",
+		"sprite": 76,
+		"level": 9,
+		"hp": 24,
+		"range": 3,
+		"damage": 32
+	},
+	{
+		"name": "Undefeated Minotaur",
+		"description": "Can he lose?",
+		"sprite": 77,
+		"level": 10,
+		"hp": 105,
+		"damage": 10
+	},
+	{
+		"name": "Undefeated Centaur",
+		"description": "Can he lose?",
+		"sprite": 78,
+		"level": 10,
+		"hp": 44,
+		"damage": 35
+	},
+	{
+		"name": "The Ascended One",
+		"description": "???",
+		"sprite": 79,
+		"level": 11,
+		"hp": 170,
+		"damage": 30
+	},
+	{
+		"name": "The Fallen One",
+		"description": "???",
+		"sprite": 106,
+		"level": 12,
+		"hp": 280,
+		"damage": 50
+	},
+
+	{
+		"name": "Rat Archer",
+		"description": "They carry cute little bows.",
+		"sprite": 184,
+		"level": 1,
+		"hp": 1,
+		"damage": 4,
+		"range": 4
+	},
+
+	{
+		"name": "Jester",
+		"description": "No laughing matter.",
+		"sprite": 189,
+		"level": 2,
+		"hp": 5,
+		"damage": 4,
+		"range": 2
+	},
+
+	{
+		"name": "Sprite",
+		"description": "A magical pest.",
+		"sprite": 185,
+		"level": 3,
+		"hp": 6,
+		"damage": 2,
+		"range": 4
+	},
+
+	{
+		"name": "Longbowman",
+		"description": "Trained from birth to hit their targets.",
+		"sprite": 182,
+		"level": 4,
+		"hp": 8,
+		"damage": 6,
+		"range": 6
+	},
+
+	{
+		"name": "Spitting Cobra",
+		"description": "A rare species that can spit as well as bite.",
+		"sprite": 188,
+		"level": 5,
+		"hp": 12,
+		"damage": 12,
+		"range": 3
+	},
+
+	{
+		"name": "Arcing Phantom",
+		"description": "An electrifiying horror.",
+		"sprite": 187,
+		"level": 6,
+		"hp": 6,
+		"damage": 13,
+		"range": 6
+	},
+
+	{
+		"name": "Sniper",
+		"description": "Has you in its sights.",
+		"sprite": 191,
+		"level": 7,
+		"hp": 10,
+		"damage": 16,
+		"range": 10
+	},
+
+	{
+		"name": "Guardian",
+		"description": "",
+		"sprite": 223,
+		"level": 999,
+		"hp": 10,
+		"damage": 100,
+		"range": 10
+	},
+
+	{
+		"name": "Fire elemental",
+		"description": "Hot to the touch.",
+		"sprite": 186,
+		"level": 8,
+		"hp": 15,
+		"damage": 21,
+		"range": 3
+	},
+
+	{
+		"name": "Unstable elemental",
+		"description": "Explodes on death for 10 damage in radius 2.",
+		"sprite": 139,
+		"level": 5,
+		"hp": 15,
+		"damage": 6,
+		"properties": {
+			"explodeOnDeath": 10
+		}
+	},
+
+	{
+		"name": "Fly",
+		"description": "Follows death and destruction.",
+		"sprite": 179,
+		"level": 1,
+		"hp": 0.5,
+		"damage": 1,
+		"properties": {
+			"swarm": 4
+		}
+	},
+
+	{
+		"name": "Mana Gremlin",
+		"description": "Creates mana around it when it dies.",
+		"sprite": 176,
+		"level": 2,
+		"hp": 7,
+		"damage": 2,
+		"properties": {
+			"manaOnDeath": true
+		}
+	},
+
+	{
+		"name": "Beastmaster",
+		"description": "Summons a hawk every turn.",
+		"sprite": 177,
+		"level": 5,
+		"hp": 10,
+		"damage": 8,
+		"range": 3,
+		"properties": {
+			"summon": "Hawk"
+		}
+	},
+
+	{
+		"name": "Mummy",
+		"description": "Curses you if killed.",
+		"sprite": 178,
+		"level": 6,
+		"hp": 20,
+		"damage": 6,
+		"properties": {
+			"startsWithStatuses":[{
+				"type": "SlowDeath",
+				"stacks": 5
+			}]
+		}
+	},
+
+	{
+		"name": "Gravedigger",
+		"description": "Ghostly. Destroys all walls near its target.",
+		"sprite": 180,
+		"level": 7,
+		"hp": 25,
+		"damage": 20,
+		"properties": {
+			"destroyWalls": 8,
+			"ghostly": true
+		}
+	},
+
+	{
+		"name": "Vicar",
+		"description": "Destroys a wall near its target.",
+		"sprite": 181,
+		"level": 4,
+		"hp": 15,
+		"damage": 5,
+		"range": 3,
+		"properties": {
+			"destroyWalls": 1
+		}
+	},
+
+	{
+		"name": "High Priest",
+		"description": "Destroys walls near its target.",
+		"sprite": 183,
+		"level": 9,
+		"hp": 40,
+		"damage": 18,
+		"range": 4,
+		"properties": {
+			"destroyWalls": 8
+		}
+	},
+
+	{
+		"name": "Sentinel",
+		"description": "Always watching, always guarding.",
+		"sprite": 190,
+		"level": 10,
+		"hp": 30,
+		"damage": 20,
+		"range": 6
+	}
+
+]

@@ -1,0 +1,1067 @@
+@font-face {
+  font-family: Frijole;
+  src: url("../fonts/Frijole-Regular.ttf");
+  font-weight: normal;
+}
+
+
+@font-face {
+  font-family: 'Roboto Mono';
+  src: url("../fonts/RobotoMono-VariableFont_wght.ttf");
+  font-weight: normal;
+}
+
+body,html{
+	background-color: black;
+	color: white;
+	font-family: arial;
+	padding: 0;
+	margin: 0;
+
+	--card-border-color: #efc092;
+	--card-border-dark: #aa6f76;
+	--highlight-color: #1391be;
+	--highlight-color-darker: #156c8b;
+
+
+	user-select: none;
+}
+
+.uninteractable{
+	pointer-events: none;
+}
+
+.exhaust{
+	color: #ad9fd1;
+	text-shadow: 0 0 5px #ad9fd1;
+}
+
+.highlight{
+	color: cyan;
+	text-shadow: 0 0 3px cyan;
+	font-weight: bold;
+}
+
+.overlay{
+	background-color: black;
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	z-index: 5000;
+	box-sizing: border-box;
+	overflow: hidden;
+	opacity: 0;
+}
+
+.overlay-inner{
+	box-sizing: border-box;
+	overflow: hidden;
+	width: 100%;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+}
+
+.scrollable{
+	overflow: auto;
+	width: 100%;
+	height: 100%;
+}
+
+.centered{
+	text-align: center;
+}
+
+#loading{
+	color: #555;
+	opacity: 1;
+}
+#black-overlay{
+	opacity: 1;
+}
+
+#game-over-screen{
+	font-style: italic;
+	color: red;
+}
+
+#win-screen{
+}
+
+#canvas{
+	background-color: black;
+}
+
+#title-screen{
+	background-image: url('../img/leyliner-title.jpg');
+	background-size: cover;
+}
+
+#title-screen .overlay-inner{
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	flex-direction: row;
+}
+
+#title-inner{
+	box-sizing: border-box;
+	overflow: hidden;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+	flex-direction: column;
+}
+
+#title-screen h1{
+	font-size: 80px;
+	margin: 10px 0 20px 0;
+	min-height: 0;
+	padding: 0;
+	line-height: 1.4;
+	font-weight: normal;
+	font-family: 'Frijole';
+}
+
+
+#canvas-container{
+	box-sizing: border-box;
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top: 0;
+	overflow: hidden;
+}
+
+#card-container{
+	box-sizing: border-box;
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top: 0;
+	overflow: hidden;
+}
+
+.card{
+	font-size: 16px;
+	background: linear-gradient(#efc092, #aa6f76);
+	border: 1px solid white;
+
+	border-radius: 25px;
+	box-sizing: border-box;
+	width: 200px;
+	height: 280px;
+	padding: 5px;
+	position: absolute;
+	left: 20px;
+	opacity: 1;
+	cursor: pointer;
+}
+
+.shortcut{
+	display: inline-block;
+	padding: 3px;
+	width: 32px;
+	height: 32px;
+	box-sizing: border-box;
+	position: absolute;
+	text-align: center;
+}
+
+.card .shortcut{
+	background-color: black;
+	border-radius: 3px 20px 3px 20px;
+	bottom: 3px;
+	left: 3px;
+	border: 3px solid var(--card-border-dark);
+}
+
+.button .shortcut{
+	background-color: rgba(0,0,0,.5);
+	border-radius: 3px;
+	top: calc(50% - 16px);
+	left: 10px;
+	border: 1px solid rgba(255, 255, 255, 0.5);
+	margin-right: 5px;
+}
+
+#card-container .card{
+	margin: 0;
+	animation: move-down .5s;
+}
+
+#card-container .card:hover{
+	background: white;
+	/*animation: move-up .5s;
+	margin-top: -20px;*/
+}
+
+@keyframes  move-up {
+  0% { margin-top: 0; }
+  100% { margin-top: -20px; }
+}
+
+@keyframes  move-down {
+  100% { margin-top: 0; }
+  0% { margin-top: -20px; }
+}
+
+.card-inner{
+	border: 10px;
+	width: 100%;
+	height: 100%;
+	border-radius: 20px;
+	background: linear-gradient(#4a4c67, #26232d);
+
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.card-cost{
+	font-size: 24px;
+	font-weight: bold;
+	border-radius: 100px;
+	border: 3px solid var(--card-border-color);
+	width: 40px;
+	height: 40px;
+	box-sizing: border-box;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: absolute;
+	top: -3px;
+	left: -3px;
+}
+
+.card-title{
+	font-size: 20px;
+	margin: 0 40px;
+	padding: 5px 0;
+	text-align: center;
+	font-weight: bold;
+	text-shadow: 0 1px 0 black, 0 0 5px rgba(255,255,255,0.35);
+}
+
+.card-description{
+	padding: 5px 10px 5px 10px;
+}
+
+.card-mana{
+	border-top: 1px solid var(--card-border-dark);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 140px;
+	border-radius: 0 0 20px 20px;
+}
+
+.type-colorless .card-mana{
+	border-top: none;
+}
+
+.card-mana-inner{
+	width: 24px;
+	height: 24px;
+	background-image: url('../img/ss.png');
+	transform: scale(4);
+	transform-origin: 12px 12px;
+	image-rendering: pixelated;
+}
+
+#sidebar{
+	color: white;
+	padding: 10px;
+	font-size: 20px;
+	box-sizing: border-box;
+	position: absolute;
+	height: 100%;
+	top: 0;
+	right: 0;
+	width: 0;
+	background-color: black;
+	display: flex;
+	overflow: hidden;
+}
+
+#sidebar-phase{
+	margin-bottom: 5px;
+}
+
+#sidebar-phase-description{
+	margin-bottom: 20px;
+	min-height: 60px;
+}
+
+.blink{
+	font-weight: bold;
+  	animation: blinker 1s linear infinite;
+	color: cyan;
+	text-shadow: 0 0 10px cyan
+}
+
+#player-hp{
+	font-weight: bold;
+}
+
+#player-shield{
+	font-weight: bold;
+	color: #5be9ff;
+	text-shadow: 0 0 2px #5be9ff;
+}
+
+#sidebar-phase span{
+	color: #666;
+	margin: 5px 20px 20px 0px;
+}
+
+#sidebar-phase span.active{
+	color: white;
+	text-shadow: 0 0 5px white, 0 0 1px white;
+}
+
+#sidebar-info{
+	flex-grow: 1;
+}
+
+#sidebar-buttons{
+	padding: 5px;
+	z-index: 1000;
+	pointer-events: none;
+	display: flex;
+	flex-direction: column;
+	align-items: end;
+}
+
+#sidebar-potions{
+	margin-top: 20px;
+	display: block;
+}
+
+.potion{
+	border: 1px solid rgba(255,255,255,0.3);
+	box-sizing: border-box;
+	display: inline-block;
+	margin: 5px;
+	width: 48px;
+	height: 48px;
+	pointer-events: auto;
+	border-radius: 200px;
+	cursor: pointer;
+	position: relative;
+}
+
+.potion:hover{
+	border: 1px solid rgba(255,255,255,0.7);
+}
+
+.potion-inner{
+	/* we adjust width/height, background size, and background position
+	by a scaling factor of 2 to achieve a double sized 24x24 pixel sprite */
+	width: 48px;
+	height: 48px;
+	transform-origin: 0 0;
+	background-size: 768px 768px; 
+	image-rendering: pixelated;
+	background-image: url('../img/ss.png');
+	background-position: 0 calc(2*14*-24px);
+}
+
+.potion-count{
+	bottom: -5px;
+	right: -5px;
+	color: black;
+	background-color: #ddd;
+	border-radius: 100px;
+	width: 20px;
+	height: 20px;
+	position:absolute;
+	display:flex;
+	align-items:center;
+	justify-content:center;
+	font-weight: bold;
+}
+
+#sidebar-main-info{
+	margin-bottom: 20px;
+}
+
+.button{
+	padding: 10px 40px;
+	width: 160px;
+	text-align: center;
+	border-radius: 3px;
+	color: white;
+	background-color: #14a86e;
+	font-weight: bold;
+	display: inline-block;
+	cursor: pointer;
+	pointer-events: auto;
+  	margin: 5px;
+  	position: relative;
+}
+
+.button:hover {
+  background-color: #036a41
+}
+
+#sidebar .button{
+	padding-right: 5px;
+}
+
+#attune-button{
+	display:none;
+}
+
+.button-greyed-out{
+	background-color: #555;
+}
+
+.button-greyed-out:hover{
+	background-color: #333;
+}
+
+.button.button-active{
+	background-color: var(--highlight-color);
+}
+
+.button.button-active:hover{
+	background-color: var(--highlight-color-darker);
+}
+
+.button.disabled{
+	background-color: #444;
+	color: #999;
+}
+
+.button.disabled:hover{
+	background-color: #444;
+}
+
+#credits {
+	width: 400px;
+	text-align: center;
+}
+
+#jere-josh{
+	margin: 60px 0 20px 0;
+}
+
+#credits span{
+	display: inline-block;
+	padding: 7px 15px;
+}
+
+a, a:hover, a:visited, a:active{
+	color: #ff00ff;
+}
+
+#how-to-play-button{
+	background-color: #595;
+}
+
+#discord-button{
+	background-color: #5865F2;
+}
+
+#discord-button img{
+	position: absolute;
+	left: 20px;
+	top: 7px;
+	vertical-align: center;
+	height: 24px;
+}
+
+#how-to-play-button:hover {
+	background-color: #373;
+}
+
+#how-to-play-screen img{
+	border: 1px solid white;
+	display: inline-block;
+	vertical-align: middle;
+}
+
+#starter-decks{
+	margin: 30px;
+	display: flex;
+	background-color: rgba(0,0,0,.6);;
+	box-shadow: 0 0 10px rgba(0,0,0,.6);
+	padding: 10px;
+	border-radius: 20px;
+}
+
+@keyframes blinker {
+  50% {
+    opacity: 0;
+  }
+}
+
+.how-text{
+	display: inline-block;
+	margin: 15px;
+	width: 500px;
+	vertical-align: middle;
+	font-size: 18px;
+}
+
+.how-beat{
+	font-weight: bold;
+	text-align: center;
+	font-size: 20px;
+}
+
+#sidebar-hover-info{
+	margin-top: 20px;
+}
+
+#cards-owned-inner{
+	width: 80vw;
+	text-align: left;
+}
+
+#inventory-container{
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+}
+
+#card-shop{
+	width: 90vw;
+	height: 100%;
+	background-color: black;
+	z-index: 2000;
+	padding: 30px;
+	box-sizing: border-box;
+	display: block;
+}
+
+#card-shop .mini-card.card{
+	width: 150px;
+	height: 150px;
+	animation: none;
+	box-sizing: border-box;
+	box-shadow: 0 5px 10px rgba(0,0,0,.4);
+	margin: 10px;
+	cursor: pointer;
+	border: 0;
+	pointer-events: none;
+}
+
+#card-shop .mini-card.card.delete{
+	background-color: #555;
+}
+
+#card-shop .mini-card.card.delete .card-mana{
+	display: none;
+}
+
+#card-shop .card.delete:after{
+	content : 'X';
+	font-size: 120px;
+	font-weight: bold;
+	color: red;
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	top: 0px;
+	left: 0px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	text-shadow: 0 0 10px black, 0 0 2px black;
+	pointer-events: none;
+}
+
+#card-shop .mini-card .card-description, #card-shop .mini-card .card-header,
+#card-shop .mini-card .card-cost{
+	display: none;
+}
+
+#card-shop .mini-card .card-mana{
+	border-top: 1px solid var(--card-border-dark);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100%;
+	border-radius: 20px;
+	box-sizing: border-box;
+}
+
+#card-shop-row-container{
+	display: flex;
+	flex-direction: column;
+	margin-top: 50px;
+}
+
+.card-shop-row{
+	height: 170px;
+	position: relative;
+	box-sizing: border-box;
+	cursor: pointer;
+	border-radius: 25px;
+	margin: 10px 0;
+/*	border: 1px solid rgba(255,255,255,.5);*/
+	display: flex;
+	justify-content: space-around;
+	padding: 0 10vw;
+}
+
+.card-shop-row:hover{
+	/*background-color: rgba(255,255,255,.15);
+	border: 1px solid rgba(255,255,255,1);*/
+}
+
+.card-shop-row.selected, .card-shop-row.selected:hover{
+	border: none;
+	background: none;
+}
+
+#shop-housekeeping{
+	position: relative;
+	display: flex;
+	justify-content: space-between;
+}
+
+
+.starter-deck{
+	position: relative;
+	border: 1px solid #555;
+	border-radius: 10px;
+	margin: 5px;
+	cursor: pointer;
+	padding: 10px;
+	width: 120px;
+	height: 120px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	box-sizing: border-box;
+}
+
+.mana-pool-mana, .deck-list-mana{
+	width: 24px;
+	height: 24px;
+	margin: 5px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	box-sizing: border-box;
+	display: inline-block;
+}
+
+.mana-pool-mana .card-mana-inner, .deck-list-mana .card-mana-inner{
+	transform: scale(1);
+	transform-origin: 0 0;
+}
+
+.deck-list-card {
+	margin: 10px;
+	font-size: 18px;
+}
+
+.deck-list-card div{
+	vertical-align: top;
+	display: inline-block;
+}
+
+.deck-list-mana{
+	margin: 0;
+}
+
+.starter-deck:hover{
+	background-color: #222;
+	border-color: white;
+}
+
+.tooltip-highlight{
+	font-weight: bold;
+	text-decoration: underline;
+}
+
+.display-card{
+	position: relative;
+	left: 0;
+	top: 0;
+	display: inline-block;
+	margin: 10px;
+}
+
+.display-card .shortcut{
+	display: none;
+}
+
+
+/* colors */
+body,html{
+	--fire-color: 255, 100, 0;
+	--moon-color: 255, 0, 255;
+	--elec-color: 255, 238, 0;
+	--earth-color: 166, 70, 30;
+	--blood-color: 255, 0, 0;
+	--rebirth-color: 205, 207, 227;
+	--decay-color: 68, 147, 57;
+	--chaos-color: 0, 0, 0;
+	--frost-color: 69, 92, 223;
+	--colorless-color: 180, 180, 180;
+}
+
+
+.tooltip-highlight.type-moon{
+	color: rgb(var(--moon-color));
+}
+
+.tooltip-highlight.type-elec{
+	color: rgb(var(--elec-color));
+}
+
+.tooltip-highlight.type-blood{
+	color: rgb(var(--blood-color));
+}
+
+.tooltip-highlight.type-colorless{
+	color: rgb(var(--colorless-color));
+}
+
+.tooltip-highlight.type-fire{
+	color: rgb(var(--fire-color));
+}
+
+.tooltip{
+	width: max(100%, 170px);
+	box-sizing: border-box;
+	border-radius: 10px;
+	border: 2px solid white;
+	background-color: black;
+	color: white;
+	position: absolute;
+	top: 0;
+	z-index: 99999;
+	padding: 10px;
+	display: none;
+	font-size: 14px;
+	box-shadow: 0 0 5px black, 0 0 10px black;
+}
+
+/*.tooltip.left-side{
+	 right: calc(100%);
+}
+
+.tooltip.right-side{
+	 left: calc(100%);
+}*/
+
+.tooltip h3.tooltip-highlight{
+	text-align: center;
+	text-decoration: none;
+	margin-top: 0;
+	padding-top: 0;
+}
+
+
+
+/* CARD COST color */
+.type-fire .card-cost{
+	background: linear-gradient(150deg, rgb(var(--fire-color)), black);
+}
+.type-moon .card-cost{
+	background: linear-gradient(150deg, rgb(var(--moon-color)), black);
+}
+.type-elec .card-cost{
+	background: linear-gradient(150deg, rgb(var(--elec-color)), black);
+}
+.type-earth .card-cost{
+	background: linear-gradient(150deg, rgb(var(--earth-color)), black);
+}
+.type-blood .card-cost{
+	background: linear-gradient(150deg, rgb(var(--blood-color)), black);
+}
+.type-colorless .card-cost{
+	background: linear-gradient(150deg, rgb(var(--colorless-color)), black);
+}
+.type-rebirth .card-cost{
+	background: linear-gradient(150deg, rgb(var(--rebirth-color)), black);
+}
+.type-decay .card-cost{
+	background: linear-gradient(150deg, rgb(var(--decay-color)), black);
+}
+.type-chaos .card-cost{
+	background: linear-gradient(150deg, rgb(var(--chaos-color)), black);
+}
+.type-frost .card-cost{
+	background: linear-gradient(150deg, rgb(var(--frost-color)), black);
+}
+/* MANA position */
+.type-random .card-mana-inner{
+	background-position:  calc((0)*-24px) calc(2*-24px);
+}
+.type-fire .card-mana-inner{
+	background-position:  calc((1)*-24px) calc(2*-24px);
+}
+.type-moon .card-mana-inner{
+	background-position:  calc((2)*-24px) calc(2*-24px);
+}
+.type-elec .card-mana-inner{
+	background-position:  calc((3)*-24px) calc(2*-24px);
+}
+.type-blood .card-mana-inner{
+	background-position:  calc((4)*-24px) calc(2*-24px);
+}
+.type-colorless .card-mana-inner{
+	background: none;
+}
+.type-earth .card-mana-inner{
+	background-position:  calc((5)*-24px) calc(2*-24px);
+}
+.type-rebirth .card-mana-inner{
+	background-position:  calc((6)*-24px) calc(2*-24px);
+}
+.type-decay .card-mana-inner{
+	background-position:  calc((7)*-24px) calc(2*-24px);
+}
+.type-chaos .card-mana-inner{
+	background-position:  calc((8)*-24px) calc(2*-24px);
+}
+.type-frost .card-mana-inner{
+	background-position:  calc((9)*-24px) calc(2*-24px);
+}
+
+/* MANA color, hover color */
+.type-fire .card-mana{
+	background: radial-gradient(rgba(var(--fire-color), 0.4), black);
+}
+.type-fire:hover .card-mana, .card-shop-row:hover .type-fire.mini-card .card-mana{
+	background: radial-gradient(rgba(var(--fire-color), 0.8), black);
+}
+.type-moon .card-mana{
+	background: radial-gradient(rgba(var(--moon-color), 0.4), black);
+}
+.type-moon:hover .card-mana, .card-shop-row:hover .type-moon.mini-card .card-mana{
+	background: radial-gradient(rgba(var(--moon-color), 0.8), black);
+}
+.type-elec .card-mana{
+	background: radial-gradient(rgba(var(--elec-color), 0.4), black);
+}
+.type-elec:hover .card-mana, .card-shop-row:hover .type-elec.mini-card .card-mana{
+	background: radial-gradient(rgba(var(--elec-color), 0.8), black);
+}
+.type-earth .card-mana{
+	background: radial-gradient(rgba(var(--earth-color), 0.4), black);
+}
+.type-earth:hover .card-mana{
+	background: radial-gradient(rgba(var(--earth-color), 0.8), black);
+}
+.type-blood .card-mana{
+	background: radial-gradient(rgba(var(--blood-color), 0.4), black);
+}
+.type-blood:hover .card-mana, .card-shop-row:hover .type-blood.mini-card .card-mana{
+	background: radial-gradient(rgba(var(--blood-color), 0.8), black);
+}
+.type-rebirth .card-mana{
+	background: radial-gradient(rgba(var(--rebirth-color), 0.4), black);
+}
+.type-rebirth:hover .card-mana{
+	background: radial-gradient(rgba(var(--rebirth-color), 0.8), black);
+}
+.type-decay .card-mana{
+	background: radial-gradient(rgba(var(--decay-color), 0.4), black);
+}
+.type-decay:hover .card-mana{
+	background: radial-gradient(rgba(var(--decay-color), 0.8), black);
+}
+.type-chaos .card-mana{
+	background: radial-gradient(rgba(var(--chaos-color), 0.4), black);
+}
+.type-chaos:hover .card-mana{
+	background: radial-gradient(rgba(var(--chaos-color), 0.8), black);
+}
+.type-frost .card-mana{
+	background: radial-gradient(rgba(var(--frost-color), 0.4), black);
+}
+.type-frost:hover .card-mana{
+	background: radial-gradient(rgba(var(--frost-color), 0.8), black);
+}
+
+/* mini card backgrounds */
+
+.type-fire.mini-card{
+	background: rgb(var(--fire-color));
+}
+.type-moon.mini-card{
+	background: rgb(var(--moon-color));
+}
+.type-elec.mini-card{
+	background: rgb(var(--elec-color));
+}
+.type-earth.mini-card{
+	background: rgb(var(--earth-color));
+}
+.type-blood.mini-card{
+	background: rgb(var(--blood-color));
+}
+.type-colorless.mini-card{
+	background: rgb(var(--colorless-color));
+}
+.type-rebirth.mini-card{
+	background: rgb(var(--rebirth-color));
+}
+.type-decay.mini-card{
+	background: rgb(var(--decay-color));
+}
+.type-chaos.mini-card{
+	background: rgb(var(--chaos-color));
+}
+.type-frost.mini-card{
+	background: rgb(var(--frost-color));
+}
+
+
+
+
+
+.unaffordable .card-cost{
+	color: #aaa;
+	background: #444;
+}
+.unplayable .card-cost{
+	display: none;
+}
+
+.discounted .card-cost{
+	color: lime;
+}
+
+
+
+
+.won-deck .card-mana-inner{
+	animation:spin .5s linear infinite;
+	transform:scale(4); 
+}
+@keyframes spin { 
+    50% { 
+        transform:scale(3.5); 
+    } 
+}
+.won-deck.type-fire{
+	border-color: rgb(var(--fire-color));
+	background-color: rgba(var(--fire-color), 0.3);
+	box-shadow: 0 0 10px rgb(var(--fire-color));
+}
+.won-deck.type-moon{
+	border-color: rgb(var(--moon-color));
+	background-color: rgba(var(--moon-color), 0.3);
+	box-shadow: 0 0 10px rgb(var(--moon-color));
+}
+.won-deck.type-elec{
+	border-color: rgb(var(--elec-color));
+	background-color: rgba(var(--elec-color), 0.3);
+	box-shadow: 0 0 10px rgb(var(--elec-color));
+}
+.won-deck.type-blood{
+	border-color: rgb(var(--blood-color));
+	background-color: rgba(var(--blood-color), 0.3);
+	box-shadow: 0 0 10px rgb(var(--blood-color));
+}
+
+#version-number{
+	position: absolute;
+	bottom: 20px;
+	left: 20px;
+	font-size: 20px;
+	font-family: Helvetica, Arial;
+	font-weight: bold;
+}
+
+
+/*
+
+COLOR AD, show off new features
+
+.starter-deck.type-blood::before{
+	content: 'NEW VAMP CARDS!';
+	position: absolute;
+	top: -40px;
+	left: 10px;
+	font-style: italic;
+	text-shadow: 0 0 4px cyan;
+	color: cyan;
+	font-size: 16px;
+}
+
+*/
+
+
+.card.exhausted * {
+	background: white !important;
+	border-color: white !important;
+	color: white !important;
+	text-shadow: none;
+	box-shadow: 0 0 10px white !important;
+}
+
+#turncount{
+	text-align: center;
+	font-weight: bold;
+	padding: 50px;
+	background: linear-gradient(
+		90deg,
+		rgba(0,0,0,0),
+		rgba(0,0,0,.85),
+		rgba(0,0,0,.85),
+		rgba(0,0,0,0)
+	);
+	z-index: 4000;
+	width: 100%;
+	position: absolute;
+	top: 20vh;
+	left: 0;
+	box-sizing: border-box;
+	opacity: 0;
+	pointer-events: none;
+}
+
+#turncount-turn{
+	font-size: 50px;
+}
+
+#turncount-quake{
+	font-size: 24px;
+}
+
+.reroll-icon{
+	width: 24px;
+	height: 24px;
+	background-color: black;
+	border-radius: 100px;
+	display: inline-block;
+	float:left;
+	position: absolute;
+	top: 7px;
+	left: 10px;
+}
+
+.reroll-icon .card-mana-inner{
+	transform: scale(1);
+	transform-origin: 12px 12px;
+}
+
+.reroll-button{
+	width: 50px;
+}
+
+#error-higlight{
+	font-weight: bold;
+	position: absolute;
+	bottom: 10px;
+	right: 20px;
+	z-index: 200000;
+	color: red;
+	font-size: 30px;
+	tex-shadow: 0 0 5px black;
+	display: none;
+}
