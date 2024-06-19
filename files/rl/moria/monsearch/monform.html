@@ -1,0 +1,39 @@
+<html>
+
+<!
+!! form for handling mon lookups
+!>
+
+<head>
+
+<title>Monster memory lookups</title>
+
+</head>
+
+<body>
+
+<h1>Monster memory lookups</h1>
+
+After a tiny bit of code hacking, I produced a utility to dump monster
+memories.  (This is based on something my ex-roommate did a long time
+ago, for which the source code vanished.)
+
+<p>
+You can leave the monster character blank to get a listing of all
+monsters.
+
+<p>
+<hr>
+
+<form METHOD=POST ACTION="monsearch.cgi">
+    Enter the monster's character <input NAME="mchar" SIZE=1 MAXLENGTH=1><br>
+    Enter your player's level <input NAME="plev" SIZE=2 MAXLENGTH=2><br>
+    <input TYPE=submit value="Gimme the info">
+</form>
+
+<hr>
+
+</body>
+
+</html>
+    

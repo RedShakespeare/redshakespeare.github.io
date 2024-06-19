@@ -1,0 +1,799 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+  <!--
+      Author:  Janis Papanagnou
+      Date:    2006-10-10, 2006-10-12, 2014-11-08, 2017-05-11, 2017-07-22
+
+      Copyright &copy; 2006-2014 Janis Papanagnou
+      Content licensed under the
+      <A href="http://www.opencontent.org/opl.shtml">
+        OpenContent License
+      </A>.
+      Source code is licensed under
+      <A href="http://www.gnu.org/copyleft/gpl.html">
+        GNU General Public License
+      </A>.
+  -->
+
+<title> NetHack价格鉴定 </title>
+
+
+<style type="text/css">
+<!--
+select, input, body, td, a, p, .h { font-family: arial; font-size: 11pt; }
+-->
+</style>
+
+
+
+<script language="javascript" type="text/javascript">
+
+<!--
+obj_scroll = [
+    "鉴定", "光亮", "白纸", "武器附魔", "防具附魔",
+    "解除诅咒", "混乱怪物", "防具毁坏", "火",
+    "食物探测", "金钱探测", "魔法地图", "恐吓怪物",
+    "传送", "失忆", "制造怪物", "大地", "驯化",
+    "充能", "灭绝", "惩罚", "臭云"
+]
+obj_scroll_base_price = [
+    20, 50, 60, 60, 80, 80, 100, 100, 100, 100, 100, 100, 100, 100, 200, 200,
+    200, 200, 300, 300, 300, 300,
+    -1
+]
+obj_scroll_probability = [
+    180, 90, 28, 80, 63, 65, 53, 45, 30, 25, 33, 45, 35, 55, 35, 45, 18, 15,
+    15, 15, 15, 15
+]
+
+obj_potion = [
+    "酒", "果汁", "看见隐形", "疾病", "混乱",
+    "强力治愈", "幻觉", "治愈", "恢复能力", "沉睡",
+    "圣水", "邪水", "水", "失明", "获得能量",
+    "隐身", "怪物探测", "物品探测", "启蒙",
+    "完全治愈", "飘浮", "变形", "加速", "强酸", "油",
+    "增强能力", "升级", "麻痹"
+]
+obj_potion_base_price = [
+    50, 50, 50, 50, 100, 100, 100, 100, 100, 100, 100, 100, 0, 150, 150, 150,
+    150, 150, 200, 200, 200, 200, 200, 250, 250, 300, 300, 300,
+    -1
+]
+obj_potion_probability = [
+    42, 42, 42, 42, 42, 47, 40, 57, 40, 42, 11.5, 11.5, 69.0, 40, 42, 40, 40,
+    42, 20, 10, 42, 10, 42, 10, 30, 42, 20, 42
+]
+
+obj_wand = [
+    "光亮", "无", "挖掘", "启蒙", "上锁", "魔法飞弹",
+    "隐身", "解锁", "侦查", "暗门探测",
+    "减慢怪物", "加速怪物", "冲击", "超度", "寒冷",
+    "火焰", "闪电", "沉睡", "取消", "制造怪物",
+    "变形", "传送", "死亡", "许愿"
+]
+obj_wand_base_price = [
+    100, 100, 150, 150, 150, 150, 150, 150, 150, 150, 150, 150, 150, 150, 175,
+    175, 175, 175, 200, 200, 200, 200, 500, 500,
+    -1
+]
+obj_wand_probability = [
+    95, 25, 55, 15, 25, 50, 45, 25, 30, 50, 50, 50, 75, 50, 40, 40, 40, 50, 45,
+    45, 45, 45, 5, 5
+]
+
+obj_ring = [
+    "装饰品", "饥饿", "保护", "变形保护",
+    "潜行", "维持能力", "警报", "激怒怪物",
+    "抗寒", "增加体质", "增加力量",
+    "增加精确", "增加伤害", "隐身",
+    "抗毒", "看见隐形", "抗电",
+    "抗火", "自由行动", "飘浮", "再生",
+    "搜索", "慢消化", "传送", "冲突", "变形",
+    "变形控制", "传送控制"
+]
+obj_ring_base_price = [
+    100, 100, 100, 100, 100, 100, 100, 150, 150, 150, 150, 150, 150, 150, 150,
+    150, 150, 200, 200, 200, 200, 200, 200, 200, 300, 300, 300, 300,
+    -1
+]
+obj_ring_probability = [
+    1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+    1, 1, 1
+]
+
+obj_book = [
+    "白纸", "力冲击", "吸血", "魔法飞弹", "冰锥",
+    "火球", "死亡一指", "治愈", "治疗失明",
+    "治疗疾病", "强力治愈", "点石成肉", "恢复能力",
+    "探测怪物", "光亮", "探测食物", "千里眼", "探测隐形",
+    "鉴定", "探测宝藏", "魔法地图", "沉睡", "混乱怪物",
+    "减慢怪物", "造成恐惧", "魅惑怪物", "保护",
+    "制造怪物", "解除诅咒", "生成宠物", "超度",
+    "跳跃", "自我加速", "隐身", "飘浮", "传送",
+    "敲击", "巫师锁", "挖掘", "变形", "取消"
+]
+obj_book_base_price = [
+      0, 100, 200, 200, 400, 400, 700, 100, 200, 300, 300, 300, 400, 100, 100,
+    200, 300, 300, 300, 400, 500, 100, 200, 200, 300, 300, 100, 200, 300, 600,
+    600, 100, 300, 400, 400, 600, 100, 200, 500, 600, 700,
+    -1
+]
+obj_book_probability = [
+    18, 35, 10, 45, 10, 20,  5, 40, 25, 32, 27, 15, 25, 43, 45, 30, 15, 20, 20,
+    20, 18, 50, 30, 30, 25, 20, 18, 35, 25, 10, 16, 20, 33, 25, 20, 15, 35, 30,
+    20, 10, 15
+]
+
+
+o_class = [ "INVALID", "卷轴", "药水", "戒指", "魔杖", "魔法书" ]
+
+var n = 0
+var obj_list = new Array()
+var obj_list_prob = new Array()
+var obj_list_price = new Array()
+
+
+function swap (i, j)
+{
+    swp_name = obj_list[i]
+    obj_list[i] = obj_list[j]
+    obj_list[j] = swp_name
+    
+    swp_prob = obj_list_prob[i]
+    obj_list_prob[i] = obj_list_prob[j]
+    obj_list_prob[j] = swp_prob
+    
+    swp_price = obj_list_price[i]
+    obj_list_price[i] = obj_list_price[j]
+    obj_list_price[j] = swp_price
+}
+
+function list_sort_name ()
+{
+    if (n)
+    {
+        // sort by name alphabetically ascending
+        for (i = 0; i < n; i++)
+            for (j = i+1; j < n; j++)
+                if (obj_list[i] > obj_list[j])
+                    swap (i, j)
+
+        list_stat()
+    }
+
+    document.form1.shk_price.focus()
+}
+
+function list_sort_prob ()
+{
+    if (n)
+    {
+        // sort by probability numerically descending
+        for (i = 0; i < n; i++)
+            for (j = i+1; j < n; j++)
+                if (obj_list_prob[i] < obj_list_prob[j])
+                    swap (i, j)
+
+        list_stat()
+    }
+
+    document.form1.shk_price.focus()
+}
+
+function list_sort_price ()
+{
+    if (n)
+    {
+        // sort by probability numerically descending
+        for (i = 0; i < n; i++)
+            for (j = i+1; j < n; j++)
+                if (obj_list_price[i] > obj_list_price[j])
+                    swap (i, j)
+
+        list_stat()
+    }
+
+    document.form1.shk_price.focus()
+}
+
+function list_reset ()
+{
+    form0.debug1.value += " list_reset"
+
+    n = 0
+    obj_list.length = 0
+    obj_list_prob.length = 0
+    obj_list_price.length = 0
+
+    form0.debug1.value = "****"
+    form0.debug2.value = "****"
+    form0.debug3.value = "****"
+}
+
+function list_add_obj (obj_name, prob, modif, obj_price)
+{
+    form0.debug1.value += " list_add_obj"
+
+    obj_list.push (obj_name)
+    obj_list_prob.push (prob * modif)
+    obj_list_price.push (obj_price)
+
+    form0.debug3.value += " [" + obj_list.length + "]=(" + obj_list[n] + "," + obj_list_prob[n] + ")"
+
+    n++
+}
+
+function list_stat ()
+{
+    form0.debug1.value += " list_stat"
+
+    form0.debug3.value += " #1"
+
+    sum_prob = 0
+    for (i = 0; i < n; i++)
+        sum_prob += obj_list_prob[i]
+
+    form0.debug3.value += " #2"
+
+    remove_table_rows()
+
+    oc = o_class[form1.object_class.value]
+    msg = ""
+    for (i = 0; i < obj_list.length; i++)
+    {
+        form0.debug3.value += " /" + i
+
+        o_str = "o_" + oc + "_" + obj_list[i]
+        oo_str = o_str + "_prob"
+
+        obj_prob = Math.round (1000 * obj_list_prob[i] / sum_prob) / 10.0
+        if(oc == "卷轴" || oc == "药水" || oc == "魔法书" )
+        {
+            obj = oc + "之" + obj_list[i]
+        }
+        else
+        {
+            obj = obj_list[i] + oc
+        }
+        prb = obj_prob.toFixed(1) + "%"
+        line = obj + " " + prb
+
+        base = obj_list_price[i] + " $"
+        add_table_node (obj, prb, base)
+
+        msg += "- " + line + "\n"
+        form0.debug2.value += " p=" + obj_prob
+    }
+
+    form0.debug3.value += " #3"
+
+    form0.debug2.value += " n=" + n
+
+//    if (n == 0)
+//        alert ("No matches.");
+//    else
+//        alert ("Matches found (" + n + "):\n" + msg);
+
+    if (n == 0)
+        add_table_node ("(no matches)", "0%", "0 $")
+
+}
+
+
+function remove_table_rows ()
+{
+    while (document.getElementById ("Table").hasChildNodes()  &&
+           document.getElementById ("Table").lastChild.nodeName == "TR")
+    {
+        row = document.getElementById ("Table").lastChild
+        document.getElementById ("Table").removeChild (row)
+    }
+}
+
+function add_table_node (obj, prb, price)
+{
+    form0.debug2.value += " O=" + obj
+    form0.debug2.value += " P=" + prb
+    form0.debug2.value += " Q=" + price
+
+    row = document.createElement ("tr")
+    td_obj = document.createElement ("td")
+    td_obj.appendChild (document.createTextNode (obj))
+    row.appendChild (td_obj)
+    td_prb = document.createElement ("td")
+    td_prb.appendChild (document.createTextNode (prb))
+    td_prb.setAttribute ("style", "text-align:right")
+    row.appendChild (td_prb)
+    td_price = document.createElement ("td")
+    td_price.appendChild (document.createTextNode (price))
+    td_price.setAttribute ("style", "text-align:right")
+    row.appendChild (td_price)
+    document.getElementById ("Table").appendChild (row)
+}
+
+
+function calculate ()
+{
+    form0.debug1.value += " calculate"
+
+    list_reset()
+
+    ocl = form1.object_class.value
+    shk_price = form1.shk_price.value
+
+    switch (ocl)
+    {
+    case "1": // ocl_scroll
+        for (oid = 0; (obj_base_price = obj_scroll_base_price[oid]) != -1; oid++)
+        {
+            obj_probability = obj_scroll_probability[oid]
+            obj_name = obj_scroll[oid]
+
+            calculate_list (shk_price, obj_base_price, obj_probability, obj_name)
+        }
+        break;
+
+    case "2": // ocl_potion
+        for (oid = 0; (obj_base_price = obj_potion_base_price[oid]) != -1; oid++)
+        {
+            obj_probability = obj_potion_probability[oid]
+            obj_name = obj_potion[oid]
+
+            calculate_list (shk_price, obj_base_price, obj_probability, obj_name)
+        }
+        break;
+
+    case "3": // ocl_ring
+        for (oid = 0; (obj_base_price = obj_ring_base_price[oid]) != -1; oid++)
+        {
+            obj_probability = obj_ring_probability[oid]
+            obj_name = obj_ring[oid]
+
+            calculate_list (shk_price, obj_base_price, obj_probability, obj_name)
+        }
+        break;
+
+    case "4": // ocl_wand
+        for (oid = 0; (obj_base_price = obj_wand_base_price[oid]) != -1; oid++)
+        {
+            obj_probability = obj_wand_probability[oid]
+            obj_name = obj_wand[oid]
+
+            calculate_list (shk_price, obj_base_price, obj_probability, obj_name)
+        }
+        break;
+
+    case "5": // ocl_book
+        for (oid = 0; (obj_base_price = obj_book_base_price[oid]) != -1; oid++)
+        {
+            obj_probability = obj_book_probability[oid]
+            obj_name = obj_book[oid]
+
+            calculate_list (shk_price, obj_base_price, obj_probability, obj_name)
+        }
+        break;
+    }
+
+    list_stat()
+}
+
+
+function calculate_list (shk_price, base_price, prob, obj_name)
+{
+    form0.debug1.value += " calculate_list"
+
+    if (shk_price.match (/^\s*$/))
+    {
+        list_add_obj (obj_name, prob, 1, base_price)
+        return
+    }
+
+    if (form1.buy_or_sell[0].checked)
+        buy_or_sell = "buy"
+    if (form1.buy_or_sell[1].checked)
+        buy_or_sell = "sell"
+    if (form1.buy_or_sell[2].checked)
+        buy_or_sell = "sell90"
+
+    switch (buy_or_sell)
+    {
+    case "buy":
+        if (cost (base_price, 0) == shk_price)
+            list_add_obj (obj_name, prob, 75, base_price)
+        if (cost (base_price, 1) == shk_price)
+            list_add_obj (obj_name, prob, 25, base_price)
+        break;
+
+    case "sell":
+        if (offer (base_price, 0) == shk_price)
+            list_add_obj (obj_name, prob, 75, base_price)
+        if (offer (base_price, 1) == shk_price)
+            list_add_obj (obj_name, prob, 25, base_price)
+        break;
+
+    case "sell90":
+        if (Math.floor(offer (base_price, 0) * 9 / 10) == shk_price)
+            list_add_obj (obj_name, prob, 75, base_price)
+        if (Math.floor(offer (base_price, 1) * 9 / 10) == shk_price)
+            list_add_obj (obj_name, prob, 25, base_price)
+        break;
+    }
+}
+
+
+function release_check ()
+{
+    if (form1.release[0].checked)
+        return "343";
+    if (form1.release[1].checked)
+        return "360";
+}
+
+function cost (price, surcharge)
+{
+    if (release_check() == "343")
+        return cost343 (price, surcharge);
+    else
+        return cost350 (price, surcharge);
+}
+
+function offer (price, abatement)
+{
+    if (release_check() == "343")
+        return offer343 (price, abatement);
+    else
+        return offer350 (price, abatement);
+}
+
+function bad_conditions ()
+{
+    return  (form1.character[0].checked ||
+             form1.shirt.checked ||
+             form1.dunce_cap.checked)
+}
+
+function cost343 (price, surcharge)
+{
+    cha = form1.charisma.value
+
+    if (price == 0)
+        price = 5
+
+    if (surcharge)
+        price += Math.floor (price / 3)    // 133%
+
+    if (bad_conditions())
+        price += Math.floor (price / 3)    // 133%
+
+         if (cha >= 19)   price  = Math.floor (price / 2)    //  50%
+    else if (cha >= 18)   price -= Math.floor (price / 3)    //  67%
+    else if (cha >= 16)   price -= Math.floor (price / 4)    //  75%
+    else if (cha <   6)   price *= 2                         // 200%
+    else if (cha <   8)   price += Math.floor (price / 2)    // 150%
+    else if (cha <  11)   price += Math.floor (price / 3)    // 133%
+
+    if (price <= 0)
+        price = 1
+
+    return  price
+}
+
+function cost350 (price, surcharge)
+{
+    cha = form1.charisma.value;
+
+    var m = 1;
+    var d = 1;
+
+    if (price == 0)
+        price = 5;
+
+    if (surcharge) {
+        m *= 4; d *= 3;       // price += Math.floor (price / 3)    // 133%
+    }
+
+    if (bad_conditions()) {
+        m *= 4; d *= 3;       // price += Math.floor (price / 3)    // 133%
+    }
+
+         if (cha >= 19) {         d *= 2; }    //  50%
+    else if (cha >= 18) { m *= 2; d *= 3; }    //  67%
+    else if (cha >= 16) { m *= 3; d *= 4; }    //  75%
+    else if (cha <   6) { m *= 2;         }    // 200%
+    else if (cha <   8) { m *= 3; d *= 2; }    // 150%
+    else if (cha <  11) { m *= 4; d *= 3; }    // 133%
+
+    price *= m;
+    if (d > 1) {
+        price *= 10;
+        price /= d;
+        price += 5;
+        price /= 10;
+        price = Math.floor (price);
+    }
+
+    if (price <= 0)
+        price = 1;
+
+    return  price;
+}
+
+function offer343 (price, abatement)
+{
+    if (bad_conditions())
+        price /= 3    // 33%
+    else
+        price /= 2    // 50%
+    price = Math.floor (price)
+
+    if (price > 1 && abatement)
+        price -= Math.floor (price / 4)    // 75%
+
+    return  price
+}
+
+function offer350 (price, abatement)
+{
+    var m = 1;
+    var d = 1;
+
+    if (bad_conditions()) {
+        d = 3;     // price /= 3    // 33%
+    } 
+    else {
+        d = 2;     // price /= 2    // 50%
+    } 
+    // price = Math.floor (price)
+
+    if (price > 1 && abatement) {
+        m *= 3; d *= 4;     // price -= Math.floor (price / 4)    // 75%
+    }
+
+    if (price > 1) {
+        price *= m;
+        if (d > 1) {
+            price *= 10;
+            price /= d;
+            price += 5;
+            price /= 10;
+            price = Math.floor (price);
+        }
+        if (price < 1)
+            price = 1;
+    }
+
+    return  price;
+}
+
+
+function find_objects ()
+{
+    calculate()
+    document.form1.shk_price.focus()
+}
+
+function switch_object_class()
+{
+    document.form1.shk_price.focus()
+}
+
+-->
+</script>
+
+</head>
+
+<!-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -->
+
+<body>
+  <h1> 道具的价格鉴定 </h1>
+
+
+  <form name="form0" style="display: none;" action="prices.html">
+    <input type="text" size="192" name="debug1" value="****" readonly>
+    <br>
+    <input type="text" size="192" name="debug2" value="****" readonly>
+    <br>
+    <input type="text" size="192" name="debug3" value="****" readonly>
+  </form>
+
+
+  <noscript>
+    <br>
+    <table style="border-width: 4px; border-style: solid; padding: 8px">
+      <tr>
+        <td>
+          <b> The calculation needs JavaScript to be enabled in your browser! </b>
+        </td>
+      </tr>
+    </table>
+    <br>
+    <br>
+  </noscript>
+
+
+  <form name="form1" style="display: block;" action="prices.html"
+        onsubmit="find_objects(); return false">
+    <table border="1" cellspacing="0" bgcolor="lightgray">
+      <tr>
+        <td>
+          <b>
+            &nbsp; &nbsp;
+            <input type="radio" name="release" value="343">
+            <font size="+0"> NH 3.4.3 </font>
+            &nbsp; &nbsp; &nbsp;
+          </b>
+        </td>
+        <td>
+          <b>
+            &nbsp; &nbsp;
+            <input type="radio" name="release" value="360" checked="checked">
+            <font size="+0"> NH 3.6.x </font>
+            &nbsp; &nbsp; &nbsp;
+          </b>
+        </td>
+      </tr>
+    </table>
+    <br>
+    <br>
+    <table>
+      <tr>
+        <td>
+          角色
+        </td>
+        <td>
+          &nbsp; <input type="radio" name="character" value="0">
+          1~14级游客
+          <br>
+          &nbsp;
+          <input type="radio" name="character" value="1">
+          15~30级游客
+          &nbsp;
+          <br>
+          &nbsp;
+          <input type="radio" name="character" value="2" checked="checked">
+          其他职业
+        </td>
+        <td>
+          &nbsp;
+          具有
+          <select name="charisma" style="text-align: center">
+            <option value="3">   3 </option>
+            <option value="4">   4 </option>
+            <option value="5">   5 </option>
+            <option value="6">   6 </option>
+            <option value="7">   7 </option>
+            <option value="8">   8 </option>
+            <option value="9">   9 </option>
+            <option value="10"> 10 </option>
+            <option value="11"> 11 </option>
+            <option value="12" selected="selected"> 12 </option>
+            <option value="13"> 13 </option>
+            <option value="14"> 14 </option>
+            <option value="15"> 15 </option>
+            <option value="16"> 16 </option>
+            <option value="17"> 17 </option>
+            <option value="18"> 18 </option>
+            <option value="19"> 19 </option>
+            <option value="20"> 20 </option>
+            <option value="21"> 21 </option>
+            <option value="22"> 22 </option>
+            <option value="23"> 23 </option>
+            <option value="24"> 24 </option>
+            <option value="25"> 25 </option>
+          </select>
+          魅力
+        </td>
+      </tr>
+    </table>
+
+    <br>
+
+    <table>
+      <tr>
+        <td> 穿着 </td>
+        <td>
+          &nbsp;&nbsp;
+          <input type="checkbox" name="shirt">
+        </td>
+        <td title="visibly - not hidden by body armor or cloak">
+          可被看见的衬衫
+        </td>
+        <td>
+          &nbsp;&nbsp;
+          <input type="checkbox" name="dunce_cap">
+        </td>
+        <td title="You feel like sitting in a corner?">
+          愚人帽
+        </td>
+      </tr>
+    </table>
+
+    <br>
+
+    <table>
+      <tr>
+        <td>
+          &nbsp;
+          <input type="radio" name="buy_or_sell" value="buy"
+                 checked="checked"> 购买
+          <br>
+          &nbsp;
+          <input type="radio" name="buy_or_sell" value="sell"> 出售
+          <br>
+          &nbsp;
+          <input type="radio" name="buy_or_sell" value="sell90"
+                 title="无力付钱的店主将提供90%的信用">
+                 <font style="color:gray">出售 (90%信用)</font>
+        </td>
+        <td>
+          <table>
+            <tr>
+              <td>
+                &nbsp;
+              </td>
+            </tr>
+            <tr>
+              <td>
+                &nbsp;
+                
+                <select name="object_class" onchange="switch_object_class()">
+                  <option value="1"> 卷轴    </option>
+                  <option value="2"> 药水    </option>
+                  <option value="3"> 戒指      </option>
+                  <option value="4"> 魔杖      </option>
+                  <option value="5"> 魔法书 </option>
+                </select>
+              </td>
+              <td>
+                &nbsp;
+                价值
+                <input type="text" name="shk_price" size="5" style="text-align: right">
+                Zorkmids
+              </td>
+            </tr>
+            <tr>
+              <td>
+                &nbsp;
+              </td>
+              <td align="center">
+                <br>
+                <input type="button" name="show_objects" value="显示结果"
+                       onclick="find_objects()">
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+
+    <br>
+
+  </form>
+
+
+  <div style="margin: 10">
+    <table id="Table" cellpadding="3" cellspacing="0" border="solid">
+      <tr>
+        <th align="left"  onclick="list_sort_name()" title="sort by object name">
+          名称 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        </th>
+        <th align="right" onclick="list_sort_prob()" title="sort by probability">
+          概率
+        </th>
+        <th align="right" onclick="list_sort_price()" title="sort by base price">
+          基础价格
+        </th>
+      </tr>
+    </table>
+  </div>
+
+</body>
+</html>
+
+<!--
+        vim: ts=2 sw=2 expandtab ai nu
+-->

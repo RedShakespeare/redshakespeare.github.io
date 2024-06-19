@@ -1,0 +1,240 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+<!--
+      Author:  Janis Papanagnou
+      Date:    2012-03-06, 2015-11-23
+
+      Copyright &copy; 2012 Janis Papanagnou
+      Content licensed under the
+      <A href="http://www.opencontent.org/opl.shtml">OpenContent License</A>
+      Source code is licensed under
+      <A href="http://www.gnu.org/copyleft/gpl.html">GNU General Public License</A>.
+-->
+
+<title> Nethack法术学习成功率 </title>
+
+
+<style type="text/css">
+  .centered   { text-align: center; }
+  .percentage { text-align: center; width: 4em; }
+  select, input, body, td { font-family: arial; font-size: 12pt; }
+</style>
+
+<style type="text/css" title="black on white">
+  select, input, body, td { background-color: white; color: black; }
+  select, input           { border: 1px solid black; }
+</style>
+
+<style type="text/css" title="green on black">
+  select, input, body, td { background-color: black; color: green; }
+  select, input           { border: 1px solid green; }
+</style>
+
+
+
+<script language="javascript" type="text/javascript">
+
+function calculate ()
+{
+    Intelligence = parseInt (document.getElementById ("Intelligence").value)
+    XPLevel      = parseInt (document.getElementById ("XPLevel").value)
+
+    for ( BookLevel = 1; BookLevel <= 7; BookLevel++ )
+    {
+        success = (Intelligence + 4 + Math.floor(XPLevel/2) - 2*BookLevel) * 5
+        lenses = success + 10
+        if ( success < 0 ) success = 0
+        if ( lenses < 0 ) lenses = 0
+        if ( success > 100 ) success = 100
+        if ( lenses > 100 ) lenses = 100
+
+        document.getElementById ("s"+BookLevel).value = success + "%"
+        document.getElementById ("l"+BookLevel).value = lenses + "%"
+    }
+}
+
+</script>
+
+</head>
+
+<!-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -->
+
+<body onload="calculate()">
+  <h1> 法术学习成功率计算 </h1>
+
+  <noscript>
+    <br>
+    <table style="border-width: 4px; border-style: solid; padding: 8px">
+      <tr>
+        <td>
+          <b> The calculation needs JavaScript to be enabled in your browser! </b>
+        </td>
+      </tr>
+    </table>
+    <br>
+    <br>
+  </noscript>
+
+
+  <form name="form1" style="display: block;" action="learnspells.html">
+
+    <table>
+      <tr>
+        <td> 经验等级 </td>
+        <td> &nbsp; </td>
+        <td height="35pt">
+          <select id="XPLevel" style="text-align:right" onchange="calculate()">
+            <option value="1">   1&nbsp; </option>
+            <option value="2">   2&nbsp; </option>
+            <option value="3">   3&nbsp; </option>
+            <option value="4">   4&nbsp; </option>
+            <option value="5">   5&nbsp; </option>
+            <option value="6">   6&nbsp; </option>
+            <option value="7">   7&nbsp; </option>
+            <option value="8">   8&nbsp; </option>
+            <option value="9">   9&nbsp; </option>
+            <option value="10"> 10&nbsp; </option>
+            <option value="11"> 11&nbsp; </option>
+            <option value="12"> 12&nbsp; </option>
+            <option value="13"> 13&nbsp; </option>
+            <option value="14"> 14&nbsp; </option>
+            <option value="15"> 15&nbsp; </option>
+            <option value="16"> 16&nbsp; </option>
+            <option value="17"> 17&nbsp; </option>
+            <option value="18"> 18&nbsp; </option>
+            <option value="19"> 19&nbsp; </option>
+            <option value="20"> 20&nbsp; </option>
+            <option value="21"> 21&nbsp; </option>
+            <option value="22"> 22&nbsp; </option>
+            <option value="23"> 23&nbsp; </option>
+            <option value="24"> 24&nbsp; </option>
+            <option value="25"> 25&nbsp; </option>
+            <option value="26"> 26&nbsp; </option>
+            <option value="27"> 27&nbsp; </option>
+            <option value="28"> 28&nbsp; </option>
+            <option value="29"> 29&nbsp; </option>
+            <option value="30"> 30&nbsp; </option>
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td> 智力 </td>
+        <td> &nbsp; </td>
+        <td height="35pt">
+          <select id="Intelligence" style="text-align:right "onchange="calculate()">
+            <option value="3">                       3&nbsp; </option>
+            <option value="4">                       4&nbsp; </option>
+            <option value="5">                       5&nbsp; </option>
+            <option value="6">                       6&nbsp; </option>
+            <option value="7">                       7&nbsp; </option>
+            <option value="8">                       8&nbsp; </option>
+            <option value="9">                       9&nbsp; </option>
+            <option value="10" selected="selected"> 10&nbsp; </option>
+            <option value="11">                     11&nbsp; </option>
+            <option value="12">                     12&nbsp; </option>
+            <option value="13">                     13&nbsp; </option>
+            <option value="14">                     14&nbsp; </option>
+            <option value="15">                     15&nbsp; </option>
+            <option value="16">                     16&nbsp; </option>
+            <option value="17">                     17&nbsp; </option>
+            <option value="18">                     18&nbsp; </option>
+            <option value="19">                     19&nbsp; </option>
+            <option value="20">                     20&nbsp; </option>
+            <option value="21">                     21&nbsp; </option>
+            <option value="22">                     22&nbsp; </option>
+            <option value="23">                     23&nbsp; </option>
+            <option value="24">                     24&nbsp; </option>
+            <option value="25">                     25&nbsp; </option>
+          </select> 
+        </td>
+      </tr>
+    </table>
+
+    <br>
+    <br>
+    <br>
+
+    <table cellspacing="5">
+      <colgroup>
+        <col width="15%">
+        <col width="20%">
+        <col width="20%">
+        <col width="20%">
+        <col width="20%">
+      </colgroup>
+
+      <tr class="centered">
+        <td> 法术等级 </td>
+        <td> 成功率</td>
+        <td> 戴眼镜时 </td>
+        <td title="depending on spellbook"> 阅读花费回合数 </td>
+        <td title="depending on spellbook"> 戴眼镜时 </td>
+      </tr>
+      <tr class="centered">
+        <td> 1 </td>
+        <td> <input class="percentage" id="s1" type="text"> </td>
+        <td> <input class="percentage" id="l1" type="text"> </td>
+        <td> 3&thinsp;&ndash;&thinsp;5 </td>
+        <td> 2&thinsp;&ndash;&thinsp;3 </td>
+      </tr>
+      <tr class="centered">
+        <td> 2 </td>
+        <td> <input class="percentage" id="s2" type="text"> </td>
+        <td> <input class="percentage" id="l2" type="text"> </td>
+        <td> 4&thinsp;&ndash;&thinsp;5 </td>
+        <td> 2&thinsp;&ndash;&thinsp;3 </td>
+      </tr>
+      <tr class="centered">
+        <td> 3 </td>
+        <td> <input class="percentage" id="s3" type="text"> </td>
+        <td> <input class="percentage" id="l3" type="text"> </td>
+        <td> 4&thinsp;&ndash;&thinsp;14 </td>
+        <td> 2&thinsp;&ndash;&thinsp;9 </td>
+      </tr>
+      <tr class="centered">
+        <td> 4 </td>
+        <td> <input class="percentage" id="s4" type="text"> </td>
+        <td> <input class="percentage" id="l4" type="text"> </td>
+        <td> 14&thinsp;&ndash;&thinsp;23 </td>
+        <td> 9&thinsp;&ndash;&thinsp;15 </td>
+      </tr>
+      <tr class="centered">
+        <td> 5 </td>
+        <td> <input class="percentage" id="s5" type="text"> </td>
+        <td> <input class="percentage" id="l5" type="text"> </td>
+        <td> 32&thinsp;&ndash;&thinsp;37 </td>
+        <td> 21&thinsp;&ndash;&thinsp;24 </td>
+      </tr>
+      <tr class="centered">
+        <td> 6 </td>
+        <td> <input class="percentage" id="s6" type="text"> </td>
+        <td> <input class="percentage" id="l6" type="text"> </td>
+        <td> 38&thinsp;&ndash;&thinsp;50 </td>
+        <td> 25&thinsp;&ndash;&thinsp;33 </td>
+      </tr>
+      <tr class="centered">
+        <td> 7 </td>
+        <td> <input class="percentage" id="s7" type="text"> </td>
+        <td> <input class="percentage" id="l7" type="text"> </td>
+        <td> 66&thinsp;&ndash;&thinsp;82 </td>
+        <td> 44&thinsp;&ndash;&thinsp;54 </td>
+      </tr>
+    </table>
+
+    <br>
+
+  </form>
+
+  <br>
+
+</body>
+
+</html>
+
+<!--
+        vim: ts=2 sw=2 expandtab ai nu
+-->

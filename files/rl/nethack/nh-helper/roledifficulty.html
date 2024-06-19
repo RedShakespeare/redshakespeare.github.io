@@ -1,0 +1,153 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+<!--
+      Author:  Janis Papanagnou
+      Date:    2014-10-24, 2015-11-22, 2016-07-01, 2016-07-08
+
+      Copyright &copy; 2014 &ndash; 2018 Janis Papanagnou
+      Content licensed under the
+      <A href="http://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution 3.0 License</A>.
+      Source code is licensed under
+      <A href="http://www.gnu.org/copyleft/gpl.html">GNU General Public License</A>.
+-->
+
+  <title> Role Difficulty </title>
+
+  <style type="text/css">
+    p, hr  { width: 35em }
+    td, th { text-align: center }
+    .Val, .Bar, .Sam, .Cav, .Kni, .Ran, .Hea, .Mon, .Pri, .Tou, .Rog, .Wiz, .Arc {
+         font-family: monospace, sans-serif ; width: 3em
+    }
+  </style>
+  <style type="text/css" title="colors">
+    .Val { background-color: #00ff00 }
+    .Bar { background-color: #55ff00 }
+    .Sam { background-color: #99ff00 }
+    .Cav { background-color: #aaff00 }
+    .Kni { background-color: #bbff00 }
+    .Ran { background-color: #ddff00 }
+    .Hea { background-color: #ffff00 }
+    .Mon { background-color: #ffdd00 }
+    .Pri { background-color: #ffbb00 }
+    .Tou { background-color: #ff9900 }
+    .Rog { background-color: #ff7700 }
+    .Wiz { background-color: #ff5500 }
+    .Arc { background-color: #ff0000 }
+  </style>
+  <!-- greyscale option for people with dyschromatopsia -->
+  <style type="text/css" title="greyscale">
+    .Val { background-color: #f7f7f7 }
+    .Bar { background-color: #efefef }
+    .Sam { background-color: #e7e7e7 }
+    .Cav { background-color: #dfdfdf }
+    .Kni { background-color: #d7d7d7 }
+    .Ran { background-color: #cfcfcf }
+    .Hea { background-color: #c7c7c7 }
+    .Mon { background-color: #bfbfbf }
+    .Pri { background-color: #b7b7b7 }
+    .Tou { background-color: #afafaf }
+    .Rog { background-color: #a7a7a7 }
+    .Wiz { background-color: #9f9f9f }
+    .Arc { background-color: #979797 }
+  </style>
+</head>
+
+<body>
+<h3> Nethack Role Difficulty </h3>
+
+<p>
+Various ideas exist about determining the role difficulty in Nethack.
+The approach applied here results in the ranking depicted below.
+It is based on player data taken from nethack.alt.org at 2014-10-24,
+at that time running Nethack release 3.4.3.
+</p>
+<p>
+The sample set is taken from players with at least 13 ascensions and
+an ascension ratio of at least 2%, and whose games have a random
+distribution of played classes with a standard deviation of at most 0.20
+(i.e. excluding players who focus on few roles only).
+The players are grouped in four classes w.r.t. ascension ratio
+(A: 50-100%, B: 25-50%, C: 10-25%, and D: 2-10%), and in four classes
+w.r.t. randomness of played classes (&lt;0.10, &lt;0.12, &lt;0.16, and
+&lt;0.20, biased towards the more random distributed games).
+</p>
+<p>
+I've grouped the rank results by the ascension class A-D (see above),
+and built an overall ranking from those. (An unbiased result for all
+players, the wiki data, and my own ranking can be found for comparison
+in the last three columns.) The overall result's coloring spans from
+the easy (green) to the hard (red) roles, and these colors have been
+used in the other columns to illustrate the specific differences.
+</p>
+
+<br>
+
+<table border="1" cellpadding="2">
+<tbody>
+<tr> 
+  <th title="Ordered from easy to difficult roles">Rank</th>
+  <th colspan="1" rowspan="14"></th> 
+  <th title="Result of the Analysis">Overall</th>
+  <th colspan="1" rowspan="14"></th> 
+  <th title="50-100% (serial ascenders)">A</th>
+  <th title="25-50% (regular ascenders)">B</th>
+  <th title="10-25% (frequent ascenders)">C</th>
+  <th title="2-10% (casual ascenders)">D</th>
+  <th colspan="2" rowspan="14">&nbsp;</th> 
+  <th title="All NH 3.4.3 players on NAO (until 2016-04-01), unbiased">Unb.</th>
+  <th colspan="1" rowspan="14"></th> 
+  <th title="Ranking of the analysis in the Wiki (from Dec. 2011)"><a href="http://nethackwiki.com/wiki/Class_difficulty#Role_difficulty_statistics">Wiki</a></th>
+  <th colspan="1" rowspan="14"></th> 
+  <th title="Ranking of my own NAO games (from 2018-08-10)"><a href="rrall.html">Own</a></th>
+</tr>
+<tr> <td class="rank">1.</td> <td class="Val">Val</td> <td class="Sam">Sam</td> <td class="Val">Val</td> <td class="Bar">Bar</td> <td class="Val">Val</td> <td class="Cav">Cav</td> <td class="Val">Val</td> <td class="Val" title="79.1 % (A:72 D:19)">Val</td> </tr>
+<tr> <td class="rank">2.</td> <td class="Bar">Bar</td> <td class="Val">Val</td> <td class="Cav">Cav</td> <td class="Val">Val</td> <td class="Sam">Sam</td> <td class="Kni">Kni</td> <td class="Bar">Bar</td> <td class="Bar" title="73.3 % (A:55 D:20)">Bar</td> </tr>
+<tr> <td class="rank">3.</td> <td class="Sam">Sam</td> <td class="Bar">Bar</td> <td class="Bar">Bar</td> <td class="Sam">Sam</td> <td class="Bar">Bar</td> <td class="Sam">Sam</td> <td class="Sam">Sam</td> <td class="Sam" title="68.6 % (A:57 D:26)">Sam</td> </tr>
+<tr> <td class="rank">4.</td> <td class="Cav">Cav</td> <td class="Ran">Ran</td> <td class="Ran">Ran</td> <td class="Kni">Kni</td> <td class="Kni">Kni</td> <td class="Bar">Bar</td> <td class="Arc">Arc</td> <td class="Ran" title="63.5 % (A:54 D:31)">Ran</td> </tr>
+<tr> <td class="rank">5.</td> <td class="Kni">Kni</td> <td class="Cav">Cav</td> <td class="Sam">Sam</td> <td class="Hea">Hea</td> <td class="Cav">Cav</td> <td class="Hea">Hea</td> <td class="Cav">Cav</td> <td class="Mon" title="62.0 % (A:54 D:33)">Mon</td> </tr>
+<tr> <td class="rank">6.</td> <td class="Ran">Ran</td> <td class="Wiz">Wiz</td> <td class="Hea">Hea</td> <td class="Pri">Pri</td> <td class="Tou">Tou</td> <td class="Ran">Ran</td> <td class="Mon">Mon</td> <td class="Wiz" title="56.8 % (A:54 D:41)">Wiz</td> </tr>
+<tr> <td class="rank">7.</td> <td class="Hea">Hea</td> <td class="Mon">Mon</td> <td class="Kni">Kni</td> <td class="Cav">Cav</td> <td class="Mon">Mon</td> <td class="Tou">Tou</td> <td class="Ran">Ran</td> <td class="Cav" title="56.5 % (A:43 D:33)">Cav</td> </tr>
+<tr> <td class="rank">8.</td> <td class="Mon">Mon</td> <td class="Hea">Hea</td> <td class="Mon">Mon</td> <td class="Mon">/Mon</td> <td class="Hea">Hea</td> <td class="Rog">Rog</td> <td class="Kni">Kni</td> <td class="Kni" title="54.7 % (A:58 D:48)">Kni</td> </tr>
+<tr> <td class="rank">9.</td> <td class="Pri">Pri</td> <td class="Kni">Kni</td> <td class="Rog">Rog</td> <td class="Tou">\Tou</td> <td class="Ran">Ran</td> <td class="Arc">Arc</td> <td class="Hea">Hea</td> <td class="Pri" title="54.5 % (A:42 D:35)">Pri</td> </tr>
+<tr> <td class="rank">10.</td> <td class="Tou">Tou</td> <td class="Pri">/Pri</td> <td class="Arc">Arc</td> <td class="Ran">Ran</td> <td class="Pri">Pri</td> <td class="Val">Val</td>  <td class="Pri">Pri</td> <td class="Rog" title="51.6 % (A:48 D:45)">Rog</td> </tr>
+<tr> <td class="rank">11.</td> <td class="Rog">Rog</td> <td class="Rog">\Rog</td> <td class="Pri">Pri</td> <td class="Rog">Rog</td> <td class="Rog">Rog</td> <td class="Pri">Pri</td>  <td class="Wiz">Wiz</td> <td class="Hea" title="50.0 % (A:38 D:38)">Hea</td> </tr>
+<tr> <td class="rank">12.</td> <td class="Wiz">Wiz</td> <td class="Tou">/Tou</td> <td class="Tou">Tou</td> <td class="Wiz">Wiz</td> <td class="Wiz">Wiz</td> <td class="Mon">Mon</td>  <td class="Rog">Rog</td> <td class="Tou" title="42.1 % (A:32 D:44)">Tou</td> </tr>
+<tr> <td class="rank">13.</td> <td class="Arc">Arc</td> <td class="Arc">\Arc</td> <td class="Wiz">Wiz</td> <td class="Arc">Arc</td> <td class="Arc">Arc</td> <td class="Wiz">Wiz</td>  <td class="Tou">Tou</td> <td class="Arc" title="37.6 % (A:26 D:43)">Arc</td> </tr>
+</tbody>
+</table>
+
+<p>
+Note: braces around pairs of entries denote equal metric values of those
+entries.
+</p>
+
+<br>
+<br>
+<br>
+
+<hr align="left">
+<p align="center">
+  <font size="-1">
+    &copy; 2014&thinsp;&ndash;&thinsp;2018 by Janis &nbsp;&nbsp;|&nbsp;&nbsp; Page content:
+    <A href="http://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution 3.0 License</A>
+  </font>
+</p>
+
+<!--
+<h4>Summary</h4>
+<p>
+As expected, there are slight variances depending on ascension class A-D,
+and the basic well known picture about easy classes matches. But there's
+one obvious difference (compared to the approach in the Wiki); the "Arc"
+is on rank 4 (forth easiest, according to the Wiki approach) or rank 13
+(most difficult, according to my approach).
+</p>
+-->
+
+
+</body>
+</html>

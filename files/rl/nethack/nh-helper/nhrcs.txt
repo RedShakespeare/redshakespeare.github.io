@@ -1,0 +1,96 @@
+    NHRCS - Nethack Random Character Selector (Shell Version 1.0)
+    
+    Usage:  nhrcs  base-selection-set  [selections... | options...]
+   
+    Base selection set:
+      ALL    Start with all possible character combination; restrict
+             the selection set by subsequent '-' selections.
+      NONE   Start with an empty set of character combinations, add
+             to the selection set by subsequent '+' selections.
+      BASE=filename
+             Start the selection set using the character combinations
+             defined in the given file; you may build your own list
+             from the data produced by this program running with the
+             options "ALL list" or any subset by specifying selections.
+   
+    Selections:
+      +|- class, +|- race, +|- alignment, +|- gender
+             You may specify a sequence of these selections to be added
+             (+) or removed (-) from the base selection set. You may
+             define compound (class-race-alignment-gender) selections
+             (or subsets) by joining the selections with a dash. Missing
+             components in the middle must be specified by a '*', as in
+             +arc-*-*-fem.
+   
+    Options:
+      All these options may be specified in the ressource file.
+   
+      name=charactername   Specify the name of your character.
+      show      Display the command as it would be executed.
+      exec      Launch Nethack with a random selection from your set.
+      confirm   Launch Nethack with that selection after confirmation.
+      list      Display a list of all possible selections in your set.
+   
+   
+    Examples:
+      nhrcs ALL list
+        list all combinations of class, race, alignment, and gender,
+        which are allowed by Nethack
+   
+      nhrcs NONE +wiz list
+        list all combinations for the wizard class which are allowed
+        by Nethack
+   
+      nhrcs NONE +ran +wiz -hum
+        just non-human rangers or wizards
+    
+      nhrcs NONE +hum
+        just humans
+    
+      nhrcs ALL -rog -mal
+        all but rogues or males
+    
+      nhrcs ALL -wiz-elf -wiz-orc
+        all but elven or orcish wizards
+    
+      nhrcs NONE +rog +wiz +wiz +wiz
+        just rogues and wizards, biased towards wizards
+    
+      Note: You may specify Kornshell's regular expressions in your
+      selection:
+    
+      nhrcs NONE +ran-@(gno|orc)-*-mal
+        just male gnomish or orcish rangers of any alignment
+    
+      Note: If you specify compound selections, like 'tou-hum-neu-mal',
+      or 'hum-neu', make sure that the sequence of selectors is in the
+      correct order and contiguous.
+      
+      Note: The charater selection set is build incrementally, so the
+      order of single selections is significant, swapping may change the
+      result. This is helpful to include otherwise excluded character
+      types. Example:
+   
+          nhrcs NONE +ran +wiz +pri -hum
+   
+      will select all rangers, wizards, and priests, but never humans;
+   
+          nhrcs NONE +ran +wiz -hum +pri
+   
+      will select all rangers and wizards that are non-human, and also
+      priests, even human ones.
+    
+    Files
+      .nhrcsrc may contain options which are considered if they are not
+      overwritten by options specified on the command line.
+    
+      Note: If you want to also specify the base selection set as the
+      first line in the ressource file use this call syntax to achieve
+      it:
+          nhrcs $(< ~/.nhrcsrc)
+    
+    Known bugs:
+      Wrong wording for a female caveman (cavewoman) and a female priest
+      (priestess).
+    
+    Janis Papanagnou                                          2005-01-29

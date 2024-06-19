@@ -1,0 +1,138 @@
+medu-343.des  Last edited 2006-12-02 for NetHack 3.4.3
+Crossing the sea of Medusa using boulders in NetHack 3.4
+Written for 3.4.3 by Janis Papanagnou.
+
+
+Crossing the sea of the Medusa levels is most obviously done using some means
+of levitation (ring, spell, potion, or boots of levitation, or the barbarians
+quest artifact, "The Heart of Ahriman"). You may also just dig down on any
+square that is not adjacent to any water square or level teleport down and
+approach Medusa from below (how to pass the sea on your way back is the one
+problem to be solved later, e.g. by using the water walking boots from Vlads
+tower; the other problem is that you may need levitation, water walking or a
+music instrument to enter the Castle).  If you have some means of producing
+ice, a wand, a spell, or a frost horn, you can build a fragile(!) bridge to
+cross the water. The ability to jump from island to island is also helpful to
+cross (part of) the sea. Last but not least you can polyself to become some
+creature that can fly over or dive through the sea.
+
+
+This spoiler describes the alternative way using a bridge of solid land built
+from boulders that, compared to the bridge of ice, has the advantage to not
+be a death trap in case of a fire attack. And (unlike e.g. potions or boots
+of levitation that vanish or occupy an armor slot) it's a (quite) persistent
+solution that you may use on your way up and down the dungeon at any time.
+
+You are guaranteed two scrolls of earth on the lowest Sokoban level that you
+may use to cross Medusa's sea. There are two Medusa levels; the round island
+level and the titan level. For the former level one scroll of earth may be
+sufficient, for the latter you need two scrolls of earth. But be aware that
+boulders may "sink without trace" with a probability of 10%; so make sure
+that not a single boulder will be wasted. The titan level has two additional
+boulders that can both be used for your purpose, one in the starting room and
+the other on the distant island that you will pass on your way to Medusa.
+Occasionally there may be giants generated to throw boulders, needless to say
+that you should try to get hold of them in an area where you can push them to
+your advance.
+
+
+The specific solutions that are presented below take into account that you
+occasionally need a square to maneuver the boulders in case of any direction
+changes, and are minimal in this respect. If you have e.g. a wand of cold
+you may use that to bridge such a maneuver space with ice and may choose an
+slightly different path that requires fewer boulders (you can usually save one
+or two boulders that way), without sacrificing the solid path approach of the
+final path.
+
+In the maps below you'll find the following characters used...
+
+  X  - path built solely by boulders without additional means
+  Y  - alternative paths that require squares of ice to maneuver boulders or
+       slightly more than the minimum amount of boulders
+  O  - additional boulders guaranteed to be existing on the level
+  ?  - a safe square where you can read the scrolls of earth without disabling
+       any boulder (by being too close at a wall or at water, etc.)
+
+(To view the map I suggest to use Pasi's syntax highlighting available for
+the editors vim and emacs; the paths and locations will be highlighted nicely
+that way and much better visible.)
+
+
+1. Round Island level
+
+This Medusa level requires a minimum of eight boulders from one scroll of
+earth.
+
+MAP
+}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}
+}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}
+}}.}}}}}..}}}}}......}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}....}}}...}}}}}
+}...}}.....}}}}}....}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}...............}
+}....Y}}}}}Y}}}....}Y}..}}}}}}}}}}}.......}}}}}}}}}}}}}}}}..}}.....}}}...}}
+}....}}}}}}}Y.....}}}Y..}}}}}}.................}}}}}}}}}}}.}}}}.....}}...}}
+}....}}}}}}}}}}Y}.}}}}.}}}}}}.-----------------.}}}}}}}}}}}}}}}}}.........}
+}....}}}}}}}}}Y}}}}}}}}.}}}...|...............S...}}}}}}}}}}}}}}}}}}}....}}
+}.....Y.YY....}}}}}}}}}.Y}....--------+--------....}}}}}}..}}}}}}}}}}}...}}
+}......}}}}..}}}}}}}}}}}}Y........|.......|........}}}}}....}}}}}}}}}}}}}}}
+}.....}}}}}}}}}}}}}}}}}}}}........|.......|........}}}}}...}}}}}}}}}.}}}}}}
+}.....}}}}}}}}}}}}}}}}}}}}....--------+--------....}}}}}}.}.}}}}}}}}}}}}}}}
+}......}}}}}}}}}}}}}}}}}}X}...S...............|...}}}}}}}}}}}}}}}}}.}}}}}}}
+}..?....}}}}}}}..}}}}}}}X}}}}.-----------------.}}}}}}}}}}}}}}}}}....}}}}}}
+}........XX.XX....}}}}}X}}}}}}.................}}}}}..}}}}}}}}}.......}}}}}
+}.......}}}}}}}......}X}}}}}}}}}}}}.......}}}}}}}}}.....}}}}}}...}}..}}}}}}
+}.....}}}}}}}}}}}.....}}}}}}}}}}}}}}}}}}}}}}.}}}}}}}..}}}}}}}}}}....}}}}}}}
+}}..}}}}}}}}}}}}}....}}}}}}}}}}}}}}}}}}}}}}...}}..}}}}}}}.}}.}}}}..}}}}}}}}
+}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}
+}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}
+ENDMAP
+
+
+2. Titan level
+
+This Medusa level requires both of the guaranteed scrolls of earth from
+Sokoban, but there are enough boulders available to compensate up to 3
+traceless sinking boulders. Though the necessary number of boulders can
+also in this case be further reduced by using a spare charge from a wand
+of cold and choosing a slightly different path over the sea. This level
+has some specifics to mention; the secret door top-left on the map has to
+be kicked down to have the necessary room to push the boulders away from
+the blocking wall. Take also care that you don't push any boulder to the
+right wall, because of the water squares in the lower part of the room you
+would waste a boulder. Finally many of the walls of the ruins in the middle
+of the map will have to be broke down using some mandatory means of digging
+to be able to build that path.
+
+MAP
+}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}
+}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}
+}------}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}-------}}}}}}}}--------------}
+}|....|}}}}}}}}}..}.}}..}}}}}}}}}}}}}..}}}}}}-.....--}}}}}}}|............|}
+}|..O.|.}}}}}}}}}}}.}...}}..}}}}}}}}}}}}}}}}}---......}}}}}.|............|}
+}S....|.}}}}}}---}}}}}}}}}}}}}}}}}}}}}}}}}}---...|..-}}}}}}.S..----------|}
+}|.?..|.}}}}}}-...}}}}}}}}}.}}...}.}}}}.}}}......----}}}}}}.|............|}
+}|....|.}}}}}}-....--}}}}}}}}}}}}}}}}}}}}}}----...--}}}}}}}.|..--------+-|}
+}|....|.}}}}}}}......}}}}...}}}}}}.}}}}}}}}}}}---..---}}}}}.|..|..S...|..|}
+}|....|.}}}}}}-....-}}}}}}}------}}}}}}}}}}}}}}-...|O-}}}}}.|..|..|...|..|}
+}|....|.}}}}}}}}X---}}}}}}}........}}}}}}}}}}---.|....}}}}}.|..|..|...|..|}
+}|....|.}}}}}}}X}}}}X}}}}}-....|...-}}}}}}}}--...----.}}}}}.|..|..|...|..|}
+}|....|.}}}}}}..}}}}}X}}}}---..--------}}}}}-..---}}X}}}}}}.|..|..-------|}
+}|...}|...XXX.}}}}}}...}}}}}--..........}}}}..--}}}}}X}}}}}.|..|.........|}
+}|...XS...}}.}}}}}}}}}}X}}}}-..--------}}}}}X}}}}}}}}...}}}.|..--------..S}
+}|...}|...}}}}}}}..}}}}}X----..|....-}}X}}}X}}}}}}}}}}..}}}.|............|}
+}|....|}}}YY....YYYY..YY.-.......----}}......}}}}}}.......X}|............|}
+}------}}}}}}}}}}}}}}}}}}---------}}}}}}}X}}}}}}}}}}}}}}}}}}--------------}
+}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}
+}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}
+ENDMAP
+
+
+Note: The above briefly mentioned method to dig or level-teleport down
+instead of crossing the sea will make it impossible to apply the boulder
+method presented here; the Medusa levels are designed to require more
+boulders if you start your way from the east side of the map!
+
+
+And don't forget the blindfold!
+
+
+Corrections and comments are welcome (janis_papanagnou@hotmail.com)

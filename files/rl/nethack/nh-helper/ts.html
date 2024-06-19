@@ -1,0 +1,309 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+  <!--
+      Sewer and Town Generator based on earlier Code
+      written in C++ and C and now ported to Javascript,
+      slightly adjusted.
+
+      Author:  Janis Papanagnou
+      Date:    2017-12-26, 2017-12-29
+
+      Copyright &copy; 1999-2017 Janis Papanagnou
+      Content licensed under the
+      <A href="http://www.opencontent.org/opl.shtml">
+        OpenContent License
+      </A>.
+      Source code is licensed under
+      <A href="http://www.gnu.org/copyleft/gpl.html">
+        GNU General Public License
+      </A>.
+  -->
+
+<title> 下水道与城镇 </title>
+
+<style type="text/css">
+  textarea { font-family: courier; font-size: 12pt; }
+</style>
+
+<script language="javascript" type="text/javascript">
+
+  var COLS = 76;
+  var ROWS = 21;
+
+  var ROCK  = ' ', FLOOR = '.', WATER = '~', TRAP  = '^', BARS  = '#',
+      DOWN  = '>', UP    = '<', DOOR  = '+';
+
+  /* In Sewers unused symbols are marked as 'x'. */
+  /* Wall_{Top,Mid,Bottom}{Left,Mid,Right} */
+  /* Wall_{Horizontal,Vertical} */
+  var W_TL = '-',  W_TM = 'x',  W_TR = '-',
+      W_ML = 'x',  W_MM = 'x',  W_MR = 'x',
+      W_BL = '-',  W_BM = 'x',  W_BR = '-',
+      W_H = '-',   W_V = '|';
+
+  var lines = new Array();
+
+  function rnd (x)
+  {
+    return  Math.floor(Math.random() * x);
+  }
+
+  function rndg (x)
+  {
+    if (x <= 0)
+      return  0;
+
+    return  rnd(Math.floor((x+1)/2)+1) + rnd(Math.floor((x+2)/4)+1) +
+            rnd(Math.floor((x+4)/8)+1) + rnd(Math.floor((x+8)/16)+1);
+  }
+
+  function replaceAt (str, ind, rep)
+  {
+    return  str.substring(0, ind) + rep + str.substring(ind + 1);
+  }
+
+  function map_set_point (x, y, sym)
+  {
+    lines[y] = replaceAt (lines[y], x, sym);
+  }
+
+  function map_change_point (old_sym, new_sym)
+  {
+    var x=0, y=0;
+    do {
+      x = rnd(COLS);
+      y = rnd(ROWS);
+    }
+    while (lines[y].charAt(x) != old_sym);
+
+    map_set_point (x, y, new_sym);
+  }
+
+  var dots = "......................................" +
+             "......................................";
+  var spcs = "                                      " +
+             "                                      ";
+
+  function map_init (town)
+  {
+    var filler = town ? dots : spcs;
+    for (var i=0; i<ROWS; i++)
+      lines[i] = filler;
+  }
+
+  function map_fill (xLeft, xRight, yUp, yDown, sym)
+  {
+    var x, y;
+    for (y=yUp; y<=yDown; y++)
+      for (x=xLeft; x<=xRight; x++)
+        map_set_point (x, y, sym);
+  }
+
+  function map_fillV (x, yUp, yDown, sym, town)
+  {
+    var y;
+    for (y=yUp; y<=yDown; y++)
+      map_set_point (x, y, sym);
+    if (town) {
+      var dy = yDown-yUp+1;
+      var z = 1+rnd(2-2*(dy<4));
+      while (z--)
+        map_set_point (x, yUp+rnd(dy), DOOR);
+    }
+  }
+
+  function map_fillH (xLeft, xRight, y, sym, town)
+  {
+    var x;
+    for (x=xLeft; x<=xRight; x++)
+      map_set_point (x, y, sym);
+    if (town) {
+      var dx = xRight-xLeft+1;
+      var z = 1+rnd(2-2*(dx<6));
+      while (z--)
+        map_set_point (xLeft+rnd(dx), y, DOOR);
+    }
+  }
+
+  function map_cutV (xLeft, xRight, yUp, yDown, town)
+  {
+    map_fillV(xLeft,   yUp+1, yDown-1,  W_V,  town);
+    map_set_point(xLeft, yUp,   W_TR);
+    map_set_point(xLeft, yDown, W_BR);
+    map_fillV(xRight,  yUp+1, yDown-1,  W_V,  town);
+    map_set_point(xRight, yUp,   W_TL);
+    map_set_point(xRight, yDown, W_BL);
+  }
+
+  function map_cutH (xLeft, xRight, yUp, yDown, town)
+  {
+    map_fillH(xLeft+1, xRight-1,  yUp,    W_H,  town);
+    map_set_point(xLeft,  yUp, W_BL);
+    map_set_point(xRight, yUp, W_BR);
+    map_fillH(xLeft+1, xRight-1,  yDown,  W_H,  town);
+    map_set_point(xLeft,  yDown, W_TL);
+    map_set_point(xRight, yDown, W_TR);
+  }
+
+  function map_init_frame ()
+  {
+    map_fillV(0, 0, ROWS-1, W_V, 0);
+    map_fillV(COLS-1, 0, ROWS-1, W_V, 0);
+    map_fillH(0, COLS-1, 0, W_H, 0);
+    map_fillH(0, COLS-1, ROWS-1, W_H, 0);
+    map_set_point(0, 0, W_TL);
+    map_set_point(0, ROWS-1, W_BL);
+    map_set_point(COLS-1, 0, W_TR);
+    map_set_point(COLS-1, ROWS-1, W_BR);
+  }
+
+  function map_close_border (town)
+  {
+    var x, y;
+
+    for (y=0; y<ROWS; y+=ROWS-1)
+      for (x=1; x<COLS-1; x++)
+        if ((lines[y].charAt(x) == FLOOR || lines[y].charAt(x) == WATER)
+            && !town)
+          map_set_point (x, y, BARS);
+
+    for (x=0; x<COLS; x+=COLS-1)
+      for (y=1; y<ROWS-1; y++)
+        if ((lines[y].charAt(x) == FLOOR || lines[y].charAt(x) == WATER)
+            && !town)
+          map_set_point (x, y, BARS);
+  }
+
+  var BASEBLOCKSIZE = 3;
+  var BASECUTLIMIT = 2*BASEBLOCKSIZE;
+  var WCUTLIMIT = BASECUTLIMIT+4;
+  var HCUTLIMIT = BASECUTLIMIT+3;
+
+  function dryOrWet (level)
+  {
+    /* 33% water probability */
+    return  (rnd(level) == 0  ||  rnd(3) != 0) ? FLOOR : WATER;
+  }
+
+  function map_cut_block (x0, y0, w, h, town)
+  {
+    /* To make more appealing sewers, in case that  COLS > ROWS ,
+       the first cut is always a vertical cut. */
+    map_cut_block_V(x0, y0, w, h, 1, town);
+  }
+
+  function map_cut_block_V (x0, y0, w, h, level, town)
+  {
+    if (level <= 2  || (w >= WCUTLIMIT  &&  rnd(w-WCUTLIMIT+1) != 0))
+    {
+      var wMid = Math.floor(rnd(w)/20)+1;
+      var xMid = rndg(w-BASECUTLIMIT-wMid) + BASEBLOCKSIZE;
+
+      var yUp    = y0;
+      var yDown  = y0+h-1;
+
+      map_cutV(x0+xMid-1, x0+xMid+wMid, yUp, yDown, town);
+      map_fill(x0+xMid, x0+xMid+wMid-1, yUp, yDown, FLOOR);
+      if (!town && dryOrWet(level) != FLOOR)
+      {
+        var ww = rnd(wMid)+1;
+        var dx = rnd(wMid-ww+1);
+        var wx0 = x0+xMid+dx;
+        map_fill(wx0, wx0+ww-1, yUp, yDown, WATER);
+      }
+
+      map_cut_block_H(x0, y0, xMid, h, level+1, town);
+      map_cut_block_H(x0+xMid+wMid, y0, w-xMid-wMid, h, level+1, town);
+    }
+  }
+
+  function map_cut_block_H (x0, y0, w, h, level, town)
+  {
+    if (level <= 2  || (h >= HCUTLIMIT  &&  rnd(h-HCUTLIMIT+1) != 0))
+    {
+      var hMid = Math.floor(rnd(h)/12)+1;
+      var yMid = rndg(h-BASECUTLIMIT-hMid) + BASEBLOCKSIZE;
+
+      var xLeft  = x0;
+      var xRight = x0+w-1;
+
+      map_cutH(xLeft, xRight, y0+yMid-1, y0+yMid+hMid, town);
+      map_fill(xLeft, xRight, y0+yMid, y0+yMid+hMid-1, FLOOR);
+      if (!town && dryOrWet(level) != FLOOR)
+      {
+        var wh = rnd(hMid)+1;
+        var dy = rnd(hMid-wh+1);
+        var wy0 = y0+yMid+dy;
+        map_fill(xLeft, xRight, wy0, wy0+wh-1, WATER);
+      }
+
+      map_cut_block_V(x0, y0, w, yMid, level+1, town);
+      map_cut_block_V(x0, y0+yMid+hMid, w, h-yMid-hMid, level+1, town);
+    }
+  }
+
+  function map_dump ()
+  {
+    document.getElementById("map").value = lines.join("\n");
+  }
+
+  var town;
+
+  function mkmap (town)
+  {
+    map_init (town);
+    map_init_frame ();
+    map_cut_block (0, 0, COLS, ROWS, town);
+    map_close_border (town);
+    map_change_point (FLOOR, UP);
+    map_change_point (FLOOR, DOWN);
+    var ntraps = town ? 12 : 6;
+    for (var trap=1; trap <= ntraps; trap++)
+      map_change_point (FLOOR, TRAP);
+    map_dump (town);
+  }
+
+  function mksewer ()
+  {
+    town = false;
+    mkmap (false);
+  }
+
+  function mktown ()
+  {
+    town = true;
+    mkmap (true);
+  }
+
+
+</script>
+
+</head>
+
+<body>
+  <h2> 下水道与城镇 </h2>
+  <h4> （样图生成器） </h4>
+
+  <br>
+  <p style="margin-left: 1cm;">
+    <textarea id="map" name="map" cols="76" rows="21" readonly="readonly"
+              style="border:0">
+    </textarea>
+  </p>
+
+  <p style="margin-left: 1cm;">
+    <input type="button" name="Sewer" value="下水道" onclick="mksewer()">
+    &nbsp;&nbsp;&nbsp;
+    <input type="button" name="Town"  value="  城镇  " onclick="mktown()">
+  </p>
+
+</body>
+</html>
+
+<!--
+	vim: ts=2 sw=2 expandtab
+-->

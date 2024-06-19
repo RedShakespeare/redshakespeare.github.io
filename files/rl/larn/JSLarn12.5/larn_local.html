@@ -1,0 +1,126 @@
+<!doctype html>
+<html class='no-js' lang=''>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='x-ua-compatible' content='ie=edge'>
+    <title>Play Larn Online - A classic DOS/Amiga/Unix Roguelike Video Game</title>
+    <meta name='description' content='Larn Game: Play Larn Online - A classic DOS/Amiga/Unix Roguelike Video Game'>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"> -->
+    <link rel="icon" type="image/png" href="img/favicon.png">
+    <link rel="stylesheet" type="text/css" href="larn.css">
+    <!-- <link rel='apple-touch-icon' href='apple-touch-icon.png'> -->
+
+    <script src='lib/rollbar.js'></script>
+    <script src='lib/lambda.min.js'></script>
+    <script src='lib/lz-string.min.js'></script>
+    <script src='lib/mousetrap.min.js'></script>
+    <script src='lib/diff.js'></script>
+
+    <!-- <script src='larn.min.js'></script> -->
+
+    <script src='config.js'></script>
+    <script src='util.js'></script>
+    <script src='env/larn_config.js'></script>
+    <script src='larn.js'></script>
+    <script src='main.js'></script>
+    <script src='object.js'></script>
+    <script src='global.js'></script>
+    <script src='monster.js'></script>
+    <script src='monsterdata.js'></script>
+    <script src='player.js'></script>
+    <script src='mazes.js'></script>
+    <script src='level.js'></script>
+    <script src='create.js'></script>
+    <script src='data.js'></script>
+    <script src='parse.js'></script>
+    <script src='buttons.js'></script>
+    <script src='scores.js'></script>
+    <script src='inventory.js'></script>
+    <script src='movem.js'></script>
+    <script src='action.js'></script>
+    <script src='io.js'></script>
+    <script src='display.js'></script>
+    <script src='storedata.js'></script>
+    <script src='store.js'></script>
+    <script src='mcdopes.js'></script>
+    <script src='savelev.js'></script>
+    <script src='spells.js'></script>
+    <script src='spellsinfo.js'></script>
+    <script src='regen.js'></script>
+    <script src='spheres.js'></script>
+    <script src='help.js'></script>
+    <script src='state.js'></script>
+    <script src='bill.js'></script>
+    <script src='altar.js'></script>
+    <script src='fountain.js'></script>
+    <script src='potion.js'></script>
+    <script src='scroll.js'></script>
+    <script src='stairs.js'></script>
+    <script src='throne.js'></script>
+    <script src='devmode.js'></script>
+    <script src='fullstory.js'></script>
+    <script src='tv/tv_config.js'></script>
+    <script src='tv/movie.js'></script>
+    <script src='tv/frame.js'></script>
+    <script src='tv/roll.js'></script>
+    <script src='tv/patch.js'></script>
+    <script src='tv/lambda.js'></script>
+</head>
+
+<body>
+
+    <!-- warning: whitespace matters a lot because we are using pre tags -->
+
+    <table>
+        <tbody>
+            <!-- one row with two columns -->
+            <tr>
+                <!-- column one has the game board, the button footer, and an optional beta message -->
+                <td>
+                    <!-- game board -->
+                    <!-- beautify ignore:start -->
+                    <div id='LARN'>
+LARN is a dungeon type adventure game similar in concept to HACK, ROGUE or
+MORIA, but with a different feel and winning criteria.
+
+Unfortunately if you're seeing this page it means that there was an error
+loading the game.
+
+This version of Larn requires a browser from circa 2016 to work properly.
+Please check to make sure you are running Firefox 53+, Chrome 55+, Edge 15+,
+or Safari 11+. Internet Explorer is not supported.
+
+If you're still having trouble, please send a message to "eye (at) larn.org"
+and I'll get to the bottom of it!
+                    </div>
+                    <!-- beautify ignore:end -->
+                    <!-- button footer -->
+                    <p id='FOOTER'></p>
+                    <!-- beta message -->
+                    <div>
+                    </div>
+                </td> <!-- column one -->
+                <td style="padding-left:20px;">
+                    <div id='STATS'></div>
+                </td> <!-- column two -->
+            </tr>
+        </tbody>
+    </table>
+
+    <script>
+        'use strict';
+        var no_intro = false;
+        var newplayer = false;
+        var mobile = false;
+        var altrender = false;
+        try {
+            Rollbar.configure({ enabled: false });
+        } catch (e) {}
+        play();
+    </script>
+
+</body>
+
+</html>

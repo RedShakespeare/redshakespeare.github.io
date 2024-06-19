@@ -1,0 +1,1269 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+<!--
+      Author:  Janis Papanagnou
+      Date:    2006-09-18 2006-09-23 2006-09-24 2006-09-25
+
+      Copyright &copy; 2006 Janis Papanagnou
+      Content licensed under the
+      <A href="http://www.opencontent.org/opl.shtml">OpenContent License</A>
+      Source code is licensed under
+      <A href="http://www.gnu.org/copyleft/gpl.html">GNU General Public License</A>.
+-->
+
+<title> Nethack施法失败率计算器 </title>
+
+
+<style type="text/css">
+<!--
+select, input, body, td, a, p, .h { font-family: arial; font-size: 9pt; }
+-->
+</style>
+
+
+
+<script language="javascript" type="text/javascript">
+
+//               Arc Bar Cav Hea Kni Mon Pri Ran Rog Sam Tou Val Wiz
+penbase      = [  5, 14, 12,  3,  8,  8,  3,  9,  8, 10,  5, 10,  1 ]
+penemerg     = [  0,  0,  0, -3, -2, -2, -2,  2,  0,  0,  1, -2,  0 ]
+pensuit      = [ 10,  8,  8, 10,  9, 20, 10, 10,  9,  8, 10,  9, 10 ]
+penshield    = [  2,  0,  1,  2,  0,  2,  2,  1,  1,  0,  2,  0,  3 ]
+stat         = [  0,  0,  0,  1,  1,  1,  1,  0,  0,  0,  0,  1,  0 ]
+specialspell = [ 19, 31, 37,  8, 29, 11, 27, 32, 18, 15, 24,  3,  2 ]
+
+// max skill per character class
+//                     Arc Bar Cav Hea Kni Mon Pri Ran Rog Sam Tou Val Wiz
+sk_pcc_attack      = [  1,  2,  1,  0,  2,  1,  0,  0,  0,  2,  0,  1,  3 ]
+sk_pcc_healing     = [  1,  0,  0,  3,  2,  3,  3,  1,  0,  0,  0,  0,  2 ]
+sk_pcc_divination  = [  3,  0,  0,  0,  0,  1,  3,  3,  2,  0,  1,  0,  3 ]
+sk_pcc_enchantment = [  0,  0,  0,  0,  0,  1,  0,  0,  0,  0,  1,  0,  2 ]
+sk_pcc_clerical    = [  0,  0,  0,  0,  2,  2,  3,  0,  0,  2,  0,  0,  2 ]
+sk_pcc_escape      = [  0,  0,  0,  0,  0,  1,  0,  1,  2,  0,  2,  1,  3 ]
+sk_pcc_matter      = [  1,  0,  2,  0,  0,  1,  0,  0,  2,  0,  0,  0,  3 ]
+
+// unused...
+spell = [
+  "force bolt", "drain life", "magic missile", "cone of cold", "fireball", "finger of death",
+  "healing", "cure blindness", "cure sickness", "extra healing", "stone to flesh", "restore ability",
+  "detect monsters", "light", "detect food", "clairvoyance", "detect unseen", "identify",
+      "detect treasure", "magic mapping",
+  "sleep", "confuse monster", "slow monster", "cause fear", "charm monster",
+  "protection", "create monster", "remove curse", "create familiar", "turn undead",
+  "jumping", "haste self", "invisibility", "levitation", "teleport away",
+  "knock", "wizard lock", "dig", "polymorph", "cancellation"
+]
+
+lvl   = [ 1,2,2,4,4,7, 1,2,3,3,3,4, 1,1,2,3,3,3,4,5, 1,2,2,3,3, 1,2,3,6,6, 1,3,4,4,6, 1,2,5,6,7 ]
+emerg = [ 0,0,0,0,0,0, 1,1,1,1,0,1, 0,0,0,0,0,0,0,0, 0,0,0,0,0, 0,0,1,0,0, 0,0,0,0,0, 0,0,0,0,0 ]
+
+
+
+function isqrt (val)
+{
+    rt = 0
+    odd = 1
+    while (val >= odd)
+    {
+        val -= odd
+        odd += 2
+        rt += 1
+    }
+    return rt
+}
+
+
+function calculate (s, skill)
+{
+    c = form1.profession.value
+    p = penbase[c]
+    if (form1.gauntlets.checked) p += 6
+    if (form1.helmet.checked)    p += 4
+    if (form1.boots.checked)     p += 2
+    if (form1.shield.checked)    p += penshield[c]
+    if (!form1.robe.checked &&  form1.suit.checked) p += pensuit[c]
+    if ( form1.robe.checked &&  form1.suit.checked) p += Math.floor(pensuit[c]/2)
+    if ( form1.robe.checked && !form1.suit.checked) p -= pensuit[c]
+    if (s == specialspell[c])    p -= 4
+    if (emerg[s] == 1)           p += penemerg[c]
+    if (p > 20) p = 20
+    
+    b = Math.floor(11 * form1.wis.value / 2)
+    d = lvl[s] * 4 - skill * 6 - Math.floor(form1.xlvl.value / 3) - 5
+    if (d <= 0) {
+        d = Math.floor(Math.abs(d) * 15 / lvl[s])
+        if (d > 20) d = 20
+        b += d
+    } else {
+      b -= isqrt((900 * d) + 2000)
+      //b -= 10 * isqrt(9 * d + 20)
+    }
+    if (b < 0)   b = 0
+    if (b > 120) b = 120
+    
+    if (form1.shield.checked && form1.shieldsize.value == 1)
+    {
+        if (s == specialspell[c]) { b = b/2 } else { b = b/4 }
+        b = Math.floor(b)
+    }
+    
+    b = Math.floor(b * (20 - p) / 15) - p
+    if (b < 0)   b = 0
+    if (b > 100) b = 100
+
+    failrate = 100 - b
+
+    return (failrate)
+}
+
+
+function calculate_attack ()
+{
+    if (form2.attack.checked)
+    {
+        skill = form2.skill_attack.value
+
+        form2.sp_force_bolt.value      = calculate ( 0, skill)
+        form2.sp_drain_life.value      = calculate ( 1, skill)
+        form2.sp_magic_missile.value   = calculate ( 2, skill)
+        form2.sp_cone_of_cold.value    = calculate ( 3, skill)
+        form2.sp_fireball.value        = calculate ( 4, skill)
+        form2.sp_finger_of_death.value = calculate ( 5, skill)
+    }
+
+    if (form2.skill_attack.value > sk_pcc_attack[form1.profession.value])
+        showdiv ('attack_skill_strained')
+    else
+        hidediv ('attack_skill_strained')
+}
+
+function calculate_healing ()
+{
+    if (form2.healing.checked)
+    {
+        skill = form2.skill_healing.value
+
+        form2.sp_healing.value         = calculate ( 6, skill)
+        form2.sp_cure_blindness.value  = calculate ( 7, skill)
+        form2.sp_cure_sickness.value   = calculate ( 8, skill)
+        form2.sp_extra_healing.value   = calculate ( 9, skill)
+        form2.sp_stone_to_flesh.value  = calculate (10, skill)
+        form2.sp_restore_ability.value = calculate (11, skill)
+    }
+
+    if (form2.skill_healing.value > sk_pcc_healing[form1.profession.value])
+        showdiv ('healing_skill_strained')
+    else
+        hidediv ('healing_skill_strained')
+}
+
+function calculate_divination ()
+{
+    if (form2.divination.checked)
+    {
+        skill = form2.skill_divination.value
+
+        form2.sp_detect_monsters.value = calculate (12, skill)
+        form2.sp_light.value           = calculate (13, skill)
+        form2.sp_detect_food.value     = calculate (14, skill)
+        form2.sp_clairvoyance.value    = calculate (15, skill)
+        form2.sp_detect_unseen.value   = calculate (16, skill)
+        form2.sp_identify.value        = calculate (17, skill)
+        form2.sp_detect_treasure.value = calculate (18, skill)
+        form2.sp_magic_mapping.value   = calculate (19, skill)
+    }
+
+    if (form2.skill_divination.value > sk_pcc_divination[form1.profession.value])
+        showdiv ('divination_skill_strained')
+    else
+        hidediv ('divination_skill_strained')
+}
+
+function calculate_enchantment ()
+{
+    if (form2.enchantment.checked)
+    {
+        skill = form2.skill_enchantment.value
+
+        form2.sp_sleep.value           = calculate (20, skill)
+        form2.sp_confuse_monster.value = calculate (21, skill)
+        form2.sp_slow_monster.value    = calculate (22, skill)
+        form2.sp_cause_fear.value      = calculate (23, skill)
+        form2.sp_charm_monster.value   = calculate (24, skill)
+    }
+
+    if (form2.skill_enchantment.value > sk_pcc_enchantment[form1.profession.value])
+        showdiv ('enchantment_skill_strained')
+    else
+        hidediv ('enchantment_skill_strained')
+}
+
+function calculate_clerical ()
+{
+    if (form2.clerical.checked)
+    {
+        skill = form2.skill_clerical.value
+
+        form2.sp_protection.value      = calculate (25, skill)
+        form2.sp_create_monster.value  = calculate (26, skill)
+        form2.sp_remove_curse.value    = calculate (27, skill)
+        form2.sp_create_familiar.value = calculate (28, skill)
+        form2.sp_turn_undead.value     = calculate (29, skill)
+    }
+
+    if (form2.skill_clerical.value > sk_pcc_clerical[form1.profession.value])
+        showdiv ('clerical_skill_strained')
+    else
+        hidediv ('clerical_skill_strained')
+}
+
+function calculate_escape ()
+{
+    if (form2.escape.checked)
+    {
+        skill = form2.skill_escape.value
+
+        form2.sp_jumping.value         = calculate (30, skill)
+        form2.sp_haste_self.value      = calculate (31, skill)
+        form2.sp_invisibility.value    = calculate (32, skill)
+        form2.sp_levitation.value      = calculate (33, skill)
+        form2.sp_teleport_away.value   = calculate (34, skill)
+    }
+
+    if (form2.skill_escape.value > sk_pcc_escape[form1.profession.value])
+        showdiv ('escape_skill_strained')
+    else
+        hidediv ('escape_skill_strained')
+}
+
+function calculate_matter ()
+{
+    if (form2.matter.checked)
+    {
+        skill = form2.skill_matter.value
+
+        form2.sp_knock.value           = calculate (35, skill)
+        form2.sp_wizard_lock.value     = calculate (36, skill)
+        form2.sp_dig.value             = calculate (37, skill)
+        form2.sp_polymorph.value       = calculate (38, skill)
+        form2.sp_cancellation.value    = calculate (39, skill)
+    }
+
+    if (form2.skill_matter.value > sk_pcc_matter[form1.profession.value])
+        showdiv ('matter_skill_strained')
+    else
+        hidediv ('matter_skill_strained')
+}
+
+
+function calculate_all ()
+{
+    calculate_attack()
+    calculate_healing()
+    calculate_divination()
+    calculate_enchantment()
+    calculate_clerical()
+    calculate_escape()
+    calculate_matter()
+}
+
+
+function profession_change ()
+{
+    if (stat[form1.profession.value] == 0)
+    {
+        form1.IntWis.value=" 智力 "
+    }
+    else
+    {
+        form1.IntWis.value=" 感知 "
+    }
+
+    //initial_spell_classes ()
+
+    calculate_all ()
+}
+
+
+function hidediv(id)
+{
+	if (document.getElementById) { // DOM3 = IE5, NS6
+		document.getElementById(id).style.display = 'none';
+	}
+	else {
+		if (document.layers) { // Netscape 4
+			document.id.display = 'none';
+		}
+		else { // IE 4
+			document.all.id.style.display = 'none';
+		}
+	}
+}
+
+function showdiv(id)
+{
+	if (document.getElementById) { // DOM3 = IE5, NS6
+		document.getElementById(id).style.display = 'block';
+	}
+	else {
+		if (document.layers) { // Netscape 4
+			document.id.display = 'block';
+		}
+		else { // IE 4
+			document.all.id.style.display = 'block';
+		}
+	}
+}
+
+
+function toggle_attack ()
+{
+    if (form2.attack.checked)
+    {
+        showdiv('t_attack')
+        calculate_attack()
+    }
+    else
+        hidediv('t_attack')
+}
+
+function toggle_healing ()
+{
+    if (form2.healing.checked)
+    {
+        showdiv('t_healing')
+        calculate_healing()
+    }
+    else
+        hidediv('t_healing')
+}
+
+function toggle_divination ()
+{
+    if (form2.divination.checked)
+    {
+        showdiv('t_divination')
+        calculate_divination()
+    }
+    else
+        hidediv('t_divination')
+}
+
+function toggle_enchantment ()
+{
+    if (form2.enchantment.checked)
+    {
+        showdiv('t_enchantment')
+        calculate_enchantment()
+    }
+    else
+        hidediv('t_enchantment')
+}
+
+function toggle_clerical ()
+{
+    if (form2.clerical.checked)
+    {
+        showdiv('t_clerical')
+        calculate_clerical()
+    }
+    else
+        hidediv('t_clerical')
+}
+
+function toggle_escape ()
+{
+    if (form2.escape.checked)
+    {
+        showdiv('t_escape')
+        calculate_escape()
+    }
+    else
+        hidediv('t_escape')
+}
+
+function toggle_matter ()
+{
+    if (form2.matter.checked)
+    {
+        showdiv('t_matter')
+        calculate_matter()
+    }
+    else
+        hidediv('t_matter')
+}
+
+
+function expand_all ()
+{
+    form2.attack.checked = 1
+    showdiv('t_attack')
+    calculate_attack()
+    form2.healing.checked = 1
+    showdiv('t_healing')
+    calculate_healing()
+    form2.divination.checked = 1
+    showdiv('t_divination')
+    calculate_divination()
+    form2.enchantment.checked = 1
+    showdiv('t_enchantment')
+    calculate_enchantment()
+    form2.clerical.checked = 1
+    showdiv('t_clerical')
+    calculate_clerical()
+    form2.escape.checked = 1
+    showdiv('t_escape')
+    calculate_escape()
+    form2.matter.checked = 1
+    showdiv('t_matter')
+    calculate_matter()
+}
+
+function collapse_all ()
+{
+    form2.attack.checked = 0
+    hidediv('t_attack')
+    form2.healing.checked = 0
+    hidediv('t_healing')
+    form2.divination.checked = 0
+    hidediv('t_divination')
+    form2.enchantment.checked = 0
+    hidediv('t_enchantment')
+    form2.clerical.checked = 0
+    hidediv('t_clerical')
+    form2.escape.checked = 0
+    hidediv('t_escape')
+    form2.matter.checked = 0
+    hidediv('t_matter')
+}
+
+
+function initial_spell_classes ()
+{
+    initial_spell_class_values ()
+
+    c = form1.profession.value
+
+    form2.attack.checked = (sk_pcc_attack[c] != 0)
+    toggle_attack ()
+    form2.healing.checked = (sk_pcc_healing[c] != 0)
+    toggle_healing ()
+    form2.divination.checked = (sk_pcc_divination[c] != 0)
+    toggle_divination ()
+    form2.enchantment.checked = (sk_pcc_enchantment[c] != 0)
+    toggle_enchantment ()
+    form2.clerical.checked = (sk_pcc_clerical[c] != 0)
+    toggle_clerical ()
+    form2.escape.checked = (sk_pcc_escape[c] != 0)
+    toggle_escape ()
+    form2.matter.checked = (sk_pcc_matter[c] != 0)
+    toggle_matter ()
+}
+
+function initial_spell_class_values ()
+{
+    unskilled = 0; basic = 1
+    form2.skill_attack.value = unskilled
+    form2.skill_healing.value = unskilled
+    form2.skill_divination.value = unskilled
+    form2.skill_enchantment.value = unskilled
+    form2.skill_clerical.value = unskilled
+    form2.skill_escape.value = unskilled
+    form2.skill_matter.value = unskilled
+
+    switch (form1.profession.value)
+    {
+    case "3": /* Healer */
+    case "5": /* Monk */
+        form2.skill_healing.value = basic
+        break;
+    case "6": /* Priest */
+        form2.skill_clerical.value = basic
+        break;
+    case "12": /* Wizard */
+        form2.skill_attack.value = basic
+        form2.skill_enchantment.value = basic
+        break;
+    }
+
+    hidediv ('attack_skill_strained')
+    hidediv ('healing_skill_strained')
+    hidediv ('divination_skill_strained')
+    hidediv ('enchantment_skill_strained')
+    hidediv ('clerical_skill_strained')
+    hidediv ('escape_skill_strained')
+    hidediv ('matter_skill_strained')
+}
+
+
+</script>
+
+</head>
+
+<!-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -->
+
+<body>
+  <h1> 施法失败率计算器 </h1>
+
+  <!-- to display debug information...
+  <form name="form0"  style="display:none;">
+    <input type="text" size="9" name="debug1" value="****" readonly>
+    <br>
+    <input type="text" size="9" name="debug2" value="****" readonly>
+  </form>
+  -->
+
+  <noscript>
+    <br>
+    <table style="border-width: 4px; border-style: solid; padding: 8px">
+      <tr>
+        <td>
+          <b> The calculation needs JavaScript to be enabled in your browser! </b>
+        </td>
+      </tr>
+    </table>
+    <br>
+    <br>
+  </noscript>
+
+
+  <form name="form1" style="display: block;" action="spells.html">
+    经验等级
+    <select name="xlvl" onchange="calculate_all()">
+      <option value="1">   1 </option>
+      <option value="2">   2 </option>
+      <option value="3">   3 </option>
+      <option value="4">   4 </option>
+      <option value="5">   5 </option>
+      <option value="6">   6 </option>
+      <option value="7">   7 </option>
+      <option value="8">   8 </option>
+      <option value="9">   9 </option>
+      <option value="10"> 10 </option>
+      <option value="11"> 11 </option>
+      <option value="12"> 12 </option>
+      <option value="13"> 13 </option>
+      <option value="14"> 14 </option>
+      <option value="15"> 15 </option>
+      <option value="16"> 16 </option>
+      <option value="17"> 17 </option>
+      <option value="18"> 18 </option>
+      <option value="19"> 19 </option>
+      <option value="20"> 20 </option>
+      <option value="21"> 21 </option>
+      <option value="22"> 22 </option>
+      <option value="23"> 23 </option>
+      <option value="24"> 24 </option>
+      <option value="25"> 25 </option>
+      <option value="26"> 26 </option>
+      <option value="27"> 27 </option>
+      <option value="28"> 28 </option>
+      <option value="29"> 29 </option>
+      <option value="30"> 30 </option>
+    </select>
+    的
+    <select name="profession" onchange="profession_change()">
+      <option value="0">  考古学家            </option>
+      <option value="1">  野蛮人               </option>
+      <option value="2">  穴居人                 </option>
+      <option value="3">  医生                  </option>
+      <option value="4">  骑士                  </option>
+      <option value="5" selected="selected"> 僧侣 </option>
+      <option value="6">  牧师                  </option>
+      <option value="7">  游侠                  </option>
+      <option value="8">  盗贼                   </option>
+      <option value="9">  武士                 </option>
+      <option value="10"> 游客                 </option>
+      <option value="11"> 女武神                </option>
+      <option value="12"> 巫师                  </option>
+    </select>
+    拥有
+    <select name="wis" onchange="calculate_all()">
+      <option value="3">   3                     </option>
+      <option value="4">   4                     </option>
+      <option value="5">   5                     </option>
+      <option value="6">   6                     </option>
+      <option value="7">   7                     </option>
+      <option value="8">   8                     </option>
+      <option value="9">   9                     </option>
+      <option value="10" selected="selected"> 10 </option>
+      <option value="11"> 11                     </option>
+      <option value="12"> 12                     </option>
+      <option value="13"> 13                     </option>
+      <option value="14"> 14                     </option>
+      <option value="15"> 15                     </option>
+      <option value="16"> 16                     </option>
+      <option value="17"> 17                     </option>
+      <option value="18"> 18                     </option>
+      <option value="19"> 19                     </option>
+      <option value="20"> 20                     </option>
+      <option value="21"> 21                     </option>
+      <option value="22"> 22                     </option>
+      <option value="23"> 23                     </option>
+      <option value="24"> 24                     </option>
+      <option value="25"> 25                     </option>
+    </select>
+    <input name="IntWis" size="10" value=" 感知 " readonly="readonly" type="text">
+    <br>
+    <br>
+
+    <input type="checkbox" name="robe"      onclick="calculate_all()">
+      穿着长袍 <br>
+    <input type="checkbox" name="suit"      onclick="calculate_all()">
+      穿着金属护甲 <br>
+    <input type="checkbox" name="helmet"    onclick="calculate_all()">
+      戴着非卓越头盔的金属头盔 <br>
+    <input type="checkbox" name="gauntlets" onclick="calculate_all()">
+      戴着力量手套 <br>
+    <input type="checkbox" name="boots"     onclick="calculate_all()">
+      穿着金属靴或踢靴 <br>
+    <input type="checkbox" name="shield"    onclick="calculate_all()">
+      拿着
+        <select name="shieldsize" onchange="calculate_all()">
+          <option value="0"> 小型 </option>
+          <option value="1"> 大型 </option>
+        </select>
+      盾牌 <br>
+    <br>
+
+  </form>
+
+  <!--
+  <input type="button" name="btn1" value="Calculate" onclick="calculate_all()">
+  -->
+
+  <input type="button" name="expand" value="全选"
+         style="font-size: 90%;" onclick="expand_all()">
+  <input type="button" name="collapse" value="全不选"
+         style="font-size: 90%;" onclick="collapse_all()">
+  &nbsp;&nbsp;
+  <input type="button" name="initial" value="初始技能"
+         style="font-size: 90%;" onclick="initial_spell_classes()">
+  <br>
+  <br>
+
+  <form name="form2" action="spells.html">
+
+    <table class="spellclass">
+      <colgroup>
+        <col width="130">
+        <col width="110">
+        <col width="50">
+      </colgroup>
+
+      <tbody>
+        <tr>
+          <td>
+            <input name="attack" onclick="toggle_attack()" type="checkbox">
+            <b> 攻击魔法 </b>
+          </td>
+          <td>
+            &nbsp;
+            <select name="skill_attack" onchange="calculate_attack()">
+              <option value="0"> 不熟练 </option>
+              <option value="1"> 基础     </option>
+              <option value="2"> 熟练   </option>
+              <option value="3"> 老练    </option>
+            </select>
+          </td>
+          <td id="attack_skill_strained" style="display: none"
+              title="该职业无法达到此技能等级">
+            <b style="font-size: 125%; font-family: arial;"> ⚠ </b>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="3">
+            <table id="t_attack" style="display: none;" cellpadding="0" cellspacing="0">
+              <colgroup>
+                <col width="120">
+                <col width="25">
+                <col width="110">
+              </colgroup>
+
+              <tbody>
+                <tr>
+                  <td> &nbsp; &nbsp; &nbsp; 力冲击 </td>
+                  <td> (1) </td>
+                  <td>
+                    &nbsp; &nbsp; &nbsp;
+                    <input name="sp_force_bolt" size="3" value="****"
+                           readonly="readonly" style="text-align: right" type="text"> %
+                  </td>
+                </tr>
+                <tr>
+                  <td> &nbsp; &nbsp; &nbsp; 吸血 </td>
+                  <td> (2) </td>
+                  <td>
+                    &nbsp; &nbsp; &nbsp;
+                    <input name="sp_drain_life" size="3" value="****"
+                           readonly="readonly" style="text-align: right" type="text"> %
+                  </td>
+                </tr>
+                <tr>
+                  <td> &nbsp; &nbsp; &nbsp; 魔法飞弹 </td>
+                  <td> (2) </td>
+                  <td>
+                    &nbsp; &nbsp; &nbsp;
+                    <input name="sp_magic_missile" size="3" value="****"
+                           readonly="readonly" style="text-align: right" type="text"> %
+                  </td>
+                </tr>
+                <tr>
+                  <td> &nbsp; &nbsp; &nbsp; 冰锥 </td>
+                  <td> (4) </td>
+                  <td>
+                    &nbsp; &nbsp; &nbsp;
+                    <input name="sp_cone_of_cold" size="3" value="****"
+                           readonly="readonly" style="text-align: right" type="text"> %
+                  </td>
+                </tr>
+                <tr>
+                  <td> &nbsp; &nbsp; &nbsp; 火球 </td>
+                  <td> (4) </td>
+                  <td>
+                    &nbsp; &nbsp; &nbsp;
+                    <input name="sp_fireball" size="3" value="****"
+                           readonly="readonly" style="text-align: right" type="text"> %
+                  </td>
+                </tr>
+                <tr>
+                  <td> &nbsp; &nbsp; &nbsp; 死亡一指 </td>
+                  <td> (7) </td>
+                  <td>
+                    &nbsp; &nbsp; &nbsp;
+                    <input name="sp_finger_of_death" size="3" value="****"
+                           readonly="readonly" style="text-align: right" type="text"> %
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+            <input name="healing" onclick="toggle_healing()" type="checkbox">
+            <b> 治愈魔法 </b>
+          </td>
+          <td>
+            &nbsp;
+            <select name="skill_healing" onchange="calculate_healing()">
+              <option value="0"> 不熟练 </option>
+              <option value="1"> 基础     </option>
+              <option value="2"> 熟练   </option>
+              <option value="3"> 老练    </option>
+            </select>
+          </td>
+          <td id="healing_skill_strained" style="display: none"
+              title="该职业无法达到此技能等级">
+            <b style="font-size: 125%; font-family: arial;"> ⚠ </b>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="3">
+            <table id="t_healing" style="display: none;" cellpadding="0" cellspacing="0">
+              <colgroup>
+                <col width="120">
+                <col width="25">
+                <col width="110">
+              </colgroup>
+
+              <tbody>
+                <tr>
+                  <td> &nbsp; &nbsp; &nbsp; 治愈 </td>
+                  <td> (1) </td>
+                  <td>
+                    &nbsp; &nbsp; &nbsp;
+                    <input name="sp_healing" size="3" value="****"
+                           readonly="readonly" style="text-align: right" type="text"> %
+                  </td>
+                </tr>
+                <tr>
+                  <td> &nbsp; &nbsp; &nbsp; 治疗失明 </td>
+                  <td> (2) </td>
+                  <td>
+                    &nbsp; &nbsp; &nbsp;
+                    <input name="sp_cure_blindness" size="3" value="****"
+                           readonly="readonly" style="text-align: right" type="text"> %
+                  </td>
+                </tr>
+                <tr>
+                  <td> &nbsp; &nbsp; &nbsp; 治疗疾病 </td>
+                  <td> (3) </td>
+                  <td>
+                    &nbsp; &nbsp; &nbsp;
+                    <input name="sp_cure_sickness" size="3" value="****"
+                           readonly="readonly" style="text-align: right" type="text"> %
+                  </td>
+                </tr>
+                <tr>
+                  <td> &nbsp; &nbsp; &nbsp; 强力治愈 </td>
+                  <td> (3) </td>
+                  <td>
+                    &nbsp; &nbsp; &nbsp;
+                    <input name="sp_extra_healing" size="3" value="****"
+                           readonly="readonly" style="text-align: right" type="text"> %
+                  </td>
+                </tr>
+                <tr>
+                  <td> &nbsp; &nbsp; &nbsp; 点石成肉 </td>
+                  <td> (3) </td>
+                  <td>
+                    &nbsp; &nbsp; &nbsp;
+                    <input name="sp_stone_to_flesh" size="3" value="****"
+                           readonly="readonly" style="text-align: right" type="text"> %
+                  </td>
+                </tr>
+                <tr>
+                  <td> &nbsp; &nbsp; &nbsp; 恢复能力 </td>
+                  <td> (4) </td>
+                  <td>
+                    &nbsp; &nbsp; &nbsp;
+                    <input name="sp_restore_ability" size="3" value="****"
+                           readonly="readonly" style="text-align: right" type="text"> %
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+            <input name="divination" onclick="toggle_divination()" type="checkbox">
+            <b> 预测魔法 </b>
+          </td>
+          <td>
+            &nbsp;
+            <select name="skill_divination" onchange="calculate_divination()">
+              <option value="0"> 不熟练 </option>
+              <option value="1"> 基础    </option>
+              <option value="2"> 熟练   </option>
+              <option value="3"> 老练    </option>
+            </select>
+          </td>
+          <td id="divination_skill_strained" style="display: none"
+              title="该职业无法达到此技能等级">
+            <b style="font-size: 125%; font-family: arial;"> ⚠ </b>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="3">
+            <table id="t_divination" style="display: none;" cellpadding="0" cellspacing="0">
+              <colgroup>
+                <col width="120">
+                <col width="25">
+                <col width="110">
+              </colgroup>
+
+              <tbody>
+                <tr>
+                  <td> &nbsp; &nbsp; &nbsp; 探测怪物 </td>
+                  <td> (1) </td>
+                  <td>
+                    &nbsp; &nbsp; &nbsp;
+                    <input name="sp_detect_monsters" size="3" value="****"
+                           readonly="readonly" style="text-align: right" type="text"> %
+                  </td>
+                </tr>
+                <tr>
+                  <td> &nbsp; &nbsp; &nbsp; 光亮 </td>
+                  <td> (1) </td>
+                  <td>
+                    &nbsp; &nbsp; &nbsp;
+                    <input name="sp_light" size="3" value="****"
+                           readonly="readonly" style="text-align: right" type="text"> %
+                  </td>
+                </tr>
+                <tr>
+                  <td> &nbsp; &nbsp; &nbsp; 探测食物 </td>
+                  <td> (2) </td>
+                  <td>
+                    &nbsp; &nbsp; &nbsp;
+                    <input name="sp_detect_food" size="3" value="****"
+                           readonly="readonly" style="text-align: right" type="text"> %
+                  </td>
+                </tr>
+                <tr>
+                  <td> &nbsp; &nbsp; &nbsp; 千里眼 </td>
+                  <td> (3) </td>
+                  <td>
+                    &nbsp; &nbsp; &nbsp;
+                    <input name="sp_clairvoyance" size="3" value="****"
+                           readonly="readonly" style="text-align: right" type="text"> %
+                  </td>
+                </tr>
+                <tr>
+                  <td> &nbsp; &nbsp; &nbsp; 探测隐形 </td>
+                  <td> (3) </td>
+                  <td>
+                    &nbsp; &nbsp; &nbsp;
+                    <input name="sp_detect_unseen" size="3" value="****"
+                           readonly="readonly" style="text-align: right" type="text"> %
+                  </td>
+                </tr>
+                <tr>
+                  <td> &nbsp; &nbsp; &nbsp; 鉴定 </td>
+                  <td> (3) </td>
+                  <td>
+                    &nbsp; &nbsp; &nbsp;
+                    <input name="sp_identify" size="3" value="****"
+                           readonly="readonly" style="text-align: right" type="text"> %
+                  </td>
+                </tr>
+                <tr>
+                  <td> &nbsp; &nbsp; &nbsp; 探测宝藏 </td>
+                  <td> (4) </td>
+                  <td>
+                    &nbsp; &nbsp; &nbsp;
+                    <input name="sp_detect_treasure" size="3" value="****"
+                           readonly="readonly" style="text-align: right" type="text"> %
+                  </td>
+                </tr>
+                <tr>
+                  <td> &nbsp; &nbsp; &nbsp; 魔法地图 </td>
+                  <td> (5) </td>
+                  <td>
+                    &nbsp; &nbsp; &nbsp;
+                    <input name="sp_magic_mapping" size="3" value="****"
+                           readonly="readonly" style="text-align: right" type="text"> %
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+            <input name="enchantment" onclick="toggle_enchantment()" type="checkbox">
+            <b> 迷惑魔法 </b>
+          </td>
+          <td>
+            &nbsp;
+            <select name="skill_enchantment" onchange="calculate_enchantment()">
+              <option value="0"> 不熟练 </option>
+              <option value="1"> 基础     </option>
+              <option value="2"> 熟练   </option>
+              <option value="3"> 老练    </option>
+            </select>
+          </td>
+          <td id="enchantment_skill_strained" style="display: none"
+              title="该职业无法达到此技能等级">
+            <b style="font-size: 125%; font-family: arial;"> ⚠ </b>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="3">
+            <table id="t_enchantment" style="display: none;" cellpadding="0" cellspacing="0">
+              <colgroup>
+                <col width="120">
+                <col width="25">
+                <col width="110">
+              </colgroup>
+
+              <tbody>
+                <tr>
+                  <td> &nbsp; &nbsp; &nbsp; 沉睡 </td>
+                  <td> (1) </td>
+                  <td>
+                    &nbsp; &nbsp; &nbsp;
+                    <input name="sp_sleep" size="3" value="****"
+                           readonly="readonly" style="text-align: right" type="text"> %
+                  </td>
+                </tr>
+                <tr>
+                  <td> &nbsp; &nbsp; &nbsp; 混乱怪物 </td>
+                  <td> (2) </td>
+                  <td>
+                    &nbsp; &nbsp; &nbsp;
+                    <input name="sp_confuse_monster" size="3" value="****"
+                           readonly="readonly" style="text-align: right" type="text"> %
+                  </td>
+                </tr>
+                <tr>
+                  <td> &nbsp; &nbsp; &nbsp; 减慢怪物 </td>
+                  <td> (2) </td>
+                  <td>
+                    &nbsp; &nbsp; &nbsp;
+                    <input name="sp_slow_monster" size="3" value="****"
+                           readonly="readonly" style="text-align: right" type="text"> %
+                  </td>
+                </tr>
+                <tr>
+                  <td> &nbsp; &nbsp; &nbsp; 造成恐惧 </td>
+                  <td> (3) </td>
+                  <td>
+                    &nbsp; &nbsp; &nbsp;
+                    <input name="sp_cause_fear" size="3" value="****"
+                           readonly="readonly" style="text-align: right" type="text"> %
+                  </td>
+                </tr>
+                <tr>
+                  <td> &nbsp; &nbsp; &nbsp; 魅惑怪物 </td>
+                  <td> (3) </td>
+                  <td>
+                    &nbsp; &nbsp; &nbsp;
+                    <input name="sp_charm_monster" size="3" value="****"
+                           readonly="readonly" style="text-align: right" type="text"> %
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+            <input name="clerical" onclick="toggle_clerical()" type="checkbox">
+            <b> 神圣魔法 </b>
+          </td>
+          <td>
+            &nbsp;
+            <select name="skill_clerical" onchange="calculate_clerical()">
+              <option value="0"> 不熟练 </option>
+              <option value="1"> 基础     </option>
+              <option value="2"> 熟练   </option>
+              <option value="3"> 老练    </option>
+            </select>
+          </td>
+          <td id="clerical_skill_strained" style="display: none"
+              title="该职业无法达到此技能等级">
+            <b style="font-size: 125%; font-family: arial;"> ⚠ </b>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="3">
+            <table id="t_clerical" style="display: none;" cellpadding="0" cellspacing="0">
+              <colgroup>
+                <col width="120">
+                <col width="25">
+                <col width="110">
+              </colgroup>
+
+              <tbody>
+                <tr>
+                  <td> &nbsp; &nbsp; &nbsp; 保护 </td>
+                  <td> (1) </td>
+                  <td>
+                    &nbsp; &nbsp; &nbsp;
+                    <input name="sp_protection" size="3" value="****"
+                           readonly="readonly" style="text-align: right" type="text"> %
+                  </td>
+                </tr>
+                <tr>
+                  <td> &nbsp; &nbsp; &nbsp; 制造怪物 </td>
+                  <td> (2) </td>
+                  <td>
+                    &nbsp; &nbsp; &nbsp;
+                    <input name="sp_create_monster" size="3" value="****"
+                           readonly="readonly" style="text-align: right" type="text"> %
+                  </td>
+                </tr>
+                <tr>
+                  <td> &nbsp; &nbsp; &nbsp; 解除诅咒 </td>
+                  <td> (3) </td>
+                  <td>
+                    &nbsp; &nbsp; &nbsp;
+                    <input name="sp_remove_curse" size="3" value="****"
+                           readonly="readonly" style="text-align: right" type="text"> %
+                  </td>
+                </tr>
+                <tr>
+                  <td> &nbsp; &nbsp; &nbsp;生成宠物 </td>
+                  <td> (6) </td>
+                  <td>
+                    &nbsp; &nbsp; &nbsp;
+                    <input name="sp_create_familiar" size="3" value="****"
+                           readonly="readonly" style="text-align: right" type="text"> %
+                  </td>
+                </tr>
+                <tr>
+                  <td> &nbsp; &nbsp; &nbsp; 超度 </td>
+                  <td> (6) </td>
+                  <td>
+                    &nbsp; &nbsp; &nbsp;
+                    <input name="sp_turn_undead" size="3" value="****"
+                           readonly="readonly" style="text-align: right" type="text"> %
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+            <input name="escape" onclick="toggle_escape()" type="checkbox">
+            <b> 逃脱魔法 </b>
+          </td>
+          <td>
+            &nbsp;
+            <select name="skill_escape" onchange="calculate_escape()">
+              <option value="0"> 不熟练 </option>
+              <option value="1"> 基础     </option>
+              <option value="2"> 熟练   </option>
+              <option value="3"> 老练    </option>
+            </select>
+          </td>
+          <td id="escape_skill_strained" style="display: none"
+              title="该职业无法达到此技能等级">
+            <b style="font-size: 125%; font-family: arial;"> ⚠ </b>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="3">
+            <table id="t_escape" style="display: none;" cellpadding="0" cellspacing="0">
+              <colgroup>
+                <col width="120">
+                <col width="25">
+                <col width="110">
+              </colgroup>
+
+              <tbody>
+                <tr>
+                  <td> &nbsp; &nbsp; &nbsp; 跳跃 </td>
+                  <td> (1) </td>
+                  <td>
+                    &nbsp; &nbsp; &nbsp;
+                    <input name="sp_jumping" size="3" value="****"
+                           readonly="readonly" style="text-align: right" type="text"> %
+                  </td>
+                </tr>
+                <tr>
+                  <td> &nbsp; &nbsp; &nbsp; 自我加速 </td>
+                  <td> (3) </td>
+                  <td>
+                    &nbsp; &nbsp; &nbsp;
+                    <input name="sp_haste_self" size="3" value="****"
+                           readonly="readonly" style="text-align: right" type="text"> %
+                  </td>
+                </tr>
+                <tr>
+                  <td> &nbsp; &nbsp; &nbsp; 隐身 </td>
+                  <td> (4) </td>
+                  <td>
+                    &nbsp; &nbsp; &nbsp;
+                    <input name="sp_invisibility" size="3" value="****"
+                           readonly="readonly" style="text-align: right" type="text"> %
+                  </td>
+                </tr>
+                <tr>
+                  <td> &nbsp; &nbsp; &nbsp; 飘浮 </td>
+                  <td> (4) </td>
+                  <td>
+                    &nbsp; &nbsp; &nbsp;
+                    <input name="sp_levitation" size="3" value="****"
+                           readonly="readonly" style="text-align: right" type="text"> %
+                  </td>
+                </tr>
+                <tr>
+                  <td> &nbsp; &nbsp; &nbsp; 传送 </td>
+                  <td> (6) </td>
+                  <td>
+                    &nbsp; &nbsp; &nbsp;
+                    <input name="sp_teleport_away" size="3" value="****"
+                           readonly="readonly" style="text-align: right" type="text"> %
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+            <input name="matter" onclick="toggle_matter()" type="checkbox">
+            <b> 物质魔法 </b>
+          </td>
+          <td>
+            &nbsp;
+            <select name="skill_matter" onchange="calculate_matter()">
+              <option value="0"> 不熟练 </option>
+              <option value="1"> 基础     </option>
+              <option value="2"> 熟练   </option>
+              <option value="3"> 老练    </option>
+            </select>
+          </td>
+          <td id="matter_skill_strained" style="display: none"
+              title="该职业无法达到此技能等级">
+            <b style="font-size: 125%; font-family: arial;"> ⚠ </b>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="3">
+            <table id="t_matter" style="display: none;" cellpadding="0" cellspacing="0">
+              <colgroup>
+                <col width="120">
+                <col width="25">
+                <col width="110">
+              </colgroup>
+
+              <tbody>
+                <tr>
+                  <td> &nbsp; &nbsp; &nbsp; 敲击 </td>
+                  <td> (1) </td>
+                  <td>
+                    &nbsp; &nbsp; &nbsp;
+                    <input name="sp_knock" size="3" value="****"
+                           readonly="readonly" style="text-align: right" type="text"> %
+                  </td>
+                </tr>
+                <tr>
+                  <td> &nbsp; &nbsp; &nbsp; 巫师锁 </td>
+                  <td> (2) </td>
+                  <td>
+                    &nbsp; &nbsp; &nbsp;
+                    <input name="sp_wizard_lock" size="3" value="****"
+                           readonly="readonly" style="text-align: right" type="text"> %
+                  </td>
+                </tr>
+                <tr>
+                  <td> &nbsp; &nbsp; &nbsp; 挖掘 </td>
+                  <td> (5) </td>
+                  <td>
+                    &nbsp; &nbsp; &nbsp;
+                    <input name="sp_dig" size="3" value="****"
+                           readonly="readonly" style="text-align: right" type="text"> %
+                  </td>
+                </tr>
+                <tr>
+                  <td> &nbsp; &nbsp; &nbsp; 变形 </td>
+                  <td> (6) </td>
+                  <td>
+                    &nbsp; &nbsp; &nbsp;
+                    <input name="sp_polymorph" size="3" value="****"
+                           readonly="readonly" style="text-align: right" type="text"> %
+                  </td>
+                </tr>
+                <tr>
+                  <td> &nbsp; &nbsp; &nbsp; 取消 </td>
+                  <td> (7) </td>
+                  <td>
+                    &nbsp; &nbsp; &nbsp;
+                    <input name="sp_cancellation" size="3" value="****"
+                           readonly="readonly" style="text-align: right" type="text"> %
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </td>
+        </tr>
+   
+      </tbody>
+    </table> 
+
+
+
+  </form>
+</body>
+
+</html>
+
+<!--
+        vim: ts=2 sw=2 expandtab ai nu
+-->

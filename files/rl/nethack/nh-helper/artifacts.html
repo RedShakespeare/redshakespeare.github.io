@@ -1,0 +1,1276 @@
+<!DOCTYPE HTML PUBLIC '-//W3C//DTD HTML 4.01 Transitional//EN'>
+
+<html>
+<head>
+  <meta http-equiv='content-type' content='text/html; charset=UTF-8'>
+
+  <!--
+      Author:  Janis Papanagnou
+      Date:    2015-12-18, 2015-12-27, 2016-04-07, 2016-08-06, 2016-08-07,
+               2016-08-21, 2017-02-17, 2017-03-17, 2017-04-17, 2017-04-18,
+               2017-06-08
+
+      Copyright &copy; 2015-2017 Janis Papanagnou
+      Original GUI content licensed under the
+      <A href="http://www.opencontent.org/opl.shtml">
+        OpenContent License
+      </A>.
+      Source code and GUI design is licensed under
+      <A href="http://www.gnu.org/copyleft/gpl.html">
+        GNU General Public License
+      </A>.
+  -->
+
+  <!--
+      Deliberate restrictions of this applet:
+       *  not considering: blessed/uncursed/cursed, rusty/corroded/burnt
+            (blessed against undead and demons: dmg += rnd(4) ~2.5)
+            (dmg -= greatest_erosion() )
+       *  not considering: negative enchantments, over-enchantments (e.g. Astral)
+
+      Note: The data is based on Nethack release 3.4.3. (Some details may or
+            may not have changed with release 3.6.0; pointers are welcome.)
+
+      Send bug reports and feedback to: janis_papanagnou(at)hotmail(dot)com
+  -->
+
+
+<title> 神器伤害计算器 </title>
+
+<style type='text/css'>
+<!--
+  select, body, td, th, a, p, .h { font-family:arial; font-size:11pt; }
+  select { padding-right:5px; padding-left:3px; }
+  input { font-family: arial; font-size:10pt; }
+  .r { width:3.3em; text-align:right; padding-right:3px; }
+  .l { width:8.0em; text-align:left; padding-left:2px; }
+  .button { font-size:0.8em; font-weight:bold }
+  .radio { text-align:center }
+-->
+</style>
+
+
+<script language='javascript' type='text/javascript'>
+<!--
+
+/*
+   weapon                 weapon type       weapon class        special    modifiers
+
+  "Cleaver",              BATTLE_AXE,       "Axe",              0,         PHYS(3,6)
+  "Demonbane",            LONG_SWORD,       "Long sword",       M2_DEMON,  PHYS(5,0)
+  "Dragonbane",           BROADSWORD,       "Broadsword",       S_DRAGON,  PHYS(5,0)
+  "Excalibur",            LONG_SWORD,       "Long sword",       0,         PHYS(5,10)
+  "Fire Brand",           LONG_SWORD,       "Long sword",       0,         FIRE(5,0)
+  "Frost Brand",          LONG_SWORD,       "Long sword",       0,         COLD(5,0)
+  "Giantslayer",          LONG_SWORD,       "Long sword",       M2_GIANT,  PHYS(5,0)
+  "Grayswandir",          SILVER_SABER,     "Saber",            0,         PHYS(5,0)
+  "Grimtooth",            ORCISH_DAGGER,    "Dagger",           0,         PHYS(2,6)
+  "Longbow of Diana",     BOW,              "Bow",              0,         PHYS(5,0)
+  "Magicbane",            ATHAME,           "Dagger",           0,         STUN(3,4)
+  "Mjollnir"              WAR_HAMMER,       "Hammer",           0,         ELEC(5,24)
+  "Ogresmasher",          WAR_HAMMER,       "Hammer",           S_OGRE,    PHYS(5,0)
+  "Orcrist",              ELVEN_BROADSWORD, "Broadsword",       M2_ORC,    PHYS(5,0)
+  "Sceptre of Might",     MACE,             "Mace",             0,         PHYS(5,0)
+  "Snickersnee",          KATANA,           "Long sword",       0,         PHYS(0,8)
+  "Staff of Aesculapius", QUARTERSTAFF,     "Quarterstaff",     0,         DRLI(0,0)
+  "Sting",                ELVEN_DAGGER,     "Dagger",           M2_ORC,    PHYS(5,0)
+  "Stormbringer",         RUNESWORD,        "Broadsword",       0,         DRLI(5,2)
+  "Sunsword",             LONG_SWORD,       "Long sword",       M2_UNDEAD, PHYS(5,0)
+  "Trollsbane",           MORNING_STAR,     "Morning star",     S_TROLL,   PHYS(5,0)
+  "Tsurugi of Muramasa",  TSURUGI,          "Two-handed sword", 0,         PHYS(0,8)
+  "Vorpal Blade",         LONG_SWORD,       "Long sword",       0,         PHYS(5,1)
+  "Werebane",             SILVER_SABER,     "Saber",            M2_WERE,   PHYS(5,0)
+*/
+
+
+var skill_tohit = [ ];
+skill_tohit["Unskilled"] = -4;
+skill_tohit["Basic"]     =  0;
+skill_tohit["Skilled"]   = +2;
+skill_tohit["Expert"]    = +3;
+
+var skill_dmg = [ ];
+skill_dmg["Unskilled"] = -2;
+skill_dmg["Basic"]     =  0;
+skill_dmg["Skilled"]   = +1;
+skill_dmg["Expert"]    = +2;
+
+var artifacts = [ ];
+var a_index = [ ];
+a_index["Cleaver"]              = artifacts.push( { a:"Cleaver",              wtype:"battle-axe",       wclass:"Axe",              tohit:2.0, pn:1,sn:3.5, pb:0,sb:0.0  } ) - 1;
+a_index["Demonbane"]            = artifacts.push( { a:"Demonbane",            wtype:"long sword",       wclass:"Long_sword",       tohit:3.0, pn:1,sn:0.0, pb:2,sb:0.0  } ) - 1;
+a_index["Dragonbane"]           = artifacts.push( { a:"Dragonbane",           wtype:"broadsword",       wclass:"Broadsword",       tohit:3.0, pn:1,sn:0.0, pb:2,sb:0.0  } ) - 1;
+a_index["Excalibur"]            = artifacts.push( { a:"Excalibur",            wtype:"long sword",       wclass:"Long_sword",       tohit:3.0, pn:1,sn:5.5, pb:1,sb:5.5  } ) - 1;
+a_index["Fire_Brand"]           = artifacts.push( { a:"Fire_Brand",           wtype:"long sword",       wclass:"Long_sword",       tohit:3.0, pn:1,sn:0.0, pb:2,sb:0.0  } ) - 1;
+a_index["Frost_Brand"]          = artifacts.push( { a:"Frost_Brand",          wtype:"long sword",       wclass:"Long_sword",       tohit:3.0, pn:1,sn:0.0, pb:2,sb:0.0  } ) - 1;
+a_index["Giantslayer"]          = artifacts.push( { a:"Giantslayer",          wtype:"long sword",       wclass:"Long_sword",       tohit:3.0, pn:1,sn:0.0, pb:2,sb:0.0  } ) - 1;
+a_index["Grayswandir"]          = artifacts.push( { a:"Grayswandir",          wtype:"silver saber",     wclass:"Saber",            tohit:3.0, pn:2,sn:0.0, pb:2,sb:10.5 } ) - 1;
+a_index["Grimtooth"]            = artifacts.push( { a:"Grimtooth",            wtype:"orcish dagger",    wclass:"Dagger",           tohit:1.5, pn:1,sn:3.5, pb:0,sb:0.0  } ) - 1;
+a_index["Longbow_of_Diana"]     = artifacts.push( { a:"Longbow_of_Diana",     wtype:"bow",              wclass:"Bow",              tohit:3.0, pn:1,sn:0.0, pb:1,sb:0.0  } ) - 1;
+a_index["Magicbane"]            = artifacts.push( { a:"Magicbane",            wtype:"athame",           wclass:"Dagger",           tohit:1.5, pn:0,sn:0.0, pb:0,sb:0.0  } ) - 1;
+a_index["Mjollnir"]             = artifacts.push( { a:"Mjollnir",             wtype:"war hammer",       wclass:"Hammer",           tohit:3.0, pn:1,sn:0.0, pb:1,sb:12.5 } ) - 1;
+a_index["Ogresmasher"]          = artifacts.push( { a:"Ogresmasher",          wtype:"war hammer",       wclass:"Hammer",           tohit:3.0, pn:1,sn:0.0, pb:2,sb:0.0  } ) - 1;
+a_index["Orcrist"]              = artifacts.push( { a:"Orcrist",              wtype:"elven broadsword", wclass:"Broadsword",       tohit:3.0, pn:1,sn:0.0, pb:2,sb:0.0  } ) - 1;
+a_index["Sceptre_of_Might"]     = artifacts.push( { a:"Sceptre_of_Might",     wtype:"mace",             wclass:"Mace",             tohit:3.0, pn:1,sn:0.0, pb:2,sb:0.0  } ) - 1;
+a_index["Snickersnee"]          = artifacts.push( { a:"Snickersnee",          wtype:"katana",           wclass:"Long_sword",       tohit:0.0, pn:1,sn:4.5, pb:0,sb:0.0  } ) - 1;
+a_index["Staff_of_Aesculapius"] = artifacts.push( { a:"Staff_of_Aesculapius", wtype:"quarterstaff",     wclass:"Quarterstaff",     tohit:0.0, pn:1,sn:0.0, pb:2,sb:4.5  } ) - 1;
+a_index["Sting"]                = artifacts.push( { a:"Sting",                wtype:"elven dagger",     wclass:"Dagger",           tohit:3.5, pn:1,sn:0.0, pb:2,sb:0.0  } ) - 1;
+a_index["Stormbringer"]         = artifacts.push( { a:"Stormbringer",         wtype:"runesword",        wclass:"Broadsword",       tohit:3.0, pn:1,sn:0.0, pb:1,sb:6.0  } ) - 1;
+a_index["Sunsword"]             = artifacts.push( { a:"Sunsword",             wtype:"long sword",       wclass:"Long_sword",       tohit:3.0, pn:1,sn:0.0, pb:2,sb:0.0  } ) - 1;
+a_index["Trollsbane"]           = artifacts.push( { a:"Trollsbane",           wtype:"morning star",     wclass:"Morning_star",     tohit:3.0, pn:1,sn:0.0, pb:2,sb:0.0  } ) - 1;
+a_index["Tsurugi_of_Muramasa"]  = artifacts.push( { a:"Tsurugi_of_Muramasa",  wtype:"tsurugi",          wclass:"Two-handed_sword", tohit:0.0, pn:1,sn:4.5, pb:0,sb:0.0  } ) - 1;
+a_index["Vorpal_Blade"]         = artifacts.push( { a:"Vorpal_Blade",         wtype:"long sword",       wclass:"Long_sword",       tohit:3.0, pn:1,sn:1.0, pb:0,sb:0.0  } ) - 1;
+a_index["Werebane"]             = artifacts.push( { a:"Werebane",             wtype:"silver saber",     wclass:"Saber",            tohit:3.0, pn:1,sn:0.0, pb:1,sb:10.5, pb2:2,sb2:10.5 } ) - 1;
+
+var weapons = [ ];
+var w_index = [ ];
+w_index["athame"]           = weapons.push( { tohit: +2, sdam: 2.5, ldam: 2.0 } ) - 1;
+w_index["battle-axe"]       = weapons.push( { tohit:  0, sdam: 7.0, ldam: 8.5 } ) - 1;
+w_index["bow"]              = weapons.push( { tohit:  0, sdam: 1.5, ldam: 1.5 } ) - 1;   /* melee only (ranged damage is depending on projectile properties) */
+w_index["broadsword"]       = weapons.push( { tohit:  0, sdam: 5.0, ldam: 4.5 } ) - 1;
+w_index["elven broadsword"] = weapons.push( { tohit:  0, sdam: 6.0, ldam: 4.5 } ) - 1;
+w_index["elven dagger"]     = weapons.push( { tohit: +2, sdam: 3.0, ldam: 2.0 } ) - 1;
+w_index["katana"]           = weapons.push( { tohit: +1, sdam: 5.5, ldam: 6.5 } ) - 1;
+w_index["long sword"]       = weapons.push( { tohit:  0, sdam: 4.5, ldam: 6.5 } ) - 1;
+w_index["mace"]             = weapons.push( { tohit:  0, sdam: 4.5, ldam: 3.5 } ) - 1;
+w_index["morning star"]     = weapons.push( { tohit:  0, sdam: 5.0, ldam: 4.5 } ) - 1;
+w_index["orcish dagger"]    = weapons.push( { tohit: +2, sdam: 2.0, ldam: 2.0 } ) - 1;
+w_index["quarterstaff"]     = weapons.push( { tohit:  0, sdam: 3.5, ldam: 3.5 } ) - 1;
+w_index["runesword"]        = weapons.push( { tohit:  0, sdam: 5.0, ldam: 4.5 } ) - 1;
+w_index["silver saber"]     = weapons.push( { tohit:  0, sdam: 4.5, ldam: 4.5 } ) - 1;
+w_index["tsurugi"]          = weapons.push( { tohit: +2, sdam: 8.5, ldam:11.5 } ) - 1;
+w_index["war hammer"]       = weapons.push( { tohit:  0, sdam: 3.5, ldam: 2.5 } ) - 1;
+
+// Origin of subsequent damage values: https://nethackwiki.com/wiki/Magicbane
+// (array suffix y and n indicate whether the monster resisted the effect)
+var magicbane_res_y = [ 4.36, 5.21, 6.07, 6.55,  7.41,  8.27,  9.00, 10.00 ];
+var magicbane_res_n = [ 7.16, 8.07, 8.98, 9.51, 10.42, 11.33, 11.99, 12.90 ];
+// These damage numbers are for large monsters, add 0.5 for small monsters,
+// skill modifiers have to be added, too.
+
+var w_prof = [ ];
+w_prof["Axe"]               = "X-ES-S--S--BES";
+w_prof["Bow"]               = "X-BS-B-BE-EB--";
+w_prof["Broadsword"]        = "X-S--S---SSBS-";
+w_prof["Dagger"]            = "XBBBSB--EEBEEE";
+w_prof["Hammer"]            = "X-ES-B-EBB-BE-";
+w_prof["Long_sword"]        = "X-S--E---SEBE-";
+w_prof["Mace"]              = "X-SEBS-E-S-B-B";
+w_prof["Morning_star"]      = "X-SB-S-EBB-B--";
+w_prof["Quarterstaff"]      = "XSBEE-BEB-BBBE";
+w_prof["Saber"]             = "XEB-BS---SBSB-";
+w_prof["Two-handed_sword"]  = "X-E--S---BEBE-";
+
+
+function update_numbers(id)
+{
+    var a_idx = a_index[id];
+    var artifact = new Object (artifacts[a_idx]);
+    var wtype = artifact.wtype;
+    var wclass = artifact.wclass;
+    var w_idx = w_index[wtype];
+    var weapon = new Object (weapons[w_idx]);
+
+    var skill = 0;
+    var sk_tohit = 0;
+    var sk_dmg = 0;
+    var skills = document.getElementsByName(wclass);
+
+    for (var i = 0; i < skills.length; i++) {
+        if (skills[i].checked) {
+            skill = skills[i].value;
+            sk_tohit = skill_tohit[skill];
+            sk_dmg = skill_dmg[skill];
+            break;
+        }
+    }
+
+    var weapon_enchantment = + this.document.getElementById(id).value;
+
+    var tohit = sk_tohit + weapon.tohit + artifact.tohit + weapon_enchantment;
+    this.document.getElementById("h_"+id).value = tohit;
+
+    var we_dmg = + weapon_enchantment;
+    var s_dmg = + weapon.sdam;
+    var l_dmg = + weapon.ldam;
+
+    var sml_dmg = sk_dmg + we_dmg + s_dmg;
+    var lrg_dmg = sk_dmg + we_dmg + l_dmg;
+
+    var norm_sml_dmg = 0;
+    var norm_lrg_dmg = 0;
+    var bonus_sml_dmg = 0;
+    var bonus_lrg_dmg = 0;
+    var bonus2_sml_dmg = 0;
+    var bonus2_lrg_dmg = 0;
+
+    if (artifact.a == "Magicbane") {
+        // It appeared easier to use pre-calculated numbers for Magicbane.
+        norm_sml_dmg = Math.round((sk_dmg + magicbane_res_y[we_dmg] + 0.5)*10)/10;
+        norm_lrg_dmg = Math.round((sk_dmg + magicbane_res_y[we_dmg])*10)/10;
+        bonus_sml_dmg = Math.round((sk_dmg + magicbane_res_n[we_dmg] + 0.5)*10)/10;
+        bonus_lrg_dmg = Math.round((sk_dmg + magicbane_res_n[we_dmg])*10)/10;
+    } else {
+        var pn = artifact.pn;
+        var sn = artifact.sn;
+        var pb = artifact.pb;
+        var sb = artifact.sb;
+        norm_sml_dmg  = sml_dmg*pn+sn;
+        norm_lrg_dmg  = lrg_dmg*pn+sn;
+        bonus_sml_dmg = sml_dmg*pb+sb;
+        bonus_lrg_dmg = lrg_dmg*pb+sb;
+        if (artifact.a == "Werebane") {
+            // Werebane has two (different) bonus targets
+            var pb2 = artifact.pb2;
+            var sb2 = artifact.sb2;
+            bonus2_sml_dmg = sml_dmg*pb2+sb2;
+            bonus2_lrg_dmg = lrg_dmg*pb2+sb2;
+        }
+    }
+    this.document.getElementById("s_"+id).value = norm_sml_dmg;
+    this.document.getElementById("l_"+id).value = norm_lrg_dmg;
+
+    var bonus_target = this.document.getElementById("bt_"+id);
+    if (bonus_target != null) {
+        this.document.getElementById("bs_"+id).value = bonus_sml_dmg;
+        this.document.getElementById("bl_"+id).value = bonus_lrg_dmg;
+
+        target = this.document.getElementById("b2t_"+id);
+        if (target != null && target.value == "兽化人") {
+            this.document.getElementById("b2s_"+id).value = bonus2_sml_dmg;
+            this.document.getElementById("b2l_"+id).value = bonus2_lrg_dmg;
+        }
+    }
+}
+
+function update_wclass(name)
+{
+    for (var i = 0; i < artifacts.length; i++) {
+        if (artifacts[i].wclass == name)
+            update_numbers(artifacts[i].a);
+    }
+}
+
+function update_all()
+{
+    for (var i = 0; i < artifacts.length; i++) {
+        update_numbers(artifacts[i].a);
+    }
+}
+
+function enable_wc(wclass)
+{
+    document.getElementById("cb_" + wclass).checked = "checked";
+    document.getElementById("wc_" + wclass).style.color="black";
+    document.getElementById("U_" + wclass).disabled="";
+    document.getElementById("B_" + wclass).disabled="";
+    document.getElementById("S_" + wclass).disabled="";
+    document.getElementById("E_" + wclass).disabled="";
+
+    update_artifact_list(wclass);
+}
+
+function disable_wc(wclass)
+{
+    document.getElementById("cb_" + wclass).checked = "";
+    document.getElementById("wc_" + wclass).style.color="lightgray";
+    document.getElementById("U_" + wclass).disabled="disabled";
+    document.getElementById("B_" + wclass).disabled="disabled";
+    document.getElementById("S_" + wclass).disabled="disabled";
+    document.getElementById("E_" + wclass).disabled="disabled";
+
+    update_artifact_list(wclass);
+}
+
+function update_artifact_list(wclass)
+{
+    for (var i = 0; i < artifacts.length; i++) {
+        if (artifacts[i].wclass == wclass) {
+            if (document.getElementById("cb_" + wclass).checked  &&  ! hidden["v_" + artifacts[i].a])
+                document.getElementById("v_" + artifacts[i].a).style.display = "";
+            else
+                document.getElementById("v_" + artifacts[i].a).style.display = "none";
+        }
+    }
+}
+
+function toggle(wclass)
+{
+    if (document.getElementById("cb_" + wclass).checked) {
+        enable_wc(wclass);
+    } else {
+        disable_wc(wclass);
+    }
+}
+
+function cbs_aux_single(artifact, checked, display, color, funct)
+{
+    var wclass = artifact.wclass;
+    document.getElementById("cb_" + wclass).checked = checked;
+    document.getElementById("v_" + artifact.a).style.display = display;
+    document.getElementById("wc_" + wclass).style.color = color;
+    document.getElementById("U_" + wclass).disabled = funct;
+    document.getElementById("B_" + wclass).disabled = funct;
+    document.getElementById("S_" + wclass).disabled = funct;
+    document.getElementById("E_" + wclass).disabled = funct;
+}
+
+function cbs_aux_loop(checked, display, color, funct)
+{
+    for (var i = 0; i < artifacts.length; i++) {
+        cbs_aux_single(artifacts[i], checked, display, color, funct);
+    }
+}
+
+function cbs_all()      // enable all weapon classes
+{
+    cbs_aux_loop("checked","","black","");
+}
+
+function cbs_none()     // disable all weapon classes
+{
+    cbs_aux_loop("","none","lightgray","disabled");
+}
+
+function cbs_role()     // enable only role-specific weapon classes
+{
+    var role_index = this.document.getElementById("sel_role").value;
+    var wclass;
+    for (wclass in w_prof) {
+        // Format:  w_prof["Axe"] = "X-ES-S--S--BES";
+        var role_prof = w_prof[wclass].charAt(role_index);
+
+        if (role_prof == "-") {
+            disable_wc(wclass);
+        } else {
+            enable_wc(wclass);
+        }
+    }
+}
+
+function cbs_reset()    // all weapon classes will be reset to 'unskilled'
+{
+    for (var i = 0; i < artifacts.length; i++) {
+        var wclass = artifacts[i].wclass;
+        document.getElementById("U_" + wclass).checked="checked";
+        document.getElementById("B_" + wclass).checked="";
+        document.getElementById("S_" + wclass).checked="";
+        document.getElementById("E_" + wclass).checked="";
+    }
+    update_all();
+}
+
+function cbs_set()      // only selected weapon classes are set to 'basic'
+{
+    for (var i = 0; i < artifacts.length; i++) {
+        var wclass = artifacts[i].wclass;
+        if (document.getElementById("cb_" + wclass).checked) {
+            document.getElementById("U_" + wclass).checked="";
+            document.getElementById("B_" + wclass).checked="checked";
+            document.getElementById("S_" + wclass).checked="";
+            document.getElementById("E_" + wclass).checked="";
+        }
+    }
+    update_all();
+}
+
+function cbs_max()      // set all weapon classes to maximum value for selected role
+{
+    var role_index = this.document.getElementById("sel_role").value;
+    var wclass;
+    for (wclass in w_prof) {
+        // Format:  w_prof["Axe"] = "X-ES-S--S--BES";
+        var role_prof = w_prof[wclass].charAt(role_index);
+        if (role_prof == "-")
+            role_prof = "U";
+        document.getElementById("U_" + wclass).checked="";
+        document.getElementById("B_" + wclass).checked="";
+        document.getElementById("S_" + wclass).checked="";
+        document.getElementById("E_" + wclass).checked="";
+        document.getElementById(role_prof + "_" + wclass).checked = "checked";
+    }
+    update_all();
+}
+
+function role_change()
+{
+    var role_selected = (this.document.getElementById("sel_role").value != "0");
+    var role_disabled = (role_selected ? "" : "disabled");
+    this.document.getElementById("b_role").disabled = role_disabled;
+    this.document.getElementById("b_max").disabled = role_disabled;
+    cbs_role();
+    do_unhide();
+}
+
+
+function update_enchantments()
+{
+    var new_enchantment = (this.document.getElementById("enchantment").value);
+    for (var a in a_index) {
+        this.document.getElementById(a).value = new_enchantment;
+        update_numbers(a);
+    }
+    this.document.getElementById("enchantment").value = -1;
+}
+
+
+var hidden = [ ];
+
+function do_hide(a_id_arg)
+{
+    var a_id = "v_" + a_id_arg.substr(2);   // skip "b_" prefix
+    hidden[a_id] = true;
+    document.getElementById(a_id).style.display = "none";
+
+    this.document.getElementById("b_unhide").disabled = "";
+}
+
+function do_unhide()
+{
+    for (var i = 0; i < artifacts.length; i++) {
+        var a_id = "v_" + artifacts[i].a;
+        hidden[a_id] = false;
+        var wclass = artifacts[i].wclass;
+        if (document.getElementById("cb_" + wclass).checked)
+            document.getElementById(a_id).style.display = "";
+    }
+
+    this.document.getElementById("b_unhide").disabled = "disabled";
+}
+
+
+-->
+</script>
+
+</head>
+
+<!-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -->
+
+<body onload="update_all()">
+
+  <h1> 神器伤害计算器 </h1>
+
+  <noscript>
+    <br>
+    <table style='border-width: 4px; border-style: solid; padding: 8px'>
+      <tr>
+        <td>
+          <b> The calculation needs JavaScript to be enabled in your browser! </b>
+        </td>
+      </tr>
+    </table>
+    <br>
+    <br>
+  </noscript>
+
+<br>
+
+<table>
+<colgroup>
+  <col width="3">
+  <col width="200">
+  <col width="80">
+  <col width="80">
+  <col width="80">
+  <col width="80">
+  <col width="300">
+</colgroup>
+<tr>
+  <td> &nbsp; </td>
+  <td> <b>武器技能</b> </td>
+  <td class="radio"> <b>不熟练</b> </td>
+  <td class="radio"> <b>基础</b> </td>
+  <td class="radio"> <b>熟练</b> </td>
+  <td class="radio"> <b>老练</b> </td>
+  <td> <b>&nbsp;</b> </td>
+</tr>
+<tr>
+  <td colspan="6"><hr></td>
+  <td colspan="1">&nbsp;</td>
+</tr>
+<tr id="wc_Axe">
+  <td> <input type="checkbox" checked="checked" id="cb_Axe" onclick='toggle("Axe")'> </td>
+  <td> <b>&nbsp;斧头</b> </td>
+  <td class="radio"> <input type="radio" id="U_Axe" name="Axe"                           value="Unskilled" onchange="update_wclass(this.name)" checked="checked"> </td>
+  <td class="radio"> <input type="radio" id="B_Axe" name="Axe"                           value="Basic"     onchange="update_wclass(this.name)"> </td>
+  <td class="radio"> <input type="radio" id="S_Axe" name="Axe"                           value="Skilled"   onchange="update_wclass(this.name)"> </td>
+  <td class="radio"> <input type="radio" id="E_Axe" name="Axe"                           value="Expert"    onchange="update_wclass(this.name)"> </td>
+  <td> &nbsp; </td>
+</tr>
+<tr id="wc_Bow">
+  <td> <input type="checkbox" checked="checked" id="cb_Bow" onclick='toggle("Bow")'> </td>
+  <td> <b>&nbsp;弓</b> </td> 
+  <td class="radio"> <input type="radio" id="U_Bow" name="Bow"                           value="Unskilled" onchange="update_wclass(this.name)" checked="checked"> </td>
+  <td class="radio"> <input type="radio" id="B_Bow" name="Bow"                           value="Basic"     onchange="update_wclass(this.name)"> </td>
+  <td class="radio"> <input type="radio" id="S_Bow" name="Bow"                           value="Skilled"   onchange="update_wclass(this.name)"> </td>
+  <td class="radio"> <input type="radio" id="E_Bow" name="Bow"                           value="Expert"    onchange="update_wclass(this.name)"> </td>
+  <td> &nbsp; </td>
+</tr>
+<tr id="wc_Broadsword">
+  <td> <input type="checkbox" checked="checked" id="cb_Broadsword" onclick='toggle("Broadsword")'> </td>
+  <td> <b>&nbsp;阔剑</b> </td>
+  <td class="radio"> <input type="radio" id="U_Broadsword" name="Broadsword"             value="Unskilled" onchange="update_wclass(this.name)" checked="checked"> </td>
+  <td class="radio"> <input type="radio" id="B_Broadsword" name="Broadsword"             value="Basic"     onchange="update_wclass(this.name)"> </td>
+  <td class="radio"> <input type="radio" id="S_Broadsword" name="Broadsword"             value="Skilled"   onchange="update_wclass(this.name)"> </td>
+  <td class="radio"> <input type="radio" id="E_Broadsword" name="Broadsword"             value="Expert"    onchange="update_wclass(this.name)"> </td>
+  <td> &nbsp; </td>
+</tr>
+<tr id="wc_Dagger">
+  <td> <input type="checkbox" checked="checked" id="cb_Dagger" onclick='toggle("Dagger")'> </td>
+  <td> <b>&nbsp;匕首</b> </td>
+  <td class="radio"> <input type="radio" id="U_Dagger" name="Dagger"                     value="Unskilled" onchange="update_wclass(this.name)" checked="checked"> </td>
+  <td class="radio"> <input type="radio" id="B_Dagger" name="Dagger"                     value="Basic"     onchange="update_wclass(this.name)"> </td>
+  <td class="radio"> <input type="radio" id="S_Dagger" name="Dagger"                     value="Skilled"   onchange="update_wclass(this.name)"> </td>
+  <td class="radio"> <input type="radio" id="E_Dagger" name="Dagger"                     value="Expert"    onchange="update_wclass(this.name)"> </td>
+  <td> &nbsp; </td>
+</tr>
+<tr id="wc_Hammer">
+  <td> <input type="checkbox" checked="checked" id="cb_Hammer" onclick='toggle("Hammer")'> </td>
+  <td> <b>&nbsp;战锤</b> </td>
+  <td class="radio"> <input type="radio" id="U_Hammer" name="Hammer"                     value="Unskilled" onchange="update_wclass(this.name)" checked="checked"> </td>
+  <td class="radio"> <input type="radio" id="B_Hammer" name="Hammer"                     value="Basic"     onchange="update_wclass(this.name)"> </td>
+  <td class="radio"> <input type="radio" id="S_Hammer" name="Hammer"                     value="Skilled"   onchange="update_wclass(this.name)"> </td>
+  <td class="radio"> <input type="radio" id="E_Hammer" name="Hammer"                     value="Expert"    onchange="update_wclass(this.name)"> </td>
+  <td> &nbsp; </td>
+</tr>
+<tr id="wc_Long_sword">
+  <td> <input type="checkbox" checked="checked" id="cb_Long_sword" onclick='toggle("Long_sword")'> </td>
+  <td> <b>&nbsp;长剑</b> </td>
+  <td class="radio"> <input type="radio" id="U_Long_sword" name="Long_sword"             value="Unskilled" onchange="update_wclass(this.name)" checked="checked"> </td>
+  <td class="radio"> <input type="radio" id="B_Long_sword" name="Long_sword"             value="Basic"     onchange="update_wclass(this.name)"> </td>
+  <td class="radio"> <input type="radio" id="S_Long_sword" name="Long_sword"             value="Skilled"   onchange="update_wclass(this.name)"> </td>
+  <td class="radio"> <input type="radio" id="E_Long_sword" name="Long_sword"             value="Expert"    onchange="update_wclass(this.name)"> </td>
+  <td> &nbsp; </td>
+</tr>
+<tr id="wc_Mace">
+  <td> <input type="checkbox" checked="checked" id="cb_Mace" onclick='toggle("Mace")'> </td>
+  <td> <b>&nbsp;权杖</b> </td>
+  <td class="radio"> <input type="radio" id="U_Mace" name="Mace"                         value="Unskilled" onchange="update_wclass(this.name)" checked="checked"> </td>
+  <td class="radio"> <input type="radio" id="B_Mace" name="Mace"                         value="Basic"     onchange="update_wclass(this.name)"> </td>
+  <td class="radio"> <input type="radio" id="S_Mace" name="Mace"                         value="Skilled"   onchange="update_wclass(this.name)"> </td>
+  <td class="radio"> <input type="radio" id="E_Mace" name="Mace"                         value="Expert"    onchange="update_wclass(this.name)"> </td>
+  <td> &nbsp; </td>
+</tr>
+<tr id="wc_Morning_star">
+  <td> <input type="checkbox" checked="checked" id="cb_Morning_star" onclick='toggle("Morning_star")'> </td>
+  <td> <b>&nbsp;流星锤</b> </td>
+  <td class="radio"> <input type="radio" id="U_Morning_star" name="Morning_star"         value="Unskilled" onchange="update_wclass(this.name)" checked="checked"> </td>
+  <td class="radio"> <input type="radio" id="B_Morning_star" name="Morning_star"         value="Basic"     onchange="update_wclass(this.name)"> </td>
+  <td class="radio"> <input type="radio" id="S_Morning_star" name="Morning_star"         value="Skilled"   onchange="update_wclass(this.name)"> </td>
+  <td class="radio"> <input type="radio" id="E_Morning_star" name="Morning_star"         value="Expert"    onchange="update_wclass(this.name)"> </td>
+  <td> &nbsp; </td>
+</tr>
+<tr id="wc_Quarterstaff">
+  <td> <input type="checkbox" checked="checked" id="cb_Quarterstaff" onclick='toggle("Quarterstaff")'> </td>
+  <td> <b>&nbsp;铁头木棒</b> </td>
+  <td class="radio"> <input type="radio" id="U_Quarterstaff" name="Quarterstaff"         value="Unskilled" onchange="update_wclass(this.name)" checked="checked"> </td>
+  <td class="radio"> <input type="radio" id="B_Quarterstaff" name="Quarterstaff"         value="Basic"     onchange="update_wclass(this.name)"> </td>
+  <td class="radio"> <input type="radio" id="S_Quarterstaff" name="Quarterstaff"         value="Skilled"   onchange="update_wclass(this.name)"> </td>
+  <td class="radio"> <input type="radio" id="E_Quarterstaff" name="Quarterstaff"         value="Expert"    onchange="update_wclass(this.name)"> </td>
+  <td> &nbsp; </td>
+</tr>
+<tr id="wc_Saber">
+  <td> <input type="checkbox" checked="checked" id="cb_Saber" onclick='toggle("Saber")'> </td>
+  <td> <b>&nbsp;佩剑</b> </td>
+  <td class="radio"> <input type="radio" id="U_Saber" name="Saber"                       value="Unskilled" onchange="update_wclass(this.name)" checked="checked"> </td>
+  <td class="radio"> <input type="radio" id="B_Saber" name="Saber"                       value="Basic"     onchange="update_wclass(this.name)"> </td>
+  <td class="radio"> <input type="radio" id="S_Saber" name="Saber"                       value="Skilled"   onchange="update_wclass(this.name)"> </td>
+  <td class="radio"> <input type="radio" id="E_Saber" name="Saber"                       value="Expert"    onchange="update_wclass(this.name)"> </td>
+  <td> &nbsp; </td>
+</tr>
+<tr id="wc_Two-handed_sword">
+  <td> <input type="checkbox" checked="checked" id="cb_Two-handed_sword" onclick='toggle("Two-handed_sword")'> </td>
+  <td> <b>&nbsp;双手剑</b> </td>
+  <td class="radio"> <input type="radio" id="U_Two-handed_sword" name="Two-handed_sword" value="Unskilled" onchange="update_wclass(this.name)" checked="checked"> </td>
+  <td class="radio"> <input type="radio" id="B_Two-handed_sword" name="Two-handed_sword" value="Basic"     onchange="update_wclass(this.name)"> </td>
+  <td class="radio"> <input type="radio" id="S_Two-handed_sword" name="Two-handed_sword" value="Skilled"   onchange="update_wclass(this.name)"> </td>
+  <td class="radio"> <input type="radio" id="E_Two-handed_sword" name="Two-handed_sword" value="Expert"    onchange="update_wclass(this.name)"> </td>
+  <td> &nbsp; </td>
+</tr>
+<tr>
+  <td colspan="7">&nbsp;</td>
+</tr>
+<tr>
+  <td colspan="2">
+    <input type="button" id="b_all"   class="button" value="  全选  " onclick="cbs_all()"   title="选择所有技能">
+    <input type="button" id="b_none"  class="button" value=" 全不选 "  onclick="cbs_none()"  title="撤销所有技能的选择">
+    &nbsp; &nbsp;
+    <input type="button" id="b_role"  class="button" value=" 按职业 "  onclick="cbs_role()"  title="按当前职业选择技能"  disabled="disabled">
+  </td>
+  <td colspan="1" class="radio">
+    <input type="button" id="b_reset" class="button" value=" 重置 " onclick="cbs_reset()" title="将所有技能重置为不熟练">
+  </td>
+  <td colspan="1" class="radio">
+    <input type="button" id="b_set"   class="button" value="  设为基础  " onclick="cbs_set()"   title="将所有技能设为基础">
+  </td>
+  <td colspan="2" class="radio">
+    <input type="button" id="b_max"   class="button" value=" 职业最高技能 " onclick="cbs_max()"   title="将技能设为职业所能达到的最高等级"  disabled="disabled">
+  </td>
+  <td colspan="1">
+    &nbsp;&nbsp;&nbsp;<b>职业：</b> 
+    <select id='sel_role' class="button" onchange='role_change()'>
+      <option value='0' style="color:grey; font-style:italic">（未选择） </option>
+      <option value='1'>  考古学家 </option>
+      <option value='2'>  野蛮人    </option>
+      <option value='3'>  穴居人      </option>
+      <option value='4'>  医生       </option>
+      <option value='5'>  骑士       </option>
+      <option value='6'>  僧侣         </option>
+      <option value='7'>  牧师       </option>
+      <option value='8'>  游侠       </option>
+      <option value='9'>  盗贼        </option>
+      <option value='10'> 武士      </option>
+      <option value='11'> 游客      </option>
+      <option value='12'> 女武神     </option>
+      <option value='13'> 巫师       </option>
+    </select>
+  </td>
+</tr>
+</table>
+
+<br><br><br><br>
+
+<table>
+<tr>
+  <td title="修改所有武器的附魔">
+    <select id="enchantment" onchange="update_enchantments()">
+      <option value="-1"> &nbsp; </option>
+      <option value="0"> +0 </option>
+      <option value="1"> +1 </option>
+      <option value="2"> +2 </option>
+      <option value="3"> +3 </option>
+      <option value="4"> +4 </option>
+      <option value="5"> +5 </option>
+      <option value="6"> +6 </option>
+      <option value="7"> +7 </option>
+    </select>
+  </td>
+  <td> &nbsp; <b>神器武器</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
+  <th title="average to-hit term"> <b>命中</b> &nbsp;&nbsp;&nbsp; </th>
+  <th title="average damage against small monsters"> <b>对小型</b> &nbsp; </th>
+  <th title="average damage against large monsters"> <b>对大型</b> &nbsp;&nbsp;</th>
+  <td title="monster targets for bonus damage"> <b>特殊伤害加成对象</b> &nbsp;&nbsp;&nbsp; </td>
+  <th title="average damage against small monsters if bonus applies"> <b>对小型</b> &nbsp; </th>
+  <th title="average damage against large monsters if bonus applies"> <b>对大型</b> </th>
+  <td> &nbsp;&nbsp;&nbsp;&nbsp;
+    <input type="button" id="b_unhide" class="button" value=" 显示隐藏项 " onclick="do_unhide()" title="显示所有被隐藏的神器" disabled="disabled">
+  </td>
+</tr>
+<tr><td colspan="9"><hr></td></tr>
+<tr id="v_Cleaver">
+  <td>
+    <select id="Cleaver" onchange="update_numbers(this.id)">
+      <option value="0"> +0 </option>
+      <option value="1"> +1 </option>
+      <option value="2"> +2 </option>
+      <option value="3"> +3 </option>
+      <option value="4"> +4 </option>
+      <option value="5"> +5 </option>
+      <option value="6"> +6 </option>
+      <option value="7"> +7 </option>
+    </select>
+  </td>
+  <td> &nbsp; 撕裂者 &nbsp;&nbsp;&nbsp; </td>
+  <td> <input class="r" type="text" readonly id="h_Cleaver"> &nbsp;&nbsp;&nbsp; </td>
+  <td> <input class="r" type="text" readonly id="s_Cleaver"> &nbsp; </td>
+  <td> <input class="r" type="text" readonly id="l_Cleaver"> &nbsp;&nbsp; </td>
+  <td colspan="3"> &nbsp; </td>
+  <!--
+  <td> <input class="l" type="text" readonly id="bt_Cleaver" value=""> &nbsp;&rarr;&nbsp;&nbsp; </td>
+  <td> <input class="r" type="text" readonly id="bs_Cleaver"> &nbsp; </td>
+  <td> <input class="r" type="text" readonly id="bl_Cleaver"> </td>
+  -->
+  <td align="right">
+    <input type="button" id="b_Cleaver" class="button" value=" 隐藏 " onclick="do_hide(this.id)" title="隐藏此神器">
+  </td>
+</tr>
+<tr id="v_Demonbane">
+  <td>
+    <select id="Demonbane" onchange="update_numbers(this.id)">
+      <option value="0"> +0 </option>
+      <option value="1"> +1 </option>
+      <option value="2"> +2 </option>
+      <option value="3"> +3 </option>
+      <option value="4"> +4 </option>
+      <option value="5"> +5 </option>
+      <option value="6"> +6 </option>
+      <option value="7"> +7 </option>
+    </select>
+  </td>
+  <td> &nbsp; 斩魔之剑 &nbsp;&nbsp;&nbsp; </td>
+  <td> <input class="r" type="text" readonly id="h_Demonbane"> &nbsp;&nbsp;&nbsp; </td>
+  <td> <input class="r" type="text" readonly id="s_Demonbane"> &nbsp; </td>
+  <td> <input class="r" type="text" readonly id="l_Demonbane"> &nbsp;&nbsp; </td>
+  <td> <input class="l" type="text" readonly id="bt_Demonbane" value="恶魔"> &nbsp;&rarr;&nbsp;&nbsp; </td>
+  <td> <input class="r" type="text" readonly id="bs_Demonbane"> &nbsp; </td>
+  <td> <input class="r" type="text" readonly id="bl_Demonbane"> </td>
+  <td align="right">
+    <input type="button" id="b_Demonbane" class="button" value=" 隐藏 " onclick="do_hide(this.id)" title="隐藏此神器">
+  </td>
+</tr>
+<tr id="v_Dragonbane">
+  <td>
+    <select id="Dragonbane" onchange="update_numbers(this.id)">
+      <option value="0"> +0 </option>
+      <option value="1"> +1 </option>
+      <option value="2"> +2 </option>
+      <option value="3"> +3 </option>
+      <option value="4"> +4 </option>
+      <option value="5"> +5 </option>
+      <option value="6"> +6 </option>
+      <option value="7"> +7 </option>
+    </select>
+  </td>
+  <td> &nbsp; 屠龙之剑 &nbsp;&nbsp;&nbsp; </td>
+  <td> <input class="r" type="text" readonly id="h_Dragonbane"> &nbsp;&nbsp;&nbsp; </td>
+  <td> <input class="r" type="text" readonly id="s_Dragonbane"> &nbsp; </td>
+  <td> <input class="r" type="text" readonly id="l_Dragonbane"> &nbsp;&nbsp; </td>
+  <td> <input class="l" type="text" readonly id="bt_Dragonbane" value="龙"> &nbsp;&rarr;&nbsp;&nbsp; </td>
+  <td> <input class="r" type="text" readonly id="bs_Dragonbane"> &nbsp; </td>
+  <td> <input class="r" type="text" readonly id="bl_Dragonbane"> </td>
+  <td align="right">
+    <input type="button" id="b_Dragonbane" class="button" value=" 隐藏 " onclick="do_hide(this.id)" title="隐藏此神器">
+  </td>
+</tr>
+<tr id="v_Excalibur">
+  <td>
+    <select id="Excalibur" onchange="update_numbers(this.id)">
+      <option value="0"> +0 </option>
+      <option value="1"> +1 </option>
+      <option value="2"> +2 </option>
+      <option value="3"> +3 </option>
+      <option value="4"> +4 </option>
+      <option value="5"> +5 </option>
+      <option value="6"> +6 </option>
+      <option value="7"> +7 </option>
+    </select>
+  </td>
+  <td> &nbsp; 誓约胜利之剑 &nbsp;&nbsp;&nbsp; </td>
+  <td> <input class="r" type="text" readonly id="h_Excalibur"> &nbsp;&nbsp;&nbsp; </td>
+  <td> <input class="r" type="text" readonly id="s_Excalibur"> &nbsp; </td>
+  <td> <input class="r" type="text" readonly id="l_Excalibur"> &nbsp;&nbsp; </td>
+  <td colspan="3"> &nbsp; </td>
+  <!--
+  <td> <input class="l" type="text" readonly id="bt_Excalibur" value=""> &nbsp;&rarr;&nbsp;&nbsp; </td>
+  <td> <input class="r" type="text" readonly id="bs_Excalibur"> &nbsp; </td>
+  <td> <input class="r" type="text" readonly id="bl_Excalibur"> </td>
+  -->
+  <td align="right">
+    <input type="button" id="b_Excalibur" class="button" value=" 隐藏 " onclick="do_hide(this.id)" title="隐藏此神器">
+  </td>
+</tr>
+<tr id="v_Fire_Brand">
+  <td>
+    <select id="Fire_Brand" onchange="update_numbers(this.id)">
+      <option value="0"> +0 </option>
+      <option value="1"> +1 </option>
+      <option value="2"> +2 </option>
+      <option value="3"> +3 </option>
+      <option value="4"> +4 </option>
+      <option value="5"> +5 </option>
+      <option value="6"> +6 </option>
+      <option value="7"> +7 </option>
+    </select>
+  </td>
+  <td> &nbsp; 烈焰之剑 &nbsp;&nbsp;&nbsp; </td>
+  <td> <input class="r" type="text" readonly id="h_Fire_Brand"> &nbsp;&nbsp;&nbsp; </td>
+  <td> <input class="r" type="text" readonly id="s_Fire_Brand"> &nbsp; </td>
+  <td> <input class="r" type="text" readonly id="l_Fire_Brand"> &nbsp;&nbsp; </td>
+  <td> <input class="l" type="text" readonly id="bt_Fire_Brand" value="无火抗"> &nbsp;&rarr;&nbsp;&nbsp; </td>
+  <td> <input class="r" type="text" readonly id="bs_Fire_Brand"> &nbsp; </td>
+  <td> <input class="r" type="text" readonly id="bl_Fire_Brand"> </td>
+  <td align="right">
+    <input type="button" id="b_Fire_Brand" class="button" value=" 隐藏 " onclick="do_hide(this.id)" title="隐藏此神器">
+  </td>
+</tr>
+<tr id="v_Frost_Brand">
+  <td>
+    <select id="Frost_Brand" onchange="update_numbers(this.id)">
+      <option value="0"> +0 </option>
+      <option value="1"> +1 </option>
+      <option value="2"> +2 </option>
+      <option value="3"> +3 </option>
+      <option value="4"> +4 </option>
+      <option value="5"> +5 </option>
+      <option value="6"> +6 </option>
+      <option value="7"> +7 </option>
+    </select>
+  </td>
+  <td> &nbsp; 冰霜之剑 &nbsp;&nbsp;&nbsp; </td>
+  <td> <input class="r" type="text" readonly id="h_Frost_Brand"> &nbsp;&nbsp;&nbsp; </td>
+  <td> <input class="r" type="text" readonly id="s_Frost_Brand"> &nbsp; </td>
+  <td> <input class="r" type="text" readonly id="l_Frost_Brand"> &nbsp;&nbsp; </td>
+  <td> <input class="l" type="text" readonly id="bt_Frost_Brand" value="无寒抗"> &nbsp;&rarr;&nbsp;&nbsp; </td>
+  <td> <input class="r" type="text" readonly id="bs_Frost_Brand"> &nbsp; </td>
+  <td> <input class="r" type="text" readonly id="bl_Frost_Brand"> </td>
+  <td align="right">
+    <input type="button" id="b_Frost_Brand" class="button" value=" 隐藏 " onclick="do_hide(this.id)" title="隐藏此神器">
+  </td>
+</tr>
+<tr id="v_Giantslayer">
+  <td>
+    <select id="Giantslayer" onchange="update_numbers(this.id)">
+      <option value="0"> +0 </option>
+      <option value="1"> +1 </option>
+      <option value="2"> +2 </option>
+      <option value="3"> +3 </option>
+      <option value="4"> +4 </option>
+      <option value="5"> +5 </option>
+      <option value="6"> +6 </option>
+      <option value="7"> +7 </option>
+    </select>
+  </td>
+  <td> &nbsp; 巨人杀手 &nbsp;&nbsp;&nbsp; </td>
+  <td> <input class="r" type="text" readonly id="h_Giantslayer"> &nbsp;&nbsp;&nbsp; </td>
+  <td> <input class="r" type="text" readonly id="s_Giantslayer"> &nbsp; </td>
+  <td> <input class="r" type="text" readonly id="l_Giantslayer"> &nbsp;&nbsp; </td>
+  <td> <input class="l" type="text" readonly id="bt_Giantslayer" value="巨人"> &nbsp;&rarr;&nbsp;&nbsp; </td>
+  <td> <input class="r" type="text" readonly id="bs_Giantslayer"> &nbsp; </td>
+  <td> <input class="r" type="text" readonly id="bl_Giantslayer"> </td>
+  <td align="right">
+    <input type="button" id="b_Giantslayer" class="button" value=" 隐藏 " onclick="do_hide(this.id)" title="隐藏此神器">
+  </td>
+</tr>
+<tr id="v_Grayswandir">
+  <td>
+    <select id="Grayswandir" onchange="update_numbers(this.id)">
+      <option value="0"> +0 </option>
+      <option value="1"> +1 </option>
+      <option value="2"> +2 </option>
+      <option value="3"> +3 </option>
+      <option value="4"> +4 </option>
+      <option value="5"> +5 </option>
+      <option value="6"> +6 </option>
+      <option value="7"> +7 </option>
+    </select>
+  </td>
+  <td> &nbsp; 夜刃 &nbsp;&nbsp;&nbsp; </td>
+  <td> <input class="r" type="text" readonly id="h_Grayswandir"> &nbsp;&nbsp;&nbsp; </td>
+  <td> <input class="r" type="text" readonly id="s_Grayswandir"> &nbsp; </td>
+  <td> <input class="r" type="text" readonly id="l_Grayswandir"> &nbsp;&nbsp; </td>
+  <td> <input class="l" type="text" readonly id="bt_Grayswandir" value="惧银怪物"> &nbsp;&rarr;&nbsp;&nbsp; </td>
+  <td> <input class="r" type="text" readonly id="bs_Grayswandir"> &nbsp; </td>
+  <td> <input class="r" type="text" readonly id="bl_Grayswandir"> </td>
+  <td align="right">
+    <input type="button" id="b_Grayswandir" class="button" value=" 隐藏 " onclick="do_hide(this.id)" title="隐藏此神器">
+  </td>
+</tr>
+<tr id="v_Grimtooth">
+  <td>
+    <select id="Grimtooth" onchange="update_numbers(this.id)">
+      <option value="0"> +0 </option>
+      <option value="1"> +1 </option>
+      <option value="2"> +2 </option>
+      <option value="3"> +3 </option>
+      <option value="4"> +4 </option>
+      <option value="5"> +5 </option>
+      <option value="6"> +6 </option>
+      <option value="7"> +7 </option>
+    </select>
+  </td>
+  <td> &nbsp; 邪兽之牙 &nbsp;&nbsp;&nbsp; </td>
+  <td> <input class="r" type="text" readonly id="h_Grimtooth"> &nbsp;&nbsp;&nbsp; </td>
+  <td> <input class="r" type="text" readonly id="s_Grimtooth"> &nbsp; </td>
+  <td> <input class="r" type="text" readonly id="l_Grimtooth"> &nbsp;&nbsp; </td>
+  <td colspan="3"> &nbsp; </td>
+  <!--
+  <td> <input class="l" type="text" readonly id="bt_Grimtooth" value=""> &nbsp;&rarr;&nbsp;&nbsp; </td>
+  <td> <input class="r" type="text" readonly id="bs_Grimtooth"> &nbsp; </td>
+  <td> <input class="r" type="text" readonly id="bl_Grimtooth"> </td>
+  -->
+  <td align="right">
+    <input type="button" id="b_Grimtooth" class="button" value=" 隐藏 " onclick="do_hide(this.id)" title="隐藏此神器">
+  </td>
+</tr>
+<tr id="v_Longbow_of_Diana">
+  <td>
+    <select id="Longbow_of_Diana" onchange="update_numbers(this.id)">
+      <option value="0"> +0 </option>
+      <option value="1"> +1 </option>
+      <option value="2"> +2 </option>
+      <option value="3"> +3 </option>
+      <option value="4"> +4 </option>
+      <option value="5"> +5 </option>
+      <option value="6"> +6 </option>
+      <option value="7"> +7 </option>
+    </select>
+  </td>
+  <td> &nbsp; 戴安娜的长弓 &nbsp;&nbsp;&nbsp; </td>
+  <td> <input class="r" type="text" readonly id="h_Longbow_of_Diana"> &nbsp;&nbsp;&nbsp; </td>
+  <td> <input class="r" type="text" readonly id="s_Longbow_of_Diana"> &nbsp; </td>
+  <td> <input class="r" type="text" readonly id="l_Longbow_of_Diana"> &nbsp;&nbsp; </td>
+  <td colspan="3"> &nbsp; </td>
+  <!--
+  <td> <input class="l" type="text" readonly id="bt_Longbow_of_Diana" value=""> &nbsp;&rarr;&nbsp;&nbsp; </td>
+  <td> <input class="r" type="text" readonly id="bs_Longbow_of_Diana"> &nbsp; </td>
+  <td> <input class="r" type="text" readonly id="bl_Longbow_of_Diana"> </td>
+  -->
+  <td align="right">
+    <input type="button" id="b_Longbow_of_Diana" class="button" value=" 隐藏 " onclick="do_hide(this.id)" title="隐藏此神器">
+  </td>
+</tr>
+<tr id="v_Magicbane">
+  <td>
+    <select id="Magicbane" onchange="update_numbers(this.id)">
+      <option value="0"> +0 </option>
+      <option value="1"> +1 </option>
+      <option value="2"> +2 </option>
+      <option value="3"> +3 </option>
+      <option value="4"> +4 </option>
+      <option value="5"> +5 </option>
+      <option value="6"> +6 </option>
+      <option value="7"> +7 </option>
+    </select>
+  </td>
+  <td> &nbsp; 神魔克星 &nbsp;&nbsp;&nbsp; </td>
+  <td> <input class="r" type="text" readonly id="h_Magicbane"> &nbsp;&nbsp;&nbsp; </td>
+  <td> <input class="r" type="text" readonly id="s_Magicbane"> &nbsp; </td>
+  <td> <input class="r" type="text" readonly id="l_Magicbane"> &nbsp;&nbsp; </td>
+  <td> <input class="l" type="text" readonly id="bt_Magicbane" value="魔法效果"> &nbsp;&rarr;&nbsp;&nbsp; </td>
+  <td> <input class="r" type="text" readonly id="bs_Magicbane"> &nbsp; </td>
+  <td> <input class="r" type="text" readonly id="bl_Magicbane"> </td>
+  <td align="right">
+    <input type="button" id="b_Magicbane" class="button" value=" 隐藏 " onclick="do_hide(this.id)" title="隐藏此神器">
+  </td>
+</tr>
+<tr id="v_Mjollnir">
+  <td>
+    <select id="Mjollnir" onchange="update_numbers(this.id)">
+      <option value="0"> +0 </option>
+      <option value="1"> +1 </option>
+      <option value="2"> +2 </option>
+      <option value="3"> +3 </option>
+      <option value="4"> +4 </option>
+      <option value="5"> +5 </option>
+      <option value="6"> +6 </option>
+      <option value="7"> +7 </option>
+    </select>
+  </td>
+  <td> &nbsp; 雷神之锤 &nbsp;&nbsp;&nbsp; </td>
+  <td> <input class="r" type="text" readonly id="h_Mjollnir"> &nbsp;&nbsp;&nbsp; </td>
+  <td> <input class="r" type="text" readonly id="s_Mjollnir"> &nbsp; </td>
+  <td> <input class="r" type="text" readonly id="l_Mjollnir"> &nbsp;&nbsp; </td>
+  <td> <input class="l" type="text" readonly id="bt_Mjollnir" value="无电抗"> &nbsp;&rarr;&nbsp;&nbsp; </td>
+  <td> <input class="r" type="text" readonly id="bs_Mjollnir"> &nbsp; </td>
+  <td> <input class="r" type="text" readonly id="bl_Mjollnir"> </td>
+  <td align="right">
+    <input type="button" id="b_Mjollnir" class="button" value=" 隐藏 " onclick="do_hide(this.id)" title="隐藏此神器">
+  </td>
+</tr>
+<tr id="v_Ogresmasher">
+  <td>
+    <select id="Ogresmasher" onchange="update_numbers(this.id)">
+      <option value="0"> +0 </option>
+      <option value="1"> +1 </option>
+      <option value="2"> +2 </option>
+      <option value="3"> +3 </option>
+      <option value="4"> +4 </option>
+      <option value="5"> +5 </option>
+      <option value="6"> +6 </option>
+      <option value="7"> +7 </option>
+    </select>
+  </td>
+  <td> &nbsp; 食人魔粉碎者 &nbsp;&nbsp;&nbsp; </td>
+  <td> <input class="r" type="text" readonly id="h_Ogresmasher"> &nbsp;&nbsp;&nbsp; </td>
+  <td> <input class="r" type="text" readonly id="s_Ogresmasher"> &nbsp; </td>
+  <td> <input class="r" type="text" readonly id="l_Ogresmasher"> &nbsp;&nbsp; </td>
+  <td> <input class="l" type="text" readonly id="bt_Ogresmasher" value="食人魔"> &nbsp;&rarr;&nbsp;&nbsp; </td>
+  <td> <input class="r" type="text" readonly id="bs_Ogresmasher"> &nbsp; </td>
+  <td> <input class="r" type="text" readonly id="bl_Ogresmasher"> </td>
+  <td align="right">
+    <input type="button" id="b_Ogresmasher" class="button" value=" 隐藏 " onclick="do_hide(this.id)" title="隐藏此神器">
+  </td>
+</tr>
+<tr id="v_Orcrist">
+  <td>
+    <select id="Orcrist" onchange="update_numbers(this.id)">
+      <option value="0"> +0 </option>
+      <option value="1"> +1 </option>
+      <option value="2"> +2 </option>
+      <option value="3"> +3 </option>
+      <option value="4"> +4 </option>
+      <option value="5"> +5 </option>
+      <option value="6"> +6 </option>
+      <option value="7"> +7 </option>
+    </select>
+  </td>
+  <td> &nbsp; 杀兽剑 &nbsp;&nbsp;&nbsp; </td>
+  <td> <input class="r" type="text" readonly id="h_Orcrist"> &nbsp;&nbsp;&nbsp; </td>
+  <td> <input class="r" type="text" readonly id="s_Orcrist"> &nbsp; </td>
+  <td> <input class="r" type="text" readonly id="l_Orcrist"> &nbsp;&nbsp; </td>
+  <td> <input class="l" type="text" readonly id="bt_Orcrist" value="兽人"> &nbsp;&rarr;&nbsp;&nbsp; </td>
+  <td> <input class="r" type="text" readonly id="bs_Orcrist"> &nbsp; </td>
+  <td> <input class="r" type="text" readonly id="bl_Orcrist"> </td>
+  <td align="right">
+    <input type="button" id="b_Orcrist" class="button" value=" 隐藏 " onclick="do_hide(this.id)" title="隐藏此神器">
+  </td>
+</tr>
+<tr id="v_Sceptre_of_Might">
+  <td>
+    <select id="Sceptre_of_Might" onchange="update_numbers(this.id)">
+      <option value="0"> +0 </option>
+      <option value="1"> +1 </option>
+      <option value="2"> +2 </option>
+      <option value="3"> +3 </option>
+      <option value="4"> +4 </option>
+      <option value="5"> +5 </option>
+      <option value="6"> +6 </option>
+      <option value="7"> +7 </option>
+    </select>
+  </td>
+  <td> &nbsp;力量权杖 &nbsp;&nbsp;&nbsp; </td>
+  <td> <input class="r" type="text" readonly id="h_Sceptre_of_Might"> &nbsp;&nbsp;&nbsp; </td>
+  <td> <input class="r" type="text" readonly id="s_Sceptre_of_Might"> &nbsp; </td>
+  <td> <input class="r" type="text" readonly id="l_Sceptre_of_Might"> &nbsp;&nbsp; </td>
+  <td> <input class="l" type="text" readonly id="bt_Sceptre_of_Might" value="不同阵营"> &nbsp;&rarr;&nbsp;&nbsp; </td>
+  <td> <input class="r" type="text" readonly id="bs_Sceptre_of_Might"> &nbsp; </td>
+  <td> <input class="r" type="text" readonly id="bl_Sceptre_of_Might"> </td>
+  <td align="right">
+    <input type="button" id="b_Sceptre_of_Might" class="button" value=" 隐藏 " onclick="do_hide(this.id)" title="隐藏此神器">
+  </td>
+</tr>
+<tr id="v_Snickersnee">
+  <td>
+    <select id="Snickersnee" onchange="update_numbers(this.id)">
+      <option value="0"> +0 </option>
+      <option value="1"> +1 </option>
+      <option value="2"> +2 </option>
+      <option value="3"> +3 </option>
+      <option value="4"> +4 </option>
+      <option value="5"> +5 </option>
+      <option value="6"> +6 </option>
+      <option value="7"> +7 </option>
+    </select>
+  </td>
+  <td> &nbsp; 草薙剑 &nbsp;&nbsp;&nbsp; </td>
+  <td> <input class="r" type="text" readonly id="h_Snickersnee"> &nbsp;&nbsp;&nbsp; </td>
+  <td> <input class="r" type="text" readonly id="s_Snickersnee"> &nbsp; </td>
+  <td> <input class="r" type="text" readonly id="l_Snickersnee"> &nbsp;&nbsp; </td>
+  <td colspan="3"> &nbsp; </td>
+  <!--
+  <td> <input class="l" type="text" readonly id="bt_Snickersnee" value=""> &nbsp;&rarr;&nbsp;&nbsp; </td>
+  <td> <input class="r" type="text" readonly id="bs_Snickersnee"> &nbsp; </td>
+  <td> <input class="r" type="text" readonly id="bl_Snickersnee"> </td>
+  -->
+  <td align="right">
+    <input type="button" id="b_Snickersnee" class="button" value=" 隐藏 " onclick="do_hide(this.id)" title="隐藏此神器">
+  </td>
+</tr>
+<tr id="v_Staff_of_Aesculapius">
+  <td>
+    <select id="Staff_of_Aesculapius" onchange="update_numbers(this.id)">
+      <option value="0"> +0 </option>
+      <option value="1"> +1 </option>
+      <option value="2"> +2 </option>
+      <option value="3"> +3 </option>
+      <option value="4"> +4 </option>
+      <option value="5"> +5 </option>
+      <option value="6"> +6 </option>
+      <option value="7"> +7 </option>
+    </select>
+  </td>
+  <td> &nbsp; 阿斯克勒庇厄斯之杖 &nbsp;&nbsp;&nbsp; </td>
+  <td> <input class="r" type="text" readonly id="h_Staff_of_Aesculapius"> &nbsp;&nbsp;&nbsp; </td>
+  <td> <input class="r" type="text" readonly id="s_Staff_of_Aesculapius"> &nbsp; </td>
+  <td> <input class="r" type="text" readonly id="l_Staff_of_Aesculapius"> &nbsp;&nbsp; </td>
+  <td> <input class="l" type="text" readonly id="bt_Staff_of_Aesculapius" value="无降级抗"> &nbsp;&rarr;&nbsp;&nbsp; </td>
+  <td> <input class="r" type="text" readonly id="bs_Staff_of_Aesculapius"> &nbsp; </td>
+  <td> <input class="r" type="text" readonly id="bl_Staff_of_Aesculapius"> </td>
+  <td align="right">
+    <input type="button" id="b_Staff_of_Aesculapius" class="button" value=" 隐藏 " onclick="do_hide(this.id)" title="隐藏此神器">
+  </td>
+</tr>
+<tr id="v_Sting">
+  <td>
+    <select id="Sting" onchange="update_numbers(this.id)">
+      <option value="0"> +0 </option>
+      <option value="1"> +1 </option>
+      <option value="2"> +2 </option>
+      <option value="3"> +3 </option>
+      <option value="4"> +4 </option>
+      <option value="5"> +5 </option>
+      <option value="6"> +6 </option>
+      <option value="7"> +7 </option>
+    </select>
+  </td>
+  <td> &nbsp; 杀兽针 &nbsp;&nbsp;&nbsp; </td>
+  <td> <input class="r" type="text" readonly id="h_Sting"> &nbsp;&nbsp;&nbsp; </td>
+  <td> <input class="r" type="text" readonly id="s_Sting"> &nbsp; </td>
+  <td> <input class="r" type="text" readonly id="l_Sting"> &nbsp;&nbsp; </td>
+  <td> <input class="l" type="text" readonly id="bt_Sting" value="兽人"> &nbsp;&rarr;&nbsp;&nbsp; </td>
+  <td> <input class="r" type="text" readonly id="bs_Sting"> &nbsp; </td>
+  <td> <input class="r" type="text" readonly id="bl_Sting"> </td>
+  <td align="right">
+    <input type="button" id="b_Sting" class="button" value=" 隐藏 " onclick="do_hide(this.id)" title="隐藏此神器">
+  </td>
+</tr>
+<tr id="v_Stormbringer">
+  <td>
+    <select id="Stormbringer" onchange="update_numbers(this.id)">
+      <option value="0"> +0 </option>
+      <option value="1"> +1 </option>
+      <option value="2"> +2 </option>
+      <option value="3"> +3 </option>
+      <option value="4"> +4 </option>
+      <option value="5"> +5 </option>
+      <option value="6"> +6 </option>
+      <option value="7"> +7 </option>
+    </select>
+  </td>
+  <td> &nbsp; 兴风者 &nbsp;&nbsp;&nbsp; </td>
+  <td> <input class="r" type="text" readonly id="h_Stormbringer"> &nbsp;&nbsp;&nbsp; </td>
+  <td> <input class="r" type="text" readonly id="s_Stormbringer"> &nbsp; </td>
+  <td> <input class="r" type="text" readonly id="l_Stormbringer"> &nbsp;&nbsp; </td>
+  <td> <input class="l" type="text" readonly id="bt_Stormbringer" value="无降级抗"> &nbsp;&rarr;&nbsp;&nbsp; </td>
+  <td> <input class="r" type="text" readonly id="bs_Stormbringer"> &nbsp; </td>
+  <td> <input class="r" type="text" readonly id="bl_Stormbringer"> </td>
+  <td align="right">
+    <input type="button" id="b_Stormbringer" class="button" value=" 隐藏 " onclick="do_hide(this.id)" title="隐藏此神器">
+  </td>
+</tr>
+<tr id="v_Sunsword">
+  <td>
+    <select id="Sunsword" onchange="update_numbers(this.id)">
+      <option value="0"> +0 </option>
+      <option value="1"> +1 </option>
+      <option value="2"> +2 </option>
+      <option value="3"> +3 </option>
+      <option value="4"> +4 </option>
+      <option value="5"> +5 </option>
+      <option value="6"> +6 </option>
+      <option value="7"> +7 </option>
+    </select>
+  </td>
+  <td> &nbsp; 旭日剑 &nbsp;&nbsp;&nbsp; </td>
+  <td> <input class="r" type="text" readonly id="h_Sunsword"> &nbsp;&nbsp;&nbsp; </td>
+  <td> <input class="r" type="text" readonly id="s_Sunsword"> &nbsp; </td>
+  <td> <input class="r" type="text" readonly id="l_Sunsword"> &nbsp;&nbsp; </td>
+  <td> <input class="l" type="text" readonly id="bt_Sunsword" value="亡灵"> &nbsp;&rarr;&nbsp;&nbsp; </td>
+  <td> <input class="r" type="text" readonly id="bs_Sunsword"> &nbsp; </td>
+  <td> <input class="r" type="text" readonly id="bl_Sunsword"> </td>
+  <td align="right">
+    <input type="button" id="b_Sunsword" class="button" value=" 隐藏 " onclick="do_hide(this.id)" title="隐藏此神器">
+  </td>
+</tr>
+<tr id="v_Trollsbane">
+  <td>
+    <select id="Trollsbane" onchange="update_numbers(this.id)">
+      <option value="0"> +0 </option>
+      <option value="1"> +1 </option>
+      <option value="2"> +2 </option>
+      <option value="3"> +3 </option>
+      <option value="4"> +4 </option>
+      <option value="5"> +5 </option>
+      <option value="6"> +6 </option>
+      <option value="7"> +7 </option>
+    </select>
+  </td>
+  <td> &nbsp; 巨魔杀手 &nbsp;&nbsp;&nbsp; </td>
+  <td> <input class="r" type="text" readonly id="h_Trollsbane"> &nbsp;&nbsp;&nbsp; </td>
+  <td> <input class="r" type="text" readonly id="s_Trollsbane"> &nbsp; </td>
+  <td> <input class="r" type="text" readonly id="l_Trollsbane"> &nbsp;&nbsp; </td>
+  <td> <input class="l" type="text" readonly id="bt_Trollsbane" value="巨魔"> &nbsp;&rarr;&nbsp;&nbsp; </td>
+  <td> <input class="r" type="text" readonly id="bs_Trollsbane"> &nbsp; </td>
+  <td> <input class="r" type="text" readonly id="bl_Trollsbane"> </td>
+  <td align="right">
+    <input type="button" id="b_Trollsbane" class="button" value=" 隐藏 " onclick="do_hide(this.id)" title="隐藏此神器">
+  </td>
+</tr>
+<tr id="v_Tsurugi_of_Muramasa">
+  <td>
+    <select id="Tsurugi_of_Muramasa" onchange="update_numbers(this.id)">
+      <option value="0"> +0 </option>
+      <option value="1"> +1 </option>
+      <option value="2"> +2 </option>
+      <option value="3"> +3 </option>
+      <option value="4"> +4 </option>
+      <option value="5"> +5 </option>
+      <option value="6"> +6 </option>
+      <option value="7"> +7 </option>
+    </select>
+  </td>
+  <td> &nbsp; 妖刀村正 &nbsp;&nbsp;&nbsp; </td>
+  <td> <input class="r" type="text" readonly id="h_Tsurugi_of_Muramasa"> &nbsp;&nbsp;&nbsp; </td>
+  <td> <input class="r" type="text" readonly id="s_Tsurugi_of_Muramasa"> &nbsp; </td>
+  <td> <input class="r" type="text" readonly id="l_Tsurugi_of_Muramasa"> &nbsp;&nbsp; </td>
+  <td colspan="3"> &nbsp; </td>
+  <!--
+  <td> <input class="l" type="text" readonly id="bt_Tsurugi_of_Muramasa" value=""> &nbsp;&rarr;&nbsp;&nbsp; </td>
+  <td> <input class="r" type="text" readonly id="bs_Tsurugi_of_Muramasa"> &nbsp; </td>
+  <td> <input class="r" type="text" readonly id="bl_Tsurugi_of_Muramasa"> </td>
+  -->
+  <td align="right">
+    <input type="button" id="b_Tsurugi_of_Muramasa" class="button" value=" 隐藏 " onclick="do_hide(this.id)" title="隐藏此神器">
+  </td>
+</tr>
+<tr id="v_Vorpal_Blade">
+  <td>
+    <select id="Vorpal_Blade" onchange="update_numbers(this.id)">
+      <option value="0"> +0 </option>
+      <option value="1"> +1 </option>
+      <option value="2"> +2 </option>
+      <option value="3"> +3 </option>
+      <option value="4"> +4 </option>
+      <option value="5"> +5 </option>
+      <option value="6"> +6 </option>
+      <option value="7"> +7 </option>
+    </select>
+  </td>
+  <td> &nbsp; 斩首剑 &nbsp;&nbsp;&nbsp; </td>
+  <td> <input class="r" type="text" readonly id="h_Vorpal_Blade"> &nbsp;&nbsp;&nbsp; </td>
+  <td> <input class="r" type="text" readonly id="s_Vorpal_Blade"> &nbsp; </td>
+  <td> <input class="r" type="text" readonly id="l_Vorpal_Blade"> &nbsp;&nbsp; </td>
+  <td colspan="3"> &nbsp; </td>
+  <!--
+  <td> <input class="l" type="text" readonly id="bt_Vorpal_Blade" value=""> &nbsp;&rarr;&nbsp;&nbsp; </td>
+  <td> <input class="r" type="text" readonly id="bs_Vorpal_Blade"> &nbsp; </td>
+  <td> <input class="r" type="text" readonly id="bl_Vorpal_Blade"> </td>
+  -->
+  <td align="right">
+    <input type="button" id="b_Vorpal_Blade" class="button" value=" 隐藏 " onclick="do_hide(this.id)" title="隐藏此神器">
+  </td>
+</tr>
+<!-- Note: Werebane has two bonus targets and as a result a second (incomplete)
+     data line. The font-sizes "+1" below are a hack to display the alignments
+     more naturally, since the input boxes are larger than the '&nbsp;' padding
+     character. -->
+<tr id="v_Werebane" align="top">
+  <td>
+    <select id="Werebane" onchange="update_numbers(this.id)">
+      <option value="0"> +0 </option>
+      <option value="1"> +1 </option>
+      <option value="2"> +2 </option>
+      <option value="3"> +3 </option>
+      <option value="4"> +4 </option>
+      <option value="5"> +5 </option>
+      <option value="6"> +6 </option>
+      <option value="7"> +7 </option>
+    </select><br>
+    <font size="+1">&nbsp;</font> </td>
+  <td> &nbsp; 兽化人之灾 &nbsp;&nbsp;&nbsp;<br>
+    <font size="+1">&nbsp;</font> </td>
+  <td> <input class="r" type="text" readonly id="h_Werebane"> &nbsp;&nbsp;&nbsp;<br>
+    <font size="+1">&nbsp;</font> </td>
+  <td> <input class="r" type="text" readonly id="s_Werebane"> &nbsp;<br>
+    <font size="+1">&nbsp;</font> </td>
+  <td> <input class="r" type="text" readonly id="l_Werebane"> &nbsp;&nbsp;<br>
+    <font size="+1">&nbsp;</font> </td>
+  <td> <input class="l" type="text" readonly id="bt_Werebane" value="惧银怪物"> &nbsp;&rarr;&nbsp;&nbsp;<br>
+       <input class="l" type="text" readonly id="b2t_Werebane" value="兽化人"> &nbsp;&rarr;&nbsp;&nbsp; </td>
+  <td> <input class="r" type="text" readonly id="bs_Werebane"> &nbsp;<br>
+       <input class="r" type="text" readonly id="b2s_Werebane"> &nbsp; </td>
+  <td> <input class="r" type="text" readonly id="bl_Werebane"><br>
+       <input class="r" type="text" readonly id="b2l_Werebane"> </td>
+  <td align="right">
+    <input type="button" id="b_Werebane" class="button" value=" 隐藏 " onclick="do_hide(this.id)" title="隐藏此神器"><br>
+    <font size="+1">&nbsp;</font> </td>
+</tr>
+</table>
+
+
+</body>
+</html>
+
+<!--
+    vim: ts=4 sw=4 syntax=html expandtab
+-->
