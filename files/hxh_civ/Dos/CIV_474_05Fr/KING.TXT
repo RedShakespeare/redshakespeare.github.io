@@ -1,0 +1,377 @@
+0000ã00000000000000000000D0000ÓwÁ0000(	00000000r00000000
+00000000000000000000h
+000000000000000000000000000000000000
+0000ú
+00000000D00	00000000«Ó00Ö000000000000000000000000N
+ş0000000000Ì0000»0000000000000000700000000g00000000’e00
+0000»0000‹00å00000000)000000S000000‰00000000¾00000000
+ï00000000&
+U’Ú_,ˆ00³™J–	†000000000000000000000000
+000000E00000000000000000000000000000000000000000000Ÿég00
+0000000000000000000000000000—000000î00000000000000000000000000
+
+*NEWSA
+Lions - gladiateurs 7-0 !
+
+*NEWSB
+Le maire violone et sa ville br–le !
+
+*NEWSC
+La terre est ronde, dit Colomb.
+
+*NEWSD
+R‚sultats des derniers J.O. !
+
+*NEWSE
+Attila regrette le malentendu.
+
+*NEWSF
+Secrets de beaut‚ de Cl‚opƒtre ! Section B.
+
+*NEWSG
+L'Iliade, meilleur bestseller, voir LIVRES.
+
+*NEWSH
+Fin Croisade = catastrophe, presse accus‚e
+
+*NEWSI
+Renaissance imminente, disent des savants
+
+*NEWSJ
+Nous aimons le roi ? Dernier sondage.
+
+*NEWSK
+Pr‚visions de Noah : pluie, pluie et pluie.
+
+*NEWSL
+Grande Muraille touch‚e, Vandales soup‡onn‚s.
+
+*NEWSM
+Pr‚visions de Nostradamus : ennuis imminents !
+
+*NEWSN
+Secret du r‚gime de M. -Antoinette : gƒteaux !
+
+*EXCHANGE
+'Nous notons que votre civilisation^
+primitive ne connaŒt mˆme pas^
+$RPLC1. Voulez-vous^
+un ‚change de connaissances ?'^
+_'Nous n'avons pas besoin de $RPLC1.'^
+_'D'accord pour ‚change'
+
+*CANCEL
+Vous fŒtes paix avec nos m‚chants^
+voisins $THEM. Nous^
+$RPLC1 l'annulation imm‚diate du^
+trait‚ !^
+_'Jamais, $THEM = nos amis.'^
+_Annulez trait‚ avec $THEM.
+
+*TRIBUTE
+'Vous ne m‚ritez pas la paix.^
+Mais nous acceptons de ne pas^
+‚craser votre faible civilisation^
+en ‚change de $BUCKS$ en tribut.'^
+_'Vos menaces vaines font rire'^
+_Payez tribut : $BUCKS^
+
+*TAKECIV
+'Votre civilisation fait rire.^
+Ns acceptons de ne pas ‚craser^
+votre civilisation sans valeur en^
+‚change du secret $RPLC1.'^
+_'Ignorons vos menaces vaines'^
+_Dites secret $RPLC1
+
+*PEACE
+'Vous m‚ritez peut-ˆtre la paix.^
+Nous avons pr‚par‚ un trait‚ …^
+signer.'^
+_Non^
+_Oui^
+
+*ATTITUDE
+Malgr‚ votre attitude irres-^
+pectueuse, nous vous ‚pargnerons^
+la furie des arm‚es puissantes.^
+
+*PROVOKE
+'Notre patience est … bout. On^
+ne peut plus tol‚rer vos viles^
+provocations. Pr‚p. guerre !'
+
+*REJECT
+'Vous rejetez offre g‚n‚reuse ?^
+Votre insolence doit ˆtre punie.^
+Pr‚parez-vous … la guerre !'
+
+*RID
+'Nous d‚cidƒmes d‚barrasser monde^
+de votre civilisation minable.^
+Pr‚parez-vous … la guerre !'
+
+*MOBILIZE
+'TrŠs bien, nous mobilisons nos^
+arm‚es pr GUERRE ! Vous paierez^
+votre sale fiert‚ !'
+
+*THREAT
+Vous r‚pondez : 'Nous...^
+_Sommes pr la paix avec $RPLC1.'^
+_Avons une proposition militaire'^
+_Voulons un tribut pour patience.'^
+
+*NOCONTACT
+Aucun contact avec les $RPLC1.^
+
+*ATWAR
+Ns = d‚j… en guerre avec les^
+$RPLC1 minables.^
+
+*MERCENARY
+Ns frappons sans piti‚ m‚chants^
+$RPLC1 en ‚change de^
+$BUCKS pour nos frais.^
+_Pas grave.^
+_Oui, avec plaisir.^
+
+*UNFORTUNATE
+Malheureusement, votre tr‚sor^
+n'est pas assez riche pour^
+vos promesses extravagantes.^
+
+*PALACE
+Le peuple d‚cide spontan‚ment de reconnaŒtre^
+vos nombreuses ann‚es de rŠgne ‚clair‚.^
+Hommes de m‚tier, ma‡ons, ouvriers et artisans^
+font un bel ajout … votre palais.^
+
+*HELPME
+Notre civilisation est menac‚e par^
+m‚chants $THEM. Vous nous aiderez …^
+repousser leur agression gratuite ?^
+Nous vous enverrons $BUCKS$ pour frais.^
+_Non, d‚sol‚, dommage.^
+_OK, annulez trait‚ avec $THEM.
+
+*CRUSADE
+Nous vous invitons … notre croisade^
+pour exterminer m‚chants $THEM.^
+Nous $RPLC1 trait‚ de paix^
+pendant la dur‚e des hostilit‚s.^
+_Non.^
+_Oui, annul. trait‚ avec $THEM.
+
+*GIVECIV
+En ‚change de la paix, on partage^
+le secret de $RPLC1.^
+_Rejet offre^
+_Paix^
+
+*GIVECASH
+Contre la paix, nous proposons^
+un tribut de $BUCKS$ pr votre^
+magnificence patente.^
+_Rejet offre^
+_Paix^
+
+*GIVEMORE
+Nous pr‚sentons un don de $BUCKS$^
+pour votre nature pacifique.^
+
+*GROVEL
+Piti‚ pr notre civilisation humble^
+qui aime la paix. On vous donnera^
+tous nos ($BUCKS$) en or et nos^
+connaiss. si vous.ns laissez en paix.^
+_Rejet offre^
+_Paix^
+
+*TREATY
+Nous confirmons ce trait‚^
+d'amiti‚ et de bienveillance^
+‚ternelles entre les^
+civilisations $RPLC1 et $US.
+
+*GAPE
+Vous ˆtes invit‚ … assister^
+surpris et ‚merveill‚^
+… la d‚mo des merveilles^
+de $RPLC1 par les $US. NOTE :^
+interdit aux scribes.
+
+*LEADER
+Dirigeant barbare pris !^
+Ran‡on pay‚e : 100$.
+
+*ESCHISM
+Empire $US en proie … la^
+guerre civile due … la chute^
+de la capitale ! La poussiŠre^
+s'installe, l'empire s'est divis‚^
+en factions loyales^
+($US) et rebelles ($THEM).
+
+*QUIZ
+Un usurpateur dit que vous n'ˆtes pas^
+roi l‚gitime ! Pr prouver vs = fils de^
+roi, r‚pondez … cette question :^
+
+*QUIZ2
+Les gens rient de votre r‚ponse piŠtre.^
+Vous avez une derniŠre chance pour^
+prouver vs = fils de roi. Lisez manuel.^
+
+*CORRECT
+Bravo, vous avez d‚montr‚ votre^
+m‚rite. Nous vous souhaitons un^
+rŠgne glorieux de souverain.^
+
+*INCORRECT
+Votre manque de connaissances va^
+de ville en ville. Dans tout le^
+royaume, les soldats vont chez eux.^
+
+*INIT
+$RPLC1, vous ˆtes^
+devenu dirigeant des^
+$US. Votre rŠgne^
+soit long et prospŠre.^
+Les $US connaissent^
+l'irrig., le minage,^
+
+*TAXES
+Note : les fonds diminuent. Il^
+faut peut-ˆtre augmenter taux^
+d'impos. ou prendre percepteurs.^
+
+*SPACE
+^
+En l'an $RPLC1^
+des voyageurs de la Terre^
+partent pour^
+explorer le cosmos.^
+Un vaisseau habit‚ par^
+$BUCKS0,000 $THEM colons^
+r‚ussit … franchir les^
+vastes distances interstellaires.^
+Arrivant en $RPLC2^
+au syst. stellaire^
+Alpha Centauri,^
+ces pionniers intr‚pides^
+commencent … coloniser^
+un nouveau mde.^
+$US, vous avez^
+r‚alis‚ le rˆve d'innom-^
+brables g‚n‚rations.^
+Votre nom restera … jamais^
+ds les annales CIVILIZATION !^
+
+*SPACE2
+^
+En l'an $RPLC1^
+des voyageurs de la Terre^
+partent pour^
+explorer le cosmos.^
+Un vaisseau habit‚ par^
+$BUCKS0,000 $THEM colons^
+r‚ussit … franchir les^
+vastes distances interstellaires.^^
+Arrivant en $RPLC2^
+au syst. stellaire^
+Alpha Centauri,^
+ces pionniers intr‚pides^
+commencent … coloniser^
+un nouveau mde.^
+$US, votre^
+histoire est longue et glorieuse.^
+Votre nom sera peut-ˆtre^
+un jour, lui aussi,^
+ds les annales CIVILIZATION.^
+
+*ARCH
+Des siŠcles aprŠs,^
+arch‚ologues voient restes^
+de votre civilis. antique.^
+Des preuves de villes prospŠres,^
+$RPLC1,^
+routes et gvt centralis‚^
+surprennent savants ‚bahis.^
+Enfin, ils d‚couvrent une^
+tablette en pierre qui contient^
+seult 1 express. myst‚r. :^
+$US REVIENDRONT.^
+
+*FAME
+Votre score final est^
+dans le hall de la gloire.^
+Voulez-vous continuer ?^
+(Sans score)^
+_Non, crev‚.^
+_Oui, je veux.^
+
+*LOMEM
+Apparemment, il n'y a pas assez^
+de m‚moire dans cet ordinateur^
+pour les options choisies.^
+Vous risquez donc d'avoir du mal^
+… afficher anim. et … sauveg.^
+jeux. Pr r‚d. m‚m. n‚cess. :^
+1) Enlevez les TSR et les autres^
+programmes r‚sidants de la machine.^
+2) S‚lect. pilotes IBM ou No^
+Sound au lieu de Roland ou AdLib.^
+3) S‚lect. EGA, pas VGA/MCGA.^
+.^
+MEM. DISP. = $RPLC1, MEM. NECESSAIRE = 8000^
+Continuez … vos risques !^
+
+*D1
+Peste … $RPLC1 !^
+Nbreux morts !^
+Habitants veulent AQUEDUC.^
+
+*D2
+Inondations … $RPLC1.^
+Maisons emport‚es.^
+Habitants veulent REMPARTS.^
+
+*D3
+Erupt. volcan. prŠs $RPLC1.^
+Fuite habitants apeur‚s.^
+Habitants veulent TEMPLE.^
+
+*D4
+Famine … $RPLC1 !^
+Nbreux morts.^
+
+*D5
+$RPLC1 ravag‚ par le feu !^
+$US d‚truits.^
+Habitants veulent AQUEDUC.^
+
+*D6
+Pirates pillent $RPLC1 !^
+Arrˆt product., vol nourriture.^
+Habitants veulent CASERNES.^
+
+*REV
+Voulez-vous vraiment REVOLUTION ?^
+_Non merci.^
+_Oui, il ns faut nouveau gvt.^
+
+*UMAX
+Sire, la population ne peut^
+soutenir autant d'unit. mil.^
+Il faut ‚lim. ctnes unit. anc.^
+avant d'en faire d'autres.
+
+*PMAX
+Sire, bureaucrates ne peuvent^
+g‚rer autant de villes. Il^
+faut ‚lim. ctaines villes^
+anc. avant d'en faire d'autres.
+
+*END
+

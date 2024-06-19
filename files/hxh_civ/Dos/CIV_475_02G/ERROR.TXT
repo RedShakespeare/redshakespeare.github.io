@@ -1,0 +1,65 @@
+00000000000000000000000000000000000000000000000000d00Q00000000
+00000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000„000000000000000000000000000000000000
+000000000000000000000000000000000000000000³±000000000000000000
+000000000000000000000000000000000000000000000000¹00000000000000
+000000000000000000ƒ00000000000000000000000000000000000000000000
+00000000000000ï0000000000000000000000000000000000000000000000
+00000000600000000000000000000„00000000000000000000000000000000
+
+*ZOC
+Einheiten neben feindl. Einheiten drfen^
+nicht auf Felder bewegt werden, die auch^
+neben feindl. Einheiten liegen.^
+Ausnahme: Diplomat, Karawane, Marine-^
+oder Lufteinheit; Betreten und Verlassen ^
+von St„dten. Details, s. Handbuch S. 45.^
+
+*TRIREME
+Dreiruderer auf See verschollen.^
+Dreiruderer verschwinden,wenn bei^
+Rundenende nicht in Landn„he.^
+
+*FUEL
+Ihre Lufteinheit ist ohne Kraftstoff.^
+Jagd-/Kerneinheiten mssen bei^
+Rundenende zu Stadt/Tr„ger zurck.^
+Bombereinheiten mssen nach^
+jeweils zwei Runden zurck.
+
+*AMPHIB
+Bodeneinheiten an Kste absetzen.^
+Ziel: Aufnahme des Gefechts.^
+
+*FIGHTER
+Angriff auf LUFT-Einh. nur mit JGERN.^
+
+*OCCUPY
+Einnahme Feindst„dte nur mit BODEN-Einh.^
+
+*PILLAGE
+Keine Brandschatz. von Stadtquadr.^
+Diplomat, Karawane, J„ger, und^
+Marine k”n. nicht brandschatzen.^
+
+*SETTLERS
+Diese Funktion kann nur von ^
+Siedlereinheiten erfllt werden.^
+
+*NOWATER
+Kein Wasser neben diesem Quadrat.^
+Bew„sserte Quadrate mssen neben^
+FLUSS-/SEE-Quadr. liegen od. neben^
+frher bew„ss. Nicht-Stadt-Quadrat.^
+
+*NOMINE
+Keine Bergwerke in dies. Landschaft.^
+
+*NOIRR
+Keine Bew„ss. in dies.Landschaft.^
+
+*ADDCITY
+Keine Neueinsiedler bei^
+Stadtgr”áe ab 10 m”glich.^
+
+*END

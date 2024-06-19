@@ -1,0 +1,165 @@
+00000000ê00000000b
+000000Þ0ü0000000000000000000000000Õ0ê0
+0000000000000000000000000000000000000000000000000000000000000000
+0000©0™0000000000000000000000000000000000000000000000000000000
+00000000S0j000000000000000000000000000000000000000000000000000
+0000000000000000000000000000000000000000000000000000000000Ó_00
+0ð00000000000000000000000000000ï0ò000000000000000000000000000
+000000Ù00r	0ã0’
+i	00000000000000000000000000“l00000000
+00000000000000000000+û000000tQ00000000000000000000000000à
+
+*FIRSTMOVE
+Dfitq gthdjq pflfxtq zdkztncz yfqnb^
+gjl[jlzott vtcnj lkz cnhjbntkmcndf^
+Dfitq cnjkbws. Kexibt vtcnf lkz^
+ujhjljd hfcgjkfuf@ncz d`kbpb htr,^
+keujd, d ghb`ht&yjq pjyt bkb d`kbpb^
+gjktpys[ bcrjgftvs[.^
+
+*BUILDCITY
+"nj vtcnj dgjkyt gjl[jlbn, xnj`s cltcm^
+jcyjdfnm ujhjl. Lkz 'njuj ye&yj ds`hfnm^
+rjvfyle GJCNHJBNM YJDSQ UJHJL bp vty@^
+bkb yf&fnm rkfdbie (b).^
+
+*FIRSTPRODUCT
+D k@`jv bp Dfib[ ujhjljd Ds vj&tnt cnhjbnm^
+yjdst Ctnnkths, djtyyst tlbybws bkb `kfuj-^
+ecnhfbdfnm ujhjl lkz lfkmytqituj hjcnf dfitq^
+wbdbkbpfwbb. D rf&lsq vjvtyn dhtvtyb d ujhjlt^
+ltkftncz xnj-nj jlyj, yj Ds vj&tnt bpvtybnm^
+pflfybt ujhjle d k@`jq vjvtyn. Lkz 'njuj^
+ds`bhfqnt geyrn (CNHJQ) d byajhvfwbjyyjv^
+'rhfyt ujhjlf, rjnjhsq ctqxfc gjzdbncz.^
+
+*FIRSTCIV
+Ujhjlf nfr&t cke&fn wtynhfvb njhujdkb b
+yferb, ult Dfib velhtws b extyst vjuen
+yfrfgkbdfnm byajhvfwb@, xnj`s jnrhsdfnm
+yjdst df&yst nt[yjkjubb b bcreccndf lkz
+hfpdbnbz Dfitq wbdbkbpfwbb. Bcgjkmpweqnt
+cktle@ott vty@ lkz herjdjlcndf b[ hf`jnjq:^
+
+*FIRSTUNIT1
+Ds njkmrj-xnj gjcnhjbkb cdj@ gthde@^
+djbycre@ tlbybwe. Bcgjkmpeqnt cnhtkrb^
+rkfdbfnehs lkz ldb&tybz b vty@ GHBRFP^
+lkz eghfdktybz. Djtyyst gjpdjkz@n^
+bccktljdfnm, hfcibhznm, yfgflfnm b^
+pfobofnm Dfie wbdbkbpfwb@.
+
+*FIRSTUNIT2
+Cnfdmnt djtyys[ d j`jhjye lkz pfobns^
+cdjb[ ujhjljd jn dfhdfhjd b dhfujd.^
+C'nnkths vjuen jcyjdsdfnm yjdst ujhjlf,^
+f nfr&t cnhjbnm ljhjub, bhhbufwb@, if[ns.^
+Fnfreqnt dhfujd Ktubjythfvb, Rjktcybwfvb^
+b Rfnfgekmnfvb.
+
+*MINING
+"njn rdflhfn vj&tn ghjbpdjlbnm `jkmit.^
+Gjvnhjqnt pltcm if[ne  (m)  b ghjbpdjlb-^
+ntkmyjcnm ujhjlf $US djphfcntn^
+
+*IRRIGATE
+"nj gjl[jlzobq hfqjy lkz bhhbufwbb  (i) .^
+<jkmitt ghjbpdjlcndj gbob gjvj&tn ujhjle^
+$US hfcnb `scnhtt.^
+
+*ROAD
+"nj [jhjitt vtcnj lkz cnhjbntkmcndf^
+ljhjub. Dfib djqcrf cvjuen ldbufnmcz^
+`scnhtt, f d ujhjlt $US hfcwdtntn^
+njhujdkz.^
+
+*MONARCHY
+Ds njkmrj-xnj jnrhskb VJYFH{B>. Ghb^
+VJYFH{BB ghjbpdjlbntkmyjcnm &bntktq dsit,^
+yj yf cjlth&fybt djqcr ye&yj `jkmit^
+chtlcnd. Lkz gtht[jlf r vjyfh[bxtcrjve^
+ghfdktyb@ ye&yj cjdthibnm Htdjk@wb@!^
+(Htdjk@wbz: cv. vty@ BUHF).^
+
+*LAND
+LAND MASS:^
+^
+- Gkfytnf c yjhvfkmyjq ljktq ceib bvttn rfr jcnhjdf, nfr b rjynbytyns.^
+- Ghb vfkjq ljkt ceib yf gkfytnt `elen d jcyjdyjv jcnhjdf, xnj ghtlgjkfuftn
+bpjkbhjdfyyst wbdbkbpfwbb, hfpdbdf@obtcz fdnjyjvyj.^
+- Yf gkfytnt c dscjrjq ljktq ceib `elen `jkmibt rjynbytyns, cgjcj`cnde@obt
+hfpdbnb@ njhujdkb b djqyfv vt&le wbdbkbpfwbzvb.^
+
+*TEMPERATURE
+TEMPERATURE:^
+^
+- Gkfytnf EVTHTYYS{ ntvgthfneh bvttn dct nbgs kfyifdnjd.^
+- Yf {JKJLYJQ gkfytnt `eltn `jkmit Fhrnbxtcrb[ b Neylhjds[ pjy ghb
+ytljcnfnrt Gecnsym.^
+- Yf gkfytnt c ]FHRBV rkbvfnjv ythtlrb gecnsyb b vfkj Neylhjds[ b
+Fhrnbxtcrb[ pjy.^
+
+*CLIMATE
+CLIMATE:^
+^
+- Gkfytnf c YJHVFKMYSV rkbvfnjv bvttn bltfkmyjt cjxtnfybt kfyifdnjd.^
+- Yf gkfytnt c CE{BV rkbvfnjv `eltn `jkmit Gecnsym b Cntgtq.^
+- Yf gkfytnt c DKF]YSV rkbvnjv `jkmit L&eyuktq, <jkjn b Htr.^
+
+*AGE
+AGE:
+^
+- Yf vjkjls[ gkfytnf[ `jkmit ujh, nktcjd b n.g.^
+- Xtv cnfhit gkfytnf, ntv vtymit yf ytq ythjdyjuj htkmtaf.^
+
+*HELP1
+JCYJDYST GHBYWBGS: (1)^
+^
+Pfobofqnt Dfib ujhjlf gj vtymitq vtht^
+jlybv (kexit ldevz) djbyfvb j`jhjys^
+^
+Cj`k@lfqnt `fkfyc vt&le `kfujecnhjqcndjv^
+ceotcnde@ob[ b cnhjbntkmcndjv yjds[^
+ujhjljd.^
+^
+Yt cjplfdfqnt ujhjljd `jkmit, xtv Ds^
+cgjcj`ys pfobofnm; dfhdfhs b dhf&tcrbt^
+fhvbb vjuen gjzdkznmcz dytpfgyj.^
+
+*HELP2
+JCYJDYST GHBYWBGS: (2)^
+^
+]bdbnt d vbht c cbkmysvb cjctlzvb.^
+Jrhe&fqnt b dj@qnt cj ckf`svb.^
+^
+Gjpf`jnmntcm j gtht[jlt r Vjyfh[bb,^
+rjulf dfib ujhjlf ljcnbuyen dtkbxbys^
+d itcnm bkb ctvm.^
+^
+Gj vtht hjcnf wbdbkbpfwbb yt pf`sdfqnt^
+bcgjkmpjdfnm Lbgkjvfnjd lkz bpextybz^
+hfpdbnbz ghjnbdybrjd. Bcgjkmpeqnt^
+Rfhfdfys lkz njhujdkb, erhtgkz@otq^
+Dfie 'rjyjvbre.^
+
+*DISORDER
+Ujhjl dgflftn d `tcgjhzlrb, rjulf^
+xbckj ytcxfcnys[ &bntktq ghtdsiftn^
+rjkbxtcndj cxfcnkbds[. Hjcn b ghjbp-^
+djlcndj d ujhjlt ghb `tcgjhzlrf[^
+ghtrhfof@ncz. Chtlcndf jn `tcgjhzlrjd^
+nfrjds: ghtdhfotybt &bntktq d `tpltkm-^
+ybrjd, ddjl djqcr d ujhjl, cnhjbntkmcndj^
+{hfvf, Cj`jhf, Rjkbptz, f nfr&t edtkb-^
+xtybt jnxbcktybq yf hjcrjim jn njhujdkb.^
+<jktt gjlhj`yj 'nj jgbcfyj yf cnh. 66^
+herjdjlcndf.^
+
+*SCHISM
+$THEM `jkmifz b cbkmyfz lth&fdf, yj^
+jgjpbwbjyyst gfhnbb ujnjds yfxfnm^
+uhf&lfycre@ djqye. Tckb Dfib fhvbb^
+cvjuen pf[dfnbnm b[ cnjkbwe, gjnhzctybt^
+vj&tn hfpltkbnm cnhfye yf ldf ahjynf.^
+
+*END

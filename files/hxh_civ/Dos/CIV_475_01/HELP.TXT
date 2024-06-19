@@ -1,0 +1,165 @@
+00000000ê0000000000b000000Þ0000000000000000000000000000Õ0000
+0000000000000000000000000000000000000000000000000000000000000000
+0000©0000000000000000000000000000000000000000000000000000000000
+00000000S000000000000000000000000000000000000000000000000000000
+0000000000000000000000000000000000000000000000000000000000Ó_00
+00000000000000000000000000000000ï000000000000000000000000000000
+000000Ù00r	0000’
+00000000000000000000000000000000l00000000
+0000000000000000000000û00000000Q0000000000000000000000000000à
+
+*FIRSTMOVE
+Your first task is to find a suitable^
+site and found your capital city.^
+The best city sites are near rivers,^
+grasslands, coastal areas, or areas^
+near special resources.^
+
+*BUILDCITY
+This spot looks like a good site for a^
+city. Select 'Found New City' from the^
+ORDERS menu or use the 'b' key to found^
+a city here.^
+
+*FIRSTPRODUCT
+Each of your cities can build additional^
+Settlers, military units, or city improve-^
+ments to further the growth of your civil-^
+ization. Only one item can be in production^
+per city. Production orders can be changed^
+at any time. Select the item you wish to^
+build by clicking the 'CHANGE' button in^
+the city information screen which follows.^
+
+*FIRSTCIV
+Cities also act as centers for trade and^
+the flow of information. Your wise men^
+and scientists can collect this information^
+to acquire important new abilities and^
+skills for your civilization. Use the^
+following menu to direct their studies:^
+
+*FIRSTUNIT1
+You have just built your first military^
+unit. Use the keyboard arrows to move^
+this unit and the Orders menu to give^
+special commands. Military units allow^
+you to explore, expand, attack, and^
+defend your civilization. 
+
+*FIRSTUNIT2
+Fortify units in your cities to defend^
+them against barbarians or enemy armies.^
+Settler units can found new cities as well^
+as build roads, irrigation, and mines.^
+Attack your enemies with Legions, Chariots,^
+and Catapults.
+
+*MINING
+This area could produce more resources.^
+Mining ('m') these hills will add to the^
+production capacity of $US.^
+
+*IRRIGATE
+This would be a suitable area to build^
+irrigation ('i'). More food will help the^
+city of $US to grow more rapidly.^
+
+*ROAD
+This would be a good place to build a^
+road. Your units will be able to move^
+faster and more trade will be generated^
+in the city of $US.^
+
+*MONARCHY
+You have just acquired knowledge of^
+MONARCHY. Under a MONARCHY your citizens^
+are more productive but the maintenance^
+costs of military units are higher. To^
+change your government to a MONARCHY,^
+you must first have a Revolution!^
+(Revolution: see the GAME Menu).^
+
+*LAND
+LAND MASS:^
+^
+- A planet with a normal land mass will favor a mixture of islands and continents.^
+- A planet with a small land mass will tend to have more islands, encouraging
+isolated and undisturbed civilization development.^
+- A planet with a large land mass will tend to have more continents, encouraging
+more trade and war between civilizations.^
+
+*TEMPERATURE
+TEMPERATURE:^
+^
+- A planet with TEMPERATE temperatures will favor a mixture of all terrain types.^
+- A planet with COOL temperatures will favor the formation of Arctic and
+Tundra terrain at the expense of Desert.^
+- A planet with WARM temperatures will favor the formation of Desert
+terrain at the expense of Tundra and Arctic.^
+
+*CLIMATE
+CLIMATE:^
+^
+- A planet with a NORMAL climate will favor a mixture of all terrain types.^
+- A planet with an ARID climate will have more Desert and Plains.^
+- A planet with with a WET climate will have more Jungles, Swamps, and Rivers.^
+
+*AGE
+AGE:
+^
+- A younger planet has large areas of similar terrain (forests, mountains, etc.)
+- An older planet has smaller, more broken up features.
+
+*HELP1
+GENERAL PRINCIPLES: (1)^
+^
+Defend your cities with at least one^
+(preferably two) good defensive units.^
+^
+Strike a balance between improving your^
+existing cities and striking out to found^
+new cities.^
+^
+Don't expand beyond your ability to defend^
+yourself; barbarians and hostile armies^
+may appear without warning.^
+
+*HELP2
+GENERAL PRINCIPLES: (2)^
+^
+Make peace with your stronger neighbors.^
+Isolate and conquer your weaker neighbors.^
+^
+Think about changing your government to^
+Monarchy once your cities reach sizes of^
+six or seven.^
+^
+As your civilization grows don't forget to^
+use your Diplomats to learn what your^
+opponents are up to. Use Caravans to^
+establish trade routes and strengthen^
+your economy.^
+
+*DISORDER
+A city falls into Civil Disorder when^
+the number of unhappy citizens exceeds^
+the number of happy citizens. Growth^
+and production cease while a city is^
+in disorder. Remedies for disorder^
+include: turning citizens into enter-^
+tainers, moving military units into^
+the city, building a Temple, Cathedral,^
+or Colosseum, increasing the amount of^
+trade used for Luxuries. See pp. 66 in^
+the manual for more details.^
+
+*SCHISM
+The $THEM are a large and powerful^
+civilization. However, rebel factions^ 
+threaten to start a civil war. If your^
+armies can capture their capital city,^
+the shock could split the country in two!^
+
+*END
+

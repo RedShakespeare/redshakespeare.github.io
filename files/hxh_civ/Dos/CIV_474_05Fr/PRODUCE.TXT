@@ -1,0 +1,122 @@
+0000w00$Š0000000000000000000000000000000000(000000^00ë00
+0000000000008‚0000%000000•0000¢000000000000000000000000
+0000000000000000s0000000000000000000000é0000k00000000Ä0000
+0000000000ò0000000000000000000000000000000000®k0000Ô000000
+0000000000Ë000000000000000000000000000000000000000000«_00
+00000000000000ı0000V000000000000000000000000ê0000000000¬
+00000000000000000000000000000000˜0000000000Å0000000000ê0000
+0000000000000000b00000000000000ÜN0000„0000f00®00003¹00
+
+*Temple
+*Cath‚drale
+*Colis‚e
+Gens malheureux.^
+Il faut faire $RPLC1.
+
+*Casernes
+Il faut faire $RPLC1^
+pr faire unit‚s v‚t‚rans.
+
+*Grenier
+Il faut faire $RPLC1^
+pr encour. croiss. ville.^
+
+*MarketPlace
+*Banque
+Il faut faire $RPLC1^
+pour am‚liorer l'‚co.^
+
+*BibliothŠque
+*Universit‚
+Il faut fairee $RPLC1^
+pr augmenter connaiss.^
+
+*Cour
+Il faut faire $RPLC1^
+pr r‚duire la corruption.
+
+*Remparts
+Il faut faire $RPLC1^
+pour prot‚ger la ville.
+
+*Aqueduct
+Il faut faire $RPLC1^
+pr croissance ville.
+
+*Transit de masse
+*Centre de recyclage.
+Il faut faire $RPLC1^
+pr aider dim. pollution.
+
+*Usine
+*Fabrique
+*Centrale ‚lectrique
+*Usine hydro-‚lectrique
+*Centrale nucl‚aire
+Il faut faire $RPLC1^
+pour accr. productivit‚.
+
+*D‚fense IDS
+Il faut faire $RPLC1.
+
+*Struct. vaisseau spatial
+*Composant du vaisseau
+*Module du vaisseau
+Il faut faire $RPLC1^
+pr colon. autres mondes.
+
+*Colons
+il faut faire $RPLC1^
+pr colon. ce continent.
+
+*Milice
+*Phalange
+*Mousquetaires
+*Fusiliers
+*Infanterie m‚canis‚e
+Il faut faire $RPLC1^
+pr d‚fendre nos villes.
+
+*L‚gion
+*Cavalerie
+*Chavaliers
+*Catapulte
+*Canon
+*Chariot
+*Blind‚s
+*Artillerie
+*Avion de chasse
+*Bombardier
+Il faut faire $RPLC1^
+pr attaquer nos ennemis.
+
+*TrirŠme
+*Voilier
+Il faut faire des $RPLC1s^
+pour explorer le monde.
+
+*Fr‚gate
+*Cuirass‚
+*Croiseur
+*Cuirass‚
+*Sous-marin
+Il faut faire des $RPLC1s^
+pr r‚gner sur les mers.
+
+*Porte-avions
+*Navire de transport
+*Nucl‚aire
+Il faut faire $RPLC1.^
+
+*Diplomate
+Il faut faire $RPLC1^
+pr contact avec autres^
+civilisations.
+
+*Caravane
+Il faut faire $RPLC1^
+pr ‚tabl. itin. comm.^
+avec autres civilisations.
+
+*END
+

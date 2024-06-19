@@ -1,0 +1,122 @@
+˛00f00000000000000000000000000000000000000›0000000000000000
+W000000F0000¶0000000000000000k000000000000000000000000000000
+00M00000000000000000000000000Œ00'0000000000À0000†0000
+008Ωò000000zÚ0000000000µ00B000000L3000000Ø000000000000
+00000000dÙ00000000000000!000000000000∂00000000000000000000
+\©00000000000000\ç00üŸ]¨00000000¸0000000000000000000000
+0000000000Ö00000000000000000000é000000000000000000000000j00
+000000p00M≠00∞000000<000000000000000000000000˛0000000000
+
+*Temple
+*Cathedral
+*Colosseum
+The people are unhappy.^
+We should build a $RPLC1.
+
+*Barracks
+We should build a $RPLC1^
+to produce veteran units.
+
+*Granary
+We should build a $RPLC1^
+to encourage city growth.^
+
+*MarketPlace
+*Bank
+We should build a $RPLC1^
+to improve the economy.^
+
+*Library
+*University
+We should build a $RPLC1^
+to increase our knowledge.^
+
+*Courthouse
+We should build a $RPLC1^
+to reduce corruption.
+
+*City Walls
+We should build a $RPLC1^
+to protect our city.
+
+*Aqueduct
+We should build a $RPLC1^
+to let our city grow.
+
+*Mass Transit
+*Recycling Cntr.
+We should build a $RPLC1^
+to help reduce pollution.
+
+*Factory
+*Mfg. Plant
+*Power Plant
+*Hydro Plant
+*Nuclear Plant
+We should build a $RPLC1^
+to increase productivity.
+
+*SDI Defense
+We should build a $RPLC1.
+
+*SS Structural
+*SS Component
+*SS Module
+We should build a $RPLC1^
+to colonize other worlds.
+
+*Settlers
+We should build $RPLC1^
+to colonize this continent.
+
+*Militia
+*Phalanx
+*Musketeers
+*Riflemen
+*Mech. Inf.
+We should build $RPLC1^
+to defend our cities.
+
+*Legion
+*Cavalry
+*Knights
+*Catapult
+*Cannon
+*Chariot
+*Armor
+*Artillery
+*Fighter
+*Bomber
+We should build a $RPLC1^
+to attack our enemies.
+
+*Trireme
+*Sail
+We should build $RPLC1s^
+to explore the world.
+
+*Frigate
+*Ironclad
+*Cruiser
+*Battleship
+*Submarine
+We should build $RPLC1s^
+to rule the seas.
+
+*Carrier
+*Transport
+*Nuclear
+We should build a $RPLC1.^
+
+*Diplomat
+We should build a $RPLC1^
+to make contact with other^
+civilizations.
+
+*Caravan
+We should build a $RPLC1^
+to establish trade routes^
+with other civilizations.
+
+*END
+

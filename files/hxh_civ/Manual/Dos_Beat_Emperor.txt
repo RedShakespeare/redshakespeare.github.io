@@ -1,0 +1,248 @@
+CIVILIZATION 1
+BEATING IT AT EMPEROR DIFFICULTY
+BY: EDMAN
+VERSION 1.1
+29th of December, 2002
+
+===================================================================
+COPYRIGHT
+===================================================================
+This guide is copyright (c) Edman (a.k.a. Edmunds Steins) 
+ - edman@hackermail.com. This guide or any part of it may
+not be reproduced without the permission of the author.
+If you wish to use this guide on your web site, feel free
+to do so, but email me (edman@hackermail.com) first.
+===================================================================
+
+Basically, there are some people who have spent quite a lot
+of time playing Civilization and still can't beat it at the
+highest level of difficulty - the Emperor.
+
+This guide will offer you with some very simple strategies
+which allow you to beat the game with ease even at this
+level of difficulty.
+
+===================================================================
+CONTENTS:
+===================================================================
+ 1. Exactly how difficult is it?
+ 2. The easiest way of doing it
+ 3. FAQ
+ 4. Credits & Version History
+
+===================================================================
+ 1. EXACTLY HOW DIFFICULT IS IT?
+===================================================================
+
+Don't get me wrong - even with this guide, Emperor is really
+difficult. The following factors make it extremely difficult:
+
+ --> The Computer cheats with no end. For example, the AI
+     can get Wonders at their convenience.
+
+ --> The AI researches techs at an impossible speed. They
+     can get into the Future Techs (if left alone) by
+     1300 AD.
+
+ --> The AI has an advantage at city happyness. Their
+     unhappyness is like your Prince difficulty.
+
+ --> They build imporvements/units at around double speed.
+
+Now that you know what you are up against, let's tackle the
+problem!
+
+===================================================================
+ 2. THE EASIEST WAY OF DOING IT
+===================================================================
+
+The way to beat the game the easiest way (I have once done
+this in 17 minutes, and no, I'm not joking!) is to simply
+"overmass" them. If you can't beat them technologically,
+then just do it by beating them at everything else! And that
+includes 
+
+ --> Building as many cities as possible
+
+ --> Building as many units as possible.
+
+Basically, the number of cities you have has got to explode
+at the beginning of the game. Once you have a large number
+of cities (20 will usually do), you can start building units
+in large numbers.
+
+So this is a walkthrough of doing it:
+
+ 1. Start a new game. Pick Earth if you want things to be a
+    little bit easier. Pick 3 Civs. Makes it easier to hunt
+    them down. If you want things to be even easier, pick
+    Russians. There are two reasons for doing this:
+        --> The Russians have a small chance of starting with
+            2 settlers. This can be very useful in your tries
+            to build 20 cities as quickly as possible.
+        --> The Russians start in a region full of forests.
+            This is bad if you want to get your cities at high
+            population, but good if you want production. As
+            you want to mass-produce units, you want this type
+            of landscape.
+
+ 2. Build Your city at 4000 BC. Immediately switch to building
+    a Militia. Set your taxes to 0% and science to 100%. For
+    research, pick them in this order:
+        --> Bronze Working
+        --> The Wheel
+        --> Alphabet
+        --> Map Making
+    Once you have finished researching these techs, stop all
+    research (switch taxes to 100%).
+
+ 3. Once you have build your Militia, build another one. Have
+    that one walk around and explore the map. If you chose the
+    Russians on earth, walk west to find either the Germans or
+    the French. Walk south to find either the Zulus (bad, these
+    guys are dangerous) or the Babylonians (very good, these
+    guys are worthless).
+
+ 4. Once your second militia is produced, start making settlers.
+    And then just continue to make settlers, and don't really
+    try to stop. When you finish Bronze Working, stop building
+    a settler and build an extra phalanx for protection from 
+    barbarians.
+
+ 5. Don't bother building new cities far away from your capital.
+    One square between cities is all that is needed. Don't 
+    bother building roads, as that takes up too much time. 
+    Just keep on building cities right next to each other. As
+    the level of unhappyness in emperor is very high (cities
+    get unhappy with size 3), keep 2 phalanxes in each of your
+    cities and don't let them grow over size 4 - adjust the
+    food squares so that you can have the maximum production 
+    and the minimum food. Once you have everything in place,
+    build some barracks.
+
+ 6. Once you have enough cities (don't think that anything
+    below 20 will be enough!), you can start producing
+    chariots (that is, you should have wheel by now). 
+
+ 7. If you have Zulus on your map, I suggest targeting them
+    first. They will usually have no more than 5 cities. If
+    you have built enough chariots (around 20, and no, it 
+    doesn't take that long), you should be able to take out
+    a couple of their cities. That's all you need - to weaken
+    them. Once that has happened, attack the second civ on 
+    your map. Weaken them down to a couple of cities. Once
+    you have done that, return back to the first civ (zulus
+    in my example), and destroy their capital, leaving them
+    with only 1 city with no palace. Do the same for the
+    second civ.
+
+ 8. You should have gotten map making by now. Using Tiremes,
+    you can go anywhere on the world map if you are playing
+    on the earth. Simply load your chariots and unload them
+    in all parts of the world. Make sure you have the whole
+    world map covered.
+
+ 9. Destroy the two opponents.
+
+ 10. Two more AI civs will be made. Of course, as you have
+    your units everywhere, you will see them immediately 
+    (you will see their first settlers). Leave them alone 
+    (let them go out of your sight). They will create their
+    first city. It will be undefended, so just take it over.
+    The reason you can't kill the settlers themselves is 
+    because there is a bug in civilization: if you kill a 
+    civ before it has created the first settler, you will
+    never win the game.
+
+ 11. Go and brag that you beat Civ 1 at emperor difficulty!
+
+This strategy works all the time. Build as many cities as
+you can, then build as many units and then just 
+assassinate everyone. Good Luck!
+
+===================================================================
+3. FREQUENTLY ASKED QUESTIONS
+===================================================================
+
+Q: Is It REALLY possible to beat the game at Emperor level??
+A: YES!! I didn't write this guide as a joke, OK?
+
+Q: What is the highest score you have ever gotten in a Civ
+   game?
+A: I really can't remember, but I think it was 183%.
+
+Q: What year did you finish your fastest Emperor level game?
+A: It was at year 2420 BC.
+
+Q: Apart from this beat-them-up-as-fast-as-you-can method,
+   is there another way of beating Emperor.
+A: Yes there is, but you should remember that you should only
+   attempt to do this another way if you want to have fun,
+   because you will simply make the game much more difficult 
+   for no apparent reason. The way to do this is to simply do
+   a conquest (like I described) to take over a continent, then
+   switch all income to research and simply develop your
+   cities like you normally would. For this to work, you 
+   should be isolated, otherwise the AI will most likely 
+   declare a war on you. Simply develop until you get Nuclear
+   Weapons and then just nuke your opponents. Most likely
+   they will nuke you back, but it will be fun.
+
+Q: Why is it that I can't beat the game? I have taken every
+   enemy city!
+A: You must have destroyed an enemy civ before it had built
+   it's first city. The only way to counter this is to
+   restart the game.
+
+Q: I can't build nearly enough chariots/cities! What did I
+   do wrong???
+A: Basically, to win this challenge, you have to concentrate
+   on producing cities one after another. Never stop, and
+   never do anything else, like research another technology
+   when that money could have gone to something useful, like
+   another chariot!
+
+Q: I've been trying to do this, but my cities keep on getting
+   into civil disorder! HELP!!
+A: Every city should have a size 4. If it has a larger size,
+   then starve it. That's right, kill off the people you don't
+   want. After all, this is despotism! Each city should have 
+   two phalanxes in it. That should keep the population happy!
+
+Q: Is there anything more difficult than Emperor?
+A: In theory, yes. Practically, no. Within the game itself,
+   there is nothing worse than Emperor. However, you can hack
+   the Civ save and edit the level of difficult one higher than
+   Emperor (as far as I can remember, emperor was 4, so change
+   it to 5). Get a save state hacking program if you don't know
+   how to do this.
+
+===================================================================
+4. CREDITS & VERSION HISTORY
+===================================================================
+I would like to thank:
+
+ --> Cid Meier for making this game
+ --> People at the current GameFAQs board, you inspired me to do
+     this (I know that there aren't many/any...).
+ --> InfoGrames for keeping up Civ series with Civ 3
+ --> Me, for typing this guide and playing this game for 5 years
+     straight!
+ --> My sister, she showed me Civ 1!
+
+Version History:
+Version 1.0: Well, this is it! The first version! Includes all the
+             basic strategies for beating emperor.
+
+Version 1.1: Fixed some spelling mistakes.
+
+Planning:
+Version 2.0: This will include the High tech way and the usual way
+             of beating Civ 1. Date for release not known (I will
+             do it if I ever get the inspiration!)
+
+===================================================================
+                  !! THANK YOU FOR READING !!
+===================================================================
+
+Guide Copyright (c) Edman (edman@hackermail.com)
