@@ -1,0 +1,586 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>How It Works &#8212; &lt;img&gt; The Angband Manual</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/better.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_/static/css/badge_only.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
+    <script async="async" src="../../../_/static/javascript/readthedocs-doc-embed.js"></script>
+    <link rel="canonical" href="how-it-works.html" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Documentation on documentation" href="metadoc.html" />
+    <link rel="prev" title="Debug Command Descriptions" href="debug.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+      <link rel="stylesheet" href="../_static/style.css" type="text/css" />
+  
+<!-- RTD Extra Head -->
+
+<link rel="stylesheet" href="../../../_/static/css/readthedocs-doc-embed.css" type="text/css" />
+
+<script type="application/json" id="READTHEDOCS_DATA">{"ad_free": false, "api_host": "https://readthedocs.org", "build_date": "2023-04-21T00:08:54Z", "builder": "sphinx", "canonical_url": null, "commit": "14f92695", "docroot": "/docs/", "features": {"docsearch_disabled": false}, "global_analytics_code": "UA-17997319-1", "language": "en", "page": "hacking/how-it-works", "programming_language": "c", "project": "angband", "proxied_api_host": "/_", "source_suffix": ".rst", "subprojects": {}, "theme": "better", "user_analytics_code": "", "version": "latest"}</script>
+
+<!--
+Using this variable directly instead of using `JSON.parse` is deprecated.
+The READTHEDOCS_DATA global variable will be removed in the future.
+-->
+<script type="text/javascript">
+READTHEDOCS_DATA = JSON.parse(document.getElementById('READTHEDOCS_DATA').innerHTML);
+</script>
+
+<script type="text/javascript" src="../../../_/static/javascript/readthedocs-analytics.js" async="async"></script>
+
+<!-- end RTD <extrahead> -->
+</head><body>
+<header id="pageheader">
+    <div style="display: flex; align-items: baseline;">
+        <h1>The Angband Manual</h1>
+        <span class="version">v4.2.4-264-g14f92695-dirty</span>
+    </div>
+    <img src="../_static/att.svg" style="height: 4rem;">
+</header>
+
+  <div class="related top">
+  <nav id="rellinks">
+    <ul>
+        <li>
+          &larr;
+          <a href="debug.html" title="Previous document">Debug Command Descriptions</a>
+        </li>
+        <li>
+          <a href="metadoc.html" title="Next document">Documentation on documentation</a>
+          &rarr;
+        </li>
+    </ul>
+  </nav>
+  <nav id="breadcrumbs">
+    <ul>
+      <li><a href="../index.html">Home</a></li> 
+    </ul>
+  </nav>
+  </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="how-it-works">
+<h1>How It Works<a class="headerlink" href="how-it-works.html#how-it-works" title="Permalink to this heading">¶</a></h1>
+<p>This document describes how Angband actually <em>works</em> at a high level. Individual
+sections referenced from the TOC are marked with anchors in square brackets to
+make grepping for them easier.</p>
+<div class="contents local topic" id="contents">
+<p class="topic-title">Contents</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="how-it-works.html#the-game" id="id1">The Game</a></p></li>
+<li><p><a class="reference internal" href="how-it-works.html#data-structures" id="id2">Data Structures</a></p>
+<ul>
+<li><p><a class="reference internal" href="how-it-works.html#the-chunk" id="id3">The Chunk</a></p></li>
+<li><p><a class="reference internal" href="how-it-works.html#the-player" id="id4">The Player</a></p></li>
+<li><p><a class="reference internal" href="how-it-works.html#the-static-data" id="id5">The Static Data</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="how-it-works.html#the-z-layer" id="id6">The Z Layer</a></p></li>
+<li><p><a class="reference internal" href="how-it-works.html#key-abstractions" id="id7">Key Abstractions</a></p>
+<ul>
+<li><p><a class="reference internal" href="how-it-works.html#the-command-queue" id="id8">The command queue</a></p></li>
+<li><p><a class="reference internal" href="how-it-works.html#events" id="id9">Events</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="how-it-works.html#files" id="id10">Files</a></p>
+<ul>
+<li><p><a class="reference internal" href="how-it-works.html#gamedata-files" id="id11">Gamedata Files</a></p></li>
+<li><p><a class="reference internal" href="how-it-works.html#pref-files" id="id12">Pref Files</a></p></li>
+<li><p><a class="reference internal" href="how-it-works.html#savefiles" id="id13">Savefiles</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="how-it-works.html#control-flow" id="id14">Control Flow</a></p>
+<ul>
+<li><p><a class="reference internal" href="how-it-works.html#startup" id="id15">Startup</a></p>
+<ul>
+<li><p><a class="reference internal" href="how-it-works.html#main-c-and-main-c" id="id16"><code class="docutils literal notranslate"><span class="pre">main.c</span></code> and <code class="docutils literal notranslate"><span class="pre">main-*.c</span></code></a></p></li>
+<li><p><a class="reference internal" href="how-it-works.html#init-c-init-angband" id="id17">init.c - <code class="docutils literal notranslate"><span class="pre">init_angband</span></code></a></p></li>
+<li><p><a class="reference internal" href="how-it-works.html#ui-init-c-textui-init" id="id18">ui-init.c - <code class="docutils literal notranslate"><span class="pre">textui_init</span></code></a></p></li>
+<li><p><a class="reference internal" href="how-it-works.html#ui-prefs-c-process-pref-file" id="id19">ui-prefs.c - <code class="docutils literal notranslate"><span class="pre">process_pref_file</span></code></a></p></li>
+<li><p><a class="reference internal" href="how-it-works.html#ui-game-c-play-game" id="id20">ui-game.c - <code class="docutils literal notranslate"><span class="pre">play_game</span></code></a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="how-it-works.html#gameplay" id="id21">Gameplay</a></p>
+<ul>
+<li><p><a class="reference internal" href="how-it-works.html#game-world-c-the-game-main-loop" id="id22">game-world.c - the game main loop</a></p>
+<ul>
+<li><p><a class="reference internal" href="how-it-works.html#mon-move-c-process-monsters" id="id23">mon-move.c - process_monsters()</a></p></li>
+<li><p><a class="reference internal" href="how-it-works.html#game-world-c-process-player" id="id24">game-world.c - process_player()</a></p></li>
+<li><p><a class="reference internal" href="how-it-works.html#keeping-the-ui-up-to-date" id="id25">Keeping the UI up to date</a></p></li>
+<li><p><a class="reference internal" href="how-it-works.html#game-world-c-process-world" id="id26">game-world.c - process_world()</a></p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="how-it-works.html#dungeon-generation" id="id27">Dungeon Generation</a></p></li>
+<li><p><a class="reference internal" href="how-it-works.html#monster-ai" id="id28">Monster AI</a></p></li>
+<li><p><a class="reference internal" href="how-it-works.html#stats" id="id29">Stats</a></p></li>
+</ul>
+</li>
+</ul>
+</div>
+<section id="the-game">
+<h2><a class="toc-backref" href="how-it-works.html#id1">The Game</a><a class="headerlink" href="how-it-works.html#the-game" title="Permalink to this heading">¶</a></h2>
+<p>As you probably know if you’re reading this, Angband is a roguelike game set in
+a high-fantasy universe. The game world is made up of levels, numbered from zero
+(“the town”) to some maximum depth. Levels are increasingly dangerous the deeper
+they are into the dungeon. Levels are filled with monsters, traps, and objects.
+Monsters move and act on their own, traps react to creatures entering their
+square, and objects are inert unless used by a creature. The objective of the
+game is to find Morgoth at depth 100 and kill him.</p>
+</section>
+<section id="data-structures">
+<h2><a class="toc-backref" href="how-it-works.html#id2">Data Structures</a><a class="headerlink" href="how-it-works.html#data-structures" title="Permalink to this heading">¶</a></h2>
+<p>There are three important top-level data structures in Angband: the ‘chunk’, the
+player, and the static data tables.</p>
+<section id="the-chunk">
+<h3><a class="toc-backref" href="how-it-works.html#id3">The Chunk</a><a class="headerlink" href="how-it-works.html#the-chunk" title="Permalink to this heading">¶</a></h3>
+<p>A chunk represents an area of dungeon, and contains everything inside it; this
+includes any monsters, objects, or traps inside the bounds of that chunk. A
+chunk also keeps a map of the terrain in its area. For unpleasant historical
+reasons, all monsters/objects/traps in a chunk are stored in arrays and usually
+referred to by index; each square of a chunk knows the indexes (if any) of
+monsters/objects/traps contained in it. A chunk also stores AI pathfinding data
+for its contained area. All data in the ‘current’ chunk is lost when leaving the
+level.</p>
+</section>
+<section id="the-player">
+<h3><a class="toc-backref" href="how-it-works.html#id4">The Player</a><a class="headerlink" href="how-it-works.html#the-player" title="Permalink to this heading">¶</a></h3>
+<p>The player is a global object containing information about, well, the player.
+All the information in the player is level-independent. This structure contains
+stats, any current effects, hunger status, sex/race/class, the player’s
+inventory, and a grab-bag of other information. Although there is a global
+player object, many functions instead take a player object explicitly to make
+them easier to test.</p>
+</section>
+<section id="the-static-data">
+<h3><a class="toc-backref" href="how-it-works.html#id5">The Static Data</a><a class="headerlink" href="how-it-works.html#the-static-data" title="Permalink to this heading">¶</a></h3>
+<p>Angband’s static data - player and monster races, object types, artifacts, et
+cetera - is loaded from the <a class="reference internal" href="how-it-works.html#gamedata-files">gamedata Files</a>. Once loaded, this
+data is stored in global tables, sometimes referred to as the ‘info arrays’.
+These arrays are generally declared in the header files of the code that uses
+them most, but they are mostly initialized by the edit-file code. The sizes of
+these arrays are stored in a ‘maxima’ structure, called z_info.</p>
+</section>
+</section>
+<section id="the-z-layer">
+<h2><a class="toc-backref" href="how-it-works.html#id6">The Z Layer</a><a class="headerlink" href="how-it-works.html#the-z-layer" title="Permalink to this heading">¶</a></h2>
+<p>The lowest-level code in Angband is the “Z” layer, which provides
+platform-independent abstractions and generic data structures. Currently, the Z
+layer provides:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 30%" />
+<col style="width: 70%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">z-bitflag</span></code></p></td>
+<td><p>Densely-packed bit flag arrays</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">z-color</span></code></p></td>
+<td><p>Colors</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">z-debug</span></code></p></td>
+<td><p>Debugging annotations</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">z-dice</span></code></p></td>
+<td><p>Dice expressions</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">z-expression</span></code></p></td>
+<td><p>Mathematical expressions</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">z-file</span></code></p></td>
+<td><p>File I/O</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">z-form</span></code></p></td>
+<td><p>String formatting</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">z-msg</span></code></p></td>
+<td><p>Rich messages</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">z-msg</span></code></p></td>
+<td><p>Message buffering -lis</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">z-quark</span></code></p></td>
+<td><p>String interning</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">z-queue</span></code></p></td>
+<td><p>Queues</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">z-rand</span></code></p></td>
+<td><p>Randomness</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">z-set</span></code></p></td>
+<td><p>Sets</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">z-textblock</span></code></p></td>
+<td><p>Wrapped text</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">z-type</span></code></p></td>
+<td><p>Basic types</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">z-util</span></code></p></td>
+<td><p>Random utility macros</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">z-virt</span></code></p></td>
+<td><p>malloc() wrappers</p></td>
+</tr>
+</tbody>
+</table>
+<p>Code in the Z layer may not depend on files outside the Z layer.</p>
+</section>
+<section id="key-abstractions">
+<h2><a class="toc-backref" href="how-it-works.html#id7">Key Abstractions</a><a class="headerlink" href="how-it-works.html#key-abstractions" title="Permalink to this heading">¶</a></h2>
+<p>Certain game-specific abstractions are important and widely used in Angband to
+glue the UI code to the game engine. These are the command queue, which sends
+player commands to the game engine, and events, which indicate to the UI that
+the state of the game changed.</p>
+<section id="the-command-queue">
+<h3><a class="toc-backref" href="how-it-works.html#id8">The command queue</a><a class="headerlink" href="how-it-works.html#the-command-queue" title="Permalink to this heading">¶</a></h3>
+<p>TBD</p>
+</section>
+<section id="events">
+<h3><a class="toc-backref" href="how-it-works.html#id9">Events</a><a class="headerlink" href="how-it-works.html#events" title="Permalink to this heading">¶</a></h3>
+<p>TBD</p>
+</section>
+</section>
+<section id="files">
+<h2><a class="toc-backref" href="how-it-works.html#id10">Files</a><a class="headerlink" href="how-it-works.html#files" title="Permalink to this heading">¶</a></h2>
+<p>Angband uses three types of files for storing data: gamedata files, which contain
+the game’s static data, pref files, which contain UI settings,
+and save files, which contain the state of a game in progress.</p>
+<section id="gamedata-files">
+<h3><a class="toc-backref" href="how-it-works.html#id11">Gamedata Files</a><a class="headerlink" href="how-it-works.html#gamedata-files" title="Permalink to this heading">¶</a></h3>
+<p>Gamedata files use a line-oriented format where fields are separated by colons. The
+parser for this format is in <code class="docutils literal notranslate"><span class="pre">parser.h</span></code>. These files are mostly loaded at
+initialization time (see <a class="reference internal" href="how-it-works.html#init-c-init-angband">init.c - init_angband</a>) and used to fill in the static data
+arrays (see <a class="reference internal" href="how-it-works.html#the-static-data">The Static Data</a>).</p>
+</section>
+<section id="pref-files">
+<h3><a class="toc-backref" href="how-it-works.html#id12">Pref Files</a><a class="headerlink" href="how-it-works.html#pref-files" title="Permalink to this heading">¶</a></h3>
+<p>TBD</p>
+</section>
+<section id="savefiles">
+<h3><a class="toc-backref" href="how-it-works.html#id13">Savefiles</a><a class="headerlink" href="how-it-works.html#savefiles" title="Permalink to this heading">¶</a></h3>
+<p>Currently, a savefile is a series of concatenated blocks. Each block has a name
+describing what type it is and a version tag. The version tag allows for old
+savefiles to be loaded, although the load/save code will only write new
+savefiles. Numbers in savefiles are stored in little-endian byte order and
+strings are stored null-terminated.</p>
+</section>
+</section>
+<section id="control-flow">
+<h2><a class="toc-backref" href="how-it-works.html#id14">Control Flow</a><a class="headerlink" href="how-it-works.html#control-flow" title="Permalink to this heading">¶</a></h2>
+<p>The flow of control through Angband is complicated and can be very non-obvious
+due to overuse of global variables as special-behavior hooks. That said, this
+section gives a high-level overview of the control flow of a game session.</p>
+<section id="startup">
+<h3><a class="toc-backref" href="how-it-works.html#id15">Startup</a><a class="headerlink" href="how-it-works.html#startup" title="Permalink to this heading">¶</a></h3>
+<p>Execution begins in main.c, which runs frontend-independent initialization code,
+then continues in the appropriate <code class="docutils literal notranslate"><span class="pre">main-*.c</span></code> file for the current frontend. After
+the game engine is initialized, the player is loaded (or generated) and gameplay
+begins.</p>
+<section id="main-c-and-main-c">
+<h4><a class="toc-backref" href="how-it-works.html#id16"><code class="docutils literal notranslate"><span class="pre">main.c</span></code> and <code class="docutils literal notranslate"><span class="pre">main-*.c</span></code></a><a class="headerlink" href="how-it-works.html#main-c-and-main-c" title="Permalink to this heading">¶</a></h4>
+<p>main.c’s <code class="docutils literal notranslate"><span class="pre">main()</span></code> is the entry point for Angband execution except on Windows,
+where main-win.c’s <code class="docutils literal notranslate"><span class="pre">WinMain()</span></code> is used, on Nintendo DS, where a special
+<code class="docutils literal notranslate"><span class="pre">main()</span></code> in main-nds.c is used, and on OS X where main-cocoa.m’s <code class="docutils literal notranslate"><span class="pre">main()</span></code>
+is used. The <code class="docutils literal notranslate"><span class="pre">main()</span></code> function is responsible for dropping permissions if
+Angband is running setuid, parsing command line arguments, then finding a
+frontend to use and initializing it. Once <code class="docutils literal notranslate"><span class="pre">main()</span></code> finds a frontend, it sets
+up signal handlers, sets up the display, and calls <a class="reference internal" href="how-it-works.html#init-c-init-angband">init.c - init_angband</a>,
+which loads all the <a class="reference internal" href="how-it-works.html#gamedata-files">gamedata files</a> and initializes other static data used
+by the game.</p>
+</section>
+<section id="init-c-init-angband">
+<h4><a class="toc-backref" href="how-it-works.html#id17">init.c - <code class="docutils literal notranslate"><span class="pre">init_angband</span></code></a><a class="headerlink" href="how-it-works.html#init-c-init-angband" title="Permalink to this heading">¶</a></h4>
+<p>The init_angband() function in init.c is responsible for loading and setting up
+static data needed by the game engine. Inside init.c, there is a list of ‘init
+modules’ that have startup-time static data they need to initialize, these are
+registered in an array of module pointers in init.c, and init_angband() calls
+their initialization hooks before doing any other work.  Finally it sets up the
+RNG.</p>
+</section>
+<section id="ui-init-c-textui-init">
+<h4><a class="toc-backref" href="how-it-works.html#id18">ui-init.c - <code class="docutils literal notranslate"><span class="pre">textui_init</span></code></a><a class="headerlink" href="how-it-works.html#ui-init-c-textui-init" title="Permalink to this heading">¶</a></h4>
+<p>The textui_init() function then loads the top-level pref file (see
+<a class="reference internal" href="how-it-works.html#pref-files">pref files</a>), initializes the command queue (see <a class="reference internal" href="how-it-works.html#the-command-queue">the command queue</a>),
+and configures subwindows.</p>
+</section>
+<section id="ui-prefs-c-process-pref-file">
+<h4><a class="toc-backref" href="how-it-works.html#id19">ui-prefs.c - <code class="docutils literal notranslate"><span class="pre">process_pref_file</span></code></a><a class="headerlink" href="how-it-works.html#ui-prefs-c-process-pref-file" title="Permalink to this heading">¶</a></h4>
+<p>The process_pref_file() function in ui-prefs.c is responsible for loading user
+pref files, which can live at multiple paths. User preference files override
+default preference files. See <a class="reference internal" href="how-it-works.html#pref-files">pref files</a> for more details.</p>
+</section>
+<section id="ui-game-c-play-game">
+<h4><a class="toc-backref" href="how-it-works.html#id20">ui-game.c - <code class="docutils literal notranslate"><span class="pre">play_game</span></code></a><a class="headerlink" href="how-it-works.html#ui-game-c-play-game" title="Permalink to this heading">¶</a></h4>
+<p>This function calls start_game() to load a saved game if there is a valid save
+(see <a class="reference internal" href="how-it-works.html#savefiles">savefiles</a>) or birth a new character if not.  It then asks for a command
+from the player, and then runs the game main loop (see
+<a class="reference internal" href="how-it-works.html#game-world-c-the-game-main-loop">game-world.c - the game main loop</a>), over and over until the character dies
+or the player quits</p>
+</section>
+</section>
+<section id="gameplay">
+<h3><a class="toc-backref" href="how-it-works.html#id21">Gameplay</a><a class="headerlink" href="how-it-works.html#gameplay" title="Permalink to this heading">¶</a></h3>
+<p>Once the simulation is set up, the game main loop in <a class="reference internal" href="how-it-works.html#ui-game-c-play-game">ui-game.c - play_game</a>
+is responsible for stepping the simulation.</p>
+<section id="game-world-c-the-game-main-loop">
+<h4><a class="toc-backref" href="how-it-works.html#id22">game-world.c - the game main loop</a><a class="headerlink" href="how-it-works.html#game-world-c-the-game-main-loop" title="Permalink to this heading">¶</a></h4>
+<p>The main loop of the game, run_game_loop() is repeatedly called inside
+play_game(). Each iteration of the main loop is one “turn” in Angband parlance,
+or one step of the simulator. During each turn:</p>
+<ul class="simple">
+<li><p>All monsters with more energy than the player act</p></li>
+<li><p>The player acts</p></li>
+<li><p>All other monsters act</p></li>
+<li><p>The UI updates</p></li>
+<li><p>The world acts</p></li>
+<li><p>End-of-turn housekeeping is done</p></li>
+</ul>
+<section id="mon-move-c-process-monsters">
+<h5><a class="toc-backref" href="how-it-works.html#id23">mon-move.c - process_monsters()</a><a class="headerlink" href="how-it-works.html#mon-move-c-process-monsters" title="Permalink to this heading">¶</a></h5>
+<p>In Angband, creatures act in order of “energy”, which roughly determines how
+many actions they can take per step through the simulation. The
+process_monsters() function in mon-move.c is responsible for walking through
+the list of all monsters in the current chunk (see <a class="reference internal" href="how-it-works.html#the-chunk">the chunk</a>) and having each
+monster act by calling process_monster(), which implements the highest level AI
+for monsters.</p>
+</section>
+<section id="game-world-c-process-player">
+<h5><a class="toc-backref" href="how-it-works.html#id24">game-world.c - process_player()</a><a class="headerlink" href="how-it-works.html#game-world-c-process-player" title="Permalink to this heading">¶</a></h5>
+<p>The process_player() function allows the player to act repeatedly until they do
+something that uses energy. Commands like looking around or inscribing items do
+not use energy; movement, attacking, casting spells, using items, and so on do.
+The rule of thumb is that a command that does not alter game engine state does
+not use energy, because it does not represent an action the character in the
+simulation is doing. The guts of the process_player() function are actually
+handled by process_command() in cmd-core.c, which looks up commands in the
+game_cmds table in that file.</p>
+</section>
+<section id="keeping-the-ui-up-to-date">
+<h5><a class="toc-backref" href="how-it-works.html#id25">Keeping the UI up to date</a><a class="headerlink" href="how-it-works.html#keeping-the-ui-up-to-date" title="Permalink to this heading">¶</a></h5>
+<p>Four related horribly-named functions in player-calcs.h are responsible for
+keeping the UI in sync with the simulated character’s state:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 22%" />
+<col style="width: 78%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">notice_stuff()</span></code></p></td>
+<td><p>which deals with pack combining and dropping ignored items;</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">update_stuff()</span></code></p></td>
+<td><p>which recalculates derived bonuses, AI data, vision, seen
+monsters, and other things based on the flags in
+<code class="docutils literal notranslate"><span class="pre">player-&gt;upkeep-&gt;update</span></code>;</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">redraw_stuff()</span></code></p></td>
+<td><p>which signals the UI to redraw changed sections of the
+game state;</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">handle_stuff()</span></code></p></td>
+<td><p>which calls update_stuff() and redraw_stuff() if needed.</p></td>
+</tr>
+</tbody>
+</table>
+<p>These functions are called during every game loop, after the player and all
+monsters have acted.</p>
+</section>
+<section id="game-world-c-process-world">
+<h5><a class="toc-backref" href="how-it-works.html#id26">game-world.c - process_world()</a><a class="headerlink" href="how-it-works.html#game-world-c-process-world" title="Permalink to this heading">¶</a></h5>
+<p>The process_world() function only runs every 10 turns. It is responsible for the
+day/night transition in town, restocking the stores, generating new creatures
+over time, dealing poison/cut damage, applying hunger, regeneration, ticking
+down timed effects, consuming light fuel, and applying a litany of spell effects
+that happen ‘at random’ from the player’s point of view.</p>
+</section>
+</section>
+</section>
+<section id="dungeon-generation">
+<h3><a class="toc-backref" href="how-it-works.html#id27">Dungeon Generation</a><a class="headerlink" href="how-it-works.html#dungeon-generation" title="Permalink to this heading">¶</a></h3>
+<p>prepare_next_level() in generate.c controls the process of generating or loading
+a level.  To signal that run_game_loop() in game-world.c should call
+prepare_next_level(), game logic calls dungeon_change_level() in player-util.c
+to set the necessary data in the player structure.  When a level change happens
+by traversing a staircase, some other data in the player structure is set to
+indicate what should be done to connect stairs.  That doesn’t happen in
+dungeon_change_level() and is instead set directly, currently in do_cmd_go_up()
+and do_cmd_go_down() in cmd-cave.c.</p>
+<p>With the default for non-persistent levels, loading only happens when
+returning to the town or when returning from a single combat arena.  The code
+and global data for handling stored levels is in gen-chunk.c.</p>
+<p>When a new level is needed, prepare_next_level() calls cave_generate(), also in
+generate.c.  That initializes a global bit of state, a dun_data structure called
+dun declared in generate.h, for passing a lot of the details needed when
+generating a level.  It then selects a level profile via choose_profile() in
+generate.c.  The level profile controls the layout of the level.  The available
+level profiles are those listed in list-dun-profiles.h and several aspects of
+each profile are configured at runtime from the contents of
+lib/gamedata/dungeon_profile.txt.  With a profile selected, cave_generate()
+uses the profile’s builder function pointer to attempt to layout the new level.
+Those function pointers are initialized when list-dun-profiles.h is included
+in generate.c.  The level layout functions all have names with the name of
+the profile followed by <em>_gen</em>, classic_gen() for classic levels as an
+example.  Those functions are defined in gen-cave.c.</p>
+<p>Three of the level layout functions, classic_gen(), modified_gen(), and
+moria_gen() follow the same basic procedure.  They divide the level into a
+grid of rectangular blocks where, in general, each block can only contain
+one room though a room could occupy many blocks.  They then try to randomly
+place rooms in those blocks until some criteria is met.  Room selection is
+configurable from lib/gamedata/dungeon_profile.txt and uses the predefined
+room types listed in list-rooms.h.  When building a room, those level layout
+functions use the convenience function, room_build() from gen-room.c.  That, in
+turn, calls the appropriate function to build the type of room chosen.  The
+names of the room building functions have <em>build_</em> followed by the name of the
+room type, build_simple() for instance.  Those functions are defined in
+gen-room.c.  Once the rooms are built, there’s an initial pass to connect them
+with corridors.  That happens in gen-cave.c’s do_traditional_tunneling().
+A second pass, to try and ensure connectedness though vault areas can disrupt
+that, is then done with ensure_connectedness().  At that point, most other
+features (mineral veins, staircases, objects, and monsters) are added.  Some
+features will have already been added through some of the types of rooms.</p>
+<p>The other layout functions are more of a grab bag.  They are all in gen-cave.c.
+Many of them have portions that are caverns or labyrinths.  Those are generated
+using cavern_chunk() or labyrinth_chunk(), respectively, in gen-cave.c.</p>
+</section>
+<section id="monster-ai">
+<h3><a class="toc-backref" href="how-it-works.html#id28">Monster AI</a><a class="headerlink" href="how-it-works.html#monster-ai" title="Permalink to this heading">¶</a></h3>
+<p>TBD</p>
+</section>
+<section id="stats">
+<h3><a class="toc-backref" href="how-it-works.html#id29">Stats</a><a class="headerlink" href="how-it-works.html#stats" title="Permalink to this heading">¶</a></h3>
+<p>The stats generation code aims to make it easy to analyze object generation,
+monster generation, and other Angband processes suitable for Monte Carlo
+simulation.  The stats pseudo-visual module will repeatedly create a character,
+walk her down the dungeon, and, for each dungeon level, kill the monsters
+there and dump information about the monsters and objects.  The end result
+is a SQLite3 database, written to the stats subdirectory of Angband’s user
+directory.  A similar procedure is used by the <code class="docutils literal notranslate"><span class="pre">S</span></code> debugging command.  It
+will generate a text file summarizing the monsters and objects generated.
+That output may be more accessible, since one doesn’t have to deal with the
+structure of the database, but the database stores finer-grained classifications
+of the objects and monsters.</p>
+</section>
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="../index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="how-it-works.html#">How It Works</a><ul>
+<li><a class="reference internal" href="how-it-works.html#the-game">The Game</a></li>
+<li><a class="reference internal" href="how-it-works.html#data-structures">Data Structures</a><ul>
+<li><a class="reference internal" href="how-it-works.html#the-chunk">The Chunk</a></li>
+<li><a class="reference internal" href="how-it-works.html#the-player">The Player</a></li>
+<li><a class="reference internal" href="how-it-works.html#the-static-data">The Static Data</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="how-it-works.html#the-z-layer">The Z Layer</a></li>
+<li><a class="reference internal" href="how-it-works.html#key-abstractions">Key Abstractions</a><ul>
+<li><a class="reference internal" href="how-it-works.html#the-command-queue">The command queue</a></li>
+<li><a class="reference internal" href="how-it-works.html#events">Events</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="how-it-works.html#files">Files</a><ul>
+<li><a class="reference internal" href="how-it-works.html#gamedata-files">Gamedata Files</a></li>
+<li><a class="reference internal" href="how-it-works.html#pref-files">Pref Files</a></li>
+<li><a class="reference internal" href="how-it-works.html#savefiles">Savefiles</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="how-it-works.html#control-flow">Control Flow</a><ul>
+<li><a class="reference internal" href="how-it-works.html#startup">Startup</a><ul>
+<li><a class="reference internal" href="how-it-works.html#main-c-and-main-c"><code class="docutils literal notranslate"><span class="pre">main.c</span></code> and <code class="docutils literal notranslate"><span class="pre">main-*.c</span></code></a></li>
+<li><a class="reference internal" href="how-it-works.html#init-c-init-angband">init.c - <code class="docutils literal notranslate"><span class="pre">init_angband</span></code></a></li>
+<li><a class="reference internal" href="how-it-works.html#ui-init-c-textui-init">ui-init.c - <code class="docutils literal notranslate"><span class="pre">textui_init</span></code></a></li>
+<li><a class="reference internal" href="how-it-works.html#ui-prefs-c-process-pref-file">ui-prefs.c - <code class="docutils literal notranslate"><span class="pre">process_pref_file</span></code></a></li>
+<li><a class="reference internal" href="how-it-works.html#ui-game-c-play-game">ui-game.c - <code class="docutils literal notranslate"><span class="pre">play_game</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="how-it-works.html#gameplay">Gameplay</a><ul>
+<li><a class="reference internal" href="how-it-works.html#game-world-c-the-game-main-loop">game-world.c - the game main loop</a><ul>
+<li><a class="reference internal" href="how-it-works.html#mon-move-c-process-monsters">mon-move.c - process_monsters()</a></li>
+<li><a class="reference internal" href="how-it-works.html#game-world-c-process-player">game-world.c - process_player()</a></li>
+<li><a class="reference internal" href="how-it-works.html#keeping-the-ui-up-to-date">Keeping the UI up to date</a></li>
+<li><a class="reference internal" href="how-it-works.html#game-world-c-process-world">game-world.c - process_world()</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="how-it-works.html#dungeon-generation">Dungeon Generation</a></li>
+<li><a class="reference internal" href="how-it-works.html#monster-ai">Monster AI</a></li>
+<li><a class="reference internal" href="how-it-works.html#stats">Stats</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  </div>
+<form class="search" action="../search.html" method="get">
+  <input type="text" name="q"
+   placeholder="type to search" />
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+  <div class="related bottom">
+  <nav id="rellinks">
+    <ul>
+        <li>
+          &larr;
+          <a href="debug.html" title="Previous document">Debug Command Descriptions</a>
+        </li>
+        <li>
+          <a href="metadoc.html" title="Next document">Documentation on documentation</a>
+          &rarr;
+        </li>
+    </ul>
+  </nav>
+  <nav id="breadcrumbs">
+    <ul>
+      <li><a href="../index.html">Home</a></li> 
+    </ul>
+  </nav>
+  </div>
+  <footer id="pagefooter">&copy; 2019, Angband developers past and present.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a>
+      5.3.0
+        with the <a href="http://github.com/irskep/sphinx-better-theme">
+          better</a> theme.
+
+  </footer>
+
+  
+  </body>
+</html>

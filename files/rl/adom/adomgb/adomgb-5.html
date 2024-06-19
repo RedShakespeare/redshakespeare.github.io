@@ -1,0 +1,150 @@
+<html>
+<head>
+<title>Improved ADOM Guidebook - Unresolved mysteries</title>
+<link rel="stylesheet" type="text/css" href="adomgb-body.css">
+</head>
+<body>
+<h1>Improved ADOM Guidebook</h1>
+<hr>
+<a href="adomgb-4.html">Previous</a> - <a href="toc.html">TOC</a> - <a href="adomgb-app-notation.html">Next</a>
+<hr>
+<a href="#51">Kherab's 3rd quest</a> - <a href="#52">Scroll of Omnipotence</a> - <a href="#53">Red Rooster Inn</a> - <a href="#54">Volcano</a> - <a href="#55">Weird Tome</a>
+<hr>
+
+<h3>Unresolved mysteries</h3>
+Since ADOM is not an open source, not everything has been revealed. Few mysteries remain, though they may likely be just omissions or unfinished features.<p>
+
+<h4 id="51">5.1 Kherab's third quest</h4>
+<img src="tiles/item520.png" alt="sors" align="left">
+When your PC has done the first two quests for Kherab, the dwarven artificer in Darkforge, he tells your character to "be patient,
+in the near future more will have to be done". However, he will never assign the third quest, even to experience level 50 characters who are ready to close
+the Chaos Gate or attempt an Ultra ending. From scanning the executable, reference to a "spear of raw steel" has been found,
+seemingly a third quest reward along with the Shield of Raw Steel and Amulet of Raw Steel now available.<p>
+
+<table class="box"><tr><td class="box"><pre>
+------------ spear of raw steel (+4, 4d10+8) [+4, +0] {Wi+8} ------------
+
+Weight: 120s
+
+When worn it modifies DV by +4 and PV by +0.
+
+When used in melee combat it grants a +4 bonus to hit and causes 4d10+8 points of damage.
+When used as a missile it grants a +0 bonus to hit and causes 4d5+8 points of damage.
+
+It modifies your willpower attribute by +8.
+This weapon returns when thrown.
+It contains the essence of Chaos and Corruption.
+It is very good at scoring critical hits in melee.
+It grants resistance to poison.
+It grants resistance to shock attacks.
+It grants immunity to acid.
+</pre></table><p>
+
+<div class="newb">
+Kheab's third quest now actually exists, but the reward is different &ndash; see <a href="adomgb-2-4.html#2442">2.4.4.2</a>.
+However, the Spear of Raw Steel is still there among the list of items (id 520), seemingly unobtainable.<p>
+</div>
+
+<h4 id="52">5.2 Scroll of Omnipotence</h4>
+<img src="tiles/item892.png" alt="soo" align="left">
+In the secret compartment of the High Mountain Village, there's a message that reads:<p>
+<table class="box"><tr><td class="box"><pre>
+Dear Lubaf, I am sorry to disappoint you but you won't be able to find the
+Scroll of Omnipotence in this place. I have hidden it more effectively.
+You will need to find the red rooster at dawn. Then you'll encounter the final
+challenge.
+
+With passionate hate,
+ Alhacrast, Overlord of Jak-Nagiur.
+</pre></table><p>
+
+This may be what Khelavaster refers to as the foolish legends that built up around the quest for the crumpled scroll and the Trident of the Red Rooster.
+Upon further examination of the executable, it seems the Scroll of Omnipotence could only be read by champions of Order/Balance/Chaos:
+<table class="box"><tr><td class="box"><pre>
+You read the scroll of omnipotence
+
+As you read the scroll you suddenly feel great power surging through your body.
+You feel invincible and your abilities are increased by enourmous amounts!
+Now you are a true champion of %s!
+
+...ripped to pieces by trying to claim power not meant for %s..
+Immediately you realize that this was a big mistake as you
+are not prepared for the wave of power that suddenly floats your body. You
+are ripped to pieces almost instantly!....
+</pre></table><p>
+
+<div class="newb">
+The Scroll of Omnipotence now exists and can be obtained &ndash; see <a href="adomgb-2-30.html#2u2">2.30.2</a>.
+However, apart from scoring the Ultimate ending, its purpose remains a mystery.<p>
+</div>
+
+<h4 id="53">5.3 Red Rooster Inn</h4>
+The Red Rooster Inn is mentioned in the executable and is probably a red herring. It was thought in earlier versions of ADOM that the innkeeper
+would produce the Trident of the Red Rooster in the Red Rooster Inn at dawn.<p>
+
+The executable contains the following texts:
+<table class="box"><tr><td class="box"><pre>
+You enter the Red Rooster Inn. It's completely empty...
+
+You enter the Red Rooster Inn as the sun is just rising. Alganon, the innkeeper,
+welcomes you with great joy and honors you for helping the ancient dwarf. As
+a reward he grants you a long item wrapped in a sheet. He winks at you and
+mumbles "Ye know what'ta do with dat, don't ye?". Due to some urgent business
+Alganon then leaves.
+</pre></table><p>
+
+<div class="newb">
+The Red Rooster Inn doesn't exist at all and all the texts about it and Alganon have been removed from the ADOM executable.<p>
+</div>
+
+<h4 id="54">5.4 Volcano</h4>
+<img src="tiles/volcano_active.png" alt="volcano" align="left">
+There is a volcano mentioned in the executable, but no character has ever found such a location. It may be a remnant left over from earlier development
+of ADOM, possibly designed to be the location where the Chaos Orb of Elemental Fire could be found prior to implementation of the Tower of Eternal Flames.
+Deeper analysis shows a volcano is just an unimplemented dungeon feature.<p>
+
+<div class="newb">
+Volcanoes exist as a wilderness feature, and there is also the Volcano Dungeon &ndash; see <a href="adomgb-2-29.html">2.29</a>.<p>
+</div>
+
+<h4 id="55">5.5 Weird Tome</h4>
+<img src="tiles/item670.png" alt="wt" align="left">
+The Ghost Librarian in the Library of Niltrias demands silence. In practice, this means the PC must spend a certain amount of time in the Library without
+speaking. Spellcasting is allowed. After spending 2000 turns (well spent reading spellbooks) without speaking, upon <tt>C</tt>hatting
+with her, she gives the PC the Weird Tome. She instructs the PC to deliver it to the Mad Minstrel, who will in turn reward the PC with five cursed scrolls of
+corruption removal.<p>
+
+The mystery about the book is the fact that nobody has managed to read it. Scanning the executable gives some further hints on successful reading of the tome:
+<table class="box"><tr><td class="box"><pre>
+... manage to decipher the secret.
+It describes a means to find the scroll of omnipotence.
+... have to %s to find it.
+</pre></table><p>
+
+Giving the tome to saved Khelavaster in Terinyo results in:
+<table class="box"><tr><td class="box"><pre>
+Khelavaster, the invisible ancient sage, curiously looks at the uncursed
+weird tome. "Huh? Oh, I have read that a long time ago. Pretty interesting."
+Khelavaster, the invisible ancient sage, drops the uncursed weird tome.
+</pre></table><p>
+
+Giving the Weird Tome to Gaab'Baay, results in:
+<table class="box"><tr><td class="box"><pre>
+Gaab'Baay, the old crone, hastily accepts the uncursed weird tome.
+Gaab'Baay, the old crone, examines the uncursed weird tome closely.
+Gaab'Baay, the old crone, cackles: "Na, I don't need this." Gaab'Baay, the
+old crone, drops the uncursed weird tome.
+</pre></table><p>
+
+Demented Ratling eats the tome. Andor Drakon is ignorant and refuses the tome from "puny mortal". Other unique characters simply refuse the tome.<p>
+
+See section <a href="adomgb-2-16.html#2g2">2.16.2</a> for more details about the Ghost Librarian and the Weird Tome.<p>
+
+<div class="newb">
+The Weird Tome mystery remains unsolved.<p>
+</div>
+
+<hr>
+Updated September 11th, 2019
+</body>
+</html>

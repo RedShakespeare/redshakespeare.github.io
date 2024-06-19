@@ -1,0 +1,223 @@
+<html>
+<head>
+<title>Improved ADOM Guidebook - Companions</title>
+<link rel="stylesheet" type="text/css" href="adomgb-body.css">
+</head>
+<body>
+<h1>Improved ADOM Guidebook</h1>
+<hr>
+<a href="adomgb-0-10.html">Previous</a> - <a href="toc.html">TOC</a> - <a href="adomgb-0-12.html">Next</a>
+<hr>
+<a href="#0b1">In general</a> - <a href="#0b2">Ordering companions</a> - <a href="#0b3">Scrolls of familiar summoning</a> - <a href="#0b4">Figurines of wondrous power</a> -
+<a href="#0b5">Taming monsters</a> - <a href="#0b6">Storyline companions</a> - <a href="#0b7">Slaves</a> - <a href="#0b71">Necromancy choices</a> - <a href="#0b8">White Necromancy</a>
+<hr>
+
+<h3 id="0b">Companions</h3>
+Did you know that you can order your companions around? Press <tt>Ctrl-o</tt> to do so. Press <tt>:c</tt> to view a list of your companions.<p>
+
+<h4 id="0b1">0.11.1 Companions in general</h4>
+Companions are allies who will help the PC, to a point. They are often referred to as pets if they are animals, while monsters created using Necromancy are acknowledged as
+the PC's slaves.<p>
+
+<h4 id="0b11">0.11.1.1 Obtaining companions</h4>
+Companions can be obtained in several ways:<p>
+<ul>
+<li>Bards and Farmers get an animal companion from the start
+<li>scrolls of familiar summoning
+<li>figurines of wondrous power
+<li>class powers: Beastfighter lvl 25, Druid lvl 25, Elementalist lvl 40, Necromancer lvl 18 and lvl 32
+<li>wishing for <tt>friends</tt>
+<li>taming monsters by giving away items or by using the Music skill
+<li>in the HMV: Hawkslayer, Borys
+<li>slaves created by using the Necromancy skill on humanoid corpses
+<li><big>monsters freed from Ice Queen Domain's prison could be tame</big>
+<li><span class="newi">mercenaries hired in the Borderland Settlement, swordsman from Goblin Camp</span>
+</ul><p>
+
+<h4 id="0b12">0.11.1.2 Losing companiopns</h4>
+One word of caution before attempting to create a powerful companion &ndash; they are fickle and will sometimes turn on the PC at the slightest provocation &ndash; such as
+unintentionally triggering a fireball trap, injuring the companion. This is a very common cause of death from powerful companions. Note that fire-immune companions will not
+turn hostile. Alternatively critically damaged/injured companions may decide to fight to death in a blind rage which makes them hostile. Or, they may forget about the PC if
+they stay out of their sight for a large number of turns. It is prudent to check the companion with <tt>l</tt>ook command to avoid unexpected surprises. If this occurs whilst the
+PC is still on the same level as the companion, the player might be alerted with the message "You feel a change of mind in a being close to you".<p>
+
+<h4 id="0b13">0.11.1.3 Healing companions</h4>
+Most companions can be healed using any of the normal techniques &ndash; casting Heal and throwing potions of healing, for example. Note that this is a significant lawful action and
+can quickly change the PC's alignment. Undead slaves or companions can't normally be healed, but all liches can magically mend the damage by themselves.
+Skeletons and skeletal warriors can repair themselves when given bones (1d6 HP repaired per bone).<p>
+
+<h4 id="0b14">0.11.1.4 Companions speed</h4>
+One problem that many players have with companions is that companions have a fixed speed. This means that as the game progresses and the PC gains speed via wearables, the Athletics
+skill, eating quickling corpses, etc., companions become slower and slower relative to the PC. This can become very annoying, with the PC forced to wait for companions to catch up.
+This problem makes many players reluctant to rely too heavily on companions.<p>
+
+<h4 id="0b15">0.11.1.5 Companions and D: 50</h4>
+Note also that companions cannot accompany PCs to D: 50. Companions can be <i>created</i> on D: 50, but they cannot cross D: 49.<p>
+
+<h4 id="0b2">0.11.2 Ordering companions</h4>
+<span class="credit">Credit ADOM Wiki &ndash; <a href="http://ancardia.wikia.com/wiki/Companion">Companion</a></span>
+Basically, all companions will follow the PC, attack hostile monsters and will do nothing about neutral monsters and NPCs unless ordered to. The PC may order <tt>Ctrl-o</tt> one of
+the following commands: <i>wait, follow, move</i> or <i>attack</i>. All companions (with the exception of Necromancer's slaves) have a chance to ignore the command. This chance is
+greatly influenced by the Charisma attribute.<p>
+
+<b>Wait</b><br>
+A companion will stay in place until one of the following events happens:<p>
+<ul>
+<li>PC will order any other command
+<li>companion is attacked
+<li>PC is attacked in the companion's visible range
+</ul><p>
+
+The Wait command is normally a simple way of controlling companions' movement or position. Note that the PC will be able to switch places <tt>:s</tt> with a waiting companion
+without canceling this command. Waiting companions will still follow the PC on other levels if they are in immediate vicinity of the staircase.<p>
+
+Wait can also be used for more obscure strategies. A waiting companion will block an ant nest or a beehive effectively preventing its inhabitants from emerging.
+Placing a companion on the shop entrance and issuing a wait command will prevent the shopkeeper from blocking it when the PC picks up the items. The PC then may switch places
+with their companion and be free to leave the shop without paying. Note that this is rightfully treated as shoplifting offense, and will trigger all negative consequences the
+moment the PC leaves the shop.<p>
+
+<b>Move</b><br>
+The Move command allows the PC to target a tile within their line of sight and order the companion to go to that tile. Move is very unreliable, as companions can easily be
+distracted by monsters' attacks or other dungeon features on the way to the designated tile and, more importantly, will not stay on that tile upon reaching it. Sometimes they
+will also experience pathfinding problems.<p>
+
+<b>Follow</b><br>
+Issuing the Follow command resets the companions' behavior to default setting.<p>
+
+<b>Attack</b><br>
+The Attack command will, as the name implies, make the companion attack any monster or NPC. This is not considered a chaotic action and the targeted monster will not turn
+hostile to the PC. Note that if a companion kills a quest target (for example, Kranach or Keethrax) the PC will not be given the usual reward when chatting with the quest-giver.<p>
+
+It is possible to calm hostile NPCs by ordering a weak companion to attack them &ndash; slaying a companion will typically calm down the NPC in question.<p>
+
+<small>As of R+, ordering a companion to attack a shopkeeper will lead to a huge alignment drop, make the shopkeeper hostile and cause him to summon guards (muscular dwarves
+for Waldenbrook, casino guards for the Casino shopkeeper and thugs for all other shopkeepers).</small><p>
+
+<h4 id="0b3">0.11.3 Scrolls of familiar summoning <tt>?</tt></h4>
+<img src="tiles/item165.png" alt="sofs" align="left">
+These scrolls can be read to create a tame monster. The monster created is dependent on the danger level of the dungeon level. This means it is to the PC's advantage to read
+these in the most dangerous place possible. In the early midgame, the best place is probably the Dwarven Halls, since almost anything can show up there. Ancient karmic dragon,
+emperor lich and balor companions have been generated in the Dwarven Halls, for instance. B/U/C status of the scroll (+6 DL/0/-6 DL) as well as the Raven birthsign (+5 DL) also
+contribute to the level of the companion.<p>
+
+<h4 id="0b4">0.11.4 Figurines of wondrous power <tt>]</tt></h4>
+<img src="tiles/item648.png" alt="fowp" align="left">
+These miniature statues were implemented by TB in response to players' requests for pet shops. Figurines can also be found randomly in the dungeons. They generate a monster
+when <tt>u</tt>sed; the type of monster corresponds to the name (a jackal figurine of wondrous power). Figurines can be created for every monster type in the game, the exception
+being unique monsters. If the figurine is blessed when <tt>u</tt>sed, the monster produced is tame. As with scrolls of familiar summoning, it is best to use them in a dangerous
+place. The Small Cave is ideal, since newly generated monsters have roughly twice the experience level of the PC.<p>
+
+<h4 id="0b5">0.11.5 Taming monsters</h4>
+This is a specialty of Bards, but any PC with the Music skill can try to tame monsters by placing a musical instrument in the tool slot and <tt>u</tt>sing it. Most PCs are not
+very successful at this until the Music skill level is in the 90s. The success rate is also dependent on the type of instrument used, with heavier instruments generally better
+than light ones. No PC can tame a pet if there are already three pets on a dungeon level. One or more pets must be led to a different level and left there. The PC can then return
+to tame more.<p>
+
+Beggars can be made into companions by giving them gold and/or food. It requires about 8000 gold pieces and 10 cooked lizards. Berserkers of the same <big>opposite</big> gender
+can be tamed by giving them a wedding ring.<p>
+
+Some monsters can be tamed by feeding them. Cave lions and wild cats can be tamed by giving them rat or giant rat corpses. This is very useful to remember if the PC wants the
+Ring of the Master Cat (section <a href="adomgb-3-16.html">3.16</a>). Cave tigers can also be tamed, but they refuse to eat rat or giant rat corpses. Instead, they like pieces
+of raw or fresh meat. Unfortunately, it takes more than five pieces of meat to completely tame them; this is out of reach for most PCs. Wild cats, cave lions, giant raccoons,
+and black hurthlings can also be tamed with fish, which can be obtained from water tiles in the wilderness (section <a href="adomgb-0-4.html">0.4</a> Survival). Dogs can be tamed
+by giving them bones, which are readily available by killing skeletons. This can be especially useful with blink dogs. Tame a blink dog with bones, then get it involved in a fight.
+The blink dog will summon more of its brethren, some of which will inevitably be killed. A blink dog corpse will eventually be generated, which grants teleport control when eaten.
+This is particularly useful for lawful PCs. Since blink dogs are lawful, killing them will wreak havoc on a lawful alignment.<p>
+
+<table id="0b51" border=1><caption>Taming Monsters</caption>
+<tr><th>Monster <th>Method
+<tr><td>Animal <td>Music, raw meat, fresh meat
+<tr><td>Beggar <td>gold, food
+<tr><td>Berserker <td>wedding ring (if same <big>opposite</big> gender)
+<tr><td>Black hurthling, giant raccoon <td>fish meat
+<tr><td>Cave lion, wild cat <td>(giant) rat corpse, fish meat
+<tr><td>Cave tiger <td>raw meat, fresh meat
+<tr><td>Dog <td>bone, raw meat, fresh meat, sausage
+</table><p>
+
+Additionally, rust monsters can be made non-hostile by giving them iron items, but they can't be tamed.<p>
+
+<h4 id="0b6">0.11.6 Humanoid storyline companions</h4>
+The following companions may be acquired during the PC's adventure:<p>
+<ul>
+<li>Hawkslayer, the burly adventurer from High Mountain Village (<a href="adomgb-2-1.html#212">2.1.2</a>)
+<li>Borys, the flesh golem from High Mountain Village (<a href="adomgb-2-1.html#218">2.1.8</a>)
+<li>Swordsman from Goblin Camp (<a href="adomgb-1-5.html">1.5</a>)
+<li>random monsters from Ice Queen Domain Prison Section (<a href="adomgb-2-22.html#2m7">2.22.7</a>)
+<li>mercenaries for hire from Borderland Settlement (<a href="adomgb-1-9.html#192">1.9.2</a>)
+<li>Yggaz, the fool from Terinyo when given antediluvian alcohol (<a href="adomgb-1-2.html#127">1.2.7</a>) 
+</ul><p>
+
+<h4 id="0b7">0.11.7 Slaves</h4>
+Slaves are the undead created to serve a Necromancer PC. They share some characteristics with companions. They will fight against a Necromancer PC's opponents up to the point
+where injuries cause them to panic and become afraid of further combat. As with companions, a high Charisma attribute enables the Necromancer to better control her slaves.
+Note that traditional methods of healing damage undead rather than healing them. The Bless spell also damages undead. Undead in skeletal form (skeletons and skeletal warriors)
+can be healed by giving them bones. Others must simply heal at their natural rate, which is often frustratingly slow. Unlike companions, slaves will never turn on their master.<p>
+
+If a Necromancer manages to survive to a high enough level to find quickling corpses, especially higher-level quickling corpses, most of the problems with undead vanish. Quicklings
+are considered humanoid in ADOM and so their corpses can be animated with Necromancy. They are extremely fast (this also means the problem with slow companions vanishes) and
+regenerate wounds at a phenomenal rate. One particular quickling king skeletal warrior on record killed Nuurag-Vaarn, the chaos archmage, before the PC knew it had happened.<p>
+
+Note that slaves are not subject to the experience level 50 limit as PCs are. It is quite possible for slaves to reach experience level 100 and higher. Needless to say, they
+become formidable at those levels.<p>
+
+One trick Necromancers can use to create out of depth slaves is to exploit the properties of the Small Cave (check section <a href="adomgb-1-4.html">1.4</a> for a general
+explanation of how the Small Cave works). In this scenario, a Necromancer PC avoids entering the Small Cave at the beginning of the game, instead gaining early experience in the
+Infinite Dungeon or elsewhere. As the game progresses, a source of invisibility will eventually be found. It is rare for monsters that see invisible to be generated in the Small
+Cave. At the same time, many are humanoid and their corpses are usable for Necromancy. If an experience level 20 Necromancer enters the Small Cave while invisible, she can
+reasonably expect to leave or descend into the Unremarkable Dungeon with a couple of level 35-40 slaves. Very useful at that point in the game.<p>
+
+Creating undead corpses is chaotic act, which reduces alignment by 300, costs PP (increases with level) and most importantly Mana. When Mana is reduced to 1, the PC can
+continue creating slaves at no Mana cost, but only those costing 1 Mana. The PC "is not powerful enough" to create slaves which would reduce Mana attribute below zero. However,
+animating a corpse trains Mana by 2000 points. Note that lvl 1-5 Necromancers, as well as other classed dabbling in Necromancy, don't get to choose, but create zombie or
+skeleton randomly. The chance is 100% zombie at level 1 to about 50% zombie / 50% skeleton at level 5. Mana cost is reduced for Necromancers at level 40.<p>
+
+<table id="0b71" border=1><caption>Necromancy choices</caption>
+<tr><th>Undead being <th>Availability lvl<th>Ma cost lvl 1-39 <th>Ma cost lvl 40-50
+<tr><td>[A] Skeleton <td>1         <td>1   <td>1
+<tr><td>[B] Zombie   <td>1         <td>1   <td>1
+<tr><td>[C] Ghul     <td>6         <td>1   <td>1
+<tr><td>[D] Shadow   <td>10        <td>2   <td>1
+<tr><td>[E] Corpse fiend<td>13     <td>2   <td>1
+<tr><td>[F] Wight    <td>16        <td>2   <td>1
+<tr><td>[G] Wraith   <td>19        <td>2   <td>1
+<tr><td>[H] Mummy    <td>25        <td>3   <td>1
+<tr><td>[I] Skeletal warrior<td>29 <td>3   <td>1
+<tr><td>[J] Ghost    <td>33        <td>3   <td>1
+<tr><td>[K] Spectre  <td>37        <td>4   <td>2
+<tr><td>[L] Vampire  <td>41        <td>N/A <td>4
+<tr><td>[M] Shadow lord<td>46      <td>N/A <td>5
+<tr><td>[N] Lich     <td>50        <td>N/A <td>8
+</table><p>
+
+Good repeatable sources for more powerful corpses are the Quickling Tree, Minotaur Maze, and stone giants from Mining.<p>
+
+<div class="resb">
+<h4 id="0b8">0.11.8 White Necromancy</h4>
+<span class="credit">Credit ADOM Wiki &ndash; <a href="http://ancardia.wikia.com/wiki/White_necromancy">White Necromancy</a></span>
+
+White Necromancy is an alternate form of Necromancy, practiced exclusively by Mist Elves of lawful or neutral alignments. It can be used to create unlife beings as slaves using
+lumps of clay.<p>
+
+White Necromancy appears in the skills menu as <i>Necromancy</i>. Chaotic Mist Elves can only use the <i>black</i> version of the skill. Lawful and neutral Mist Elves can only
+use White Necromancy when applying the skill. The mechanics of White Necromancy are very similar to black Necromancy. Applying the skill requires some PP and appropriate
+<i>source material</i>. Passing the skill check will create a bound slave and drain several points of Mana permanently. However, this process also significantly trains Mana
+allowing the PC to regain some or all points over time. Created slaves adjust up to the PC's level; additionally they can level up in the usual way by killing monsters.<p>
+
+Mist Elves that are not Necromancers will only ever create homunculi at the cost of 2 Mana points per creation. On the other hand, Mist Elf Necromancers using the skill get
+a choice of slaves to create as they gain levels.<p>
+
+<table id="0b71" border="1"><caption>White Necromancy choices</caption>
+<tr><th>Unlife being    <th>Availability lvl<th>Ma cost<th>Notes
+<tr><td>[A] Homunculus  <td>1               <td>2      <td>Has sleep-inducing melee attack &ndash; effective against weaker monsters.
+<tr><td>[B] Clay statue <td>5               <td>4      <td>Regenerates.
+<tr><td>[C] Stone statue<td>7               <td>6      <td>Immune to fire &ndash; not affected by fireball traps and background damage in the ToEF.
+<tr><td>[D] Clay golem  <td>11              <td>10     <td>Has slowing melee attack &ndash; effective for damage control.
+<tr><td>[E] Stone golem <td>15              <td>16     <td>Immune to cold &ndash; not affected by background damage in the Ice Queen Domain.
+</table><p>
+</div>
+
+<hr>
+Updated September 12th, 2020
+</body>
+</html>

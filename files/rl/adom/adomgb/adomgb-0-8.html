@@ -1,0 +1,96 @@
+<html>
+<head>
+<title>Improved ADOM Guidebook - Defense</title>
+<link rel="stylesheet" type="text/css" href="adomgb-body.css">
+</head>
+<body>
+<h1>Improved ADOM Guidebook</h1>
+<hr>
+<a href="adomgb-0-7.html">Previous</a> - <a href="toc.html">TOC</a> - <a href="adomgb-0-9.html">Next</a>
+<hr>
+<a href="#081">DV versus PV</a> - <a href="#082">DV bonuses</a> - <a href="#083">PV bonuses</a> - <a href="#084">Monsters who bypass PV</a>
+<hr>
+
+<h3 id="08">Defense</h3>
+PC's defense is improved by using shields &ndash; the larger the better! The shield skill grants extra DV bonus, up to twice the shield's DV. Changing <tt>T</tt>actic
+can dramatically improve (or deteriorate) PC's defense.<p>
+
+<h4 id="081">0.8.1 DV versus PV</h4>
+As everyone knows from reading the <a href="adomman-J.html#J3">ADOM Manual</a>, DV is an abbreviation for Defensive Value and PV is an abbreviation for Protection Value.
+The former determines how hard it is for an opponent to hit the PC; the latter determines how much damage is absorbed by armor if
+a monster makes a successful hit. All monsters can score critical hits which bypass PV. Some monsters <i>always</i> bypass PV, notably claw bugs,
+which make them very annoying opponents for low level characters. Note also that non-artifact armor can be damaged by monster attacks,
+lowering its Protection Value especially and eventually destroying it.<p>
+
+So the question arises, which is better, a high DV or a high PV? As with the question of whether to specialize in one weapon or become
+proficient with many weapons, it is largely a matter of personal preference and style. There are successful players who use both
+approaches. In practice, it is possible to raise DV to the point where none other than the very highest level monsters can hit the PC.
+A DV over 100 means very few monsters will hit the PC successfully. However, a DV this high is not available to any but the very high
+level characters that specifically pursue it. Likewise, a PV over 100 means few monsters can hurt the PC, since the vast majority do
+not deal over 100 points of damage in one round. Bear in mind, however: 1) the possibility of critical hits and 2) the possibility
+of running into something very nasty, such as balors, greater molochs and the Emperor Moloch which certainly <i>do</i> deal over 100 points of
+damage per round.<p>
+
+A general rule of thumb? Add up the DV and PV bonuses. A [-3, +5] iron chain mail is about as good as a [+0, +2] leather armor (and the
+latter is lighter and won't rust). Few non-artifact armors can compete with an average eternium plate mail at [-1, +13]. Dragon scale mails
+averaging [-2, +11] are also extremely desirable armors since they grant immunity to the element corresponding to the dragon the armor is
+derived from. On the DV side, few non-artifact items can compare to eternium tower shields averaging [+13, +4]. Dragon scale mails and
+eternium tower shields are so powerful that many players will use a wish on these items.<p>
+
+<h4 id="082">0.8.2 DV bonuses</h4>
+<img src="tiles/dv.png" alt="dv" align="left">
+DV is base 10, minimum is 1. It is then influenced by the following bonuses or penalties:<p>
+<ul>
+<li>weapon skills, full bonus for weapon in right hand, half bonus for weapon in left hand
+<li>half DV bonus from Unarmed combat when fighting with Staves
+<li>of defense weapon suffix +6
+<li>shield skill, up to 2*(highest equipped shield DV)
+<li>+(Dexterity-12)/2
+<li>Dodge skill, up to +10 (Fighters lvl 12+ up to +15, Assassin lvl 32+ up to +20)
+<li>Tactics skill, up to +60%
+<li>high Alertness with Alchemy have also positive effect on DV, up to +4 (section <a href="adomgb-0-4.html">0.4</a>)
+<li>Talents: Shield Specialist/Expert/Master +1/+2/+3, Careful/Very Careful/Defensive Fighter/Dodger +1/+3/+2/+2
+<li>Satiated/Bloated, -1/-3
+<li>Burden levels, -1 per level
+<li>Blind/Drunk status, -8/-3
+<li>positive corruptions: Thin and nimble, Unholy aura, Maggots, +6/+6/+4
+<li>negative corruptions: Bronze bones, Rage, -2/-9
+<li>Beastfighter class ability, +lvl/3 if not using weapons or shields
+<li>Duelist lvl 12+, +2*weapon skill
+<li>Mindcrafter's Mental Shield +(lvl+Wi)/5
+<li>Monk class ability, +lvl*2/3 if not wearing armor except specific
+<li>Paladin lvl25+, +1 per two levels against opponents of opposite alignment
+</ul><p>
+
+<h4 id="083">0.8.3 PV bonuses</h4>
+<img src="tiles/pv.png" alt="pv" align="left">
+PV is base 0, and there is no minimum &ndash; it can go negative. If PV is below 4, the PC will suffer corresponding damage from kicking walls and statues. 
+The followinng bonuses and penalties are applied to PV:<p>
+<ul>
+<li>+(Toughness-18)/2, max +20
+<li>Talents: Tough skin and successors, +1/+1/+2/+3
+<li>Blessed status, +1 (+2 lvl 25+, +3 lvl 50)
+<li>positive corruptions: Bronze bones, Stiff muscles, Scales, +3/+4/+8
+<li>negative corruptions: Bulging cranium, Stilts, -4/-4
+<li>Tree starsign, +1
+<li>Chaos Knight lvl 50, up to +24
+<li>Fighter lvl 6/18/32, +7%/15%/+25% to armor's PV
+<li>Mindcrafter's Mental Shield, +(lvl+Wi)/8
+</ul><p>
+
+<h4 id="084">0.8.4 Monsters who bypass PV on every hit</h4>
+Monsters with a penetrating melee attack will bypass armor (PV) on every successful hit. Such monsters present a significant threat to PCs relying on high PV and having low DV.
+They typically come in two varieties: slow heavy-hitters with one or two very strong attacks per round or fast combatants with multiple light-to-moderate attacks per round.
+Both types are able to best the PC; a single critical strike from heavy-hitters may deplete all of hit points, while fast penetrating monsters will prevent the PC from escaping.
+The monster memory will not display any line to signify the ability to penetrate armor.<p>
+
+The full list of monsters with penetrating melee attack:
+all types of claw bugs, all types of ratlings, all types of quicklings, all types of molochs, chaos spawns, stone oozes, steel zombies, diamond golems, giant rust monsters, corruptors,
+vapor rats, battle bunnies, green blobs, muscular dwarves, magedoom eyes, royal guardians, ultimate doppelgangers, djinnis. Uniques: Glod, Cat Lord, Eternal Guardian, Assassin Prince,
+Kherab, Skriek, Hotzenplotz, Yergius, Kranf Niest, Malicious Doctor, Nuurag-Vaarn, <big>Chaos Diplomat, Andor Drakon.</big> <span class="newi">Additionally: antediluvian orcs/trolls,
+dwarven battle spirits, all newest trap&amp;wall constructs, paladins of order, velociraptors, Grizzled Dwarven Veteran, Nak An'Dwar, Truesilver Golem, Rolf.</span><p>
+
+<hr>
+Updated August 19th, 2021
+</body>
+</html>

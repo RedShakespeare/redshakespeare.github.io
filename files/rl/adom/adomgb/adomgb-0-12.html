@@ -1,0 +1,614 @@
+<html>
+<head>
+<title>Improved ADOM Guidebook - Powers</title>
+<link rel="stylesheet" type="text/css" href="adomgb-body.css">
+</head>
+<body>
+<h1>Improved ADOM Guidebook</h1>
+<hr>
+<a href="adomgb-0-11.html">Previous</a> - <a href="toc.html">TOC</a> - <a href="adomgb-0-13.html">Next</a>
+<hr>
+<a href="#0c11">Resistances</a> - <a href="#0c12">Immunities</a> - <a href="#0c13">Dooming and Cursing</a> - <a href="#0c14">Lucky and Fate smiles</a> -
+<a href="#0c15">Teleportitis and Teleport control</a> - <a href="#0c16">Invisibility and See invisible</a> - <a href="#0c17">Water breathing</a> -
+<a href="#0c2">Status conditions</a> - <a href="#0c3">Item powers</a> - <a href="#0c4">Item statuses</a>
+<hr>
+
+<h3 id="0c">Powers</h3>
+Powers in ADOM are intrinsics, status conditions and item powers. Status conditions differ from intrinsics, as intrinsics are usually permanent unless/until they are removed
+(by removing an item if granted by one; or by magical means such as pools or karma). Also, status conditions appear in the bottom left of the game screen; whilst intrinsics
+can usually only be identified by a potion of insight or the Revelation spell. Item powers are magical properties of certain items, usually artifacts.<p>
+
+<h4 id="0c1">0.12.1 Intrinsics</h4>
+Intrinsics are properties conferred on the player by worn item (and only stay in effect as long as the corresponding items are equipped) or received permanently from eaten corpse,
+pool or certain other means. Intrinsics generally provide resistance against certain forms of attack or confer other benefits. A few intrinsics, notably cursing and dooming, are
+undesirable and are generally removed as soon as possible. Note that the effects of most intrinsics stack — that is, two counts of fire resistance is better than one; two counts of
+dooming is worse than one. Also note that items that provide elemental resistances or immunities cannot be destroyed by the corresponding element, even if an item's material usually
+makes it susceptible to that element (eg. rings of fire resistances will never burn despite being made of wood).<p>
+
+There is no command to view your intrinsics. You have to find a way to see them in game. The available methods are:<p>
+<ul>
+<li>drink a potion of insight
+<li>cast the Revelation spell
+<li>intrinsics are revealed upon death
+</ul><p>
+
+<h4 id="0c11">0.12.1.1 Resistances</h4>
+There are various resistances available. These are:<p>
+<ul>
+<li>damage types: fire, cold, acid, shock
+<li>special attacks: paralysis, petrification, poison, confusion, death rays, sleep, stun, sickness
+</ul><p>
+
+Remember that resistance does <i>not</i> equal immunity in ADOM, ie. being hit by a Death Ray while resistant will not kill you instantly, but will still deal a
+significant amount of damage. Nevertheless two of the resistances don't have any levels, they equal immunities in effect: petrification and sleep. Some of
+the resistances can be gained by eating an appropriate monster corpse: intrinsic fire resistance can be gained by eating the corpse of fire-related creatures.
+The game generates messages related to this:<p>
+<ul>
+<li>fire beetle (50% chance of gaining fire resistance): You suddenly feel very hot! (whether or not resistance has actually been granted)
+<li>fire lizard (10% chance of gaining fire resistance): You suddenly shiver. (fire resistance granted) This stuff cools you down! (fire resistance not granted)
+<li>larger fire creatures, fire drakes, red dragons, and red wyrms, grant fire resistance every time
+</ul><p>
+
+There are further considerations about fire resistance in the Tower of Eternal Flames. See section <a href="adomgb-2-5.html#251">2.5.1</a> for more explanation.<p>
+<ul>
+<li>cold resistance can be gained by eating white dragons, white wyrms, ice lizards, or frost salamander/frost giant corpses
+<li>acid resistance can be gained by eating ankheg, ant, black dragon or black wyrm corpses
+<li>shock resistance can be gained by eating lightning lizard, blue dragons or blue wyrms corpses
+<li>poison resistance can be gained by eating giant centipede, cave fisher, tarantula, snake, viper, cobra, spider, or dark elven corpses. Be aware that most of
+this both poisons the PC and grants resistance, so the PC will have to endure a brief period of poisoning
+<li>petrification resistance can be gained by eating gorgon corpse (but the PC should have it already by other means, else is risking death)
+<li><big>paralyzation resistance can be gained by eating gelatinous cube corpse (1/3 chance)</big>
+</ul><p>
+
+An interesting test conducted by Petri Sihvola regarding petrification by a gorgon's breath:
+<pre>
+> I did some testing and there's an approximate 50% chance of dying to a gorgon breath without resistance. However, if DV is high enough
+> the chance is drastically reduced. This one shows my DV and how many times I died:
+> DV:23 10/20
+> DV:44 8/20
+> DV:53 1/20
+> DV:69 0/20
+</pre><p>
+
+The following table shows the means of gaining various resistances:<p>
+
+<table border=1><caption>Gaining resistances</caption>
+<tr><th>Resistance <th>Wearables <th>Wielded weapons<th>Class powers
+<tr><td><b>Fire</b> <td>ring of fire resistance, ring of minor elemental mastery, robes of resistance, bracers of resistance, red dragon-hide
+gauntlets, Black Torc, Perion's Mithril Plate Mail, Brannalbin's Cloak of Defense, Rolf's Savior, Nature's Friend, Ring of the High Kings,
+Elemental Gauntlets, Shezestriakis, red armor, <span class="newi">Robe of the Master Monk, Gleaming Dwarven Shield</span>
+<td>Rolf's Companion, Hammerhead, Trusted One, Staff of the Wanderer, Whirlwind, red weapon, <span class="newi">Gleaming Dwarven Rune Axe</span>
+<td>Elementalist level 6
+<tr><td><b>Cold</b> <td>ring of cold resistance, ring of minor elemental mastery, amulet of the cold heart, bracers of resistance,
+white dragon-hide gauntlets, Black Torc, Brannalbin's Cloak of Defense, Rolf's Savior, Nature's Friend, Ring of the High Kings, Elemental
+Gauntlets, Shezestriakis, white armor, <big>Spiked Armor of Chaos and Terror,</big> <span class="newi">Chainmail of Raw Steel,
+Robe of the Master Monk, Gleaming Dwarven Shield</span>
+<td>sword of Nonnak, white weapon, Trusted One, <big>Staff of Creation</big>
+<td>&nbsp;
+<tr><td><b>Acid</b> <td>ring of acid resistance, alchemistic gloves, robes of resistance, black dragon-hide gauntlets, Perion's Mithril
+Plate Mail, Brannalbin's Cloak of Defense, Nature's Friend, Shezestriakis, green armor, <big>Spiked Armor of Chaos and Terror, </big>
+<span class="newi">Chainmail of Raw Steel</span>
+<td>Staff of the Archmagi, Trusted One, green weapon
+<td>&nbsp;
+<tr><td><b>Shock</b> <td>robes of resistance, ring of minor elemental mastery, bracers of resistance, blue dragon-hide gauntlets, Black Torc,
+Brannalbin's Cloak of Defense, Nature's Friend, Ring of the High Kings, Elemental Gauntlets, Shezestriakis, yellow armor, <big>Moloch's Thorns,</big>
+<span class="newi">Robe of the Master Monk, Ring of the Archmages, Quicksilver Bracer</span>
+<td>Sceptre of Chaos, Executor, Trusted One, Spear of Raw Steel, yellow weapon, <big>Staff of Creation,</big> <span class="newi">Michals Transmogrifier,
+Bloody Rose, Judge &amp; Jury</span>
+<td>Elementalist level 12
+<tr><td><b>Poison</b> <td>alchemistic gloves, Crown of Leadership, Preserver, Ancient Mummy Wrapping, True Strength, Celestrix, Rolf's Savior,
+Shield of Raw Steel, Nature's Friend, Ring of the High Kings, Shezestriakis, <span class="newi">Heart of Ancarddia, Amulet of Indomitable Life,
+Chainmail of the Martyred Crusader, Robe of the Master Monk, Venom Mantle, Gleaming Dwarven Shield</span>
+<td>whip of the snake, Bugbiter, Serpent's Bite, Soaker, Sceptre of Chaos, Spear of Raw Steel, <span class="newi">Nature's Breath, Silence of the Dead, Unpick Axe,
+Whip of the Vampire Snake, Scorpion's Sting</span>
+<td>Beastfighter level 6, Healer level 50
+<tr><td><b>Paralysis</b> <td>amulet of free action, Preserver, Lust for Glory, Boots of the Divine Messenger, <span class="newi">Stone of the Ages, Chainmail
+of Raw Stell, Robe of the Master Monk, Ring of the Archmages, Quicksilver Bracers</span>
+<td>Soaker, Long Sting, Trusted One, <span class="newi">Nature's Breath, Kalmius' Shield</span>
+<td>Necromancer level 6, Paladin level 40
+<tr><td><b>Petrification</b> <td>amulet of petrification resistance, Crown of Chaos, Medal of Chaos, Lust for Glory, <span class="newi">Stone of the Ages,
+Quicksilver Bracers, Bergbringer</span>
+<td>Trusted One
+<td>&nbsp;
+<tr><td><b>Death rays</b> <td>amulet of death ray resistance, bracers of resistance, Crown of Chaos, Amulet of Raw Steel, Ancient Mummy Wrapping,
+True Strength, Celestrix, Lust for Glory, Bracers of War, Boots of the Divine Messenger, <span class="newi">Circlet of the Pure Mind, Amulet of Indomitable Life,
+Stone of the Ages, Chainmail od Raw Steel, Chainmail of the Martyred Cruader, Ring of the Archmages, Bergbringer</span>
+<td>Sword of Nonnak, Trident of the Red Rooster, Death's Blade, Trusted One, <big>Foeslammer, Staff of Creation,</big> <span class="newi">Silence of the Dead,
+Headman's Hand, Judge &amp; Jury, Kalmius' Shield</span>
+<td>&nbsp;
+<tr><td><b>Confusion</b> <td> helm/ring of mental stability, ring of the clear mind, Crown of Leadership, Shirt of the Saints, True Strength,
+Protector, Bracers of War, <big>Crowned Spiked Helmet of Chaos Lordship, Fencing Gloves of St. Montojja</big> <span class="newi">Circlet of the Pure Mind, Helm of the
+Night Watchman, Chainmail of the Martyred Crusader, Robe of the Master Monk</span>
+<td>Staff of the Archmagi, Soaker, Skullcrusher, Executor, Axe of the Minotaur Emperor, <big>Staff of Creation,</big> <span class="newi">staff of the swirling mind,
+Staff of Wonder, Masher, Eagle's Claw, Harvester, Unpick Axe, Scorpion's Sting, Sonic Boom</span>
+<td>Mindcrafter level 6
+<tr><td><b>Stun</b> <td>ring of stun resistance, Amulet of Raw Steel, Medal of Chaos, Ancient Mummy Wrapping, Protector, Bracers of War,
+Ironfist, padded armor, <big>Moloch's Thorns, Fencing Gloves of St. Montojja,</big> <span class="newi">Helm of the Night Watchman, The Wall, Bergbringer</span>
+<td>Grod, Wyrmlance, Hammerhead, Skullcrusher, Executor, Big Punch, Trusted One, <span class="newi">Masher, Bloody Rose</span>
+<td>Beastfighter level 12
+<tr><td><b>Sleep</b> <td>bracers of resistance, Amulet of Raw Steel, Ancient Mummy Wrapping, Shirt of the Saints, Celestrix, Protector,
+<big>Crowned Spiked Helmet of Chaos Lordship,</big> <span class="newi">Helm of the Night Watchman, Robe of the Master Monk, Tattered Cloak of the Dark Souls,
+Ring of the Archmages, Boots of the Far Wanderer</span>
+<td>Staff of the Archmagi, Executor, Trusted One, Staff of the Wanderer, Black Thumb, <span class="newi">Nature's Breath, Silence of the Dead</span>
+<td>&nbsp;
+<tr><td><b>Sickness</b> [1] <td>amulet/armor of health, <span class="newi">healer's robe, bracers of resilience</span>
+<td><span class="newi">staff of toughness, Nature's Breath</span>
+<td>Paladin level 40, Healer level 50
+</table><p>
+
+[1] Final sickness attack deals 6d6 damage. It can be prevented with resistance, or (Wi*3.45)% chance or (Healing/5)% chance.<p>
+
+<h4 id="0c12">0.12.1.2 Immunities</h4>
+Immunity to the four basic damage types is possible: fire, cold, acid and shock. Immunity means that the PC will take no damage from the corresponding elemental
+attack. However, creatures which deal elemental damage can still harm the PC, due to their ability to deal physical damage. The PC is only immune to damage from
+the elemental attack. <span class="newi">Sickness immunity was added.</span><p>
+
+Obtaining immunities:<p>
+<ul>
+<li>crowning<p>
+<ul>
+<li>grants an immunity to one of fire, cold, acid or shock
+</ul><p>
+
+<li>wearables<p>
+<ul>
+<li>dragon scale mail grants immunity to the corresponding element<p>
+<ul>
+<li>red &ndash; fire
+<li>white &ndash; cold
+<li>blue &ndash; shock
+<li>black &ndash; acid
+</ul><p>
+<li>crowns grants immunity to the corresponding element &ndash; fire, ice, lightning = shock
+<li>Crown of Science and moloch armor grant immunity to fire
+<li>Shield of Raw Steel grants immunity to fire and cold
+<li>Ancient Mummy Wrapping grants immunity to cold
+<li>armor "Nature's Companion" grants immunity to fire and shock
+<li>girdle "Celestrix" grants immunity to shock
+<li>ring of elemental mastery grants immunity to fire, cold and shock
+<li>Ring of Immunity grants all four immunities
+<li><big>Spiked Armor of Chaos and Terror grants immunity to fire</big>
+</ul>
+<div style="position:relative; top:2px; left:25px" class="newb">
+&bull;&nbsp; Heart of Ancardia and Chainmail of Raw Steel grant immunity to fire<br>
+&bull;&nbsp; Chainmail of the Martyred Crusader grants immunity to shock<br>
+&bull;&nbsp; cloak "Venom Mantle" grants immunity to acid<br>
+&bull;&nbsp; karmic dragon scalemail "Wyrm's Behest" grants all four immunities<br>
+&bull;&nbsp; immunity to sickness: Aylas Holy Scarf, Amulet of Indomitable Life, Perion's Mithril Platemail, Chainmail of the Martyred Crusader, Robe of the Master Monk<br>
+</div><p>
+
+<li>wielded<p>
+<ul>
+<li>morning star "Grod" grants immunity to fire
+<li>Scorched Spear and Rune-Covered Trident grant immunity to cold
+<li>Hammer of the Gods and Staff of the Wanderer grant immunity to shock
+<li>Spear of Raw Steel grants immunity to acid (if it exists)
+<li>Trident of the Red Rooster grants all four immunities
+<li><big>Staff of Creation grants immunity to fire</big></ul>
+<div style="position:relative; top:2px; left:25px" class="newb">
+&bull;&nbsp; Harvester and staff of minor volcano summoning grant immunity to fire<br>
+&bull;&nbsp; Eagle's Claw and Headman's Hand grant immunity to cold<br>
+&bull;&nbsp; boomerang "Sonic Boom" grants immunity to shock<br>
+&bull;&nbsp; immunity to sickness: sickle "Harvester", Unpick Axe<br>
+</div><p>
+
+<li>corpses<p>
+<ul>
+<li>eating a giant slug corpse grants immunity to acid
+<li>eating a <i>blessed</i> lightning lizard corpse has a 12.5% chance of granting shock immunity
+<li>eating Srraxxarrakex's corpse grants immunity to shock
+<li><big>eating frost salamander's corpse has a 10% chance of granting immunity to cold</big>
+</ul><p>
+
+<li>class powers<p>
+<ul>
+<li>Assassins receive immunity to poison at level 40
+<li>Druids receive shock immunity at level 40
+<li>Weaponsmiths receive fire immunity at level 32
+</ul>
+</ul><p>
+
+<h4 id="0c13">0.12.1.3 Dooming and Cursing</h4>
+Basically, Cursed and Doomed intrinsics decrease Luck, which is a hidden property. See section <a href="adomgb-0-6.html#064">0.6.4</a> for
+details.<p>
+
+Dooming or Cursing, as might be expected from the names, is generally to be avoided. They result from robbing shops, by drinking from pools,
+attacking karmic creatures in melee, reading scrolls of ill fate, cursing monster attacks (green hag, annis hag, black wizard, black druid),
+or eating certain corpses:<p>
+<ul>
+<li>Cursing only: ancient dwarf, annis hag, green hag, quasit
+<li>Dooming only: least/lesser/greater daemon, Cat Lord
+<li>both: Cute Dog, dwarven child, Oracle, Priest, royal guardian, (greater) white unicorn
+</ul><p>
+
+Cursing makes the game nudge all the die-rolls against the PC, generate more monsters which hit harder while the PC's hits become weaker.
+Dooming is a more severe form of this. Dooming also increases background corruption rate, and makes it much more difficult to pray for divine help.<p>
+
+Nevertheless, there are ways to exploit these intrinsics. These techniques are not for the beginner, of course. Vaults and wilderness encounters
+become more common. If the PC wants to achieve Grand Mastery in a weapon class, becoming Cursed and/or Doomed in the wilderness is the only way to
+do it in a reasonable time frame.<p>
+
+Dooming and Cursing can be removed by sacrificing at a coaligned altar. It may take considerable sacrificing to remove the Cursed/Doomed
+intrinsics, since they are only removed at the "very close" level of piety. Praying while the PC is already at very close status also may
+remove Dooming and/or Cursing, although these intrinsics make it more difficult to appeal for divine assistance, as noted above. Removing Dooming
+(only) results in the message "You feel a terrible gloom being lifted from you." Removing Cursing (only) results in the message "You feel relieved."
+Removing both Cursing and Dooming simultaneously results in only the "You feel a terrible gloom being lifted from you." message.<p>
+
+Another trick for exploiting the Doomed state is as follows: if a PC finds an altar early in the game, ideally before the Si level so that zero or
+very few artifacts have been generated, the PC should purchase or acquire plenty of food (cooked lizards and/or stomafillia herbs), become Doomed by
+eating a dooming corpse (daemons and quasits spring to mind) or wearing a ring of doom, and then exploit the heavy monster generation by sacrificing
+the monsters on the altar. This can quickly lead to very close or even extremely close status. After the Dooming is removed, by removing a cursed
+ring of doom or through reaching very close status, the PC can be crowned or precrowned.<p>
+
+Dooming also has an effect in dark rooms: if a Doomed PC wanders into a dark room, there is 2% chance for an instakill "You are likely to be eaten by a grue."
+(this only applies to Doomed characters). Deliberately playing in a Cursed or Doomed state is dangerous and should be reserved for those players who know
+exactly why they are doing it.<p>
+
+There is a game bug that causes fireproof blankets to be positively affected by the Cursed and Doomed intrinsics. It makes them last almost forever in the ToEF.
+It is probably not worth the Cursing or Dooming to make the blanket last. The ToEF is usually difficult enough in a Blessed state. <big>The bug is fixed in R+.</big><p>
+
+The following items grant Cursing/Dooming intrinsics:<p>
+<ul>
+<li>Cursing only: Black Torc, Executor, <span class="newi">Bergbringer</span>
+<li>Dooming only: armor/weapon/missile of damnation, javelin of doom, Celestrix
+<li>both: ring of doom, Crown of Science, Crown of Chaos, Medal of Chaos, Sceptre of Chaos, Boots of Great Speed
+</ul><p>
+
+<h4 id="0c14">0.12.1.4 Lucky and Fate smiles</h4>
+Basically, Lucky and Fate smiles intrinsics increases Luck, which is a hidden property. See section <a href="adomgb-0-6.html#064">0.6.4</a> for details.<p>
+
+The Lucky and Fate smiles intrinsics are the good counterparts to the Cursing and Dooming intrinsics, respectively. They cause the game to
+nudge die-rolls in the PC's favor. The effect is not as dramatic as the Dooming and Cursing intrinsics &ndash; Fate smiles almost counters Cursing.
+It should be noted that all four intrinsics may be present simultaneously. The negative ones are considerably stronger.<p>
+
+The Lucky and Fate smiles intrinsics are naturally gained by PCs as they sacrifice on coaligned altars; the messages are:<p>
+
+"You feel an inner strength lifting your spirits!" &ndash; The Lucky intrinsic<br>
+"You feel very close to -deity-." &ndash; The Fate smiles intrinsic<p>
+
+Eating karmic corpses increases Luck, by losing Dooming, Cursing, or gaining Lucky or Fate smiles intrinsics. Scrolls of luck work similarly but have no
+effect on Dooming.<p>
+
+The following items grant Lucky/Fate smiles intrinsics:<p>
+<ul>
+<li>Lucky only: amulet/ring of luck, Preserver, Bracers of War, Purifier, <span class="newi">Wyrm's Behest, Scorpion's Sting, Horn of Plenty</span>
+<li>Fate smiles only: Ring of the Master Cat
+<li>both: Ankh, True Strength, <span class="newi">Heart of Ancardia, Chainmail of the Martyred Crusader, Staff of Wonder, Silence of the Dead, Cornucopia</span>
+</ul><p>
+
+<h4 id="0c15">0.12.1.5 Teleportitis and Teleport control</h4>
+Teleportitis is a "disease" that causes your PC to teleport around randomly. It is obtainable from pools (you feel jumpy), corruption (your close
+attunement to corrupted astral space allows teleportation), from eating the right corpse (pixie) and items (helm of teleportation, Cloak of Oman, Manacles of Madness,
+Boots of the Far Wanderer, Hornet's Sting). It can be useful for escaping tight spots such as being surrounded by monsters (though it never seems to kick in when needed ;),
+for shoplifting and for reaching areas that are usually inaccessible. As of R65, teleportitis is not triggered while reading a spellbook. The prime danger of
+uncontrolled teleportitis, however, is shopping &ndash; there is always a chance the character will teleport while carrying an unpaid item, resulting in the shopkeeper declaring
+a robbery and trying to kill the involuntary shoplifter.<p>
+
+To avoid this and make teleportitis an overall pleasant thing to have, it is crucial to obtain teleport control. Teleport control allows you to choose the destination when
+teleporting your PC. It works whether the cause of the teleportation is teleportitis or deliberate, such as <tt>z</tt>apping a wand of teleportation or casting the Teleport
+spell at the PC's current location. Mindcrafters always get Teleport control at experience level one, others have to rely on eating the right corpse (blink dog), drinking from
+pools (you feel like jumping around) or wearing items (amulet/ring of teleport control, Boots of the Divine Messenger, Moloch's Thorns, Ring of the Archmages, Boots of the Far
+Wanderer, Hornet's Sting).<p>
+
+Controlled teleportation is important in the game. There is a guaranteed wand of teleportation in the VDDL level of the Assassin's Guild. It can be found using
+any of the item detection techniques. The wand and potions of booze are then on-demand teleportation. Teleport control is not guaranteed but if necessary,
+the PC can stair hop in the Infinite Dungeon between I3 and I4 until blink dogs are generated.<p>
+
+The following locations disallow teleportation of any source:<p>
+<ul>
+<li>Any elemental temple. This does not include the lower levels of the Tower of Eternal Flames.
+<li>Last level of the Tomb of the High Kings &ndash; the actual tomb containing the piranha lake and RotHK. (<a href="adomgb-2-12.html">2.12</a>)
+<li>BUGCV &ndash; the underground level of the Bug Temple. (<a href="adomgb-2-3.html">2.3</a>)
+<li>Cat Lord level. (<a href="adomgb-3-16.html">3.16</a>)
+<li>Final level of the Assassins Guild. (<a href="adomgb-2-11.html#2b3">2.11.3</a>)
+<li>D: 49. (<a href="adomgb-3-23.html">3.23</a>)
+<li><big>Ice Queen Domain except Dungeon. (<a href="adomgb-2-22.html">2.22</a>)</big>
+<li><span class="newi">Rolf's Fortress except Dungeon. (<a href="adomgb-2-27.html">2.27</a>)</span>
+<li><span class="newi">Heavenly Area. (<a href="adomgb-3-17.html#3h4">3.17.4</a>)</span>
+</ul><p>
+
+In addition, Darkforge and Merchant Guild disallow teleportation until the area's boss (Kherab and Schwarzzahn, respectively) is dead.<p>
+
+<h4 id="0c16">0.12.1.6 Invisibility and See invisible</h4>
+Invisibility provides several bonuses to Stealth, Backstabbing, to hit/damage etc. Hostile monsters who don't see invisible will still occasionally hit the PC if they are next
+to her, although they will not use any special attacks unless they actually see the PC. Be aware however that invisible PCs are not allowed to fight in the Arena.<p>
+
+Invisibility can be gained by drinking from pools (you suddenly are gone), eating invisible stalker corpse (10% chance), or wearing items, such as ring/robe/cloak
+of invisibility, Brannalbin's Cloak of Defence, or Tattered Cloak of the Dark Souls. Being invisible by wearing items severely increases food consumption, section
+<a href="adomgb-0-3.html#032">0.3.2</a>. Potions of invisibility/visibility and the Invisibility spell provide temporary effect. Note that permanent invisibility may
+be removed only by drinking from pools. You can also wear normal mummy wrappings.<p>
+
+The See invisible intrinsic can be gained by drinking from pools (your eyes tingle), eating invisible stalker corpse (90% chance), wearing a ring of see invisible, Amulet of Raw
+Steel, Medal of Chaos, Ring of the Master Cat, Crown of Leadership, Ancient Mummy Wrapping, Shirt of the Saints, Celestrix, Crowned Spiked Helmet of Chaos Lordship, Third Eye,
+Robe of the Master Monk, Ring of the Archmages, Bracers of Pure Mind, Manacles of Madness, or wielding Rune-Covered Trident, Trident of The Red Rooster, Axe of the Minotaur
+Emperor, Silence of the Dead, Masher, Scorpion's Sting, Judge &amp; Jury.<p>
+
+<h4 id="0c17">0.12.1.7 Water breathing</h4>
+Water breathing allows the PC to completely avoid drowning damage, be it while swimming over an open body of water, swimming in completely submerged locations,
+or swimming in magma. It also reduces to about 1/3 the amount of damage the PC takes from water breath attacks.<p>
+
+It is possible to gain the Water breathing intrinsic by eating Blup's or Shyssiryxius' corpse. The message "For some seconds a strange liquid seems to fill your lungs." is generated.<p>
+
+Certain items and wielded weapons grant the intrinsic:<p>
+<ul>
+<li>helm/amulet of water breathing
+<li>Rune-Covered Trident, Trident of the Red Rooster &ndash; when wielded
+<li>Medal of Chaos, <big>Crowned Spiked Helmet of Chaos Lordship</big> &ndash; when worn
+<li><span class="newi">Chainmail of the Martyred Crusader, Robe of the Master Monk, Boots of the Far Wanderer &ndash; when worn</span>
+<li><span class="newi">Silence of the Dead, Harvester &ndash; when wielded</span>
+</ul><p>
+
+Elementalists receive Water breathing as an intrinsic class power at experience level 25. A non-artifact source of water breathing intrinsic (amulet or helm) is guaranteed
+to be found at the bottom level of the Rift dungeon.<p>
+
+The following items also stop drowning, although Water breathing is not listed as an intrinsic at the time.<p>
+<ul>
+<li>rings of the fish &ndash; autocursing; 1 blessed or 2 of any status stop drowning damage, single uncursed ring stops drowning 80%, cursed 60% of the time &ndash;
+if the PC is not Cursed or Doomed
+<li>armor of the sea &ndash; stops drowning 100%, 80%, 60% of the time B/U/C
+</ul><p>
+
+Water breathing is one of the three intrinsics in the game that cannot be received from sipping pools, the others being confusion and sickness resistance.<p>
+
+<h4 id="0c2">0.12.2 Status conditions</h4>
+Status conditions are effects caused by certain actions in the game that temporarily influence characteristics of the PC (or a monster, if
+cast on one by certain means). Such characteristics include loss of HP, loss of certain attributes, inability to use certain commands or
+even complete loss of mobility for a certain amount of turns. Some may even be fatal. Status conditions are almost always negative; though
+a few can actually have positive effects.<p>
+
+<table id="0c21" border=1><caption>0.12.2.1 Hunger</caption>
+<tr><th>Icon<th>Condition <th>Effects <th>Causes <th>Cure <th>Notes
+<!--<tr><td><b>Overfed</b><td>? <td>? <td>? <td>Not used in the game.-->
+<tr><td><img src="tiles/warning_bloated.png" alt="bloated"><td><b>Bloated</b><td>-3 DV, -10 Speed, -2 to-hit <td>satiation &gt; 2500 <td>wait [3] <td>Prevents PC from <tt>e</tt>ating most food, except certain potions.
+<tr><td><img src="tiles/warning_satiated.png" alt="satiated"><td><b>Satiated</b><td>-1 DV, -5 Speed, -1 to-hit  <td>1500 &lt; satiation &lt;= 2500 <td>stomacemptia herbs or wait [3]<td>&nbsp;
+<tr><td><img src="tiles/warning_hungry.png" alt="hungry"><td><b>Hungry</b><td>none <td>100 &lt;= satiation &lt; 200 <td rowspan=3>eating [1]<td>Just serves as a warning.
+<tr><td><img src="tiles/warning_hungry!.png" alt="hungry!"><td><b>Hungry!</b><td>none<br><big>-St,Le,Wi,Dx</big> <td>50 &lt;= satiation &lt; 100 <td>Serves as further warning.
+<tr><td><img src="tiles/warning_starving.png" alt="starving"><td><b>Starving!</b><td>-4&nbsp;St, then -St, -Le, -Wi, -Dx [2] <td>satiation &lt; 50 <td>In this state, most PCs will eat things they normally wouldn't out of desperation; for example, Dwarves will eat orcs and non-trolls will eat doppelgangers.
+<tr><td>&nbsp;<td><b>Starved</b> <td>Death! <td>satiation &lt;= 0 <td>n/a <td>High To prevents dying out of starvation too soon.
+</table><p>
+
+[1] Or other methods for increasing satiation, see <a href="adomgb-0-3.html#0311">0.3.1.1</a>.<p>
+[2] The attributes drop until half of the original value is reached (for St, it is half of original-4).<p>
+<big>[3] Casting spells from HP also reduces satiation.</big><p>
+
+For more detailed information about hunger conditions and satiation levels, <big>which are a bit different in R+,</big> section <a href="adomgb-0-3.html#032">0.3.2</a>.<p>
+
+<table id="0c22" border=1><caption>0.12.2.2 Burden</caption>
+<tr><th>Icon<th>Condition <th>Effects <th>Causes <th>Cure <th>Notes
+<tr><td><img src="tiles/warning_burdened.png" alt="burdened"><td><b>Burdened</b><td>-1 DV, -5 Speed, -1 to-hit, food consumption +1 <big>+0.5</big> when moving <td rowspan="5">carrying too much [1] <td rowspan=4>droping items or increasing carrying capacity  <td>Trains St if St&lt;15.
+<tr><td><img src="tiles/warning_strained.png" alt="strained"><td><b>Strained</b><td>-2 DV, -10 Speed, -2 to-hit, food consumption +1 <big>+0.5</big>, +2 <big>+1</big>when moving <td>Trains St if St&lt;16.
+<tr><td><img src="tiles/warning_strained!.png" alt="strained!"><td><b>Strained!</b><td>-3 DV, -20 Speed, -3 to-hit, food consumption +1 <big>+0.5</big>, +3 <big>+2</big>when moving [2] <td>Trains St if St&lt;18.
+<tr><td><img src="tiles/warning_overburdened.png" alt="overburdened"><td><b>Overburdened!</b><td>-4 DV, -40 Speed, -6 to-hit, food consumption +2 <big>+1</big><td>Trains St if St&lt;20; abuses Dx; cannot pick up items or move.
+<tr><td>&nbsp;<td><b>Crushed!</b>     <td>Death! <td>n/a <td>&nbsp;
+</table><p>
+
+[1] The burden levels can be checked using the command <tt>:b</tt>.<p>
+[2] Walking down staircases whilst very strained can cause the PC to fall, injuring her.<p>
+
+<table id="0c23" border=1><caption>0.12.2.3 Bleeding</caption>
+<tr><th>Icon<th>Condition        <th>Effects <th>Causes <th>Cure <th>Notes
+<tr><td><img src="tiles/warning_bleeding.png" alt="bleeding"><td><b>Bleeding</b>  <td>-1-4 HP/turn [1]  <td rowspan=2>monster attacks; pools<td rowspan="2">First Aid skill or bandage <td rowspan="2">Can be inflicted on monsters by <i>weeping</i> weapons.
+<tr><td><img src="tiles/warning_bleeding.png" alt="bleeding!"><td><b>Bleeding!</b><td>-5+ HP/turn [1]
+</table><p>
+
+[1] Bleeding status occurs when the number of turns the PC is to bleed for is between 1 and 4 inclusive, Bleeding! when it is 5 or higher.
+HP loss caused by either status is always equal to the amount of bleeding turns left, which decreases by 1 each turn.<p>
+
+<table id="0c24" border=1><caption>0.12.2.4 Tactics</caption>
+<tr><th>Icon<th>Condition <th>Effects <th>Causes <th>Cure <th>Notes
+<tr><td><img src="tiles/warning_berserk.png" alt="berserk"><td><b>Berserk</b><td>+ X to-hit, + Y to-damage, - Z DV [1]<td>setting the appropriate <tt>T</tt>actic &ndash; <tt>F1</tt> <td rowspan=2>choosing another tactic setting <td>One of the conditions for becoming True Berserker, see <a href="adomgb-0-7.html#074">0.7.4</a>.
+<tr><td><img src="tiles/warning_coward.png" alt="coward"><td><b>Coward</b>   <td>- X to-hit, - Y to-damage, + Z DV [1]<td>setting the appropriate <tt>T</tt>actic &ndash; <tt>F7</tt> <td>If your HP is below 1/3 of maximum, moving costs 20% less EP.
+</table><p>
+
+[1] X, Y and Z modifiers are increased by the Tactics skill, Strength and Dexterity.<p>
+
+<table id="0c25" border=1><caption>0.12.2.5 Positive</caption>
+<tr><th>Icon<th>Condition <th>Effects <th>Causes <th>Cure <th>Notes
+<tr><td><img src="tiles/warning_blessed.png" alt="blessed"><td><b>Blessed</b>         <td>+2 Luck, +1 PV <big>[1]</big><td>casting Bless spell on the PC (temporary), crowning (permanent), <big>drinking potion of holy water (temporary),</big> <span class="newi">praying at Legend statue</span><td>fallen champion; particularly unholy rooms <td>The only truly positive status.
+<tr><td><img src="tiles/warning_invisible.png" alt="invisible"><td><b>Invisible</b>   <td colspan=2>section <a href="adomgb-0-12.html#0c16">0.12.1.6</a> above <td>pools; potion of visibility (temporary); <big>mummy wrapping</big> <td>Invisible PCs cannot enter the Arena.
+<tfoot class="new">
+<tr><td><img src="tiles/warning_levitating.png" alt="levitating"><td><b>Levitating</b><td>ignore the increased EP costs of moving through difficult terrain, immunity to pit and alarm traps, move over water and magma without taking drowning damage, no damage from falling down stairs
+<td>staff/ring/boots of levitation; Eagle's Claw <td>unequiping the item <td>It's not possible to discover the Water Dragon Cave while levitating; levitation does not work on D: 49.
+</tfoot></table><p>
+<big>[1] +1 additional PV per 25 levels, also +1 to-hit per 10 levels, +1 to-damage per 20 levels.</big><p>
+
+<table id="0c26" border=1><caption>0.12.2.6 Other</caption>
+<tr><th>Icon<th>Condition <th>Effects <th>Causes <th>Cure <th>Notes
+
+<tr><td><img src="tiles/warning_blind.png" alt="blind"><td><b>Blind</b> <td>-8 DV, -4 to-hit; you cannot see PC's location on the map; PC cannot identify monsters or items (same effects as  being in darkness); disables many actions: shooting, kicking, applying certain skills
+<td>light trap, flashing door trap; cursed potion of invisibility, potion of blindness, cursed potion of booze; being hit with a glob of mud; failing to learn a spell from a book
+<td>the glob of mud is removed using Wipe <tt>F</tt>ace; blessed potion of blindness; prayer
+<td>Being blind is one way to melee a Dorn Beast without becoming paralysed.
+
+<tr><td><img src="tiles/warning_confused.png" alt="confused"><td><b>Confused</b> <td>actions of PC are considerably restricted &ndash; any direction key, including <tt>.</tt> and <tt>5</tt>, causes PC to stagger in a random direction (even if this means falling into water!); PC can't shoot, zap wands, read, sometimes also fail to cast spells and can't control teleportation
+<td>doppelganger attacks; spells cast by monsters such as liches, wyrms or skeletal kings; eating certain corpses (such as minotaurs or displacer beasts); non-blessed potion of confusion; failing to learn a spell from a spellbook; IBM guild manual confuses permanently
+<td>blessed potion of confusion; prayer
+<td>Combat staggering by <tt>a</tt>pplying First Aid or cleaning <tt>E</tt>ars.
+
+<tr><td><img src="tiles/warning_deaf.png" alt="deaf"><td><b>Deaf</b> <td>no messages related to sounds will be generated; additionally, the PC cannot <tt>C</tt>hat to any NPCs (the message "You don't know how to communicate by using sign language." is generated)
+<td>plugging the ears by <tt>U</tt>sing beeswax; non-blessed potion of deafness; exploding door traps
+<td>blocked ears are cured by using the clean <tt>E</tt>ars command or if the wax is destroyed by fire; blessed potion of deafness; prayer
+<td>Forcing the PC to be deaf is one way to survive being instakilled by the Banshee's scream. Curiously, the PC can still hear shopkeepers whilst deaf.
+
+<tr><td><img src="tiles/warning_drunk.png" alt="drunk"><td><b>Drunk</b> <td>-3 DV, -5 Speed, -1 to-hit, -4 to-hit kicking, +2 dmg (+0 kicking); no effect on moving, shooting or casting spells; small penalty for learning spells
+<td>non-cursed potion of booze; ales from Torgall in Dwarftown; pools; <span class="newi">antediluvian alcohol</span>
+<td>wait
+<td>It wears off rather quickly.
+
+<tr><td><img src="tiles/warning_mute.png" alt="Mute"><td><b>Mute</b> <td>cannot cast spells except for by wands; obviously, cannot chat or haggle; <big>cannot <tt>a</tt>pply Ventriloquism</big>
+<td>harpy corpse; <span class="resi">statues</span>
+<td>prayer or wait
+<td>&nbsp;
+
+<tr><td><img src="tiles/warning_paralyzed.png" alt="paralyzed"><td><b>Paralyzed</b> <td>cannot take any action for a number of turns &ndash; meaning that if there are monsters around, they are able to hack away at the hapless PC
+<td>being attacked by or attacking a gelatinous cube, floating eye, Dorn Beast; attacks from mimics, ghuls, liches, casino guards, carrion crawlers, brown worms, dark elven priestesses, living walls, solars, greater fungoids; attacking stone ooze; eating gelatinous cube or ghul corpses
+<td>wait
+<td>A PC can safely melee a Dorn Beast without being paralysed if they cannot see it (the PC is blind, the beast is invisible, or the battle takes place in darkness).
+
+<tr><td><img src="tiles/warning_poisoned.png" alt="poisoned"><td><b>Poisoned</b> <td>PC takes Damage every Frequency number of turns (poison effect has two parameters: Damage and Frequency)
+<td>potion of poison; potion of oil; oil of rust removal; monster attacks from snakes, spiders, assassins, thugs, dark elven warriors/lords/princesses, imps, centipedes etc.; corpses of certain monsters &ndash; spiders, imps, zombies, giant centipedes etc.; demon daisy; pools
+<td>potion of cure poison, alraunia antidote, Neutralize Poison or Slow Poison spells; prayer
+<td>Can be inflicted on monsters by attacking them with a weapon dipped into potion of poison (or Serpent's Bite).
+
+<tr><td><img src="tiles/warning_sick.png" alt="sick"><td><b>Sick</b> <td>each attribute is reduced; the PC will suffer feverish attacks every time their HP is higher than half their max HP; it may wear off harmlessly by itself, but sometimes when it wears off the PC will "suffer one last major fever attack" which deals 6d6 damage
+<td>attacks from mummies, corpse fiends, green blobs/slimes/worms; eating corpses of kobolds, rabid dogs, quasits, were-beasts; potion of  sickness; devil's rose; worm-ridden armor; pools
+<td>Cure Disease spell; curaria mancox herb; potion of healing or better (these don't always work); fairy dragon corpse; prayer works only if  piety is above 3000 and the PC is fully healed
+<td>Feverish fits (last brutal sickness attack) + Paralyzed or Sleeping = Death.
+
+<tr><td><img src="tiles/warning_sleeping.png" alt="sleeping"><td><b>Sleeping</b> <td>cannot act for a few turns
+<td>harpy, werejackal, fairy dragon songs; homunculus attacks; eating homunculus or cooshoo corpse
+<td>wait
+<td>Though roughly equivalent to paralysis, sleep is generally not as dangerous; as monsters that inflict sleep do not tend to be as powerful or persistent as monsters that inflict paralysis.
+
+<tr><td><img src="tiles/warning_slowed.png" alt="slowed"><td><b>Slowed</b> <td>Speed -50%
+<td>Slow Monster spell cast on the PC; attacks from clay golem, slow shadow, stone snake, WMoPC
+<td>prayer
+<td>Increasing the speed may improve the situation, but won't remove the speed penalty.
+
+<tr><td><img src="tiles/warning_stunned.png" alt="stunned"><td><b>Stunned</b> <td>pressing a direction button will cause the PC to stagger in a random direction, but unlike confusion, the PC can safely skip their turn using <tt>.</tt> or <tt>5</tt>; can't perform actions such as drinking potions or shooting; may be unable to cast spells
+<td>flashing door trap; powerfull monster attack; failing to learn a spell from a spellbook; non-trolls eating a cursed hurthling cake
+<td>prayer
+<td>Note a potion of stun recovery won't work, as your hands will shake too much to drink potions.
+
+</table><p>
+
+<h4 id="0c3">0.12.3 Item powers</h4>
+For the effects of "Essence of Chaos and Corruption" power, section <a href="adomgb-0-10.html#0a24">0.10.2.4</a>.<p>
+
+<h4 id="0c31">0.12.3.1 Regeneration</h4>
+Regeneration is a special item power which generates one additional hit point per turn. It works in addition to natural regeneration described in section
+<a href="adomgb-0-14.html#0e6">0.14.6</a>. The effects are cumulative, so if the PC has two sourcers of Regeneration, she gains additional 2 HP per turn.
+The following items grant Regeneration: crown/ring/bracers/staff of regeneration, knife of endurance, Bracers of War, Preserver, True Strength, Celestrix,
+<span class="newi">Amulet of Indomitable Life, Chainmail of Raw Steel.</span> It is possible to regenerate a maximum of 9 <big>8</big> HP per turn via
+Regeneration (head, amulet, girdle, hands, rings, bracers, missile). <big>Missile slot no longer provides regeneration.</big><p>
+
+<h4 id="0c32">0.12.3.2 Critical hits</h4>
+Critical hits is a special item power which allows the PC to score critical hits more often. If a Critical hit is scored, the attack message generated includes
+"with full force" phrase. In case of missile attack, the message includes "exactly hit" phrase. As critical hits do not bypass PV, it is possible to receive the "You hit the
+-monster- with full force and fail to hurt it." message. In such a case even the double amount of damage wasn't enough to get past the PV. Consider switching the form of offense.
+The following items grant Critical hits: bloody dagger, whip of slaughtering, murderous weapon, Bracers of War, Ring of the Master Cat, Grod, Serpent's Bite, Axe of the Minotaur
+Emperor, Spear of Raw Steel, <big>Foeslammer, Rapier of the Needle,</big> <span class="newi">Eagle's Claw, Harvester, Bloody Rose, Headman's Hand, Lead Great Axe.</span>
+Refer to section <a href="adomgb-0-7.html#077">0.7.7</a> for more quantitative details.<p>
+
+<h4 id="0c33">0.12.3.3 Autocursing</h4>
+Autocursing items become cursed when equipped, generating message "the &lt;item&gt; suddenly glows in a black light!". It is obviously a bad effect, though not terrible for
+moderately advanced PC, since the curse can be removed via regular means, which include dipping the item into potion of holy water, reading a scroll of uncursing, casting the
+Remove Curse spell, praying, or using Wizard's 40th level class power (see also <a href="adomgb-0-14.html#0ed">0.14.13</a>). The following mostly bad items share the
+autocursing property: amulet of hunger, ring of doom, ring of the fish, ring of weakness, gauntlets of peace, boots of the slow shuffle, auto-locking armor, Black Torc,
+Medal of Chaos, Crown of Science, Shezestriakis, Moon Sickle, Kinslayer, <span class="newi">Tattered Cloak of the Dark Souls.</span><p>
+
+<h4 id="0c34">0.12.3.4 Slaying</h4>
+Many artifact and few special regular weapons are imbued with Slaying powers. This means the particular weapon always scores a critical hit against certain monster types.
+Vanquisher is very valued artifact weapon since it slays almost everything. A missile of slaying (without specification) slays everything. Refer to section
+<a href="adomgb-0-9.html#094">0.9.4</a> to determine monster types. <span class="newi">Black Whip of Extinction slays everything and animals (not listed below).</span><p>
+
+<table id="0c341" border=1><caption>Slaying weapons</caption>
+<tr><th>Monster type<th>Weapons
+<tr><td>Battle bunnies <td>rabbit knife
+<tr><td>Constructs <td>Vanquisher, Purifier, arrow/quarrel/<big>sling bullet</big> of construct slaying, <span class="newi">Eagle's Claw, Nature's Breath</span>
+<tr><td>Demons <td>Vanquisher, Grod, Rune-covered Trident, Purifier, Executor, Trident of the Red Rooster, Justifier, arrow/quarrel/sling bullet of demon slaying, <span class="newi">Devilbane</span>
+<tr><td>Dragons <td>Vanquisher, Wyrmlance, arrow/quarrel/<big>sling bullet</big> of dragon slaying
+<tr><td>Giants <td>Vanquisher, Grod, arrow/quarrel/<big>sling bullet</big> of giant slaying
+<tr><td>Humanoids <td>Vanquisher, Serpent's Bite, Skullcrusher, Executor, Kinslayer, arrow/quarrel/<big>sling bullet</big> of humanoid slaying, <big>Foeslammer,</big> <span class="newi">Silence of the Dead</span>
+<tr><td>Insects <td>Bugbiter, <big>sling bullet of insect slaying,</big> <span class="newi">Eagle's Claw</span>
+<tr><td>Jellies <td>Vanquisher, Soaker, arrow/quarrel of jelly slaying
+<tr><td>Plants <td>Scorched Spear, Black Thumb, <big>Foeslammer, sling bullet of plant slaying,</big> <span class="newi">Harvester, Lead Great Axe</span>
+<tr><td>Rats <td>Cat's Claw
+<tr><td>Undead <td>mace of disruption, Vanquisher, Rune-covered Trident, Purifier, Trident of the Red Rooster, Justifier, Sun's Messenger, Black Torc, arrow/quarrel/<big>sling bullet/</big><span class="newi">staff</span> of undead slaying, <span class="newi">Eagle's Claw</span>
+</table><p>
+
+<h4 id="0c35">0.12.3.5 Returning</h4>
+Some missiles or weapons possess a special Returning power, which means the missile or weapon returns when thrown. This does not mean the PC
+catches it automatically &ndash; the actual chance of successfully catching a returning missile depends on Dexterity and Luck. All artifact missiles
+possess this power, and also the following weapons: boomerang, dagger/spear/drakish scurgar of returning, curved throwing club, javelin of doom,
+Black Torc, Rolf's Companion, Rune-covered Trident, Trident of the Red Rooster, Hammer of the Gods, Spear of Raw Steel,
+<span class="newi">Silence of the Dead, Gleaming Dwarven Rune Axe.</span><p>
+
+<h4 id="0c36">0.12.3.6 Penetration</h4>
+Penetration is the act of bypassing the PV of a creature in combat, dealing damage as if the creature has PV of 0. For PC, penetration can only
+be achieved via a phase dagger, a penetrating weapon, a missile of penetration, or via Archer's 40th level class power, which grants 20% chance
+of bypassing enemy armor when using missile. On the other hand, several monsters, such as ratling duelists and claw bugs, will always bypass
+the PV of the PC. <big>Duelists fighting unencumbered can sometimes "locate a weak spot in the armor" of humanoid opponents. Their chance to do so
+increases at level 25.</big><p>
+
+<div class="resb">
+<h4 id="0c37">0.12.3.7 Terror</h4>
+Equipped items with this power periodically cause monsters to flee in panic. The effect is identical to the unholy aura corruption. Take great care when near shopkeepers!
+Crowning gifts for Chaos Knights mostly feature this power. Terror items include the following artifacts: Spiked Armor of Chaos and Terror, Crowned Spiked Helmet of Chaos
+Lordship, Foeslammer, <span class="newi">Michals Transmogrifier.</span><p>
+</div>
+
+<div class="newb">
+<h4 id="0c38">0.12.3.8 PP regeneration</h4>
+Few items have the ability to enhance PP regeneration by +1, similarly to HP regeneration discussed earlier in 0.12.3.1. Items with this power: empowered armor,
+bracers of empowerment, Circlet of the Pure Mind, Manacles of Madness, Staff of Wonder, Chainmail of the Martyred Crusader, Kalmius' Shield, Ring of the Archmages.<p>
+
+<h4 id="0c39">0.12.3.9 Purity</h4>
+Purity items prevent or reduce background corruption. Special corrupting areas (ChAoS Plane, Scintillating Cave 9) will still corrupt the PC. Mundane item with this
+power are bracers/robe of purity. Artifacts: Aylas Holy Scarf, Bracers of Pure Might, Chainmail of the Martyred Crusader.<p>
+
+Refer to chapter <a href="adomgb-0-10.html#0a21">0.10.2.1</a> for discussion of background corruption. Cursed purity items provide 1 protection level, uncursed 2, and blessed 3.
+This is added together if multiple purity items are equipped. 5 or higher protection level seems to eliminate background corruption completely, except for Emperor Moloch Lair
+and Chaos Plane.<p>
+
+<table border=1><caption>Purity protection</caption>
+<tr><th rowspan=2>CPs <th colspan=4>Protection level
+<tr>       <th>1 <th>2 <th>3 <th>4
+<tr><td>1  <td>0 <td>0 <td>0 <td>0
+<tr><td>2  <td>1 <td>1 <td>0 <td>0
+<tr><td>3  <td>2 <td>1 <td>1 <td>0
+<tr><td>4  <td>2 <td>2 <td>1 <td>0
+<tr><td>5  <td>3 <td>2 <td>1 <td>0
+<tr><td>6  <td>3 <td>2 <td>2 <td>1
+<tr><td>7  <td>4 <td>3 <td>2 <td>1
+<tr><td>8  <td>4 <td>3 <td>2 <td>1
+<tr><td>9  <td>5 <td>3 <td>2 <td>1
+<tr><td>10 <td>5 <td>4 <td>3 <td>1
+<tr><td>11 <td>6 <td>4 <td>3 <td>2
+<tr><td>12 <td>6 <td>4 <td>3 <td>2
+<tr><td>13 <td>7 <td>5 <td>3 <td>2
+</table><p>
+
+<h4 id="0c3a">0.12.3.10 Blood sucking</h4>
+Certain artifact weapons can drink blood from living monsters, enhancing one or more of the following stats: to-hit (precision), damage (lethality),
+DV (parry attacks), PV (block attacks), Speed (move faster), Strength, Dexterity, Toughness. The bonuses gradually increase as the weapon damages living monsters, but
+drop back to base values over time. Constructs, insects, jellies, plants, undead, (dwarven) chaos knights, and (greater/emperor) molochs apparently do not have blood,
+and thus will not power up these weapons. Blood sucking weapons include: Fang, Masher, Whip of the Vampire Snake, Arak's Guard, Judge &amp; Jury, Silence of the Dead,
+Headman's Hand, and Hornet's Sting.<p>
+</div>
+
+<h4 id="0c4">0.12.4 Item statuses</h4>
+The following statuses modify the item's function or stats in some way. More than one status can be present at the same time.<p>
+<ul>
+<li><b>Rusty</b> &ndash; iron items become rusty by exposure to water &ndash; swimming, water traps, rain, water breath attacks. Water traps and rain can be prevented by
+wearing cloak. Other common cause to rusting is (large/giant) rust monster. Dipping iron items into a potion of water or cursed oil of rust removal also results in rusty status.
+Rusty weapons deal half damage and are more prone to breaking. Rusty armor reduces Appearance by 1 and is more prone to destruction. Rusty tools are more liable to breaking when
+used (rusty climbing set can lead to death). Rusty wands usually function normally, except (ball) lightning. Rust is removed by dipping the item into a non-cursed oil of rust removal,
+or via Smithing/Glod.
+<li><b>Broken</b> &ndash; weapons, keys and wands may become broken simply by frequent usage. Blessed items are less prone to breaking, cursed more. Cursed scrolls of repair break
+items, even the non-breakable ones (such as herbs; broken potions still can be quaffed with usual effect, broken scrolls and books can be read etc. <big>fixed</big>). Broken weapons
+deal only half damage (cumulative with rust). Broken wands and keys are non-functional. Broken status of metal items (except gold <span class="newi">and truesilver</span>, since there
+are no gold ingots) can be removed by Smithing. Non-cursed scroll of repair or Glod will remove broken status from any item or items stack.
+<li><b>Rustproof</b> &ndash; invulnerable to water and rust. Rustproof items are created by dipping metal items into a potion of oil (may fail, cursed <big>blessed</big> works best)
+or a blessed oil of rust removal. It makes sense only for iron items, since other metals (mithril, adamantium, eternium, gold, and truesilver) aren't damaged by water. Few iron items
+are naturally rustproof &ndash; lead sling bullet, drakish scurgar, ring of the fish, amulet/helm of water breathing, and iron ore.
+<li><b>Waterproof</b> &ndash; functionally identical to rustproof, but for non-metal items (waterproof waterproof blanket possible). Note that rust monsters ignore all non-iron items.
+Waterproof items are created by dipping non-metal items into a potion of oil (may fail, cursed <big>blessed</big> works best) or a blessed oil of rust removal. It makes sense only for
+scrolls and books, since other materials aren't damaged by water. No items are naturally waterproof.
+<li><b>Poisoned</b> &ndash; weapons, missiles and food items can be made poisoned by diping them into a potion of poison (any status). Weapons and missiles are denoted by (p) after
+the stats, instead of saying "poisoned", like for food items. Poisoned status wears off after few hits from poisoned weapons. Poisoned food can also be used as a missile to poison
+monsters. The status always dissappears from missiles and food after they are fired, regardless of whether they hit or not.
+<li><b>Cooked</b> &ndash; corpses improved by the Cooking skill, or Fire Bolt, Fireball, Improved Fireball spells, wand of fire(balls), failed Alchemny, or used crystal of fire.
+Also monster's fire breath can create cooked corpses. Their nutrition value is doubled, weight decreased by 5%, and rotting is 4x slower.
+<li><b>Lit</b> &ndash; torches. You need to have both tinderbox and box with flint and steel with charges left to make a torch lit, unless a lit torch is already available. A lit torch
+negates darkness, in the tool slot increases visibility radius by 3 tiles, and disables Stealth. In addition to the natural melee damage rating of 1d4, a lit torch will deal 1d4
+fire damage. A lit torch can't be in the backpack, however you can lit 3 torches at the same time &ndash; in both hands and in the tool slot.
+</ul><p>
+
+Artifacts are mostly excluded from these statuses, except they can be poisoned by dipping them into a potion of poison and broken with a cursed scroll of repair.
+<big>Fixed in R+.</big><p>
+
+<hr>
+Updated September 22nd, 2016
+</body>
+</html>

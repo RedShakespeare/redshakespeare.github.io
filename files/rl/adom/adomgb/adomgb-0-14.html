@@ -1,0 +1,737 @@
+<html>
+<head>
+<title>Improved ADOM Guidebook - Items</title>
+<link rel="stylesheet" type="text/css" href="adomgb-body.css">
+</head>
+<body>
+<h1>Improved ADOM Guidebook</h1>
+<hr>
+<a href="adomgb-0-13.html">Previous</a> - <a href="toc.html">TOC</a> - <a href="adomgb-0-15.html">Next</a>
+<hr>
+<a href="#0e1">Recharging wands</a> - <a href="#0e2">Huge rocks and anvils</a> - <a href="#0e3">Statues</a> - <a href="#0e4">Potions of raw chaos</a> -
+<a href="#0e5">Potions of exchange</a> - <a href="#0e6">Regeneration of HP and PP:</a> <a href="#0e61">HP</a> - <a href="#0e62">PP</a> -
+<a href="#0e63">Potions of troll blood and raw mana</a> - <a href="#0e64">Troll corpses</a> - <a href="#0e7">Seven league boots</a> - <a href="#0e8">Stethoscopes</a> -
+<a href="#0e9">Safe places to store items</a> - <a href="#0ea">Weight and appearance of items</a> - <a href="#0eb">Dipping</a> - <a href="#0ec">Milking</a> -
+<a href="#0ed">Losing cursed items</a> - <a href="#0ee">Item destruction</a> - <a href="#0ef">Monster item drops</a> - <a href="#0eg">Giving items to monsters</a> -
+<a href="#0eh">Magic staves</a> - <a href="#0ei">Mushrooms</a> - <a href="#0ej">Keys</a> - <a href="#0ek">Instruments</a> - <a href="#0el">Carrying capacity</a>
+<hr>
+
+<h3 id="0e">Items</h3>
+All items in ADOM have positive weight, including gold. Items are either artifacts or "mundane". Except gold, all items are also either cursed, uncursed, or blessed. 
+Items are made of one of the following materials: leather, cloth, glass, paper, various, wood, gold, stone, iron, mithril, adamantium, eternium, crystal, truesilver. 
+This information is hidden completely, not revealed even when the item is greater identified. Material generally only affects item's destruction chance, and for metallic items,
+smithing possibilities. Artifacts are undestructible and unsmithable, so their material has no significance.<p>
+
+Each item belongs to one of the following categories: 
+<ul>
+<li>armor <tt>[</tt> (helmet, body armor, girdle, cloak, shield, bracers <tt>~</tt>, gauntlets, boots)
+<li>jewelry (amulet <tt>'</tt> or ring <tt>=</tt>)
+<li>melee weapon <tt>(</tt> (dagger or knife, club or hammer, mace or flail, sword, axe, whip, one handed polearm, two-handed polearm, two-handed weapon, staff, magic staff)
+<li>missile weapon <tt>{</tt> (sling, bow, or crossbow)
+<li>missile <tt>/</tt> (for slings, for bows, for crossbows, throwing club, throwing dagger, throwing spear or javelin, boomerang or scurgar)
+<li>rock <tt>*</tt> (normal or huge)
+<li>miscellaneous item (tool <tt>]</tt>, musical instrument <tt>}</tt>, wand <tt>\</tt>, potion <tt>!</tt>, book <tt>"</tt>, scroll <tt>?</tt>, gem <tt>*</tt>)
+<li>food <tt>%</tt> (corpse, herb, mushroom, other food)
+<li>gold <tt>$</tt>
+</ul>
+There are no artifacts for: sling missiles, thrown missiles (club, dagger, or spear), rocks, musical instruments, wands, gems, food, and gold. All other item categories feature
+at least one artifact representative.<p> 
+
+All of the items regardless of their intended use can be used as both melee weapon or missile, so they all have appropriate stats, which are revealed when the item in question is 
+greater identified. The exception to this are shields &ndash; they can't be used in melee.<p>  
+
+Commands for manipulating items:<p>
+<ul>
+<li><tt>i</tt>nventory, <tt>I</tt> to view your backpack
+<li><tt>p</tt>ickup items, or <tt>d</tt>rop items
+<li><tt>r</tt>ead scrolls <tt>?</tt> or books <tt>"</tt>
+<li><tt>z</tt>ap wands <tt>\</tt> or magic staves <tt>(</tt>
+<li><tt>D</tt>rink potions <tt>!</tt>
+<li><tt>!</tt> to dip items into potions
+<li><tt>e</tt>at food, corpses <tt>%</tt>, mushrooms or herbs <tt>"</tt>
+<li><tt>Ctrl+u</tt>se a tool <tt>]</tt> or musical instrument <tt>{</tt> in the tool slot
+<li><tt>u</tt>se any item
+<li><tt>t</tt>hrow to shoot missiles <tt>/</tt> or rocks <tt>*</tt>
+<li><tt>g</tt>ive away items to monsters or NPCs
+<li><tt>k</tt>ick items on the ground to move them
+<li><tt>/</tt> to view a list of identified items
+<li><tt>$</tt> to count your gold (and pay in shops)
+<li><tt>wi</tt> to go to closest item on the ground
+<li><big>Items can be annotated, item lists can be filtered using</big> <tt>Enter</tt>
+</ul><p>
+
+<h4 id="0e1">0.14.1 Recharging wands <tt>\</tt></h4>
+<img src="tiles/item169.png" alt="wand" align="left">
+There are many ways to recharge a depleted wand. The common ways are to dip <tt>!</tt> the wand into an appropriate potion or <tt>r</tt>ead a scroll of charging. Only the type
+of potion and its status affects the number of charges. The type, status and rusty/nonrusty nature of the wand do not matter.<p>
+
+The following items can be used to recharge wands, listed with number of charges added B/U/C, sorted from worst to best:<p>
+<img src="tiles/item64.png" alt="booze" align="left"><img src="tiles/item490.png" alt="bmana" align="left"><img src="tiles/item517.png" alt="charging" align="left"><img src="tiles/item249.png" alt="mana" align="left">
+<ul>
+<li>Potion of booze: 2d2/1d3/1d2
+<li>Potion of boost mana: 3d3/2d3/1d3
+<li>Scroll of charging: 3d3/2d3/1d3
+<li>Potion of mana: 3d4/2d4/1d4
+</ul><p>
+
+<!--
+<table id="0e11" border=1><caption>Recharging wands
+<span class="credit">Credit Petri Sihvola.</span></caption>
+<tr><th>Potion or scroll<th>Status<th>Trials<th>Average charges<th>Min/Max charges<th>Dice
+<tr><td rowspan=3><b>Boost mana</b><td>blessed<td>60<td>5.8<td>3/9<td>3d3
+<tr><td>uncursed<td>60<td>3.9<td>2/6<td>2d3
+<tr><td>cursed<td>60<td>1.9<td>1/3<td>1d3
+<tr><td rowspan=3><b>Booze</b><td>blessed<td>60<td>3.1<td>2/4<td>2d2
+<tr><td>uncursed<td>60<td>1.9<td>1/3<td>1d3
+<tr><td>cursed<td>60<td>1.5<td>1/2<td>1d2
+<tr><td rowspan=3><b>Mana</b><td>blessed<td>60<td>7.5<td>3/11<td>3d4
+<tr><td>uncursed<td>60<td>4.6<td>2/8<td>2d4
+<tr><td>cursed<td>60<td>2.7<td>1/4<td>1d4
+<tr><td rowspan=3><b>Scroll of charging</b><td>blessed<td>60<td>6.0<td>3/9<td>3d3
+<tr><td>uncursed<td>60<td>4.1<td>2/6<td>2d3
+<tr><td>cursed<td>60<td>1.8<td>1/3<td>1d3
+</table><p>-->
+
+Remember that a potentially endless supply of booze is available from beggars in Lawenilothehl. Give them 40 gold pieces, then <tt>C</tt>hat with them and they will
+often drop a potion of booze. Only one per beggar, though, so those who have given up their potion need to be killed (alignment hit) or led into the Wilderness to
+encourage more beggar generation. Get rid of all the other random monsters in the town to further encourage monster generation.<p>
+
+Potions of raw mana do not work. Note that potions of mana can be used to permanently increase the PCs Mana attribute; the player may want to save them for that purpose.
+Wizards can also recharge wands at level 32, only once per wand though. Wands of wishing (and few other wands) can't be recharged. For these, you'll want to use the chance
+to wrench a final charge from the wand, destroying it. See also potions of raw chaos below.<p>
+
+<h4 id="0e2">0.14.2 Huge rocks and anvils <tt>*</tt> <tt>]</tt></h4>
+<img src="tiles/item580.png" alt="hrock" align="left"><img src="tiles/item72.png" alt="anvil" align="left">
+These heavy items have a nice use: crashing doors. Throw one at a door and enjoy the sight of a broken door before you. This is not guaranteed; it seems to be Strength
+dependent. There is a very nice side benefit to this: any trap that the door was protected with is destroyed along with the door. The trap does not go off as it is destroyed.<p>
+
+In addition, huge rocks can be used to keep ants from escaping anthills. Whenever an ant wants to escape, you get a message like "The uncursed huge rock (-10, 10d6) seems
+to be shaking.". Eventually the huge rock is destroyed ("Something from below destroys the uncursed huge rock (-10, 10d6)!") and ants can come out of the hole again.
+Sometimes this happens after only a few turns, sometimes it takes more than a hundred. Multiple huge rocks are destroyed one after the other and thus last longer than a single one.<p>
+
+<h4 id="0e3">0.14.3 Statues <tt>]</tt></h4>
+<img src="tiles/item363.png" alt="statue" align="left">
+If your PC is really, really buff, a statue can be wielded as a melee weapon, but the real use for statues is to <tt>k</tt>ick it until it breaks down,
+making it yield a magical wand. Statues can be generated by petrifying enemies. There are a number of unique statues of famous heroes found in the Bug Cave
+(section <a href="adomgb-2-3.html">2.3</a>). If PC has PV below four, she will take damage from kicking statues (and walls).<p>
+
+A test PC kicked 200 statues with each status to pieces. The results were as follows:<p>
+<ul>
+<li>blessed statues: 62 wands generated, about 1/3
+<li>uncursed statues: 17 wands generated, about 1/10
+<li>cursed statues: 3 wands generated, about 1/100
+</ul><p>
+
+<h4 id="0e4">0.14.4 Potions of raw chaos <tt>!</tt></h4>
+<img src="tiles/item610.png" alt="rchaos" align="left">
+Items can be dipped in potions of raw chaos in order to transform them into new ones, but will not make wands of wishing or rings of djinni summoning. Everything created
+will be cursed. Dipping items (other than artifacts) into a PoRC will transform it into a random item of the same type &ndash; useful for brass items. Equipped items are
+removed (even if cursed) and cursed. There is a chance of spilling the potion, though, which corrupts the PC (spilling happens if 1d(Dx+10) &gt; Dx). Worse is the possibility
+of transforming an item into the exact same item. This causes an explosion which badly corrupts the PC, about 5 corruptions (100d100 CP's), and causes 10d30 of damage.
+Needless to say, this can kill a low-level PC. Dipping a scroll of corruption removal into potion of raw chaos causes a massive explosion of 13d13 damage, producing death
+message 'was ripped apart when confronting Order and Chaos'.<p>
+
+PoRC will only create items of a danger level that corresponds to the level on which you dip the item. For creating an amulet of lifesaving, you should dip amulets on DL2. Your odds
+are poor &ndash; 1.08%. You can safely dip amulets of balance, free action, health, hunger, luck, chaos, order, speed, teleport control, cold hearts, water breathing,
+silver tongue, and mana. A heap of items that are dipped into PoRC will always transform into a single item.<p>
+
+Wands dipped into a PoRC will turn into a wand with a different number of charges. This is one way to recharge wands with 0 charges left. The type of wand, however,
+is unpredictable.<p>
+
+Potions of raw chaos can be created by dipping any corrupting artifact (those containing the essence of Chaos and Corruption + Moon Sickle) into any ordinary potion.<p>
+
+<h4 id="0e5">0.14.5 Potions of exchange <tt>!</tt></h4>
+<img src="tiles/item105.png" alt="exchange" align="left">
+In addition to swapping attributes, these can polymorph monsters when thrown. Blessed potions can polymorph items to another of the same type. Spellbooks are always transformed into
+non-spellbooks and vice versa.<p>
+
+The item produced will be appropriate for the danger level where the dipping takes place. This is the basis of ring-based wish engines. Once one has blessed potions of exchange stacks
+of 19 rings can be dipped, potentially producing 19 rings of djinni summoning. These in turn are enough to produce 57 more potions of exchange on average. Since used rings
+of djinni summoning become brass rings, additional rings do not have to be wished for. The PC may have to throw in some wishes for potions of water to keep blessing the potions
+of exchange. Of course once the engine starts there are enough spare wishes to actually get some things that matter as well. :-).<p>
+
+<big>In R+, every item from a stack is transformed individually. Additionally, there is a limit of one RoDS per game via dipping.</big><p>
+
+<h4 id="0e6">0.14.6 Regeneration of HP and PP</h4>
+When drinking potions of insight or casting the Revelation spell, there is some information about Power Point and Hit Point regeneration. Those
+two values lie between 5 and 200: the lower the number, the faster the regeneration. But there are 2 variables connected to regeneration: RegenRate and RegenAmount.
+RegenRate is how often (in turns) you heal &ndash; this value is revealed via revelation or insight; RegenAmount is how much &ndash; this value is completely hidden.<p>
+
+Regeneration occurs at the same rate whether walking around or resting. RegenRate is measured in turns, not game time. High speed or seven league
+boots lead to exactly the same regeneration rate in turns. Thus regeneration is faster with respect to game time if the PC is fast or walking around with
+seven league boots. If a PC with low walking energy cost wants to spend the minimum amount of game time regenerating, the best bet is to walk around
+while regenerating. The Cursed, Doomed, Lucky and Fate smiles intrinsics do not make a difference for regeneration purposes. Hunger status has no effect on regeneration.<p>
+
+<h4 id="0e61">0.14.6.1 HP regeneration</h4>
+<table border=1><caption>Natural HP regeneration</caption>
+<tr><th>Condition <th>NaturalRegen
+<tr><td>Human, Hurthling <td>50
+<tr><td>Dark Elf <td>70
+<tr><td>Gray Elf <td>65
+<tr><td>High Elf <td>60
+<tr><td>Gnome <td>48
+<tr><td>Dwarf <td>45
+<tr><td>Orc <td>40
+<tr><td>Drakeling <td>30
+<tr><td>Troll <td>20
+<tr><td>Healer <td>halved
+<tr><td>Most PCs <td>-1 (based on Toughness)
+<tr><td>Some PCs <td>-1 once more (based on Toughness)
+<tfoot>
+<tr><td>Mist Elf<td>80
+<tr><td>Ratling<td>35
+</tfoot></table><p>
+
+The modifiers are applied in the order listed here. Eg. Trollish Healers with exceptional Toughness get a starting regeneration time of 20 / 2 - 1 - 1 = 8.<p>
+
+RegenRate = Max(2, NaturalRegen (*10 if Sick; *0.8 if Healthy talent; *1/0.5/0.125 if wearing C/U/B necklace of rapid healing; *10 if wearing rotting armor)).<p>
+
+The Healing skill provides additional chance for regeneration every turn: (Healing / (1200 (*4.67 if Sick)))%. So with 100 Healing the chance is 8.3% per turn (1.8% if Sick).
+The Candle birthsign provides additional regeneration every 12 <big>20</big> turns.<p>
+
+RegenAmount = 1 + ClassBonus + CandleBonus + RoomBonus. ClassBonus is 1 for lvl 6-11 Healers, lvl 32+ Bards, lvl 32+ Druids in wilderness, 2 for lvl 12+ Healers, 0 otherwise.
+CandleBonus is 1 for Candle borns, 0 otherwise. RoomBonus is 3 if in "refreshing" room, 1 if in "herbs and antiseptics" room, 0 otherwise.<p>
+
+Separate from these RegenRate and RegenAmount calculations, every piece of regenerating equipment (except necklace of rapid healing) grants
+additional 1 HP per turn. The regenerating corruption grants additional 1 HP every 5 turns, but 1 scar every 1000 regenerations (-1 Dx or -1 Ap).<p>
+
+All HP regeneration is stopped, if the PC is in the "devoid of all life" room, or in water without Water breathing.<p>
+
+<h4 id="0e62">0.14.6.2 PP regeneration</h4>
+<table border=1><caption>Natural PP regeneration</caption>
+<tr><th>Condition<th>NaturalRegen
+<tr><td>Human, Drakeling<td>50
+<tr><td>Troll<td>100
+<tr><td>Dwarf<td>90
+<tr><td>Hurthling<td>60
+<tr><td>Orc<td>55
+<tr><td>High Elf<td>40
+<tr><td>Gnome<td>40
+<tr><td>Dark Elf<td>30
+<tr><td>Gray Elf<td>25
+<tr><td>Most PCs<td>-1 (based on Mana)
+<tr><td>Some PCs<td>-1 once more (based on Mana)
+<tfoot>
+<tr><td>Mist Elf<td>15
+<tr><td>Ratling<td>55
+</tfoot></table><p>
+
+PP regeneration is applied every turn if one the following checks pass:<p>
+<ul>
+<li>TurnNumber mod NaturalRegen = 0 (once every NaturalRegen turns)
+<li>Concentration &gt; 1d500
+<li>Concentration &gt;= 75 and Concentration &gt; 1d500
+<li>Concentration &gt;= 90 and Concentration &gt; 1d500
+<li>Concentration = 100 and Concentration &gt; 1d500 (100 Concentration provides about 59% overall chance)
+<li>Charged talent and 3%
+<li>the PC is in magical island in Terinyo and 100% (means the island grants PP regeneration every turn)
+<li>Mana battery corruption and 10%
+</ul><p>
+
+RegenAmount = 1 + ClassBonus. ClassBonus is 1 for lvl 40+ Bards and lvl 12+ Druids in wilderness, 0 otherwise. <span class="newi">PP regenerating equipment +1.
+Charged talent +1.</span><p>
+
+All PP regeneration is stopped if wearing anti-magical armor.<p>
+
+<h4 id="0e63">0.14.6.3 Potions of troll blood and raw mana <tt>!</tt></h4>
+<img src="tiles/item507.png" alt="tblood" align="left"><img src="tiles/item508.png" alt="rmana" align="left">
+Natural regeneration can be affected by drinking potions of troll blood (for hit points) or potions of raw mana (for power points).
+These potions cannot lower RegenRate below 5 turns or raise it above 200. Their effectiveness depends on their B/U/C status:<p>
+
+<table id="0e631" border=1><caption>Potions of troll blood and raw mana</caption>
+<tr><th>Potion status <th>Modification to RegenRate
+<tr><td>Blessed <td>-4d3
+<tr><td>Uncursed<td>-2d3
+<tr><td>Cursed  <td>+2d3
+</table><p>
+
+Bottom line: always bless your potions of troll blood or raw mana.<p>
+
+As can be seen, many blessed potions of troll blood will get you more than good Healing skill, but having Healing at 100 is best. Likewise,
+potions of raw mana are nice, but not as important as having a high Concentration skill.<p>
+
+<h4 id="0e64">0.14.6.4 Troll corpses <tt>%</tt></h4>
+<img src="tiles/item103.png" alt="exchange" align="left">
+There are four types of troll corpses (troll, troll berserker, troll chief, troll king). They all yield either of two messages when eaten by a non-Troll:<p>
+<ol type="a">
+<li>"Urg! Foul meat! Your blood suddenly courses faster through your veins!"
+<li>"Urg! Foul meat!"
+</ol><p>
+
+Message a. indicates that natural HP regeneration decreased by one. Message b. indicates that natural HP regeneration did not change.<p>
+
+For Troll PCs, the messages are slightly modified:<p>
+<ol type="a">
+<li>"Yum! Your blood suddenly courses faster through your veins!"
+<li>"Yum!"
+</ol><p>
+
+The behavior is the same: a. decreases natural HP regeneration, b. does not.<p>
+
+No corpse can reduce the regeneration time below 6. Trying this always gives b. message. This differs from potions of troll blood, which always result in the
+"Your blood suddenly curses faster..." message, even if the regeneration time is already minimal. Note that the lower threshold is 6, unlike the threshold for
+potions of troll blood, which is 5. This means that Trolls, who cannot make use of potions of troll blood, cannot lower their regeneration time to 5, unlike the
+other races.<p>
+
+The probabilities of getting a decrease in regeneration time depends only on the B/U/C status of the corpse. Specifically, it does not depend on:<p>
+<ul>
+<li>current regeneration time (no difference between the lowest eligible value 7 and the unrealistically high value 200)
+<li>PC race (Human vs. Troll)
+<li>cooked/uncooked status
+<li>type of troll corpse (troll, troll berserker, troll chief, troll king)
+</ul><p>
+
+Results indicate that blessed corpses work in 100% of the cases (although, like all corpses, they cannot lower it below 6), and uncursed
+or cursed corpses work in 50% of the cases. There was no observable difference between uncursed and cursed corpses:<p>
+<ul>
+<li>94 blessed troll corpses: 94x decrease
+<li>621 uncursed troll corpses: 314x decrease, 307x no decrease
+<li>361 cursed troll corpses: 187x decrease, 174x no decrease
+</ul><p>
+
+There was no difference in weight or satiation value of the various kinds of troll corpses. All corpses weigh 240s if not cooked, irrespective of
+B/U/C (rotting) status, and 228s (= 5% less) if cooked, again irrespective of B/U/C (rotting) status.<p>
+
+An uncursed corpse yields 500 units of satiation (like a large ration). This is doubled if the corpse is cooked (presumably this holds for other
+corpses too, but this needs further verification). The resulting value is modified by +25% for blessed corpes and -50% for cursed corpses, just
+like for other food items. So, e.g. a blessed cooked troll chief corpse gives 500 * 2 * 1.25 = 1250 units of satiation.<p>
+
+<b>Summary</b><p>
+<ul>
+<li>item: [troll/troll berserker/troll chief/troll king] corpse
+<li>weight: 240s (-5% if cooked)
+<li>nutritional value: 500 (*2 if cooked, *1.25 if blessed, *0.5 if cursed)
+<li>effect when eaten [blessed]: if natural HP regeneration is &gt;= 7, it is reduced by 1
+<li>effect when eaten [uncursed/cursed]: if natural HP regeneration is &gt;= 7, it is reduced by 1 with a probability of 50%
+<li>message when eaten [non-troll PC]: "Urg! Foul meat!"
+<li>message when eaten [Troll PC]: "Yum!"
+<li>additional message if and only if natural HP regeneration was reduced: "Your blood suddenly courses faster through your veins!"
+</ul><p>
+
+<h4 id="0e7">0.14.7 Seven league boots <tt>[</tt></h4>
+<img src="tiles/item558.png" alt="exchange" align="left">
+Seven league boots can dramatically reduce the time needed to walk around in the wilderness, depending on their B/U/C status:<p>
+<ul>
+<li>blessed: time needed for walking is divided by 6
+<li>uncursed: time needed for walking is divided by 3
+<li>cursed: time needed for walking is multiplied by 2
+</ul><p>
+
+B/U/C seven league boots also alter the base energy cost for movement outside the wilderness from 1000 to 500/750/1500 <big>750/900/1500</big>, respectively.
+The Long Stride talent stacks, reducing base energy cost further. Seven league boots should be blessed immediately. They enable the PC to outrun anything other
+than quicklings. Consequently, some players regard seven league boots as the most important item in the game, and will use a wish to obtain them, if necessary.<p>
+
+<h4 id="0e8">0.14.8 Stethoscopes <tt>]</tt></h4>
+<img src="tiles/item65.png" alt="exchange" align="left">
+<tt>U</tt>sing a stethoscope, you can determine a living monster's statistics precisely. Uncursed provides DV, PV, and HP, blessed in addition also level, number of attacks,
+damage, and speed. Cursed stethoscope doesn't work. Furthermore, using a stethoscope, you can easily find secret doors: scan a wall block, and if it "sounds hollow", it's
+a secret door. In addition to monsters and secret doors, stethoscopes can also be used on closed doors to find out the number of monsters behind it. The messages are:<p>
+
+<table id="0e81" border=1><caption>Stethoscope messages</caption>
+<tr><th>Message<th>Meaning
+<tr><td>Silence.                        <td>corridor (this message is shown even if the corridor is full of monsters, so be warned)
+<tr><td>You hear nothing.               <td>empty room
+<tr><td>You hear some low-volume sounds.<td>1 monster in the room
+<tr><td>You hear some sounds.           <td>2-3 monsters
+<tr><td>You hear many sounds.           <td>4-8 monsters
+<tr><td>You hear lots of sounds.        <td>9 or more monsters (tension rooms and rooms filled with breeders or summoned creatures also give this message)
+</table><p>
+
+See section <a href="adomgb-0-15.html#0f3">0.15.3</a> concerning a Healer's special ability with stethoscopes.<p>
+
+<h4 id="0e9">0.14.9 Safe places to store items</h4>
+<p><ul>
+<li><b>Top line of the Terinyo map</b><br>
+The only monster in Terinyo that can step on the top line is the sheriff, and he can easily be lured to the first level of the Puppy Cave. It is then
+100% secure. Skriek can step on the top line as well, if one lures him there. If the PC has committed an act which causes the town to become hostile, any
+inhabitant can enter the top row. If the PC has managed to save Khelavaster and he has returned to Terinyo, he can enter the top row.<p>
+
+<li><b>Locked rooms</b><br>
+Locked rooms are one of the safest places to leave items in ADOM. With the current state of the monster inventory system (they can pick up items but not use them),
+a monster will never be able to unlock a door. Several monsters can smash doors, however. Some monsters (balors spring to mind) can teleport into locked rooms.<p>
+
+<li><b>Old Barbarian's glade</b><br>
+The Old Barbarian's glade is a decent place to store items. He is the only monster ever generated in this location, so nothing randomly generated is going to run
+away with the PC's stuff. If the PC leaves items far away from the Old Barbarian, he will not have time to find them prior to the PC's next visit.<p>
+
+<li><b>Mad Minstrel's clearing</b><br>
+The Mad Minstrel will leave his hut, and will pick up items. The safety of the storage is therefore similar to the Old Barbarian's glade. No other monsters are
+generated in his clearing, so leaving items far away from the Mad Minstrel should not allow him time to find them prior to the PC's next visit.<p>
+
+<li><b>Dwarven Mystic's room in Dwarftown</b><br>
+The ultimate in security, if the PC has not destroyed it with a wand of destruction (section <a href="adomgb-3-5.html#354">3.5.4</a>).
+After <tt>C</tt>hatting wih the Dwarven Mystic, he disappears, leaving a 2 x 2 room that cannot be entered
+except by teleportation. Since there are no teleporting monsters found in Dwarftown (except for the greater daemon &ndash; kill it) this is
+as safe as storage areas get. Other Dwarftown inhabitants can, in extremely rare circumstances, be generated in this room. Since they
+will be nonhostile, killing them is not a good idea. Teleport them out if possible. Alternatively, use the Ogre Cave (see below).<p>
+
+<li><b>Ogre Cave in Dwarftown</b><br>
+Monster generation there is nonexistent. So once it is cleared, items can be left anywhere on the level with no chance that the items will be disturbed.<p>
+
+<li><b>Secret room in the HMV</b><br>
+Another room accessible only by teleportation, therefore almost perfect theoretical security. A monster teleporting into this room has never been seen.
+In extremely rare circumstances, however, monsters can be generated in this room. They may well be hostile, so killing them is a simple solution.
+Teleporting them out is a worthwhile alternative.<p>
+
+<li><b>Sharad-Waador's room</b><br>
+Items left in Sharad-Waador's room never seem to be disturbed. Sharad-Waador never moves from the tile where he is initially
+generated (unless he is attacked or the PC reneges on the deal to take the quest), and no time passes on the level between the PC's
+departure and reemergence from the Blue Dragon Caves. This is very important, since the player may want to leave important non-artifact
+equipment behind in order to avoid its potential destruction in the Blue Dragon Caves (section <a href="adomgb-3-19.html">3.19</a>).<p>
+</ul><p>
+
+<h4 id="0ea">0.14.10 Weight and appearance of items</h4>
+Note the weight of items. Many valuable items have a unique weight. For instance, there is only one type of sword with a weight of 35s, one
+amulet weighing 7s, one amulet weighing 8s, one girdle weighing 30s, etc. In general, lighter items are better. Items with odd, unusual or rare
+weights are often better than their more commonly observed counterparts. Certain special items also have a unique color. Slaying quarrels will
+be brown rather than the silver of normal quarrels. Metal-shod quarterstaves (whether iron-, mithril-, adamantium- or eternium-) are silver; normal
+quarterstaves are brown. This is especially important to remember for eternium-shod quarterstaves, since they have the same weight as wooden
+quarterstaves.<p>
+
+<h4 id="0eb">0.14.11 Dipping items into a potion <tt>!</tt></h4>
+<img src="tiles/pot_uid.png" alt="potion" align="left">
+The command to dip something into a potion is <tt>!</tt>. The various uses of dipping stuff into a potion are compiled below:<p>
+<ul>
+<li>holy water: bless items
+<li>unholy water: curse items
+<li>water: clear scrolls, rust iron items (but not if rustproof)
+<li>poison: poison weapons
+<li>raw chaos: exchange items, see <a href="adomgb-0-14.html#0e4">0.14.4</a>
+<li>blessed exchange: exchange items, see <a href="adomgb-0-14.html#0e5">0.14.5</a>
+<li>oil: rustproof/waterproof items &ndash; blessed potions work almost 100%, uncursed about 50%, cursed almost 0% (the other way around in 1.1.1 and earlier)
+<li>cursed oil of rust removal: rust iron items, even if rustproof, but not if rustproof naturally
+<li>uncursed oil of rust removal: remove rust from items
+<li>blessed oil of rust removal: rustproof/waterproof items
+<li>booze, mana, boost mana: recharge wands, see <a href="adomgb-0-14.html#0e1">0.14.1</a>
+</ul><p>
+
+Other potions used for dipping are usualy wasted. The exception is when an item containing the essence of Chaos and Corruption is dipped into a potion &ndash; then the
+potion is transformed into raw chaos. The other exception is Alchemy.<p>
+
+When dipping a stack of items into a potion, the amount you can dip depends on the weight of the item. You can dip:<p>
+
+<table border=1><caption>Dipping</caption>
+<tr><th>Weight<th>Stack size
+<tr><td>1s   <td>19
+<tr><td>2s   <td>9
+<tr><td>3s   <td>6
+<tr><td>4s   <td>4
+<tr><td>5-6s <td>3
+<tr><td>7-9s <td>2
+<tr><td>10+s <td>1
+</table><p>
+
+You can always only dip 1 potion of -attribute- or 1 potion of gain attributes. You can dip missile ammo in stacks of 40.<p>
+
+<h4 id="0ec">0.14.12 Milking</h4>
+<span class="credit">Credit ADOM Wiki &ndash; <a href="http://ancardia.wikia.com/wiki/Milking">Milking</a>.</span>
+Milking refers to abusing the fact that certain monsters shoot or throw some weaponry which cannot be gained by just killing them. In cases of one handed weapon there is one
+weapon per monster limit, while missiles can be gained in heaps per single enemy. Both weapons and missiles have a base type listed below (it is not possible to get arrows/quarrels
+of -foo- slaying), however, all available suffixes/prefixes are available. The best strategy is running along a wall of room (with preferably close doors) allowing monster to follow.
+Keeping some space between character and monster is recommended but unnecessary. It is better not to do this in corridors with low level characters as you can easily end in unfavorable
+position without room to maneuver.<p>
+
+List of all milkable monsters:<p>
+<ul>
+<li>orc &ndash; orcish knife
+<li>caveman &ndash; club
+<li>dwarven guardian &ndash; hand axe
+<li>(large) gnoll &ndash; battle axe
+<li>dwarven elite guardian &ndash; mithril battle axe
+<li>orc scorcher, hill orc (sergeant) &ndash; orcish spear
+<li>goblin rockthrower, stone giant (lord), ogre, hill giant (chieftain), fire giant (king), frost giant (jarl/berserker), troll (berserker/chief/king), earth elemental,
+wall beast &ndash; rock
+<li>greater earth elemental, Ogre Guardian, cyclops &ndash; huge rock
+<li>Keethrax &ndash; sling bullet
+<li>barbarian (leader), kobold (chieftain), raider (lord) &ndash; arrow
+<li>Hawkslayer &ndash; eternium arrow
+<li>ratling archer &ndash; quarrel
+<li>black hurthling, dark elven archer, pixie archer, quickling lord/king &ndash; tiny quarrel
+<li>(greater) titan &ndash; eternium quarrel
+</ul>
+<img src="tiles/item367.png" alt="oknife" align="left"><img src="tiles/item1.png" alt="club" align="left"><img src="tiles/item3.png" alt="haxe" align="left"><img src="tiles/item5.png" alt="baxe" align="left"><img src="tiles/item115.png" alt="mbaxe" align="left">
+<img src="tiles/item368.png" alt="ospear" align="left"><img src="tiles/items53.png" alt="rocks" align="left"><img src="tiles/item580.png" alt="hrock" align="left"><img src="tiles/item274.png" alt="sbullet" align="left">
+<img src="tiles/item51.png" alt="arrow" align="left"><img src="tiles/item525.png" alt="earrow" align="left"><img src="tiles/item68.png" alt="quarrel" align="left"><img src="tiles/item646.png" alt="tquarrel" align="left"><img src="tiles/item225.png" alt="equarrel" align="left">
+<p><br style="clear:all">
+Note that barbarian encounters in wilderness can practically net a large amount of arrows (including prefixed ammo) in short time. Arrow and spear traps can also provide ammunition
+if triggered multiple time by monsters or by PC with <tt>Ctrl-t</tt> command. Triggering traps on yourself will always lead to a successful hit, however, with sufficient protection
+(in terms of PV) damage to PC may be nullified. Note that spear traps always produce base iron spears without any prefixes/suffixes.<p>
+
+Though not milking in the strictest sense of the term, giant ant workers and other digging monsters can be similarly milked for rocks by allowing them to dig out large sections of a
+dungeon level. Casting Earthquake is another way of getting large amounts of rocks.<p>
+
+<h4 id="0ed">0.14.13 Losing cursed items</h4>
+Careful reader shall already know about the many ways of losing cursed stuff. For completeness, here we list all of them. Note that for trapped armor morphing and destroying are the
+only ways to get rid of it.<p>
+
+<b>Removing curse</b><p>
+<ul>
+<li><tt>r</tt>ead non-cursed scroll of uncursing.
+<li><tt>!</tt> dip them item into potion of holy water. You can get holy water by dropping water on coaligned altar if your piety is high enough, or by dipping normal
+or unholy water into holy water.
+<li><tt>_</tt> pray, your piety must be at least 50 (pleased and up).
+<li><tt>Z</tt> cast the Remove Curse spell. Note that a wand or potion of wonder may grant you the spell.
+<li><tt>Ctrl-x</tt> Wizard's level 40 class power allows to uncurse an item.
+<li><tt>r</tt>ead cursed scroll of repair to break your cursed item, then read blessed scroll of repair to both repair and uncurse it. This tactic can also be exploited
+to uncurse or bless large stacks of items.
+</ul><p>
+
+<b>Unequipping the item</b><p>
+<ul>
+<li>If your cursed item is a weapon, you can fight a monster with disarm ability. These are: ratling fencer/duelist/warlord, (master) swordsman, bunny master (Bugs), Mad Minstrel.
+<li>For helmets, Kranf Niest will remove any helmet from the PC as a part of getting the Healing skill.
+</ul><p>
+
+<b>Morphing</b><p>
+<tt>!</tt> dipping items into a potion of raw chaos or blessed potion of exchange will change the item into another of its type, removing it from your body. Keep in mind that if
+you are using raw chaos potions you have a risk of explosion, which does 10d30 damage and corrupts heavily (100d100 CPs).<p>
+
+<b>Destroying</b><p>
+<ul>
+<li>Scroll of item destruction works only if there are at least 4 items equipped, granting only 25% chance to lose your cursed item.
+<li>Annihilators and eyes of destruction can destroy equipped items, regardless of material.
+<li>Angering your deity (usually just by praying repeatedly) will eventually result it "Your equipment turns to dust." destroying all cursed equipped items (remove other items).
+<li>For iron items only, (large/giant) rust monsters are usable &ndash; just stand next to them.
+<li>If your cursed item is a weapon made of iron, mithril or adamantium, attacking ochre jellies or gray oozes can damage it to the point of destruction. Similarly, you can get
+rid of cursed gloves or boots by fighting these unarmed or kicking them, respectively.
+<li>Acid or fireball trap can be set off <tt>Ctrl-t</tt> to intentionaly destroy equipped item, however only items destructible by acid or fire respectively &ndash; see the item
+destruction table below. Bad Luck helps here. The table is useful for the remaining methods as well.
+<li>For items destructible by fire, visit ToEF &ndash; however as this is dangerous for all items, bringing blessed fireproof blanket is recommended.
+<li>Monsters with breath attacks can destroy equipped items.
+</ul><p>
+
+<h4 id="0ee">0.14.14 Item destruction</h4>
+<span class="credit">Credit Sorear's Wiki &ndash; <a href="http://www.it-is-law.com/adom/index.php?title=Item_Destruction">Item Destruction</a>.</span>
+Item destruction has two parameters, the elemental type, and the maximum number of items to destroy. There are 7 elements which can cause item destruction or damage (max number
+of items in parenthesis):<p>
+<ul>
+<li>fire: ToEF (2 every turn), exploding spellbook (1000), failed Alchemy (Min(1,dmg/5)), fireball trap, booby door trap, fire vortex, red dragons
+<li>cold: D: 49, ice vortex, white dragons, <big>Ice Queen Domain</big>
+<li>acid: acid trap (Min(1,dmg/5)), acid vortex, black dragons
+<li>lightning: Air Temple (Min(1,dmg/5)), lightning vortex, blue dragons
+<li>water: water trap (1000), pool (1000), rain (1), Swimming (50% chance, 1000 items), water orb insertion on D: 48, water elementals/grues/dragons
+<li>crushing: falling Rift (40), trick door trap (DL), ceiling trap, pit traps, failed mountaineering (Min(1,dmg/5))
+<li>ripping: explosive rune door trap
+</ul><p>
+
+Equipped rings of ice or fire have chance of negating equipment fire or ice damage, respectively. The RingBonus is 98/80/50 B/U/C for each equipped ring. All damage is negated
+if Min(99, RingBonus+Luck) &lt;= 1d100. Fireproof/waterproof blankets protect inventory (not equipment) 100% against fire/water damage respecively, regardless of B/U/C status.
+Fireproof blanket is destroyed if 5/15/100 B/U/C + (GoodLuck-BadLuck) * 10 &gt;=1d1000. Always the best blanket is selected if there are multiple. Note that in this case BadLuck
+actually increases fireproof blanket longevity (probably bug <big>fixed in R+, Bad Luck decreases longevity</big>). Waterproof blankets are not destroyed in this manner.<p>
+
+For fire, ice, acid and lightning elemental damage being resistant decreases chances of item damage. The Divisor starts at 1; there is +2 if you are intrinsically resistant,
++3 if you are intrinsically immune, +1 per equipped item granting resistance, and +3 per equipped item granting immunity. Note this is different from resistance to HP damage.<p>
+
+Items which are not immune (0% in the below table) have a base chance of destruction or damage depending only on the item's material and the element in question. This chance is
+reduced by 20% (rounding down) if the item is blessed. It is then increased by 50% if the item is rusty and twice your Luck is subtracted. Finally, the chance is divided by the
+Divisor above.<p>
+
+<table id="0ee1" border=1><caption>Base item destruction chance</caption>
+<tr><th>Material        <th>Fire<th>Water<th>Crushing<th>Ripping<th>Lightning<th>Acid<th>Cold<th>Items
+<tr><td><b>leather</b>   <td>10% <td> 0% <td> 0% <td>10% <td>10% <td>20% <td> 0% <td>leather cap/apron/armor, furs, leather/thick/hard girdle, leather/fine cloak, many gauntlets, most boots, whips
+<tr><td><b>cloth</b>     <td>40% <td> 0% <td> 0% <td>50% <td>20% <td>10% <td> 0% <td>hood, hat, clothes, robes, cloaks, slings, bandage
+<tr><td><b>glass</b>     <td>20% <td> 0% <td>80% <td>60% <td> 5% <td> 0% <td>10% <td>potions, glass amulet/wand, worthless pieces
+<tr><td><b>paper</b>     <td>95% <td>40% <td>10% <td>50% <td>20% <td>50% <td> 5% <td>scrolls, books, spellbooks
+<tr><td><b>various</b>   <td>25% <td> 0% <td>10% <td>25% <td> 5% <td>15% <td> 0% <td>food, corpses, studded leather armor, shell armors, strange metal/copper-hewn/bulky girdle, pickaxe, leather amulet, pearl/coral/shining necklace, brass/wedding ring, blankets, fluff ball, magical writing set, tinderbox, box with flint and steel, thieves picks
+<tr><td><b>wood</b>      <td>30% <td> 0% <td>30% <td>30% <td>20% <td>20% <td> 0% <td>bone helmet/bracers/amulet, wooden shield/stick/ring, clubs, cudgels, staves, bows, arrows, quarrels, boomerang, many wands, torches, log, giant boar skull, instruments, bone
+<tr><td><b>gold</b>      <td>15% <td> 0% <td> 0% <td>10% <td> 0% <td>25% <td> 0% <td>brass/silver/copper bracers, many rings, brass amulet, golden ball, gold piece, holy symbol
+<tr><td><b>stone</b>     <td> 2% <td> 0% <td> 5% <td> 8% <td> 3% <td> 0% <td> 1% <td>helm of mental stability, stone weapons, stone/opal/onyx/ruby amulet, marble/jade ring, stone/marble/obsidian wand, rocks, statues, figurines, <big>lump of clay</big>
+<tr><td><b>iron</b>      <td> 3% <td>15% <td> 5% <td>10% <td> 0% <td>25% <td> 0% <td rowspan=4>most armor except cloaks, moloch armor (eternium), steel/iron/bronze bracers (iron), shields, most weapons, amulets (many iron, 2 adamantium &ndash; obsidian/marble, 1 mithril &ndash; silver), rings (many iron, 4 adamantium &ndash; adamantium/onyx/opal/ordinary, 1 mithril &ndash; mithril), wands (many iron, 1 eternium &ndash; glowing), crossbows (iron), many missiles, keys (iron), anvil (iron), ores, ingots, skill sets (iron), stethoscope (iron), whistle (iron), glockenspiel (iron)
+<tr><td><b>mithril</b>   <td> 0% <td> 0% <td> 1% <td> 1% <td> 0% <td> 5% <td> 0%
+<tr><td><b>adamantium</b><td> 0% <td> 0% <td> 1% <td> 0% <td> 0% <td> 1% <td> 0%
+<tr><td><b>eternium</b>  <td> 0% <td> 0% <td> 0% <td> 0% <td> 0% <td> 0% <td> 0%
+<tr><td><b>crystal</b>   <td> 0% <td> 0% <td> 0% <td> 0% <td> 0% <td> 0% <td> 0% <td>crystal armor/shield/dagger, gems
+<tfoot class="new">
+<tr><td><b>truesilver</b><td> 0% <td> 0% <td> 1% <td> 1% <td> 0% <td> 1% <td> 0% <td>armor, weapons, shields, missiles
+</tfoot></table><p>
+
+Some other facts regarding item destruction:<p>
+<ul>
+<li>If a stack of items is targeted, the number of actually damaged/destroyed items is 1dNumberOfItemsInStack.
+<li>Any item/element combination value of 1% is completely safe if the item is blessed and the PC does not have negative Luck.
+<li>Thick gauntlets automatically resist damage 75% of the time.
+<li>Artifacts cannot be damaged.
+<li>Any item grating resistance can't be damaged by the corresponding element. This is not true for items granting immunity.
+<li>Always half of items in inventory are safe from damage. This changes as items are picked or dropped, or the inventory is viewed. <big>Fixed in R+.</big>
+<li>Equipment items are considered for damage, starting from the bottom and working up; tools are the first to take a hit and the helmet is the last.
+<li>Body armor cannot be damaged during wearing or removing.
+<li>Rings under gauntlets can't be damaged; however gauntlets may get destroyed first leaving rings vulnerable.
+<li>No items can be damaged during a long interruptible action, such as reading a book.
+<li>Rustproofed and naturally rustproof items cannot be affected by water.
+<li>The room effect "scarred by many fights" triples chance of item destruction.
+<li>Items made of glass are 100% destroyed if kicked or thrown.
+</ul><p>
+
+<table id="0ef" border=1><caption>0.14.15 Monster item drops</caption>
+<span class="credit">Credit Sorear's Wiki &ndash; <a href="http://www.it-is-law.com/adom/index.php?title=Monster_Item_Drops">Monster Item Drops</a>.</span></caption>
+<tr><th>Monster             <th>Item drops                          <th>Chance
+<tr><td>giant frog          <td>frog legs                           <td>25% [1]
+<tr><td>crime lord, half-orc bouncer<td>gold                        <td>100%
+<tr><td>moloch, greater moloch<td>moloch armor                      <td>5%
+<tr><td rowspan=2>dwarven chaos knight<td>wand of digging           <td>10%
+<tr>                        <td>pickaxe [2]                         <td>30%
+<tr><td>animated tree       <td>log                                 <td>8.3%
+<tr><td>dwarf               <td>pickaxe                             <td>16.7%
+<tr><td>stone golem         <td>rocks                               <td>100%
+<tr><td>giant boar          <td>giant boar skull                    <td>33.3%
+<tr><td rowspan=6>chaos knight, chaos warrior<td>eternium plate mail<td>33.3%
+<tr>                        <td>eternium medium shield              <td>25%
+<tr>                        <td>eternium cap                        <td>20%
+<tr>                        <td>eternium boots                      <td>16.7%
+<tr>                        <td>thick gauntlets                     <td>16.7%
+<tr>                        <td>eternium long sword                 <td>33.3%
+<tr><td>mummy, greater mummy<td>mummy wrapping                      <td>25%
+<tr><td>skeleton, skeletal warrior<td>2d6 bones                     <td>16.7%
+<tr><td>balor, greater balor<td>scourge                             <td>100%
+<tr><td>ratling duelist     <td>gauntlets                           <td>100%
+<tr><td>missile weapon user <td>missile weapon                      <td>10% [3]
+<tr><td>dwarven artificier  <td>eternium warhammer, heavy crossbow, eternium quarrels, anvil<td>100%
+<tr><td>dwarven smith       <td>eternium warhammer, anvil           <td>100%
+<tr><td>Emperor Moloch      <td>moloch armor, crumpled scroll       <td>100%
+<tr><td>mummy lord          <td>ankh, ancient mummy wrapping        <td>100%
+<tr><td>mad carpenter       <td>manual of bridge building, hatchet  <td>100%
+<tr><td>black druid         <td>black torc                          <td>100%
+<tr><td>orb guardian        <td>orb                                 <td>100%
+<tr><td>chaos dragon        <td>crown                               <td>100%
+<tr><td>Assassin Prince     <td>black rune-covered dagger           <td>100%
+<tr><td>Minotaur Emperor    <td>axe of the minotaur emperor, potion of strength, 2 potions of cure corruption, spellbook <big>[4]</big><td>100%
+<tr><td>Khelavaster not saved<td>wand of digging, amulet of protection, potion of invisibility, eternium dagger, <br>
+boots of sneakiness, gold, robe<td>100%
+<tr><td>Khelavaster saved   <td>6 scrolls of corruption removal, 4 potions of ultra healing, spellbook of teleportation,<br>
+spellbook of identify, wand of digging (8), eternium dagger (everything blessed)<td>100%
+</table><p>
+
+[1] Instead of a corpse.<p>
+[2] Never both.<p>
+[3] Moderate-sized monsters will have a 10% chance to drop a big missile weapon (long bow or heavy crossbow) instead of a small one. Smaller monsters will always
+drop a smaller weapon.<p>
+<big>[4] Different rewards, see <a href="adomgb-2-14.html#2e12">2.14.1.2</a></big><p>
+
+<h4 id="0eg">0.14.16 Giving items to monsters <tt>g</tt></h4>
+<span class="credit">Credit Sorear's Wiki &ndash; <a href="http://www.it-is-law.com/adom/index.php?title=Giving_Stuff_to_Monsters">Giving Stuff to Monsters</a>.</span>
+
+You can give away stuff via the <tt>g</tt>ive item to monster command. This mostly results in monster ignoring or refusing to take the item, gold being exception.
+Other possible results are compiled below. Empty effect field basically means no effect apart from some kind of different message.<p>
+
+<table id="0eg1" border=1><caption>Giving stuff to monsters</caption>
+<tr><th>Monster                       <th>Accepts                                 <th>Effect
+<tr><td>big dog, blink dog, large dog, cute dog<td>bone, raw meat, fresh meat, sausage <td>tames
+<tr><td>black hurthling               <td>fish meat                               <td>tames
+<tr><td>wild cat, cave lion           <td>rat corpse, giant rat corpse, fish meat <td>tames
+<tr><td>farmer                        <td>plant seed, herb seed                   <td>+alignment [1]
+<tr><td>farmer                        <td>sickle, scythe, flail                   <td>iron ration, +10 alignment
+<tr><td>beggar                        <td>food                                    <td>+satiation*0.1 alignment, min 10, max 100
+<tr><td>berserker                     <td>wedding ring                            <td>tames if same <big>opposite</big> gender
+<tr><td>giant raccoon                 <td>fish meat                               <td>tames
+<tr><td>child, dwarven child, baby water dragon (Blup)<td>candy                   <td>+alignment (2 or 10)
+<tr><td>child, dwarven child          <td>weapon                                  <td>&nbsp;
+<tr><td>doppelganger, Ratling Rebel   <td>anything                                <td>&nbsp;
+<tr><td>rust monster                  <td>iron items                              <td>tames
+<tr><td>injured skeleton or skeletal warrior <td>bone                             <td>heals 1d6
+<tr><td>-color- dragon (baby, regular, ancient, great wyrm) <td>-color- dragon scale mail, -color- dragon hide gauntlets<td>enrages
+<tr><td>any animal                    <td>fresh meat, raw meat                    <td>tames
+<tr><td>any humanoid                  <td>food                                    <td>+100 alignment
+<tr><td>anyone                        <td>gold                                    <td>&nbsp;
+<tr><td>ancient sage (Khelavaster)    <td>books, scrolls                          <td>&nbsp;
+<tr><td>ancient sage                  <td>crumpled scroll                         <td>TotRR
+<tr><td>dying sage (Khelavaster)      <td>amulet of life saving                   <td>+5000 alignment
+<tr><td>Ghost Librarian               <td>books, scrolls                          <td>blessing 2000 turns
+<tr><td>priest (Ruun)                 <td>gold                                    <td>alter alignment or +piety [2]
+<tr><td>village elder (Rynt)          <td>healing items, stethoscope              <td>+alignment; see <a href="adomgb-1-2.html#122">1.2.2</a>
+<tr><td>fool (Yggaz)                  <td>potion of booze                         <td>potion
+<tr><td>sheriff (Tywat Pare)          <td>evil monster corpses                    <td>gold, +alignment; see <a href="adomgb-1-2.html#121">1.2.1</a>
+<tr><td>carpenter (Yrrigs)            <td>hatchet                                 <td>Bridge Building [3]
+<tr><td>Demented Ratling              <td>artifact                                <td>Demented Ratling +10 levels; see <a href="adomgb-3-5.html#358">3.5.8</a>
+<tr><td>druid (Guth'Alak)             <td>chaos corpse; see <a href="adomgb-1-2.html#123">1.2.3</a><td>potion of cure corruption
+<tr><td>Mad Minstrel                  <td>Weird Tome                              <td>5 cursed scrolls of corruption removal
+<tr><td>grizzled gladiator (Bart)     <td>ratling pamphlet                        <td>&nbsp;
+<tr><td>Tiny Girl                     <td>cute dog corpse                         <td>+600 alignment
+<tr><td>baby water dragon (Blup)      <td>potion of carrot juice                  <td>Swimming
+<tr><td>old crone (Gaab'Baay)         <td>anything                                <td>&nbsp;
+</table><p>
+
+[1] Alignment +Min(SeedsGiven,30) * 10 / Max((TotalSeedsGiven / 10),1). Then repeat each time divisible by 30 (31 and 60 both run twice; TotalSeedsGiven is calculated after
+each run.)<p>
+[2] If different alignments, alignment is drawn towards Ruun's by gp/20. Otherwise gain gp/15 piety.<p>
+[3] If BridgeBuilding = 0 then +1dLe+1d10+8 else +Le*0.8+2d5.<p>
+
+<div class="newb">
+<h4 id="0eh">0.14.17 Magic staves <tt>(</tt></h4>
+<img src="tiles/item747.png" alt="mstaff" align="left">
+Magic staves are a special type of two-handed weapon. They have effects that can be activated once by <tt>u</tt>sing or <tt>z</tt>apping them. Once activated,
+they will gradually recharge. Broken staves cannot be activated. Multiple staves of the same type work independently. The staves which need to be equipped
+to gain their effect can be wielded again if unequipped/disarmed and will grant their effect if its duration has not run out. Magic staves are subject to the
+mana battery corruption.<p>
+
+Staves have a base recharge turn timer that depends on the status of the staff: blessed staves recharge 4 times as fast as uncursed staves, and uncursed staves
+recharge 2 times as fast as cursed staves. If the PC wields a staff when it is zapped, the recharge time is halved. If the PC has more than 100 Speed,
+both the duration of the recharge time and any active effect will be multiplied by Speed/100. The following actions will deduct additional turns from the timer:<p>
+<ul>
+<li>wielding the staff
+<li>attacking a monster with the staff
+<li>hitting a monster with the staff
+<li>critically hitting a monster with the staff
+<li>killing a monster with the staff
+</ul><p>
+
+All magic staves appear as "quarterstaff" when unidentified. They cannot be activated until they have been identified. Magic staves are counted as basic
+melee weapons, and thus can be generated with prefixes and suffixes. For instance, it's possible for a "flaming staff of strength and devastation" to be generated.
+Magic staves benefit from and train the Staves weapon skill. For the list of all magic staves, see <a href="adomgb-app-B.html#mstaves">Appendix B</a>.<p>
+
+<h4 id="0ei">0.14.18 Mushrooms <tt>%</tt></h4>
+<img src="tiles/item849.png" alt="mroom" align="left">
+Mushrooms are special food items dropped by fungoid enemies, found in the Fungal Caves (section <a href="adomgb-3-6.html#362">3.6.2</a>). They appear as "strange
+mushroom" when unidentified. All mushrooms dropped by normal fungoids are generated cursed. Certain types of mushrooms are only dropped by the Fungoid Overlord.
+Those are quite valuable, offering significant short and long-term benefits.<p>
+
+Certain common mushrooms can be quite useful, especially in large quantities. Mushrooms of energy and kaboom can be helpful for aspiring Archmages. Mushrooms
+of shivering are helpful for dealing with cursed or autocursing weapons. Mushrooms of the glow can be use to raise important attributes in conjunction with
+potion of exchange. Mushrooms cannot be wished for.<p>
+
+For the list of all mushrooms, see <a href="adomgb-app-G.html#mushrooms">Appendix G</a>.<p>
+</div>
+
+<h4 id="0ej">0.14.19 Keys <tt>]</tt></h4>
+<img src="tiles/item354.png" alt="key" align="left">
+Keys are used for locking and unlocking doors. There is a special command for doing so: <tt>Ctrl+l</tt>. It works for both locking and unlocking doors, provided you carry the
+correct key. Keys can be found randomly, or bought for the right price from Skriek (<a href="adomgb-1-3.html#134">1.3.4</a>). There are six types of keys: round key, square key,
+tiny key, small key, hexagonal key, triangular key. All keys weigh 1s. Keys have a chance to disappear or break after being used. The base chance for this is 1/8/40 depending on
+B/U/C status, +20 if the key is rusty. Let's call this number KS (key status). If KS >= Luck*5+1d100, the key is destroyed or broken (1/2 chance for each case). So blessed key
+with positive Luck roll will never degrade, with neutral Luck only once in 100 cases.<p>
+
+<h4 id="0ek">0.14.20 Instruments <tt>{</tt></h4>
+<img src="tiles/item84.png" alt="instrument" align="left">
+With the exception of whistles, instruments are used to calm and tame animals using the Music skill (section <a href="adomgb-0-11.html#0b5">0.11.5</a>).
+Whistles are said to call pets towards the PC instead, though reportedly, this often does not happen. Bards start with two or more instruments.
+B/U/C status of an instrument determines the range of calming/taming effect (4/3/2 tiles respectively).<p>
+
+<h4 id="0el">0.14.21 Carrying capacity</h4>
+Carrying capacity (CC) determines how many stones of equipment the player may carry before becoming burdened or strained by excessive load. It is defined as the highest possible weight
+at which the character is not yet strained. The burden levels can be checked with the <tt>:b</tt> command.<p>
+<ul>
+<li>Unburdened: 0-0.75 CC
+<li>Burdened: 0.75-1 CC
+<li>Strained: 1-1.5 CC
+<li>Strained!: 1.5-1.75 CC
+<li>Overburdened!: 1.75-6 CC
+</ul>
+Should the character carry more than their 6 CC limit, they will die of being crushed under tons of luggage. It is impossible to pick up anything at Overburdened! status; only
+a reduction in carrying capacity can trigger this effect (typically losing a temporary carrying capacity boost).<p>
+Strength determines CC as follows: St 1: 640s (+40 per 1 St) St 10: 1000s (+100 per 1 St) St 15: 1500s (+150 per 1 St) St 20: 2250s (+225 per 1 St) St 25: 3375s (+300 per 1 St)
+St 99: 25575s. The CC is then modified by the following factors:<p>
+<ul>
+<li>girdle of greed: + (-4/0.5/1 *weight of gold C/U/B)
+<li>girdle of carrying: *0.5/+St*50/+St*100 C/U/B
+<li>gloves of carrying: + (-3/0.5/0.9 *weight of wielded items C/U/B)
+<li>bracers of lifting: *1.33 (B/U/C doesn't matter)
+<li>armor of carrying: *1.5 (B/U/C doesn't matter)
+<li>Strength of Atlas spell: +Ma*1000
+<li>Farmer lvl 6: *2
+<li>Merchant lvl 12: *2, lvl 50: *3 (overrides lvl 12)
+<li>Porter, Master Packager, Beasts of Burden talents: *1.1,*1.2,*1.3
+</ul><p>
+
+<hr>
+Updated September 12th, 2020
+</body>
+</html>

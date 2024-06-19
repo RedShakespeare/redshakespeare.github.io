@@ -1,0 +1,737 @@
+<html>
+<head>
+<title>Improved ADOM Guidebook - Corruptions</title>
+<link rel="stylesheet" type="text/css" href="adomgb-body.css">
+</head>
+<body>
+<h1>Improved ADOM Guidebook</h1>
+<hr>
+<a href="adomgb-0-9.html">Previous</a> - <a href="toc.html">TOC</a> - <a href="adomgb-0-11.html">Next</a>
+<hr>
+<a href="#0a1">What is corruption</a> - <a href="#0a12">List</a> - <a href="#0a13">Evaluations</a>  - <a href="#0a2">Gaining corruptions:</a>
+<a href="#0a21">Backround</a> - <a href="#0a22">Other means</a> - <a href="#0a3">Removing corruptions:</a> <a href="#0a31">Potions of cure corruption</a> -
+<a href="#0a32">Scrolls of corruption removal</a> - <a href="#0a33">Other means</a>
+<hr>
+
+<h3 id="0a">Corruptions</h3>
+There is only short, rather cryptic introduction to corruptions in the <a href="adomman-N.html">ADOM Manual</a>. Press <tt>\</tt> to view your corruption status.<p>
+
+<h4 id="0a1">0.10.1 What is corruption?</h4>
+Corruption is unavoidable in the Drakalor Chain for any PC who wants to make progress in the game. It is a background process that happens
+as a result of the Chaos Gate at the bottom of the Caverns of Chaos being open. Some locations remain free of corruption despite the Chaos Gate
+being open, notably those near the surface of the Drakalor Chain. In order to get anything done, however, the PC must descend into corrupting
+areas. It is only a matter of time after that until the first corruption occurs. After 90 days of game time elapses, corruption rate doubles.
+After the gate is closed, background corruption ceases, which is nice if the PC wants to play tourist for a while.<p>
+
+<!--However, corruption can still be caused by artifacts that corrupt (section <a href="#0a24">0.10.2.4</a>)
+as well as corrupting hits from monsters (section <a href="#0a23">0.10.2.3</a>).<p>-->
+
+<h4 id="0a11">0.10.1.1 Definition</h4>
+Corruption is the means by which the PC is tainted by the essence of Chaos. They can be corrupted by being damaged by a creature of chaos, triggering a
+corruption trap, eating the corpse of a corrupted creature, or local background corruption. A large amount of corruption can also be gained by drinking a
+potion of raw chaos, activating a staff of corruption dissemination, or completing certain chaotic quests. Some powerful artifacts of chaos will corrupt 
+the PC simply by being in their possession; equipping them will amplify the effect.<p>
+
+Each new corruption means that PC gains new abilities, most of them granting some kind of advantage in exchange for some disadvantage. Some of these abilities
+are quite powerful, but beware: if the PC becomes fully corrupted, she will be transformed into a writhing mass of primal chaos, and the game will end.<p>
+
+PCs get one corruption for each 1000 corruption points (CP) they accrue. Any incoming corruption is adjusted by the following factors:<p>
+<ul>
+<li>*1.3 C- alignment
+<li>*0.7 L+ alignment
+<li>*0.9 other lawful
+<li>*0.9 Unicorn star sign when lawful
+<li>*0.9 Druid/Monk lvl 50
+<li>*0.7 Farmer/Paladin lvl 50
+<li><big>*(100/(90 + Appearance))</big>
+<li><big>*0.75/0.5 Chaos Knight lvl 32 with 5/10 corruptions</big>
+</ul><p>
+
+Note that the possible corruptions occur in random order (not the order listed on this page) which is decided at the beginning of the game. However, if one or more
+corruptions are removed, the RNG is reseeded and the corruptions will reoccur in a new random order.<p>
+
+<div class="resb">
+There are a total of 35 different corruptions, but the PC have at most 18 at one time. The corruption pool will always include Poison hands, Mana battery, and Thin and nimble.
+Apish look will always be the final corruption. Otherwise, the other corruptions and order of corruptions in the pool is random. However, the 18 corruptions in the pool will
+remain the same unless all corruptions are removed.<p>
+
+In addition to the specific special effects of corruptions, with a certain number of corruptions, the PC will get bonuses to Strength, Dexterity, Toughness and Mana, and a
+penalty to Willpower, depending on alignment. The gains or losses to such attributes are as follows:
+<ul>
+<li>if chaotic: (number of corruptions)/2
+<li>if neutral: (number of corruptions)/3
+<li>if lawful: (number of corruptions)/4
+</ul><p>
+</div>
+
+<h4 id="0a12">0.10.1.2 List of corruptions</h4>
+The following is a complete list of corruptions (there are 18 <big>35</big> corruptions total):<p>
+
+<table border=1><caption>Corruptions</caption>
+<tr><th>Corruption <th>Acquired message <th>Removed message <th>Attributes <th>Special
+<tr>
+<td>You are surrounded by an unholy aura.
+<td>You are suddenly emitting an unholy aura!
+<td>The unholy aura surrounding you suddenly disappears.
+<td>-10&nbsp;Ch, +6&nbsp;DV
+<td>Occasionally makes monsters flee. Can turn shopkeepers hostile.
+<tr>
+<td>You rage!
+<td>Suddenly a great hatred and anger takes control of you.
+<td>You calm down.
+<td>-9&nbsp;DV
+<td>+6 melee damage bonus.
+<tr>
+<td>Poison drips from your hands.
+<td>Suddenly a poisonous fluid begins to drop from your hands!
+<td>The fluid dripping from your hands suddenly is gone.
+<td>&nbsp;
+<td>Poisons monsters, turns potions into poison, curses food. 
+<tr>
+<td>You have grown thorns.
+<td>Suddenly thorns grow from your hands!
+<td>The thorns in your hands suddenly retard and disappear!
+<td>-2&nbsp;Dx, -3&nbsp;Ap
+<td>Replaces base 1d3 unarmed damage with 3d3.
+<tr>
+<td>Your close attunement to corrupted astral space allows teleportation.
+<td>You suddenly feel more attuned to the astral planes.
+<td>You suddenly feel less attuned to the astral planes.
+<td>&nbsp;
+<td>+Tele.
+<tr>
+<td>You have grown a bulging cranium.
+<td>Your cranium suddenly grows to enourmous proportions!
+<td>Your cranium shrinks back to normal size.
+<td>+6&nbsp;Le, +4&nbsp;Wi, -3&nbsp;To, -6&nbsp;Ap, -4&nbsp;PV
+<td>&nbsp;   
+<tr>
+<td>You are a living mana battery.
+<td>You start to absorb mana at an enormous rate.
+<td>You no longer absorb mana.
+<td>&nbsp;
+<td>Drains all charges from wands, increasing max PP by 2/1/0 B/U/C. PP of spells reduced by 20%.
+<tr>
+<td>You have grown horns.
+<td>Suddenly horns sprout from your forehead!
+<td>The horns in your forehead disappear!
+<td>-4&nbsp;Ap
+<td>Minor melee damage bonus (+2/+3 for weapon/barehanded attacks).
+<tr>
+<td>Your antennae explore the details of your environment.
+<td>You suddenly grow antennae at your temples!
+<td>The antennae growing from your temples suddenly disappear!
+<td>-4&nbsp;Ap
+<td>Periodically reveals map in a circular area around the PC.  
+<tr>
+<td>Your skin is covered by tough scales.
+<td>Suddenly your skin is transformed into tough scales!
+<td>Your scales transform into natural skin!
+<td>-6&nbsp;Dx, -4&nbsp;Ap, +8&nbsp;PV
+<td>&nbsp;
+<tr>
+<td>You have grown 10 extra eyes.
+<td>Suddenly you grow 10 more eyes in a circle around your head!
+<td>Suddenly 10 of your eyes disappear!
+<td>+6&nbsp;Pe, -6&nbsp;Ap
+<td>Near immunity to blindness.
+<tr>
+<td>You exhale sulphur.
+<td>You start to exhale sulphuric clouds!
+<td>Your breath suddenly is normal once more!
+<td>-4&nbsp;Ch
+<td>Drakeling racial ability to spit acid at the cost of satiation. 
+<tr>
+<td>You look somewhat apish.
+<td>You suddenly feel that you are stepping backward in evolution.
+<td>You seem to integrate into the evolutionary scheme once more.
+<td>+3&nbsp;St, -1&nbsp;Le, -1&nbsp;Wi, -2&nbsp;Ch, -3&nbsp;Ap
+<td>Kicks in over periods of time further changing attributes, generating message: You suddenly remember your ancestors.
+<tr>
+<td>Your corrupted tissue seems to heal much faster.
+<td>Suddenly an unnatural vigor seems to spread through your body!
+<td>The unnatural vigor brimming through your veins suddenly is gone.
+<td>&nbsp;
+<td>Healing ~20 HP in 100 turns, occassionally leaving scars (-1&nbsp;Dx, -1&nbsp;Ap), which are not removed with the corruption.
+<tr>
+<td>Your feet have been transformed into hooves.
+<td>Your feet suddenly transform into hooves!
+<td>Your feet are reversed to their normal shape.
+<td>-6&nbsp;Dx
+<td>+8 damage bonus to <tt>k</tt>icking.
+<tr>
+<td>Your muscles have stiffened slowing you down.
+<td>Your muscles suddenly stiffen slowing you down greatly.
+<td>The stiffness disappears from your muscles.
+<td>+2&nbsp;St, +4&nbsp;PV
+<td>Energy cost of all actions +50%. 
+<tr>
+<td>You have become extremely thin and nimble.
+<td>Suddenly your body becomes extremely lean and your reflexes speed up!
+<td>Your body becomes thicker and you assume your usual shape! Your reflexes slow down once more.
+<td>+6&nbsp;DV
+<td>Reduces weight and increases hunger. Required to access the Quickling Tree.
+<tr>
+<td>You have become very light.
+<td>You suddenly lose a *lot* of weight.
+<td>Your suddenly gain a *lot* of weight.
+<td>+4&nbsp;Dx, -6&nbsp;St, -6&nbsp;To, -6&nbsp;Ap, +20&nbsp;Speed
+<td>1/10 weight. Required to access the Quickling Tree.
+<tfoot><tr>
+<td>Your blood turned to acid.
+<td>Your blood turns to acid!
+<td>Your blood no longer is acidic.
+<td>&nbsp;
+<td>=Acid. Can damage or blind attackers.
+<tr>
+<td>You sport a babbling mouth on your forehead that rants and raves dark secrets.
+<td>You sprout a babbling mouth on your forehead that rants and raves!
+<td>The babbling mouth on your forehead disappears.
+<td>+8&nbsp;Le, -6&nbsp;Ch, -4&nbsp;Pe, -6&nbsp;Ap
+<td>Periodically cast random spells draining all PP. Fail all Stealth checks. 
+<tr>
+<td>Your eyes turned black.
+<td>Your eyes turn black!
+<td>Your eyes return to normal.
+<td>+3&nbsp;Pe
+<td>+SeeI. 
+<tr>
+<td>You sweat blood.
+<td>You start to sweat blood!
+<td>You no longer sweat blood.
+<td>-2&nbsp;Ch, -4&nbsp;Ap, +5&nbsp;Speed
+<td>&nbsp;
+<tr>
+<td>Your bones are made from bronze.
+<td>Your bones turn into bronze!
+<td>Your bones no longer are made from bronze.
+<td>-2&nbsp;Dx, -2&nbsp;DV, +3&nbsp;PV
+<td>&nbsp;  
+<tr>
+<td>You are attached to ChAoS corrupting your foes.
+<td>You embrace the essence of ChAoS!
+<td>You feel somewhat less attached to ChAoS.
+<td>&nbsp;
+<td>Melee attacks corrupt opponents.
+<tr>
+<td>The voice of ChAoS whispers disturbing secrets into your thoughts.
+<td>You suddenly hear the constant whispering of ChAoS in your thoughts!
+<td>The constant whisper of ChAoS suddenly is silenced.
+<td>+4&nbsp;Le, +2&nbsp;Ma, -6&nbsp;Wi
+<td>&nbsp;
+<tr> 
+<td>Your blood is freezingly cold.
+<td>Your blood freezes!
+<td>Your blood returns to normal warmth!
+<td>-2&nbsp;Dx, -1&nbsp;Ap, -10&nbsp;Speed
+<td>Drakelings' racial feature of cold-blooded physiology.
+<tr>
+<td>Your bodily tissues seem to be in a state of decay requiring a lot of will to stay up.
+<td>Your body starts to decay!
+<td>Your body gets rid of all decay.
+<td>+10&nbsp;Wi, -5&nbsp;St, -5&nbsp;Ap, -10&nbsp;Speed
+<td>Slows HP regeneration by 50%.
+<tr>
+<td>You thrive on the flesh of Order.
+<td>You yearn to consume Order!
+<td>You no longer hunger for Order!
+<td>&nbsp;
+<td>Eating corpses of lawful monsters grants a temporary +1d100 Speed.
+<tr>
+<td>You sport gills.
+<td>You grow gills!
+<td>Your gills disappear.
+<td>-3&nbsp;Ap
+<td>+WBre.
+<tr>
+<td>You hate the sun and try to blot it.
+<td>You start to hate the sun.
+<td>You no longer hate the sun.
+<td>&nbsp;
+<td>Periodically darken tiles in immediate vicinity.
+<tr>
+<td>Your flesh continually spouts disease-ridden maggots.
+<td>Your flesh starts to spout disease-ridden maggots!
+<td>Your flesh stops spouting disease-ridden maggots.
+<td>-6&nbsp;To, -2&nbsp;Ch, -4&nbsp;Ap, +4&nbsp;DV
+<td>Occasionally spawn tame white/red/brown/purple/green worm, dealing minor damage.   
+<tr>
+<td>Your frontal eyes have merged to form one larger eye.
+<td>Your frontal eyes merge to form one larger eye!
+<td>Your central eye separates into two smaller eyes.
+<td>+4&nbsp;Pe, -2&nbsp;Ch, -2&nbsp;Ap
+<td>Helmet blocks Perception bonus.
+<tr>
+<td>Your eyes are shrouded by the mists of ChAoS.
+<td>The mists of ChAoS shroud your eyes!
+<td>The mists of ChAoS no longer cover your eyes.
+<td>-10&nbsp;Pe
+<td>+SeeI. 
+<tr>
+<td>Your legs have stretched into long, fragile stilts.
+<td>Suddenly your legs grow into enormous fragile stilts!
+<td>Suddenly your legs return to normal length.
+<td>-6&nbsp;Ap, -4&nbsp;PV
+<td>Reduces movement energy cost by 25%. -4 to <tt>k</tt>ick damage.
+<tr>
+<td>Your mouth has turned into a writhing mass of prehensile tentacles.
+<td>Your mouth collapses into a writhing mass of prehensile tentacles!
+<td>Your mouth returns to normal.
+<td>+6&nbsp;Dx, -15&nbsp;Ap
+<td>Significant chance for spellcasting, <tt>C</tt>hatting and Ventriloquism to fail.   
+</tfoot></table><p>
+
+<h4 id="0a13">0.10.1.3 Evaluation of corruptions</h4>
+Here are provided some comments about the corrupions effects and workarounds:<p>
+<ol type="A">
+<li><b>You are surrounded by an unholy aura (Ch: -10, DV: +6).</b><br>
+Acts mostlly like armor of hate. Causes monsters to become afraid of the PC at more or less random times. In their frightened state, they will flee. A very nasty side effect 
+is that shopkeepers become homicidally enraged at PCs that move anywhere near shops with this corruption, fearing that their customers will be frightened away. If the PC has 
+any unpaid items when this is triggered then it is classified as a shop robbery, with associated alignment drop and possible Cursing or Dooming. If this happens with Munxip 
+or Waldenbrook, the entire town becomes hostile and the PC loses access to local quests. Note that invisible PCs do not suffer the effects of this corruption: monsters that 
+cannot see invisible do not detect this corruption. This works for shopkeepers until the "*foo* stares at your position with great intensity" message is generated. After that, 
+look out.<p>
+
+<li><b>You rage (DV: -9, +6 melee damage)!</b><br>
+Mediocre increase to damage in exchange for losing nine points of DV. Not a very good bargain, especially for low level characters, since this will make them easier to hit
+(and some monster hits cause further corruption). Is very good only for melee character with already great DV. It also gives the PC a chance to splatter peaceful monsters they
+walk into without a prompt, instead of swapping places with them.<p>
+
+<li><b>Poison drips from your hands.</b><br>
+Some players hate this corruption more than any other. PCs with this corruption poison any monsters they engage in melee (a nice effect), turn
+any potion they touch (drinking, dipping, throwing, picking up, dropping) into poison (very bad) and curse any food (including herbs) they touch (very bad). It can result in
+starvation quickly. The workaround is to wear thick gauntlets, which negate all of the above effects. Gauntlets of Eternal Peace or alchemistic gloves also can negate these
+effects when picking up potions or food items, but it is not guaranteed. However, they will <i>never</i> block the effects when drinking potions or eating food. Note that
+Poison Hands does not prevent the PC from <tt>U</tt>sing herbs and <tt>a</tt>pplying Alchemy.<p>
+
+<li><b>You have grown thorns (3d3 unarmed damage, Dx: -2, Ap: -3).</b><br>
+The extra melee damage occurs only when fighting unarmed. Also bleeding effect is added. Monks and Beastfighters get no benefit. In most cases, other classes should not fight unarmed,
+since the damage output and other benefits of most weapons outweigh the damage bonus from this corruption. Thorns do give a good boost to Necromancers' Shadow Touch, which can be used
+on weaker monsters after tough fights. Otherwise, useless waste of 2 Dx. When the thorns first grow, the PC suffers 3d3 damage.<p>
+
+<li><b>Your close attunement to corrupted astral space allows teleportation (+Tele).</b><br>
+Very, very nice if the PC has teleport control. Very, very annoying if the PC doesn't have teleport control.<p>
+
+<li><b>You have grown a bulging cranium (Le: +6, Wi: +4, To: -3, Ap: -6, PV: -4).</b><br>
+Learning and Willpower increases are nice especially for magic oriented classes. The PV decrease makes any PC more vulnerable to damage and corruption. Not good for looks or Toughness
+either.<p>
+
+<li><b>You are a living mana battery.</b><br>
+Another nominee for the most hated corruption. All wands and magic staves the PC touches are drained of their charges. This does not destroy them; their final charge can still be
+wrenched from them, but extremely annoying nonetheless. Partially charged, unidentified or artifact magic staves are not affected by mana battery and will retain their charges.
+There is no workaround. Some side benefits: 1) every time the PC touches a wand with non-zero charges, power points are added to the PC's maximum PP: blessed wands give +2, uncursed +1,
+and cursed 0. 2) spell costs are reduced to 80% of their normal cost &ndash; note that this is not cumulative with Darknight / Silvernight reductions, since costs cannot drop below 50%.
+3) PP regeneration is increased (if you aren't already gaining PP from another source (like Concentration), you have a 10% chance of gaining 1 PP). Curiously, wands that the PC sells
+while this corruption is active are priced per their existing charges, but are drained of charges after they are sold. Picking up a wand with charges in a shop will lower the value of
+the wand, and the shopkeeper will blame the PC for damage.<p>
+
+<li><b>You have grown horns (+2 melee damage, Ap: -4).</b><br>
+Melee damage in exchange for Appearance. The bonus is +2 for weapons or +3 for unarmed combat.<p>
+
+<li><b>Your antennae explore the details of your environment (Ap: -4).</b><br>
+Kicks in quasirandomly (1/250 chance every turn) to reveal a bit of the dungeon layout in the immediate vicinity (radius 7 + NumberOfCorruptions/2), as indicated by the message
+"You suddenly know more about your environment.". Loss of Appearance. It provides a means of locating hidden dungeon features such as royal vaults without using any items.<p>
+
+<li><b>Your skin is covered by tough scales (PV: +8, Dx: -6, Ap: -4).</b><br>
+Nice PV increase, nasty Dexterity decrease, loss of Appearance.<p>
+
+<li><b>You have grown 10 extra eyes (Ap: -6, Pe: +6).</b><br>
+Nice Perception increase, loss of Appearance. May speed up recovery from light traps.<p>
+
+<li><b>You exhale sulphur (Ch: -4).</b><br>
+This enables the PC to spit a corrosive acid for satiation, much the same as a Drakeling's racial ability. Definitely beneficial corruption except for Drakelings.<p>
+
+<li><b>You look somewhat apish (St: +3, Le: -1, Wi: -1, Ch: -2, Ap: -3).</b><br>
+This corruption's effects reoccur periodically. Maximum is set at beggining of game, 1d10+4. Its effects are cumulative over time, so the PC keeps gaining Strength while losing
+Learning, Willpower, Charisma, and Appearance. At some point it also starts decreasing Dexterity and increasing Toughness. The game notifies you when this is happening with the
+phrase "You suddenly remember your ancestors." Nice for fighter types, nasty for spellcasters.
+<big>Apish look can only be obtained if the PC is 'extremely corrupted', as their 18th corruption. Consequently, a Chaos Knight can never start out with the corruption.</big><p>
+
+<li><b>Your corrupted tissue seems to heal much faster.</b><br>
+Another corruption causing cumulative effects. The PC heals faster (1 HP every 5 turns), but the process leaves scars (every 1000 HP healed by corruption) which reduce both
+Dexterity and Appearance by one point for each scar. Scars do not disappear when the corruption is removed, and can only be removed by <tt>u</tt>sing gelee royal. Nasty over time.<p>
+
+<li><b>Your feet have been transformed into hooves (+8 kicking damage, Dx: -6).</b><br>
+Nasty loss of Dexterity, especially since most PCs aren't kickers anyway, but useful for Monks. Helps Monks kicking down walls and everyone kicking down doors.<p>
+
+<li><b>Your muscles have stiffened slowing you down (base action cost: 1500 energy points, PV: +4, St: +2).</b><br>
+Very, very bad, possibly the worst. Slows down all your movement by 1.5x &ndash; should be removed immediately.<p>
+
+<li><b>You have become extremely thin and nimble (1/2 weight, DV: +6).</b><br>
+Nice corruption. Six points of DV, but increases hunger by 1 per turn. This is one of the corruptions needed to enter the Quickling Tree, except for Hurthlings and Mist Elves.<p>
+
+<li><b>You have become very light (1/10 weight, Dx: +4, St: -6, To: -6, Ap: -6, Speed: +20).</b><br>
+Bad Strength, Toughness and Appearance losses in exchange for speed and Dexterity. It should be noted that despite its advantages, high speed significantly lowers experience gains.
+This is the corruption needed to enter the Quickling Tree, for everyone.
+</ol>
+
+<div class="resb">
+<span class="credit">Credit ADOM Wiki &ndash; <a href="http://ancardia.wikia.com/wiki/Corruptions">Corruptions</a>.</span>
+<ol type="A" start="19">
+<li><b>Your blood turned to acid. (=Acid)</b><br>
+Provision of an elemental immunity and the potential to blind attackers makes it very desirable. It may even 
+save a character's life, if they are engaged in melee while paralyzed and/or by a monster with multiple attacks.
+But, blind monsters with the teleporting ability will teleport every time they move, making them hard to track. 
+Cats can kill themselves by attacking the PC.<p>
+
+<li><b>You sport a babbling mouth on your forehead that rants and raves dark secrets (Le: +8, Pe: -4, Ch: -6, Ap: -6).</b><br>
+At random intervals, the mouth screams a formula that invokes the same effect as a wand of wonder, ie. casts a random spell 
+and slightly increases the knowledge of that spell. The effect seems to have a 1/1000 chance of occurring at each turn.
+Once activated, it depletes all of the PP. This may prove very frustrating and even dangerous for PCs heavily relying
+on their own magic. It does have the additional benefit of training Mana quite quickly without draining own spell base.
+Very unfortunate accidents, like unexpectedly attacking an adjacent NPC with a ball spell, can occur.
+It also makes the PC automatically fail all Stealth checks, and prevents the PC from getting the Weird Tome from the Ghost Librarian.<p>
+
+<li><b>Your eyes turned black (Pe: +3, +SeeI).</b><br>
+Grants the see invisible intrinsic, in addition to extra Perception. One of three corruptions with no negative effects whatsoever 
+(the other being acid blood, and thriving on the flesh of order).<p>
+
+<li><b>You sweat blood. (Ch: -2, Ap: -4, Speed: +5)</b><br>
+A decent tradeoff of attributes, since extra speed is beneficial for most situations.<p>
+
+<li><b>Your bones are made from bronze (Dx: -2, DV: -2, PV: +3).</b><br>
+A fair exchange of dodging abilities for protection. Certainly not one of the most dangerous corruptions.<p>
+
+<li><b>You are attached to ChAoS corrupting your foes.</b><br>
+Melee attacks inflicting corruption on monsters is almost universally undesirable. A monster that poses little threat to begin with 
+may be transformed into a writhing mass of primal chaos; the corrupting touch actually heals chaos monsters like WMoPCs. The effect 
+is usually not complete absorption &ndash; the enemy will suffer damage, and most corrupting monsters will recover just a small amount &ndash;
+but non-lethal hits will completely heal WMoPCs. PCs depending on melee should thus remove it immediately, especially if acquired on D: 50.<p>
+
+<li><b>The voice of ChAoS whispers disturbing secrets into your thoughts (Le: +4, Ma: +2, Wi: -6).</b><br>
+Willpower is usually easier to train than Learning by using herbs, so it is generally a good tradeoff; neither greatly 
+beneficial nor very dangerous.<p>
+
+<li><b>Your blood is freezingly cold (Dx: -2, Ap: -1, Speed: -10).</b><br>
+PCs with cold blood will slow down dramatically when cold and speed up greatly at the cost of taking damage when hot. 
+Drakelings get no benefits at all from the corruption; they may want to remove the corruption to regain speed right away, though 
+compared to some other corruptions it is somewhat tolerable. For other PCs, while the speed penalty is undesirable, the 
+temperature-related effects can be positive as well as negative.<p>
+
+<li><b>Your bodily tissues seem to be in a state of decay requiring a lot of will to stay up (Wi: +10, St: -5, Ap: -5, Speed: -10).</b><br>
+In addition to causing quite dramatic attribute changes, the corruption also halves all HP regeneration for the PC.
+Though the Willpower boost may be of benefit to Mindcrafters and mages wielding ball spells, the disadvantages are 
+likely to significantly nuisance them without adequate strategies to compensate the loss of mobility and carrying capacity.
+The regeneration penalty is definitely very undesirable to all, making this corruption one of the worst.<p>
+
+<li><b>You thrive on the flesh of Order.</b><br>
+Eating the corpse of a lawful being gives a speed bonus of 1d100 points, that decays by 1 point per turn. The usefulness 
+is limited by the facts that very few monsters in the game are lawful (blink dogs being one notable example). One of the three 
+only positive corruptions, with weakest effect.<p>
+
+<li><b>You sport gills (Ap: -3, +WBre).</b><br>
+Very desirable corruption with only a minor downside. Water breathing is a quite difficult intrinsic to obtain, and it allows 
+the PC to cross any river and even the Water Dragon Cave without taking any damage.<p>
+
+<li><b>You hate the sun and try to blot it.</b><br>
+Occasionally forces the PC to replicate the effect of the Darkness spell. With no light sources, this corruption can become 
+very annoying and the player might want to get rid of it as quickly as possible. It is especially dangerous in places where 
+there is no reason to cast Darkness anyway &ndash; such as Terinyo or Dwarftown where the PC can thus accidentally attack unseen
+civilians, or in shops. Can be deadly to Doomed characters.<p>
+
+<li><b>Your flesh continually spouts disease-ridden maggots (To: -6, Ch: -2, Ap: -4, DV: +4).</b><br>
+At random intervals a tame (brown/green/purple/red/white) worm will spawn from your body, causing a few points of damage.
+Though companions can be put to tactical uses by some players, the Toughness loss afflicted on the PC by the corruption is a very 
+significant problem for many of them.<p>
+
+<li><b>Your frontal eyes have merged to form one larger eye (Pe: +4, Ch: -2, Ap: -2).</b><br>
+Note that the positive part of the corruption will not occur if PC is wearing helmet, which limits its usefulness. In addition to the attribute modifiers, 
+it also gives a -1 penalty to melee to-hit and a -4 penalty to missile to-hit.<p>
+
+<li><b>Your eyes are shrouded by the mists of ChAoS (Pe: -10, +SeeI).</b><br>
+Though it grants a quite useful intrinsic, there are quite a few other less harmful means of acquiring it. The significant 
+loss of Perception is likely to have a noticeably serious impact on visibility range; additionally, if Perception falls as low as 1,
+the number of turns required to find a secret door/passageway by <tt>s</tt>earching increases dramatically.<p>
+
+<li><b>Your legs have stretched into long, fragile stilts (Ap: -6, PV: -4, base movement cost: -25% energy points, -4 kicking damage).</b><br>
+Kind of like the opposite of the stiff muscles corruption, this corruption exchanges some PV and Appearance for increased mobility &ndash; quite a
+desirable tradeoff overall.<p>
+
+<li><b>Your mouth has turned into a writhing mass of prehensile tentacles (Dx: +6, Ap: -15).</b><br>
+Great gain in Dexterity, but a huge loss in Appearance. Since Appearance determines resistance to corruption,
+the latter means that the PC can be corrupted much more easily after getting this. The most serious effect of the corruption is its
+effect on spellcasting &ndash; attempting to cast a spell can cause it fail and waste a turn. Characters wishing to cast spells will
+need to remove this immediately. Trying to chat with NPCs also fails very frequently, but can be done with enough persistence and is usually
+not a major problem anyway. This corruption seems to prevent the PC from getting the Weird Tome from the Ghost Librarian even if speaking
+succeeds on the first try. The failure rate depends on Willpower, ranging from 95% at 1 Willpower to 33% at 99.
+</ol><p></div>
+
+<h4 id="0a2">0.10.2 Gaining corruptions</h4>
+The game keeps track of corruption with a numerical value which increments each time twenty turns pass in a corrupting zone. For each 1000 corruption points (CPs),
+the PC gains one corruption <big>only if Appearance = 10, otherwise 910 CPs for Ap=1 and 1890 CPs for Ap=99</big>. The amount required to corrupt the PC to death is
+19 corruptions (the 19th corruption doesn't actually occur &ndash; instead, the PC is transformed and game ends). 180 points equals 1% corruption and the PC gains
+a new corruption each time they pass a multiple of 1000/180 = 5.556%. This is a strict rule only up to 99% corruption. The 99% corruption level begins at 99 * 180 = 17820
+corruption points, but the PC is given extra leeway at this point and does not transform into a chaos creature until the counter is over 19000 points.<p>
+
+<div class="resb">PCs with lower Appearance acquire corruptions at a faster rate. This means that previously inconsequential Appearance losses now make certain
+corruptions more detrimental. Also, because about 1 in 2 corruptions reduce Appearance, they cause a cumulative acceleration of acquisition of new corruptions.
+</div><p>
+
+<h4 id="0a21">0.10.2.1 Background corruption</h4>
+<span class="credit">Credit Vladimir Panteleev.</span>
+As mentioned above, the PC must eventually enter areas where background corruption occurs. Areas with no corruption flag set:<p>
+<ul>
+<li>Small Cave before day 90
+<li>Unremarkable Dungeon
+<li>Dusty Dungeon lvls 1-2
+<li>Village Dungeon
+<li>Druid Dungeon
+<li>Puppy Cave
+<li>Caverns of Chaos lvls 1-9
+<li>Infinite Dungeon lvls 1-9
+<li>Wilderness
+<li>Gremlin Cave
+<li>Dwarven Graveyard
+<li>Water Dragon Cave
+<li>Greater White Unicorn Glade
+<li>Terinyo
+<li>Lawenilothehl
+<li>High Mountain Village
+<li>Old Barbarian's Glade
+<li>Mad Minstrel's Clearing
+</ul><p>
+
+Otherwise, the corruption points (CPs) gained depend on a Danger Level (DL) in particular area. Refer to section <a href="adomgb-app-L.html">Appendix L</a> for the list of
+areas and their DLs.<p>
+
+No other corruption occurs if:<p>
+<ul>
+<li>the current level has the NoCorruption flag set (see the list above)
+<li>DL&lt;10
+<li>the Chaos Gate is closed
+</ul><p>
+
+The background corruption is applied once every N turns. If the PC is Doomed, that's TWICE every N turns:<p>
+
+if (TurnNumber mod N=0) or (Doomed and (TurnNumber mod N=1)) then<p>
+
+(this is how mathematicians/programmers say once normally and twice with Doomed intrinsic per N turns)<p>
+
+N is calculated based on the DL the PC is on:<p>
+<ul>
+<li>ID: N=CorruptionSpeed[ Max(Min(90,CurrentIDLevel)-10,0)/20 ]
+<li>I66: N=20
+<li>levels with Danger Level&gt;40: N=CorruptionSpeed[ (DangerLevel-5)/10 ]
+<li>other N=CorruptionSpeed[ (DangerLevel-10)/10 ]
+</ul><p>
+
+CorruptionSpeed is a 5-element array:<p>
+<ul>
+<li>CorruptionSpeed[0]=20
+<li>CorruptionSpeed[1]=15
+<li>CorruptionSpeed[2]=10 <big>12</big>
+<li>CorruptionSpeed[3]= 5 <big>9</big>
+<li>CorruptionSpeed[4]= 2 <big>6</big>
+</ul><p>
+
+Put in words, N can be 2 <big>6</big>, 5 <big>9</big>, 10 <big>12</big>, 15, or 20. The smaller N, the faster the corruption (corruption occurs every N turns,
+or twice the N turns if Doomed). In the Infinite Dungeon, N is 20 for levels I:10-29, 15 for levels
+I:30-49, 10 <big>12</big> for levels I:50-69, 5 <big>9</big> for levels I:70-89, and 2 <big>6</big> for levels I:90 and above. The exception is level I:66
+(the special SIL level with MaLaKaI) where N is 20. For other areas, N is 20 for DL 10-19, 15 for DL 20-29, 10 <big>12</big> for DL 30-39, 5 <big>9</big> for DL 40-44,
+and 2 <big>6</big> for DL 45 and above.<p>
+
+If the background corruption is to be applied on this turn:<p>
+<ul>
+<li>1 CP is always applied
+<li>if the current level is in the CoC and DL&gt;=45, +2 CP
+<li>ChAoS Plane: +1d100 CPs
+<li>Emperor Moloch's level: +1d33 CPs
+</ul><p>
+
+Now, there's a bug <big>(fixed)</big> in the corrupting code. This is how it SHOULD have worked:<p>
+<ul>
+<li>+1 CP if it's beyond day 90
+<li>+2 CP if it's beyond day 180 (cumulative with previous)
+<li>+3 CP if it's beyond day 270 (cumulative with previous)
+<li>+4 CP if it's beyond day 360 (cumulative with previous)
+</ul><p>
+
+However, only the first line is executed &ndash; the 90-day limit.<p>
+
+Being L+ decreases corruption by -30%, L or LN -10 %, C- enhances corruption by +30%, lawful Unicorn-borns -10%, lvl50 Farmers and lawful Paladins -30%, lvl50 Monks
+and Druids -10%.<p>
+
+Note that since background corruption is applied only by 1-2 points, the above do not affect its speed, but major corruptions, such as eating
+chaotic corpses etc. The "crowned as champion" status does not affect corruption speed.<p>
+
+Note that a corrupting level can be made less so, or even completely noncorrupting, by reading scrolls of peace. These reduce the danger
+level, and thus the corruption rate of the current level. Bless the scrolls before reading them. The number of scrolls required depends on
+the level. If Dwarftown is generated on D: 10 or D: 11, for instance, reading a blessed scroll of peace will probably stop corruption. On
+the other hand, if it is necessary to stop corruption on a particular level of the Blue Dragon Caves, approximately nine scrolls of peace are required.<p>
+
+<h4 id="0a22">0.10.2.2 Corruption traps <tt>^</tt></h4>
+<img src="tiles/trap_c.png" alt="corruption trap" align="left">
+Corruption traps are as common as any other trap in the dungeons. They cause 10d10 CPs. They are purple when revealed.<p>
+
+<h4 id="0a23">0.10.2.3 Corrupting hits from monsters</h4>
+Some monsters corrupt by hitting the PC in melee. Common ones include chaos brothers, chaos sisters and the grues found in
+the elemental temples. <a href="adomgb-app-J.html">Appendix J</a> contains a complete list.<p>
+
+<h4 id="0a24">0.10.2.4 Artifacts which corrupt</h4>
+<h4 id="0a241">0.10.2.4.1 Moon Sickle <tt>(</tt></h4>
+<img src="tiles/item199.png" alt="moon sickle" align="left">
+This unique corrupting artifact corrupts only if it hits successfuly (2d3 CPs). It is guaranteed to be found moderately deep in the CoC. Read more about it in section
+<a href="adomgb-3-6.html#365">3.6.5</a>.<p>
+
+<h4 id="0a242">0.10.2.4.2 When carried</h4>
+The following artifacts contain the essence of Chaos and Corruption and will corrupt the PC merely by carrying them:<p>
+<ul>
+<li>Black Tome of Alsophocus (random artifact) <tt>"</tt>
+<li>Boots of Great Speed (found in the Quickling Tree) <tt>[</tt>
+<li>Shield of Raw Steel (reward for Kherab's first quest) <tt>[</tt>
+<li>Amulet of Raw Steel (reward for Kherab's second quest) <tt>'</tt>
+<li><span class="newi">Chainmail of Raw Steel (reward for Kherab's third quest) <tt>[</tt></span>
+<li>Spear of Raw Steel (reward for Kherab's fourth quest, if you can get it) <tt>(</tt>
+<li>Sceptre of Chaos (part of Chaos trinity, found in SIL (I:66)) <tt>(</tt>
+<li>Medal of Chaos (part of Chaos trinity, summoned by Gaab'Baay) <tt>'</tt>
+<li>Crown of Chaos (part of Chaos trinity, found in the Stone Circle) <tt>[</tt>
+<li><span class="newi">Staff of Wonder (random artifact) <tt>(</tt></span>
+</ul><p>
+
+<img src="tiles/item681.png" alt="btoa" align="left"><img src="tiles/item574.png" alt="bogs" align="left"><img src="tiles/item519.png" alt="sors" align="left"><img src="tiles/item521.png" alt="aors" align="left">
+<img src="tiles/item893.png" alt="cors" align="left"><img src="tiles/item520.png" alt="sors" align="left"><img src="tiles/item577.png" alt="soc" align="left"><img src="tiles/item582.png" alt="moc" align="left">
+<img src="tiles/item576.png" alt="coc" align="left"><img src="tiles/item865.png" alt="sow" align="left"><p>
+
+The Black Tome of Alsophocus teaches the PC random spell, or improves knowledge in a known spell if read successfully. It grants 20 CPs per
+turn spent reading (base PP cost of the spell + 3), but min 200 and max 6666. The corrupting artifacts provide about 1/2 CP per turn when in backpack,
+and almost 1 CP per turn when equipped. The effects are cumulative. Of course more corruption is applied when successfully used (spear &amp; sceptre).<p>
+
+<h4 id="0a243">0.10.2.4.3 When used</h4>
+All of the Chaos Orbs fall into this category, however, there is a great deal of difference in the amount of corruption caused by using the different Chaos Orbs.<p style="clear:both">
+
+<table border=1><caption>Corruption caused by using the Chaos Orbs</caption>
+<tr><th>Chaos Orb <th>CPs  <th>Effect              <th>Tile
+<tr><td>Water     <td>600  <td>full HP             <td><img src="tiles/item302.png" alt="water">
+<tr><td>Fire      <td>300  <td>fireball            <td><img src="tiles/item304.png" alt="fire">
+<tr><td>Air       <td>500  <td>air elemental pet   <td><img src="tiles/item303.png" alt="air">
+<tr><td>Earth     <td>300  <td>earthquake          <td><img src="tiles/item305.png" alt="earth">
+<tr><td>Mana      <td>5000 <td>full PP; +10 max PP; +3 Ma<td><img src="tiles/item612.png" alt="mana">
+</table><p>
+
+Note that if a PC is wearing Elemental Gauntlets when the Orbs are used, the above corruption points are halved.<p>
+
+<h4 id="0a25">0.10.2.5 Potions of raw chaos <tt>!</tt></h4>
+<img src="tiles/item610.png" alt="porc" align="left">
+Logically enough, if the PC drinks a potion of raw chaos it will cause corruption (50d5/50d10/50d30 CPs B/U/C). They can also corrupt, however,
+if the PC tries to use them to polymorph an item by dipping it in the potion. There is a chance the potion will explode, which causes 100d100 CPs as
+well as 10d30 damage. Dipping in potions of raw chaos will not make wands of wishing or rings of djinni summoning &ndash; section <a href="adomgb-0-14.html#0e4">0.14.4</a>.<p>
+
+<h4 id="0a26">0.10.2.6 Tracts of chaos <tt>"</tt></h4>
+<img src="tiles/item680.png" alt="toc" align="left">
+Tracts of chaos grant corruption, ~100 CPs per reading &ndash; section <a href="adomgb-0-2.html#026">0.2.6</a>.<p>
+
+<h4 id="0a27">0.10.2.7 From pools <tt>0</tt></h4>
+<img src="tiles/pool.png" alt="pool" align="left">
+Drinking from pools may result in the message "You feel corrupted!" (1/52 chance). Self-explanatory, DLd30 CPs. Additionally, a pool inside Stone Circle
+causes massive corruption (10d100 CPs) per sip.<p>
+
+<h4 id="0a28">0.10.2.8 From corpses <tt>%</tt></h4>
+<img src="tiles/item103.png" alt="corpse" align="left">
+Some corpses will corrupt the PC if eaten. Obvious ones include the corpses of the Chaos Orb guardians. Others include Keethrax, Keriax
+and chaos animals. The effects won't be compiled here. You can browse <a href="adomgb-app-J.html">Appendix J</a> or section <a href="adomgb-0-3.html#0335">0.3.3</a>
+for corruptions resulting from eating monster corpses.<p>
+
+<h4 id="0a29">0.10.2.9 From quests</h4>
+Riurry will reward the PC with 1-2 corruptions for killing the Greater White Unicorn Yrruir. <big>Chaos Diplomat will reward the PC with 1-2 corruptions for killing the
+Ice Queen.</big><p>
+
+<h4 id="0a2a">0.10.2.10 Being crowned a champion of chaos</h4>
+Being crowned a champion of chaos will cause 2-3 immediate corruptions. Additionaly, 75% of demons will be generated neutral to crowned chaotics.<p>
+
+<h4 id="0a3">0.10.3 Removing corruptions</h4>
+There will be a time when your PC wants to remove one or more corruptions. Some corruptions are very troublesome and worth getting rid of immediately. Later in
+the game, removing corruptions may be necessary simply to extend the life of the PC. Whatever the reason, a thorough knowledge of how to remove corruptions
+should be part of every experienced player's repertoire. There are several ways of doing this as outlined below. Corruption removal items are among the most
+precious in the game. They should always be blessed unless the PC is trying to specifically remove only one corruption that is impossible to deal with (poison
+hands can be impossible to deal with without thick gauntlets) while preserving others (for instance one needed to enter the Quickling Tree).<p>
+
+<h4 id="0a31">0.10.3.1 Potions of cure corruption <tt>!</tt></h4>
+<img src="tiles/item538.png" alt="pocc" align="left">
+Potions of cure corruption are exactly what the name implies &ndash; they remove corruption, approximately 0.75 corruptions for each blessed potion of cure
+corruption the PC drinks. A potion of cure corruption is also a quest object for Gaab'Baay. Beware of cursed potions of cure corruption. They cause corruption rather
+than curing it.<p>
+
+Blessed potions of cure corruption remove 50d30 CPs, uncursed remove 50d10 CPs, cursed add 50d5 CPs.<p>
+
+<small>
+The Ice Queen will reward the PC with 4 potions for completing her first quest. The Minotaur Emperor will drop (among other rewards) up to 4 potions when killed.
+</small><p>
+<!--
+<table border=1><caption>Potions of cure corruption
+<span class="credit">Credit Magnus Malm.</span></caption>
+<tr><th>Status <th colspan="10">Ten trials: corruption points added or removed <th>Min <th>Avg <th>Max <th>Dice
+<tr><td>Cursed <td>+147 <td>+139 <td>+151 <td>+147 <td>+168 <td>+138 <td>+147 <td>+122 <td>+150 <td>+162 <td>+138 <td>+147 <td>+168<td>-50d5
+<tr><td>Uncursed <td>-298 <td>-298 <td>-283 <td>-258 <td>-296 <td>-291 <td>-279 <td>-275 <td>-304 <td>-279 <td>-258 <td>-286 <td>-304<td>50d10
+<tr><td>Blessed <td>-695 <td>-733 <td>-735 <td>-795 <td>-734 <td>-812 <td>-826 <td>-841 <td>-804 <td>-716 <td>-695 <td>-769 <td>-841<td>50d30
+</table><p>-->
+
+<h4 id="0a311">0.10.3.1.1 Obtaining PoCCs from Guth'Alak</h4>
+<img src="tiles/285.png" alt="guth'alak" align="left">
+Potions of cure corruption can be obtained from the druid Guth'Alak in Terinyo. He will reward a non-chaotic PC with a potion of cure corruption for delivering
+a greater chaos creature's or highly corrupted creature's corpse to him.<p>
+
+He will provide potion of corruption for the corpse of the following monsters:<p>
+<ul>
+<li>Snake from Beyond <tt>s</tt>
+<li>Master Summoner <tt>@</tt> (Yulgash)
+<li>Ancient Stone Beast <tt>F</tt>
+<li>Ancient Chaos Wyrm <tt>W</tt>
+<li>Greater Black Unicorn <tt>U</tt> (Riurry)
+<li>Chaos Archmage <tt>@</tt> (Nuurag-Vaarn)
+<li>black unicorn <tt>U</tt> (the only non-unique)
+<li>Black Druid <tt>@</tt> (Keethrax)
+<li>Emperor Moloch <tt>&amp;</tt>
+<li>Multi-headed Chaos Dragon <tt>W</tt> (Keriax)
+<li><big>Minotaur Emperor <tt>M</tt></big>
+</ul><p>
+
+If the PC is chaotic, it is a good idea to sell a chaos creature's corpse to Munxip for safekeeping, then buy it back at a later time when the PC is non-chaotic.
+It can then be traded to Guth'Alak for a potion of cure corruption.<p>
+
+<h4 id="0a32">0.10.3.2 Scrolls of corruption removal <tt>?</tt></h4>
+<img src="tiles/item339.png" alt="socr" align="left">
+Scrolls of corruption removal were called scrolls of chaos resistance in ADOM 1.1.1 and earlier.
+Blessed scrolls of corruption removal remove about 1.5 corruptions per reading. There are several places where scrolls of corruption removal can be obtained: the
+only absolutely guaranteed location is the hidden room in the High Mountain Village. This will always contain one scroll of corruption removal, although
+beware &ndash; it is always cursed. Khelavaster will give six scrolls of corruption removal to a PC that manages to save him. The Dwarven Mystic in Dwarftown
+may give four blessed scrolls of corruption removal to neutral PCs. The Bug Temple has three cursed scrolls of corruption removal. Finally, the Mad Minstrel will reward
+a PC who brings him the Weird Tome with five cursed scrolls of corruption removal. Beware of cursed scrolls of corruption removal. They cause corruption rather
+than curing it.<p>
+
+Blessed scrolls of corruption removal remove 100d30 CPs, uncursed remove 100d10 CPs, cursed add 100d5 CPs. Thus cursed SoCRs are twice as bad as cursed PoCCs, while
+blessed SoCRs are twice as good as blessed PoCCs. The implications should be obvious: never drink or read any cursed corruption removal item, and bless
+SoCRs in any but a dire emergency.<p>
+
+<!--
+<table border=1><caption>Scrolls of corruption removal</caption>
+<span class="credit">Credit Magnus Malm.</span>
+<tr><th>Status <th colspan="10">Ten trials: corruption points added or removed <th>Min <th>Avg <th>Max <th>Dice
+<tr><td>Cursed <td>+293 <td>+286 <td>+301 <td>+304 <td>+324 <td>+304 <td>+311 <td>+307 <td>+284 <td>+299 <td>+284 <td>+301 <td>+324<td>-100d5
+<tr><td>Uncursed <td>-595 <td>-567 <td>-539 <td>-565 <td>-618 <td>-514 <td>-562 <td>-552 <td>-500 <td>-533 <td>-500 <td>-555 <td>-618<td>100d10
+<tr><td>Blessed <td>-1649 <td>-1512 <td>-1458 <td>-1561 <td>-1415 <td>-1542 <td>-1561 <td>-1279 <td>-1507 <td>-1652 <td>-1415 <td>-1544 <td>-1652<td>100d30
+</table><p>-->
+
+<h4 id="0a33">0.10.3.3 Tracts of order <tt>"</tt></h4>
+<img src="tiles/item682.png" alt="too" align="left">
+Reading a tract of order amounts to an appeal to the lawful god for corruption removal &ndash; section <a href="adomgb-0-2.html#026">0.2.6</a>.
+The amount of corruption removed is around 100 CPs. Tracts of order are most useful to get rid of an annoying corruption as soon as it occurs, thus
+reseeding the RNG and hopefully avoiding it the next time a PC receives a corruption.<p>
+
+<h4 id="0a34">0.10.3.4 Yrruir <tt>U</tt> &ndash; the greater white unicorn quest</h4>
+<img src="tiles/308.png" alt="yrruir" align="left">
+Yrruir will remove all corruption <b>once</b> as a reward for the PC killing the Greater Black Unicorn &ndash; Riurry. It is wise to wait to use this cleansing until
+it is absolutely necessary. If the PC is doing a normal ending, this should ideally be the last thing the PC does before leaving the Drakalor Chain to
+ensure a corruption-free ending, which leads to better scores and a happier future history for the PC after the game is finished.<p>
+
+<div class="newb">
+<h4 id="0a35">0.10.3.5 Staff of purification <tt>(</tt></h4>
+<img src="tiles/item767.png" alt="staff of purification" align="left">
+Staves of purification are very useful for dealing with corruption. They recharge fast enough to offset background corruption and the odd corrupting melee hit, and 
+can be used outside of corrupting areas to remove any amount of corruption, given enough time. Unfortunately, they are unable to remove corruption while the PC has 
+the Mana battery corruption. If corruption is a problem, a staff of purification is worth a wish.<p>
+</div>
+
+<hr>
+Updated September 28th, 2020
+</body>
+</html>

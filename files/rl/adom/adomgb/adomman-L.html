@@ -1,0 +1,363 @@
+<html>
+<head>
+<title>ADOM Manual - Magic & Spells</title>
+<link rel="stylesheet" type="text/css" href="adomgb-body.css">
+</head>
+<body>
+<h1>ADOM Manual</h1>
+<hr>
+<a href="adomman-K.html">Previous</a> - <a href="adomman-toc.html">TOC</a> - <a href="adomman-M.html">Next</a>
+<hr>
+
+<h2 id="L">Magic &amp; Spells</h2>
+The world of Ancardia is steeped in powerful magic. Although these
+forces have been far stronger in earlier ages and slowly seem to be
+declining in might, they are still a major force to be reckoned with.<p>
+
+The world of Ancardia is the home of many powerful wizards of various
+schools and specialization. Priests are also able to use magical
+spells very similar to the ones utilized by wizards (although the
+sources for these powers are very different).<p>
+
+All magic is fueled by mana, the magical energy called the fifth
+element by some. In ADOM the mana attribute of the player character
+is the major factor in determining how well he is able to channel
+magical spells (although both race and profession also have great
+influence on this).<p>
+
+Spells have to be learned from books. When reading such a book, the
+character meditates about the forces and magical patterns which are
+required to create the magical effect in question and attunes himself
+to the mana flow of the world in such a way as to be able to activate
+the specific spell. How well he is able to do this depends on a
+number of factors &ndash; among them the Learning attribute, the
+Concentration skill, the class and more. ADOM uses a special number
+to describe the current attunement to the mana flow of Ancardia for
+each and every spell the character learns. The more often a spell is
+cast, the less close the attunement of the character to the mana flow
+will be as his actions change the mana flow and force him to re-attune
+him by again studying spellbooks.
+Thus this number decreases with each spell casting until it is finally
+reduced to zero and the character is no longer able to cast the spell.<p>
+
+On the other hand, a character becomes more efficient in casting a
+specific spell if he does so very often. Training allows him to
+adjust the various factors involved in casting a spell until he
+maximizes the gain from such a spell. This learning factor is
+described by the term 'Spell Power'. The character needs to cast a
+spell 'x' times to increase his power with that spell by +1. The
+value 'x' depends on the current power (the better you already are,
+the harder it is to improve) and can be determined like this:<p>
+
+If the current power is '+x', the character needs to cast the spell 'x
++ 1' times to become even more efficient. If the character is neither
+a wizard, elementalist, druid, priest, or necromancer, this number is
+tripled. If the character is either a magician (wizard, elementalist
+or necromancer) and tries to cast a priest spell or if he is a cleric
+(druid or priest) and tries to cast a wizard spell, this number is
+doubled.<p>
+
+Power has various effects: it increases the range and/or damage of
+combat spells, it heightens the effects of personal and healing magic
+and so on. Each spell description lists those effects. Finally, high
+power with a spell reduces the costs for casting such spells. For
+each 5 levels of power with a given spell, the spell costs are reduced
+by 1 power point per casting. Note that this reduction can't reduce
+the cost to a level lower than half the original cost.<p>
+
+IMPORTANT: Power can never be increased to a level higher than twice
+your learning score. If, on the other hand, your learning score is
+reduced below a certain spell power, the power rating will remain at
+its current level.<p>
+
+<h3 id="L1">Spell Display</h3>
+Pressing <tt>Z</tt> will display all the spells you know and some additional
+data concerning them. Following each spell you will notice several
+numbers. The first one describes how well you memorized the spell. It
+is decreased whenever the spell is cast (by an amount determined by
+the power level of the spell, your attributes, and some other
+factors). If this number is reduced to 0 or less, the spell is
+forgotten and you are no longer able to cast it. The second number is
+the number of power points you need to expend to cast the spell in
+question. If you do not have that many power points, you can still
+cast the spell. But beware &ndash; this is very dangerous. The strain
+imposed by casting a spell in such a way could kill you, if you are
+not completely healed.<p>
+
+Afterwards a series of statistics follow which explain the spell
+effects in more detail. The following values are possible:<p>
+<ul>
+<li>P: x - The spell is cast with power 'x'.
+<li>R: x - The spell has a range or radius of 'x'. If the range 'LOS' is given, this means 'Line of Sight' &ndash; as far as the PC can see.
+<li>D: x - The spell lasts for 'x' turns.
+<li>E: x - The spell effect is 'x'. Mostly this will be damage caused or cured. If the term '+R*' appears in the effect value this means that the effect decreases
+with distance. You can assume that the modifier is equal to the range R at distance 1, to (range R - 1) at distance 2 and so on.
+</ul><p>
+
+<h3 id="L2">Casting Spells from Books</h3>
+It is also possible to cast a spell from a spellbook if you already
+have learned the particular spell. Doing so costs triple the
+amount of power points usually required, takes up 3000 energy points
+(casting from a book takes more time since you have to loudly invoke
+the text) and does not reduce your current spell knowledge. It also
+does not destroy the spellbook after a limited amount of readings,
+either. Since casting a spell from a book simply consists of
+following the instructions in the book, the spell power for
+the spell in question is not increased.<p>
+
+<h3 id="L3">Spell List</h3>
+This section summarizes the various spells known in Ancardia. Please
+note that it should be considered to be but a short summary of the
+various spells &ndash; there might be yet unknown powerful castings.<p>
+
+First the spell name is listed. If two names are given, separated by
+a /, the first one is the name commonly used by members of the arcane
+professions (wizards, elementalists and necromancers), while the
+second name is the one used by members of the clerical professions
+(priests, druids and paladins). Then you'll find in brackets the
+profession groups specifically suited to learning the spell.
+Effectively, this means that members of those profession groups will
+have an easier time to understand and learn the spell. Increasing
+power also is simpler for members of those groups. For them the costs
+are determined as explained above. For members of the 'other'
+profession group, the costs are doubled. For characters neither
+having an arcane nor a clerical profession, costs are tripled.
+Paladins using clerical magic only pay double the normal cost to
+increase power. Lastly, you will find a description of the spell
+effects.<p>
+
+The descriptions include formulae to determine range, damage and
+duration for spells. These formulae use certain abbreviations:<p>
+<ul>
+<li>W - Willpower of the PC.
+<li>M - Mana of the PC.
+<li>L - Level of the PC.
+<li>P - Spell Power for the given spell.
+<li>R - Maximum range (as determined by the range formula).
+<li>R* - Remaining range points when target is hit.
+</ul><p>
+
+It also uses a maximum function denoted as M{x, y}, which means 'take
+the maximum of x and y'. The minimum function m{x, y} is defined
+accordingly. Finally, the die-rolling notation is used (see the
+respective section in the manual for details).<p>
+
+Example: A damage of M{L + 2, W - 2}d6 + (L + W) / 4 means that to
+determine damage, you first choose the maximum value of your level + 2
+and your willpower - 2. Roll the appropriate number of d6 and add to
+the result a number determined by adding level and willpower divided by 4.
+Confusing, eh? Feel assured that you don't need to understand this to
+be able to play ADOM &ndash; it just helps those die-hard tacticians.<p>
+
+<h4 id="L31">Acid Ball / Rain of Sorrow (Arcane)</h4>
+This spell creates a downpour of acid in the vicinity of the
+character. The caster is not harmed by the magical energies. Note
+that the rain even penetrates walls since the magical energies
+creating the acid are built up on the elemental plane of Mana and rock
+or stone on the material plane is no concern on the plane of Mana.<p>
+
+<h4 id="L32">Acid Bolt (Arcane, Clerical)</h4>
+This spell allows the caster to hurl a bolt of vicious and deadly
+liquid at his opponents.<p>
+
+<h4 id="L33">Bless (Clerical)</h4>
+Application of this spell blesses one person (no items!). The target
+will be more effective in combat and also enjoys some more luck. If cast
+on undead targets, those undead will be damaged.<p>
+
+<h4 id="L34">Burning Hands / Baptism Of Fire (Arcane, Clerical)</h4>
+This spell engulfs a target adjacent to the caster in searing flames.<p>
+
+<h4 id="L35">Calm Monster (Arcane, Clerical)</h4>
+Usage of this spell allows to calm down enraged monsters.<p>
+
+<h4 id="L36">Create Item / Divine Favor (Arcane, Clerical)</h4>
+Application of this spell will bring a random item into existence.
+Artifacts can't be created but other powerful items definitely are a
+possibility.<p>
+
+<h4 id="L37">Cure Critical Wounds (Clerical)</h4>
+This spell cures a terrible wound. 4d8 + 4 + 2P points of damage
+will be restored.<p>
+
+<h4 id="L38">Cure Disease (Clerical)</h4>
+Application of this spell will cure a deadly disease, illness or
+sickness.<p>
+
+<h4 id="L39">Cure Light Wounds (Clerical)</h4>
+This spell cures one minor wound. 1d8 + 1 + P/2 points of damage will
+be restored.<p>
+
+<h4 id="L3a">Cure Serious Wounds (Clerical)</h4>
+This spell cures a major wound. 2d10 + 2 + P points of damage will
+be restored.<p>
+
+<h4 id="L3b">Darkness (Arcane, Clerical)</h4>
+This spell is the reversal of the Light spell. It magically darkens a
+bright area.<p>
+
+<h4 id="L3c">Death Ray / Greater Divine Touch (Arcane, Clerical)</h4>
+This spell instantly slays the target (if it does not manage to resist
+in some way, that is!).<p>
+
+<h4 id="L3d">Destroy Undead / Dispel Undead (Clerical)</h4>
+This spell is particularly suited to annihilate undead creatures
+completely. The caster must be adjacent to the target creature.<p>
+
+<h4 id="L3e">Disarm Trap (Clerical)</h4>
+With this spell one trap can be deactivated permanently. The caster
+must be adjacent to the trap to be disarmed.<p>
+
+<h4 id="L3f">Earthquake (Clerical)</h4>
+This very powerful spell effectively causes the earth to shake. It's
+especially useful in the underground to collapse tunnel systems, open
+new passages and slay hordes of enemies. Be warned that some
+locations are structurally too hard to be affected by an earthquake.<p>
+
+<h4 id="L3g">Farsight (Arcane, Clerical)</h4>
+This spell increases the range of view of the caster greatly.<p>
+
+<h4 id="L3h">Fire Ball / Major Punishment (Arcane)</h4>
+This spell makes the caster explode in a violent fireball engulfing
+everything in his vicinity. The caster is not harmed by the magical
+energies. Note that the explosion even penetrates walls since the
+magical energies creating the fire are built up on the elemental plane
+of Mana and rock or stone on the material plane is no concern on the
+plane of Mana.<p>
+
+<h4 id="L3i">Fire Bolt / Hellish Flames (Arcane, Clerical)</h4>
+Application of this spell allows the caster to hurl a fiery bolt at
+his enemies.<p>
+
+<h4 id="L3j">Frost Bolt / Nether Bolt (Arcane, Clerical)</h4>
+This spell causes an icy bolt to spring from the hands of the caster.<p>
+
+<h4 id="L3k">Greater Identify / Greater Enlightenment (Arcane, Clerical)</h4>
+This spell will detail the powers of one item, especially its hidden
+powers (like the ability to grant special immunities or resistances
+etc.).<p>
+
+<h4 id="L3l">Heal (Clerical)</h4>
+This spells heals a life-threatening wound. 10d6 + 10 + 4P points of
+damage will be restored.<p>
+
+<h4 id="L3m">Ice Ball / Freezing Fury (Arcane)</h4>
+This spell summons a deadly ice storm in the vicinity of the player,
+consisting of hail and frozen crystals. The caster is not harmed by the
+magical energies. Note that the storm even penetrates walls since the
+magical energies creating the storm are built up on the elemental
+plane of Mana and rock or stone on the material plane is no concern on
+the plane of Mana.<p>
+
+<h4 id="L3n">Identify / Enlightenment (Arcane, Clerical)</h4>
+By invoking this spell, the caster is able to identify a previously
+unknown item in his equipment.<p>
+
+<h4 id="L3o">Improved Fireball / Invoked Devastation (Arcane)</h4>
+This spell is similar to its lesser cousin (see above) with the major
+difference that it causes more damage and can be hurled at targets
+far away. Note that the explosion penetrates even walls since the
+magical energies creating the fire are built up on the elemental plane
+of Mana and rock or stone on the material plane is of no concern on the
+plane of Mana.<p>
+
+<h4 id="L3p">Invisibility / Veil of the Gods (Arcane)</h4>
+This spell hides the target from mortal eyes. Only by magical means
+can the target be discovered. Be warned: attacks on others will allow
+them to see you. There are also several kinds of beasts that are able
+to see through such magical disguises.<p>
+
+<h4 id="L3q">Knock / Divine Key (Arcane)</h4>
+This spell unlocks and opens one locked door. Traps are not activated
+by this spell but rather circumvented. The caster must stand adjacent
+to the door.<p>
+
+<h4 id="L3r">Know Alignment (Clerical)</h4>
+This spell allows the caster to determine the alignment of one target.<p>
+
+<h4 id="L3s">Light (Arcane, Clerical)</h4>
+This spell lights up a magically or naturally darkened area.<p>
+
+<h4 id="L3t">Lightning Ball / Heavenly Fury (Arcane)</h4>
+This spell summons a violent hail of thunderstrokes in the vicinity of
+the player. The caster is not harmed by the magical energies. Note
+that the thunderstrokes even penetrate walls since the magical
+energies creating the lightning are built up on the elemental plane of
+Mana and rock or stone on the material plane is no concern on the
+plane of Mana.<p>
+
+<h4 id="L3u">Lightning Bolt / Divine Wrath (Arcane, Clerical)</h4>
+This spell permits the user to launch a bolt of electrical energy from
+his hands. Be careful as this bolt tends to bounce off obstacles.<p>
+
+<h4 id="L3v">Magic Lock / Seal of the Spheres (Arcane)</h4>
+By using this spell, the caster can magically lock a door.<p>
+
+<h4 id="L3w">Magic Map / Knowledge of the Ancients (Arcane, Clerical)</h4>
+This spell maps major parts of the currently unknown regions of the
+area you explore.<p>
+
+<h4 id="L3x">Magic Missile / Minor Punishment (Arcane)</h4>
+This spell allows the caster to launch a minor energy bolt against his
+enemies which is able to bounce off obstacles.<p>
+
+<h4 id="L3y">Mystic Shovel / Divine Digger (Arcane, Clerical)</h4>
+This spell allows you to penetrate stone in order to dig tunnels. Be
+warned &ndash; some materials are so hard that even magic won't have any
+effect!<p>
+
+<h4 id="L3z">Neutralize Poison (Clerical)</h4>
+By using this spell, the caster is able to neutralize poisonous
+substances in his blood stream.<p>
+
+<h4 id="L3z1">Petrification (Clerical)</h4>
+The target of this spell probably will be turned to stone&hellip; forever.<p>
+
+<h4 id="L3z2">Remove Curse (Arcane, Clerical)</h4>
+This spell allows you to turn cursed items into uncursed items.<p>
+
+<h4 id="L3z3">Revelation (Clerical)</h4>
+This spell reveals special abilities of the character (e.g. magical
+resistances and immunities).<p>
+
+<h4 id="L3z4">Scare Monster / Holy Awe (Arcane, Clerical)</h4>
+This spell is used to create terror and fear within living,
+intelligent opponents.<p>
+
+<h4 id="L3z5">Slow Monster (Arcane)</h4>
+The target of this spell moves and acts with half its effective speed.<p>
+
+<h4 id="L3z6">Slow Poison (Clerical)</h4>
+This spell slows down the effects of poison in one's body. Several
+castings might even succeed in completely neutralizing the poison.<p>
+
+<h4 id="L3z7">Strength of Atlas / Lordly Might (Arcane)</h4>
+This spell allows the caster to carry tremendous loads. Beware &ndash; his
+combat strength is not increased, only his carrying capacity! You
+should also make sure that you are not too overloaded when the spell
+ends.<p>
+
+<h4 id="L3z8">Stun Ray / Lesser Divine Touch (Arcane, Clerical)</h4>
+This spell dazes the targets and makes them move with little
+coordination.<p>
+
+<h4 id="L3z9">Summon Monsters (Arcane, Clerical)</h4>
+This spell calls a number of monsters into existence&hellip; which sadly
+are not necessarily peaceful.<p>
+
+<h4 id="L3za">Teleportation / Ethereal Bridge (Arcane)</h4>
+This spell instantly transports the target to another physical
+location. Without special magical means, the caster is unable to
+control the place of arrival.<p>
+
+<h4 id="L3zb">Web (Arcane)</h4>
+This spell engulfs everything in its path in sticky webs, probably
+slowing down or completely stopping the movements of weaker monsters.<p>
+
+<h4 id="L3zc">Wish (Arcane)</h4>
+This powerful spell alters reality itself and allows you to wish for
+something.<p>
+
+<hr>
+</body>
+</html>

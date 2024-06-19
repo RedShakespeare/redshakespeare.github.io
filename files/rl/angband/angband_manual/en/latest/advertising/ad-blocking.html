@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+<meta property="og:title" content="Ad blocking" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://docs.readthedocs.io/en/latest/advertising/ad-blocking.html" />
+<meta property="og:site_name" content="Read the Docs Documentation" />
+<meta property="og:description" content="Ad blockers fulfill a legitimate need to mitigate the significant downsides of advertising from tracking across the internet, security implications of third-party code, and impacting the UX and performance of sites. At Read the Docs, we specifically didn’t want those things. That’s why we built t..." />
+<meta property="og:image" content="https://docs.readthedocs.io/en/latest/_static/img/logo-opengraph.png" />
+<meta property="og:image:alt" content="Read the Docs Documentation" />
+<meta name="description" content="Ad blockers fulfill a legitimate need to mitigate the significant downsides of advertising from tracking across the internet, security implications of third-party code, and impacting the UX and performance of sites. At Read the Docs, we specifically didn’t want those things. That’s why we built t..." />
+<meta name="twitter:card" content="summary_large_image" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ad blocking &mdash; Read the Docs user documentation 9.11.0 documentation</title>
+      <link rel="stylesheet" href="https://docs.readthedocs.io/en/latest/_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="https://docs.readthedocs.io/en/latest/_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="https://docs.readthedocs.io/en/latest/_static/css/tooltipster.custom.css" type="text/css" />
+      <link rel="stylesheet" href="https://docs.readthedocs.io/en/latest/_static/css/tooltipster.bundle.min.css" type="text/css" />
+      <link rel="stylesheet" href="https://docs.readthedocs.io/en/latest/_static/css/tooltipster-sideTip-shadow.min.css" type="text/css" />
+      <link rel="stylesheet" href="https://docs.readthedocs.io/en/latest/_static/css/tooltipster-sideTip-punk.min.css" type="text/css" />
+      <link rel="stylesheet" href="https://docs.readthedocs.io/en/latest/_static/css/tooltipster-sideTip-noir.min.css" type="text/css" />
+      <link rel="stylesheet" href="https://docs.readthedocs.io/en/latest/_static/css/tooltipster-sideTip-light.min.css" type="text/css" />
+      <link rel="stylesheet" href="https://docs.readthedocs.io/en/latest/_static/css/tooltipster-sideTip-borderless.min.css" type="text/css" />
+      <link rel="stylesheet" href="https://docs.readthedocs.io/en/latest/_static/css/micromodal.css" type="text/css" />
+      <link rel="stylesheet" href="https://docs.readthedocs.io/en/latest/_static/css/sphinx_rtd_theme.css" type="text/css" />
+      <link rel="stylesheet" href="https://docs.readthedocs.io/en/latest/_static/tabs.css" type="text/css" />
+      <link rel="stylesheet" href="https://docs.readthedocs.io/en/latest/_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css" type="text/css" />
+      <link rel="stylesheet" href="https://docs.readthedocs.io/en/latest/_static/css/rtd_sphinx_search.min.css" type="text/css" />
+      <link rel="stylesheet" href="https://docs.readthedocs.io/en/latest/_static/css/custom.css" type="text/css" />
+      <link rel="stylesheet" href="https://docs.readthedocs.io/en/latest/_static/css/sphinx_prompt_css.css" type="text/css" />
+    <link rel="canonical" href="ad-blocking.html" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="https://docs.readthedocs.io/en/latest/_static/jquery.js"></script>
+        <script src="https://docs.readthedocs.io/en/latest/_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../" id="documentation_options" src="https://docs.readthedocs.io/en/latest/_static/documentation_options.js"></script>
+        <script src="https://docs.readthedocs.io/en/latest/_static/doctools.js"></script>
+        <script src="https://docs.readthedocs.io/en/latest/_static/sphinx_highlight.js"></script>
+        <script src="https://docs.readthedocs.io/en/latest/_static/js/hoverxref.js"></script>
+        <script src="https://docs.readthedocs.io/en/latest/_static/js/tooltipster.bundle.min.js"></script>
+        <script src="https://docs.readthedocs.io/en/latest/_static/js/micromodal.min.js"></script>
+        <script src="https://docs.readthedocs.io/en/latest/_static/tabs.js"></script>
+        <script src="https://docs.readthedocs.io/en/latest/_static/design-tabs.js"></script>
+        <script src="https://docs.readthedocs.io/en/latest/_static/js/rtd_search_config.js"></script>
+        <script src="https://docs.readthedocs.io/en/latest/_static/js/rtd_sphinx_search.min.js"></script>
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+        <script async="async" src="https://docs.readthedocs.io/_/static/javascript/readthedocs-doc-embed.js"></script>
+        <script src="https://docs.readthedocs.io/en/latest/_static/js/expand_tabs.js"></script>
+    <script src="https://docs.readthedocs.io/en/latest/_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="https://docs.readthedocs.io/en/latest/genindex.html" />
+    <link rel="search" title="Search" href="https://docs.readthedocs.io/en/latest/search.html" />
+    <link rel="next" title="The story of Read the Docs" href="https://docs.readthedocs.io/en/latest/story.html" />
+    <link rel="prev" title="Advertising details" href="https://docs.readthedocs.io/en/latest/advertising/advertising-details.html" />
+   
+
+  
+  <script defer data-domain="docs.readthedocs.io" src="https://plausible.io/js/script.js"></script>
+  
+
+
+<!-- RTD Extra Head -->
+
+<link rel="stylesheet" href="https://docs.readthedocs.io/_/static/css/readthedocs-doc-embed.css" type="text/css" />
+
+<script type="application/json" id="READTHEDOCS_DATA">{"ad_free": false, "api_host": "https://readthedocs.org", "build_date": "2023-04-20T15:30:10Z", "builder": "sphinx", "canonical_url": null, "commit": "fdff2a67", "docroot": "/docs/user/", "features": {"docsearch_disabled": false}, "global_analytics_code": "UA-17997319-1", "language": "en", "page": "advertising/ad-blocking", "programming_language": "py", "project": "docs", "proxied_api_host": "/_", "source_suffix": ".rst", "subprojects": {}, "theme": "sphinx_rtd_theme", "user_analytics_code": "UA-17997319-6", "version": "latest"}</script>
+
+<!--
+Using this variable directly instead of using `JSON.parse` is deprecated.
+The READTHEDOCS_DATA global variable will be removed in the future.
+-->
+<script type="text/javascript">
+READTHEDOCS_DATA = JSON.parse(document.getElementById('READTHEDOCS_DATA').innerHTML);
+</script>
+
+<script type="text/javascript" src="https://docs.readthedocs.io/_/static/javascript/readthedocs-analytics.js" async="async"></script>
+
+<!-- end RTD <extrahead> -->
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="https://docs.readthedocs.io/en/latest/index.html">
+            
+              <img src="https://docs.readthedocs.io/en/latest/_static/logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="https://docs.readthedocs.io/en/latest/search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">🚀 Tutorials</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="https://docs.readthedocs.io/en/latest/tutorial/index.html">Read the Docs tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://docs.readthedocs.io/en/latest/intro/getting-started-with-sphinx.html">Getting started with Sphinx</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://docs.readthedocs.io/en/latest/intro/getting-started-with-mkdocs.html">Getting started with MkDocs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://docs.readthedocs.io/en/latest/intro/import-guide.html">Importing your documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://docs.readthedocs.io/en/latest/examples.html">Example projects</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">💡 Explanation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="https://docs.readthedocs.io/en/latest/choosing-a-site.html">Choosing between our two platforms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://docs.readthedocs.io/en/latest/integrations.html">Continuous Documentation Deployment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://docs.readthedocs.io/en/latest/downloadable-documentation.html">Understanding offline formats</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://docs.readthedocs.io/en/latest/environment-variables.html">Understanding environment variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://docs.readthedocs.io/en/latest/subprojects.html">Subprojects: host multiple projects on a single domain</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://docs.readthedocs.io/en/latest/localization.html">Localization of documentation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">🪄 How-to guides</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="https://docs.readthedocs.io/en/latest/guides/setup/index.html">Project setup and configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://docs.readthedocs.io/en/latest/guides/build/index.html">Build process</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://docs.readthedocs.io/en/latest/guides/maintenance/index.html">Upgrading and maintaining projects</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://docs.readthedocs.io/en/latest/guides/content/index.html">Content, themes and SEO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://docs.readthedocs.io/en/latest/guides/access/index.html">Security and access</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://docs.readthedocs.io/en/latest/guides/management/index.html">Account management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://docs.readthedocs.io/en/latest/guides/best-practice/index.html">Best practice</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://docs.readthedocs.io/en/latest/guides/troubleshooting/index.html">Troubleshooting problems</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">📚 Reference</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="https://docs.readthedocs.io/en/latest/reference/features.html">Feature reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://docs.readthedocs.io/en/latest/config-file/index.html">Configuration file</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://docs.readthedocs.io/en/latest/builds.html">Build process overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://docs.readthedocs.io/en/latest/build-customization.html">Build process customization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://docs.readthedocs.io/en/latest/server-side-search/syntax.html">Search query syntax</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://docs.readthedocs.io/en/latest/faq.html">Frequently asked questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://docs.readthedocs.io/en/latest/api/index.html">Public API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://docs.readthedocs.io/en/latest/changelog.html">Changelog</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="https://docs.readthedocs.io/en/latest/about/index.html">About Read the Docs</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="https://docs.readthedocs.io/en/latest/commercial/index.html">About Read the Docs for Business</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://docs.readthedocs.io/en/latest/reference/policies.html">Policies and legal documents</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="https://docs.readthedocs.io/en/latest/advertising/index.html">Advertising</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="https://docs.readthedocs.io/en/latest/advertising/ethical-advertising.html">EthicalAds</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://docs.readthedocs.io/en/latest/advertising/advertising-details.html">Advertising details</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="ad-blocking.html#">Ad blocking</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ad-blocking.html#allowing-ethicalads">Allowing EthicalAds</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ad-blocking.html#going-ad-free">Going ad-free</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ad-blocking.html#statistics-and-data">Statistics and data</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="https://docs.readthedocs.io/en/latest/story.html">The story of Read the Docs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://docs.readthedocs.io/en/latest/sponsors.html">Sponsors of Read the Docs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://docs.readthedocs.io/en/latest/open-source-philosophy.html">Read the Docs open source philosophy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://docs.readthedocs.io/en/latest/team.html">Read the Docs team</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://docs.readthedocs.io/en/latest/support.html">Site support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://docs.readthedocs.io/en/latest/glossary.html">Glossary</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference external" href="https://dev.readthedocs.io">Developer Documentation</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="https://docs.readthedocs.io/en/latest/index.html">Read the Docs user documentation</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="https://docs.readthedocs.io/en/latest/index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="https://docs.readthedocs.io/en/latest/about/index.html">About Read the Docs</a></li>
+          <li class="breadcrumb-item"><a href="https://docs.readthedocs.io/en/latest/advertising/index.html">Advertising</a></li>
+      <li class="breadcrumb-item active">Ad blocking</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/readthedocs/readthedocs.org/blob/main/docs/user/advertising/ad-blocking.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+  
+           <div itemprop="articleBody">
+             
+  <section id="ad-blocking">
+<h1>Ad blocking<a class="headerlink" href="ad-blocking.html#ad-blocking" title="Permalink to this heading"></a></h1>
+<p>Ad blockers fulfill a legitimate need
+to mitigate the significant downsides of advertising
+from tracking across the internet,
+security implications of third-party code,
+and impacting the UX and performance of sites.</p>
+<p>At Read the Docs, we specifically didn’t want those things.
+That’s why we built the our <a class="reference internal" href="https://docs.readthedocs.io/en/latest/advertising/ethical-advertising.html"><span class="doc">Ethical Ad initiative</span></a>
+with only relevant, unobtrusive ads that respect your privacy
+and don’t do creepy behavioral targeting.</p>
+<p>Advertising is the single largest source of funding for Read the Docs.
+To keep our operations sustainable, we ask that you either
+<a class="hxr-hoverxref hxr-tooltip reference internal" href="ad-blocking.html#allowing-ethicalads"><span class="std std-ref">allow our EthicalAds</span></a>
+or <a class="hxr-hoverxref hxr-tooltip reference internal" href="ad-blocking.html#going-ad-free"><span class="std std-ref">go ad-free</span></a>.</p>
+<section id="allowing-ethicalads">
+<h2>Allowing EthicalAds<a class="headerlink" href="ad-blocking.html#allowing-ethicalads" title="Permalink to this heading"></a></h2>
+<p>If you use AdBlock or AdBlockPlus
+and you allow <a class="reference external" href="https://adblockplus.org/en/acceptable-ads">acceptable ads</a> or <a class="reference external" href="https://adblockplus.org/en/acceptable-ads#privacy-friendly-acceptable-ads">privacy-friendly acceptable ads</a>
+then you’re all set.
+Advertising on Read the Docs complies with both of these programs.</p>
+<p>If you prefer not to allow acceptable ads
+but would consider allowing <a class="reference external" href="https://ads-for-open-source.readthedocs.io/en/latest/">ads that benefit open source</a>,
+please consider subscribing to either the wider <strong>Open Source Ads list</strong>
+or simply the <strong>Read the Docs Ads list</strong>.</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://ads-for-open-source.readthedocs.io/en/latest/installation.html#installing-on-adblock">Setup for AdBlock</a></p></li>
+<li><p><a class="reference external" href="https://ads-for-open-source.readthedocs.io/en/latest/installation.html#installing-on-adblockplus">Setup for AdBlockPlus</a></p></li>
+<li><p><a class="reference external" href="https://ads-for-open-source.readthedocs.io/en/latest/installation.html#installing-on-ublock-origin">Setup for uBlock Origin</a></p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Because of the way Read the Docs is structured
+where docs are hosted on many different domains,
+adding a normal ad block exception
+will only allow that single domain not Read the Docs as a whole.</p>
+</div>
+</section>
+<section id="going-ad-free">
+<h2>Going ad-free<a class="headerlink" href="ad-blocking.html#going-ad-free" title="Permalink to this heading"></a></h2>
+<p>Users can go completely ad-free when logged in
+by becoming a <a class="reference external" href="https://readthedocs.org/accounts/gold/">Gold member</a>
+or a <a class="reference external" href="https://readthedocs.org/sustainability/#donations">Supporter</a>.
+Gold members may also completely remove advertising for all visitors to their projects.
+Thank you for supporting Read the Docs.</p>
+</section>
+<section id="statistics-and-data">
+<h2>Statistics and data<a class="headerlink" href="ad-blocking.html#statistics-and-data" title="Permalink to this heading"></a></h2>
+<p>It can be really hard to find good data on ad blocking.
+In the spirit of transparency,
+here is the data we have on ad blocking at Read the Docs.</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://blog.readthedocs.com/ads-and-adblocking/">32% of Read the Docs users use an ad blocker</a></p></li>
+<li><p>Of those, <a class="reference external" href="https://blog.readthedocs.com/ad-blocker-update/">a little over 50% allow acceptable ads</a></p></li>
+<li><p>Read the Docs users running ad blockers click on ads at about the same rate
+as those not running an ad blocker.</p></li>
+<li><p>Comparing with our server logs,
+roughly 28% of our hits did not register a Google Analytics (GA) pageview
+due to an ad blocker, privacy plugin, disabling JavaScript, or another reason.</p></li>
+<li><p>Of users who do not block GA,
+about 6% opt out of analytics on Read the Docs by enabling
+<a class="hxr-hoverxref hxr-tooltip reference internal" href="https://docs.readthedocs.io/en/latest/privacy-policy.html#do-not-track"><span class="std std-ref">Do Not Track</span></a>.</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+
+  <div id="rtd-stickybox-container">
+  <div class="raised" data-ea-publisher="readthedocs" data-ea-type="image" data-ea-style="stickybox"></div>
+</div>
+
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="https://docs.readthedocs.io/en/latest/advertising/advertising-details.html" class="btn btn-neutral float-left" title="Advertising details" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="https://docs.readthedocs.io/en/latest/story.html" class="btn btn-neutral float-right" title="The story of Read the Docs" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright Read the Docs, Inc &amp; contributors.
+      <span class="commit">Revision <code>fdff2a67</code>.
+      </span></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="Versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> Read the Docs</span>
+      v: latest
+      <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      <dl>
+        <dt>Versions</dt>
+        
+          <dd><a href="https://docs.readthedocs.io/en/latest/">latest</a></dd>
+        
+          <dd><a href="https://docs.readthedocs.io/en/stable/">stable</a></dd>
+        
+          <dd><a href="https://docs.readthedocs.io/en/diataxis-main/">diataxis-main</a></dd>
+        
+      </dl>
+      <dl>
+        <dt>Downloads</dt>
+        
+          <dd><a href="https://docs.readthedocs.io/_/downloads/en/latest/htmlzip/">html</a></dd>
+        
+          <dd><a href="https://docs.readthedocs.io/_/downloads/en/latest/epub/">epub</a></dd>
+        
+      </dl>
+      <dl>
+        
+        <dt>On Read the Docs</dt>
+          <dd>
+            <a href="https://readthedocs.org/projects/docs/?fromdocs=docs">Project Home</a>
+          </dd>
+          <dd>
+            <a href="https://readthedocs.org/builds/docs/?fromdocs=docs">Builds</a>
+          </dd>
+      </dl>
+    </div>
+  </div>
+<script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

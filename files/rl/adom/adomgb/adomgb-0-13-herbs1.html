@@ -1,0 +1,140 @@
+<html>
+<head>
+<title>Improved ADOM Guidebook - Short treatise on herbs</title>
+<link rel="stylesheet" type="text/css" href="adomgb-body.css">
+</head>
+<body>
+
+<h3>Short treatise on herbs</h3>
+The patterns governing herb growth are well documented elsewhere, but it is
+also quite easy to tell what kind of herb a given bush will produce. How?
+It's determined by the line on the screen at which the bush appears. Using the
+big room as a guide, the first screen line at which a floor or dungeon feature
+can appear is line 5, whose herb bushes always produce morgia roots. The line
+below that is home to moss of mareilon, and below that is the mighty
+spenseweed. Curaria mancox/devil's roses are next, followed by alraunia
+antidote/demon daisy, followed by stomafillia/stomacemptia, followed by pepper
+petal/burb root. The line after pepper petal is morgia root again, and the
+pattern repeats. Presented more visually (and best viewed in a monospaced
+font):<pre>
+(line no.
+  mod 7)  type of herb found at that line
+---------+--------------------------------
+    5    | morgia root
+    6    | moss of mareilon
+    0    | spenseweed
+    1    | curaria mancox/devil's rose
+    2    | alraunia antidote/demon daisy
+    3    | stomafillia/stomacemptia
+    4    | pepper petal/burb root</pre>
+
+If you don't know what "line number mod 7" means in the above chart, feel free
+to ignore it. Just remember that the pattern starts with morgia root for the
+topmost line at which herb bushes usually appear (barring any digging) and
+repeat every seven lines. BTW, if you are like me in never remembering which
+beneficial herbs are paired with demon daisies and devil's roses, remember the
+"a" in "daisy" matches the "a"'s in "alraunia" and the "o" in "rose" matches
+the "o" in "mancox." Kinda cheesy, but it works.<p>
+
+On a standard 80x25 character screen, there are fifteen lines on which floors
+and dungeon features may appear, yielding two complete repetitions of the
+pattern with a bonus line of morgia root at the bottom. Lines 4, 20, and 21
+may be burrowed to yield floors there too, and herb bushes can grow into these
+lines once dug out if their growth patterns permit it. If you play on a larger
+screen, use the "l"ook command to count down the line number of a given herb
+bush, keeping in mind that the "look" cursor's topmost limit is line 3, which
+would be stomafillia according to the pattern.<p>
+
+It is sometimes possible to move herb bushes to the lines you want in order to
+get a particularly desirable herb. You need four herb bushes in a "T" shape,
+like this (again, view it in a monospaced font):
+
+<pre>
+...
+"""
+.".
+
+When it's time for new bushes to grow, you'll get this pattern. . .
+
+.".
+"""
+"""
+
+. . .pick the bottom row clean. . .
+
+.".
+"""
+...
+
+. . . and wait for another generation to pass. . .
+
+"""
+"""
+.".
+
+Then harvest the bottom bush of each column to oblivion.
+
+"""
+.".
+...
+
+</pre>
+Voila! The T has moved up a row. You can also use an inverted T to move
+downward, or T's laid on their sides to move left or right. Once your T is in
+the position you want, just pluck off one end of the crossbar to get the
+ever-lovin' herb square. The process isn't risk-free, however. For one thing,
+generations of herb growth are not always predictable, and you may find two
+generations spawning in quick succession without giving you enough time in
+between to overharvest the needed bushes. Another note: do this in a locked
+room if you can. If you don't, the RNG *will* dump a wererat or a dark elven
+spider factory into your lap at an inoppurtune moment, leaving you to hack and
+slash through the bodies and miss perhaps several generations of herb growth.<p>
+
+As for the overall usefulness of each herb--well, reasonable minds will differ.
+Following are my own subjective opinions. Spenseweed, stomafillia, morgia root
+and moss of mareilon are the top four, with a definite gap in usefulness
+between them and curaria and alraunia, and another larger gap between those two
+and pepper petal. I personally rate spenseweed and stomafillia at the top
+because their utility never expires; you will *always* need healing and you
+will *always* need food, but the attribute gain twins stop increasing your attributes at
+a certain point. My non-troll characters go for spenseweed first, stomafillia
+second; for trolls, the priorities are reversed. If only the two grew on
+adjacent lines! Also, don't pass up the opportunity for a attribute gain square,
+ever, unless you absolutely must choose between morgia root and spenseweed.
+Even then, morgia root *may* be the right choice, depending on how early it is
+(early game, pick morgia, late, pick spenseweed, middle is a toss-up), your
+race and class (mindcrafters and wizards love morgia, brawlers *need*
+spenseweed), and how low your attributes are now.<p>
+
+In the middle tier, I prefer alraunia antidote in the *very* early game, as in
+the initial dive from the SMC to the mountain village before my first spider
+corpse. Once I'm no longer scared of pit vipers, my preference changes to
+curaria mancox so as to safely increase my Mana score by munching on kobold
+shaman. Last and in my mind least is pepper petal, which is inferior to
+spenseweed in almost every way. Spenseweed's use by rubbing instead of
+ingesting allows its use even while bloated, which will happen often if you're
+on the Blessed stomafillia Diet Plan (TM). Pepper petal has an evil twin;
+spenseweed doesn't. I've not observed any significant difference in healing
+potency between blessed pepper petal and blessed spenseweed, but as I often
+don't even bother to ID a bush I know will be pepper petal, I may have missed
+it. Some may argue that pepper petal is preferable to spenseweed for a
+starving character, but since stomafillia grows on the line above pepper
+petal--i.e. the two are often found together--I don't consider that a
+compelling argument.<p>
+
+Please note that, in those crucial beginning turns, *any* benefical herb
+(anything but the "evil twins") can save your life. If you see an herb bush by
+its lonesome, fated to die next generation anyway, then for heaven's sake,
+don't stop picking till you see the ground! Also, the Alchemy skill can add
+new wrinkles to prioritizing one's herbs. If you happen to know a recipe for a
+PoGA using only demon daisies and booze, then ignore the above paragraphs and
+GO FOR IT, MAN! Remember that success in the Drakalor Chain often comes not by
+memorizing a bunch of rules and patterns but by thinking on your feet!<p>
+
+One last comment: for an eerily complete catalog of insights into Conway's
+Life, point your web browser to <a href="http://web.stanford.edu/~cdebs/GameOfLife/">http://web.stanford.edu/~cdebs/GameOfLife/</a> and learn
+more than you ever knew you needed to know about herb bushes.<p>
+
+<hr>
+</body>
+</html>

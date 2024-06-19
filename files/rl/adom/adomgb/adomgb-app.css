@@ -1,0 +1,150 @@
+body {
+	font-family: Arial;
+   font-size: 16px;
+   background-image: url("marble.jpg");
+}
+
+th {
+	color: black;
+	background-color: cyan;
+	font-weight: bold;
+}
+
+td {
+	color: black;
+	background-color: white;
+}
+
+caption {
+	text-align: left;
+   font-weight: bold;	
+	font-size: large;
+}
+
+td.character {
+	text-align: center;
+	background-color: black;
+	font-weight: bold;
+	font-family: Arial;
+}
+
+td.chaotic {
+	background-color: #808080;
+}
+
+td.neutral {
+	background-color: #C0C0C0;
+}
+
+td.lawful {
+	background-color: white;
+}
+
+td.unique {
+	background-color: orange;
+}
+
+td.named, img.named {
+	background-color: yellow;
+}
+
+td.bad {
+	color: #FF0000;   
+}
+
+tt {
+	background-color: light gray; 
+	width: 0px;
+	white-space: nowrap; 
+	border-style: outset; 
+	border-width: 2px; 
+	margin: 0px; 
+	padding: 0px 3px 0px 3px; 
+	clear: none;
+}
+
+h2,h3,h4 {
+  margin-top: 2px;
+}
+
+h2 {
+  margin-bottom: 10px;
+}
+
+h3 {
+  margin-bottom: 5px;
+}
+
+h4 {
+  margin-bottom: 2px;
+}
+
+small {
+  display: block;
+  margin-top: 1px;
+  margin-bottom: 1px;
+  padding: 1px;
+  border: solid magenta 2px;
+  font-size: 16px;
+}
+
+big {
+  display: inline;
+  padding: 1px;
+  border: solid magenta 2px;
+  font-size: 16px;
+}
+
+.resb {
+  display: block;
+  border: solid magenta 2px;
+  padding: 1px;
+}
+
+.resi {
+  display: inline;
+  border: solid magenta 2px;
+  padding: 1px;
+}
+
+.newb {
+	display: block;
+	border: solid cyan 2px;
+	padding: 1px;
+   margin: 1px -3px 1px -3px;
+}
+
+.newi {
+	display: inline;
+	border: solid cyan 2px;
+	padding: 1px;
+}
+
+.credit {
+  display: block;
+  font-size: 12px;
+  font-weight: normal;
+  margin-top: 2px;
+  margin-bottom: 5px;
+}
+
+table {
+  border-collapse: collapse;
+  border: 2px solid black;
+}
+
+tfoot.new {
+  outline: 2px solid cyan;
+}
+
+tfoot.normal {
+  outline: 2px solid black;
+}
+
+tfoot {
+  outline: 2px solid magenta;
+}
+
+.nowrap { 
+   white-space: nowrap;
+}

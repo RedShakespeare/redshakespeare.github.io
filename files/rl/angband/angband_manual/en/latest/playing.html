@@ -1,0 +1,930 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Playing the Game &#8212; &lt;img&gt; The Angband Manual</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/better.css" />
+    <link rel="stylesheet" type="text/css" href="../../_/static/css/badge_only.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
+    <script async="async" src="../../_/static/javascript/readthedocs-doc-embed.js"></script>
+    <link rel="canonical" href="playing.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Command Descriptions" href="command.html" />
+    <link rel="prev" title="Attacking monsters" href="attack.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+      <link rel="stylesheet" href="_static/style.css" type="text/css" />
+  
+<!-- RTD Extra Head -->
+
+<link rel="stylesheet" href="../../_/static/css/readthedocs-doc-embed.css" type="text/css" />
+
+<script type="application/json" id="READTHEDOCS_DATA">{"ad_free": false, "api_host": "https://readthedocs.org", "build_date": "2023-04-21T00:08:54Z", "builder": "sphinx", "canonical_url": null, "commit": "14f92695", "docroot": "/docs/", "features": {"docsearch_disabled": false}, "global_analytics_code": "UA-17997319-1", "language": "en", "page": "playing", "programming_language": "c", "project": "angband", "proxied_api_host": "/_", "source_suffix": ".rst", "subprojects": {}, "theme": "better", "user_analytics_code": "", "version": "latest"}</script>
+
+<!--
+Using this variable directly instead of using `JSON.parse` is deprecated.
+The READTHEDOCS_DATA global variable will be removed in the future.
+-->
+<script type="text/javascript">
+READTHEDOCS_DATA = JSON.parse(document.getElementById('READTHEDOCS_DATA').innerHTML);
+</script>
+
+<script type="text/javascript" src="../../_/static/javascript/readthedocs-analytics.js" async="async"></script>
+
+<!-- end RTD <extrahead> -->
+</head><body>
+<header id="pageheader">
+    <div style="display: flex; align-items: baseline;">
+        <h1>The Angband Manual</h1>
+        <span class="version">v4.2.4-264-g14f92695-dirty</span>
+    </div>
+    <img src="_static/att.svg" style="height: 4rem;">
+</header>
+
+  <div class="related top">
+  <nav id="rellinks">
+    <ul>
+        <li>
+          &larr;
+          <a href="attack.html" title="Previous document">Attacking monsters</a>
+        </li>
+        <li>
+          <a href="command.html" title="Next document">Command Descriptions</a>
+          &rarr;
+        </li>
+    </ul>
+  </nav>
+  <nav id="breadcrumbs">
+    <ul>
+      <li><a href="index.html">Home</a></li> 
+    </ul>
+  </nav>
+  </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="playing-the-game">
+<span id="id1"></span><h1>Playing the Game<a class="headerlink" href="playing.html#playing-the-game" title="Permalink to this heading">¶</a></h1>
+<p>Most of your interaction with Angband will take the form of “commands”.
+Every Angband command consists of an “underlying command” plus a variety of
+optional or required arguments, such as a repeat count, a direction, or the
+index of an inventory object. Commands are normally specified by typing a
+series of keypresses, from which the underlying command is extracted, along
+with any encoded arguments. You may choose how the standard “keyboard keys”
+are mapped to the “underlying commands” by choosing one of the two standard
+“keysets”, the “original” keyset or the “roguelike” keyset.</p>
+<p>The original keyset is very similar to the “underlying” command set, with a
+few additions (such as the ability to use the numeric “directions” to
+“walk” or the <code class="docutils literal notranslate"><span class="pre">5</span></code> key to “stay still”). The roguelike keyset provides
+similar additions, and also allows the use of the
+<code class="docutils literal notranslate"><span class="pre">h</span></code>/<code class="docutils literal notranslate"><span class="pre">j</span></code>/<code class="docutils literal notranslate"><span class="pre">k</span></code>/<code class="docutils literal notranslate"><span class="pre">l</span></code>/<code class="docutils literal notranslate"><span class="pre">y</span></code>/<code class="docutils literal notranslate"><span class="pre">u</span></code>/<code class="docutils literal notranslate"><span class="pre">b</span></code>/<code class="docutils literal notranslate"><span class="pre">n</span></code> keys to “walk” (or, in
+combination with the shift or control keys, to run or alter), which thus
+requires a variety of key mappings to allow access to the underlying
+commands used for walking/running/altering. In particular, the “roguelike”
+keyset includes many more “capital” and “control” keys, as shown below.</p>
+<p>Note that any keys that are not required for access to the underlying
+command set may be used by the user to extend the “keyset” which is being
+used, by defining new “keymaps”. To avoid the use of any “keymaps”, press
+backslash (<code class="docutils literal notranslate"><span class="pre">\</span></code>) plus the “underlying command” key. You may enter
+“control-keys” as a caret (<code class="docutils literal notranslate"><span class="pre">^</span></code>) plus the key (so <code class="docutils literal notranslate"><span class="pre">^</span></code> + <code class="docutils literal notranslate"><span class="pre">p</span></code> yields
+‘^p’).</p>
+<p>Some commands allow an optional “repeat count”, which allows you to tell
+the game that you wish to do the command multiple times, unless you press a
+key or are otherwise disturbed. To enter a “repeat count”, type <code class="docutils literal notranslate"><span class="pre">0</span></code>,
+followed by the numerical count, followed by the command. You must type
+‘space’ before entering certain commands. Skipping the numerical count
+yields a count of 99 for the open, tunnel, disarm, alter, and close
+commands. All other commands do not repeat unless requested.</p>
+<p>Some commands will prompt for extra information, such as a direction, an
+inventory or equipment item, a spell, a textual inscription, the symbol of
+a monster race, a sub-command, a verification, an amount of time, a
+quantity, a file name, or various other things. Normally you can hit return
+to choose the “default” response, or escape to cancel the command entirely.</p>
+<p>Some commands will prompt for a spell or an inventory item. Pressing space
+(or <code class="docutils literal notranslate"><span class="pre">*</span></code>) will give you a list of choices. Pressing <code class="docutils literal notranslate"><span class="pre">-</span></code> (minus) selects
+the item on the floor. Pressing a lowercase letter selects the given item.
+Pressing a capital letter selects the given item after verification.
+Pressing a numeric digit <code class="docutils literal notranslate"><span class="pre">#</span></code> selects the first item (if any) whose
+inscription contains ‘&#64;#’ or ‘&#64;x#’, where <code class="docutils literal notranslate"><span class="pre">x</span></code> is the current
+“underlying command”. You may only specify items which are “legal” for the
+command. Whenever an item inscription contains ‘!*’ or ‘!x’ (with <code class="docutils literal notranslate"><span class="pre">x</span></code>
+as above) you must verify its selection.</p>
+<p>Some commands will prompt for a direction. You may enter a “compass”
+direction using any of the “direction keys” shown below. Sometimes, you may
+specify that you wish to use the current “target”, by pressing <code class="docutils literal notranslate"><span class="pre">t</span></code> or
+<code class="docutils literal notranslate"><span class="pre">5</span></code>, or that you wish to select a new target, by pressing <code class="docutils literal notranslate"><span class="pre">*</span></code> (see
+“Target” below).</p>
+<blockquote>
+<div><dl>
+<dt>Original Keyset Directions</dt><dd><table class="docutils align-default">
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>7</p></td>
+<td><p>8</p></td>
+<td><p>9</p></td>
+</tr>
+<tr class="row-even"><td><p>4</p></td>
+<td></td>
+<td><p>6</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>2</p></td>
+<td><p>3</p></td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt>Roguelike Keyset Directions</dt><dd><table class="docutils align-default">
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>y</p></td>
+<td><p>k</p></td>
+<td><p>u</p></td>
+</tr>
+<tr class="row-even"><td><p>h</p></td>
+<td></td>
+<td><p>l</p></td>
+</tr>
+<tr class="row-odd"><td><p>b</p></td>
+<td><p>j</p></td>
+<td><p>n</p></td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</div></blockquote>
+<p>Each of the standard keysets provides some short-cuts over the “underlying
+commands”. For example, both keysets allow you to “walk” by simply pressing
+an “original” direction key (or a “roguelike” direction key if you are
+using the roguelike keyset), instead of using the “walk” command plus a
+direction. The roguelike keyset allows you to “run” or “alter” by simply
+holding the shift or control modifier key down while pressing a “roguelike”
+direction key, instead of using the “run” or “alter” command plus a
+direction. Both keysets allow the use of the <code class="docutils literal notranslate"><span class="pre">5</span></code> key to “stand still”,
+which is most convenient when using the original keyset.</p>
+<section id="original-keyset-command-summary">
+<h2>Original Keyset Command Summary<a class="headerlink" href="playing.html#original-keyset-command-summary" title="Permalink to this heading">¶</a></h2>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 9%" />
+<col style="width: 42%" />
+<col style="width: 9%" />
+<col style="width: 41%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">a</span></code></p></td>
+<td><p>Aim a wand</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">A</span></code></p></td>
+<td><p>Activate an object</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">b</span></code></p></td>
+<td><p>Browse a book</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">B</span></code></p></td>
+<td><p>(unused)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">c</span></code></p></td>
+<td><p>Close a door</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">C</span></code></p></td>
+<td><p>Display character sheet</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">d</span></code></p></td>
+<td><p>Drop an item</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">D</span></code></p></td>
+<td><p>Disarm a trap or lock a door</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">e</span></code></p></td>
+<td><p>List equipped items</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">E</span></code></p></td>
+<td><p>Eat some food</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">f</span></code></p></td>
+<td><p>Fire an item</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">F</span></code></p></td>
+<td><p>Fuel your lantern/torch</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">g</span></code></p></td>
+<td><p>Get objects on floor</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">G</span></code></p></td>
+<td><p>Gain new spells/prayers</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">h</span></code></p></td>
+<td><p>Fire default ammo at target</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">H</span></code></p></td>
+<td><p>(unused)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">i</span></code></p></td>
+<td><p>List contents of pack</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">I</span></code></p></td>
+<td><p>Inspect an item</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">j</span></code></p></td>
+<td><p>(unused)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">J</span></code></p></td>
+<td><p>(unused)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">k</span></code></p></td>
+<td><p>Ignore an item</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">K</span></code></p></td>
+<td><p>Toggle ignore</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">l</span></code></p></td>
+<td><p>Look around</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">L</span></code></p></td>
+<td><p>Locate player on map</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">m</span></code></p></td>
+<td><p>Cast a spell</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">M</span></code></p></td>
+<td><p>Display map of entire level</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">n</span></code></p></td>
+<td><p>Repeat previous command</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">N</span></code></p></td>
+<td><p>(unused)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">o</span></code></p></td>
+<td><p>Open a door or chest</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">O</span></code></p></td>
+<td><p>(unused)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">p</span></code></p></td>
+<td><p>(unused)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">P</span></code></p></td>
+<td><p>(unused)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">q</span></code></p></td>
+<td><p>Quaff a potion</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Q</span></code></p></td>
+<td><p>Kill character &amp; quit</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">r</span></code></p></td>
+<td><p>Read a scroll</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">R</span></code></p></td>
+<td><p>Rest for a period</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">s</span></code></p></td>
+<td><p>Steal (rogues only)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">S</span></code></p></td>
+<td><p>See abilities</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">t</span></code></p></td>
+<td><p>Take off equipment</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">T</span></code></p></td>
+<td><p>Dig a tunnel</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">u</span></code></p></td>
+<td><p>Use a staff</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">U</span></code></p></td>
+<td><p>Use an item</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">v</span></code></p></td>
+<td><p>Throw an item</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">V</span></code></p></td>
+<td><p>Display version info</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">w</span></code></p></td>
+<td><p>Wear/wield equipment</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">W</span></code></p></td>
+<td><p>Walk into a trap</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">x</span></code></p></td>
+<td><p>(unused)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">X</span></code></p></td>
+<td><p>(unused)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">y</span></code></p></td>
+<td><p>(unused)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Y</span></code></p></td>
+<td><p>(unused)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">z</span></code></p></td>
+<td><p>Zap a rod</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Z</span></code></p></td>
+<td><p>(unused)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">!</span></code></p></td>
+<td><p>(unused)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">^a</span></code></p></td>
+<td><p>(special - debug command)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">&#64;</span></code></p></td>
+<td><p>(unused)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">^b</span></code></p></td>
+<td><p>(unused)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">#</span></code></p></td>
+<td><p>(unused)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">^c</span></code></p></td>
+<td><p>(special - break)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">$</span></code></p></td>
+<td><p>(unused)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">^d</span></code></p></td>
+<td><p>(unused)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">%</span></code></p></td>
+<td><p>(unused)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">^e</span></code></p></td>
+<td><p>Toggle inven/equip window</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">^</span></code></p></td>
+<td><p>(special - control key)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">^f</span></code></p></td>
+<td><p>Repeat level feeling</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">&amp;</span></code></p></td>
+<td><p>(unused)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">^g</span></code></p></td>
+<td><p>Do autopickup</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">*</span></code></p></td>
+<td><p>Target monster or location</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">^h</span></code></p></td>
+<td><p>(unused)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">(</span></code></p></td>
+<td><p>(unused)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">^i</span></code></p></td>
+<td><p>(special - tab)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">)</span></code></p></td>
+<td><p>Dump screen to a file</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">^j</span></code></p></td>
+<td><p>(special - linefeed)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">{</span></code></p></td>
+<td><p>Inscribe an object</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">^k</span></code></p></td>
+<td><p>(unused)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">}</span></code></p></td>
+<td><p>Uninscribe an object</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">^l</span></code></p></td>
+<td><p>Center map</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">[</span></code></p></td>
+<td><p>Display visible monster list</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">^m</span></code></p></td>
+<td><p>(special - return)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">]</span></code></p></td>
+<td><p>Display visible object list</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">^n</span></code></p></td>
+<td><p>(unused)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
+<td><p>(unused)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">^o</span></code></p></td>
+<td><p>Show previous message</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">_</span></code></p></td>
+<td><p>Enter store</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">^p</span></code></p></td>
+<td><p>Show previous messages</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">+</span></code></p></td>
+<td><p>Alter grid</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">^q</span></code></p></td>
+<td><p>(unused)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">=</span></code></p></td>
+<td><p>Set options</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">^r</span></code></p></td>
+<td><p>Redraw the screen</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">;</span></code></p></td>
+<td><p>Walk (with pickup)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">^s</span></code></p></td>
+<td><p>Save and don’t quit</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">:</span></code></p></td>
+<td><p>Take notes</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">^t</span></code></p></td>
+<td><p>(unused)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">'</span></code></p></td>
+<td><p>Target closest monster</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">^u</span></code></p></td>
+<td><p>(unused)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">&quot;</span></code></p></td>
+<td><p>Enter a user pref command</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">^v</span></code></p></td>
+<td><p>(unused)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">,</span></code></p></td>
+<td><p>Stay still (with pickup)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">^w</span></code></p></td>
+<td><p>(special - wizard mode)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">&lt;</span></code></p></td>
+<td><p>Go up staircase</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">^x</span></code></p></td>
+<td><p>Save and quit</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">.</span></code></p></td>
+<td><p>Run</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">^y</span></code></p></td>
+<td><p>(unused)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">&gt;</span></code></p></td>
+<td><p>Go down staircase</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">^z</span></code></p></td>
+<td><p>(unused)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">\</span></code></p></td>
+<td><p>(special - bypass keymap)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">~</span></code></p></td>
+<td><p>Check knowledge</p></td>
+</tr>
+<tr class="row-even"><td><p>`</p></td>
+<td><p>(special - escape)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">?</span></code></p></td>
+<td><p>Display help</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">/</span></code></p></td>
+<td><p>Identify symbol</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">|</span></code></p></td>
+<td><p>List contents of quiver</p></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="roguelike-keyset-command-summary">
+<h2>Roguelike Keyset Command Summary<a class="headerlink" href="playing.html#roguelike-keyset-command-summary" title="Permalink to this heading">¶</a></h2>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 41%" />
+<col style="width: 9%" />
+<col style="width: 40%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">a</span></code></p></td>
+<td><p>Zap a rod (Activate)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">A</span></code></p></td>
+<td><p>Activate an object</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">b</span></code></p></td>
+<td><p>(walk - south west)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">B</span></code></p></td>
+<td><p>(run - south west)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">c</span></code></p></td>
+<td><p>Close a door</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">C</span></code></p></td>
+<td><p>Display character sheet</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">d</span></code></p></td>
+<td><p>Drop an item</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">D</span></code></p></td>
+<td><p>Disarm a trap or lock a door</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">e</span></code></p></td>
+<td><p>List equipped items</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">E</span></code></p></td>
+<td><p>Eat some food</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">f</span></code></p></td>
+<td><p>(unused)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">F</span></code></p></td>
+<td><p>Fuel your lantern/torch</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">g</span></code></p></td>
+<td><p>Get objects on floor</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">G</span></code></p></td>
+<td><p>Gain new spells/prayers</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">h</span></code></p></td>
+<td><p>(walk - west)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">H</span></code></p></td>
+<td><p>(run - west)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">i</span></code></p></td>
+<td><p>List contents of pack</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">I</span></code></p></td>
+<td><p>Inspect an item</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">j</span></code></p></td>
+<td><p>(walk - south)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">J</span></code></p></td>
+<td><p>(run - south)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">k</span></code></p></td>
+<td><p>(walk - north)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">K</span></code></p></td>
+<td><p>(run - north)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">l</span></code></p></td>
+<td><p>(walk - east)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">L</span></code></p></td>
+<td><p>(run - east)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">m</span></code></p></td>
+<td><p>Cast a spell</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">M</span></code></p></td>
+<td><p>Display map of entire level</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">n</span></code></p></td>
+<td><p>(walk - south east)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">N</span></code></p></td>
+<td><p>(run - south east)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">o</span></code></p></td>
+<td><p>Open a door or chest</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">O</span></code></p></td>
+<td><p>Toggle ignore</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">p</span></code></p></td>
+<td><p>(unused)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">P</span></code></p></td>
+<td><p>Browse a book</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">q</span></code></p></td>
+<td><p>Quaff a potion</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Q</span></code></p></td>
+<td><p>Kill character &amp; quit</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">r</span></code></p></td>
+<td><p>Read a scroll</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">R</span></code></p></td>
+<td><p>Rest for a period</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">s</span></code></p></td>
+<td><p>Steal (rogues only)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">S</span></code></p></td>
+<td><p>See abilities</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">t</span></code></p></td>
+<td><p>Fire an item</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">T</span></code></p></td>
+<td><p>Take off equipment</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">u</span></code></p></td>
+<td><p>(walk - north east)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">U</span></code></p></td>
+<td><p>(run - north east)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">v</span></code></p></td>
+<td><p>Throw an item</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">V</span></code></p></td>
+<td><p>Display version info</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">w</span></code></p></td>
+<td><p>Wear/wield equipment</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">W</span></code></p></td>
+<td><p>Locate player on map (Where)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">x</span></code></p></td>
+<td><p>Look around</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">X</span></code></p></td>
+<td><p>Use an item</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">y</span></code></p></td>
+<td><p>(walk - north west)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Y</span></code></p></td>
+<td><p>(run - north west)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">z</span></code></p></td>
+<td><p>Aim a wand (Zap)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Z</span></code></p></td>
+<td><p>Use a staff (Zap)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">!</span></code></p></td>
+<td><p>(unused)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">^a</span></code></p></td>
+<td><p>(special - debug command)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">&#64;</span></code></p></td>
+<td><p>Center map</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">^b</span></code></p></td>
+<td><p>(alter - south west)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">#</span></code></p></td>
+<td><p>(unused)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">^c</span></code></p></td>
+<td><p>(special - break)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">$</span></code></p></td>
+<td><p>(unused)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">^d</span></code></p></td>
+<td><p>Ignore an item</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">%</span></code></p></td>
+<td><p>(unused)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">^e</span></code></p></td>
+<td><p>Toggle inven/equip window</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">^</span></code></p></td>
+<td><p>(special - control key)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">^f</span></code></p></td>
+<td><p>Repeat level feeling</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">&amp;</span></code></p></td>
+<td><p>(unused)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">^g</span></code></p></td>
+<td><p>Do autopickup</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">*</span></code></p></td>
+<td><p>Target monster or location</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">^h</span></code></p></td>
+<td><p>(alter - west)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">(</span></code></p></td>
+<td><p>(unused)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">^i</span></code></p></td>
+<td><p>(special - tab)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">)</span></code></p></td>
+<td><p>Dump screen to a file</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">^j</span></code></p></td>
+<td><p>(alter - south)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">{</span></code></p></td>
+<td><p>Inscribe an object</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">^k</span></code></p></td>
+<td><p>(alter - north)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">}</span></code></p></td>
+<td><p>Uninscribe an object</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">^l</span></code></p></td>
+<td><p>(alter - east)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">[</span></code></p></td>
+<td><p>Display visible monster list</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">^m</span></code></p></td>
+<td><p>(special - return)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">]</span></code></p></td>
+<td><p>Display visible object list</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">^n</span></code></p></td>
+<td><p>(alter - south east)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
+<td><p>Walk into a trap</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">^o</span></code></p></td>
+<td><p>Show previous message</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">_</span></code></p></td>
+<td><p>Enter store</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">^p</span></code></p></td>
+<td><p>Show previous messages</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">+</span></code></p></td>
+<td><p>Alter grid</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">^q</span></code></p></td>
+<td><p>(unused)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">=</span></code></p></td>
+<td><p>Set options</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">^r</span></code></p></td>
+<td><p>Redraw the screen</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">;</span></code></p></td>
+<td><p>Walk (with pickup)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">^s</span></code></p></td>
+<td><p>Save and don’t quit</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">:</span></code></p></td>
+<td><p>Take notes</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">^t</span></code></p></td>
+<td><p>Dig a tunnel</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">'</span></code></p></td>
+<td><p>Target closest monster</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">^u</span></code></p></td>
+<td><p>(alter - north east)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">&quot;</span></code></p></td>
+<td><p>Enter a user pref command</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">^v</span></code></p></td>
+<td><p>Repeat previous command</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">,</span></code></p></td>
+<td><p>Run</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">^w</span></code></p></td>
+<td><p>(special - wizard mode)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">&lt;</span></code></p></td>
+<td><p>Go up staircase</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">^x</span></code></p></td>
+<td><p>Save and quit</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">.</span></code></p></td>
+<td><p>Stay still (with pickup)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">^y</span></code></p></td>
+<td><p>(alter - north west)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">&gt;</span></code></p></td>
+<td><p>Go down staircase</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">^z</span></code></p></td>
+<td><p>(unused)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">\</span></code></p></td>
+<td><p>(special - bypass keymap)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">~</span></code></p></td>
+<td><p>Check knowledge</p></td>
+</tr>
+<tr class="row-even"><td><p>`</p></td>
+<td><p>(special - escape)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">?</span></code></p></td>
+<td><p>Display help</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">/</span></code></p></td>
+<td><p>Identify symbol</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">TAB</span></code></p></td>
+<td><p>Fire default ammo at target</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">|</span></code></p></td>
+<td><p>List contents of quiver</p></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="special-keys">
+<h2>Special Keys<a class="headerlink" href="playing.html#special-keys" title="Permalink to this heading">¶</a></h2>
+<p>Certain special keys may be intercepted by the operating system or the host
+machine, causing unexpected results. In general, these special keys are
+control keys, and often, you can disable their special effects.</p>
+<p>If you are playing on a UNIX or similar system, then ‘Ctrl-c’ will
+interrupt Angband. The second and third interrupt will induce a warning
+bell, and the fourth will induce both a warning bell and a special message,
+since the fifth will either quit without saving (if Angband was compiled
+without the SETGID option which puts the save files in a shared location for
+all users) or kill your character (if Angband was compiled with the SETGID
+option). Also, ‘Ctrl-z’ will suspend the game, and return you to the original
+command shell, until you resume the game with the ‘fg’ command. The ‘Ctrl-\’
+and ‘Ctrl-d’ and ‘Ctrl-s’ keys should not be intercepted.</p>
+<p>It is often possible to specify “control-keys” without actually pressing
+the control key, by typing a caret (<code class="docutils literal notranslate"><span class="pre">^</span></code>) followed by the key. This is
+useful for specifying control-key commands which might be caught by the
+operating system as explained above.</p>
+<p>Pressing backslash (<code class="docutils literal notranslate"><span class="pre">\</span></code>) before a command will bypass all keymaps, and
+the next keypress will be interpreted as an “underlying command” key,
+unless it is a caret (<code class="docutils literal notranslate"><span class="pre">^</span></code>), in which case the keypress after that will be
+turned into a control-key and interpreted as a command in the underlying
+Angband keyset. The backslash key is useful for creating actions which are
+not affected by any keymap definitions that may be in force, for example,
+the sequence <code class="docutils literal notranslate"><span class="pre">\</span></code> + <code class="docutils literal notranslate"><span class="pre">.</span></code> + <code class="docutils literal notranslate"><span class="pre">6</span></code> will always mean “run east”, even if the
+<code class="docutils literal notranslate"><span class="pre">.</span></code> key has been mapped to a different underlying command.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">0</span></code> and <code class="docutils literal notranslate"><span class="pre">^</span></code> and <code class="docutils literal notranslate"><span class="pre">\</span></code> keys all have special meaning when entered at
+the command prompt, and there is no “useful” way to specify any of them as
+an “underlying command”, which is okay, since they would have no effect.</p>
+<p>For many input requests or queries, the special character ‘ESCAPE’ will
+abort the command. The ‘[y/n]’ prompts may be answered with <code class="docutils literal notranslate"><span class="pre">y</span></code> or
+<code class="docutils literal notranslate"><span class="pre">n</span></code>, or ‘escape’. The ‘-more-’ message prompts may be cleared (after
+reading the displayed message) by pressing ‘ESCAPE’, ‘SPACE’,
+‘RETURN’, ‘LINEFEED’, or by any keypress, if the ‘quick_messages’
+option is turned on.</p>
+</section>
+<section id="command-counts">
+<h2>Command Counts<a class="headerlink" href="playing.html#command-counts" title="Permalink to this heading">¶</a></h2>
+<p>Some commands can be executed a fixed number of times by preceding them
+with a count. Counted commands will execute until the count expires, until
+you type any character, or until something significant happens, such as
+being attacked. Thus, a counted command doesn’t work to attack another
+creature. While the command is being repeated, the number of times left to
+be repeated will flash by on the line at the bottom of the screen.</p>
+<p>To give a count to a command, type 0, the repeat count, and then the
+command. If you want to give a movement command and you are using the
+original command set (where the movement commands are digits), press space
+after the count and you will be prompted for the command.  The open, tunnel,
+disarm, alter, and close commands default to having a repeat count of 99;
+all other commands default to not repeating at all.</p>
+<p>Counted commands are very useful for time consuming commands, as they
+automatically terminate on success, or if you are attacked. You may also
+terminate any counted command (or resting or running), by typing any
+character. This character is ignored, but it is safest to use a ‘SPACE’
+or ‘ESCAPE’ which are always ignored as commands in case you type the
+command just after the count expires.</p>
+</section>
+<section id="selection-of-objects">
+<h2>Selection of Objects<a class="headerlink" href="playing.html#selection-of-objects" title="Permalink to this heading">¶</a></h2>
+<p>Many commands will also prompt for a particular object to be used.
+For example, the command to read a scroll will ask you which of the
+scrolls that you are carrying that you wish to read.  In such cases, the
+selection is made by typing a letter of the alphabet (or a number if choosing
+from the quiver).  The prompt will indicate the possible letters/numbers,
+and you will also be shown a list of the appropriate items.  Often you will
+be able to press <code class="docutils literal notranslate"><span class="pre">/</span></code> to switch between inventory and equipment, or <code class="docutils literal notranslate"><span class="pre">|</span></code> to
+select the quiver, or <code class="docutils literal notranslate"><span class="pre">-</span></code> to select the floor.  Using the right arrow also
+rotates selection between equipment, inventory, quiver, floor and back to
+equipment; the left arrow rotates in the opposite direction.</p>
+<p>The particular object may be selected by an upper case or a lower case
+letter. If lower case is used, the selection takes place immediately. If
+upper case is used, then the particular option is described, and you are
+given the option of confirming or retracting that choice. Upper case
+selection is thus safer, but requires an extra key stroke.</p>
+</section>
+<section id="shape-changes">
+<h2>Shape Changes<a class="headerlink" href="playing.html#shape-changes" title="Permalink to this heading">¶</a></h2>
+<p>Some classes, objects, or races may allow your character to change shape:
+becoming, for instance, a fox or a wolf.  While in the alternate shape,
+your character will not have access to items in the pack or quiver and
+will not be able to access items on the floor except for eating or pickup.
+The items your character was wearing upon changing shape will remain
+equipped and continue to affect the character’s statistics, resistances,
+number of blows, and damage.  Your character will not be able to activate
+any equipped items while in the alternate shape.  To have your character
+change back to normal, cast a spell or use one of the commands, like drop,
+that uses an item.</p>
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="playing.html#">Playing the Game</a><ul>
+<li><a class="reference internal" href="playing.html#original-keyset-command-summary">Original Keyset Command Summary</a></li>
+<li><a class="reference internal" href="playing.html#roguelike-keyset-command-summary">Roguelike Keyset Command Summary</a></li>
+<li><a class="reference internal" href="playing.html#special-keys">Special Keys</a></li>
+<li><a class="reference internal" href="playing.html#command-counts">Command Counts</a></li>
+<li><a class="reference internal" href="playing.html#selection-of-objects">Selection of Objects</a></li>
+<li><a class="reference internal" href="playing.html#shape-changes">Shape Changes</a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+<form class="search" action="search.html" method="get">
+  <input type="text" name="q"
+   placeholder="type to search" />
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+  <div class="related bottom">
+  <nav id="rellinks">
+    <ul>
+        <li>
+          &larr;
+          <a href="attack.html" title="Previous document">Attacking monsters</a>
+        </li>
+        <li>
+          <a href="command.html" title="Next document">Command Descriptions</a>
+          &rarr;
+        </li>
+    </ul>
+  </nav>
+  <nav id="breadcrumbs">
+    <ul>
+      <li><a href="index.html">Home</a></li> 
+    </ul>
+  </nav>
+  </div>
+  <footer id="pagefooter">&copy; 2019, Angband developers past and present.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a>
+      5.3.0
+        with the <a href="http://github.com/irskep/sphinx-better-theme">
+          better</a> theme.
+
+  </footer>
+
+  
+  </body>
+</html>

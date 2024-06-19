@@ -1,0 +1,511 @@
+<html>
+<head>
+<title>Improved ADOM Guidebook - Food</title>
+<link rel="stylesheet" type="text/css" href="adomgb-body.css">
+</head>
+<body>
+<h1>Improved ADOM Guidebook</h1>
+<hr>
+<a href="adomgb-0-2.html">Previous</a> - <a href="toc.html">TOC</a> - <a href="adomgb-0-4.html">Next</a>
+<hr>
+<a href="#031">Preventing starvation</a> - <a href="#032">Satiation levels</a> - <a href="#033">Eating corpses</a> - <a href="#0335">Detailed corpse effects</a> -
+<a href="#034">Monsters who never leave a corpse</a>
+<hr>
+
+<h3 id="03">Food</h3>
+Note that you can also <tt>e</tt>at food directly from the ground. Satiation values listed are for uncursed food; blessed food gives 125% satiation and cursed food gives 50%.
+Corpses, apples, and raw meat are susceptible to rotting. The process of rotting means the item is changing its B/U/C status for the worse. After cursed status, the next step
+is to disappear completely. Cooking food not only doubles its satiation value, but reduces the speed at which it rots. Rotting is also temporarily suspended while the PC is
+performing multi-turn actions such as eating, reading books or changing body armor.<p>
+
+<h4 id="031">0.3.1 Preventing starvation</h4>
+Starvation is often a definite problem for new players. Rest assured that there is enough food provided in the game to survive. The easiest source at the start of the
+game is Munxip's food store in Terinyo. He sells primarily large rations, which are heavy at 200 stones each. These can be useful for training the Strength attribute
+for PCs that start with low Strength. Food will be found in the various dungeons available from quests assigned in Terinyo, and in all dungeons, for that matter. If the PC elects
+to take Tywat Pare's quest to find and kill Kranach and his gang in the wilderness, remember that wilderness tiles are big, take considerable game time to cross, and
+therefore require much more food per game turn than exploring in the dungeons.<p>
+
+Once the PC finishes the area around Terinyo, she will have to cross a large area of wilderness to reach the Caverns of Chaos, the main dungeon in the game. The same
+warning about food requirements in the wilderness applies. After reaching the Caverns of Chaos, a short descent to the Arena level will provide a very good food source.
+Ratling traders are found on this level, selling various comestibles. The best are cooked lizards. These are light at 3 stones each, fairly inexpensive and nutritious.
+Food problems are generally solved at this point.<p>
+
+Most of the corpses that monsters leave are edible. Some are to be avoided. Kobolds of any type cause sickness. Rats (simple rats, not giant rats) will make any race
+other than Trolls or Orcs vomit (no satiation). Eating humanoid corpses, such as goblins, causes the message "This meal does not sit well with you." or
+"You feel uneasy." to be displayed. Several players have tested eating a variety of humanoid corpses while wearing the Platinum Girdle, which kills if a chaotic
+act is committed. It never killed the PCs.<p>
+
+Having said that, PCs who have trained the Law skill will receive the message "You feel as if transgressing some law." when eating a humanoid corpse, even a lowly goblin.
+However, there is no effect on alignment. This seems to imply that there is a bug somewhere in the humanoid corpse-eating code. Bear in mind that the Creator himself has stated
+that eating humanoid corpses is not a chaotic act.<p>
+<ul>
+<li>Dwarves refuse to eat dwarven corpses. They also refuse to eat orc corpses unless they are starving.
+<li>Hurthlings refuse to eat black hurthling corpses.
+<li>Races other than Trolls refuse to eat doppelganger corpses unless starving.
+</ul><p>
+
+Be aware that some food items are susceptible to rotting. These include corpses of all types, apples and pieces of raw meat. Eating rotten food does not cause
+sickness or other negative effects. Food that starts to rot has actually become cursed and will soon disappear. Eat it quickly if possible. In the case of corpses, especially
+strategically important ones such as chaos creatures or quicklings, rotting may be indefinitely stopped by repeatedly dipping the corpse in holy water when necessary, thus
+blessing it. Cooked corpses decay more slowly than uncooked corpses. Cooked corpses can be created with the Cooking skill or by blasting them with fire, from the Fire Bolt spell,
+for instance. Blessed cooked corpses carried by PCs with Food Preservation at 100 decay at the slowest rate. This is very handy for preserving the corpses of Chaos
+Orb guardians (section <a href="adomgb-0-10.html#0a311">0.10.3.1.1</a>).<p>
+
+Wearing certain items causes a need for increased food consumption. This includes all items that grant invisibility, artifacts (especially for PCs that are not crowned) and
+worst of all (since they grant no positive effect) amulets of hunger. Interestingly, intrinsics, including intrinsic Invisibility, do not have any effect on food consumption.
+Likewise, the Fate smiles / Lucky / Cursed / Doomed intrinsics have no effect.<p>
+
+The level of satiation is displayed on the screen. High levels of satiation (Satiated or Bloated) will cause Speed decrease. One type of herb, stomafillia, is extremely filling.
+Blessed stomafillia will cause a PC to be Bloated immediately.<p>
+
+The satiation value of food items is increased by 25% for blessed items and decreased by 50% for cursed items.<p>
+<ul>
+<li>Trolls have food consumption doubled.
+<li>Monks have food consumption halved.
+<li>Farmers have food consumption halved starting from level 12.
+<li>Wolf starsign increases all food's satiation values by 10% <big>25%</big>.
+</ul><p>
+
+<h4 id="0311">0.3.1.1 Increasing satiation</h4>
+These are the ways to increase satiation:<p>
+<ul>
+<li><tt>e</tt>ating one of the plentiful types of corpses and food (especially blessed stomafillia herbs)
+<li><tt>D</tt>rinking any potion except poison (some are more effective than others)
+<li><tt>r</tt>eading a non-cursed scroll of satiation
+<li>successfully <tt>a</tt>pplying the Survival skill in the wilderness
+<li>praying<tt>_</tt> when Hungry or worse
+<li>wishing for <tt>satiation</tt> or <tt>food</tt>
+<li><big>randomly from a statue</big>
+<li><span class="newi"><tt>z</tt>aping a staff of nourishment</span>
+</ul><p>
+
+Satiation decreases naturally over time (see next chapter), or you can decrease it artificially by eating stomacemptia herbs.<p>
+
+<h4 id="032">0.3.2 Satiation levels</h4>
+<span class="credit">Credit Malte Helmert.</span>
+
+Most "base" PCs use one unit of nutrition each turn. The units of nutrition for the various food items are listed below. None of the following applies
+to food consumption in the big wilderness map, where different rules apply (maybe just a multiplier). Apart from equipment, the formula for food
+consumption per turn is as follows:<p>
+
+<table border=1>
+<tr><td>1  <td>standard
+<tr><td>+1 <td>for Trolls
+<tr><td>+1 <td>when Strained or Strained!
+<tr><td>+2 <td>when Overburdened!
+</table><p>
+
+The formula for moving is a bit different (+1 for Trolls still applies):<p>
+
+<table class="noborder"><tr><td>
+<table border=1>
+<tr><td>1  <td>standard
+<tr><td>+1 <td>when Burdened
+<tr><td>+2 <td>when Strained
+<tr><td>+3 <td>when Strained!
+</table>
+<td><small>
+<table border=1>
+<tr><td>1  <td>standard
+<tr><td>+0.5<td>when Burdened
+<tr><td>+1 <td>when Strained
+<tr><td>+2 <td>when Strained!
+</table></small>
+</table><p>
+
+The total value after those modifiers is halved for Farmers of Level 12+ and Monks of any level. So, for example, an Overburdened Human Fighter
+would consume 3 units per turn, and a Strained! Troll Monk would consume 1.5 units per turn. In this case, fractions are <i>not</i> rounded away:
+the character will alternate between consuming 1 and 2 units.<p>
+
+After that, additional modifiers apply, which are <i>not</i> halved for Monks or Farmers:<p>
+
+<table border=1>
+<tr><td>+3   <td>for each (!) equipped item granting Invisibility
+<tr><td>+1   <td>for thin and nimble corruption
+<tr><td>+0.5 <td>for each equipped artifact (rounded down), for uncrowned or fallen champion PCs
+<tr><td>+0.25<td>for each equipped artifact (rounded down), for crowned PCs
+<tr><td>+15  <td>in the wilderness, for non-Trolls
+<tr><td>+30  <td>in the wilderness, for Trolls
+</table><p>
+
+Food consumption in the wilderness is independent of movement speed, including seven league boots, and terrain type.<p>
+
+So, for example, a strained Troll Barbarian, crowned chaotic, wearing 7 artifacts and one item granting Invisibility will consume 7 units per turn
+(1 standard, 1 troll, 1 strained, 7/4 rounded down = 1 for artifacts, 3 for invisibility).<p>
+
+No influence on food consumption:<p>
+<ul>
+<li>alignment
+<li>being a fallen champion (that is, there is no special penalty &ndash; it's just like not being crowned)
+<li>any corruption except thin and nimble
+<li>any intrinsic (particularly, intrinsic Invisibility does not increase food consumption &ndash; this was very surprising; likewise, the Doomed/Cursed/Lucky/Fate smile
+makes no difference)
+<li>the Invisibility spell
+<li>being a Healer or being born in the month of Candle
+<li>HP or PP regeneration rate, having eaten troll corpses, having drunk potions of troll blood or raw mana, wearing regenerating items &ndash; the last is very surprising
+</ul><p>
+
+The different satiation categories are:<p>
+
+<table class="noborder"><tr><td>
+<table border=1><caption>Satiation</caption>
+<tr><th>Satiation level<th>Satiation display
+<tr><td>2501+ <td>Bloated
+<tr><td>1501..2500 <td>Satiated
+<tr><td>200..1500 <td>(no display)
+<tr><td>100..199 <td>Hungry
+<tr><td>50..99 <td>Hungry!
+<tr><td>49- <td><font color="red">Starving</font>
+</table>
+<td><small>
+<table border=1><caption>Satiation</caption>
+<tr><th>Satiation level<th>Satiation display
+<tr><td>2501+ <td>Bloated
+<tr><td>1501..2500 <td>Satiated
+<tr><td>250..1500 <td>(no display)
+<tr><td>-50..249 <td>Hungry
+<tr><td>-300..-51 <td>Hungry!
+<tr><td>-301- <td><font color="red">Starving</font>
+</table></small>
+</table><p>
+
+A character with satiation level 0 <big>-301</big> can die because of starvation each turn. Apparently no food consumption takes place while eating, so it should be
+impossible to starve to death while eating.<p>
+
+Note also that starvation does not kill until Strength has dropped to half of what it was when the Starving message is shown. There is a -4 drop on
+getting to Starving status. From there Strength and other attributes will continue to drop until Strength reaches 50% of its value when Starving status was reached.<p>
+
+The exact turn of death seems to be -(Toughness*8)+2 <big>-300-(To*8)+2</big>, with minor variations at some levels. In short, this means that for every point of
+Toughness the character has, their satiation can go 8 points lower below zero. Thus higher Toughness equals more time to find food to reduce starvation.<p>
+
+Satiation value can flip over 32 bit integer (about 2.1 billion), similarly to piety level, gold amount, xp amount, etc. It can be achieved for example by reading
+1.07 million blessed scrolls of satiation. At this point, the PC will die. <small>Fixed, as all integers overflow.</small><p>
+
+Some other observations:<p>
+<ul>
+<li>Wishing for <tt>satiation</tt> or <tt>food</tt> sets the satiation level to 5000 if it was below this value. It does nothing otherwise.
+<li>Scrolls of satiation add 2000/1000/0 to the satiation level B/U/C.
+<li>Apart from corpses, the only food items that can be cooked are raw meat and fish meat, as noted in the table. Unlike corpses, they can only be
+cooked with the Cooking skill; fire destroys them.
+<li>From preliminary testing, it seems that apples and pieces of raw meat rot at approximately the same rate.
+<li>Stomafillia herbs are different in that their B/U/C status is more influential than for other food items: they yield 6250/2000/550 points of
+satiation depending on whether they are blessed, uncursed or cursed.
+<li>Stomacemptia herbs are the only non-corpse food items that lower the satiation level. Even bad ratling food, despite yielding the "you vomit"
+message, satiates slightly. Stomacemptia herbs do not apply a fixed modifier but behave a bit differently:
+<br>If the character is not yet starving, the new satiation level is set to a fixed value depending on the B/U/C status of the herb (rows) and the old
+satiation value (columns):<p>
+<table class="noborder"><tr><td>
+<table border=1>
+<tr><th>Status   <th>0-<th>1..20 <th> 21..49 <th>50..99 <th>100..199 <th>200..1500 <th>1501+
+<tr><td>Blessed  <td rowspan=3>no effect<td rowspan=3>0 <td rowspan=3>-20<td rowspan=3>49 <td>99 <td>199 <td>1500
+<tr><td>Uncursed <td rowspan=2>49 <td>99 <td>199
+<tr><td>Cursed   <td>49 <td>49
+</table>
+<td><small>
+<table border=1>
+<tr><th>Status   <th>-301-<th>-300..-51 <th>-50..249 <th>250..1500 <th>1501+
+<tr><td>Blessed  <td rowspan=3>no effect<td rowspan=3>-301 <td>-51 <td>249 <td>1500
+<tr><td>Uncursed <td rowspan=2>-301 <td>-51 <td>249
+<tr><td>Cursed   <td>-301 <td>-301
+</table></small>
+</table>
+Put in words, blessed herbs always set the satiation level to the highest possible value of the next lower category (from Satiated to normal, from
+normal to Hungry, from Hungry to Very hungry, from Very hungry to Starving), uncursed herbs go two such steps, and cursed herbs always go
+down to Starving. If the character is already Starving (satiation value below 50), then the satiation value is decreased by 20, but not below 0,
+irrespective of B/U/C status of the herb.
+</ul><p>
+
+<h4 id="033">0.3.3 Eating corpses <tt>%</tt></h4>
+<span class="credit">Credit Sorear's Wiki &ndash; <a href="http://www.it-is-law.com/adom/index.php?title=Monster_Corpse_Effects">Monster_Corpse_Effects</a>.</span>
+<img src="tiles/item103.png" alt="corpse" align="left">
+In addition to <a href="adomgb-app-J.html">Appendix J</a>, this section lists corpse effect in greater detail.<p>
+
+<b id="0331">How to read the list</b>
+<p><ul>
+<li>Only corpses with effects are listed.
+<li>Colons (:) symbolize conditions; basically read as 'if (thing before the colon) is true, then (do stuff after colon).
+This is often a percentage chance, but it can be other things as well. Conditions can stack (meaning multiple things have to be true).
+<li>Attribute increases (or decreases) listed by themselves (Such as '+1 Pe') without parentheses mean you <i>always</i> gain that attribute when eating
+the corpse (provided any conditions are true).
+<li>Attribute increases listed in parentheses (like '(+1 St)') have a chance to gain that attribute, depending on your current amount in that attribute.
+There is a chart that shows your chance to gain.
+<li>Speed increases are all done the same way. They are listed in parentheses because they are also harder to gain the higher it is.
+(There is a speed chart as well).
+<li>Commas (,) seperate gains/checks. You gain (or have a chance to gain if there are conditions) everything in the list that's seperated with a comma.
+<li>Semicolons (;) denote mutually exclusive checks. This means you can only get 1 possibility out of the series. Square brackets are used
+to make it more obvious what is in a series.
+<li>Poison effects have 2 numbers (unlike other status effects) &ndash; the first is how much (Da)mage the poison does and the second is how often
+((Fr)equency) that it happens.
+<li>Most bad effects will stack on top of others. If you're confused already, and you eat something which confuses you, that amount is added
+to how many turns you'll stay confused.
+<li>'Trains' means that it trains the attribute, so that you have a chance to gain it over time (like being burdened trains Strength).
+<li>Exclamation points (!) simply mean 'not'.
+<li>Curly brackets ({}) at the end of some of the checks are to make it plain and obvious what is the highest level of the attribute that can be reached
+by eating the corpse in question. This should make it a little easier to understand for anyone who doesn't understand the 'code-like' parts.
+<li>"Spellcasting monster" means "[Cursed: 5%: +2d3PP; Uncursed: 25%: +2d3PP; Blessed: 50%: +2d3PP], 16.7%: +1 Ma".
+<li>"Bad luck" means lose Lucky and Fate smiles intrinsics if present, and gain Cursed and Doomed intrinsics.
+<li>"Karmic" means it will get the PC somewhat more Luck: if Doomed, then lose Doomed, if not then lose Cursed, if neither Doomed nor Cursed then gain
+Lucky, if already have Lucky then gain Fate smiles.
+<li>The PC is not sickened eating a rabid dog corpse if wearing necklace of rabies resistance.
+<li>MaxAge is never reduced below CurrentAge.
+<li>Level 40+ Assassins cannot be poisoned.
+</ul><p>
+
+<b id="0332">Examples</b>
+<p><ul>
+<li><b>Kobold Shaman</b>: +1 Ma, [Cursed: 5%: +2d3PP; Uncursed: 25%: +2d3PP; Blessed: 50%: +2d3PP], Sickens 20d8<br>
+Kobold Shamans always give you +1 Mana when eaten, then there is a 5/25/50 percent chance (depending on the
+C/U/B status) of gaining 2d3 (average 4) power points. Then you become sick; you basically lose 1 sickness point
+every 20 turns so 20d8 * 20 is how many turns you'll be sick for unassisted.<p>
+
+<li><b>Chaos Viper</b>: (+1 Dx), -Pois, (+1 Sp), Poisons 8d5Da_3d3Fr, Corrupts 10d200<br>
+First, you have a chance to gain 1 Dx depending on what your Dx is already at. Second, you always
+gain poison resistance. After that you have a chance to gain 1 Speed, then you're heavily poisoned
+(on average it will start out dealing 24 damage every 6 turns, though the fact that it gives poison
+resistance may weaken the effect instantly). Finally, it corrupts you for an average of 1005 CP which
+is about 1 corruption worth.<p>
+
+<li><b>Ghul</b>: ![-Para]: Paralyzes 2d8<br>
+This one is pretty simple. If you are paralyzation resistant, nothing special happens.
+Otherwise, you're paralyzed for 2d8 turns.<p>
+
+<li><b>Ettin</b>: [St &lt; 8]: 62.5%: (+1 St); [St &lt; 16]: 60%: (+1 St); [St &lt; 20]: 58.3%: (+1 St); [St &lt; 24]: 16.7%: (+1 St);
+[St = 24]: 14.3%: (+1 St)] {St up to 25}<br>
+Whooo boy. Thomas sure made the giant-folk complicated, didn't he? The code doesn't actually look like
+this, but this was the simplest (believe it or not) way I found to display the effect. Notice that the
+curly brackets at the end give you the big picture: they can raise your Strength up to 25, no higher.
+Every check has a chance to raise your Strength depending on what it already is, and the higher it is the less
+chance you have to raise it. Note also that the attribute increases are in parentheses so the actual chance to raise
+from 24 to 25 is a mere 8%.<p>
+</ul><p>
+
+<table id="0333" border=1><caption>Speed chances</caption>
+<tr><th>Speed   <th>Chance
+<tr><td>0-119   <td>100%
+<tr><td>120-139 <td>57.95%
+<tr><td>140-159 <td>15.90%
+<tr><td>160-179 <td>3.88%
+<tr><td>180+    <td>0.78%
+</table><p>
+
+<table id="0334" border=1><caption>Parenthesized attribute chances</caption>
+<tr><th>Attribute<th>Chance<th>Attribute<th>Chance<th>Attribute<th>Chance
+<tr><td>1-21 <td>100%  <td>31 <td>10%   <td>41 <td>0.95%
+<tr><td>22   <td>55%   <td>32 <td>6.67% <td>42 <td>0.83%
+<tr><td>23   <td>58.33%<td>33 <td>4.76% <td>43 <td>0.74%
+<tr><td>24   <td>55.56%<td>34 <td>3.57% <td>44 <td>0.65%
+<tr><td>25   <td>100%  <td>35 <td>2.78% <td>45 <td>0.58%
+<tr><td>26   <td>25%   <td>36 <td>2.22% <td>46 <td>0.53%
+<tr><td>27   <td>25%   <td>37 <td>1.82% <td>47 <td>0.48%
+<tr><td>28   <td>100%  <td>38 <td>1.51% <td>48 <td>0.43%
+<tr><td>29   <td>46.67%<td>39 <td>1.28% <td>49 <td>0.40%
+<tr><td>30   <td>16.67%<td>40 <td>1.10% <td>50 <td>0.36%
+</table><p>
+
+<table id="0335" border=1><caption>Eating corpses effects</caption>
+<tr><th>Corpse<th>Effect
+<tr><td>Ancient Black Dragon<td>+1 Wi, -Acid
+<tr><td>Ancient Blue Dragon<td>(+1 Dx), -Elec
+<tr><td>Ancient Blue Wyrm<td>Spellcasting monster, (+6 Dx), (+5 Ma), (+5 To), (+1 Pe), =Elec
+<tr><td>Ancient Chaos Wyrm<td>Spellcasting monster, (+1 Ma), (+1 St) <big>(+3 St)</big>, -Fire, Corrupts 2500
+<tr><td>Ancient Dwarf<td>+6d6 PP, +Curs
+<tr><td>Ancient Karmic Dragon<td>Karmic
+<tr><td>Ancient Karmic Wyrm<td>Spellcasting monster, (+10 Ma), (+10 To), Restores PP to Max, Karmic
+<tr><td>Ancient Minotaur<td>-1 Wi, 25%: (+1 Pe), Confuses 10d3
+<tr><td>Ancient Red Dragon<td>(+1 St), -Fire
+<tr><td>Ancient Stone Beast<td>Corrupts 3000, <big>+2 St, +4 To</big>
+<tr><td>Ancient White Dragon<td>+1 To, -Cold
+<tr><td>Ankheg<td>90%: -Acid
+<tr><td>Annis Hag<td>Spellcasting monster, +Curs
+<tr><td>Baby Water Dragon<td>+WBre
+<tr><td>Battle Bunny<td>Trains St, Dx, To, Abuses Le -2d4
+<tr><td>Black Baby Dragon<td>-Acid
+<tr><td>Black Dragon<td>-Acid
+<tr><td>Black Druid<td>Spellcasting monster, -4 Wi, +3 Ma, +2 Le, +1 To, Corrupts 999, Alignment -1000
+<tr><td>Black Unicorn<td>Corrupts [2d2 * 1000]
+<tr><td>Blink Dog<td>+TCtr
+<tr><td>Blue Baby Dragon<td>-Elec
+<tr><td>Blue Dragon<td>-Elec
+<tr><td>Cat Lord<td>Spellcasting monster, (+6 Dx), +Doom
+<tr><td>Cave Fisher<td>!Dark Elf: Poisons 2Da_10Fr, 90%: -Pois
+<tr><td>Chaos Archmage<td>Spellcasting monster, +50 PP, (+12 Ma), Corrupts 5000
+<tr><td>Chaos Lizard<td>Corrupts 10d10
+<tr><td>Chaos Rat<td>Corrupts 2d5
+<tr><td>Chaos Spider<td>Poisons 2Da_10Fr, 90%: -Pois, Corrupts 20d20
+<tr><td>Chaos Viper<td>(+1 Dx), -Pois, (+1 Sp), Poisons 8d5Da_3d3Fr, Corrupts 10d200
+<tr><td>Claw Bug<td>-2 Wi, (+1 Dx)
+<tr><td>Cobra<td>Trains To +100
+<tr><td>Cooshoo<td>![-Slee]: Sleeps 4d4
+<tr><td>Cute Dog<td>Bad luck
+<tr><td>Cyclops<td>[[St &lt; 8]: 62.5%: (+1 St); [St &lt; 16]: 60%: (+1 St); [St &lt; 20]: 58.3%: (+1 St); [St &lt; 24]: 16.7%: (+1 St); [St = 24]: 14.3%: (+1 St)] {St up to 25}
+<tr><td>Dark Elven Archer<td>-1 To, (+1 Dx), -Pois
+<tr><td>Dark Elven Lord<td>-2 To, (+2 Dx), -Pois
+<tr><td>Dark Elven Priestess<td>-1 To, (+1 Dx), -Pois
+<tr><td>Dark Elven Princess<td>-2 To, (+2 Dx), -Pois
+<tr><td>Dark Elven Warrior<td>-1 To, (+1 Dx), -Pois
+<tr><td>Dark Elven Wizard<td>Spellcasting monster, -1 To, (+1 Dx), -Pois
+<tr><td>Dark Orc<td>(+1 St)
+<tr><td>Dark Sage<td>Spellcasting monster, NotCursed: DontHaveLiteracySkill: [Gain LiteracySkill = 1d20+19, Blessed: (+1 Le)]; ELSE: Cursed: LiteracySkill -5d5
+<tr><td>Displacer Beast<td>Stuns 3d8, Confuses 3d6, LevelAllowsTeleportation: Teleports
+<tr><td>Doppelganger King<td>Troll: 50%: +1 attribute (every attribute individually)
+<tr><td>Dwarven Child<td>+Curs, +Doom
+<tr><td>Dwarven Elite Guardian<td> (+1 Wi)
+<tr><td>Emperor Moloch<td>-6 Dx, (+8 To), (+6 St), Corrupts 2500, Alignment -666
+<tr><td>Ettin<td>[[St &lt; 8]: 62.5%: (+1 St); [St &lt; 16]: 60%: (+1 St); [St &lt; 20]: 58.3%: (+1 St); [St &lt; 24]: 16.7%: (+1 St); [St = 24]: 14.3%: (+1 St)] {St up to 25}
+<tr><td>Fairy Dragon<td>Spellcasting monster, Cures sickness, Confuses 6d10
+<tr><td>Fire Beetle<td>50%: -Fire (no special message)
+<tr><td>Fire Drake<td>-Fire
+<tr><td>Fire Giant King<td>(+1 St)
+<tr><td>Fire Giant<td>5%: -Fire, [[St &lt; 8]: 58.3%: (+1 St); [St &lt; 16]: 57.1%: (+1 St); [St &lt; 24]: 56.3%: (+1 St); [St &lt; 30]: 55.6%: (+1 St); [St &lt; 32]: 11.1%: (+1 St); [St &lt; 40]: 10%: (+1 St)] {St technically up to 40}
+<tr><td>Fire Lizard<td>10%: -Fire (Shiver Message)
+<tr><td>Fomorian Giant<td>50%: -1 Ap, [[St &lt; 8]: 62.5%: (+1 St); [St &lt; 16]: 60%: (+1 St); [St &lt; 20]: 58.3%: (+1 St); [St &lt; 24]: 16.7%: (+1 St); [St &lt; 30]: 14.3%: (+1 St)] {St up to 30}
+<tr><td>Frost Giant Berserker<td> 5%: -Cold, [[St &lt; 8]: 62.5%: (+1 St); [St &lt; 16]: 60%: (+1 St); [St &lt; 24]: 58.3%: (+1 St); [St = 24]: 57.1%: (+ 1St); [St &lt; 32]: 14.3%: (+1 St); [St &lt; 35]: 12.5%: (+1 St)] {St technically up to 35}
+<tr><td>Frost Giant Jarl<td>(+1 St)
+<tr><td>Frost Giant<td>5%: -Cold, [[St &lt; 8]: 62.5%: (+1 St); [St &lt; 16]: 60%: (+1 St); [St &lt; 24]: 58.3%: (+1 St); [St = 24]: 57.1%: (+1 St); [St &lt; 32]: 14.3%: (+1 St); [St &lt; 35]: 12.5%: (+1 St)] {St technically up to 35}
+<tr><td>Gelatinous Cube<td>![-Para]: Paralyzes 12d6, <big>33.3%: -Para</big>
+<tr><td>Ghul<td>![-Para]: Paralyzes 2d8
+<tr><td>Giant Ant Queen<td>90%: -Acid
+<tr><td>Giant Ant Warrior<td>90%: -Acid
+<tr><td>Giant Ant Worker<td>90%: -Acid
+<tr><td>Giant Boar<td>-4 Wi, (+2 St), (+1 To)
+<tr><td>Giant Centipede<td>Poisons 2Da_10Fr, 90%: -Pois
+<tr><td>Giant Slug<td>=Acid
+<tr><td>Giant Spider<td>!Dark Elf: Poisons 2Da_10Fr, 90%: -Pois
+<tr><td>Gorgon<td>![-Petr]: (chance Mana+Luck in 5000): [-Petr, (+1 To)]; ELSE: Death!
+<tr><td>Great Black Wyrm<td>Spellcasting monster, +1 To, +1 Wi, -Acid
+<tr><td>Great Blue Wyrm<td>Spellcasting monster, (+1 Pe), (+1 Dx), -Elec
+<tr><td>Great Karmic Wyrm<td>Spellcasting monster, Karmic
+<tr><td>Great Red Wyrm<td>Spellcasting monster, (+1 Ma), (+1 St), -Fire
+<tr><td>Great Water Dragon<td>+WBre
+<tr><td>Great White Wyrm<td>Spellcasting monster, +1 Ch, +1 To, -Cold
+<tr><td>Greater Black Unicorn<td>Corrupts [3d3 * 1000]
+<tr><td>Greater Claw Bug<td>-6 Wi, (+3 Dx), (+2 Sp)
+<tr><td>Greater Demon<td>Spellcasting monster, +Doom
+<tr><td>Greater Moloch<td>-3 Dx, (+2 To), (+1 St)
+<tr><td>Greater Titan<td>(+1d3 St), (+1d3 To)
+<tr><td>Greater White Unicorn<td> Bad luck, Alignment -8000
+<tr><td>Green Hag<td> Spellcasting monster, +Curs
+<tr><td>Harpy<td>![Muted]: Mutes 20d100
+<tr><td>Hill Giant Chieftan<td>50%: (+1 St)
+<tr><td>Hill Giant<td> [[St &lt; 8]: 62.5%: (+1 St); [St &lt; 15]: 60%: (+1 St); [St = 15]: 20%: (+1 St); [St &lt; 24]: 16.7%: (+1 St); [St = 24]: 14.3%: (+1 St)] {St up to 25}
+<tr><td>Hill Orc Sergeant<td>Trains To 300
+<tr><td>Hill Orc<td>Trains To 150
+<tr><td>Homunculus<td>![-Slee]: Sleeps 4d4
+<tr><td>Hydra<td>![-Conf]: Confuses 4d6
+<tr><td>Imp<td>Poisons 2d3Da_1d4+5Fr
+<tr><td>Invisible Stalker<td>[10%: +Invi; 90%: +SeeI]
+<tr><td>Jackalwere<td> Sickens 6d6
+<tr><td>Karmic Baby Dragon<td>Karmic
+<tr><td>Karmic Dragon<td>Karmic
+<tr><td>Karmic Lizard<td>Karmic
+<tr><td>Killer Bug<td>-12 Wi, (+6 Dx), (+4 Sp)
+<tr><td>King Cobra<td>Trains To 100
+<tr><td>Kobold Chieftain<td>Sickens 20d8
+<tr><td>Kobold Shaman<td>+1 Ma, [Cursed: 5%: +2d3PP; Uncursed: 25%: +2d3PP; Blessed: 50%: +2d3PP], Sickens 20d8
+<tr><td>Kobold<td>Sickens 20d8
+<tr><td>Large Kobold<td>Sickens 20d8
+<tr><td>Large Snake<td>50%: -Pois
+<tr><td>Large Spider<td>!Dark Elf: Poisons 2Da_10Fr, 90%: -Pois
+<tr><td>Least Demon<td>+Doom
+<tr><td>Lesser Demon<td>+Doom
+<tr><td>Lightning Lizard<td>[Blessed: 12.5%: =Elec; ELSE: -Elec]
+<tr><td>Master Summoner<td>Corrupts 2000, <big>+4 Le, +4 Wi, +4 Ma</big>
+<tr><td>Minotaur Emperor<td>-8 Wi, +3 St, +3 To, +3 Pe <big>+6 Pe</big>, Confuses 40d24+60, Corrupts 200d10
+<tr><td>Minotaur King<td>-6 Wi, 50%: [(+3 Pe), (+2 St), (+2 To)], Confuses 20d12+30, Corrupts 10d100
+<tr><td>Minotaur Lord<td>-2 Wi, 66.7%: (+1 Pe), 25%: (+1 St), Confuses 10d4
+<tr><td>Minotaur Mage<td>Spellcasting monster, -4 To, 50%: [(+3 Ma), (+3 Pe)], Confuses 20d10+20
+<tr><td>Minotaur Mazelord<td> -4 Wi, 33.3%: [(+2 Pe), (+1 St), (+1 To)], Confuses 10d8+10
+<tr><td>Minotaur Mazemaster<td>-3 Wi, 33.3%: [(+1 Pe), (+1 St), (+1 To)], Confuses 10d6
+<tr><td>Minotaur<td>Trains Pe 800, Confuses 5d10
+<tr><td>Moloch<td>-1 Dx, (+1 To)
+<tr><td>Multi-Headed Chaos Dragon<td>Spellcasting monster, (+10 St), (+10 To), (+10 Ma), (+5 Pe), Corrupts 8000
+<tr><td>Mutated Battle Bunny<td>(+1 St), (+1 To), (+1 Dx), -2d4 Le
+<tr><td>Ogre Emperor<td>[St &lt; 35]: 50%: +1 St {St up to 35}
+<tr><td>Ogre Guardian<td>[St &lt; 25]: 50%: +1 St {St up to 25}
+<tr><td>Ogre King<td>[St &lt; 25]: 50%: +1 St {St up to 25}
+<tr><td>Ogre Lord<td>[St &lt; 22]: 33.3%: +1 St {St up to 22}
+<tr><td>Ogre Magus<td>Spellcasting monster, 25%: (+1 Ma), [St &lt; 22]: 33.3%: +1 St {St up to 22}
+<tr><td>Ogre<td>[St &lt; 19]: 25%: +1 St {St up to 19}
+<tr><td>Oracle<td>Spellcasting monster, (+6 Le), Bad luck
+<tr><td>Orc Butcher<td>(+1 St)
+<tr><td>Pit Viper<td>50%: -Pois
+<tr><td>Pixie Archer<td>25%: +Tele
+<tr><td>Pixie<td>25%: +Tele
+<tr><td>Priest<td>Spellcasting monster, +Curs, +Doom
+<tr><td>Quasit<td>Poisons 3d2Da_3d3Fr, Sickens 6d6, +Curs
+<tr><td>Quickling Bard<td>Spellcasting monster, (1d5+2 Sp), -25% MaxAge
+<tr><td>Quickling King<td>(1d5+2 Sp), -25% MaxAge
+<tr><td>Quickling Lord<td>(1d4+1 Sp)
+<tr><td>Quickling Queen<td>(1d5+2 Sp), -25% MaxAge
+<tr><td>Quickling<td>(1d3 Sp)
+<tr><td>Rabid Dog<td>Sickens 30d10
+<tr><td>Ratling Guardian<td>Alignment +250
+<tr><td>Ratling Rebel<td>Alignment -1000
+<tr><td>Ratling Warlord<td>Alignment -1000
+<tr><td>Rattlesnake<td>50%: -Pois
+<tr><td>Red Baby Dragon<td>-Fire
+<tr><td>Red Dragon<td>-Fire
+<tr><td>Royal Guardian<td>[![+Curs]: +Curs; ELSE: +Doom]
+<tr><td>Shadow Troll<td>-1 To, -1 NaturalRegen
+<tr><td>Shadow Wyrm<td>Spellcasting monster, -2 To, (+4 Dx)
+<tr><td>Snake from Beyond<td>Corrupts 2000, <big>+4 Dx, +4 Ma</big>
+<tr><td>Spectre<td>(+1 To), Alignment -500
+<tr><td>Stone Giant Lord<td>(+1 St)
+<tr><td>Stone Giant<td>[[St &lt; 8]: 62.5%: (+1 St); [St &lt; 16]: 60%: (+1 St); [St &lt; 20]: 58.3%: (+1 St); [St &lt; 24]: 16.7%: (+1 St); [St &lt; 30]: 14.3%: (+1 St)] {St up to 30}
+<tr><td>Stone Snake<td>Trains To 500
+<tr><td>Swamp Hydra<td>![Blind]: [Pe &gt; 10]: 0.1%: Sickens 10d3; ELSE: ![-Conf]: [Trains To 5000, Confuses 12d6]
+<tr><td>Tarantula<td>!Dark Elf: Poisons 2Da_10Fr, 90%: -Pois
+<tr><td>Titan<td>(+1 St), (+1 To)
+<tr><td>Troll Berserker<td>[Blessed: -1 NaturalRegen; ELSE: 50%: -1 NaturalRegen]
+<tr><td>Troll Chief<td>[Blessed: -1 NaturalRegen; ELSE: 50%: -1 NaturalRegen]
+<tr><td>Troll King<td> [Blessed: -1 NaturalRegen; ELSE: 50%: -1 NaturalRegen]
+<tr><td>Troll<td>[Blessed: -1 NaturalRegen; ELSE: 50%: -1 NaturalRegen]
+<tr><td>Vampire<td>(+1 To), Alignment -500
+<tr><td>Viper<td>50%: -Pois
+<tr><td>Water Snake<td>-Pois
+<tr><td>Wererat<td>Sickens 6d6
+<tr><td>Werewolf King<td>Sickens 42d6
+<tr><td>Werewolf Lord<td>Sickens 18d6
+<tr><td>Werewolf<td>Sickens 6d6
+<tr><td>White Baby Dragon<td>-Cold
+<tr><td>White Dragon<td>-Cold
+<tr><td>White Unicorn<td>Bad luck, Alignment -4000
+<tr><td>Wight<td>(+1 To), Alignment -500
+<tr><td>Wraith<td>(+1 To), Alignment -500
+<tr><td>Zombie<td>Poisons 2Da_8Fr
+<tfoot>
+<tr><td>Frost Salamander<td>90%: [-1 Dx, -Cold]; ![=Cold]: 10%: [-5 Sp, =Cold]
+<tr><td>Kobold Trapmaster<td>Sickens 20d8
+<tr><td>Yeti<td>![-Cold]: -Cold
+</tfoot></table><p>
+
+<small>Note that eating corpses won't raise attributes beyond maximum limit in R+.</small><p>
+
+<h4 id="034">0.3.4 Monsters who never leave a corpse</h4>
+These are:<br>
+acid vortex, air demon, air elemental, air grue, ancient sage, animated armor, animated tree, annihilator, arena master, assassin prince,
+balor, banshee, berserker, berserker emperor, berserker king, berserker lord, berserker prince, big casino guard, black slayer, black wizard, bone golem, brown worm, bunny master, burly adventurer,
+carpenter, casino guard, chaos brother, chaos eye, chaos knight, chaos mutant, chaos plague bearer, chaos servant, chaos sister, chaos spawn, chaos warlord, chaos warrior, chaos wizard, child,
+clay golem, cloaked ratling, corpse fiend, corruptor, crime lord, crystal statue,
+death ooze, demented ratling, diamond golem, djinni, Dorn Beast, dragon turtle, druid, dwarven artificer, dwarven chaos knight, dwarven inn keeper, dwarven mystic, dwarven smith, dwarven weaponmaster, dying sage,
+earth elemental, ElDeR cHaOs GoD, emperor lich, eternal guardian, eternium golem, eye of destruction,
+fire demon, fire elemental, fire grue, fire vortex, flesh golem, floating eye, fool,
+ghost, ghost bat, ghost king, ghost librarian, ghost lord, giant dragon turtle, giant rust monster, giant shark, giant turtle, gibbering mouther, goodwife, gray ooze, gray slayer,
+greater air elemental, greater balor, greater chaos servant, greater earth elemental, greater fire elemental, greater mimic, greater mummy, greater water elemental,
+green blob, green slime, green worm, gremlin, grizzled gladiator,
+half-orc bouncer, healer, holy slayer, ice vortex, iron golem, jackal demon, ki-rin, large rust monster, lich, lich king, lightning vortex, living wall,
+mad carpenter, mad doctor, mad minstrel, magebane eye, magedoom eye, malicious doctor, master lich, master mimic, master necromancer, master thief, mimic, mimic hivemind, mummy, mummy lord,
+necromancer, ochre jelly, old barbarian, old crone, purple worm, ratling dealer, ratling trader, red worm, revenant, rust monster,
+shadow, shadow centipede, shadow lord, shambling mound, shark, sheriff, shopkeeper, skeletal king, skeletal warrior, skeleton, slow shadow, small dwarf, solar, staring eye, steel golem, steel horror,
+steel zombie, stone golem, stone grue, stone ooze, stone statue,tiny girl, undead chaos dwarven berserker, vapor rat, village elder,
+wall beast, water demon, water elemental, water grue, white worm, will o'wisp, writhing mass of primal chaos, yellow ooze.<p>
+
+Monsters who always leave a corpse are the following uniques:<br>
+Ancient Chaos Wyrm, Ancient Stone Beast, Black Druid, Chaos Archmage, Cute Dog, Master Summoner, Minotaur Emperor, Multi-Headed Chaos Dragon, Oracle, Snake from Beyond, <big>Raider Lord</big>.<p>
+
+Farmers are special case. They never leave a corpse before a quest for a farmer corpse is assigned, after which they leave a corpse with 50% probability.<p>
+
+<hr>
+Updated September 15th, 2016
+</body>
+</html>

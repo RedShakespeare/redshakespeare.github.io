@@ -1,0 +1,110 @@
+body {
+	font-family: monospace;
+	font-size: 18px;
+	color: white;
+	background-color: black;
+}
+
+a {
+  color: #7777FF;
+}
+
+font {
+  font-size: 18px;
+}
+
+font.upd {
+  color: #C0C0C0;
+}
+
+.gold {
+  color: yellow;
+}
+
+.goldx {
+  color: orange;
+}
+
+.wall {
+  color: #808080;
+}
+
+.door {
+  color: #999900;
+}
+
+.casino-guard {
+  color: blue;
+}
+
+.big-casino-guard {
+  color: #000080;
+}
+
+.shopkeeper {
+  color: #C0C0C0;
+}
+
+.hmo {
+  color: white;
+}
+
+.mou {
+  color: #808080;
+}
+
+.hil {
+  color: #999900;
+}
+
+.wat {
+  color: #000080;
+}
+
+.swa {
+  color: #006600;
+}
+
+.pla {
+  color: #00ff00;
+}
+
+.roa {
+  color: #999900;
+}
+
+.for {
+  color: #006600;
+}
+
+.coc {
+  color: #800080;
+}
+
+.wdc {
+  color: #0000ff;
+}
+
+.red {
+  color: #800000;
+}
+
+.dgr {
+  color: #006600;
+}
+
+.lgr {
+  color: #00ff00;
+}
+
+.bro {
+  color: #999900;
+}
+
+.gra {
+  color: #808080;
+}
+
+.whi {
+  color: #ffffff;
+}

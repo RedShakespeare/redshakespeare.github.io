@@ -1,0 +1,628 @@
+<html>
+<head>
+<title>ADOM Manual - Customizing ADOM &amp; Command Line Options &amp; Keyboard Redefinitions &amp; Message Customization</title>
+<link rel="stylesheet" type="text/css" href="adomgb-body.css">
+</head>
+<body>
+<h1>ADOM Manual</h1>
+<hr>
+<a href="adomman-R.html">Previous</a> - <a href="adomman-toc.html">TOC</a> - <a href="adomman-toc.html">Next</a>
+<hr>
+
+<h2 id="S">Appendix B: Customizing ADOM</h3>
+It is possible to set certain default values for ADOM with the
+standard configuration file 'adom.cfg'. The location of the file
+depends on the system you are playing ADOM on. Please use the
+FAQ available at <a href="http://www.adom.de/faq">http://www.adom.de/faq</a>.
+It will give you more details about this. The configuration file can
+contain certain variables which control parts of ADOM's behavior.
+This file is a plain ASCII file.<p>
+
+Generally a line in the configuration file can start with or without a
+<tt>#</tt>. If the line starts with a <tt>#</tt> it is considered to be a comment
+and will be ignored. Otherwise ADOM expects to find something that
+looks like this:
+<pre>
+        &lt;variable&gt; = &lt;value&gt;
+</pre>
+For example a line might contain the following text:
+<pre>
+        Name = 'Big Bang'
+</pre>
+or
+<pre>
+        Recovery = 400
+</pre>
+ADOM recognizes a certain number of variables which have a specific
+meaning. Each variable must have a value of a certain type. Allowed
+types are strings, numbers (only integers) and Boolean values
+('true' and 'false'). Strings which contain whitespace must be
+enclosed by <tt>'</tt> (see above).<p>
+
+ADOM variables also can be set during the game with the <tt>=</tt> command
+which requires the user to enter a line in the format explained above.
+Invalid variables will be highlighted in red color.<p>
+
+<h3 id="S1">ADOM Configuration Option List</h3>
+The following variables are currently recognized:<p>
+
+<h4 id="S11">Allow_Default_Names</h4>
+true, false: allows you to determine whether
+the default names provided by ADOM for you will be used or not if
+you press ENTER when asked to input a name. The default is 'true'.<p>
+
+<h4 id="S12">Auto_Lock_Doors</h4>
+true, false: ADOM will automatically ask you whether you'd like to
+lock a door while closing it, if you have an appropriate key.
+The default is 'true'.<p>
+
+<h4 id="S13">Auto_Lock_Nearest</h4>
+true, false: if set to true, the targeting code (used for missile
+weapons and a few spells) will automatically use the nearest monster
+as the new target, if no monster was locked before. The default is 'true'.<p>
+
+<h4 id="S14">Auto_Open_Doors</h4>
+true, false: will ask automatically whether you want to unlock a
+locked door (if you have the appropriate key). The default is 'true'.<p>
+
+<h4 id="S15">Auto_Pickup</h4>
+string containing the symbols of items chosen from the following
+categories, which are to be picked up whenever you move on a field
+containing items of that type:
+<pre>
+          [  Armor, shields, cloaks, boots, girdles, gauntlets and helmets
+          *  Gems
+          o  Rocks
+          ]  Tools
+          '  Necklaces
+          (  Melee weapons
+          }  Missile weapons
+          /  Missiles
+          =  Rings
+          \  Wands
+          !  Potions
+          ?  Scrolls
+          ~  Bracers
+          %  Food
+          $  Gold
+          {  Instruments
+          "  Books
+</pre>
+
+<div id="S16" class="resb"><h4>Auto_Save_Interval</h4>
+number. Controls auto-saving. After the given number of turns the game
+will be automatically saved. While this slows your game a little when this
+happens it generally reduces the risk of data loss and thus is highly
+recommended. 0 to deactivate, otherwise minimum is 50, maximum is 10000.
+The default is 1000.</div><p>
+
+<h4 id="S17">Auto_Select_Doors</h4>
+true, false: if set to 'false', ADOM won't try to determine the appropriate
+door in the vicinity of your PC when you try to open or close a door. The
+default is 'true'.<p>
+
+<div class="resb">
+<h4 id="S18">Auto_Swap_Neutral</h4>
+true, false: determines if your PC automatically swaps places with neutral
+beings. The default is 'true'.
+</div><p>
+
+<h4 id="S19">Base_Delay_Factor</h4>
+number: determines the number of hundreds of a second ADOM delays
+actions (like two steps for a fireball, etc.). The default is
+10; to prevent input errors ADOM only accept values in the range
+of 0 to 100.<p>
+
+<h4 id="S1a">Check_Item_In_Hand</h4>
+true, false: if set to 'true' you will be asked if you want to wield
+an item other than a pick axe, a torch or a melee weapon. The default
+is 'true'.<p>
+
+<h4 id="S1b">Class</h4>
+string: any of the available classes.<p>
+
+<h4 id="S1c">Class_Mask</h4>
+string consisting of characters chosen from the following list:
+<pre>
+        a - Fighter
+        b - Paladin
+        c - Ranger
+        d - Thief
+        e - Assassin
+        f - Wizard
+        g - Priest
+        h - Bard
+        i - Monk
+        j - Healer
+        k - Weaponsmith
+        l - Archer
+        m - Merchant
+        n - Farmer
+        o - Mindcrafter
+        p - Barbarian
+        q - Druid
+        r - Necromancer
+        s - Elementalist
+        t - Beastfighter
+        u - Chaos Knight
+        v - Duelist
+</pre>
+If you choose to randomly select your class (with the </tt>f</tt>ate option
+during character creation) the classes in 'Class_Mask' won't be
+selected. Thus you can cross out certain classes you do not like.<p>
+
+<h4 id="S1d">Colored_Menus</h4>
+true, false: if set to 'false' you won't have to endure the colored
+menus (and yes, there probably will be configurable colors for the
+menus at some point in the future although it's pretty low priority
+for me). The default is 'true'.<p>
+
+<div class="resb">
+<h4 id="S1e">Colored_Messages</h4>
+true, false: if set to 'true' the output of colored messages and
+additional customizations (like message suppression and replacement)
+is activated. The file 'adom.msg' contains the basic configuration.
+It can be easily enhanced with your own additions (see Appendix E,
+'Message Customization'). The default is 'true'.</div><p>
+
+<h4 id="S1f">Colored_PC</h4>
+true, false: if set to 'false' the player icon <tt>@</tt> will be displayed
+in white &ndash; otherwise the color is dependent on your class. The default
+is 'true'.<p>
+
+<h4 id="S1g">Compact_Kill_List</h4>
+true, false: if set to 'true' the final kill list will be compacted by
+printing more than just one killed monster type per line. The default
+is 'false'.<p>
+
+<div class="resb">
+<h4 id="S1g1">Disable_Network_Access</h4>
+true, false: if you disable network access, ADOM never tries to access
+the network. The default is 'false'.</div><p>
+
+<h4 id="S1h">Display_Key_Code</h4>
+true, false: if set to 'true' you will see the keys you pressed during
+a multi-key command. The default is 'false'.<p>
+
+<div class="resb">
+<h4 id="S1i">Exit_After_Save</h4>
+true, false: determines if ADOM should be exited after the current game
+is saved. If you change the parameter to 'true' you get the behavior
+of ADOM 1.1.1 back. The default is 'false'.</div><p>
+
+<h4 id="S1j">Fast_Missile_Readying</h4>
+true, false: will prompt you whether you want to add a (heap of)
+missiles to your missile slot when the missile slot is empty. The default
+is 'true'.<p>
+
+<h4 id="S1k">Fast_More</h4>
+true, false: if set to 'true' any key will be accepted when the
+'(more)' prompt is displayed; setting this variable to 'true' is
+equivalent to pressing <tt>Ctrl-k</tt> once at the start of the game.
+Speech bubbles are affected by this, too. The default is 'false'.<p>
+
+<h4 id="S1l">Fated_Gender</h4>
+true, false: if set to true, ADOM will select the gender for your character.
+The default is 'false'.<p>
+
+<div class="resb">
+<h4 id="S1l1">Floating_Info</h4>
+true, false: If set to 'true' floating info texts (damage, experience points, state changes, etc.)
+will appear over both the PC and the monsters. The default is 'true'.<p>
+
+<h4 id="S1m">Font_Name</h4>
+string: specifies the name of the font that ADOM will use (only supported
+on Windows and OSX).<p>
+
+<h4 id="S1n">Font_Size</h4>
+number: specifies the size of the font that ADOM will use (only supported
+on Windows and OSX). Minimum is 6, maximum is 144, default is 15.<p>
+
+<h4 id="S1o">Ghosts_Deactivated</h4>
+true, false: if set to 'true', ADOM will not create ghosts during the game
+(player ghosts are only supported by the Deluxe version). The default is 'false'.<p>
+
+<h4 id="S1p">Hide_Info_Boxes</h4>
+true, false: if set to 'true', ADOM will not display any popup info boxes
+for pure textual information (like from the commands <tt>V</tt>, <tt>:b</tt> and others).
+Instead all information will be printed to the normal message buffer.
+IMPORTANT: This setting does not affect input dialogs for numbers, text or
+other y/n choices! Those always are displayed in a popup dialog to prevent
+confusion among users who don't see the input prompt (yes, it happens,
+especially in graphical mode). The default is 'false'.<p>
+
+<h4 id="S1q">Hide_Interruption_Messages</h4>
+true, false: if set to 'true', ADOM will not display the interruption information messages when
+either walk mode or extended waiting are aborted. The default is 'false'.<p>
+
+<h4 id="S1r">Hide_Speech_Bubbles</h4>
+true, false: if set to 'true', ADOM will not display any speech bubbles for dialog with NPCs
+and instead just print the dialog to the normal message buffer. Default is 'false'.
+WARNING: Hidden speech bubbles will sometimes mis-format the output in the message
+line. This setting thus is not recommended and primarily intended for blind ADOM
+players so that they can use the message bar more effectively.
+</div><p>
+
+<h4 id="S1s">Item_Status_Color</h4>
+one of the following constants:
+<pre>
+          blue
+          green
+          cyan
+          red
+          magenta
+          brown
+          light gray
+          dark gray
+          light blue
+          light green
+          light cyan
+          light red
+          light magenta
+          yellow
+          white
+</pre>
+This definition determines the color of inventory entries that have been
+successfully identified. The traditional setting is 'light gray'.<p>
+
+<div class="resb">
+<h4 id="S1t">Look_Auto_Lock_Nearest</h4>
+true, false: if set to 'true', the targeting code (used for the 'l'ook
+command) will automatically use the nearest monster as the new target,
+if no monster was locked before. The default is 'false'.</div><p>
+
+<h4 id="S1u">Low_Hitpoint_Warning</h4>
+true, false: if set to true ADOM will beep (or flash the screen if
+beeping is impossible but flashing is possible on your system) if the
+hitpoints of your character fall below 20% (or 15 &ndash; whichever is
+lower). The default is 'true'.<p>
+
+<h4 id="S1v">Message_Buffer_Size</h4>
+number: describes the size of the message buffer in lines; the
+value is required to be between 50 and 10000. The default size is 100
+lines.<p>
+
+<h4 id="S1w">Metric_Measuring</h4>
+true, false; if set to 'true', your height and weight will be printed
+according to metric units. The default is 'false'.<p>
+
+<h4 id="S1x">Name</h4>
+string: the default name for your PC.<p>
+
+<h4 id="S1y">Nice_Stuff</h4>
+true, false: if set to true the stuff list will display cursed items in
+red and blessed items in green. The default is 'true'.<p>
+
+<div class="resb">
+<h4 id="S1z">No_Book_Spellcasting</h4>
+true, false: if set to true you no longer will be prompted about
+whether to learn a spell from a book or cast it from the book. The default
+is 'false'.</div><p>
+
+<h4 id="S1z1">Persistence</h4>
+number: determines the number of steps that will pass when
+you use the 'walk mode' to search in one place (see -&gt; continuous
+search via <tt>ws</tt>). The default is 50, the minimum is 10
+and the maximum is 500.<p>
+
+<div class="resb">
+<h4 id="S1z2">Prime_Command_Clicks</h4>
+number: determines the number of left mouse clicks required to activate the command
+configured via <tt>:x</tt>. Default is 1, minimum is 1, maximum is 2.<p>
+
+<h4 id="S1z3">Quick_Hint_Limit</h4>
+number: determines the maximum number of times a command must have been
+actively used. When this number is reached, no more quick hints for the command will
+be shown. To deactivate quick hints completely, enter zero (0). In tutorial mode
+quick hints will be always shown, no matter what you enter. Default is 10, minimum is 0,
+maximum is 1 million.
+</div><p>
+
+<h4 id="S1z4">Questioned_Attributes</h4>
+true, false: determines whether the player will be allowed to determine
+the PC attributes by answering questions. The default is 'false'.<p>
+
+<h4 id="S1z5">Quitters_Allowed</h4>
+true, false: if set to 'true' all games in which you quit will also be
+recorded in the highscore. The default is 'false'.<p>
+
+<h4 id="S1z6">Race</h4>
+string: any of the allowed races &ndash; don't forget the <tt>'</tt> for races like High Elf.<p>
+
+<h4 id="S1z7">Race_Mask</h4>
+string consisting of one or more of the following characters:
+<pre>
+        a - Human
+        b - Troll
+        c - High Elf
+        d - Gray Elf
+        e - Dark Elf
+        f - Dwarf
+        g - Gnome
+        h - Hurthling
+        i - Orc
+        j - Drakeling
+        k - Mist Elf
+        l - Ratling
+</pre>
+If you choose to randomly select your race (with the <tt>f</tt>ate option
+during character creation) the races in 'Race_Mask' won't be
+selected. Thus you can cross out certain races you do not like.<p>
+
+<h4 id="S1z8">Random_PC</h4>
+true, false: determines whether a randomly rolled character will be
+used each time you start ADOM. The default is 'false'.<p>
+
+<h4 id="S1z9">Recovery</h4>
+number: determines the number of steps that will pass when
+you use the 'walk mode' to wait in one place. The default is 50,
+the minimum is 10 and the maximum is 500.<p>
+
+<h4 id="S1za">Reload_Missiles</h4>
+true, false: if set to true, ADOM will query you, whether you want to
+equip another missile once you run out of ammunition. The default
+is 'true'.<p>
+
+<div id="S1za1" class="resb"><h4>Repetitive_Drop</h4>
+true, false: if set to 'true', the drop command will return to the drop
+screen after droppping a single item. If set to 'false', drop is stopped
+after a single drop. The default is 'true'.</div><p>
+
+<h4 id="S1zb">Reverse_Message_Order</h4>
+true, false: determines the order in which the messages are displayed
+in the message buffer; true means that the latest messages will be
+displayed at the bottom, false means that the latest messages will be
+displayed at the top. The default is 'true'.<p>
+
+<h4 id="S1zc">Sex</h4>
+male, female.<p>
+
+<h4 id="S1zd">Short_Log_Format</h4>
+string: the string is used by ADOM to create a log file. The string
+contains one character for each set of information to be included in
+the log file. The following options can be used:
+<pre>
+        a: Achievements (attribute changes, &hellip;)
+        b: Background of the PC
+        c: Spells
+        d: PC data (attributes, &hellip;)
+        e: Effects of corruption
+        i: Items in the inventory
+        k: Kill list of the PC
+        l: Skills
+        m: Items in the backpack
+        s: Screenshot
+        w: Weapon skills
+</pre>
+The default is: 'dbim'.<p>
+
+<div id="S1ze" class="resb"><h4>Show_Achievements</h4>
+true, false: if set to 'false' ADOM will not display any achievements
+you get. It still keeps track of them internally. The default is 'true'.<p>
+
+<h4 id="S1zf">Show_Blood</h4>
+true, false: if set to 'true' ADOM will display blood splatters (only
+available in versions with graphic tiles). The default is 'true'.<p>
+
+<h4 id="S1zg">Show_Corruption_Prompt</h4>
+true, false: if set to 'true' ADOM will ask you if you want to view all
+your effects of corruption after you receive a new corruption. The default
+is 'true'.</div><p>
+
+<h4 id="S1zh">Show_Experience</h4>
+true, false: if set to 'true' ADOM will display all experience points the
+PC gains. The default is 'false'.<p>
+
+<div id="S1zi" class="resb"><h4>Show_Newbie_Advice</h4>
+true, false: if set to 'true' ADOM will display some newbie advice during
+character generation. The default is 'true'.<p>
+
+<h4 id="S1zj">Show_Pick_Help</h4>
+true, false: If set to 'true' ADOM will display the elaborate help for
+picking up/dropping items. This takes up four screen lines. Setting it to
+'false' will give you four more lines of screen real estate for items.
+The default is 'true'.<p>
+
+<h4 id="S1zk">Show_Unknown_Commands</h4>
+true, false: If set to 'true' ADOM will display a message whenever it
+receives an unknown game command. The default is 'false'.
+</div><p>
+
+<h4 id="S1zl">Sorted_Skills</h4>
+true, false: if set to 'true' the skill list will be ordered
+alphabetically. The default is 'true'.<p>
+
+<h4 id="S1zm">Starvation_Warning</h4>
+true, false: if set to 'true', ADOM will beep if you are in danger of
+starving. The default is 'true'.<p>
+
+<div class="resb">
+<h4 id="S1zn">Stop_Walking_At_Corners</h4>
+true, false: if set to 'true' your PC will stop at corners if the
+walking mode is used. The default is 'false'.<p>
+
+<h4 id="S1zo">Two_Column_Pick_Drop_Menu</h4>
+true, false: if set to 'true', the default display for pick &amp; drop commands
+(if possible at all) will be two-column format. The default is 'false'.
+</div><p>
+
+<h4 id="S1zp">Uncursed_String</h4>
+string: some people don't seem to like the word 'uncursed' ADOM uses
+to describe an item that is neither cursed nor blessed. You can
+define an alternative by using this environment variable. Be careful
+about what you do since ADOM does not check your definition and using
+'cursed' or 'blessed' is possible, too. Moral: he who confuses
+himself gets what he deserves.<p>
+
+<h4 id="S1zq">Verbose_Level_Messages</h4>
+true, false: if set to 'true', level messages
+will be displayed whenever you enter a special level, otherwise only
+on the first time. The default is 'false'.<p>
+
+<h4 id="S1zr">Verbose_Log_Format</h4>
+string: this string has the same format as 'Short_Log_Format'. ADOM
+internally does not care about the format of the two strings (and
+which one is longer). The intention of these two environment
+variables simply is to allow the user to have two different means of
+creating a logfile. The default is: 'sdbwcleimka'.<p>
+
+<h4 id="S1zs">Walk_Carefully</h4>
+true, false: if set to 'true' ADOM will abort from Walk-Mode as soon
+as you spot a hostile monster. The default is 'true'.<p>
+
+<h4 id="S1zt">Zap_Wands_In_Hand</h4>
+true, false: if set to 'true' ADOM will ask whether to zap wands
+currently equipped in the left or right hand; otherwise such equipped
+wands will be ignored. The default is 'true'.<p>
+
+<h3 id="S2">Default Configuration Creation</h3>
+If you initially do not have a configuration file, ADOM will create one for you.<p>
+
+<h2 id="T">Appendix C: Command Line Options</h2>
+Pure ASCII versions of ADOM (usually DOS or Linux) can be supplied with
+some command-line options to make it do certain things. The following
+command-line options are supported:<p>
+<ul>
+<li><tt>-b</tt>: display the license for the game binary
+<li><tt>-c &lt;file&gt;</tt>: force ADOM to use &lt;file&gt; as configuration file
+<li><tt>-d</tt>: display the directories being used
+<li><tt>-D</tt>: display meta-game data
+<li><tt>-h</tt>: display the available command line options
+<li><tt>--help</tt>: display this help text
+<li><tt>-k</tt>: use the standard keymap
+<li><tt>-l &lt;name&gt;</tt>: load the saved game &lt;name&gt;
+<li><tt>-m</tt>: use monochrome display
+<li><tt>-n</tt>: forbid ADOM to use any configuration file
+<li><tt>-o</tt>: print the used compiler options
+<li><tt>-r</tt>: create keymap reference file 'keyref.kbd'
+<li><tt>-s</tt>: display the complete highscore
+<li><tt>-S</tt>: dump complete highscore to 'hiscore.doc'
+<li><tt>-t&lt;maxnum&gt;</tt>: save RNG test in 'rngtest.txt'
+<li><tt>-T&lt;maxnum&gt;</tt>: save RNG series test in 'rngstest.txt'
+<li><tt>-v</tt>: display the current version of ADOM.
+</ul><p>
+The syntax for calling ADOM with options is:
+<pre>
+         adom [-b] [-c &lt;file&gt;] [-d] [-D] [-h] [--help] [-k] [-l &lt;name&gt;] [-m]
+              [-n] [-o] [-r] [-s] [-S][-t&lt;maxnum&gt;] [-T&lt;maxnum&gt;] [-v]
+</pre>
+Important note: If you have changed the default keymap, but would like
+to have a reference file of the original bindings, you need to call
+ADOM like this:
+<pre>
+         adom -k -r
+</pre>
+(It's important that the <tt>-k</tt> is set before the <tt>-r</tt>!)<p>
+
+<h2 id="U">Appendix D: Customizing the Keymap</h2>
+ADOM allows you to customize the keybindings used during the game for
+invoking commands to a certain extent. When ADOM is started it
+searches for a file called 'adom.kbd' in your data directory (call
+'adom -d' to determine your data directory). This file contains
+a description of its syntax, which should answer all questions.
+Customizing a keymap to a very specific system requires quite
+some work on your side if you want to use special keys and such
+stuff (you will need to know the ASCII codes your system generates
+when a special key is pressed).<p>
+
+Note that customization is possible only to a certain extent.<p>
+
+If you would like to have a printed reference of your own keymap
+bindings at hand, you can enter
+<pre>
+         adom -r
+</pre>
+at your command prompt. This will make ADOM create a file called
+'keyref.kbd', which contains the current bindings and can be printed
+on any line printer. Check it for the details about how to define new
+keybindings.<p>
+
+<div class="resb">
+<h2 id="V">Appendix E: Message Customization</h2>
+Message customization is a new feature available since ADOM 1.2.0.
+(Thanks to the ADOM Sage team for inspiring this feature!)<p>
+
+It allows you to color, replace and suppress messages (i.e. text
+displayed by ADOM). You can also specify messages that will enforce
+a '(more)' prompt after they are shown.<p>
+
+To enable message customization you have to make sure that the ADOM
+variable 'Colored_Messages' is set to 'true' (see Appendix B,
+'Customizing ADOM').<p>
+
+<h3 id="V1">Editing Message Customizations</h3>
+All message customizations are configured in the file 'adom.msg'
+in your data directory. It already contains a useful default
+configuration. You can easily customize it for your own needs.<p>
+
+Lines starting with a <tt>#</tt> are ignored, they are considered comments.
+If a line starts with a <tt>:</tt> it is a directive that influences the
+current state. All other non-empty lines are considered messages that
+have to match the message format used by ADOM. Please note that you
+can match both the input and output format of messages. In case of
+a regular expression you can only use the output format. Currently
+there is no easy way to determine both message formats with ADOM
+itself, so we recommend to use Sage for this task.<p>
+
+You can use the following directives (starting with a <tt>:</tt>):<br>
+<kbd>no_skip, allow_skip, regex, no_regex, replace, suppress</kbd><p>
+
+All colors supported by ADOM can be used as directives too:<br>
+<kbd>black, blue, green, cyan, red, magenta, brown,
+light gray, dark gray, light blue, light green, light cyan,
+light red, light magenta, yellow, white</kbd><p>
+
+Directives are valid until they are changed by another directive,
+e.g. if you use <tt>:yellow</tt> then all messages that follow are colored
+yellow until you (for example) use <tt>:red</tt>.<p>
+
+<h3 id="V2">List of Message Customization Directives</h3>
+A detailed description of the directives:<p>
+
+<h4 id="V21">no_skip</h4>
+If this directive is used, all subsequent messages will need to be
+skipped by explicitly confirming a '(more)' prompt. Use this directive
+to ensure that you don't miss important messages.<p>
+
+<h4 id="V22">allow_skip</h4>
+Deactivates the 'no_skip' directive. This is the default.<p>
+
+<h4 id="V23">regex</h4>
+Message lines have to exactly match the output format of ADOM. If
+you don't know the exact format or if you want to customize several
+similar messages at once, you can use a regular expression. ADOM uses
+POSIX regular expressions, you can check the full specification here:<p>
+
+<a href="http://en.wikipedia.org/wiki/Regular_expression#POSIX_basic_and_extended">http://en.wikipedia.org/wiki/Regular_expression#POSIX_basic_and_extended</a><p>
+
+A <tt>.</tt> matches any character and a <tt>*</tt> matches the preceding character
+zero or more times. Example: You can use <tt>.*ADOM.*</tt> to match all messages that contain the text <tt>ADOM</tt>.<p>
+
+<h4 id="V24">no_regex</h4>
+Disables the use of regular expressions. This is the default.<p>
+
+<h4 id="V25">replace</h4>
+To replace a message you have to add a line that consists of the
+old message followed by a <tt>|</tt> character and followed by the new
+message, e.g.<p>
+<kbd>old message|new messages</kbd><p>
+
+<h4 id="V26">suppress</h4>
+You can suppress messages by adding them after the 'suppress'
+directive. Please note that there is no directive to 'unsuppress'
+messages, so you should move the suppressed messages to the end
+of the file.<p>
+
+<h3 id="V3">Example</h3>
+The following example shows how to display the level advancement
+message of ADOM in yellow. Because 'no_skip' is used, a '(more)'
+prompt will appear afterwards.<p>
+<pre>
+:no_skip
+:yellow
+Congratulations! You advance to level %d.
+</pre><p></div>
+
+<hr>
+</body>
+</html>

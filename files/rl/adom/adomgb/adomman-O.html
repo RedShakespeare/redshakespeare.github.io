@@ -1,0 +1,875 @@
+<html>
+<head>
+<title>ADOM Manual - The Game</title>
+<link rel="stylesheet" type="text/css" href="adomgb-body.css">
+</head>
+<body>
+<h1>ADOM Manual</h1>
+<hr>
+<a href="adomman-N.html">Previous</a> - <a href="adomman-toc.html">TOC</a> - <a href="adomman-P.html">Next</a>
+<hr>
+
+<h2 id="O">The Game</h2>
+ADOM is started by typing<p>
+
+<tt>adom</tt><p>
+
+at your command prompt or by clicking on its icon or launching it via Steam
+(for ADOM Deluxe, see <a href="http://www.adom.de/steam">http://www.adom.de/steam</a>).
+After some moments the game will start.<p>
+
+<h3 id="O1">Starting ADOM Classic</h3>
+After passing the title screen, you will have to choose whether to start a
+new game, restore a saved game or page through this manual.<p>
+
+The restore option will provide you with a list of available saved games
+from which you can restore a game. Please note that you can't restore a
+game when your character died the last time you played (this is a staple of
+roguelike gaming; ADOM Deluxe offers an option to save and restore games
+even after dying).<p>
+
+If you choose to create a new character, ADOM first of all will randomly
+determine your birth date, your star sign and give some details about the
+effects of the events surrounding your birth. Then you will have to decide
+whether to choose a specific class and race to play or whether you want
+ADOM to choose for you. In both cases you will have to determine the gender
+of your character. This has some influence on game play (in ADOM female
+characters are more agile, male characters are slightly stronger). If you
+allow fate to decide the details, ADOM will randomly choose the race and
+profession of your character, otherwise you will be presented with lists
+for both from which you have to choose.<p>
+
+Then you will have to enter a name for the character you are going to play.
+The name has no further influence on game play but serves to individualize
+your character. If you just press ENTER instead of entering a name, the
+game will christen your character with a default name, if the variable
+'Allow_Default_Names' is set to 'true' in 'adom.cfg'.<p>
+
+Next, the background of your character will be described. The game will
+mention your character's sex and race and then detail his life prior to
+starting his adventure. Every character lives through four major phases of
+development: early childhood, childhood, youth and young adulthood. For
+each phase certain events are generated. These events serve to detail your
+PC and influence his attributes. Finally, you will get to know your class,
+your area of specialization (if available) and your starting age.<p>
+
+After all this you will be dumped directly into the game. You are assumed
+to have just entered one of the major valleys in the Drakalor Chain and
+from that point on everything is based on your actions.<p>
+
+<h3 id="O2">Starting ADOM Deluxe</h3>
+ADOM Deluxe always starts in graphical mode (at least until you change the
+settings).<p>
+
+Note that you can switch ASCII and graphical display at any time by
+pressing <tt>F10</tt>.
+
+We recommend using the graphical mode until you feel comfortable with the
+options provided by ADOM Deluxe as there are tons of options and choices
+and these all are documented via tooltips and other means in the graphical
+mode (and we won't repeat that information here).<p>
+
+<h3 id="O3">Important Concepts</h3>
+<h4 id="O31">The ADOM Classic Main Screen</h4>
+Most of the time you will see the main game screen, which contains most of
+the interesting information about your character, your surroundings and
+your condition.<p>
+
+The following sample shows how a game screen might look:
+<pre>
+The skeleton fails to hurt you.
+
+
+                                   ################
+                                   #..../.%.......#    #########
+                                   #.####.........######.......#
+  #########                        #.#  #............../.......#
+  #.......###                      #.#  ########/#######.......#
+  #......./.#############          #.#         #.#     #########     #######
+  #.......#./...........############.###########.#####################.....#
+  ####.######.............^..z@............................................#
+     #.#    #....<......############.###########.#####################.....#
+     #.#    #...........#          #.#   #######/#                   #.....#
+     #.#    ##/##########          #.#   #.......#                   #.#####
+     #.#     #.#                   #.#   #.......#                   #.#
+     #.#    ##/############        #.#   #.......#                   #.#
+  ####/#### #......^......#    #####/### #########                   #.#
+  #.......# #.....###.....#    #.......###############################.#
+  #.>.....# #.....# #.....#    #......./...............................#
+  #.......# #.....# #######    #.......#################################
+  ######### #######            #########
+
+Geffrey      St:19  Le: 9  Wi:14  Dx:12  To:22  Ch: 8  Ap: 8  Ma:11  Pe:15 N=
+DV/PV: 10/4  H: 27(27)       P: 3(3)        Exp: 1/139         D: 1  Sp: 100
+</pre>
+
+The first two lines of the screens are reserved for messages which explain
+certain events and actions. If more text is issued than fits into those two
+lines, a (more) prompt will appear. To continue you have to press <tt>SPACE</tt> (or
+<tt>Z</tt>). If you are expecting many messages in one turn which you don't want to
+read, you also can press <tt>ENTER</tt>. All messages will scroll through without
+waiting for a confirmation. If you want to look at one of those messages
+later, you can still use the <tt>:m</tt> command (see below).<p>
+
+The last three lines contain information about your character in the
+following order:<p>
+<ul>
+<li>Name: Let's guess what this is :-)
+<li><tt>St: </tt>The strength score of your character.
+<li><tt>Le: </tt>The learning score of your character.
+<li><tt>Wi: </tt>The willpower score of your character.
+<li><tt>Dx: </tt>The dexterity score of your character.
+<li><tt>To: </tt>The toughness score of your character.
+<li><tt>Ch: </tt>The charisma score of your character.
+<li><tt>Ap: </tt>The appearance score of your character.
+<li><tt>Ma: </tt>The mana score of your character.
+<li><tt>Pe: </tt>The perception score of your character.
+<li><tt>DV: </tt>The defensive value of your character.
+<li><tt>PV: </tt>The protection value of your character.
+<li><tt>H: </tt>The hit points of your character.
+<li><tt>P: </tt>The magical power points of your character.
+<li><tt>Exp:</tt> The experience you have to collected up to now and your
+experience level. The second number stands for the number of
+experience points you already have earned, the first number
+describes your current experience level.
+<li><tt>D: </tt>A letter shortcut for the current dungeon followed (usually) by the
+number of the current dungeon level.
+<li><tt>Sp: </tt>The speed value of your character. Optionally the number of
+turns that have passed, the energy cost of last action, the amount of readied ammunition
+or the amount of gold pieces can be displayed in this area.
+<li>A sequence of up to two characters describing your alignment (more
+about this in the section on alignment).
+</ul><p>
+
+All lines between these two screen parts are used to display the map of the
+current dungeon level or wilderness area (as far as you have explored it).
+Specific characters are used to represent items, monsters, locations, and
+other stuff.<p>
+
+<h4 id="O32">The ADOM Deluxe Main Screen</h4>
+The ADOM Deluxe main screen uses a graphical head up display (HUD) at the
+top, a command icon system to the right and a message area at the bottom
+left to display all important information. Additionally a mini-map is
+displayed in various locations.<p>
+
+You can use the mouse to hover over most of those areas. A tooltip will
+show up if the element is clickable. The tooltip will show:<p>
+<ul>
+<li>detail information about the content of the element underneath the mouse cursor
+<li>click hints pointing towards the effects of left- or right-clicking on the given element
+</ul><p>
+
+Noe that you also can hover over map positions. After a brief moment a
+tooltip will be displayed giving detail information about the content of
+the tile underneath (e.g. item, monster, tile and feature information). If
+a monster is located beneath the mouse cursor you can click on the monster
+icon in the tooltip to call upon the monster memory of your player
+character (see the explanations in the section below).<p>
+
+The HUD contains the following elements from left to right (and if you
+can't see all of them you either should increase the size of your ADOM game
+window or your screen resolution &ndash; the HUD works best with a resolution of
+at least 1900 pixels horizontically):<p>
+<ul>
+<li>The name of the character
+<li>The experience level of the character. A bar underneath the level shows
+  your progress to advancing to the next level based on the number of
+  experience points you have collected so far.
+<li>The hit points (life energy) of your character.
+<li>The power points (magical energy) of your character.
+<li>DV: The defensive value of your character. And stacked underneath it&hellip;
+<li>PV: The protection value of your character.
+<li>St: The strength score of your character.
+<li>Le: The learning score of your character.
+<li>Wi: The willpower score of your character.
+<li>Dx: The dexterity score of your character.
+<li>To: The toughness score of your character.
+<li>Ch: The charisma score of your character.
+<li>Ap: The appearance score of your character.
+<li>Ma: The mana score of your character.
+<li>Pe: The perception score of your character.
+<li>A letter shortcut for the current dungeon followed (usually) by the
+number of the current dungeon level. And stacked underneath it&hellip;
+<li>A sequence of up to two characters describing your alignment (more about
+this in the section on alignment).
+<li>The speed value of your character. Other values can be displayed here
+(see the section on the 'Dynamic Display' for more details about this).
+And stacked underneath it&hellip;
+<li>The number of gold pieces currently carried by the player character.
+</ul><p>
+
+The icons on the right side are context-dependent and can be clicked
+(always left-clicked and sometimes right-clicked). Make yourself familiar
+with those icons (and observe changes as you move around) by closely
+looking at the provided tooltips.<p>
+
+The mini map gives an overview of the complete map (as depending on your
+monitor resolution only a part of the full map is shown). You can click on
+the mini map in order to navigate to currently invisible areas.<p>
+
+Note that the whole map areas is clickable:<p>
+<ul>
+<li>Left-clicking on a location usually will move your character to that location.
+<li>Left-clicking on a monster usually will attack that monster (either with a missile attack or in melee).
+<li>Right-clicking on locations will open a context menu with all relevant options.
+</ul><p>
+
+Sometimes special icons and quick hints will be displayed in the upper
+right corner. Special icons point towards hunger, poisoning and other
+effects (and some of them are clickable, too, e.g. to consume food when
+hungry).<p>
+
+Finally take note of the mouse cursor: it changes in order to hint at the
+left-click activity that will be executed when clicking on a specific
+locations.<p>
+
+<h3 id="O4">Quick Hints</h3>
+Quick hints point towards special commands (and the keys to be entered to
+activate them) which might be helpful in the current context. If you
+dislike the quick hints you can disable them by pressing <tt>=</tt> and setting
+the 'Quick_Hint_Limit' to zero).<p>
+
+In ASCII mode quick hints are displayed as far away from the PC as possible
+(in order to not obscure the map). In tiled mode they always are displayed
+in the top right corner.<p>
+
+Note that quick hints also disappear after playing for a while: when a
+command has been activated 10 or more times with the key combination shown
+by a quick hint, said quick hint no longer is available (as ADOM assumes
+that you have memorized the given command). You can configure the number of
+activations required by the 'Quick_Hint_Limit' as explained at the start of
+this section.<p>
+
+<h3 id="O5">The Display</h3>
+<h4 id="O51">The ASCII Display</h4>
+During game play everything you encounter is represented by certain symbols
+on the map. Symbols are simple colored characters. Some symbols have more
+than one meaning. This section explains the various symbols and their
+potential meanings.<p>
+
+<table border=1>
+<tr><th colspan=4>Map Symbols (dungeon)
+<tr><td><tt>#</tt><td>Rock or wall<td><tt>=</tt><td>Water
+<tr><td><tt>/</tt><td>Open door<td><tt>T</tt><td>Tree
+<tr><td><tt>+</tt><td>Closed door<td><tt>0</tt><td>Pool or hive
+<tr><td><tt>.</tt><td>Floor, passage, tunnel<td><tt>+</tt><td>Tombstone
+<tr><td><tt>&amp;</tt><td>Forge or lever<td><tt>|</tt><td>Webs
+<tr><td><tt>&lt;</tt><td>Stair leading upwards<td><tt>&gt;</tt><td>Stair leading downwards
+<tr><td><tt>_</tt><td>Altar <td><tt>*</tt><td>Hole
+<tr><td><tt>^</tt><td>Known trap<td><tt>8</tt><td>Gate
+<tr><td><tt>"</tt><td>Herbs<td colspan=2>&nbsp;
+</table><p>
+
+<table border=1>
+<tr><th colspan=4>Map Symbols (wilderness)
+<tr><td><tt>^</tt><td>Mountains <td><tt>.</tt><td>Road
+<tr><td><tt>~</tt><td>Hills <td><tt>=</tt><td>Water
+<tr><td><tt>&amp;</tt><td>Forest<td><tt>*</tt><td>Entrance
+<tr><td><tt>"</tt><td>Plains or Swamp<td><tt>o</tt><td>Buildings
+<tr><td><tt>+</tt><td>Graveyard<td colspan=2>&nbsp;
+</table><p>
+
+<table border=1>
+<tr><th colspan=4>Item Symbols
+<tr><td><tt>[</tt><td>Protective gear, shields<td><tt>\</tt><td>Wands
+<tr><td><tt>'</tt><td>Necklaces<td><tt>?</tt><td>Scrolls
+<tr><td><tt>(</tt><td>Hand weapons<td><tt>]</tt><td>Tools
+<tr><td><tt>}</tt><td>Missile weapons<td><tt>~</tt><td>Bracers
+<tr><td><tt>*</tt><td>Rocks or gems<td><tt>%</tt><td>Food or corpses
+<tr><td><tt>/</tt><td>Missiles<td><tt>$</tt><td>Gold
+<tr><td><tt>=</tt><td>Rings<td><tt>{</tt><td>Music instruments
+<tr><td><tt>"</tt><td>Books<td><tt>!</tt><td>Potions
+</table><p>
+
+Monsters are grouped into specific categories to make it easier to
+distinguish them. The following scheme is used (with some
+exceptions):<p>
+
+<table border=1>
+<tr><th colspan=4>Monster Symbols
+<tr><td><tt>a</tt><td>Ants<td><tt>A</tt><td>Aquatic beings
+<tr><td><tt>b</tt><td>Bees<td><tt>B</tt><td>Bats
+<tr><td><tt>c</tt><td>Centipedes<td><tt>C</tt><td>Chaos creatures
+<tr><td><tt>d</tt><td>Dogs &amp; other canines<td><tt>D</tt><td>Dragons
+<tr><td><tt>e</tt><td>magical Eyes<td><tt>E</tt><td>Elementals
+<tr><td><tt>f</tt><td>Felines<td><tt>F</tt><td>Fantastic beasts
+<tr><td><tt>g</tt><td>Grungy humanoids<td><tt>G</tt><td>Ghosts
+<tr><td><tt>h</tt><td>Humanoids<td><tt>H</tt><td>giant Humanoids
+<tr><td><tt>i</tt><td>Insects<td><tt>I</tt><td>Imps &amp; other minor demons
+<tr><td><tt>j</tt><td>Jellies &amp; oozes<td><tt>J</tt><td>(unused)
+<tr><td><tt>k</tt><td>Kobolds<td><tt>K</tt><td>berserKers &amp; barbarians
+<tr><td><tt>l</tt><td>Lizards<td><tt>L</tt><td>Liches
+<tr><td><tt>m</tt><td>Mimics<td><tt>M</tt><td>Minotaurs
+<tr><td><tt>n</tt><td>(unused)<td><tt>N</tt><td>Natural beasts
+<tr><td><tt>o</tt><td>Orcs<td><tt>O</tt><td>Ogres
+<tr><td><tt>p</tt><td>Pixies &amp; quicklings<td><tt>P</tt><td>Plants
+<tr><td><tt>q</tt><td>(unused)<td><tt>Q</tt><td>(unused)
+<tr><td><tt>r</tt><td>Rodents<td><tt>R</tt><td>Rust monsters
+<tr><td><tt>s</tt><td>Snakes<td><tt>S</tt><td>Spiders
+<tr><td><tt>t</tt><td>Townsfolk<td><tt>T</tt><td>Trolls
+<tr><td><tt>u</tt><td>Underdark humanoids<td><tt>U</tt><td>Unicorns
+<tr><td><tt>v</tt><td>(unused)<td><tt>V</tt><td>Vortices
+<tr><td><tt>w</tt><td>Worms<td><tt>W</tt><td>Wyrms
+<tr><td><tt>x</tt><td>grues<td><tt>X</tt><td>eXtra-planar beings
+<tr><td><tt>y</tt><td>(unused)<td><tt>Y</tt><td>constructs
+<tr><td><tt>z</tt><td>Zombies &amp; other lesser undead<td><tt>Z</tt><td>greater undead
+<tr><td><tt>&amp;</tt><td>greater demons <td><tt>@</tt><td>(demi-)humans
+<tr><td><tt>[</tt><td>animated armor <td><tt>*</tt><td>will o'wisp
+</table><p>
+
+<h4 id="O52">The Tiled Display</h4>
+The graphical tile display uses beautiful images to represent the map, all
+monsters, items and features. Take care to notice special messages for
+small icons on the ground!<p>
+
+<h3 id="O6">The Monster Memory</h3>
+One of the utilities provided by ADOM is the so-called monster memory. This
+utility helps the player to memorize useful monster data, like monster DV
+and PV, average hit points, number of attacks, average damage, and special
+powers. The monster memory can be invoked in two ways: either you <tt>l</tt>ook
+around and demand more information upon looking at a monster or you invoke
+the <tt>&</tt> command and enter the name of a specific monster race (e. g.
+'goblin' or 'white baby dragon'). If you have encountered the monster
+before, you will receive information based upon your observations. This can
+be as little as the physical description to as much as complete data about
+the combat stats and powers of a monster.<p>
+
+It is important to note that the monster memory takes into account the
+abilities of your character. Based upon his Learning score, his Perception
+score and some skills, it is more or less likely that the character will
+learn something from his observations. This also means that your character
+might mistake powers for something else. If a monster resists a fireball
+due to its innate magic resistance the character still will believe that
+the monster is immune to fire (just to name on example). Only later
+experiences will remedy this observation.<p>
+
+Additionally, the monster memory is not persistent. Between two games (that
+is: from one character to the next) it will get erased. This is so
+(compared to other games, which keep such a memory) because monsters in
+ADOM are pretty dynamic. They have varying levels and can gain experience
+like the PC. This effectively means that a monster can be very different
+between two games. Since observations thus are very subjective, it would be
+pretty misleading to keep such data between two games. It is my firm belief
+that the monster memory should serve to mirror the observations of the
+actual character and not those of the player. If you want to have a hint
+through, use some sheets of paper and a pen (or pencil).<p>
+
+<h3 id="O7">The Player Character Screen</h3>
+ADOM provides a screen with most of the important statistics you might want
+to know about your PC. Usually (as per default command set) this screen is
+invoked by pressing <tt>@</tt>. The PC screen is divided into several parts
+dedicated to certain aspects of the PC.<p>
+
+The upper left half of the screen is dedicated to the attribute scores of
+your PC. It lists all the attribute names in the first column (in yellow,
+if not yet maxed out or in brown if maxed out in the natural way), followed
+by the current unmodified attribute score. The next column lists the
+natural maximums for the attribute scores. They can be raised by long and
+hard training, but usually only magic will be of quick help when trying to
+pass these limits. (See the section on attributes for more details.) The
+next column displays temporary attribute bonuses (e.g. from certain
+potions), followed by a column listing special bonuses (e.g. due to magical
+items). The last column shows the total score for each attribute. If your
+attribute score is raised, it will be displayed in green; if it's lowered
+by some means, it will be displayed in red; if it's equal to the maximum
+score possible, it will be displayed in brown. In all other cases yellow is
+used.<p>
+
+The upper right half of the screen contains a list of miscellaneous data.
+First you'll see the current speed value. If you also enjoy a temporary
+speed bonus, it will be displayed in square brackets. This is followed by a
+verbal approximation of that value. Then the screen lists your current
+financial status, potential debts, the name of your deity, and the elapsed
+amount of game time. The next entries are concerned with your omens of
+birth and star sign. First you'll see the number of the day on which you
+were born in the Ancardian year followed by your star sign. Then you'll see
+the <b>current</b> month in the game (both by number and by name). The next line
+describes the <b>current</b> day in the game, both by its number in the current
+month and by its absolute number in the current game year (so that you can
+compare it to your birthday). Finally, the state of the moon (full, new,
+waxing, waning) will be described. The last entry in that section displays
+the age of your character.<p>
+
+In the middle of the screen you'll see the encumbrance data for your PC. In
+order, you'll see the current encumbrance, the minimum encumbrance to be
+considered burdened and the respective minimum levels for being considered
+strained and very strained.<p>
+
+Below this, you'll see the data for melee combat, kicking, and missile
+combat.<p>
+
+<h3 id="O8">Standard Commands</h3>
+During game play, commands are issued by pressing one or more keys.
+Whenever you find a description like <tt>Ctrl+x</tt> you are expected to press the
+Control-key and the key <tt>x</tt> at the same time to invoke the corresponding
+command. The same holds true for the <tt>Alt+x</tt> notation although you have to
+press Alt instead of Ctrl.<p>
+
+The following default commands are normally available:<p>
+
+<table border=1>
+<tr><th width="55px">Command<th>Meaning
+<tr><td><tt>Ctrl+t</tt>          <td>Activate trap
+<tr><td><tt>a</tt>          <td>Apply skill
+<tr><td><tt><</tt>          <td>Ascend stair/Leave location
+<tr><td><tt>Z</tt>          <td>Cast spell
+<tr><td><tt>C</tt>          <td>Chat with monster
+<tr><td><tt>H</tt>          <td>Change highlight mode
+<tr><td><tt>T</tt>          <td>Change tactic
+<tr><td><tt>L</tt>          <td>Check literacy
+<tr><td><tt>E</tt>          <td>Clean ears
+<tr><td><tt>c</tt>          <td>Close door
+<tr><td><tt>ws</tt>          <td>Continuous search for hidden stuff
+<tr><td><tt>(</tt>          <td>Create short character logfile
+<tr><td><tt>)</tt>          <td>Create verbose character logfile
+<tr><td><tt>[</tt>          <td>Create screenshot
+<tr><td><tt>></tt>          <td>Descend stair/Enter location
+<tr><td><tt>!</tt>          <td>Dip (something) into (potion)
+<tr><td><tt>:T</tt>          <td>Display available talents
+<tr><td><tt>A</tt>          <td>Display and quick-mark skills
+<tr><td><tt>B</tt>          <td>Display background
+<tr><td><tt>:b</tt>          <td>Display burden levels
+<tr><td><tt>\</tt>          <td>Display chaos powers
+<tr><td><tt>Alt+q</tt>          <td>Display character information
+<tr><td><tt>@</tt>          <td>Display character information
+<tr><td><tt>:c</tt>          <td>Display companions
+<tr><td><tt>$</tt>          <td>Display wealth, manage debts and pay items
+<tr><td><tt>:g</tt>          <td>Display name of your deity
+<tr><td><tt>Ctrl+e</tt>          <td>Display elapsed game time
+<tr><td><tt>/</tt>          <td>Display identified items
+<tr><td><tt>K</tt>          <td>Display kick statistics
+<tr><td><tt>:k</tt>          <td>Display killed monsters
+<tr><td><tt>:l</tt>          <td>Display level map without monsters or items
+<tr><td><tt>Alt+l</tt>          <td>Display level map without monsters or items
+<tr><td><tt>:m</tt>          <td>Display message buffer
+<tr><td><tt>M</tt>          <td>Display missile statistics
+<tr><td><tt>:h</tt>          <td>Display previous hints
+<tr><td><tt>Ctrl+h</tt>          <td>Display previous hints
+<tr><td><tt>q</tt>          <td>Display quest status
+<tr><td><tt>R</tt>          <td>Display recipes
+<tr><td><tt>x</tt>          <td>Display required experience
+<tr><td><tt>Alt+z</tt>          <td>Display learned spells
+<tr><td><tt>::</tt>          <td>Display talents
+<tr><td><tt>Alt+t</tt>          <td>Display talents
+<tr><td><tt>V</tt>          <td>Display version
+<tr><td><tt>Ctrl+w</tt>          <td>Display weapon skills
+<tr><td><tt>W</tt>          <td>Display weapon statistics
+<tr><td><tt>:W</tt>          <td>Display weather information
+<tr><td><tt>:w</tt>          <td>Display weather information
+<tr><td><tt>D</tt>          <td>Drink
+<tr><td><tt>d</tt>          <td>Drop something
+<tr><td><tt>Ctrl+d</tt>          <td>Drop a preselected set of items
+<tr><td><tt>e</tt>          <td>Eat
+<tr><td><tt>0</tt>          <td>Explore unknown areas
+<tr><td><tt>-</tt>          <td>Explore unknown areas
+<tr><td><tt>w?</tt>          <td>Explore unknown areas
+<tr><td><tt>:d</tt>          <td>Drop a category of items
+<tr><td><tt>U</tt>          <td>Use item in backpack
+<tr><td><tt>g</tt>          <td>Give item to monster
+<tr><td><tt>wm</tt>          <td>Go attack closest monster
+<tr><td><tt>wi</tt>          <td>Go to closest item(s)
+<tr><td><tt>w_</tt>          <td>Go to closest altar
+<tr><td><tt>w&amp;</tt>          <td>Go to closest forge
+<tr><td><tt>w*</tt>          <td>Go to position
+<tr><td><tt>w&lt;</tt>          <td>Go up or exit
+<tr><td><tt>w&gt;</tt>          <td>Go down or enter
+<tr><td><tt>h</tt>          <td>Handle something
+<tr><td><tt>i</tt>          <td>Inventory
+<tr><td><tt>Ctrl+i</tt>          <td>Invoke mindcraft
+<tr><td><tt>Ctrl+o</tt>          <td>Issue order to companion
+<tr><td><tt>k</tt>          <td>Kick
+<tr><td><tt>l</tt>          <td>Look (Examine environment)
+<tr><td><tt>=</tt>          <td>Manage configuration variables
+<tr><td><tt>1</tt>          <td>Move to the southwest
+<tr><td><tt>Cursor-Down</tt>     <td>Move to the south
+<tr><td><tt>2</tt>          <td>Move to the south
+<tr><td><tt>3</tt>          <td>Move to the southeast
+<tr><td><tt>Cursor-Left</tt>     <td>Move to the west
+<tr><td><tt>4</tt>          <td>Move to the west
+<tr><td><tt>Cursor-Right</tt>    <td>Move to the east
+<tr><td><tt>6</tt>          <td>Move to the east
+<tr><td><tt>7</tt>          <td>Move to the northwest
+<tr><td><tt>Cursor-Up</tt>       <td>Move to the north
+<tr><td><tt>8</tt>          <td>Move to the north
+<tr><td><tt>9</tt>          <td>Move to the northeast
+<tr><td><tt>n</tt>          <td>Name monster/yourself
+<tr><td><tt>Enter</tt>          <td>Act reasonably
+<tr><td><tt>?</tt>          <td>Online help
+<tr><td><tt>o</tt>          <td>Open door
+<tr><td><tt>,</tt>          <td>Pick up items
+<tr><td><tt>p</tt>          <td>Pick up items
+<tr><td><tt>Ctrl+p</tt>          <td>Pick up items comfortably
+<tr><td><tt>_</tt>          <td>Pray
+<tr><td><tt>Q</tt>          <td>Quit game
+<tr><td><tt>r</tt>          <td>Read
+<tr><td><tt>&</tt>          <td>Recall monster memory
+<tr><td><tt>'</tt>          <td>Repeat last command
+<tr><td><tt>O</tt>          <td>Sacrifice
+<tr><td><tt>S</tt>          <td>Save game
+<tr><td><tt>s</tt>          <td>Search for hidden objects & features
+<tr><td><tt>F1</tt>          <td>Set tactics to 'berserker'
+<tr><td><tt>F2</tt>          <td>Set tactics to 'very aggressive'
+<tr><td><tt>F3</tt>          <td>Set tactics to 'aggressive'
+<tr><td><tt>F4</tt>          <td>Set tactics to 'normal'
+<tr><td><tt>F5</tt>          <td>Set tactics to 'defensive'
+<tr><td><tt>F6</tt>          <td>Set tactics to 'very defensive'
+<tr><td><tt>F7</tt>          <td>Set tactics to 'coward'
+<tr><td><tt>:S</tt>          <td>Set the auto-save interval
+<tr><td><tt>t</tt>          <td>Shoot/Throw missile
+<tr><td><tt>I</tt>          <td>Stuff (backpack)
+<tr><td><tt>:s</tt>          <td>Swap position with monster
+<tr><td><tt>Ctrl+s</tt>          <td>Swap position with monster
+<tr><td><tt>Ctrl+a</tt>          <td>Switch auto-pickup on/off
+<tr><td><tt>:t</tt>          <td>Switch the dynamic display
+<tr><td><tt>Ctrl+k</tt>          <td>Switch the required (more) & speech bubble key
+<tr><td><tt>Ctrl+l</tt>          <td>Lock/Unlock door
+<tr><td><tt>u</tt>          <td>Use item in inventory
+<tr><td><tt>Ctrl+x</tt>          <td>Use class power
+<tr><td><tt>m</tt>          <td>Use special ability
+<tr><td><tt>Ctrl+u</tt>          <td>Use item in tool slot
+<tr><td><tt>v</tt>          <td>View all important PC data
+<tr><td><tt>Ctrl+c</tt>          <td>View challenge mode setup
+<tr><td><tt>5</tt>          <td>Wait
+<tr><td><tt>.</tt>          <td>Wait
+<tr><td><tt>w1</tt>          <td>Walk to the southwest
+<tr><td><tt>wCursor-Down</tt>    <td>Walk to the south
+<tr><td><tt>w2</tt>          <td>Walk to the south
+<tr><td><tt>w3</tt>          <td>Walk to the southeast
+<tr><td><tt>wCursor-Left</tt>    <td>Walk to the west
+<tr><td><tt>w4</tt>          <td>Walk to the west
+<tr><td><tt>w.</tt>          <td>Extended wait
+<tr><td><tt>w5</tt>          <td>Extended wait
+<tr><td><tt>wCursor-Right</tt>   <td>Walk to the east
+<tr><td><tt>w6</tt>          <td>Walk to the east
+<tr><td><tt>w7</tt>          <td>Walk to the northwest
+<tr><td><tt>wCursor-Up</tt>      <td>Walk to the north
+<tr><td><tt>w8</tt>          <td>Walk to the north
+<tr><td><tt>w9</tt>          <td>Walk to the northeast
+<tr><td><tt>F</tt>          <td>Wipe face
+<tr><td><tt>z</tt>          <td>Zap wand, staff or other item
+</table><p>
+
+<h3 id="O9">Special Commands in ADOM Deluxe</h3>
+The following extra commands are only available in ADOM Deluxe:<p>
+
+<table border=1>
+<tr><th width="55px">Command<th>Meaning
+<tr><td><tt>Ctrl+nx</tt><td>Activate NotEye expert configuration menu
+<tr><td><tt>Ctrl+nvm</tt><td>Change music volume
+<tr><td><tt>Ctrl+nvs</tt><td>Change sound volume
+<tr><td><tt>Ctrl+nd</tt><td>Switch display mode
+<tr><td><tt>Alt+Enter</tt><td>Switch fullscreen mode
+<tr><td><tt>F10</tt><td>Toggle Tile/ASCII display
+</table><p>
+
+For details about the dynamic display see the end of this section.<p>
+
+In the game you will encounter multiple screens containing tables, lists,
+etc. Whenever you are given the choice to get out of one of those screens
+by pressing the <tt>Z</tt> key, you can also press the space bar. The <tt>Z</tt> key is
+always listed in the help lines because of historical reasons (and because
+it's easier to display than the <tt> </tt> ;-)
+
+It is possible to redefine the keybindings (see the appropriate section of
+the manual for details).<p>
+
+<h3 id="Oa">Movement</h3>
+You can move into eight directions by pressing the respective number key
+displayed in the following movement grid:
+<pre>
+                             7  8  9
+                               \|/
+                             4 -5- 6
+                               /|\
+                             1  2  3
+</pre>
+To attack a monster, simply try to move into the field the monster is
+standing on. This will result in a melee attack.<p>
+
+If you opt for faster movement you can activate the so-called 'walk-mode'
+by pressing <tt>w</tt> followed by a direction key. This will make your character
+walk into the chosen direction until he meets something of interest.
+Movement will cease as soon as one of the following things happens:<p>
+<ul>
+<li>Your direction of choice is blocked.
+<li>A monster appears in your immediate vicinity.
+<li>Items are lying at your current position.
+<li>Something special (e.g. a stairway) is located at your current position.
+<li>A move will bring you into the immediate vicinity of a monster.
+<li>You are stunned, confused or blinded.
+<li>Your hunger status changes.
+<li>You are bleeding, sick or poisoned.
+</ul><p>
+
+Generally, activating 'walk-mode' is a good way to cover long distances
+which have been explored before. To make full use of the vast array of
+available tactical options, you should not use 'walk-mode' when exploring
+unknown locations.<p>
+
+Walk-mode also allows the character to wait in place (e.g. to regenerate
+lost hit points or power points). Just press <tt>w</tt> for walk-mode and the <tt>5</tt>
+for waiting in place. Walk-mode will abort if a monster enters your
+immediate vicinity, your equipment weight or your hunger level changes or
+50 turns have gone by.<p>
+
+If you are using the numeric keypad remember to press <tt>NUM LOCK</tt>.<p>
+
+<h3 id="Ob">Speed</h3>
+Actions in real life rarely are synchronous. Beings rather act
+individually, move with different speed and are either slower or faster
+than others. ADOM simulates this by using a 'speed system'. The core notion
+of this system is that every character and monster has to collect a certain
+amount of energy to be able to act. Some beings are able to gather this
+energy faster and thus can act at higher speed, others gain this energy
+more slowly and thus act in a slower way.<p>
+
+To be able to act once in ADOM your character needs to accumulate at least
+1000 energy points. Every acting being has a 'speed value' and a current
+energy rating. ADOM divides each player turn into a number of segments. In
+each segment every being on the current level adds its speed value to its
+current energy. Each being that passes the '1000 energy minimum' with its
+current energy value is allowed to act. Afterwards the current energy
+rating is reduced by 1000 (in most cases).<p>
+
+All Player Characters start with a basic speed value of 100 which basically
+means that they can act once every 10 segments. This rating can be modified
+by class (monks and beastfighters get faster with more experience),
+dexterity (a score of 17 or higher can be helpful), encumbrance level (the
+more you are encumbered the slower you get), alcohol level (being drunk is
+not a good idea in all cases), satiation level (a full stomach makes you
+move slower&hellip; starving doesn't help either), your Athletics skill, and
+special items. Being born under the sign of the Raven also helps.<p>
+
+Your energy can never be lower than 1 (although this spells certain doom)
+and is not limited by any value. The only limit is that you can act only
+once per segment (even speed scores of 2000+ can't help in this respect&hellip;
+although they are impossible to attain in any case).<p>
+
+Most monsters also have a base speed value of 100, although there are
+exceptions. Be prepared to face changing speed monstrosities occasionally.<p>
+
+Finally you need to understand that some items don't increase your overall
+speed score but might limit the energy costs for certain actions (e.g.
+seven league boots could require you to expend but 500 energy points to be
+able to move &ndash; thus you could move faster, but all other actions would be
+carried out at normal speed). This is also true for weapon skills which are
+able to reduce the amount of energy required to stage an attack (see the
+section on weapon skills for details).<p>
+
+SPECIAL NOTE: If you are setting your tactics level to 'coward' and then
+simply move around without attacking anything, such a move only costs 800
+energy points <b>if</b> your hit points are reduced to one-third their starting
+value or below (panic does that to you &ndash; and since ADOM basically is a
+heroic game we'll ignore other wound effects). Remember this when you try
+to run away!<p>
+
+<h3 id="Oc">The Dynamic Display</h3>
+The dynamic display is used to present detailed information about the
+actions of the player. It either can display one of the following pieces of
+information:<p>
+<ul>
+<li>the current number of moves executed by the player (an internal game counter)
+<li>the current speed value of the PC
+<li>the energy cost of the last action executed by the PC
+<li>the number of gold pieces carried by the PC or
+<li>the remaining number of missiles in the quiver of the PC
+</ul><p>
+
+By default the current speed value is displayed.<p>
+
+Note that the 'energy cost for the last action' display option does not
+necessarily show the expected value for energy costs below 1000. This is so
+because ADOM's internal rating system for action costs relies on relative
+measurements (e.g. if your potion of speed results in an 800 energy point
+cost for movement and due to your class you also would be able to move for
+800 energy points, this is scaled to a cost of 100000 / {100 + [(100000 /
+800) - 100] * 2} = 666 energy points). If you don't understand the formula,
+simply look at the source code. ;-) Not understanding it is <b>not</b> a sign of
+being stupid ;-))<p>
+
+<h3 id="Od">Dice</h3>
+Roleplaying games mostly use dice to generate random events. Paper games
+rely on several kinds of dice &ndash; most often 4-, 6-, 8-, 10-, 12- and
+20-sided dice are used. Computers are not limited by arbitrary die forms
+and thus enjoy the freedom to use any kind of dice imaginable as a random
+number generator.<p>
+
+Roleplayers use an abbreviated way of describing the number of dice to be
+rolled to generate a random number. Basically a certain number of dice is
+rolled, all the face values are added and maybe a modifier is added or
+subtracted to generate a total. This is normally abbreviated as
+<pre>
+                        {x}d{y}+{z}
+</pre>
+and means to roll {x} dice with {y} faces and finally to add the value {z}.
+{z} can be positive or negative. If {z} is not mentioned, it is assumed to
+be zero.<p>
+
+EXAMPLES: 1d20 means to roll one 20-sided die to generate a number between
+1 and 20. 2d6 means to roll two 6-sided dice to generate a number between 2
+and 12. 4d4+3 means to roll four 4-sided dice and finally add 3 to generate
+a number between 7 and 19. 3d13-9 means to roll three 13-sided dice and
+subtract 9 to generate a number between -6 and 30.<p>
+
+<h3 id="Oe">The Inventory &amp; Item Descriptions</h3>
+<h4 id="Oe1">The Inventory</h4>
+Every PC normally carries quite a number of items &ndash; some of them belong to
+the initial equipment, others are found during the adventure.<p>
+
+All items worn or equipped are displayed upon pressing the <tt>i</tt> key. If you
+want to change your equipment (either by wearing an additional item or by
+removing an item currently used) you simply need to press the letter
+preceding the body part in question. If an item was equipped, it will
+automatically be removed. If no item was used you will automatically be
+shown a list with items which might be useful on that body part.<p>
+
+Items normally have to be identified by some means to get more than just
+some general information. Some items are identified by using them (e.g.
+weapons and armor), others have to be identified by magical means. When
+identified, every item might list a number of values which further describe
+the powers of the item.<p>
+
+Armor must be worn to have any effect. Weapons must be wielded to have any
+effect. Rings, bracers and necklaces must be worn to be useful.<p>
+
+Items are generally rated as uncursed, cursed or blessed. Cursed items
+cannot be removed when worn and mostly do not function with full effect.
+They also are susceptible to damage more often. Blessed items are of very
+high quality and might exert some additional powers. They are more
+difficult to damage. Uncursed items represent average items.<p>
+
+Items also might be broken or rusty. There might be means available to
+repair or improve such items&hellip; try to find out about this for yourself.<p>
+
+In the following section, items are listed by category with all possible
+modifiers. The following abbreviations are used to describe the modifiers:<p>
+<ul>
+<li>CHA - Number of charges remaining
+<li>DAM - Damage dice (given in the dice notation explained above)
+<li>DVM - DV modifier
+<li>MDM - Missile damage modifier
+<li>MEM - Melee attack modifier
+<li>MIM - Missile attack modifier
+<li>PVM - PV modifier
+<li>ATM - Modifier to a specific attribute
+</ul><p>
+
+The following item descriptions are available. First the item type is
+listed, then the possible modifiers follow. Not all modifiers always
+appear, this depends on the specific item. The kind of visible modifiers
+can be determined by the type of brackets surrounding them:<p>
+<ul>
+<li>&lt;bracers&gt; [DVM, PVM]
+<li>&lt;shield&gt; (MEM) [DVM, PVM]
+<li>&lt;armor&gt; (MEM, MIM) [DVM, PVM]
+<li>&lt;gauntlets&gt; (MEM, MIM) [DVM, PVM]
+<li>&lt;cloak&gt; (MEM, MIM) [DVM, PVM]
+<li>&lt;girdle&gt; (MEM, MIM) [DVM, PVM]
+<li>&lt;helmet&gt; (MEM, MIM) [DVM, PVM]
+<li>&lt;boots&gt; (MEM, MIM) [DVM, PVM]
+<li>&lt;wand&gt; (CHA)
+<li>&lt;melee weapon&gt; (MEM, DAM) [DVM, PVM]
+<li>&lt;missile weapon&gt; (MIM, MDM)
+<li>&lt;missile&gt; (MIM, DAM)
+</ul><p>
+
+Any item (in theory) can be followed by {ATM}, which means that the item in
+question grants the specified bonus to the mentioned attribute. Any weapon
+can be followed by (p), which means that the item is poisoned.
+
+Finally, the number of charges for wands will only be visible if you zapped
+that specific wand successfully or identified that specific wand. In other
+words: if you identify 'tin wands' as 'wands of magic missiles', you still
+won't know the number of charges of a newly found 'wand of magic missiles'
+(although it will be correctly identified in all other respects).<p>
+
+<h4 id="Oe2">Working with the Backpack</h4>
+Beside those items you carry directly on your body (which can be viewed by
+pressing <tt>i</tt>), you also have a backpack which might contain large numbers
+of items (directly viewable by pressing <tt>I</tt>). At times you need to retrieve
+an item from that backpack and this can be a very tiring process if you are
+carrying a large number of items. Therefore ADOM contains a mechanism to
+filter the list of items in the backpack, so that only certain item types
+are displayed and it's easier to find the item you are looking for.
+
+Whenever it is possible to apply a filter to the items in your backpack,
+the last line of the screen will display the current filter and the
+possible commands to select a certain item type. In all cases (except for
+<tt>#</tt> &ndash; which stands for all items), you can select a certain category of
+items by pressing the symbol which usually represents those items. The
+following keys are used to filter the items in the backpack:<p>
+
+<table border=1>
+<tr><th>Key  <th>Meaning
+<tr><td><tt>[</tt><td>wearable items [1]
+<tr><td><tt>'</tt><td>necklaces
+<tr><td><tt>,</tt><td>bracers [2]
+<tr><td><tt>(</tt><td>melee weapons
+<tr><td><tt>}</tt><td>missile weapons
+<tr><td><tt>/</tt><td>missiles
+<tr><td><tt>]</tt><td>tools
+<tr><td><tt>{</tt><td>musical instruments
+<tr><td><tt>=</tt><td>rings
+<tr><td><tt>\</tt><td>wands
+<tr><td><tt>!</tt><td>potions
+<tr><td><tt>?</tt><td>scrolls
+<tr><td><tt>"</tt><td>books
+<tr><td><tt>%</tt><td>food
+<tr><td><tt>$</tt><td>gold
+<tr><td><tt>*</tt><td>gems
+<tr><td><tt>#</tt><td>all items
+</table><p>
+[1] Helmets, armor, gauntlets, cloaks, girdles, boots.<p>
+[2] This is an exception to the 'image rule' since some
+systems wait for a second key to be pressed after the <tt>~</tt> used for
+bracers and this would make this feature somewhat tiresome to use).<p>
+
+<h3 id="Of">Beasts of Burden</h3>
+While many players seem to enjoy carrying around heaps of stuff, this is
+not really recommended. If you carry a lot of stuff, you'll get hungry
+sooner. This in turn means that you probably will have to carry more food,
+which can get damaged and further burdens you. ADOM uses several burden
+levels (from burdened to strained, to very strained and to overburdened) to
+mirror this fact. Each burden level comes with a growing need for food.
+Take care!<p>
+
+<h3 id="Og">Wishing</h3>
+In ADOM you might encounter magical wishes. Wishes are a powerful form of
+magic which allows a variety of effects.<p>
+
+ADOM supports two types of wishes. You can wish for abstract things and
+concepts like friends, money, wealth, strength, health, and other things.<p>
+
+You can also wish for items. Such wishes can be very useful, since ADOM
+features many powerful and rare items. If you do not want to wait for a
+certain item, just wish for it as soon as you receive a free wish. Since
+wishes are powerful but not very precise magic, you can only wish for very
+general items. For example, it's not possible to wish for 6 blessed long
+swords (+6, 1d8+6), but you would rather have to wish for long swords or
+mithril plate mails. If your wish is not formulated precisely you might get
+something other than what you are expecting &ndash; so be careful!<p>
+
+<h3 id="Oh">Saving the Game</h3>
+To save a game in progress you just have to press the <tt>S</tt> key and answer
+the following question with a <tt>y</tt>. The game will be saved and you can
+load it later to continue your game. You should make sure that you have
+enough free space on your disk before saving the game as ADOM will
+otherwise crash. You need about 30000 bytes plus 12000 bytes per level that
+you have explored. Levels with lots of monsters or items need more space.
+Generally three free megabytes should be enough for any one game (no matter
+how deep you venture). Note that the game will quit upon saving. Note also
+that your save file will be deleted if your character dies. This is a
+special feature of all roguelike games. You are expected to win without
+ever dying.<p>
+
+To load a saved game, just start ADOM and type <tt>l</tt> on the option screen.
+If you choose that option a tiny menu will display the available games to
+be restored (if there are any). Please note that this menu only displays a
+maximum of 20 saved games (without telling you that there might be
+additional saved games). This should be sufficient for most purposes.
+Depending on your screen resolution even less games might be shown (e.g. 16
+under DOS).<p>
+
+<hr>
+</body>
+</html>

@@ -1,0 +1,841 @@
+<html>
+<head>
+<title>Improved ADOM Guidebook - Miscellaneous</title>
+<link rel="stylesheet" type="text/css" href="adomgb-body.css">
+</head>
+<body>
+<h1>Improved ADOM Guidebook</h1>
+<hr>
+<a href="adomgb-0-14.html">Previous</a> - <a href="toc.html">TOC</a> - <a href="adomgb-1-1.html">Next</a>
+<hr>
+<a href="#0f1">Dungeon generation</a> - <a href="#0f2">Kicking</a> - <a href="#0f3">Undocumented character abilities</a> - <a href="#0f4">Smithing</a> -
+<a href="#0f5">Darkness</a> - <a href="#0f6">Death messages</a> - <a href="#0f7">Bugs</a> - <a href="#0f8">Rumors:</a> <a href="#0f81">Fortune cookie messages</a> -
+<a href="#0f82">Yggaz's babbling</a> - <a href="#0f9">Final score</a>
+<hr>
+
+<h3 id="0f">Miscellaneous</h3>
+ADOM concepts which couldn't fit elsewhere.<p>
+
+<h4 id="0f1">0.15.1 Dungeon generation</h4>
+<span class="credit">Credit gut.</span>
+Dungeon generation has a few peculiarities that may be worth mentioning. Almost all rooms generated on any level will have an odd number of floor spaces available. To my knowledge,
+the only exception to this is the very rare random shop room. They are capable of being generated with an even number of available floor spaces, and this causes the 'dig' algorithm
+in the game to be unable to connect them to the rest of the map. The only way to reach these shops is by tunneling.<p>
+
+Remarks about staircase generation and room layout:<p>
+
+When hopping in the ID, I noticed that some rooms were likely to have staircases in the adjacent room. Basically, if you enter a room that's <i>in</i> a corner, or <i>near</i>
+a corner, and your room has a door that leads <i>directly</i> up, down, left or right, into a corner, there is likely a stair room there.<p>
+
+For example, if a room like this:<p>
+<pre>
+   #########
+   #.......#
+   #.<.....#
+   #.......#
+   #####.###
+       #+#
+</pre>
+is generated at the top of the level, at the left or right-hand corners, it likely leads to a stair room.<p>
+
+Please note that this:<p>
+<pre>
+   #########
+   #.......#
+   #.<.....###
+   #.........#
+   #########.#
+           #.#
+           #.#
+           ..#
+</pre>
+isn't the same, and will not work.<p>
+
+One like this:<p>
+<pre>
+      #+#
+   ####.####
+   #.......#
+   #.<.....#
+   #.......#
+   #########
+</pre>
+at the bottom left or right-hand corners is good too.<p>
+
+A room like this:<p>
+<pre>
+ #######
+ #.....##
+ #.<....+
+ #.....##
+ #######
+</pre>
+has a high probability if it is generated at the right-hand side of the map, but it has to be at the very top or bottom, right next to a corner.<p>
+
+The same goes for a room like this:
+<pre>
+ #######
+##.....#
++....<.#
+##.....#
+ #######
+</pre>
+in the left hand side of the level.<p>
+
+A room like this:
+<pre>
+ #######
+##.....###
+.....<....
+##.....###
+ #######
+</pre>
+is also good if next to any corner, but doesn't seem as sure as the others.<p>
+
+<h4 id="0f2">0.15.2 Kicking <tt>k</tt></h4>
+You ought to know that you can <tt>k</tt>ick various things around. Pressing <tt>K</tt> will reveal your kick damage.<p>
+
+<b>General</b><br>
+KickBonus is normally 0. Strong Legs talent gives +15, Monks get +Level*2. Kicking is not possible while in a pit or webs or the wilderness. Kicking while confused, stunned,
+or blind requires a Attribute in attribute+40 check; attribute is Dexterity for blindness and Willpower for Confused and Stunned state.<p>
+
+<b>Doors <tt>+</tt></b><br>
+Kicking a door will succeed St + KickBonus times in St + 12 (112 if the door is secret). Successfully kicking doors will cause tension rooms to crumble, will always trigger traps,
+and trains St. There is a 20% chance that 1d2 wooden sticks will be created. Unsuccessfully kicking a door has a 14-St chance in 15 of training St. If the door is trapped,
+you have a (Ma + 1) in 30 chance of NOT triggering it. If you avoid the trap, you will train Mana. Failing to kick open an undiscovered secret door is treated as kicking an
+undiggable wall. If a secret door is kicked open and discovered at the same instant, it has a 10% chance of being trapped.<p>
+
+<b>Walls <tt>#</tt></b><br>
+Level 13+ Monks can kick down walls on a straight Strength in 100 roll. Non-Monks kicking walls will take 1dN damage, N = Max(2, St/3). Add 2 to N if the wall is non-diggable.<p>
+
+<h4 id="0f3">0.15.3 Undocumented character abilities</h4>
+<p><ul>
+<li>All characters gain to-hit and to-damage bonuses when fighting as a True Berserker, which means no armor can be worn and Tactics must be set to
+Berserk. Shields are acceptable, any worn armor is not. Level 40 and higher Barbarians get additional bonuses on top of this when fighting as a True Berserker.
+Note that Monks do not seem to receive this True Berserker bonus.
+<li>Monks gain the ability to kick down walls at experience level 13.
+<li>Merchants always specialize in a certain item: potions, rings, scrolls, or wands. This specialization allows them to identify any item in that category on sight.
+<li>Merchants get additional bonuses to throwing coins (+level to hit, +level/2+3 to damage). Doppelgangers cannot deflect a Merchant's thrown coins.
+The coin throw action costs 1200 energy points as opposed to the normal 1000. Getting the Quick Shot talent does apply to the coin throw attack, bringing it to 1080. The coin throw
+attack is not capable of receiving weapon marks, nor does it benefit from the Strong Thrower talent. The Archery skill is not trained by coin throwing. Coin throwing does benefit from
+a high Dexterity attribute, rings of slaying, archery gloves, the Good Shot talent, the Keen Shot talent, the Quick Shot talent, the Missile Weapon Master talent, and the Find Weakness
+skill. Coin throw attacks start out with a range of only 3, but at exp. level 10, it increases to 5, and increases a further +2 with each 10 experience levels gained.
+<li>Healers have the ability to use a stethoscope without consuming any game time. All other classes consume one turn of game time when using a stethoscope.
+<li>Archers have a unique ability to dodge missiles. When a missile misses any other class PC, it simply stops at the PC's tile. Missiles often fly past Archers. This is
+actually probably undesirable since Archers want to pick up those missiles, but it is nevertheless an undocumented unique ability.
+<li>Merchants doesn't experience prices rise when a shop is restocked.
+</ul><p>
+
+<h4 id="0f4">0.15.4 Smithing</h4>
+Taken from <a href="http://www.adomgb.info/adomfaq.html">Official ADOM FAQ</a>:<p>
+
+Smithing is a complicated task. You need the following ingredients:<p>
+<ol>
+<li>Any kind of hammer <tt>(</tt>.
+<li>An anvil <tt>]</tt>. There are two guaranteed in the game (kill Kherab and Glod), but they also rarely appear in dungeons.
+<li>Something to smith! You need to know what kind of metal it's made of (use Metallurgy).
+<li>An ingot of the appropriate metal <tt>]</tt>. A lump of ore won't cut it, but can be converted into ingots by applying the Smithing skill to it first. Generate some lumps by Mining.
+<li>A forge <tt>&</tt>. You can't carry these around with you, but you can hope to find one in your travels. There are few locations in the game where forges are guaranteed (Dwarftown,
+Darkforge, <big> and the prison level (IC:6) in the Ice Queen Domain</big>), and there can be additional forges at random locations.
+</ol><p>
+
+Stand on the forge, wield the hammer, and <tt>a</tt>pply your Smithing skill to your metal item. This will also serve to make metal ingots out of ore lumps. It's rumored that wearing
+a leather apron helps in some mysterious way.<p>
+
+Other useful facts regarding Smithing:<p>
+<ul>
+<li>An easy way to train Smithing is by removing rust. Low risk of damaging the item, no lost ingots, and easy to get rusty items with a river or a water trap. Also quite fast.
+<li>Glod charges exactly 2500gp in all cases, and only if he is on the current level, for the use of his forge. Killing him, luring him off the level, and turning him into a writhing
+mass of primal chaos will all stop the demands; making him hostile won't.
+<li>The Smithing skill costs a base 5000gp from Glod, 5250gp if female. If you have very high Charisma, you get a discount; 1% per 1 Ch over 15.
+Being Cursed doubles the price, Doomed triple, being Troll doubles, being Orc quadruples, all cumulative.
+<li>You need a hammer wielded in either hand and an anvil in inventory and equipment to smith. If multiple such items apply, the best by B/U/C is used.
+The following items count as hammers: large eternium hammer, large mithril hammer, large adamantium hammer, huge iron hammer, eternium warhammer, warhammer,
+adamantium warhammer, mithril warhammer, hammer of the gods, large hammer.
+<li>You can do three things with a smithing setup &ndash; smelt ore, remove rust, and improve items.
+<li>Teleportitis does not occur during smithing sessions.
+<li>Smithing is influenced by the statuses of all involved items (hammer, anvil, worked item, and ingot if applicable). BUCMod in the below formulas means +10 per cursed item and
+-10 per blessed item.
+<li>You can never smith artifacts.
+</ul><p>
+
+<h4 id="0f41">0.15.4.1 Smelting ore</h4>
+<p><ul>
+<li>Takes 25 turns (even for Weaponsmiths). If you are interrupted, the ore is lost.
+<li>Let Difficulty = BUCMod + 0/-5/-10/-20 by ore material (iron/mithril/adamantium/eternium &ndash; better materials are easier).
+<li>If Smithing >= 1d(110+Difficulty), you now have an ingot (10/80/10 B/U/C and 2% chance of rusty if iron) instead of the ore.
+<li>Otherwise, you fail. Normally you keep the ore. There is a Difficulty+1 in Smithing*4 chance of losing the ore.
+</ul><p>
+
+<h4 id="0f42">0.15.4.2 Removing rust</h4>
+<p><ul>
+<li>Takes 25 turns, or 6 for level 12+ Weaponsmiths. Being interrupted has no lasting effects.
+<li>If Smithing >= 1d(110+BUCMod), you remove the rust.
+<li>Otherwise, nothing happens. There is a BUCMod+1 in Smithing*4 chance of the item becoming broken.
+</ul><p>
+
+<h4 id="0f43">0.15.4.3 Improving items</h4>
+<p><ul>
+<li>Requires an ingot of the same material as the work item, which is consumed in the process.
+<li>Requires (200 - Smithing) turns (one-quarter that for level 12+ Weaponsmiths). Being interrupted has no lasting effects and does not consume an ingot.
+<li>If the item is broken, you will attempt to fix it. Succeed if 120 + BUCMod &lt; Smithing. No penalty on failure.
+<li>Otherwise, you attempt to increase the item's stats. This is a two-step process; first you must pass a Smithing check to improve the item at all,
+then the amount by which the item is improved is determined. Improvement amounts are determined only by the item's existing stats, not by skill.
+If you fail the Smithing check, "You fail to improve the -item-". If you pass it but zero improvement is rolled, "Despite your best efforts the quality
+of the -item- does not improve.". Otherwise, "You manage to improve the -item-.".
+<li>The difficulty of the check is determined as follows:<p>
+<ul>
+<li>Start with Difficulty equal to BUCMod.
+<li>If the item is a weapon, add 12 times the sum of the absolute values of the to-hit and to-damage numbers (X and Y in (+X, 1d4+Y)).
+<li>Otherwise, add 18 times the sum of the absolute values of the DV and PV numbers.
+<li>If you are a Weaponsmith of any level and Difficulty is positive, divide it by 2. Otherwise, add 20.
+<li>Subtract your experience level.
+<li>Final Difficulty is 120 + Difficulty, with a minimum of 120.
+</ul><p>
+<li>Supposing you pass the test (Smithing >= 1dDifficulty), the amounts and types of increase depend on the item's class.
+<li>For melee and missile weapons:<p>
+<ul>
+<li>Increase to-hit by 1d4 if to-hit is less than 9 and one chance in the (absolute value of to-hit or 2, whichever is larger).
+<li>Increase to-damage by 1d4 if to-damage is less than 9 and one chance in the (absolute value of to-damage or 2, whichever is larger), and to-hit was not increased.
+<li>For melee weapons only, increase the DV modifier by 1 if it is no more than 3 more than the base DV modifier of the weapon type, and neither to-hit nor to-damage were increased.
+</ul><p>
+<li>For helmets, armor, girdles, shields, bracers, gauntlets, and boots:<p>
+<ul>
+<li>Increase DV by 1d3 if it is less than 6 more than the base value OR on a one-in-(3 + 2*abs(DV)) chance.
+<li>Increase PV by 1d3 if it is less than 4 more than the base value OR on a one-in-(3 + 2*abs(PV)) chance, and DV was not increased.
+</ul><p>
+<li>All other item types cannot be improved.
+</ul><p>
+
+<h4 id="0f5">0.15.5 Darkness</h4>
+<span class="credit">Credit gut.</span>
+Creating darkness:<p>
+<ul>
+<li>Darkness spell
+<li>crystal of darkness
+<li>scroll of darkness
+<li><big>corruption effect "hate the sun"</big>
+</ul><p>
+
+Removing darkness:<p>
+<ul>
+<li>Light spell
+<li>wand of light
+<li>crystal of light
+<li>scroll of light (note that while it is impossible to read a scroll while in darkness, you can read a scroll of light while standing next to a dark area)
+<li>the artifact potion Phial of Caladriel
+<li>torch &ndash; temporary
+<li>amulet of light &ndash; temporary
+<li>prayer
+</ul><p>
+
+Darkness is one of the most useful options available to all literate PCs, yet it's one of the most underused. I can't count the number of players that say that they never
+even bothered with trying it.<p>
+
+Monsters that can't see in darkness will allow the PC to pound them to death without retaliation. The only exception is for monsters that are capable of panic. These monsters
+will be able to hit the PC when in a state of panic, but <i>only</i> if they do not have an escape route. For this reason, it's best to avoid using darkness in a narrow corridor,
+because stray monsters can easily cut off the escape path of a powerful monster that is capable of killing the PC with one hit.<p>
+
+No giant can see in darkness, most humanoids also can't, with the notable exceptions of trolls, orcs, minotaurs, and dark elves. This is especially important to remember against
+tough monsters such as ogre magi (yes even the arena champion kind). Vortices, mimics and several other early-game PC killers are all helpless in darkness and vortices aren't
+even capable of panic.<p>
+
+There is a bug in the game that keeps darkness from working properly on door tiles. It is important to mention that the PC is perfectly safe to use darkness if the <i>PC</i> is
+on the door tile, but not if the monster is on the door tile.<p>
+
+Other monsters that are known to see in darkness: all balors, all molochs, all red dragons, all orcs, all dark elves, all minotaurs, all undead, ankheg, great blue wyrm, stone grue,
+stone snake, stone golem, cave lizard, gremlin,  (greater) earth elemental, living wall, wall beast, diamond golem, eternium golem, steel golem, steel horror, carrion crawler,
+chaos brother, WMoPC, master assassin, fire demon, quickling king, quickling queen, greater claw bug, killer bug, least daemon, lesser daemon, greater daemon, jackal demon,
+black unicorn, white unicorn.<p>
+
+<small>Monsters' behavior in darkness was changed in R+. Even if a monster cannot see in darkness, it will still try to move around instead of standing still, and can usually
+fight back if cornered. Note that this change affects the aforementioned vortices, allowing them to explode without actually seeing the PC, as well as other special attacks like
+rust from rust monsters and pickpocketing from ratling thieves.</small><p>
+
+<h4 id="0f6">0.15.6 Death messages</h4>
+You ought to know that the %s means that there should be some string instead of it. In most cases it is used for him/her/it, but it's also used for other stuff. See for yourself.<p>
+<ul>
+<li>blasted %sself into the afterworld with an alchemical experiment
+<li>exhausted %sself by casting too many spells
+<li>got roasted while trying to scorch webs in %s vicinity
+<li>exhausted %sself by casting an improved fireball
+<li>was killed by thorns growing from %s hands
+<li>was shredded by an overloaded %s
+<li>overtaxed %sself by animating too many %s
+<li>was burned by the acidic skin of %s
+<li>was killed %s by %s
+<li>was drained of all substance
+<li>was drained of all coherence
+<li>was transformed into %s
+<li>was aged to death by %s
+<li>was shot by %s
+<li>was killed by a %s thrown by %s
+<li>was ripped apart when confronting Order and Chaos
+<li>was killed by believing in the promises of Chaos
+<li>was extinguished by an exploding fluff ball
+<li>was killed by drinking a poisoned cocktail
+<li>was burned from within by acidic herbs
+<li>poisoned %sself with spider-filled bread
+<li>petrified %sself by eating a gorgon corpse
+<li>entered the plane of Primal Chaos
+<li>was transformed into a true servant of Chaos
+<li>was sliced by an eternal Chaos guardian
+<li>was shredded to pieces by the inhabitants of the planes of Chaos
+<li>was devoured after failing the final test
+<li>died of exhaustion on a bad day
+<li>quit prematurely
+<li>was transformed into a chaos being
+<li>transformed into the highest ChAoS gOd
+<li>transformed into an avatar of %s
+<li>transformed into a miserable and wretched chaos servant
+<li>broke %s leg on a wall
+<li>broke %s leg when kicking a tree
+<li>broke %s leg when kicking a forge
+<li>broke %s leg while kicking at the air
+<li>was crushed by a collapsing dungeon
+<li>broke %s neck by using inadequate climbing equipment
+<li>broke %s neck while falling down some narrow stairway
+<li>was eaten by a slavering grue
+<li>drowned
+<li>was shredded by chaos piranhas
+<li>was killed by falling down a deep rift
+<li>was eaten alive by a spider swarm
+<li>terminally broke %s leg by kicking an anvil
+<li>terminally broke %s leg by kicking a statue
+<li>was killed by a psychic backlash
+<li>was killed by vile %s magic
+<li>was frozen to death by %s
+<li>was blasted with energy by %s
+<li>was blasted with magic missiles by %s
+<li>was extinguished by %s
+<li>was blasted by %s
+<li>was doomed to be killed by a misfired divine energy bolt
+<li>was roasted
+<li>was electrocuted
+<li>died of pneunonia
+<li>was sacrificed by %s to %s gods
+<li>was shredded by an exploding artifact
+<li>was killed by the %s of %s
+<li>was squished by the mark of the failed paragon
+<li>was killed by an unaligned amulet
+<li>was killed by an unaligned piece of armor
+<li>died of blood loss
+<li>starved to death
+<li>died of acute blood poisoning
+<li>choked on %s own vomit while %s
+<li>was wasted away by the terrible black fever
+<li>was electrocuted by a magically charged armor
+<li>died due to physical exhaustion
+<li>was crushed by tons of luggage
+<li>died of old age
+<li>was blasted into oblivion by an angry deity
+<li>was killed due to system overheating
+<li>was killed by an exploding frog
+<li>was scorched by a scroll of charging
+<li>was killed by shattering mirrors
+<li>was drained of %s life force by strong magic
+<li>was ripped apart by an exploding spellbook
+<li>broke %s neck in a magically created pit
+<li>sacrificed %sself to %s
+<li>was annihilated by divine wrath
+<li>broke %s leg on an altar
+<li>was killed by a booby-trapped door
+<li>was smashed by a stone block
+<li>was fried by a magical explosion
+<li>was crushed by a toppling door
+<li>was killed by %s opening a booby-trapped door
+<li>broke %s neck in a pit trap
+<li>was killed by an arrow trap
+<li>got %s head smashed by a stone block
+<li>was killed in a spear trap
+<li>was mutilated by an acid trap
+<li>was crushed by a collapsed ceiling
+<li>broke %s neck by falling into a pit
+<li>was toasted when opening the lock of elemental fire
+<li>whipped %sself to death
+<li>was killed by trying too hard to be a great writer
+<li>killed %sself with a death ray
+<li>electrocuted %sself with a faulty wand of lightning
+<li>electrocuted %sself with a wand of lightning!
+<li>magic missiled %sself to death
+<li>broke %s neck in a self-made hole
+<li>froze %sself with a cone of cold!
+<li>dissolved %sself with a wand of acid
+<li>transformed %sself into an ash heap with a wand of fire!
+<li>executed %sself with a %s %s
+<li>executed %sself with a %s
+<li>drained %s life away with a death ray
+<li>was killed by an earthquake
+<li>was drained by a wand of destruction
+<li>was scorched by a fiery explosion
+<li>was frozen to death by an ice storm
+<li>was electrocuted by mighty lightning strokes
+<li>was consumed by a torrent of acid
+<li>was digested by a giant slug
+<li>was dissolved by an eternium golem
+<li>was scorched by a steel golem
+<li>was scorched by a fire drake
+<li>was annihilated by the Chaos Wyrm
+<li>was roasted by a greater fire elemental
+<li>was roasted by a fire elemental
+<li>was scorched by a fire grue
+<li>was ignited by a fire demon
+<li>was drowned by a greater water elemental
+<li>was drowned by a baby water dragon
+<li>was drowned by a water dragon
+<li>was drowned by a giant dragon turtle
+<li>was drowned by a dragon turtle
+<li>was frozen to death by a shadow wyrm
+<li>was electrocuted by a lightning lizard
+<li>was electrocuted by an ancient blue wyrm
+<li>was roasted by a stone statue
+<li>was roasted by a red worm
+<li>was scorched with a lightning bolt by a greater air elemental
+<li>was blasted by an ancient karmic wyrm
+<li>was blasted by a great karmic wyrm
+<li>was blasted by an ancient karmic dragon
+<li>was blasted by a karmic dragon
+<li>was blasted by a baby karmic dragon
+<li>was blasted by a chaos lizard
+<li>was annihilated by %s (Keriax, the Multi-headed chaos dragon)
+<li>was scorched with a lightning bolt by an air elemental
+<li>was digested by an ankheg
+<li>was scorched by an iron golem
+<li>was torched by a greater daemon
+<li>was torched by a lesser daemon
+<li>was burned by a hell hound
+<li>was flamed by a fire lizard
+<li>was petrified by a gorgon
+<li>was drowned by a water grue
+<li>was drowned by a water elemental
+<li>was drowned by the breath of a fairy dragon
+<li>was dissolved by a black baby dragon
+<li>was frozen to death by a white baby dragon
+<li>was electrocuted by a blue baby dragon
+<li>was scorched by a red baby dragon
+<li>was frozen to death by a great white wyrm
+<li>was frozen to death by an ancient white dragon
+<li>was frozen to death by a white dragon
+<li>was dissolved by a great black wyrm
+<li>was dissolved by an ancient black dragon
+<li>was dissolved by a black dragon
+<li>was electrocuted by a great blue wyrm
+<li>was electrocuted by an ancient blue dragon
+<li>was electrocuted by a blue dragon
+<li>was scorched by a great red wyrm
+<li>was scorched by an ancient red dragon
+<li>was scorched by a red dragon
+<li>was scorched with a lightning bolt by an air grue
+</ul>
+<div style="position:relative; top:-17px; left:21px; width: 650;" class="resb">
+<li>was frozen and then shred to pieces by an ice elemental
+<li>was frozen and then shred to pieces by a snow golem
+<li>was frozen to death by the aura of a frost salamander
+<li>was shred to pieces by the icy aura of the ice queen
+<li>was burned by the fires of ChAoS (damage to L/N Chaos Knights)
+<li>was burned by the poisonous touch of impure metal (iron damage to Mist Elves)
+<li>was killed by a maggot erupting from %s skin (maggot corruption)
+<li>was transformed into a demi-lich and got lost (L50 Necromancer dying of old age?)
+</div><p>
+
+<h4 id="0f7">0.15.7 Bugs</h4>
+<small>Almost all of the bugs listed here were fixed in ADOM versions after 1.1.1 (R+). Exception is death on Monday from low HP, which was left as feature.</small><p>
+
+The list is by no means complete. Very minor bugs and typos are not listed.<p>
+
+<h4 id="0f71">0.15.7.1 Bugs causing the game to crash</h4>
+<p><ul>
+<li>taking the Skilled talent on character creation
+<li>dipping gold into potion of exchange
+<li>giving out poisoned meat
+<li>eating a corpse of werewolf king
+<li>dipping fluff ball into water, when there is no room for the gremlins
+<li>reading a scroll of repair without any other items whatsoever
+<li>reading a scroll of item destruction if your inventory is only four or more stacks of other scrolls of item destruction
+<li>extended drop with wrong identified state (happens most often with ingots)
+<li>occasionally, saved Khelavaster dropping spellbooks
+<li>occasionally, chatting to an unique scared by the unholy aura corruption (proven with Thrundarr)
+<li>companion or slave berserking itself
+<li>generating and using negative heaps of gold created via dragon gold doubling
+<li>some uniques (Gaab'Baay for sure) stepping on a trap
+<li>Mindcrafter killing corrupting monsters that stand behind other monsters with Mindcraft
+<li>GetTargetData (-2) &ndash; this can happen randomly; however very rare
+</ul><p>
+
+<h4 id="0f72">0.15.7.2 Bugs causing unfair death</h4>
+<p><ul>
+<li>monster equipping moloch armor &ndash; the energy of doing so should be 37600, but wraps around to -27936, giving the monster 28 free turns
+<li>kicking walls with St&lt;3 can cause extraordinary damage (another wrap)
+<li>death on a Monday from low HP
+<li>moving huge amounts of gold into missile slot can result in death if wearing girdle of greed &ndash; the girdle takes into account only gold carried in inventory
+</ul><p>
+
+<h4 id="0f73">0.15.7.3 Bugs used to get unfair advantage</h4>
+Taking advantage of (or abusing) bugs in this category is generally frowned upon. At least, you should mention which bugs you took advantage of when posting YAVP.<p>
+<ul>
+<li>naming the unseen &ndash; the <tt>n</tt>ame command can be used to detect invisible monsters, even without the See invisible intrinsic
+<li>piety overflow &ndash; pissing a god too much causes the piety to wrap around to very high positive value, allowing for many crownings
+<li>dragons can pick up gold which is then effectively doubled when they are killed; see <a href="adomgb-0-9.html#0944">0.9.4.4</a>
+<li>the Monk's circular kick ability, as well as Fighter's all round attack, have issues when non-hostiles are near; it will ask if you're sure you want to kick or attack them, and
+you select no &ndash; your kick/attack still hits the other monsters, but no time passes
+<li>using fast pickup command <tt>;</tt> while standing on a pile of items, then canceling it (<tt>q</tt>), causes the number of elapsed game turns to decrease; this can be used to
+get ludicrous bonus to high score
+<li>starting to walk against a wall wastes one turn without the PC moving; this can be abused to get free HP and PP regeneration without monsters being allowed to act
+<li>the Good Learner talent grants 40% more xp, instead of the stated 2%
+<li>kick robbing &ndash; items can be kicked out of shop if a corner wall is destroyed &ndash; the game doesn't consider this technique robbing at all
+<li>Casino gambling happens in one turn, the PC doesn't get the corruption it should; and winnings are virtually guaranteed
+<li>blessing undead while invisible will not make them aware of your presence, and you can kill them without them fighting back; works also with bolt spells and Drakeling's acid spit;
+same for monsters who don't see in darkness; unless panicked, they just stay in place and take damage
+<li>attribute training from herbs/corpses/Garth is based on modified attributes instead of base attributes; this leads to abuse of sickness and starvation to pump attributes unrealistically high
+<li>Necromancers lvl50 using +To equipment can return to life indefinitely
+<li>look command detects webs outside visibility if level has been explored before
+<li>wish engines &ndash; a way to get unlimited wishes<p>
+<ol>
+<li>gather a stack of 19 rings, and a handful of potions of exchange
+<li>bless the potions and dip the rings into them at DL 8 to have best chance for generating rings of djinni summoning; since 19 rings can be dipped at once, a lucky PC can end up
+with 19 wishes from this alone
+<li>the probability of getting a ring of djinni summoning is about 5%; if you wish for potions of exchange, you get an average of 3, so converting all wishes into potions (minus a
+few water) gives ~57 PoEX; the odds of being able to get more RoDS is pretty high at this point
+</ol>
+</ul><p>
+
+<h4 id="0f74">0.15.7.4 Other bugs</h4>
+<p><ul>
+<li>berserking &ndash; monster can sometimes panic and attack themselves
+<li>half of the artifacts are only available as crowning gifts, and can never be generated randomly
+<li>the rate of corruption increases at the 90-day mark, but doesn't again at the 180 and 270 day marks as it's supposed to
+<li>Unicorn birthsign increases how quickly alignment changes towards chaotic instead of decreasing it
+<li>it is possible for experience gains to overflow; the most common example would probably be killing too many cats results in the Cat Lord giving only 1 xp, but there are other possibilities
+as well
+<li>+Crit armor does not improve critical hits rate
+<li>killing something using PoCC doesn't yield any xp
+<li>Elementalists don't get fire resistance at level 6, but they should
+<li>the formula for potential attribute gains (e.g. from corpses) is bugged; it's 100% likely at 28 -attribute-, but 55% at 22 (and is odd in between)
+<li>cursed scrolls of repair will "break" normally unbreakable equipment, like herbs and potions
+<li>PCs with high Swimming skill use more energy to move while in water than PCs without Swimming
+<li>darkness does not work on door tiles
+<li>fireproof blankets work better with BadLuck (see also <a href="adomgb-0-14.html#0ee">0.14.14</a>)
+<li>invisible monsters yield double xp even when the PC has +SeeI
+<li>door traps set off by monsters will attribute kills to the PC
+<li>bats do see in the dark, but don't see invisible
+<li>covered pit bug &ndash; If a PC digs a hole, and proceeds to cover the hole with a plain blanket, instead of a covered pit trap appearing, the trap will magically transform into whatever
+kind of trap is appropriate for that tile
+<li>entering 0 when using the Wizard's <tt>r</tt>echarge wands ability causes the wand to disappear without any further effect or message; just hitting Enter causes overcharge
+<li>blind PCs cannot insert orbs into anomalies on D: 48
+<li>pissing off the Balance god via reading tract of order/chaos is incorrectly displayed as pissing off the Order god
+<li>while staying on top of a pit, one can repeatedly activate the trap to repeatedly fall into the pit, without having to climb out
+<li>aquatic beings can be tamed and then taken for a walk on the mountains
+<li>raised corpses slowly decompose until they crumble &ndash; however if they are out of sight they do not die and have a negative amount of hitpoints
+<li>if wearing a ring of teleport control and have +TCtr intrinsic, you can lose the ability to control teleportation by drinking from pool, despite wearing the ring (unconfirmed)
+<li>room effects don't take darkness/invisibility into account
+<li>to avoid a falling door trap, the PC jumps back on the tile that she came from; if this is blocked, the PC won't jump anywhere, despite there might be another vacant tile
+<li>gold has hidden B/U/C status: if you have 19 or less gold pieces, you can dip the entire stack into a potion of unholy water; then wield 1 gp in either hand &ndash; the gold piece
+cannot be removed; this does not work when you have more gold &ndash; the stack will remain uncursed; similarly, angry deity can curse wielded gold
+</ul><p>
+
+<h4 id="0f8">0.15.8 Rumors</h4>
+Rumors in general are available from several sources:<p>
+<ul>
+<li>fortune cookies found randomly in the dungeons
+<li>beggars found in Lawenilothehl
+<li>Torgall the innkeeper in Dwarftown
+<li>the book titled The Collected Works of Confucius
+<li>special room effect with a mouth on a wall
+<li>Yggaz the fool in Terinyo
+</ul><p>
+
+Yggaz also regularly spews what seems to be complete nonsense; it is included at the end of the list below.<p>
+
+<h4 id="0f81">0.15.8.1 Fortune cookie messages</h4>
+<p><ol type="1">
+<li>A sharp axe is easier to wield than a sharp wit. &ndash; Weapons are more effective than Learning in battle.
+<li>All roads lead to chaos, in the end. &ndash; To the Chaos Gate, falling to the forces of Chaos, or becoming a chaos being.
+<li>Always consider the consequences of yer deeds lest ye be surprised. &ndash; The PCs actions will affect the game.
+<li>Always watch your back! &ndash; Especially since PCs have 360 degree vision.
+<li>An anvil is nothing more then an oversized ingot of iron. &ndash; And can be melted just like one.
+<li>Being light as a feather makes you very rifty. &ndash; The Rift is even more dangerous when burdened.
+<li>Care for more intelligent monsters. &ndash; They could be useful &ndash; and more dangerous.
+<li>Don't believe everything *they* say. &ndash; Not all rumors are true.
+<li>Dragons want items made from their hide back &ndash; Not technically true &ndash; if the PC <tt>g</tt>ives an item made of dragon hide to a dragon that is the same color as it,
+the dragon will destroy the item and become enraged.
+<li>Eating a demon daisy will make you a demon lover. &ndash; Nonsense. Demon daisies poison.
+<li>Gift shops are overpriced, unless you use a five finger discount. &ndash; The Great Gift Shoppe in the Casino is overpriced &ndash; unless it is robbed.
+<li>If you are doomed, this will be the last fortune you ever read. &ndash; False, although Dooming can be difficult to cope with.
+<li>If you eat the heart of a Dragon, you will share in its strength. &ndash; The PC gains a resistance corresponding to the dragon's color.
+<li>If you lick a Karmic Lizard, you can get high. &ndash; If the PC eats a karmic corpse, it grants luck-related intrinsics.
+<li>In the land of eternal darkness, light must come from within. &ndash; In the Gremlin Cave, if the PC retrieves the Phial of Caladriel, the light it produces uses up PPs.
+<li>It takes an iron stomach to eat a black dragon steak. &ndash; Black dragon corpses grants acid resistance.
+<li>Join DARK (*D*ragons *a*gainst *r*easonable *k*illing). &ndash; Nonsense.
+<li>Living sacrifices are the most valuable of all. &ndash; Not always. Gold and artifacts are safer.
+<li>Look for strange items. &ndash; The si.
+<li>MADE: Mindcrafters Against Drunken Explorers. &ndash; Nonsense. 
+<li>Note: Don't forget to throw all the poisoned cookies away. &ndash; Not only cookies, any poisoned food will poison monsters when thrown at them. 
+<li>Putting undead to rest with holy water indeed is a lawful act. &ndash; Griff Bloodax, yes. Don't waste holy water on them otherwise.
+<li>Quidquid latine dictum sit, altum viditur. &ndash; What is said in Latin is looked upon highly. (thanks to Kassandra Velez for translation)
+<li>Remember to write something on this cookie. &ndash; Not on the cookie, on blank scrolls (if the PC can take the possible consequences).
+<li>Rifts are deep. &ndash; You'll always fall down.
+<li>Scrolls of balance speak of rocks of alignment. &ndash; True.
+<li>Smoking is bad for your health! &ndash; True, but not in ADOM. 
+<li>Some gems harbor magical powers. &ndash; Darkness, light, knowledge, power, health and fire spring to mind.
+<li>Staves must be held to unlock their full potential. &ndash; Magical staves can be used or zapped for additional effects.
+<li>Sting and Needle... Needle and Sting... twins they are and united they should be. &ndash; They become <i>much</i> more powerful when dual-wielded.
+<li>Stoma Pubis enjoys throwing anvils at opponents. &ndash; T(h)omas Bis(k)up enjoys throwing anvils at opponents?
+<li>The coin of chaos has two faces - power and corruption. &ndash; Artifacts which "contain the Essence of Chaos and Corruption" can be very powerful, but also slowly corrupt their carrier.
+<li>The Mad Minstrel harbors a dark secret. &ndash; He knows the location of the Scintillating Cave.
+<li>They say that a good memory might pay. &ndash; Remember the first kill.
+<li>They say that a legendary knight called Michal once led an army of stone skeletons against the forces of Chaos. &ndash; Michal's Transmogrifier transforms skeletons into stone statues.
+<li>They say that a paragon of Order must not violate his beliefs by any means. &ndash; Do not allow your alignment to drop to obtain the Platinum Girdle on D: 50.
+<li>They say that a single stone can be used to unpick reality and create strong new ties! &ndash; Unpick Axe can create wall from a single rock.
+<li>They say that all white dragons suffer from a bad cold. &ndash; Vaults of white dragons decrease surrounding temperature and thus slow down Drakelings.
+<li>They say that an empty stomach is one's worst enemy. &ndash; Avoid starvation.
+<li>They say that at times mindless rage might save your life in fights. &ndash; Berserk tactics.
+<li>They say that at times things can get zorky. &ndash; There's a lot of Zork references.
+<li>They say that attacking shopkeepers is bad for your karma. &ndash; Cursing and Dooming may result depending on alignment.
+<li>They say that balors are the gatekeepers of Chaos. &ndash; There are nine on the level containing the Chaos Gate.
+<li>They say that being able to read is very useful when visiting the library. &ndash; Literacy is necessary if the PC wants to read anything found in the Library.
+<li>They say that Berzio potions are useful for taming monsters. &ndash; True.
+<li>They say that blessed items improve ones eyesight. &ndash; If they are potions of carrot juice or necklaces of the eye.
+<li>They say that blessed potions of extra healing might be a real boon. &ndash; True.
+<li>They say that boozed bozos can be very helpful. &ndash; Give the fool some booze.
+<li>They say that bugs can be really nasty. &ndash; Both programming ones and claw ones.
+<li>They say that burning torches can be very dangerous. &ndash; They deal nice damage.
+<li>They say that champions may pray for more favors then ordinary people. &ndash; True.
+<li>They say that converting an altar is difficult without losing ones faith. &ndash; Converting an altar always needs sacrificing something to other deity which means angering your current one.
+<li>They say that companions fear darkness. &ndash; True &ndash; they can be accidentally attacked.
+<li>They say that controlled teleportation is really great. &ndash; True.
+<li>They say that corpses mark the realm of death. &ndash; There's a lot of corpses on the Banshee level.
+<li>They say that corrupted things can be your boon and your doom. &ndash; A chaos creature's corpse will yield a potion of cure corruption from Guth'Alak, but being attacked by corrupting
+chaos creatures is very nasty. Alternatively, this may refer to artifacts which contain the essence of Chaos and Corruption. They are very powerful (boon) but will corrupt the PC (doom).
+<li>They say that corruption harbors great might... and great weakness! &ndash; True.
+<li>They say that cursed potions of invisibility might have strange effects. &ndash; They blind you, if quaffed, and blind monsters, if thrown.
+<li>They say that cursed thieves picks might do strange things. &ndash; They can trap a door.
+<li>They say that dark elves are especially good in the night. &ndash; Maybe, but they do not see in darkness.
+<li>They say that distortion is the way to godhood. &ndash; PC has to be extremely corrupted to achieve the Ordinary Chaos God ending, Ultimate Chaos God ending, and Avatar of Balance ending.
+<li>They say that dogs become more loyal when fed. &ndash; True: they enjoy bones and dwarven sausages.
+<li>They say that drinking black potions during the night corrupts your soul. &ndash; If the black potion is a potion of raw chaos.
+<li>They say that drinking holy water with bland rations will make them taste better. &ndash; Blessing cursed rations increases their nutrition value.
+<li>They say that eating beings of true evil corrupts your very essence. &ndash; True.
+<li>They say that eating humans is evil. &ndash; Humanoids, apparently not, from testing, despite the messages.
+<li>They say that eating magic-wielding monsters might be a boon for your mana. &ndash; True.
+<li>They say that elemental altars can only be converted by the most faithful. &ndash; That is, champions of Order or Balance.
+<li>They say that elves trade strength of body for speed. &ndash; Dark elven corpse effects.
+<li>They say that essence of mareilon moss is proof against the undead. &ndash; No, it increases Dexterity.
+<li>They say that excitement is a messenger of battle. &ndash; Messages about feeling excited mean a vault is present on the level.
+<li>They say that every coin has two sides. &ndash; True. 
+<li>They say that faster blood means faster recovery. &ndash; True.
+<li>They say that feeding rust monsters is costly but definitely worth it. &ndash; Feed them with thrown metal items &ndash; quarrels are a good choice.
+<li>They say that fire is the most violent element. Be as resistant as you can. &ndash; Fire resistance stacks in the ToEF. But acid deals more damage.
+<li>They say that Fire is the only element living on the surface. &ndash; Refers to the Tower of Eternal Flames on the wilderness map.
+<li>They say that fortunes must be followed by the incantation 'in bed' to work. &ndash; Reference to real-world fortune cookies. Old joke about adding 'in bed' to the end of the message to make
+them more humorous.
+<li>They say that fury makes you less stubborn. &ndash; Bug corpses decrease willpower.
+<li>They say that gambling is bad for your finances. &ndash; There is a requirement to spend more than is won in the Casino.
+<li>They say that gods like sacrifices of food and valuable stuff. &ndash; True.
+<li>They say that good gamblers know which coins they have to use. &ndash; More accurately, which slot machines.
+<li>They say that graveyards are dangerous places. &ndash; Strength and Toughness might go down, age might go up.
+<li>They say that greater vaults are hiding places for artifacts. &ndash; True, but watch out for the guardians.
+<li>They say that green pools contain deadly slime. &ndash; Nonsense.
+<li>They say that herb bushes grow according to magical patterns. &ndash; Conway's rules of life, not magic.
+<li>They say that herbs have strange effects. &ndash; Good or bad.
+<li>They say that holy water might bear fruits. &ndash; This probably refers to the ability to create herbs with holy water (section <a href="adomgb-0-13.html#0d6">0.13.6</a>).
+<li>They say that hurthlings don't like shoes. &ndash; Shoes reduce their Dexterity by 2.
+<li>They say that Infinity does not permit to visit any place twice. &ndash; It's impossible to visit an ID level or the SIL twice.
+<li>They say that it is good for your survival if you can't hear death coming. &ndash; With death equaling the Banshee.
+<li>They say that it is not wise to leave ones cause after being crowned to be a champion. &ndash; True, section <a href="adomgb-0-2.html#0253">0.2.5.3</a>.
+<li>They say that it might be useful to remain persistent with uncharged wands. &ndash; Wrench the final charge from them if there is no means of recharging them.
+<li>They say that it might come in handy to discover a use for useless potions. &ndash; Very true, D: 49.
+<li>They say that Khelavaster is still alive. &ndash; He is and will remain so, if the PC can save him.
+<li>They say that kicking a stuck door helps. &ndash; If it isn't trapped.
+<li>They say that kicking stairs helps to train your strength. &ndash; True, but see next.
+<li>They say that kicking stairs might be bad for your health. &ndash; It might collapse the dungeon, which instantly kills the PC.
+<li>They say that killing cats is bad for your karma. &ndash; It does not affect luck-related intrinsics, but makes the Cat Lord angry.
+<li>They say that killing friends won't help you finding new ones. &ndash; Killing friendly monsters is a chaotic act; attacking the inhabitants of Dwarftown will (generally) make the whole
+town hostile; attacking tamed animals increases the difficulty of taming.
+<li>They say that libraries are especially useful for wizards. &ndash; They find every spellbook available in the game.
+<li>They say that long jumps require small moves. &ndash; Might refer to alignment changes via small gold sacrifices at non-aligned altars.
+<li>They say that lucky people can find access to great wealth in the south-eastern Drakalor Chain... if they search hard enough. &ndash; Reference to Merchant Guild and the need to be lucky
+and <tt>s</tt>earch to find it.
+<li>They say that Mana is a kind of side trek. &ndash; The Mana Temple is located in a side branch of the Unreal Cave system.
+<li>They say that many cursed items cause bad luck. &ndash; Cursed items do not explicitly affect the luck-related intrinsics, but many items that cause Cursing and/or Dooming are autocursing.
+<li>They say that many wands depend on the power of the wielder. &ndash; Willpower is a factor when zapping wands.
+<li>They say that merchants are really well-spoken thieves. &ndash; At least they know how to take away your money.
+<li>They say that merchants are well-versed in handling coins. &ndash; True. Even throwing them.
+<li>They say that monsters tamed by bards will never willingly leave. &ndash; True.
+<li>They say that monuments can hold dark secrets. &ndash; This probably refers to the Infinite Dungeon, which was once a monument to Law. Chaos has transformed it into its current condition,
+and it holds a dark secret, the location of the Sceptre of Chaos (as well as Filk, but this message probably predates Filk). Might also refer to the Stone Circle, where the Crown of Chaos
+is located.
+<li>They say that nobody ever heard the wail of the Banshee more than once. &ndash; The Banshee's wail instakills, if the PC is not prepared.
+<li>They say that not all herbs must be eaten. &ndash; Some must be <tt>U</tt>sed, some are harmful.
+<li>They say that not all is at it seems. &ndash; Not every fortune cookie is true. 
+<li>They say that once you have opened the final gate there is no way back. &ndash; When the D: 48 staircase points down, there's no way back until the Chaos Gate is closed.
+<li>They say that patience is the better part of valor. &ndash; Reference to the Animated Forest.
+<li>They say that pools contain mysterious secrets. &ndash; Drinking from pools can cause many strange effects.
+<li>They say that potions of booze and mana-rich potions are able to charge more than just your alcohol level. &ndash; Dipping a wand in potions of booze or potions of (boost) mana will
+recharge it.
+<li>They say that potions of toughness tend to remove your hungry feelings. &ndash; True.
+<li>They say that praying at altars of your deity is helpful. &ndash; No, <i>sacrificing</i> at coaligned altars is helpful.
+<li>They say that quests are noble and just. &ndash; Not all of them.
+<li>They say that repetitive requests are frowned upon by the gods. &ndash; Praying too often will result in an angry deity.
+<li>They say that Rolf built an abomination from the most powerful artifact of Dwarvenkind and now is trying to cover it up. &ndash; Nonsense.
+<li>They say that Rolf is guilty of murdering his own blood and he tried to cover it up. &ndash; You must not kill a dwarf until meeting Rolf, otherwise he will be hostile.
+<li>They say that Rolf is nothing but a legend. &ndash; A true legend.
+<li>They say that Rolf was an agent of Chaos with a particularly vile plan to consume the world! &ndash; Nonsense.
+<li>They say that Rolf was killed and an impostor has taken his place millenia ago! &ndash; Nonsense.
+<li>They say that Rolf was left-handed. &ndash; Wield Rolf's axe in left hand, and shield in right to get a bonus.
+<li>They say that rubbing moss of mareilon onto your skin might get you moving. &ndash; It increases Dexterity.
+<li>They say that rusted electrical items might be dangerous to the user. &ndash; Rusty wands of (ball) lightning can be hazardous.
+<li>They say that sacrifices can be dangerous. &ndash; Especially live ones on a noncoaligned altar.
+<li>They say that shopkeepers base their prices upon racial preferences. &ndash; True. Waldenbrook hates Dark Elves and Orcs, for example.
+<li>They say that shopkeepers sometimes try to cheat the customer. &ndash; True.
+<li>They say that shops are dangerous at night. &ndash; Shopkeepers don't see the PC pick up items in the dark, but the PC still must pay.
+<li>They say that Sis might enhance your creativity. &ndash; By making the PC think of uses for them.
+<li>They say that skeletons like bones. &ndash; Giving them bones heals them.
+<li>They say that some items are especially deadly in combat... no matter how you use them. &ndash; Probably reference to a wand of ball lightning?
+<li>They say that some items are useful when worn shortly before special moments. &ndash; Some items give nice resistances and abilities not often needed.
+<li>They say that some fires take great efforts to spark! &ndash; Weird Fire Starter needs Chaos Orb of Elemental Fire.
+<li>They say that some statues have magical bones. &ndash; Statues may yield wands when broken by kicking.
+<li>They say that some stuff needs a lot of blessing to improve. &ndash; One blessing (of seven league boots, rings of djinni summoning, potions of gain attributes, rings of the fish) is enough.
+<li>They say that some wands are not very reliable. &ndash; True &ndash; rusty wands of ball lightning, for instance.
+<li>They say that sometimes it needs a heavy hit to transmogrify horror into something useful. &ndash; Michal's Transmogrifier tames stone statues.
+<li>They say that smashing statues might yield magical wands. &ndash; True.
+<li>They say that swamp hydras are tough food. &ndash; They are poisonous, but train Toughness.
+<li>They say that the ancient dwarf knows a lot about quests. &ndash; He has six.
+<li>They say that the banshee transformed after losing her beloved husband. &ndash; Male PCs can get the Banshee to stop wailing if they wield a wedding ring.
+<li>They say that the cat lord finds no fault with ye if ye has never harmed any cat. &ndash; True.
+<li>They say that the dungeons of mystery consist of 100 levels. &ndash; Caverns of Chaos have 50 levels.
+<li>They say that the forces of Law built a monument to Infinity. &ndash; But Chaos twisted it into the ID.
+<li>They say that the gods do not yearn for material wealth. &ndash; Nonsense. They <i>love</i> money!
+<li>They say that the gods greatly favor living sacrifices. &ndash; True, as long as they aren't summoned or bred.
+<li>They say that the great rift is very dangerous for almost everyone. &ndash; True.
+<li>They say that the guild of industrious brutal muggers writes really confusing manuals. &ndash; The IBM guild manual permanently confuses.
+<li>They say that the home of the banshee is ruled by eternal decay. &ndash; Corpses never rot there.
+<li>They say that the king hid a lot of gold in these dungeons. &ndash; There are some royal treasuries.
+<li>They say that the library charges high fees. &ndash; Nonsense.
+<li>They say that the lofty nature of some writing sets is influenced by the degree of magic invoked with it. &ndash; Writing scrolls of corruption removal is costly, unless PC is Monk.
+<li>They say that the merchants guild welcomes lucky adventurers. &ndash; You need to have Luck or Fate smile intrinsic to find it.
+<li>They say that the mint-flavored juice distilled out of morgia roots improves stamina, slakes thirst and conceals bad breath. &ndash; Eating morgia roots increases Willpower and Toughness.
+<li>They say that the radiance of chaos will corrupt you the faster the deeper you descend. &ndash; True.
+<li>They say that the secret to becoming a Chaos God is hidden in the Drakalor Chain. &ndash; May refer to The Oracle, who is hidden away in the High Mountain Village and tells the secret
+to becoming a Chaos God to PCs with the Medal of Chaos, Crown of Chaos and Sceptre of Chaos.
+<li>They say that there are many gems deep under the mountains. &ndash; Digging a dungeon wall might yield gems if the PC has the Gemology skill.
+<li>They say that there is a secret level guarded by many powerful monsters which contains several artifacts. &ndash; Greater vaults generally contain an artifact or two.
+<li>They say that thick gauntlets are great for isolating your hands. &ndash; This is an important hint to bear in mind if your corrupted hands are dripping in poison, and you don't wish
+to poison everything you pick up.
+<li>They say that tiny caves can be very large. &ndash; Especially the ID.
+<li>They say that those who manage to empty a pool, will receive a wish. &ndash; Nonsense.
+<li>They say that those who have too many friends also have too many enemies. &ndash; A PC with many companions may find that they fight amongst themselves.
+<li>They say that those who hear the wail of the banshee are doomed. &ndash; Not doomed, dead.
+<li>They say that to be a champion of one's cause is very valuable when using ancient magic. &ndash; Champions receive lower penalty on food consumption when wielding artifacts.
+<li>They say that too much chaos essence corrupts thy inner self. &ndash; True.
+<li>They say that true berserkers fight naked. &ndash; True.
+<li>They say that using artifacts costs a lot of energy. &ndash; Satiation is decreased by a certain extra amount for each artifact equipped.
+<li>They say that wands of knocking might split your skull. &ndash; They never deal any damage.
+<li>They say that when you hear a "Hurumph!" you'd better start to run. &ndash; A Dorn Beast. Be paralyzation resistant.
+<li>They say that white dragons suffer from a bad cold. &ndash; They are vulnerable to fire and grant cold resistance when eaten.
+<li>They say that you might find gems on the deep levels. &ndash; You can find gems anywhere.
+<li>They say that you need a lot of leverage to stop the forces of Chaos. &ndash; Two levers, actually.
+<li>They say that you need a strong will to enter the great rift. &ndash; True (section <a href="adomgb-2-15.html">2.15</a>).
+<li>They say that you need persistence and peace to truly profit from religious scriptures. &ndash; The "persistence and peace" probably refers to the fact that tracts are difficult to read,
+so the PC must not be disturbed by monsters. Interestingly, however, teleportitis does not bother PCs trying to read tracts.
+<li>They say that you need to be an expert climber to survive the great rift. &ndash; Climbing 100 is required.
+<li>They say that you need to be very experienced to enter the great rift. &ndash; Experience level 18.
+<li>They say that you only can be the champion of your deity if you are very close to your deity. &ndash; Or extremely/absolutely.
+<li>They say that you should not slow down in your final fight. &ndash; Avoid being hit by writhing masses of primal chaos.
+<li>They say that you should seek the heart of the mountains. &ndash; There's a neat library in the middle of the mountains.
+<li>They say that you should try to investigate the potential uses of beeswax. &ndash; For the Banshee's level.
+<li>They say that you should wish for appearance.
+<li>They say that you should wish for charisma.
+<li>They say that you should wish for dexterity.
+<li>They say that you should wish for friends.
+<li>They say that you should wish for knowledge. &ndash; Learning.
+<li>They say that you should wish for mana.
+<li>They say that you should wish for strength.
+<li>They say that you should wish for toughness.
+<li>They say that you should wish for wealth.
+<li>They say that you should wish for willpower.
+<li>They say that you should wish for wishes. &ndash; Never.
+<li>They say that you will feel the corrupting incursions of Chaos. &ndash; Unavoidable if the PC lives long enough.
+<li>They say that you'll have to pull mightily to plug the chaotic intrusions. &ndash; The PC must <tt>h</tt>andle two levers.
+<li>They say that you will need a weapon of mass destruction to come closer to your goal. &ndash; A <i>wand</i> of destruction helps.
+<li>They say that your piety depends on your disposition towards all gods of your pantheon. &ndash; True.
+<li>They say ye cannot shoot yourself, no matter how hard ye try. &ndash; The PC cannot shoot her doppelganger "self" since they are immune to missiles. The PC can shoot her real self easily,
+with Lightning Bolt, Death Ray, Magic Missile, wands of ball lightning or wands of far slaying.
+<li>This cookie will make you pay a high price. &ndash; Nonsense.
+<li>This is a joke. &ndash; Nonsense.
+<li>Those of Trollish Blood must drink from the Bloody Pool. &ndash; Nonsense.
+<li>Those who guard artifacts are deadly enemies. &ndash; Usually.
+<li>Those without overwhelming piety won't affect elemental altars. &ndash; The PC must be a champion of Order or Balance.
+<li>To be heavy is not very nifty in a deep rift. &ndash; The heavier the PC is, the more chance they seem to have of falling when climbing the Rift.
+<li>To change the gods of chaos would require nothing less than the end of the world. &ndash; Rather end of the game.
+<li>To leave the animated forest you will have to reach the corner opposite the enterance. &ndash; True.
+<li>Who are they, anyway? &ndash; Reference to the amount of fortune cookie messages that begin with "They say".
+<li>Ye dost not need to find some kind of amulet to save the world. &ndash; Reference to the original Rogue and its descendants.
+<li>Your termination is long due. &ndash; Right. So is the termination of this list.
+</ol><p>
+
+<h4 id="0f82">0.15.8.2 Yggaz's babbling</h4>
+<p><ol type="1">
+<li>A lord might come, he will kill some, others he will beat and that will be neat.
+<li>Age is power, fulfillment is a shower.
+<li>Baba's my mother, Stalker my father and I'm the eternal wanderer.
+<li>Convenience does not mean ease of use!
+<li>Didst ye ever eat a hag? Try it, it's very fulfilling! &ndash; And cursing.
+<li>Discover the beginning and you will have found the end. &ndash; Discover the origin of the Chaos incursion into Ancardia and you reach the end of the game.
+<li>Healers are strange people &ndash; they enjoy it if you throw stuff at weak ones... &ndash; One way to satisfy Jharod.
+<li>Follow the course, ride the horse, eat the bean and feel pretty lean.
+<li>Life's a boon and ye art a goon!
+<li>Remember: wherever you go, there you are!
+<li>Search the bard and hit him hard! &ndash; May refer to Filk.
+<li>Search the garden, harvest the treasures and take some measures. &ndash; Probably refers to herbs and arranging them into stable patterns.
+<li>Sting the bee and rewarded will be thee. &ndash; Hives are more likely to leave gelee royal after kicking them.
+<li>Swing the anvil and smash the unyielding.
+<li>The avatar I was... now the fool I am. Heed the warning. &ndash; Don't become a fallen champion?
+<li>...the right stuff that is. &ndash; Probably a continuation of #7.
+<li>The tiny island is quite magical... isn't that tragical? &ndash; Refers to the island in Terinyo.
+<li>The warning I was... now the fool I am. Heat the warning.
+<li>Wait till the dawn of time and yer problems will be solved.
+<li>Wild my babbling might be, mild my being might be...
+<li>Yagga Yagga Yeek Yeek!
+</ol><p>
+
+<h4 id="0f9">0.15.9 Final score</h4>
+Score is not influenced by equipment, attribute boosting, and number of times game was saved.
+The algorithm presented here is revised to reflect experiments conducted in April, 2008. Explanations are in {}:
+<pre>
+score = sum of all skill scores / 20 {each maximized skill is worth 5 points}
+  + (spell memory for each known spell / 5 + 50) {each known spell is worth 50 points plus one fifth of its spell knowledge}
+  + MIN(piety - 200, 10000000) {1 point for every piety point above 200 up to 10 million, or 1 point penalty for every piety point below 200 with no limit}
+  + (level - 1) * 50 {every character level is worth 50 points}
+  + experience / ~3.5 {every 3.5 exp.points are worth 1 point}
+  + (sum of the danger levels [1-50] of explored levels) * 30 {every DL of visited level is worth 30 points &ndash; extensive use of scrolls of danger increases score}
+  + (# identified items * 100) {every identified item is worth 100 points}
+  + various amounts for having intrinsics (between 200 and 10000 each)
+  + ~2000 (retrieving the Cute Dog)
+  + 20000 (making Blup happy)
+  + (sum of attribute modifications * 200) {every point in base attributes higher than starting is worth 200 points, lower than starting means 200 points penalty}
+  + (# of successful dwarven quests * 5000) {every completed dwarven quest is worth 5000 points}
+  + 5000 (if member of Thieves Guild)
+  + 5000 (if head of Thieves Guild)
+  + 1000 (adhering to the principles of the Cat Lord)
+  + 250000 (saving Khelavaster)
+  + 2000000 (being a paragon of Order)
+  + MAX(0, 300 - max. hitpoints) * 1000 (only if the game was completed) {1000 points per max.HP below 300 and game completed}
+  + 20000 (no divine interventions and game complete)
+  + 20000 (champion)
+  - 10000 (fallen champion)
+  - (chaos score * 20) {each corruption subtracts 20000 points}
+</pre><p>
+
+This score is doubled if you managed to solve the major goal of the game (close the Chaos Gate). If you managed to solve the game and leave the Drakalor Chain the
+following is added to that score:
+<pre>
+MAX(0, 80000 - moves) * 1000 {every turn below 80000 is worth 1000 points}
+</pre>
+Then the score is once more doubled.<p>
+
+<a href="adomgb-0-15-score.html">Dispelling final score myths</a> &ndash; discoveries by Darren Grey.<p>
+
+<hr>
+Updated September 11th, 2020
+</body>
+</html>
