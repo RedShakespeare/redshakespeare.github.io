@@ -1,0 +1,17 @@
+# hexo robots.txt
+User-agent: *
+Allow: /
+Allow: /roguelike
+Allow: /archives
+Allow: /about
+Allow: /tags/
+
+Disallow: /assets/
+Disallow: /img/
+Disallow: /js/
+Disallow: /css/
+Disallow: /links/
+Disallow: /files/
+Disallow: /sitemap.xml
+
+Sitemap: http://www.ephesus.top/ep-sitemap.xml
