@@ -1,0 +1,363 @@
+{
+	"baseTileSize": 16,
+	"tilesets": [
+		{
+			"id": "ui16",
+			"file": "./gfx/ui16.png",
+			"tilesetCountX": 16,
+			"tilesetCountY": 16,
+			"tileSizeX": 16,
+			"tileSizeY": 16,
+			"offsetX": 0,
+			"offsetY": 0
+		},
+		{
+			"id": "uiThin",
+			"file": "./gfx/ui16.png",
+			"tilesetCountX": 4,
+			"tilesetCountY": 16,
+			"tileSizeX": 64,
+			"tileSizeY": 16,
+			"offsetX": 0,
+			"offsetY": 0
+		},
+		{
+			"id": "terrain16",
+			"file": "./gfx/terrain16.png",
+			"tilesetCountX": 16,
+			"tilesetCountY": 16,
+			"tileSizeX": 16,
+			"tileSizeY": 16,
+			"offsetX": 0,
+			"offsetY": 0
+		},
+		{
+			"id": "16",
+			"file": "./gfx/16.png",
+			"tilesetCountX": 16,
+			"tilesetCountY": 16,
+			"tileSizeX": 16,
+			"tileSizeY": 16,
+			"offsetX": 0,
+			"offsetY": 0
+		},
+		{
+			"id": "creatures16",
+			"file": "./gfx/creatures16.png",
+			"tilesetCountX": 16,
+			"tilesetCountY": 16,
+			"tileSizeX": 16,
+			"tileSizeY": 16,
+			"offsetX": 0,
+			"offsetY": 0
+		},
+		{
+			"id": "animals16",
+			"file": "./gfx/animals16.png",
+			"tilesetCountX": 16,
+			"tilesetCountY": 4,
+			"tileSizeX": 16,
+			"tileSizeY": 16,
+			"offsetX": 0,
+			"offsetY": 0
+		},
+		{
+			"id": "animals24",
+			"file": "./gfx/animals24.png",
+			"tilesetCountX": 10,
+			"tilesetCountY": 10,
+			"tileSizeX": 24,
+			"tileSizeY": 24,
+			"offsetX": 0,
+			"offsetY": -8
+		},
+		{
+			"id": "32c",
+			"file": "./gfx/32c.png",
+			"tilesetCountX": 16,
+			"tilesetCountY": 16,
+			"tileSizeX": 32,
+			"tileSizeY": 32,
+			"offsetX": -8,
+			"offsetY": -16
+		},
+		{
+			"id": "blocks",
+			"file": "./gfx/blocks.png",
+			"tilesetCountX": 16,
+			"tilesetCountY": 12,
+			"tileSizeX": 16,
+			"tileSizeY": 32,
+			"offsetX": 0,
+			"offsetY": -16
+		}
+	],
+	"layers": [
+		{
+			"name": "Terrain",
+			"offsetX": 0,
+			"offsetY": 0
+		},
+		{
+			"name": "Flooring",
+			"offsetX": 0,
+			"offsetY": 0
+		},
+		{
+			"name": "Plants",
+			"offsetX": 0,
+			"offsetY": -4
+		},
+		{
+			"name": "Items",
+			"offsetX": 0,
+			"offsetY": 0
+		},
+		{
+			"name": "StackedItems",
+			"offsetX": 0,
+			"offsetY": -6
+		},
+		{
+			"name": "Beings",
+			"offsetX": 0,
+			"offsetY": -4
+		}
+	],
+	"visualSetCredits": "",
+	"tabCursor": {
+		"tileset": "uiThin",
+		"index": "2-0"
+	},
+	"squareCursor": {
+		"tileset": "ui16",
+		"index": "1-0"
+	},
+	"disabledTabCursor": {
+		"tileset": "uiThin",
+		"index": "1-0"
+	},
+	"disabledSquareCursor": {
+		"tileset": "ui16",
+		"index": "3-0"
+	},
+	"gridSlot": {
+		"tileset": "ui16",
+		"index": "3-0"
+	},
+	"pointyCursor": {
+		"tileset": "ui16",
+		"index": "2-0"
+	},
+	"invalidCursor": {
+		"tileset": "ui16",
+		"index": "3-1"
+	},
+	"gencoStationIcon": {
+		"tileset": "ui16",
+		"index": "0-4"
+	},
+	"forestIcon": {
+		"tileset": "ui16",
+		"index": "1-4"
+	},
+	"smallForestIcon": {
+		"tileset": "ui16",
+		"index": "2-4"
+	},
+	"mountainIcon": {
+		"tileset": "ui16",
+		"index": "3-4"
+	},
+	"windowTiles": {
+		"tileset": "ui16",
+		"tiles": {
+			"a": "0-1",
+			"b": "1-1",
+			"c": "2-1",
+			"d": "0-2",
+			"e": "1-2",
+			"f": "2-2",
+			"g": "0-3",
+			"h": "1-3",
+			"i": "2-3"
+		}
+	},
+	"viewports": {
+		"mobile": {
+			"viewportCountX": 28,
+			"viewportCountY": 14,
+			"textboxFontSize": 72,
+			"windowWidth": 448,
+			"windowHeight": 224
+		},
+		"desktop": {
+			"viewportCountX": 48,
+			"viewportCountY": 28,
+			"textboxFontSize": 72,
+			"windowWidth": 768,
+			"windowHeight": 432
+		}
+	},
+	"panels": {
+		"mobile": {
+			"stats": {
+				"x": 38,
+				"y": 8
+			},
+			"hud": {
+				"day": {
+					"x": 131,
+					"y": 200
+				},
+				"waypoint": {
+					"x": 131,
+					"y": 210
+				},
+				"leftContextualAction": {
+					"x": 396,
+					"y": 200,
+					"align": "right"
+				}
+			},
+			"journal": {
+				"x": 16,
+				"y": 0,
+				"rows": 4,
+				"rowHeight": 46,
+				"width": 352
+			},
+			"activities": {
+				"x": 16,
+				"y": 0,
+				"rows": 4,
+				"rowHeight": 16,
+				"width": 352
+			},
+			"onboarding": {
+				"width": 220,
+				"verticalOffset": -96,
+				"bottomAnchorOffset": 156
+			},
+			"toolbox": {
+				"horizontalOffset": 78
+			},
+			"actions": {
+				"width": 272,
+				"x": 0,
+				"y": 0,
+				"centered": false
+			},
+			"settings": {
+				"width": 272,
+				"x": 0,
+				"y": 0
+			},
+			"crafting": {
+				"x": 0,
+				"y": 50,
+				"w": 384,
+				"h": 160,
+				"selectedX": 144,
+				"selectedY": 120
+			},
+			"container": {
+				"x": 0,
+				"y": 0,
+				"w": 440,
+				"h": 216,
+				"columns": 10,
+				"rows": 8,
+				"selectedX": 320,
+				"selectedY": 8,
+				"selectedWidth": 116
+			},
+			"map": {
+				"x": 107,
+				"y": 20,
+				"w": 170,
+				"h": 186,
+				"scale": 0.5
+			}
+		},
+		"desktop": {
+			"stats": {
+				"x": 8,
+				"y": 48
+			},
+			"hud": {
+				"day": {
+					"x": 8,
+					"y": 0
+				},
+				"waypoint": {
+					"x": 8,
+					"y": 10
+				},
+				"leftContextualAction": {
+					"x": 640,
+					"y": 338
+				}
+			},
+			"journal": {
+				"x": 248,
+				"y": 32,
+				"rows": 7,
+				"rowHeight": 46,
+				"width": 360
+			},
+			"activities": {
+				"x": 248,
+				"y": 32,
+				"rows": 7,
+				"rowHeight": 16,
+				"width": 360
+			},
+			"onboarding": {
+				"width": 300,
+				"verticalOffset": -176,
+				"bottomAnchorOffset": 310
+			},
+			"toolbox": {
+				"horizontalOffset": 128
+			},
+			"actions": {
+				"width": 272,
+				"x": 8,
+				"y": 32,
+				"centered": true
+			},
+			"settings": {
+				"width": 200,
+				"x": 248,
+				"y": 40
+			},
+			"crafting": {
+				"x": 144,
+				"y": 0,
+				"w": 480,
+				"h": 100,
+				"selectedX": 464,
+				"selectedY": 8
+			},
+			"container": {
+				"x": 144,
+				"y": 0,
+				"w": 480,
+				"h": 192,
+				"columns": 10,
+				"rows": 8,
+				"selectedX": 464,
+				"selectedY": 8,
+				"selectedWidth": 150
+			},
+			"map": {
+				"x": 214,
+				"y": 20,
+				"w": 340,
+				"h": 356,
+				"scale": 1
+			}
+		}
+	}
+}

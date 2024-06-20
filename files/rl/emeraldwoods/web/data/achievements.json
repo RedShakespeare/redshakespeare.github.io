@@ -1,0 +1,57 @@
+{
+	"data": [
+		{
+			"id": "GENCO1",
+			"name": "Genco Central Station",
+			"description": "Access Genco Central Station",
+			"hook": "OFFICE",
+			"active": true
+		},
+		{
+			"id": "FIND_LEASH",
+			"name": "Find a Leash",
+			"description": "Find a Leash",
+			"param": "LEASH",
+			"hook": "GET",
+			"active": false
+		},
+		{
+			"id": "FIND_PICKAXE",
+			"name": "Find a Pickaxe",
+			"description": "Find a Pickaxe",
+			"param": "PICKAXE",
+			"hook": "GET",
+			"active": false
+		},
+		{
+			"id": "CAKE",
+			"name": "Bake a Carrot Cake",
+			"description": "Bake a Carrot Cake",
+			"param": "CARROT_CAKE",
+			"hook": "COOK",
+			"active": true
+		},
+		{
+			"id": "BUILD",
+			"name": "Getting settled",
+			"description": "Build a 50 blocks big house",
+			"goal": 50,
+			"hook": "BUILD",
+			"active": true
+		},
+		{
+			"id": "FEA",
+			"name": "Farm'em All",
+			"description": "Grow one of each available crop",
+			"hook": "CROPS",
+			"active": true
+		},
+		{
+			"id": "CEA",
+			"name": "Catch'em all",
+			"description": "Capture at least one of each animal",
+			"hook": "ANIMALS",
+			"active": true
+		}
+	]
+}

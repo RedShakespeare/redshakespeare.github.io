@@ -1,0 +1,1065 @@
+{
+	"data": [
+		{
+			"id": "STONE_WALL",
+			"name": "Stone Wall",
+			"app": "STONE_WALL",
+			"weight": 1000000,
+			"renderGroup": "WALL",
+			"opaque": true,
+			"solid": true,
+			"sticksToFence": true,
+			"enclosesSpace": true,
+			"description": "A solid wall.",
+			"breakable": {
+				"hp": 10,
+				"toItem": "STONE",
+				"itemQuantity": 3,
+				"breakSfx": "rock_break"
+			}
+		},
+		{
+			"id": "BRICK_WALL",
+			"name": "Brick Wall",
+			"app": "BRICK_WALL",
+			"weight": 800000,
+			"renderGroup": "WALL",
+			"opaque": true,
+			"solid": true,
+			"sticksToFence": true,
+			"enclosesSpace": true,
+			"description": "A solid wall.",
+			"breakable": {
+				"hp": 5,
+				"toItem": "STONE",
+				"itemQuantity": 2,
+				"breakSfx": "rock_break"
+			},
+			"previewColor": "#F5A15D"
+		},
+		{
+			"id": "PLOT_WALL",
+			"name": "P.L.O.T. Wall",
+			"app": "PLOT_WALL",
+			"weight": 800000,
+			"renderGroup": "WALL",
+			"opaque": true,
+			"solid": true,
+			"sticksToFence": true,
+			"description": "An indestructible wall made of Photonic Lythic OxyTheramide",
+			"previewColor": "#F5A15D"
+		},
+		{
+			"id": "WOODEN_WALL",
+			"name": "Wooden wall",
+			"app": "WOODEN_WALL",
+			"weight": 800000,
+			"renderGroup": "WALL",
+			"opaque": true,
+			"solid": true,
+			"sticksToFence": true,
+			"enclosesSpace": true,
+			"description": "A wall made of wood.",
+			"chopable": {
+				"hp": 5,
+				"chopSfx": "break_fence",
+				"toItem": "WOOD",
+				"itemQuantity": 2
+			},
+			"previewColor": "#D4662F"
+		},
+		{
+			"id": "WOODEN_WINDOW",
+			"name": "Wooden window",
+			"app": "WOODEN_WINDOW",
+			"weight": 800000,
+			"renderGroup": "WINDOW",
+			"opaque": false,
+			"solid": true,
+			"sticksToFence": true,
+			"enclosesSpace": true,
+			"description": "A window frame made of wood.",
+			"chopable": {
+				"hp": 5,
+				"chopSfx": "break_fence",
+				"toItem": "WOOD",
+				"itemQuantity": 2
+			},
+			"previewColor": "#D4662F"
+		},
+		{
+			"id": "STONE_WINDOW",
+			"name": "Stone window",
+			"app": "STONE_WINDOW",
+			"weight": 800000,
+			"renderGroup": "WINDOW",
+			"opaque": false,
+			"solid": true,
+			"sticksToFence": true,
+			"enclosesSpace": true,
+			"description": "A stone wall with a hole for a window.",
+			"breakable": {
+				"hp": 5,
+				"toItem": "STONE",
+				"itemQuantity": 3,
+				"breakSfx": "rock_break"
+			},
+			"previewColor": "#D4662F"
+		},
+		{
+			"id": "STONE_COLUMN",
+			"name": "Stone column",
+			"app": "STONE_COLUMN",
+			"weight": 800000,
+			"renderGroup": "STONE_COLUMN",
+			"opaque": true,
+			"solid": true,
+			"description": "A column made of stone.",
+			"breakable": {
+				"hp": 5,
+				"toItem": "STONE",
+				"itemQuantity": 2,
+				"breakSfx": "rock_break"
+			},
+			"previewColor": "#D4662F"
+		},
+		{
+			"id": "BRICK_WINDOW",
+			"name": "Brick Window",
+			"app": "BRICK_WINDOW",
+			"weight": 800000,
+			"renderGroup": "WINDOW",
+			"opaque": false,
+			"solid": true,
+			"sticksToFence": true,
+			"enclosesSpace": true,
+			"description": "A window frame in a bricks wall.",
+			"breakable": {
+				"hp": 5,
+				"toItem": "STONE",
+				"itemQuantity": 3,
+				"breakSfx": "rock_break"
+			},
+			"previewColor": "#D4662F"
+		},
+		{
+			"id": "WOODEN_BRIDGE",
+			"name": "Wooden bridge",
+			"app": "WOODEN_BRIDGE",
+			"weight": 800000,
+			"renderGroup": "WOODEN_BRIDGE",
+			"fixed": true,
+			"bridge": true,
+			"description": "You can walk over the water!",
+			"chopable": {
+				"hp": 5,
+				"toItem": "WOOD",
+				"itemQuantity": 3
+			},
+			"stepAudio": {
+				"preffix": "fs_wbridge_0",
+				"variations": 5
+			}
+		},
+		{
+			"id": "WOODEN_FLOOR",
+			"name": "Wooden floor",
+			"app": "WOODEN_FLOOR",
+			"weight": 1000,
+			"renderGroup": "WOODEN_FLOOR",
+			"fixed": true,
+			"opaque": false,
+			"solid": false,
+			"description": "A floor made of wood",
+			"chopable": {
+				"hp": 3,
+				"chopSfx": "break_wfloor",
+				"toItem": "WOOD",
+				"itemQuantity": 1
+			},
+			"stepAudio": {
+				"preffix": "fs_wood_0",
+				"variations": 6
+			},
+			"dropAudio": {
+				"preffix": "drop_wood_0",
+				"variations": 2
+			},
+			"faintAudio": "faint_wood",
+			"previewColor": "#D4662F"
+		},
+		{
+			"id": "TILE_1",
+			"name": "Circular Tile",
+			"app": "TILE_1",
+			"weight": 1000,
+			"renderGroup": "FLOOR",
+			"fixed": true,
+			"opaque": false,
+			"solid": false,
+			"description": "Tiles with a pattern of circles",
+			"breakable": {
+				"hp": 3
+			},
+			"previewColor": "#D4662F"
+		},
+		{
+			"id": "TILE_2",
+			"name": "Addorned Tile",
+			"app": "TILE_2",
+			"weight": 1000,
+			"renderGroup": "FLOOR",
+			"fixed": true,
+			"opaque": false,
+			"solid": false,
+			"description": "Tiles with an addorned pattern.",
+			"breakable": {
+				"hp": 3
+			},
+			"previewColor": "#D4662F"
+		},
+		{
+			"id": "TILE_3",
+			"name": "Geometric Tile",
+			"app": "TILE_3",
+			"weight": 1000,
+			"renderGroup": "FLOOR",
+			"fixed": true,
+			"opaque": false,
+			"solid": false,
+			"description": "Tiles with a geometric pattern.",
+			"breakable": {
+				"hp": 3
+			},
+			"previewColor": "#D4662F"
+		},
+		{
+			"id": "STONE_FLOORING",
+			"name": "Stone Floor",
+			"app": "STONE_FLOORING",
+			"weight": 1000,
+			"renderGroup": "FLOOR",
+			"fixed": true,
+			"opaque": false,
+			"solid": false,
+			"description": "Floor made of stone",
+			"breakable": {
+				"hp": 2,
+				"toItem": "STONE",
+				"itemQuantity": 1,
+				"breakSfx": "rock_break"
+			},
+			"previewColor": "#D4662F"
+		},
+		{
+			"id": "BRICK_FLOORING_1",
+			"name": "Brick Floor",
+			"app": "BRICK_FLOORING_1",
+			"weight": 1000,
+			"renderGroup": "FLOOR",
+			"fixed": true,
+			"opaque": false,
+			"solid": false,
+			"description": "Floor made of small bricks",
+			"breakable": {
+				"hp": 1
+			},
+			"previewColor": "#D4662F"
+		},
+		{
+			"id": "BRICK_FLOORING_2",
+			"name": "Brick Floor",
+			"app": "BRICK_FLOORING_2",
+			"weight": 1000,
+			"renderGroup": "FLOOR",
+			"fixed": true,
+			"opaque": false,
+			"solid": false,
+			"description": "Floor made of small bricks",
+			"breakable": {
+				"hp": 1
+			},
+			"previewColor": "#D4662F"
+		},
+		{
+			"id": "WOODEN_WALKWAY",
+			"name": "Wooden walkway",
+			"app": "WOODEN_WALKWAY",
+			"weight": 1000,
+			"renderGroup": "WOODEN_WALKWAY",
+			"fixed": true,
+			"opaque": false,
+			"solid": false,
+			"description": "A road made of wood",
+			"chopable": {
+				"hp": 3,
+				"chopSfx": "break_wfloor",
+				"toItem": "WOOD",
+				"itemQuantity": 1
+			},
+			"stepAudio": {
+				"preffix": "fs_wood_0",
+				"variations": 6
+			},
+			"dropAudio": {
+				"preffix": "drop_wood_0",
+				"variations": 2
+			},
+			"faintAudio": "faint_wood",
+			"previewColor": "#D4662F"
+		},
+		{
+			"id": "STONE_ROAD",
+			"name": "Stone Road",
+			"app": "STONE_ROAD",
+			"weight": 2000,
+			"renderGroup": "STONE_ROAD",
+			"fixed": true,
+			"opaque": false,
+			"solid": false,
+			"description": "A road made of stone",
+			"breakable": {
+				"hp": 2,
+				"toItem": "STONE",
+				"itemQuantity": 1,
+				"breakSfx": "rock_break"
+			},
+			"previewColor": "#D4662F"
+		},
+		{
+			"id": "FENCE",
+			"name": "Fence",
+			"app": "FENCE",
+			"weight": 10000,
+			"renderGroup": "FENCE",
+			"solid": true,
+			"sticksToFence": true,
+			"description": "Prevents animals from escaping or eating crops.",
+			"chopable": {
+				"hp": 5,
+				"chopSfx": "break_fence",
+				"toItem": "WOOD",
+				"itemQuantity": 1
+			}
+		},
+		{
+			"id": "SMALL_BED",
+			"name": "Small Bed",
+			"app": "SMALL_BED",
+			"weight": 50000,
+			"renderGroup": "SMALL_BED",
+			"solid": true,
+			"nearAction": true,
+			"description": "Very comfortable to sleep.",
+			"effect": "sleep"
+		},
+		{
+			"id": "BIG_BED",
+			"name": "Big Bed",
+			"app": "BIG_BED",
+			"menuAppearance": "BIG_BED_MENU",
+			"weight": 100000,
+			"renderGroup": "BIG_BED",
+			"solid": true,
+			"nearAction": true,
+			"description": "Very comfortable to sleep.",
+			"effect": "sleep",
+			"rotable": {
+				"rotable": true
+			}
+		},
+		{
+			"id": "WOODEN_DOOR",
+			"name": "Wooden door",
+			"app": "WOODEN_DOOR",
+			"weight": 50000,
+			"renderGroup": "WALL",
+			"fixed": true,
+			"opaque": false,
+			"solid": false,
+			"solidChain": true,
+			"enclosesSpace": true,
+			"nearAction": true,
+			"effect": "transform",
+			"chopable": {
+				"hp": 3,
+				"chopSfx": "break_fence",
+				"toItem": "WOOD",
+				"itemQuantity": 2
+			},
+			"transform": {
+				"message": "You close the door.",
+				"itemId": "WOODEN_DOOR_CLOSED",
+				"sfx": "door_close"
+			},
+			"previewColor": "#F0C297"
+		},
+		{
+			"id": "WOODEN_DOOR_CLOSED",
+			"name": "Wooden door (Closed)",
+			"app": "WOODEN_DOOR_CLOSED",
+			"weight": 50000,
+			"renderGroup": "WALL",
+			"fixed": true,
+			"opaque": true,
+			"solid": true,
+			"enclosesSpace": true,
+			"nearAction": true,
+			"effect": "transform",
+			"chopable": {
+				"hp": 3,
+				"chopSfx": "break_fence",
+				"toItem": "WOOD",
+				"itemQuantity": 2
+			},
+			"transform": {
+				"message": "You open the door.",
+				"itemId": "WOODEN_DOOR",
+				"sfx": "door_open"
+			},
+			"previewColor": "#F0C297"
+		},
+		{
+			"id": "RED_CURTAIN",
+			"name": "Red Curtain",
+			"app": "RED_CURTAIN",
+			"menuAppearance": "RED_CURTAIN_MENU",
+			"weight": 1000,
+			"renderGroup": "CURTAIN",
+			"wallAttachable": true,
+			"opaque": false,
+			"solid": false,
+			"nearAction": true,
+			"effect": "transform",
+			"chopable": {
+				"hp": 1
+			},
+			"transform": {
+				"message": "You close the curtain.",
+				"itemId": "RED_CURTAIN_CLOSED"
+			},
+			"previewColor": "#F0C297"
+		},
+		{
+			"id": "RED_CURTAIN_CLOSED",
+			"name": "Red Curtain (Closed)",
+			"app": "RED_CURTAIN_CLOSED",
+			"menuAppearance": "RED_CURTAIN_MENU",
+			"weight": 1000,
+			"renderGroup": "CURTAIN",
+			"wallAttachable": true,
+			"opaque": true,
+			"solid": false,
+			"nearAction": true,
+			"effect": "transform",
+			"chopable": {
+				"hp": 1
+			},
+			"transform": {
+				"message": "You open the curtain.",
+				"itemId": "RED_CURTAIN"
+			},
+			"previewColor": "#F0C297"
+		},
+		{
+			"id": "BLUE_CURTAIN",
+			"name": "Blue Curtain",
+			"app": "BLUE_CURTAIN",
+			"menuAppearance": "BLUE_CURTAIN_MENU",
+			"weight": 1000,
+			"renderGroup": "CURTAIN",
+			"wallAttachable": true,
+			"opaque": false,
+			"solid": false,
+			"nearAction": true,
+			"effect": "transform",
+			"chopable": {
+				"hp": 1
+			},
+			"transform": {
+				"message": "You close the curtain.",
+				"itemId": "BLUE_CURTAIN_CLOSED"
+			},
+			"previewColor": "#F0C297"
+		},
+		{
+			"id": "BLUE_CURTAIN_CLOSED",
+			"name": "Blue Curtain (Closed)",
+			"app": "BLUE_CURTAIN_CLOSED",
+			"menuAppearance": "BLUE_CURTAIN_MENU",
+			"weight": 1000,
+			"renderGroup": "CURTAIN",
+			"wallAttachable": true,
+			"opaque": true,
+			"solid": false,
+			"nearAction": true,
+			"effect": "transform",
+			"chopable": {
+				"hp": 1
+			},
+			"transform": {
+				"message": "You open the curtain.",
+				"itemId": "BLUE_CURTAIN"
+			},
+			"previewColor": "#F0C297"
+		},
+		{
+			"id": "CARPET_1",
+			"name": "Gray Carpet",
+			"app": "CARPET_1",
+			"weight": 1000,
+			"renderGroup": "CARPET",
+			"nearAction": true,
+			"effect": "rotate",
+			"rotable": {
+				"rotable": true
+			},
+			"chopable": {
+				"hp": 1
+			},
+			"previewColor": "#F0C297"
+		},
+		{
+			"id": "CARPET_2",
+			"name": "Orange Carpet",
+			"app": "CARPET_2",
+			"weight": 1000,
+			"renderGroup": "CARPET",
+			"nearAction": true,
+			"effect": "rotate",
+			"rotable": {
+				"rotable": true
+			},
+			"chopable": {
+				"hp": 1
+			},
+			"previewColor": "#F0C297"
+		},
+		{
+			"id": "CARPET_3",
+			"name": "Green Carpet",
+			"app": "CARPET_3",
+			"weight": 1000,
+			"renderGroup": "CARPET",
+			"nearAction": true,
+			"effect": "rotate",
+			"rotable": {
+				"rotable": true
+			},
+			"chopable": {
+				"hp": 1
+			},
+			"previewColor": "#F0C297"
+		},
+		{
+			"id": "GRAY_DOOR",
+			"name": "Vault door",
+			"app": "GRAY_DOOR",
+			"weight": 50000,
+			"renderGroup": "WALL",
+			"fixed": true,
+			"opaque": false,
+			"solid": false,
+			"solidChain": true,
+			"enclosesSpace": true,
+			"nearAction": true,
+			"effect": "transform",
+			"transform": {
+				"message": "You close the door.",
+				"itemId": "GRAY_DOOR_CLOSED",
+				"sfx": "door_close"
+			},
+			"previewColor": "#F0C297"
+		},
+		{
+			"id": "GRAY_DOOR_CLOSED",
+			"name": "Vault door (Closed)",
+			"app": "GRAY_DOOR_CLOSED",
+			"weight": 50000,
+			"renderGroup": "WALL",
+			"fixed": true,
+			"opaque": true,
+			"solid": true,
+			"enclosesSpace": true,
+			"nearAction": true,
+			"effect": "transform",
+			"transform": {
+				"message": "You open the door.",
+				"itemId": "GRAY_DOOR",
+				"sfx": "door_open"
+			},
+			"previewColor": "#F0C297"
+		},
+		{
+			"id": "GRAY_DOOR_LOCKED",
+			"name": "Vault door (Locked)",
+			"app": "GRAY_DOOR_CLOSED",
+			"weight": 50000,
+			"renderGroup": "WALL",
+			"fixed": true,
+			"opaque": true,
+			"solid": true,
+			"enclosesSpace": true,
+			"nearAction": true,
+			"effect": "tryUnlock",
+			"unlock": {
+				"message": "You unlock the door",
+				"itemId": "OFFICE_KEY",
+				"transform": "GRAY_DOOR"
+			},
+			"previewColor": "#F0C297"
+		},
+		{
+			"id": "WOODEN_GATE",
+			"name": "Wooden gate",
+			"app": "WOODEN_GATE",
+			"weight": 10000,
+			"renderGroup": "FENCE",
+			"fixed": true,
+			"opaque": false,
+			"solid": false,
+			"sticksToFence": true,
+			"solidChain": true,
+			"jumpable": true,
+			"nearAction": true,
+			"effect": "transform",
+			"chopable": {
+				"hp": 3,
+				"chopSfx": "break_fence",
+				"toItem": "WOOD",
+				"itemQuantity": 2
+			},
+			"transform": {
+				"message": "You close the gate.",
+				"itemId": "WOODEN_GATE_CLOSED",
+				"sfx": "gate_close"
+			},
+			"previewColor": "#F0C297"
+		},
+		{
+			"id": "WOODEN_GATE_CLOSED",
+			"name": "Wooden gate (Closed)",
+			"app": "WOODEN_GATE_CLOSED",
+			"weight": 10000,
+			"renderGroup": "FENCE",
+			"fixed": true,
+			"opaque": false,
+			"solid": true,
+			"sticksToFence": true,
+			"jumpable": true,
+			"nearAction": true,
+			"effect": "transform",
+			"chopable": {
+				"hp": 3,
+				"chopSfx": "break_fence",
+				"toItem": "WOOD",
+				"itemQuantity": 2
+			},
+			"transform": {
+				"message": "You open the gate.",
+				"itemId": "WOODEN_GATE",
+				"sfx": "gate_open"
+			},
+			"previewColor": "#F0C297"
+		},
+		{
+			"id": "CAMPFIRE",
+			"name": "Campfire",
+			"app": "CAMPFIRE",
+			"weight": 2000,
+			"renderGroup": "CAMPFIRE",
+			"fixed": true,
+			"isTable": true,
+			"isWaypoint": true,
+			"solid": true,
+			"nearAction": true,
+			"soundSource": {
+				"sound": "campfire_near",
+				"range": 5
+			},
+			"lightSource": {
+				"color": "#F18831",
+				"range": 8,
+				"intensity": 0.7
+			},
+			"description": "Provides light in darkness and safe rest, allows you to cook stuff.",
+			"effect": "cook",
+			"chopable": {
+				"hp": 5,
+				"chopSfx": "break_campfire",
+				"toItem": "FLINTSTONE",
+				"itemQuantity": 1
+			}
+		},
+		{
+			"id": "STONE",
+			"name": "Stone",
+			"app": "STONE",
+			"weight": 500,
+			"renderGroup": "STONE",
+			"solid": false,
+			"description": "A solid boulder. Useful to craft things.",
+			"breakable": {
+				"hp": 3,
+				"breakSfx": "rock_break"
+			},
+			"grabSound": "grab_rock_01,grab_rock_02"
+		},
+		{
+			"id": "WOODEN_TABLE",
+			"name": "Wooden table",
+			"app": "WOODEN_TABLE",
+			"weight": 100000,
+			"renderGroup": "WOODEN_TABLE",
+			"isTable": true,
+			"solid": true,
+			"solidChain": false,
+			"description": "Objects can be placed on top.",
+			"effect": "rotate",
+			"rotable": {
+				"rotable": true
+			},
+			"chopable": {
+				"hp": 3,
+				"chopSfx": "break_wfloor",
+				"toItem": "WOOD",
+				"itemQuantity": 10
+			}
+		},
+		{
+			"id": "WOODEN_TABLE_2",
+			"name": "Wooden table",
+			"app": "WOODEN_TABLE_2",
+			"weight": 100000,
+			"renderGroup": "WOODEN_TABLE_2",
+			"isTable": true,
+			"solid": true,
+			"solidChain": false,
+			"description": "Objects can be placed on top.",
+			"effect": "rotate",
+			"rotable": {
+				"rotable": true
+			},
+			"chopable": {
+				"hp": 3,
+				"chopSfx": "break_wfloor",
+				"toItem": "WOOD",
+				"itemQuantity": 10
+			}
+		},
+		{
+			"id": "NIGHTSTAND",
+			"name": "Nightstand",
+			"app": "NIGHTSTAND",
+			"weight": 20000,
+			"renderGroup": "NIGHTSTAND",
+			"isTable": true,
+			"solid": true,
+			"solidChain": false,
+			"description": "Objects can be placed on top.",
+			"effect": "storeItem",
+			"containerCapacity": 5,
+			"rotable": {
+				"rotable": true
+			},
+			"chopable": {
+				"hp": 3,
+				"chopSfx": "break_wfloor",
+				"toItem": "WOOD",
+				"itemQuantity": 5
+			}
+		},
+		{
+			"id": "STOVE",
+			"name": "Stove",
+			"app": "STOVE",
+			"weight": 100000,
+			"renderGroup": "STOVE",
+			"isTable": true,
+			"addedTableHeight": 2,
+			"solid": true,
+			"solidChain": false,
+			"nearAction": true,
+			"lightSource": {
+				"color": "#F18831",
+				"range": 6,
+				"intensity": 0.7
+			},
+			"description": "Allows you to cook stuff.",
+			"effect": "cook"
+		},
+		{
+			"id": "GRAY_TABLE_M",
+			"name": "Wooden table",
+			"app": "GRAY_TABLE_M",
+			"weight": 100000,
+			"renderGroup": "WOODEN_TABLE",
+			"isTable": true,
+			"solid": true,
+			"solidChain": false,
+			"nearAction": true,
+			"description": "Objects can be placed on top.",
+			"effect": "rotate",
+			"rotable": {
+				"rotable": true
+			},
+			"chopable": {
+				"hp": 3,
+				"chopSfx": "break_wfloor",
+				"toItem": "WOOD",
+				"itemQuantity": 10
+			}
+		},
+		{
+			"id": "GRAY_TABLE_L",
+			"name": "Wooden table",
+			"app": "GRAY_TABLE_L",
+			"weight": 100000,
+			"renderGroup": "WOODEN_TABLE",
+			"isTable": true,
+			"solid": true,
+			"solidChain": false,
+			"nearAction": true,
+			"description": "Objects can be placed on top.",
+			"effect": "rotate",
+			"rotable": {
+				"rotable": true
+			},
+			"chopable": {
+				"hp": 3,
+				"chopSfx": "break_wfloor",
+				"toItem": "WOOD",
+				"itemQuantity": 10
+			}
+		},
+		{
+			"id": "GRAY_TABLE_R",
+			"name": "Wooden table",
+			"app": "GRAY_TABLE_R",
+			"weight": 100000,
+			"renderGroup": "WOODEN_TABLE",
+			"isTable": true,
+			"solid": true,
+			"solidChain": false,
+			"nearAction": true,
+			"description": "Objects can be placed on top.",
+			"effect": "rotate",
+			"rotable": {
+				"rotable": true
+			},
+			"chopable": {
+				"hp": 3,
+				"chopSfx": "break_wfloor",
+				"toItem": "WOOD",
+				"itemQuantity": 10
+			}
+		},
+		{
+			"id": "WOODEN_CHAIR",
+			"name": "Wooden chair",
+			"app": "WOODEN_CHAIR",
+			"weight": 20000,
+			"renderGroup": "WOODEN_CHAIR",
+			"solid": false,
+			"solidChain": false,
+			"description": "Stop sitting on the floor!",
+			"effect": "rotate",
+			"rotable": {
+				"rotable": true
+			},
+			"chopable": {
+				"hp": 2,
+				"chopSfx": "break_wfloor",
+				"toItem": "WOOD",
+				"itemQuantity": 7
+			}
+		},
+		{
+			"id": "RAFT",
+			"name": "Raft",
+			"app": "RAFT",
+			"weight": 25000,
+			"renderGroup": "RAFT",
+			"floating": true,
+			"description": "Use it to move across water bodies."
+		},
+		{
+			"id": "STEEL_BOX",
+			"name": "Steel Box",
+			"app": "STEEL_BOX",
+			"weight": 3000,
+			"renderGroup": "STEEL_BOX",
+			"solid": true,
+			"solidChain": false,
+			"nearAction": true,
+			"description": "A box made of steel, you can store stuff inside of it",
+			"effect": "storeItem",
+			"containerCapacity": 10
+		},
+		{
+			"id": "WOODEN_CRATE",
+			"name": "Wooden Crate",
+			"app": "WOODEN_CRATE",
+			"weight": 1000,
+			"renderGroup": "WOODEN_CRATE",
+			"solid": true,
+			"solidChain": false,
+			"nearAction": true,
+			"description": "A box made of wood, you can store stuff inside of it",
+			"effect": "storeItem",
+			"containerCapacity": 10
+		},
+		{
+			"id": "CART",
+			"name": "Cart",
+			"app": "CART",
+			"weight": 25000,
+			"renderGroup": "CART",
+			"solid": true,
+			"solidChain": false,
+			"wheeled": true,
+			"nearAction": true,
+			"description": "A cart you can pull around",
+			"effect": "storeItem",
+			"containerCapacity": 30
+		},
+		{
+			"id": "ARROW_SIGNPOST",
+			"name": "Arrow Signpost",
+			"app": "ARROW_SIGNPOST",
+			"weight": 20000,
+			"renderGroup": "ARROW_SIGNPOST",
+			"solid": true,
+			"nearAction": true,
+			"description": "A wooden sign pointing somewhere, can be rotated.",
+			"effect": "rotate",
+			"rotable": {
+				"rotable": true
+			},
+			"chopable": {
+				"hp": 4,
+				"chopSfx": "break_wfloor",
+				"toItem": "WOOD",
+				"itemQuantity": 5
+			},
+			"previewColor": "#D4662F"
+		},
+		{
+			"id": "POT_1",
+			"name": "Pot",
+			"app": "POT_1",
+			"weight": 1000,
+			"renderGroup": "POT_1",
+			"description": "A clay pot",
+			"breakable": {
+				"hp": 1,
+				"breakSfx": "rock_break"
+			}
+		},
+		{
+			"id": "POT_2",
+			"name": "Pot",
+			"app": "POT_2",
+			"weight": 1000,
+			"renderGroup": "POT_2",
+			"description": "A clay pot",
+			"breakable": {
+				"hp": 1,
+				"breakSfx": "rock_break"
+			}
+		},
+		{
+			"id": "POT_3",
+			"name": "Pot",
+			"app": "POT_3",
+			"weight": 1000,
+			"renderGroup": "POT_3",
+			"description": "A clay pot",
+			"breakable": {
+				"hp": 1,
+				"breakSfx": "rock_break"
+			}
+		},
+		{
+			"id": "POT_4",
+			"name": "Pot",
+			"app": "POT_4",
+			"weight": 1000,
+			"renderGroup": "POT_4",
+			"description": "A clay pot",
+			"breakable": {
+				"hp": 1,
+				"breakSfx": "rock_break"
+			}
+		},
+		{
+			"id": "STAIRS_UP",
+			"name": "Stairs",
+			"app": "STAIRS_UP",
+			"weight": 50000,
+			"renderGroup": "STAIRS_UP",
+			"fixed": true,
+			"nearAction": true,
+			"effect": "climb",
+			"previewColor": "#F0C297"
+		},
+		{
+			"id": "OPEN_HATCH",
+			"name": "Hatch (Open)",
+			"app": "OPEN_HATCH",
+			"weight": 50000,
+			"renderGroup": "OPEN_HATCH",
+			"fixed": true,
+			"nearAction": true,
+			"effect": "climb",
+			"previewColor": "#F0C297"
+		},
+		{
+			"id": "CLOSED_HATCH",
+			"name": "Hatch (Locked)",
+			"app": "CLOSED_HATCH",
+			"weight": 50000,
+			"renderGroup": "CLOSED_HATCH",
+			"fixed": true,
+			"solid": true,
+			"nearAction": true,
+			"effect": "tryUnlock",
+			"unlock": {
+				"message": "You unlock the hatch",
+				"itemId": "OFFICE_KEY",
+				"transform": "OPEN_HATCH"
+			},
+			"previewColor": "#F0C297"
+		},
+		{
+			"id": "SNOWMAN",
+			"name": "Snowman",
+			"app": "SNOWMAN",
+			"weight": 2000,
+			"renderGroup": "SNOWMAN",
+			"fixed": true,
+			"solid": true,
+			"description": "A man made of snow and dreams.",
+			"breakable": {
+				"hp": 1,
+				"toItem": "SNOW",
+				"itemQuantity": 1
+			}
+		},
+		{
+			"id": "XMAS_TREE",
+			"name": "Festive Tree",
+			"app": "XMAS_TREE",
+			"weight": 8000,
+			"renderGroup": "XMAS_TREE",
+			"fixed": true,
+			"solid": true,
+			"description": "A small tree addorned with berries",
+			"breakable": {
+				"hp": 1,
+				"toItem": "WOOD",
+				"itemQuantity": 1
+			}
+		}
+	]
+}

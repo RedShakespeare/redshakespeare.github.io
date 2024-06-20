@@ -1,0 +1,3398 @@
+{
+	"data": [
+		{
+			"id": "NONE",
+			"character": " ",
+			"color": "#000000",
+			"coord": "0-0",
+			"tileset": "ui16",
+			"rules": []
+		},
+		{
+			"id": "HOE",
+			"character": "L",
+			"color": "#d4662f",
+			"coord": "0-2",
+			"tileset": "16",
+			"rules": []
+		},
+		{
+			"id": "CANE",
+			"character": "l",
+			"color": "#ff9757",
+			"coord": "1-2",
+			"tileset": "16",
+			"rules": []
+		},
+		{
+			"id": "MACHETE",
+			"character": "\\",
+			"color": "#c7d4e1",
+			"coord": "2-2",
+			"tileset": "16",
+			"rules": []
+		},
+		{
+			"id": "KNIFE",
+			"character": "/",
+			"color": "#c7d4e1",
+			"coord": "7-2",
+			"tileset": "16",
+			"rules": []
+		},
+		{
+			"id": "LEASH",
+			"character": "l",
+			"color": "#c7d4e1",
+			"coord": "8-2",
+			"tileset": "16",
+			"rules": []
+		},
+		{
+			"id": "AXE",
+			"character": "┍",
+			"color": "#c7d4e1",
+			"coord": "3-2",
+			"tileset": "16",
+			"rules": []
+		},
+		{
+			"id": "PICKAXE",
+			"character": "Ƭ",
+			"color": "#bd4035",
+			"coord": "4-2",
+			"tileset": "16",
+			"rules": []
+		},
+		{
+			"id": "SHOVEL",
+			"character": "y",
+			"color": "#bd4035",
+			"coord": "5-2",
+			"tileset": "16",
+			"rules": []
+		},
+		{
+			"id": "RAFT",
+			"character": "(",
+			"color": "#d4662f",
+			"coord": "0-3",
+			"tileset": "16",
+			"rules": []
+		},
+		{
+			"id": "PADDLE",
+			"character": "l",
+			"color": "#d4662f",
+			"coord": "6-2",
+			"tileset": "16",
+			"rules": []
+		},
+		{
+			"id": "CAMPFIRE",
+			"character": "△",
+			"color": "#9c3247",
+			"coord": "1-0",
+			"tileset": "16",
+			"rules": []
+		},
+		{
+			"id": "WOOD",
+			"character": "/",
+			"color": "#d4662f",
+			"coord": "0-4",
+			"tileset": "16",
+			"rules": []
+		},
+		{
+			"id": "CLAY",
+			"character": "●",
+			"color": "#d4662f",
+			"coord": "2-3",
+			"tileset": "16",
+			"rules": []
+		},
+		{
+			"id": "SNOWBALL",
+			"character": "●",
+			"color": "#d4662f",
+			"coord": "1-4",
+			"tileset": "16",
+			"rules": []
+		},
+		{
+			"id": "STONE",
+			"character": "●",
+			"color": "#928FB8",
+			"coord": "0-8",
+			"tileset": "terrain16",
+			"rules": [
+				{
+					"type": "RANDOM",
+					"transform": "0-8,1-8,2-8,3-8,4-8"
+				}
+			]
+		},
+		{
+			"id": "FLINTSTONE",
+			"character": "ᴽ",
+			"color": "#e3e6ff",
+			"coord": "2-4",
+			"tileset": "16",
+			"rules": []
+		},
+		{
+			"id": "CARBON",
+			"character": "ᴽ",
+			"color": "#e3e6ff",
+			"coord": "4-4",
+			"tileset": "16",
+			"rules": []
+		},
+		{
+			"id": "IRON_ORE",
+			"character": "ᴽ",
+			"color": "#e3e6ff",
+			"coord": "6-4",
+			"tileset": "16",
+			"rules": []
+		},
+		{
+			"id": "DONGO",
+			"character": "♠",
+			"color": "#ff417d",
+			"coord": "0-5",
+			"tileset": "16",
+			"rules": []
+		},
+		{
+			"id": "BRINGOL",
+			"character": "♠",
+			"color": "#ff417d",
+			"coord": "7-6",
+			"tileset": "16",
+			"rules": []
+		},
+		{
+			"id": "MUSKARIA",
+			"character": "♠",
+			"color": "#df3e23",
+			"coord": "1-5",
+			"tileset": "16",
+			"rules": []
+		},
+		{
+			"id": "RAW_MEAT",
+			"character": "%",
+			"color": "#d46453",
+			"coord": "0-6",
+			"tileset": "16",
+			"rules": []
+		},
+		{
+			"id": "GRILLED_MEAT",
+			"character": "%",
+			"color": "#dba463",
+			"coord": "1-13",
+			"tileset": "16",
+			"rules": []
+		},
+		{
+			"id": "NORMAL_SEED",
+			"character": "✱",
+			"color": "#144491",
+			"coord": "11-5",
+			"tileset": "16",
+			"rules": []
+		},
+		{
+			"id": "PLANTED_SEED",
+			"character": "ﻨ",
+			"color": "#1a7a3e",
+			"coord": "0-1",
+			"tileset": "32c",
+			"rules": []
+		},
+		{
+			"id": "SPROUT",
+			"character": "✻",
+			"color": "#1a7a3e",
+			"coord": "1-1",
+			"tileset": "32c",
+			"rules": []
+		},
+		{
+			"id": "HALF_GROWN_PLANT",
+			"character": "p",
+			"color": "#1a7a3e",
+			"coord": "2-1",
+			"tileset": "32c",
+			"rules": []
+		},
+		{
+			"id": "NOTE",
+			"character": "?",
+			"color": "#ffcf8e",
+			"coord": "0-7",
+			"tileset": "16",
+			"rules": []
+		},
+		{
+			"id": "MAP",
+			"character": "?",
+			"color": "#ffcf8e",
+			"coord": "2-7",
+			"tileset": "16",
+			"rules": []
+		},
+		{
+			"id": "EGG",
+			"character": "O",
+			"color": "#ffcf8e",
+			"coord": "1-6",
+			"tileset": "16",
+			"rules": []
+		},
+		{
+			"id": "POKEKO",
+			"character": "θ",
+			"color": "#691749",
+			"coord": "0-8",
+			"tileset": "16",
+			"rules": []
+		},
+		{
+			"id": "ISNIUM",
+			"character": "θ",
+			"color": "#9c3247",
+			"coord": "1-8",
+			"tileset": "16",
+			"rules": []
+		},
+		{
+			"id": "AULNE",
+			"character": "θ",
+			"color": "#d46453",
+			"coord": "2-8",
+			"tileset": "16",
+			"rules": []
+		},
+		{
+			"id": "OUVLURIN",
+			"character": "θ",
+			"color": "#f5a15d",
+			"coord": "3-8",
+			"tileset": "16",
+			"rules": []
+		},
+		{
+			"id": "HIBISCUS",
+			"character": "θ",
+			"color": "#ffcf8e",
+			"coord": "4-8",
+			"tileset": "16",
+			"rules": []
+		},
+		{
+			"id": "KADINE",
+			"character": "θ",
+			"color": "#ff7a7d",
+			"coord": "5-8",
+			"tileset": "16",
+			"rules": []
+		},
+		{
+			"id": "SAPONAIRE",
+			"character": "θ",
+			"color": "#ff417d",
+			"coord": "6-8",
+			"tileset": "16",
+			"rules": []
+		},
+		{
+			"id": "SAUGE",
+			"character": "θ",
+			"color": "#d61a88",
+			"coord": "7-8",
+			"tileset": "16",
+			"rules": []
+		},
+		{
+			"id": "GRORN",
+			"character": "θ",
+			"color": "#94007a",
+			"coord": "8-8",
+			"tileset": "16",
+			"rules": []
+		},
+		{
+			"id": "FYOLE",
+			"character": "θ",
+			"color": "#ed7b39",
+			"coord": "9-8",
+			"tileset": "16",
+			"rules": []
+		},
+		{
+			"id": "EMBERBERRY",
+			"character": "θ",
+			"color": "#429058",
+			"coord": "10-8",
+			"tileset": "16",
+			"rules": []
+		},
+		{
+			"id": "COFFEE_GRAIN",
+			"character": "θ",
+			"color": "#14a02e",
+			"coord": "2-6",
+			"tileset": "16",
+			"rules": []
+		},
+		{
+			"id": "COFFEE_BEAN",
+			"character": "θ",
+			"color": "#73172d",
+			"coord": "11-5",
+			"tileset": "16",
+			"rules": []
+		},
+		{
+			"id": "MANGO",
+			"character": "θ",
+			"color": "#ffb84a",
+			"coord": "2-5",
+			"tileset": "16",
+			"rules": []
+		},
+		{
+			"id": "LICOTRI",
+			"character": "l",
+			"color": "#9cdb43",
+			"coord": "1-0",
+			"isBeing": true,
+			"tileset": "animals16",
+			"rules": []
+		},
+		{
+			"id": "WAKO",
+			"character": "W",
+			"color": "#b4202a",
+			"coord": "5-0",
+			"isBeing": true,
+			"tileset": "animals16",
+			"rules": []
+		},
+		{
+			"id": "ALGIZ",
+			"character": "A",
+			"color": "#bb7547",
+			"coord": "0-0",
+			"isBeing": true,
+			"tileset": "animals24",
+			"rules": []
+		},
+		{
+			"id": "ALGIZ_W",
+			"character": "A",
+			"color": "#bb7547",
+			"coord": "1-0",
+			"isBeing": true,
+			"tileset": "animals24",
+			"rules": []
+		},
+		{
+			"id": "RULFO",
+			"character": "A",
+			"color": "#bb7547",
+			"coord": "2-0",
+			"isBeing": true,
+			"tileset": "animals24",
+			"rules": []
+		},
+		{
+			"id": "DRIPCO",
+			"character": "d",
+			"color": "#285cc4",
+			"coord": "10-0",
+			"isBeing": true,
+			"tileset": "animals16",
+			"rules": []
+		},
+		{
+			"id": "PUGSH",
+			"character": "p",
+			"color": "#249fde",
+			"coord": "12-0",
+			"isBeing": true,
+			"tileset": "animals16",
+			"rules": []
+		},
+		{
+			"id": "TRIPPY",
+			"character": "r",
+			"color": "#1a7a3e",
+			"coord": "15-0",
+			"isBeing": true,
+			"tileset": "animals16",
+			"rules": []
+		},
+		{
+			"id": "PHEESH",
+			"character": "p",
+			"color": "#dae0ea",
+			"coord": "1-1",
+			"isBeing": true,
+			"tileset": "animals16",
+			"rules": []
+		},
+		{
+			"id": "TORTUX",
+			"character": "T",
+			"color": "#6d758d",
+			"coord": "3-1",
+			"isBeing": true,
+			"tileset": "animals16",
+			"rules": []
+		},
+		{
+			"id": "CLAMATOPI",
+			"character": "c",
+			"color": "#6d758d",
+			"coord": "4-1",
+			"isBeing": true,
+			"tileset": "animals16",
+			"rules": []
+		},
+		{
+			"id": "MUMBA",
+			"character": "m",
+			"color": "#5a4e44",
+			"coord": "6-1",
+			"isBeing": true,
+			"tileset": "animals16",
+			"rules": []
+		},
+		{
+			"id": "MUMBA_W",
+			"character": "m",
+			"color": "#5a4e44",
+			"coord": "6-3",
+			"isBeing": true,
+			"tileset": "animals16",
+			"rules": []
+		},
+		{
+			"id": "CHEAK",
+			"character": "c",
+			"color": "#f5a097",
+			"coord": "5-3",
+			"isBeing": true,
+			"tileset": "animals16",
+			"rules": []
+		},
+		{
+			"id": "ROONCHA",
+			"character": "R",
+			"color": "#4a5462",
+			"coord": "10-1",
+			"isBeing": true,
+			"tileset": "animals16",
+			"rules": []
+		},
+		{
+			"id": "MEKI",
+			"character": "M",
+			"color": "#477d85",
+			"coord": "15-1",
+			"isBeing": true,
+			"tileset": "animals16",
+			"rules": []
+		},
+		{
+			"id": "PROBIKI",
+			"character": "p",
+			"color": "#5a4e44",
+			"coord": "1-2",
+			"isBeing": true,
+			"tileset": "animals16",
+			"rules": []
+		},
+		{
+			"id": "FOXFORO",
+			"character": "f",
+			"color": "#20d6c7",
+			"coord": "4-2",
+			"isBeing": true,
+			"tileset": "animals16",
+			"rules": []
+		},
+		{
+			"id": "SUCUBI",
+			"character": "s",
+			"color": "#b4202a",
+			"coord": "5-2",
+			"isBeing": true,
+			"tileset": "animals16",
+			"rules": []
+		},
+		{
+			"id": "LEBUNI",
+			"character": "l",
+			"color": "#4a5462",
+			"coord": "6-2",
+			"isBeing": true,
+			"tileset": "animals16",
+			"rules": []
+		},
+		{
+			"id": "ZUCK",
+			"character": "z",
+			"color": "#6d758d",
+			"coord": "8-2",
+			"isBeing": true,
+			"tileset": "animals16",
+			"rules": []
+		},
+		{
+			"id": "VEIELEVET",
+			"character": "V",
+			"color": "#285cc4",
+			"coord": "2-3",
+			"isBeing": true,
+			"tileset": "creatures16",
+			"rules": []
+		},
+		{
+			"id": "HIBAX",
+			"character": "ç",
+			"color": "#df3e23",
+			"coord": "12-2",
+			"isBeing": true,
+			"tileset": "animals16",
+			"rules": []
+		},
+		{
+			"id": "LAVILA",
+			"character": "≤",
+			"color": "#14a02e",
+			"coord": "14-2",
+			"isBeing": true,
+			"tileset": "animals16",
+			"rules": []
+		},
+		{
+			"id": "CANXI",
+			"character": "æ",
+			"color": "#dba463",
+			"coord": "1-3",
+			"isBeing": true,
+			"tileset": "animals16",
+			"rules": []
+		},
+		{
+			"id": "PIETON",
+			"character": "§",
+			"color": "#1a7a3e",
+			"coord": "2-3",
+			"isBeing": true,
+			"tileset": "animals16",
+			"rules": []
+		},
+		{
+			"id": "GRASS",
+			"character": ".",
+			"color": "#14a02e",
+			"coord": "0-2",
+			"tileset": "terrain16",
+			"rules": [
+				{
+					"type": "RANDOM",
+					"transform": "0-2,1-2,2-2,3-2,4-2"
+				}
+			]
+		},
+		{
+			"id": "TALL_GRASS",
+			"character": ",",
+			"color": "#14a02e",
+			"coord": "5-0",
+			"tileset": "blocks",
+			"rules": [
+				{
+					"type": "RANDOM",
+					"transform": "5-0,6-0,7-0,8-0,9-0"
+				}
+			]
+		},
+		{
+			"id": "STONE_FLOOR",
+			"character": ".",
+			"color": "#C7D4E1",
+			"coord": "0-3",
+			"tileset": "terrain16",
+			"rules": [
+				{
+					"type": "RANDOM",
+					"transform": "0-3,1-3,2-3,3-3"
+				}
+			]
+		},
+		{
+			"id": "ROCK_FLOOR",
+			"character": ".",
+			"color": "#C7D4E1",
+			"coord": "0-4",
+			"tileset": "terrain16",
+			"rules": [
+				{
+					"type": "RANDOM",
+					"transform": "0-4,1-4,2-4,3-4"
+				}
+			]
+		},
+		{
+			"id": "TILE_1",
+			"character": "=",
+			"color": "#FFF4C2",
+			"coord": "0-10",
+			"tileset": "terrain16",
+			"rules": []
+		},
+		{
+			"id": "TILE_2",
+			"character": "=",
+			"color": "#249FDE",
+			"coord": "1-10",
+			"tileset": "terrain16",
+			"rules": []
+		},
+		{
+			"id": "TILE_3",
+			"character": "=",
+			"color": "#F5A097",
+			"coord": "2-10",
+			"tileset": "terrain16",
+			"rules": []
+		},
+		{
+			"id": "STONE_FLOORING",
+			"character": "=",
+			"color": "#F5A097",
+			"coord": "5-10",
+			"tileset": "terrain16",
+			"rules": []
+		},
+		{
+			"id": "BRICK_FLOORING_1",
+			"character": "=",
+			"color": "#F5A097",
+			"coord": "6-10",
+			"tileset": "terrain16",
+			"rules": []
+		},
+		{
+			"id": "BRICK_FLOORING_2",
+			"character": "=",
+			"color": "#F5A097",
+			"coord": "7-10",
+			"tileset": "terrain16",
+			"rules": []
+		},
+		{
+			"id": "STONE_ROAD",
+			"character": "=",
+			"color": "#C7D4E1",
+			"coord": "0-4",
+			"tileset": "terrain16",
+			"rules": [
+				{
+					"type": "RANDOM",
+					"transform": "0-4,1-4,2-4,3-4"
+				}
+			]
+		},
+		{
+			"id": "TILLED_GRASS",
+			"character": "≣",
+			"color": "#F0C297",
+			"coord": "0-5",
+			"tileset": "terrain16",
+			"rules": []
+		},
+		{
+			"id": "DUG_GROUND",
+			"character": "O",
+			"color": "#F0C297",
+			"coord": "0-11",
+			"tileset": "terrain16",
+			"rules": [
+				{
+					"type": "RANDOM",
+					"transform": "0-11,1-11,2-11,3-11,4-11"
+				}
+			]
+		},
+		{
+			"id": "RAPID_WATER",
+			"character": "~",
+			"color": "#477d85",
+			"coord": "0-0,1-0",
+			"tileset": "terrain16",
+			"renderGroup": "WATER",
+			"rules": [
+				{
+					"type": "NOT_ABOVE",
+					"transform": "2-0,3-0"
+				},
+				{
+					"type": "RANDOM"
+				}
+			]
+		},
+		{
+			"id": "DEEP_WATER",
+			"character": "~",
+			"color": "#477d85",
+			"coord": "9-1,10-1,11-1",
+			"tileset": "terrain16",
+			"renderGroup": "WATER",
+			"rules": [
+				{
+					"type": "NOT_ABOVE",
+					"transform": "12-1,13-1,14-1"
+				},
+				{
+					"type": "RANDOM"
+				}
+			]
+		},
+		{
+			"id": "RAPID_DEEP_WATER",
+			"character": "~",
+			"color": "#477d85",
+			"coord": "10-0,11-0",
+			"tileset": "terrain16",
+			"renderGroup": "WATER",
+			"rules": [
+				{
+					"type": "NOT_ABOVE",
+					"transform": "12-0,13-0"
+				},
+				{
+					"type": "RANDOM"
+				}
+			]
+		},
+		{
+			"id": "WATER",
+			"character": "~",
+			"color": "#477d85",
+			"coord": "9-2,10-2,11-2",
+			"tileset": "terrain16",
+			"renderGroup": "WATER",
+			"rules": [
+				{
+					"type": "NOT_ABOVE",
+					"transform": "12-2,13-2,14-2"
+				},
+				{
+					"type": "RANDOM"
+				}
+			]
+		},
+		{
+			"id": "CHANNEL",
+			"character": "~",
+			"color": "#477d85",
+			"coord": "9-3,10-3,11-3",
+			"tileset": "terrain16",
+			"renderGroup": "WATER",
+			"rules": [
+				{
+					"type": "NOT_ABOVE",
+					"transform": "12-3,13-3,14-3"
+				},
+				{
+					"type": "RANDOM"
+				}
+			]
+		},
+		{
+			"id": "PUDDLE",
+			"character": "~",
+			"color": "#477d85",
+			"coord": "9-3,10-3,11-3",
+			"tileset": "terrain16",
+			"renderGroup": "WATER",
+			"rules": [
+				{
+					"type": "NOT_ABOVE",
+					"transform": "12-3,13-3,14-3"
+				},
+				{
+					"type": "RANDOM"
+				}
+			]
+		},
+		{
+			"id": "HOLE",
+			"character": "x",
+			"color": "#477d85",
+			"coord": "6-2",
+			"tileset": "terrain16",
+			"renderGroup": "HOLE",
+			"rules": [
+				{
+					"type": "NOT_ABOVE",
+					"transform": "6-1"
+				}
+			]
+		},
+		{
+			"id": "ROCK",
+			"character": "░",
+			"color": "#928FB8",
+			"coord": "1-3",
+			"tileset": "blocks",
+			"rules": [
+				{
+					"type": "NOT_ABOVE",
+					"transform": "2-3"
+				}
+			]
+		},
+		{
+			"id": "COLD_ROCK",
+			"character": "░",
+			"color": "#928FB8",
+			"coord": "1-3",
+			"tileset": "blocks",
+			"rules": [
+				{
+					"type": "NOT_ABOVE",
+					"transform": "2-3"
+				}
+			]
+		},
+		{
+			"id": "WORLD_BOUNDARIES",
+			"character": " ",
+			"color": "#000000",
+			"coord": "0-0",
+			"tileset": "ui16",
+			"rules": []
+		},
+		{
+			"id": "FOREST_FLOOR",
+			"character": ",",
+			"color": "#796755",
+			"coord": "0-1",
+			"tileset": "terrain16",
+			"rules": [
+				{
+					"type": "RANDOM",
+					"transform": "0-1,1-1,2-1"
+				}
+			]
+		},
+		{
+			"id": "FENCE",
+			"character": "#",
+			"color": "#9c341a",
+			"coord": "6-4",
+			"tileset": "blocks",
+			"rules": [
+				{
+					"type": "CROSS",
+					"transform": "5-1,6-1,7-1,5-2,6-2,7-2,5-3,6-3,7-3,5-4,6-4,7-4,8-1,8-2,8-3"
+				}
+			]
+		},
+		{
+			"id": "STONE_WALL",
+			"character": "▓",
+			"color": "#928FB8",
+			"coord": "0-10",
+			"tileset": "blocks",
+			"rules": [
+				{
+					"type": "NOT_ABOVE",
+					"transform": "1-10"
+				}
+			]
+		},
+		{
+			"id": "STONE_WINDOW",
+			"character": "+",
+			"color": "#D4662F",
+			"coord": "3-10",
+			"tileset": "blocks",
+			"rules": [
+				{
+					"type": "NOT_ABOVE",
+					"transform": "2-10",
+					"param": "WALL"
+				},
+				{
+					"type": "TELESCOPIC"
+				}
+			]
+		},
+		{
+			"id": "BRICK_WALL",
+			"character": "▒",
+			"color": "#F5A15D",
+			"coord": "0-8",
+			"tileset": "blocks",
+			"rules": [
+				{
+					"type": "NOT_ABOVE",
+					"transform": "1-8"
+				}
+			]
+		},
+		{
+			"id": "PLOT_WALL",
+			"character": "▒",
+			"color": "#F5A15D",
+			"coord": "5-7",
+			"tileset": "blocks",
+			"rules": [
+				{
+					"type": "NOT_ABOVE",
+					"transform": "6-7"
+				}
+			]
+		},
+		{
+			"id": "WOODEN_FLOOR",
+			"character": "=",
+			"color": "#691b22",
+			"coord": "0-6",
+			"tileset": "terrain16",
+			"rules": []
+		},
+		{
+			"id": "WOODEN_WALKWAY",
+			"character": "=",
+			"color": "#691b22",
+			"coord": "1-6",
+			"tileset": "terrain16",
+			"rules": []
+		},
+		{
+			"id": "WOODEN_DOOR",
+			"character": "/",
+			"color": "#F0C297",
+			"coord": "1-1",
+			"tileset": "blocks",
+			"rules": [
+				{
+					"type": "ANCHOR",
+					"transform": "0-1,1-6"
+				}
+			]
+		},
+		{
+			"id": "WOODEN_DOOR_CLOSED",
+			"character": "+",
+			"color": "#F0C297",
+			"coord": "0-1",
+			"tileset": "blocks",
+			"rules": [
+				{
+					"type": "ANCHOR",
+					"transform": "1-1,0-6"
+				}
+			]
+		},
+		{
+			"id": "GRAY_DOOR",
+			"character": "/",
+			"color": "#F0C297",
+			"coord": "0-0",
+			"tileset": "blocks",
+			"rules": [
+				{
+					"type": "ANCHOR",
+					"transform": "2-8,3-8"
+				}
+			]
+		},
+		{
+			"id": "GRAY_DOOR_CLOSED",
+			"character": "+",
+			"color": "#F0C297",
+			"coord": "0-0",
+			"tileset": "blocks",
+			"rules": [
+				{
+					"type": "ANCHOR",
+					"transform": "4-8,5-8"
+				}
+			]
+		},
+		{
+			"id": "WOODEN_GATE",
+			"character": "-",
+			"color": "#9c341a",
+			"coord": "1-2",
+			"tileset": "blocks",
+			"rules": [
+				{
+					"type": "ANCHOR",
+					"transform": "1-2,5-6"
+				}
+			]
+		},
+		{
+			"id": "WOODEN_GATE_CLOSED",
+			"character": "=",
+			"color": "#9c341a",
+			"coord": "2-2",
+			"tileset": "blocks",
+			"rules": [
+				{
+					"type": "ANCHOR",
+					"transform": "2-2,6-6"
+				}
+			]
+		},
+		{
+			"id": "WOODEN_WALL",
+			"character": "░",
+			"color": "#D4662F",
+			"coord": "0-7",
+			"tileset": "blocks",
+			"rules": [
+				{
+					"type": "NOT_ABOVE",
+					"transform": "1-7"
+				}
+			]
+		},
+		{
+			"id": "WOODEN_WINDOW",
+			"character": "+",
+			"color": "#D4662F",
+			"coord": "3-7",
+			"tileset": "blocks",
+			"rules": [
+				{
+					"type": "NOT_ABOVE",
+					"transform": "2-7",
+					"param": "WALL"
+				},
+				{
+					"type": "TELESCOPIC"
+				}
+			]
+		},
+		{
+			"id": "BRICK_WINDOW",
+			"character": "+",
+			"color": "#D4662F",
+			"coord": "3-9",
+			"tileset": "blocks",
+			"rules": [
+				{
+					"type": "NOT_ABOVE",
+					"transform": "2-9",
+					"param": "WALL"
+				},
+				{
+					"type": "TELESCOPIC"
+				}
+			]
+		},
+		{
+			"id": "PLAYER",
+			"character": "@",
+			"color": "#f8ffb8",
+			"coord": "0-0",
+			"tileset": "creatures16",
+			"rules": [
+				{
+					"type": "FLIP"
+				}
+			]
+		},
+		{
+			"id": "PLAYER_FISHING",
+			"character": "@",
+			"color": "#f8ffb8",
+			"coord": "10-0",
+			"tileset": "creatures16",
+			"horizontalOffset": 8,
+			"rules": [
+				{
+					"type": "FLIP"
+				}
+			]
+		},
+		{
+			"id": "PLAYER_RESTING",
+			"character": "@",
+			"color": "#f8ffb8",
+			"coord": "1-0",
+			"tileset": "creatures16",
+			"rules": [
+				{
+					"type": "FLIP"
+				}
+			]
+		},
+		{
+			"id": "PLAYER_SLEEP_BEDROLL",
+			"character": "@",
+			"color": "#f8ffb8",
+			"coord": "2-0",
+			"tileset": "creatures16",
+			"rules": [
+				{
+					"type": "FLIP"
+				}
+			]
+		},
+		{
+			"id": "PLAYER_SLEEP_BED",
+			"character": "@",
+			"color": "#f8ffb8",
+			"coord": "5-0",
+			"tileset": "creatures16",
+			"verticalOffset": 3,
+			"rules": [
+				{
+					"type": "FLIP"
+				}
+			]
+		},
+		{
+			"id": "PLAYER_SLEEP_BIG_BED",
+			"character": "@",
+			"color": "#f8ffb8",
+			"coord": "6-0",
+			"tileset": "creatures16",
+			"verticalOffset": 4,
+			"rules": [
+				{
+					"type": "FLIP"
+				}
+			]
+		},
+		{
+			"id": "PLAYER_SLEEP_FLOOR",
+			"character": "@",
+			"color": "#f8ffb8",
+			"coord": "6-0",
+			"tileset": "creatures16",
+			"rules": [
+				{
+					"type": "FLIP"
+				}
+			]
+		},
+		{
+			"id": "PLAYER_READING",
+			"character": "@",
+			"color": "#f8ffb8",
+			"coord": "3-0",
+			"tileset": "creatures16",
+			"rules": [
+				{
+					"type": "FLIP"
+				}
+			]
+		},
+		{
+			"id": "PLAYER_RESTING_CAMPFIRE",
+			"character": "@",
+			"color": "#f8ffb8",
+			"coord": "4-0",
+			"tileset": "creatures16",
+			"rules": [
+				{
+					"type": "FLIP"
+				}
+			]
+		},
+		{
+			"id": "PLAYER_SWIMMING",
+			"character": "@",
+			"color": "#f8ffb8",
+			"coord": "7-0",
+			"tileset": "creatures16",
+			"rules": [
+				{
+					"type": "FLIP"
+				}
+			]
+		},
+		{
+			"id": "PLAYER_DIVING",
+			"character": "@",
+			"color": "#f8ffb8",
+			"coord": "8-0",
+			"tileset": "creatures16",
+			"rules": [
+				{
+					"type": "FLIP"
+				}
+			]
+		},
+		{
+			"id": "PLAYER_G",
+			"character": "@",
+			"color": "#f8ffb8",
+			"coord": "0-5",
+			"tileset": "creatures16",
+			"rules": [
+				{
+					"type": "FLIP"
+				}
+			]
+		},
+		{
+			"id": "PLAYER_FISHING_G",
+			"character": "@",
+			"color": "#f8ffb8",
+			"coord": "10-0",
+			"tileset": "creatures16",
+			"horizontalOffset": 8,
+			"rules": [
+				{
+					"type": "FLIP"
+				}
+			]
+		},
+		{
+			"id": "PLAYER_RESTING_G",
+			"character": "@",
+			"color": "#f8ffb8",
+			"coord": "1-5",
+			"tileset": "creatures16",
+			"rules": [
+				{
+					"type": "FLIP"
+				}
+			]
+		},
+		{
+			"id": "PLAYER_SLEEP_BEDROLL_G",
+			"character": "@",
+			"color": "#f8ffb8",
+			"coord": "2-5",
+			"tileset": "creatures16",
+			"rules": [
+				{
+					"type": "FLIP"
+				}
+			]
+		},
+		{
+			"id": "PLAYER_SLEEP_BED_G",
+			"character": "@",
+			"color": "#f8ffb8",
+			"coord": "5-5",
+			"tileset": "creatures16",
+			"verticalOffset": 3,
+			"rules": [
+				{
+					"type": "FLIP"
+				}
+			]
+		},
+		{
+			"id": "PLAYER_SLEEP_BIG_BED_G",
+			"character": "@",
+			"color": "#f8ffb8",
+			"coord": "6-5",
+			"tileset": "creatures16",
+			"verticalOffset": 4,
+			"rules": [
+				{
+					"type": "FLIP"
+				}
+			]
+		},
+		{
+			"id": "PLAYER_SLEEP_FLOOR_G",
+			"character": "@",
+			"color": "#f8ffb8",
+			"coord": "6-5",
+			"tileset": "creatures16",
+			"rules": [
+				{
+					"type": "FLIP"
+				}
+			]
+		},
+		{
+			"id": "PLAYER_READING_G",
+			"character": "@",
+			"color": "#f8ffb8",
+			"coord": "0-5",
+			"tileset": "creatures16",
+			"rules": [
+				{
+					"type": "FLIP"
+				}
+			]
+		},
+		{
+			"id": "PLAYER_RESTING_CAMPFIRE_G",
+			"character": "@",
+			"color": "#f8ffb8",
+			"coord": "1-5",
+			"tileset": "creatures16",
+			"rules": [
+				{
+					"type": "FLIP"
+				}
+			]
+		},
+		{
+			"id": "PLAYER_SWIMMING_G",
+			"character": "@",
+			"color": "#f8ffb8",
+			"coord": "7-0",
+			"tileset": "creatures16",
+			"rules": [
+				{
+					"type": "FLIP"
+				}
+			]
+		},
+		{
+			"id": "PLAYER_DIVING_G",
+			"character": "@",
+			"color": "#f8ffb8",
+			"coord": "8-0",
+			"tileset": "creatures16",
+			"rules": [
+				{
+					"type": "FLIP"
+				}
+			]
+		},
+		{
+			"id": "PLAYER_SIT_CHAIR",
+			"character": "@",
+			"color": "#f8ffb8",
+			"coord": "9-0",
+			"tileset": "creatures16",
+			"rules": [
+				{
+					"type": "FLIP"
+				}
+			]
+		},
+		{
+			"id": "SMALL_BED",
+			"character": "≣",
+			"color": "#D4662F",
+			"coord": "0-0",
+			"tileset": "16",
+			"verticalOffset": 3,
+			"rules": []
+		},
+		{
+			"id": "BIG_BED",
+			"character": "≣",
+			"color": "#D4662F",
+			"coord": "0-7",
+			"tileset": "32c",
+			"rules": [
+				{
+					"type": "ROTABLE",
+					"transform": "1-7,2-7,3-7"
+				}
+			]
+		},
+		{
+			"id": "BIG_BED_MENU",
+			"character": "≣",
+			"color": "#D4662F",
+			"coord": "0-7",
+			"tileset": "32c",
+			"verticalOffset": -8,
+			"rules": []
+		},
+		{
+			"id": "BEDROLL",
+			"character": "^",
+			"color": "#9c3247",
+			"coord": "1-3",
+			"tileset": "16",
+			"rules": []
+		},
+		{
+			"id": "WOODEN_BRIDGE",
+			"character": "=",
+			"color": "#9c341a",
+			"coord": "2-6",
+			"tileset": "terrain16",
+			"rules": []
+		},
+		{
+			"id": "PAINT_CUP+RED_PAINT",
+			"character": "X",
+			"color": "#b4202a",
+			"coord": "1-15",
+			"tileset": "16",
+			"rules": []
+		},
+		{
+			"id": "PAINT_CUP+ORANGE_PAINT",
+			"character": "X",
+			"color": "#f9a31b",
+			"coord": "2-15",
+			"tileset": "16",
+			"rules": []
+		},
+		{
+			"id": "PAINT_CUP+GREEN_PAINT",
+			"character": "X",
+			"color": "#14a02e",
+			"coord": "3-15",
+			"tileset": "16",
+			"rules": []
+		},
+		{
+			"id": "PAINT_CUP+BLUE_PAINT",
+			"character": "X",
+			"color": "#285cc4",
+			"coord": "4-15",
+			"tileset": "16",
+			"rules": []
+		},
+		{
+			"id": "PAINT_CUP+WHITE_PAINT",
+			"character": "X",
+			"color": "#e3e6ff",
+			"coord": "5-15",
+			"tileset": "16",
+			"rules": []
+		},
+		{
+			"id": "COFFEE_SHRUB",
+			"character": "c",
+			"color": "#3DFF6E",
+			"coord": "1-0",
+			"tileset": "32c",
+			"rules": []
+		},
+		{
+			"id": "COFFEE_SHRUB_WINTER",
+			"character": "c",
+			"color": "#3DFF6E",
+			"coord": "3-0",
+			"tileset": "32c",
+			"rules": [
+				{
+					"type": "RANDOM",
+					"transform": "3-0,4-0"
+				}
+			]
+		},
+		{
+			"id": "SUGARCANE_SPROUT_1",
+			"character": "ﻨ",
+			"color": "#1a7a3e",
+			"coord": "0-4",
+			"tileset": "32c",
+			"rules": []
+		},
+		{
+			"id": "SUGARCANE_SPROUT_2",
+			"character": "✻",
+			"color": "#1a7a3e",
+			"coord": "1-4",
+			"tileset": "32c",
+			"rules": [
+				{
+					"type": "RANDOM",
+					"transform": "1-4,4-4,7-4,10-4,13-4"
+				}
+			]
+		},
+		{
+			"id": "SUGARCANE_SPROUT_3",
+			"character": "p",
+			"color": "#1a7a3e",
+			"coord": "2-4",
+			"tileset": "32c",
+			"rules": [
+				{
+					"type": "RANDOM",
+					"transform": "2-4,5-4,8-4,11-4,14-4"
+				}
+			]
+		},
+		{
+			"id": "SUGARCANE_TREE",
+			"character": "S",
+			"color": "#3DFF6E",
+			"coord": "3-4",
+			"tileset": "32c",
+			"rules": [
+				{
+					"type": "RANDOM",
+					"transform": "3-4,6-4,9-4,12-4,15-4"
+				}
+			]
+		},
+		{
+			"id": "MANGO_TREE",
+			"character": "T",
+			"color": "#1a7a3e",
+			"coord": "4-2",
+			"tileset": "32c",
+			"rules": []
+		},
+		{
+			"id": "AVOCADO_TREE",
+			"character": "T",
+			"color": "#1a7a3e",
+			"coord": "4-2",
+			"tileset": "32c",
+			"rules": []
+		},
+		{
+			"id": "MANGO_TREE_WINTER",
+			"character": "T",
+			"color": "#1a7a3e",
+			"coord": "3-0",
+			"tileset": "32c",
+			"rules": [
+				{
+					"type": "RANDOM",
+					"transform": "3-0,4-0"
+				}
+			]
+		},
+		{
+			"id": "AVOCADO_TREE_WINTER",
+			"character": "T",
+			"color": "#1a7a3e",
+			"coord": "3-0",
+			"tileset": "32c",
+			"rules": [
+				{
+					"type": "RANDOM",
+					"transform": "3-0,4-0"
+				}
+			]
+		},
+		{
+			"id": "CONIFER",
+			"character": "▲",
+			"color": "#3DFF6E",
+			"coord": "1-3",
+			"tileset": "32c",
+			"rules": []
+		},
+		{
+			"id": "SPRUCE",
+			"character": "▲",
+			"color": "#28c074",
+			"coord": "1-3",
+			"tileset": "32c",
+			"rules": []
+		},
+		{
+			"id": "FIR",
+			"character": "▲",
+			"color": "#c6d831",
+			"coord": "1-3",
+			"tileset": "32c",
+			"rules": []
+		},
+		{
+			"id": "PINE",
+			"character": "▲",
+			"color": "#77b02a",
+			"coord": "1-3",
+			"tileset": "32c",
+			"rules": []
+		},
+		{
+			"id": "WILLOW",
+			"character": "▲",
+			"color": "#c6d831",
+			"coord": "1-3",
+			"tileset": "32c",
+			"rules": []
+		},
+		{
+			"id": "CONIFER_WINTER",
+			"character": "▲",
+			"color": "#3DFF6E",
+			"coord": "5-3",
+			"tileset": "32c",
+			"rules": []
+		},
+		{
+			"id": "SPRUCE_WINTER",
+			"character": "▲",
+			"color": "#28c074",
+			"coord": "5-3",
+			"tileset": "32c",
+			"rules": []
+		},
+		{
+			"id": "FIR_WINTER",
+			"character": "▲",
+			"color": "#c6d831",
+			"coord": "5-3",
+			"tileset": "32c",
+			"rules": []
+		},
+		{
+			"id": "PINE_WINTER",
+			"character": "▲",
+			"color": "#77b02a",
+			"coord": "5-3",
+			"tileset": "32c",
+			"rules": []
+		},
+		{
+			"id": "WILLOW_WINTER",
+			"character": "▲",
+			"color": "#c6d831",
+			"coord": "5-3",
+			"tileset": "32c",
+			"rules": []
+		},
+		{
+			"id": "PLAINS_TREE",
+			"character": "▲",
+			"color": "#c6d831",
+			"coord": "2-3",
+			"tileset": "32c",
+			"rules": []
+		},
+		{
+			"id": "PLAINS_TREE_WINTER",
+			"character": "▲",
+			"color": "#c6d831",
+			"coord": "6-3",
+			"tileset": "32c",
+			"rules": [
+				{
+					"type": "RANDOM",
+					"transform": "6-3,7-3"
+				}
+			]
+		},
+		{
+			"id": "EMBERBERRY_SHRUB",
+			"character": "♣",
+			"color": "#c6d831",
+			"coord": "2-0",
+			"tileset": "32c",
+			"rules": []
+		},
+		{
+			"id": "FYOLE_SHRUB",
+			"character": "♣",
+			"color": "#c6d831",
+			"coord": "2-0",
+			"tileset": "32c",
+			"rules": []
+		},
+		{
+			"id": "GRORN_SHRUB",
+			"character": "♣",
+			"color": "#c6d831",
+			"coord": "2-0",
+			"tileset": "32c",
+			"rules": []
+		},
+		{
+			"id": "SAUGE_SHRUB",
+			"character": "♣",
+			"color": "#c6d831",
+			"coord": "2-0",
+			"tileset": "32c",
+			"rules": []
+		},
+		{
+			"id": "SAPONAIRE_SHRUB",
+			"character": "♣",
+			"color": "#c6d831",
+			"coord": "2-0",
+			"tileset": "32c",
+			"rules": []
+		},
+		{
+			"id": "KADINE_SHRUB",
+			"character": "♣",
+			"color": "#c6d831",
+			"coord": "2-0",
+			"tileset": "32c",
+			"rules": []
+		},
+		{
+			"id": "HIBISCUS_SHRUB",
+			"character": "♣",
+			"color": "#c6d831",
+			"coord": "2-0",
+			"tileset": "32c",
+			"rules": []
+		},
+		{
+			"id": "OUVLURIN_SHRUB",
+			"character": "♣",
+			"color": "#c6d831",
+			"coord": "2-0",
+			"tileset": "32c",
+			"rules": []
+		},
+		{
+			"id": "AULNE_SHRUB",
+			"character": "♣",
+			"color": "#c6d831",
+			"coord": "2-0",
+			"tileset": "32c",
+			"rules": []
+		},
+		{
+			"id": "ISNIUM_SHRUB",
+			"character": "♣",
+			"color": "#c6d831",
+			"coord": "2-0",
+			"tileset": "32c",
+			"rules": []
+		},
+		{
+			"id": "POKEKO_SHRUB",
+			"character": "♣",
+			"color": "#c6d831",
+			"coord": "2-0",
+			"tileset": "32c",
+			"rules": []
+		},
+		{
+			"id": "EMBERBERRY_SHRUB_WINTER",
+			"character": "♣",
+			"color": "#c6d831",
+			"coord": "3-0",
+			"tileset": "32c",
+			"rules": [
+				{
+					"type": "RANDOM",
+					"transform": "3-0,4-0"
+				}
+			]
+		},
+		{
+			"id": "FYOLE_SHRUB_WINTER",
+			"character": "♣",
+			"color": "#c6d831",
+			"coord": "3-0",
+			"tileset": "32c",
+			"rules": [
+				{
+					"type": "RANDOM",
+					"transform": "3-0,4-0"
+				}
+			]
+		},
+		{
+			"id": "GRORN_SHRUB_WINTER",
+			"character": "♣",
+			"color": "#c6d831",
+			"coord": "3-0",
+			"tileset": "32c",
+			"rules": [
+				{
+					"type": "RANDOM",
+					"transform": "3-0,4-0"
+				}
+			]
+		},
+		{
+			"id": "SAUGE_SHRUB_WINTER",
+			"character": "♣",
+			"color": "#c6d831",
+			"coord": "3-0",
+			"tileset": "32c",
+			"rules": [
+				{
+					"type": "RANDOM",
+					"transform": "3-0,4-0"
+				}
+			]
+		},
+		{
+			"id": "SAPONAIRE_SHRUB_WINTER",
+			"character": "♣",
+			"color": "#c6d831",
+			"coord": "3-0",
+			"tileset": "32c",
+			"rules": [
+				{
+					"type": "RANDOM",
+					"transform": "3-0,4-0"
+				}
+			]
+		},
+		{
+			"id": "KADINE_SHRUB_WINTER",
+			"character": "♣",
+			"color": "#c6d831",
+			"coord": "3-0",
+			"tileset": "32c",
+			"rules": [
+				{
+					"type": "RANDOM",
+					"transform": "3-0,4-0"
+				}
+			]
+		},
+		{
+			"id": "HIBISCUS_SHRUB_WINTER",
+			"character": "♣",
+			"color": "#c6d831",
+			"coord": "3-0",
+			"tileset": "32c",
+			"rules": [
+				{
+					"type": "RANDOM",
+					"transform": "3-0,4-0"
+				}
+			]
+		},
+		{
+			"id": "OUVLURIN_SHRUB_WINTER",
+			"character": "♣",
+			"color": "#c6d831",
+			"coord": "3-0",
+			"tileset": "32c",
+			"rules": [
+				{
+					"type": "RANDOM",
+					"transform": "3-0,4-0"
+				}
+			]
+		},
+		{
+			"id": "AULNE_SHRUB_WINTER",
+			"character": "♣",
+			"color": "#c6d831",
+			"coord": "3-0",
+			"tileset": "32c",
+			"rules": [
+				{
+					"type": "RANDOM",
+					"transform": "3-0,4-0"
+				}
+			]
+		},
+		{
+			"id": "ISNIUM_SHRUB_WINTER",
+			"character": "♣",
+			"color": "#c6d831",
+			"coord": "3-0",
+			"tileset": "32c",
+			"rules": [
+				{
+					"type": "RANDOM",
+					"transform": "3-0,4-0"
+				}
+			]
+		},
+		{
+			"id": "POKEKO_SHRUB_WINTER",
+			"character": "♣",
+			"color": "#c6d831",
+			"coord": "3-0",
+			"tileset": "32c",
+			"rules": [
+				{
+					"type": "RANDOM",
+					"transform": "3-0,4-0"
+				}
+			]
+		},
+		{
+			"id": "CARROT_SEED",
+			"character": "✱",
+			"color": "#144491",
+			"coord": "0-11",
+			"tileset": "16",
+			"rules": []
+		},
+		{
+			"id": "CARROT",
+			"character": "θ",
+			"color": "#f5a15d",
+			"coord": "3-5",
+			"tileset": "16",
+			"rules": []
+		},
+		{
+			"id": "CARROT_MAP",
+			"character": "θ",
+			"color": "#f5a15d",
+			"coord": "3-6",
+			"tileset": "16",
+			"rules": []
+		},
+		{
+			"id": "EMBERBERRY_MAP",
+			"character": "♣",
+			"color": "#429058",
+			"coord": "10-9",
+			"tileset": "16",
+			"rules": []
+		},
+		{
+			"id": "FYOLE_MAP",
+			"character": "♣",
+			"color": "#ed7b39",
+			"coord": "9-9",
+			"tileset": "16",
+			"rules": []
+		},
+		{
+			"id": "GRORN_MAP",
+			"character": "♣",
+			"color": "#94007a",
+			"coord": "8-9",
+			"tileset": "16",
+			"rules": []
+		},
+		{
+			"id": "SAUGE_MAP",
+			"character": "♣",
+			"color": "#d61a88",
+			"coord": "7-9",
+			"tileset": "16",
+			"rules": []
+		},
+		{
+			"id": "SAPONAIRE_MAP",
+			"character": "♣",
+			"color": "#ff417d",
+			"coord": "6-9",
+			"tileset": "16",
+			"rules": []
+		},
+		{
+			"id": "KADINE_MAP",
+			"character": "♣",
+			"color": "#ff7a7d",
+			"coord": "5-9",
+			"tileset": "16",
+			"rules": []
+		},
+		{
+			"id": "HIBISCUS_MAP",
+			"character": "♣",
+			"color": "#ffcf8e",
+			"coord": "4-9",
+			"tileset": "16",
+			"rules": []
+		},
+		{
+			"id": "OUVLURIN_MAP",
+			"character": "♣",
+			"color": "#f5a15d",
+			"coord": "3-9",
+			"tileset": "16",
+			"rules": []
+		},
+		{
+			"id": "AULNE_MAP",
+			"character": "♣",
+			"color": "#d46453",
+			"coord": "2-9",
+			"tileset": "16",
+			"rules": []
+		},
+		{
+			"id": "ISNIUM_MAP",
+			"character": "♣",
+			"color": "#9c3247",
+			"coord": "1-9",
+			"tileset": "16",
+			"rules": []
+		},
+		{
+			"id": "POKEKO_MAP",
+			"character": "♣",
+			"color": "#691749",
+			"coord": "0-9",
+			"tileset": "16",
+			"rules": []
+		},
+		{
+			"id": "COFFEE_GRAIN_MAP",
+			"character": "♣",
+			"color": "#59c135",
+			"coord": "11-9",
+			"tileset": "16",
+			"rules": []
+		},
+		{
+			"id": "KNOCK_NUT",
+			"character": "θ",
+			"color": "#f5a15d",
+			"coord": "4-5",
+			"tileset": "16",
+			"rules": []
+		},
+		{
+			"id": "GARLIC",
+			"character": "θ",
+			"color": "#f5a15d",
+			"coord": "5-5",
+			"tileset": "16",
+			"rules": []
+		},
+		{
+			"id": "GARLIC_SEED",
+			"character": "✱",
+			"color": "#144491",
+			"coord": "5-7",
+			"tileset": "16",
+			"rules": []
+		},
+		{
+			"id": "GARLIC_MAP",
+			"character": "θ",
+			"color": "#FFFFFF",
+			"coord": "5-6",
+			"tileset": "16",
+			"rules": []
+		},
+		{
+			"id": "ONION_SEED",
+			"character": "✱",
+			"color": "#144491",
+			"coord": "6-7",
+			"tileset": "16",
+			"rules": []
+		},
+		{
+			"id": "ONION",
+			"character": "θ",
+			"color": "#f5a15d",
+			"coord": "6-5",
+			"tileset": "16",
+			"rules": []
+		},
+		{
+			"id": "ONION_MAP",
+			"character": "θ",
+			"color": "#f5a15d",
+			"coord": "6-6",
+			"tileset": "16",
+			"rules": []
+		},
+		{
+			"id": "SUGARCANE",
+			"character": "Ƭ",
+			"color": "#f5a15d",
+			"coord": "7-5",
+			"tileset": "16",
+			"rules": []
+		},
+		{
+			"id": "AVOCADO",
+			"character": "θ",
+			"color": "#59c135",
+			"coord": "9-5",
+			"tileset": "16",
+			"rules": []
+		},
+		{
+			"id": "RICE_SPROUT_1",
+			"character": "ﻨ",
+			"color": "#b4202a",
+			"coord": "0-6",
+			"tileset": "32c",
+			"rules": [
+				{
+					"type": "RANDOM",
+					"transform": "0-6,4-6,8-6,12-6"
+				}
+			]
+		},
+		{
+			"id": "RICE_SPROUT_2",
+			"character": "✻",
+			"color": "#b4202a",
+			"coord": "1-6",
+			"tileset": "32c",
+			"rules": [
+				{
+					"type": "RANDOM",
+					"transform": "1-6,5-6,9-6,13-6"
+				}
+			]
+		},
+		{
+			"id": "RICE_SPROUT_3",
+			"character": "p",
+			"color": "#b4202a",
+			"coord": "2-6",
+			"tileset": "32c",
+			"rules": [
+				{
+					"type": "RANDOM",
+					"transform": "2-6,6-6,10-6,14-6"
+				}
+			]
+		},
+		{
+			"id": "RED_RICE_MAP",
+			"character": "Ƭ",
+			"color": "#b4202a",
+			"coord": "3-6",
+			"tileset": "32c",
+			"rules": [
+				{
+					"type": "RANDOM",
+					"transform": "3-6,7-6,11-6,15-6"
+				}
+			]
+		},
+		{
+			"id": "RED_RICE",
+			"character": "Ƭ",
+			"color": "#b4202a",
+			"coord": "10-5",
+			"tileset": "16",
+			"rules": []
+		},
+		{
+			"id": "WHEAT_SPROUT_1",
+			"character": "ﻨ",
+			"color": "#1a7a3e",
+			"coord": "0-5",
+			"tileset": "32c",
+			"rules": [
+				{
+					"type": "RANDOM",
+					"transform": "0-5,4-5,8-5,12-5"
+				}
+			]
+		},
+		{
+			"id": "WHEAT_SPROUT_2",
+			"character": "✻",
+			"color": "#1a7a3e",
+			"coord": "1-5",
+			"tileset": "32c",
+			"rules": [
+				{
+					"type": "RANDOM",
+					"transform": "1-5,5-5,9-5,13-5"
+				}
+			]
+		},
+		{
+			"id": "WHEAT_SPROUT_3",
+			"character": "p",
+			"color": "#1a7a3e",
+			"coord": "2-5",
+			"tileset": "32c",
+			"rules": [
+				{
+					"type": "RANDOM",
+					"transform": "2-5,6-5,10-5,14-5"
+				}
+			]
+		},
+		{
+			"id": "GIANT_WHEAT_MAP",
+			"character": "Ƭ",
+			"color": "#ffd541",
+			"coord": "3-5",
+			"tileset": "32c",
+			"rules": [
+				{
+					"type": "RANDOM",
+					"transform": "3-5,7-5,11-5,15-5"
+				}
+			]
+		},
+		{
+			"id": "GIANT_WHEAT",
+			"character": "Ƭ",
+			"color": "#ffd541",
+			"coord": "8-5",
+			"tileset": "16",
+			"rules": []
+		},
+		{
+			"id": "AVOCADO_MAP",
+			"character": "θ",
+			"color": "#59c135",
+			"coord": "5-2",
+			"tileset": "32c",
+			"rules": []
+		},
+		{
+			"id": "AVOCADO_SEED",
+			"character": "θ",
+			"color": "#c7b08b",
+			"coord": "9-7",
+			"tileset": "16",
+			"rules": []
+		},
+		{
+			"id": "AVOCADO_SPROUT_1",
+			"character": "♣",
+			"color": "#1a7a3e",
+			"coord": "0-2",
+			"tileset": "32c",
+			"rules": []
+		},
+		{
+			"id": "AVOCADO_SPROUT_2",
+			"character": "♣",
+			"color": "#1a7a3e",
+			"coord": "1-2",
+			"tileset": "32c",
+			"rules": []
+		},
+		{
+			"id": "AVOCADO_SPROUT_3",
+			"character": "♣",
+			"color": "#1a7a3e",
+			"coord": "2-2",
+			"tileset": "32c",
+			"rules": []
+		},
+		{
+			"id": "AVOCADO_SPROUT_4",
+			"character": "♣",
+			"color": "#1a7a3e",
+			"coord": "3-2",
+			"tileset": "32c",
+			"rules": []
+		},
+		{
+			"id": "MANGO_MAP",
+			"character": "θ",
+			"color": "#59c135",
+			"coord": "5-2",
+			"tileset": "32c",
+			"rules": []
+		},
+		{
+			"id": "MANGO_SEED",
+			"character": "θ",
+			"color": "#c7b08b",
+			"coord": "9-7",
+			"tileset": "16",
+			"rules": []
+		},
+		{
+			"id": "MANGO_SPROUT_1",
+			"character": "♣",
+			"color": "#1a7a3e",
+			"coord": "0-2",
+			"tileset": "32c",
+			"rules": []
+		},
+		{
+			"id": "MANGO_SPROUT_2",
+			"character": "♣",
+			"color": "#1a7a3e",
+			"coord": "1-2",
+			"tileset": "32c",
+			"rules": []
+		},
+		{
+			"id": "MANGO_SPROUT_3",
+			"character": "♣",
+			"color": "#1a7a3e",
+			"coord": "2-2",
+			"tileset": "32c",
+			"rules": []
+		},
+		{
+			"id": "MANGO_SPROUT_4",
+			"character": "♣",
+			"color": "#1a7a3e",
+			"coord": "3-2",
+			"tileset": "32c",
+			"rules": []
+		},
+		{
+			"id": "ROASTED_LICOTRI",
+			"character": "%",
+			"color": "#3b1725",
+			"coord": "0-13",
+			"tileset": "16",
+			"rules": []
+		},
+		{
+			"id": "DRIPCO_AND_GARLIC",
+			"character": "%",
+			"color": "#dba463",
+			"coord": "1-13",
+			"tileset": "16",
+			"rules": []
+		},
+		{
+			"id": "GRILLED_VEIELEVET",
+			"character": "%",
+			"color": "#3b1725",
+			"coord": "2-13",
+			"tileset": "16",
+			"rules": []
+		},
+		{
+			"id": "PHEESH_AND_OHMNION",
+			"character": "%",
+			"color": "#e9b5a3",
+			"coord": "3-13",
+			"tileset": "16",
+			"rules": []
+		},
+		{
+			"id": "ROASTED_NUTS",
+			"character": "%",
+			"color": "#5a4e44",
+			"coord": "4-13",
+			"tileset": "16",
+			"rules": []
+		},
+		{
+			"id": "YEASTLESS_BREAD",
+			"character": "%",
+			"color": "#fef3c0",
+			"coord": "5-13",
+			"tileset": "16",
+			"rules": []
+		},
+		{
+			"id": "STEEL_POT",
+			"character": "θ",
+			"color": "#5a4e44",
+			"coord": "0-14",
+			"tileset": "16",
+			"rules": []
+		},
+		{
+			"id": "STEEL_POT+ALGIZ_STEW",
+			"character": "θ",
+			"color": "#5a4e44",
+			"coord": "1-14",
+			"tileset": "16",
+			"rules": []
+		},
+		{
+			"id": "STEEL_POT+TINTO",
+			"character": "θ",
+			"color": "#5a4e44",
+			"coord": "2-14",
+			"tileset": "16",
+			"rules": []
+		},
+		{
+			"id": "STEEL_POT+TORTUX_SOUP",
+			"character": "θ",
+			"color": "#5a4e44",
+			"coord": "3-14",
+			"tileset": "16",
+			"rules": []
+		},
+		{
+			"id": "STEEL_POT+CATEMOLE",
+			"character": "θ",
+			"color": "#5a4e44",
+			"coord": "4-14",
+			"tileset": "16",
+			"rules": []
+		},
+		{
+			"id": "STEEL_POT+BERRY_PIE",
+			"character": "θ",
+			"color": "#5a4e44",
+			"coord": "5-14",
+			"tileset": "16",
+			"rules": []
+		},
+		{
+			"id": "STEEL_POT+WATERPANEL",
+			"character": "θ",
+			"color": "#5a4e44",
+			"coord": "6-14",
+			"tileset": "16",
+			"rules": []
+		},
+		{
+			"id": "STEEL_POT+COOKED_RED_RICE",
+			"character": "θ",
+			"color": "#5a4e44",
+			"coord": "7-14",
+			"tileset": "16",
+			"rules": []
+		},
+		{
+			"id": "STEEL_POT+CARROT_JUICE",
+			"character": "θ",
+			"color": "#5a4e44",
+			"coord": "8-14",
+			"tileset": "16",
+			"rules": []
+		},
+		{
+			"id": "STEEL_POT+WATER",
+			"character": "θ",
+			"color": "#5a4e44",
+			"coord": "9-14",
+			"tileset": "16",
+			"rules": []
+		},
+		{
+			"id": "CUP",
+			"character": "θ",
+			"color": "#5a4e44",
+			"coord": "0-12",
+			"tileset": "16",
+			"rules": []
+		},
+		{
+			"id": "CUP+ALGIZ_STEW",
+			"character": "θ",
+			"color": "#5a4e44",
+			"coord": "1-12",
+			"tileset": "16",
+			"rules": []
+		},
+		{
+			"id": "CUP+TINTO",
+			"character": "θ",
+			"color": "#5a4e44",
+			"coord": "2-12",
+			"tileset": "16",
+			"rules": []
+		},
+		{
+			"id": "CUP+TORTUX_SOUP",
+			"character": "θ",
+			"color": "#5a4e44",
+			"coord": "3-12",
+			"tileset": "16",
+			"rules": []
+		},
+		{
+			"id": "CUP+CATEMOLE",
+			"character": "θ",
+			"color": "#5a4e44",
+			"coord": "4-12",
+			"tileset": "16",
+			"rules": []
+		},
+		{
+			"id": "CUP+BERRY_PIE",
+			"character": "θ",
+			"color": "#5a4e44",
+			"coord": "5-12",
+			"tileset": "16",
+			"rules": []
+		},
+		{
+			"id": "CUP+WATERPANEL",
+			"character": "θ",
+			"color": "#5a4e44",
+			"coord": "6-12",
+			"tileset": "16",
+			"rules": []
+		},
+		{
+			"id": "CUP+COOKED_RED_RICE",
+			"character": "θ",
+			"color": "#5a4e44",
+			"coord": "7-12",
+			"tileset": "16",
+			"rules": []
+		},
+		{
+			"id": "CUP+CARROT_JUICE",
+			"character": "θ",
+			"color": "#5a4e44",
+			"coord": "8-12",
+			"tileset": "16",
+			"rules": []
+		},
+		{
+			"id": "CUP+WATER",
+			"character": "θ",
+			"color": "#5a4e44",
+			"coord": "9-12",
+			"tileset": "16",
+			"rules": []
+		},
+		{
+			"id": "BRANCH",
+			"character": "Ƭ",
+			"color": "#d4662f",
+			"coord": "3-4",
+			"tileset": "16",
+			"rules": []
+		},
+		{
+			"id": "EMBERBERRY_SEED",
+			"character": "✱",
+			"color": "#429058",
+			"coord": "10-10",
+			"tileset": "16",
+			"rules": []
+		},
+		{
+			"id": "FYOLE_SEED",
+			"character": "✱",
+			"color": "#ed7b39",
+			"coord": "9-10",
+			"tileset": "16",
+			"rules": []
+		},
+		{
+			"id": "GRORN_SEED",
+			"character": "✱",
+			"color": "#94007a",
+			"coord": "8-10",
+			"tileset": "16",
+			"rules": []
+		},
+		{
+			"id": "SAUGE_SEED",
+			"character": "✱",
+			"color": "#d61a88",
+			"coord": "7-10",
+			"tileset": "16",
+			"rules": []
+		},
+		{
+			"id": "SAPONAIRE_SEED",
+			"character": "✱",
+			"color": "#ff417d",
+			"coord": "6-10",
+			"tileset": "16",
+			"rules": []
+		},
+		{
+			"id": "KADINE_SEED",
+			"character": "✱",
+			"color": "#ff7a7d",
+			"coord": "5-10",
+			"tileset": "16",
+			"rules": []
+		},
+		{
+			"id": "HIBISCUS_SEED",
+			"character": "✱",
+			"color": "#ffcf8e",
+			"coord": "4-10",
+			"tileset": "16",
+			"rules": []
+		},
+		{
+			"id": "OUVLURIN_SEED",
+			"character": "✱",
+			"color": "#f5a15d",
+			"coord": "3-10",
+			"tileset": "16",
+			"rules": []
+		},
+		{
+			"id": "AULNE_SEED",
+			"character": "✱",
+			"color": "#d46453",
+			"coord": "2-10",
+			"tileset": "16",
+			"rules": []
+		},
+		{
+			"id": "ISNIUM_SEED",
+			"character": "✱",
+			"color": "#9c3247",
+			"coord": "1-10",
+			"tileset": "16",
+			"rules": []
+		},
+		{
+			"id": "POKEKO_SEED",
+			"character": "✱",
+			"color": "#691749",
+			"coord": "0-10",
+			"tileset": "16",
+			"rules": []
+		},
+		{
+			"id": "WOODEN_BRIDGE_MENU",
+			"character": "=",
+			"color": "#9c341a",
+			"coord": "2-7",
+			"tileset": "terrain16",
+			"rules": []
+		},
+		{
+			"id": "WOODEN_FLOOR_MENU",
+			"character": "=",
+			"color": "#691b22",
+			"coord": "0-7",
+			"tileset": "terrain16",
+			"rules": []
+		},
+		{
+			"id": "WOODEN_WALKWAY_MENU",
+			"character": "=",
+			"color": "#691b22",
+			"coord": "1-7",
+			"tileset": "terrain16",
+			"rules": []
+		},
+		{
+			"id": "STONE_ROAD_MENU",
+			"character": "=",
+			"color": "#C7D4E1",
+			"coord": "3-7",
+			"tileset": "terrain16",
+			"rules": []
+		},
+		{
+			"id": "WOODEN_WALL_MENU",
+			"character": "░",
+			"color": "#D4662F",
+			"coord": "4-7",
+			"tileset": "terrain16",
+			"rules": []
+		},
+		{
+			"id": "WOODEN_WINDOW_MENU",
+			"character": "+",
+			"color": "#D4662F",
+			"coord": "7-7",
+			"tileset": "terrain16",
+			"rules": []
+		},
+		{
+			"id": "BRICK_WINDOW_MENU",
+			"character": "+",
+			"color": "#D4662F",
+			"coord": "9-7",
+			"tileset": "terrain16",
+			"rules": []
+		},
+		{
+			"id": "STONE_WINDOW_MENU",
+			"character": "+",
+			"color": "#D4662F",
+			"coord": "10-7",
+			"tileset": "terrain16",
+			"rules": []
+		},
+		{
+			"id": "WOODEN_DOOR_MENU",
+			"character": "/",
+			"color": "#F0C297",
+			"coord": "5-7",
+			"tileset": "terrain16",
+			"rules": []
+		},
+		{
+			"id": "STONE_WALL_MENU",
+			"character": "▓",
+			"color": "#928FB8",
+			"coord": "6-7",
+			"tileset": "terrain16",
+			"rules": []
+		},
+		{
+			"id": "BRICK_WALL_MENU",
+			"character": "▓",
+			"color": "#928FB8",
+			"coord": "8-7",
+			"tileset": "terrain16",
+			"rules": []
+		},
+		{
+			"id": "WOODEN_CHAIR",
+			"character": "h",
+			"color": "#F0C297",
+			"coord": "13-9",
+			"tileset": "terrain16",
+			"verticalOffset": 4,
+			"rules": [
+				{
+					"type": "ROTABLE",
+					"transform": "1-13,0-13,12-9"
+				}
+			]
+		},
+		{
+			"id": "WOODEN_TABLE",
+			"character": "Π",
+			"color": "#F0C297",
+			"coord": "0-9",
+			"tileset": "terrain16",
+			"verticalOffset": 4,
+			"rules": [
+				{
+					"type": "ROTABLE",
+					"transform": "1-9"
+				}
+			]
+		},
+		{
+			"id": "WOODEN_TABLE_2",
+			"character": "Π",
+			"color": "#F0C297",
+			"coord": "10-9",
+			"tileset": "terrain16",
+			"verticalOffset": 4,
+			"rules": [
+				{
+					"type": "ROTABLE",
+					"transform": "11-9"
+				}
+			]
+		},
+		{
+			"id": "GRAY_TABLE_M",
+			"character": "Π",
+			"color": "#F0C297",
+			"coord": "3-9",
+			"tileset": "terrain16",
+			"verticalOffset": 4,
+			"rules": [
+				{
+					"type": "ROTABLE",
+					"transform": "7-9,10-9,9-9"
+				}
+			]
+		},
+		{
+			"id": "GRAY_TABLE_L",
+			"character": "Π",
+			"color": "#F0C297",
+			"coord": "2-9",
+			"tileset": "terrain16",
+			"verticalOffset": 4,
+			"rules": [
+				{
+					"type": "ROTABLE",
+					"transform": "8-9,4-9,6-9"
+				}
+			]
+		},
+		{
+			"id": "GRAY_TABLE_R",
+			"character": "Π",
+			"color": "#F0C297",
+			"coord": "4-9",
+			"tileset": "terrain16",
+			"verticalOffset": 4,
+			"rules": [
+				{
+					"type": "ROTABLE",
+					"transform": "6-9,2-9,8-9"
+				}
+			]
+		},
+		{
+			"id": "STOVE",
+			"character": "Π",
+			"color": "#F0C297",
+			"coord": "5-9",
+			"tileset": "terrain16",
+			"verticalOffset": 4,
+			"rules": []
+		},
+		{
+			"id": "BLUE_BOOK",
+			"character": "?",
+			"color": "#275bc4",
+			"coord": "1-7",
+			"tileset": "16",
+			"rules": []
+		},
+		{
+			"id": "PAINT_CUP",
+			"character": "θ",
+			"color": "#5a4e44",
+			"coord": "0-15",
+			"tileset": "16",
+			"rules": []
+		},
+		{
+			"id": "PLATE",
+			"character": "O",
+			"color": "#5a4e44",
+			"coord": "4-11",
+			"tileset": "16",
+			"rules": []
+		},
+		{
+			"id": "PLATE+ROASTED_CARROT_SALAD",
+			"character": "O",
+			"color": "#5a4e44",
+			"coord": "5-11",
+			"tileset": "16",
+			"rules": []
+		},
+		{
+			"id": "PLATE+HOT_CARROTS",
+			"character": "O",
+			"color": "#5a4e44",
+			"coord": "6-11",
+			"tileset": "16",
+			"rules": []
+		},
+		{
+			"id": "CARROT_CAKE",
+			"character": "θ",
+			"color": "#5a4e44",
+			"coord": "6-13",
+			"tileset": "16",
+			"rules": []
+		},
+		{
+			"id": "HONEY",
+			"character": "✱",
+			"color": "#691749",
+			"coord": "0-1",
+			"tileset": "16",
+			"rules": []
+		},
+		{
+			"id": "OIL",
+			"character": "✱",
+			"color": "#691749",
+			"coord": "1-1",
+			"tileset": "16",
+			"rules": []
+		},
+		{
+			"id": "BUTTER",
+			"character": "✱",
+			"color": "#691749",
+			"coord": "2-1",
+			"tileset": "16",
+			"rules": []
+		},
+		{
+			"id": "SUGAR",
+			"character": "✱",
+			"color": "#691749",
+			"coord": "3-1",
+			"tileset": "16",
+			"rules": []
+		},
+		{
+			"id": "SALT",
+			"character": "✱",
+			"color": "#691749",
+			"coord": "4-1",
+			"tileset": "16",
+			"rules": []
+		},
+		{
+			"id": "FLOUR",
+			"character": "✱",
+			"color": "#691749",
+			"coord": "5-1",
+			"tileset": "16",
+			"rules": []
+		},
+		{
+			"id": "KEY",
+			"character": "k",
+			"color": "#691749",
+			"coord": "9-2",
+			"tileset": "16",
+			"rules": []
+		},
+		{
+			"id": "STEEL_BOX",
+			"character": "Π",
+			"color": "#F0C297",
+			"coord": "3-3",
+			"tileset": "16",
+			"rules": []
+		},
+		{
+			"id": "WOODEN_CRATE",
+			"character": "Π",
+			"color": "#F0C297",
+			"coord": "4-3",
+			"tileset": "16",
+			"rules": []
+		},
+		{
+			"id": "CART",
+			"character": "Π",
+			"color": "#F0C297",
+			"coord": "9-3",
+			"tileset": "16",
+			"rules": []
+		},
+		{
+			"id": "BACKPACK",
+			"character": "Π",
+			"color": "#F0C297",
+			"coord": "5-3",
+			"tileset": "16",
+			"rules": []
+		},
+		{
+			"id": "LAPTOP",
+			"character": "L",
+			"color": "#F0C297",
+			"coord": "6-3",
+			"tileset": "16",
+			"rules": []
+		},
+		{
+			"id": "BOILED_EGG",
+			"character": "✱",
+			"color": "#691749",
+			"coord": "8-11",
+			"tileset": "16",
+			"rules": []
+		},
+		{
+			"id": "FRYING_PAN+FRIED_EGG",
+			"character": "✱",
+			"color": "#691749",
+			"coord": "9-11",
+			"tileset": "16",
+			"rules": []
+		},
+		{
+			"id": "FRYING_PAN+SCRAMBLED_EGG",
+			"character": "✱",
+			"color": "#691749",
+			"coord": "10-11",
+			"tileset": "16",
+			"rules": []
+		},
+		{
+			"id": "FRYING_PAN",
+			"character": "L",
+			"color": "#691749",
+			"coord": "9-13",
+			"tileset": "16",
+			"rules": []
+		},
+		{
+			"id": "SHINY_MUTALITE",
+			"character": "L",
+			"color": "#A6FCDB",
+			"coord": "10-2",
+			"tileset": "16",
+			"rules": []
+		},
+		{
+			"id": "TORCH",
+			"character": "L",
+			"color": "#A6FCDB",
+			"coord": "11-2",
+			"tileset": "16",
+			"rules": []
+		},
+		{
+			"id": "STUMP_1",
+			"character": "x",
+			"color": "#A6FCDB",
+			"coord": "3-3",
+			"tileset": "32c",
+			"rules": []
+		},
+		{
+			"id": "STUMP_2",
+			"character": "x",
+			"color": "#A6FCDB",
+			"coord": "4-3",
+			"tileset": "32c",
+			"rules": []
+		},
+		{
+			"id": "TAPE_PROJECTOR",
+			"character": "?",
+			"color": "#A6FCDB",
+			"coord": "7-3",
+			"tileset": "16",
+			"rules": []
+		},
+		{
+			"id": "TAPE",
+			"character": "?",
+			"color": "#A6FCDB",
+			"coord": "8-3",
+			"tileset": "16",
+			"rules": []
+		},
+		{
+			"id": "FISHING_ROD",
+			"character": "?",
+			"color": "#A6FCDB",
+			"coord": "12-2",
+			"tileset": "16",
+			"rules": []
+		},
+		{
+			"id": "FLOWER_1",
+			"character": "✱",
+			"color": "#691749",
+			"coord": "12-6",
+			"tileset": "16",
+			"rules": []
+		},
+		{
+			"id": "FLOWER_2",
+			"character": "✱",
+			"color": "#691749",
+			"coord": "13-6",
+			"tileset": "16",
+			"rules": []
+		},
+		{
+			"id": "FLOWER_3",
+			"character": "✱",
+			"color": "#691749",
+			"coord": "14-6",
+			"tileset": "16",
+			"rules": []
+		},
+		{
+			"id": "FLOWER_4",
+			"character": "✱",
+			"color": "#691749",
+			"coord": "15-6",
+			"tileset": "16",
+			"rules": []
+		},
+		{
+			"id": "STONE_COLUMN",
+			"character": "X",
+			"color": "#691749",
+			"coord": "9-10",
+			"tileset": "blocks",
+			"rules": []
+		},
+		{
+			"id": "STONE_COLUMN_MENU",
+			"character": "X",
+			"color": "#691749",
+			"coord": "11-7",
+			"tileset": "terrain16",
+			"rules": []
+		},
+		{
+			"id": "RED_CURTAIN",
+			"character": "X",
+			"color": "#691749",
+			"coord": "1-11",
+			"tileset": "blocks",
+			"rules": [
+				{
+					"type": "BELOW",
+					"transform": "3-11",
+					"param": "WALL"
+				}
+			]
+		},
+		{
+			"id": "RED_CURTAIN_CLOSED",
+			"character": "X",
+			"color": "#691749",
+			"coord": "0-11",
+			"tileset": "blocks",
+			"rules": [
+				{
+					"type": "BELOW",
+					"transform": "2-11",
+					"param": "WALL"
+				}
+			]
+		},
+		{
+			"id": "RED_CURTAIN_MENU",
+			"character": "X",
+			"color": "#691749",
+			"coord": "0-12",
+			"tileset": "terrain16",
+			"rules": []
+		},
+		{
+			"id": "BLUE_CURTAIN",
+			"character": "X",
+			"color": "#691749",
+			"coord": "5-11",
+			"tileset": "blocks",
+			"rules": [
+				{
+					"type": "BELOW",
+					"transform": "7-11",
+					"param": "WALL"
+				}
+			]
+		},
+		{
+			"id": "BLUE_CURTAIN_CLOSED",
+			"character": "X",
+			"color": "#691749",
+			"coord": "4-11",
+			"tileset": "blocks",
+			"rules": [
+				{
+					"type": "BELOW",
+					"transform": "6-11",
+					"param": "WALL"
+				}
+			]
+		},
+		{
+			"id": "BLUE_CURTAIN_MENU",
+			"character": "X",
+			"color": "#691749",
+			"coord": "1-12",
+			"tileset": "terrain16",
+			"rules": []
+		},
+		{
+			"id": "CARPET_1",
+			"character": "X",
+			"color": "#691749",
+			"coord": "2-12",
+			"tileset": "terrain16",
+			"rules": []
+		},
+		{
+			"id": "CARPET_2",
+			"character": "X",
+			"color": "#691749",
+			"coord": "3-12",
+			"tileset": "terrain16",
+			"rules": []
+		},
+		{
+			"id": "CARPET_3",
+			"character": "X",
+			"color": "#691749",
+			"coord": "4-12",
+			"tileset": "terrain16",
+			"rules": []
+		},
+		{
+			"id": "ARROW_SIGNPOST",
+			"character": "Π",
+			"color": "#F0C297",
+			"coord": "5-12",
+			"tileset": "terrain16",
+			"rules": [
+				{
+					"type": "ROTABLE",
+					"transform": "7-12,6-12,8-12"
+				}
+			]
+		},
+		{
+			"id": "POT_1",
+			"character": "X",
+			"color": "#691749",
+			"coord": "9-12",
+			"tileset": "terrain16",
+			"rules": []
+		},
+		{
+			"id": "POT_2",
+			"character": "X",
+			"color": "#691749",
+			"coord": "10-12",
+			"tileset": "terrain16",
+			"rules": []
+		},
+		{
+			"id": "POT_3",
+			"character": "X",
+			"color": "#691749",
+			"coord": "11-12",
+			"tileset": "terrain16",
+			"rules": []
+		},
+		{
+			"id": "POT_4",
+			"character": "X",
+			"color": "#691749",
+			"coord": "12-12",
+			"tileset": "terrain16",
+			"rules": []
+		},
+		{
+			"id": "NIGHTSTAND",
+			"character": "X",
+			"color": "#691749",
+			"coord": "14-9",
+			"tileset": "terrain16",
+			"verticalOffset": 4,
+			"rules": [
+				{
+					"type": "ROTABLE",
+					"transform": "15-9"
+				}
+			]
+		},
+		{
+			"id": "OPEN_HATCH",
+			"character": "Z",
+			"color": "#691749",
+			"coord": "0-8",
+			"tileset": "32c",
+			"rules": []
+		},
+		{
+			"id": "CLOSED_HATCH",
+			"character": "Z",
+			"color": "#691749",
+			"coord": "1-8",
+			"tileset": "32c",
+			"rules": []
+		},
+		{
+			"id": "STAIRS_UP",
+			"character": "<",
+			"color": "#691749",
+			"coord": "5-6",
+			"tileset": "terrain16",
+			"rules": []
+		},
+		{
+			"id": "SNOW",
+			"character": "X",
+			"color": "#691749",
+			"coord": "0-14",
+			"tileset": "terrain16",
+			"rules": [
+				{
+					"type": "RANDOM",
+					"transform": "0-14,1-14"
+				}
+			]
+		},
+		{
+			"id": "SNOW_WALKED",
+			"character": "X",
+			"color": "#691749",
+			"coord": "2-14",
+			"tileset": "terrain16",
+			"rules": [
+				{
+					"type": "RANDOM",
+					"transform": "2-14,3-14"
+				}
+			]
+		},
+		{
+			"id": "FROZEN_WATER",
+			"character": "X",
+			"color": "#691749",
+			"coord": "0-15",
+			"tileset": "terrain16",
+			"rules": [
+				{
+					"type": "RANDOM",
+					"transform": "0-15,1-15,2-15,3-15"
+				}
+			]
+		},
+		{
+			"id": "FROZEN_DEEP_WATER",
+			"character": "X",
+			"color": "#691749",
+			"coord": "0-15",
+			"tileset": "terrain16",
+			"rules": [
+				{
+					"type": "RANDOM",
+					"transform": "0-15,1-15,2-15,3-15"
+				}
+			]
+		},
+		{
+			"id": "FROZEN_PUDDLE",
+			"character": "X",
+			"color": "#691749",
+			"coord": "0-15",
+			"tileset": "terrain16",
+			"rules": [
+				{
+					"type": "RANDOM",
+					"transform": "0-15,1-15,2-15,3-15"
+				}
+			]
+		},
+		{
+			"id": "FROZEN_CHANNEL",
+			"character": "X",
+			"color": "#691749",
+			"coord": "0-15",
+			"tileset": "terrain16",
+			"rules": [
+				{
+					"type": "RANDOM",
+					"transform": "0-15,1-15,2-15,3-15"
+				}
+			]
+		},
+		{
+			"id": "SNOWMAN",
+			"character": "X",
+			"color": "#691749",
+			"coord": "7-1",
+			"tileset": "16",
+			"verticalOffset": 4,
+			"rules": []
+		},
+		{
+			"id": "XMAS_TREE",
+			"character": "X",
+			"color": "#691749",
+			"coord": "5-0",
+			"tileset": "32c",
+			"verticalOffset": 4,
+			"rules": []
+		},
+		{
+			"id": "PERMAFROST",
+			"character": ".",
+			"color": "#14a02e",
+			"coord": "4-14",
+			"tileset": "terrain16",
+			"rules": [
+				{
+					"type": "RANDOM",
+					"transform": "4-14,5-14,6-14,7-14"
+				}
+			]
+		},
+		{
+			"id": "TILLED_FROST",
+			"character": "≣",
+			"color": "#F0C297",
+			"coord": "8-14",
+			"tileset": "terrain16",
+			"rules": []
+		},
+		{
+			"id": "TILLED_GROUND",
+			"character": "≣",
+			"color": "#F0C297",
+			"coord": "1-5",
+			"tileset": "terrain16",
+			"rules": []
+		}
+	]
+}
