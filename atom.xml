@@ -66,9 +66,9 @@
     
     
     
-    <category term="roguelike" scheme="http://www.ephesus.top/tags/roguelike/"/>
-    
     <category term="Avanor" scheme="http://www.ephesus.top/tags/Avanor/"/>
+    
+    <category term="roguelike" scheme="http://www.ephesus.top/tags/roguelike/"/>
     
     <category term="实况" scheme="http://www.ephesus.top/tags/%E5%AE%9E%E5%86%B5/"/>
     
@@ -94,9 +94,9 @@
     
     
     
-    <category term="资源" scheme="http://www.ephesus.top/tags/%E8%B5%84%E6%BA%90/"/>
-    
     <category term="roguelike" scheme="http://www.ephesus.top/tags/roguelike/"/>
+    
+    <category term="资源" scheme="http://www.ephesus.top/tags/%E8%B5%84%E6%BA%90/"/>
     
     <category term="SIMH" scheme="http://www.ephesus.top/tags/SIMH/"/>
     
