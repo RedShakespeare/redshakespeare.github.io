@@ -207,7 +207,7 @@ const InternalConfig = function (initConfig) { // eslint-disable-line no-unused-
 		 * @default
 		 * @type {?string}
 		 */
-		mainPack: null,
+		mainPack: 'index.pck',
 		/**
 		 * Specify a language code to select the proper localization for the game.
 		 *
