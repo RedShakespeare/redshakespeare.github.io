@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://www.ephesus.top/2024/demogorgon_patch_3/</loc>
+    <loc>http://www.ephesus.top/2024/demogorgon_patch_2/</loc>
     
     <lastmod>2024-06-23</lastmod>
     
@@ -11,7 +11,7 @@
   </url>
   
   <url>
-    <loc>http://www.ephesus.top/2024/demogorgon_patch_2/</loc>
+    <loc>http://www.ephesus.top/2024/demogorgon_patch_3/</loc>
     
     <lastmod>2024-06-23</lastmod>
     
@@ -2829,34 +2829,6 @@
   </url>
   
   <url>
-    <loc>http://www.ephesus.top/tags/Avanor/</loc>
-    <lastmod>2024-06-23</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>http://www.ephesus.top/tags/ChatGPT/</loc>
-    <lastmod>2024-06-23</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>http://www.ephesus.top/tags/AI/</loc>
-    <lastmod>2024-06-23</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>http://www.ephesus.top/tags/Maunal/</loc>
-    <lastmod>2024-06-23</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>http://www.ephesus.top/tags/NetHack/</loc>
     <lastmod>2024-06-23</lastmod>
     <changefreq>weekly</changefreq>
@@ -2879,6 +2851,13 @@
   
   <url>
     <loc>http://www.ephesus.top/tags/AO3/</loc>
+    <lastmod>2024-06-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.ephesus.top/tags/Avanor/</loc>
     <lastmod>2024-06-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -2914,6 +2893,27 @@
   
   <url>
     <loc>http://www.ephesus.top/tags/4-2-BSD/</loc>
+    <lastmod>2024-06-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.ephesus.top/tags/ChatGPT/</loc>
+    <lastmod>2024-06-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.ephesus.top/tags/AI/</loc>
+    <lastmod>2024-06-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.ephesus.top/tags/Maunal/</loc>
     <lastmod>2024-06-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
