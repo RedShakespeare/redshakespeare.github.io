@@ -2,6 +2,33 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://www.ephesus.top/2024/dejavu/</loc>
+    
+    <lastmod>2024-06-25</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.ephesus.top/2024/dwarfs_best_friend/</loc>
+    
+    <lastmod>2024-06-25</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.ephesus.top/2024/man_behind_curtain/</loc>
+    
+    <lastmod>2024-06-25</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>http://www.ephesus.top/2024/magma/</loc>
     
     <lastmod>2024-06-25</lastmod>
@@ -2957,6 +2984,20 @@
   
   <url>
     <loc>http://www.ephesus.top/tags/%E7%9F%AE%E4%BA%BA%E8%A6%81%E5%A1%9E/</loc>
+    <lastmod>2024-06-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.ephesus.top/tags/Losing-is-Fun/</loc>
+    <lastmod>2024-06-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.ephesus.top/tags/%E7%9F%AE%E4%BA%BA%E5%B0%8F%E9%98%9F/</loc>
     <lastmod>2024-06-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
