@@ -68,6 +68,7 @@ skip_render:
   - files/leyliner/css/*
   - files/leyliner/fonts/*
   - files/leyliner/config/*
+  - files/rl/poa/zh_CN/*
 
 # Writing
 new_post_name: :title.md # File name of new posts
