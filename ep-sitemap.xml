@@ -56,6 +56,42 @@
   </url>
   
   <url>
+    <loc>http://www.ephesus.top/files/rl/emeraldwoods/web/data/cooking.json</loc>
+    
+    <lastmod>2025-12-02</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.ephesus.top/files/rl/emeraldwoods/web/data/crafting.json</loc>
+    
+    <lastmod>2025-12-02</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.ephesus.top/files/rl/emeraldwoods/web/data/displayConfig.json</loc>
+    
+    <lastmod>2025-12-02</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.ephesus.top/files/rl/emeraldwoods/web/data/items.json</loc>
+    
+    <lastmod>2025-12-02</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>http://www.ephesus.top/files/rl/emeraldwoods/web/data/notes.json</loc>
     
     <lastmod>2025-12-02</lastmod>
@@ -128,258 +164,6 @@
   </url>
   
   <url>
-    <loc>http://www.ephesus.top/files/rl/emeraldwoods/web/data/cooking.json</loc>
-    
-    <lastmod>2025-12-02</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://www.ephesus.top/files/rl/emeraldwoods/web/data/crafting.json</loc>
-    
-    <lastmod>2025-12-02</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://www.ephesus.top/files/rl/emeraldwoods/web/data/displayConfig.json</loc>
-    
-    <lastmod>2025-12-02</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://www.ephesus.top/files/rl/emeraldwoods/web/data/items.json</loc>
-    
-    <lastmod>2025-12-02</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://www.ephesus.top/files/hxh_civ/index.html</loc>
-    
-    <lastmod>2025-12-02</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://www.ephesus.top/files/hxh_civ/Win/index.html</loc>
-    
-    <lastmod>2025-12-02</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://www.ephesus.top/files/hxh_civ/Update/index.html</loc>
-    
-    <lastmod>2025-12-02</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://www.ephesus.top/files/hxh_civ/Update/PowerMac%20Fix/index.html</loc>
-    
-    <lastmod>2025-12-02</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://www.ephesus.top/files/hxh_civ/Sound/index.html</loc>
-    
-    <lastmod>2025-12-02</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://www.ephesus.top/files/hxh_civ/Scenario/index.html</loc>
-    
-    <lastmod>2025-12-02</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://www.ephesus.top/files/hxh_civ/Scenario/JustForWin/index.html</loc>
-    
-    <lastmod>2025-12-02</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://www.ephesus.top/files/hxh_civ/Picture/index.html</loc>
-    
-    <lastmod>2025-12-02</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://www.ephesus.top/files/hxh_civ/Other%20Platform/index.html</loc>
-    
-    <lastmod>2025-12-02</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://www.ephesus.top/files/hxh_civ/IMG%20Dos/index.html</loc>
-    
-    <lastmod>2025-12-02</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://www.ephesus.top/files/hxh_civ/IMG%20Dos/IMG_475_02G/index.html</loc>
-    
-    <lastmod>2025-12-02</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://www.ephesus.top/files/hxh_civ/IMG%20Dos/IMG_475_01/index.html</loc>
-    
-    <lastmod>2025-12-02</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://www.ephesus.top/files/hxh_civ/IMG%20Dos/IMG_474_04/index.html</loc>
-    
-    <lastmod>2025-12-02</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://www.ephesus.top/files/hxh_civ/IMG%20Dos/IMG_474_01/index.html</loc>
-    
-    <lastmod>2025-12-02</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://www.ephesus.top/files/hxh_civ/Dos/index.html</loc>
-    
-    <lastmod>2025-12-02</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://www.ephesus.top/files/hxh_civ/Dos/CIV_475_02G/index.html</loc>
-    
-    <lastmod>2025-12-02</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://www.ephesus.top/files/hxh_civ/Dos/CIV_475_01Rus/index.html</loc>
-    
-    <lastmod>2025-12-02</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://www.ephesus.top/files/hxh_civ/Dos/CIV_475_01/index.html</loc>
-    
-    <lastmod>2025-12-02</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://www.ephesus.top/files/hxh_civ/Dos/CIV_474_05Fr/index.html</loc>
-    
-    <lastmod>2025-12-02</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://www.ephesus.top/files/hxh_civ/Dos/CIV_474_05/index.html</loc>
-    
-    <lastmod>2025-12-02</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://www.ephesus.top/files/hxh_civ/Dos/CIV_474_04/index.html</loc>
-    
-    <lastmod>2025-12-02</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://www.ephesus.top/files/hxh_civ/Dos/CIV_474_03/index.html</loc>
-    
-    <lastmod>2025-12-02</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://www.ephesus.top/files/hxh_civ/Dos/CIV_474_01/index.html</loc>
-    
-    <lastmod>2025-12-02</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://www.ephesus.top/files/hxh_civ/Cheat/index.html</loc>
-    
-    <lastmod>2025-12-02</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>http://www.ephesus.top/files/Avanor/Avanor/index.html</loc>
     
     <lastmod>2025-12-02</lastmod>
@@ -389,7 +173,97 @@
   </url>
   
   <url>
+    <loc>http://www.ephesus.top/2022/just_readme/</loc>
+    
+    <lastmod>2025-12-02</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.ephesus.top/2024/lunch_in_the_library/</loc>
+    
+    <lastmod>2025-12-02</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.ephesus.top/2024/magma/</loc>
+    
+    <lastmod>2025-12-02</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.ephesus.top/2024/man_behind_curtain/</loc>
+    
+    <lastmod>2025-12-02</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.ephesus.top/2024/practice_and_atmospheric/</loc>
+    
+    <lastmod>2025-12-02</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.ephesus.top/2025/win10_4.2_BSD/</loc>
+    
+    <lastmod>2025-12-02</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>http://www.ephesus.top/about/index.html</loc>
+    
+    <lastmod>2025-12-02</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.ephesus.top/2024/BoMENet-arc/</loc>
+    
+    <lastmod>2025-12-02</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.ephesus.top/2023/ChatGPT-receipt/</loc>
+    
+    <lastmod>2025-12-02</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.ephesus.top/2022/another_yasd/</loc>
+    
+    <lastmod>2025-12-02</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.ephesus.top/2024/dejavu/</loc>
     
     <lastmod>2025-12-02</lastmod>
     
@@ -461,97 +335,7 @@
   </url>
   
   <url>
-    <loc>http://www.ephesus.top/2024/lunch_in_the_library/</loc>
-    
-    <lastmod>2025-12-02</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://www.ephesus.top/2024/magma/</loc>
-    
-    <lastmod>2025-12-02</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://www.ephesus.top/2022/just_readme/</loc>
-    
-    <lastmod>2025-12-02</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://www.ephesus.top/2024/practice_and_atmospheric/</loc>
-    
-    <lastmod>2025-12-02</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://www.ephesus.top/2024/man_behind_curtain/</loc>
-    
-    <lastmod>2025-12-02</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://www.ephesus.top/2025/win10_4.2_BSD/</loc>
-    
-    <lastmod>2025-12-02</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://www.ephesus.top/2024/BoMENet-arc/</loc>
-    
-    <lastmod>2025-12-02</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://www.ephesus.top/2023/ChatGPT-receipt/</loc>
-    
-    <lastmod>2025-12-02</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>http://www.ephesus.top/2024/Avanor/</loc>
-    
-    <lastmod>2025-12-02</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://www.ephesus.top/2022/another_yasd/</loc>
-    
-    <lastmod>2025-12-02</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://www.ephesus.top/2024/dejavu/</loc>
     
     <lastmod>2025-12-02</lastmod>
     
@@ -569,7 +353,14 @@
 
   
   <url>
-    <loc>http://www.ephesus.top/tags/tomenet/</loc>
+    <loc>http://www.ephesus.top/tags/Avanor/</loc>
+    <lastmod>2025-12-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.ephesus.top/tags/roguelike/</loc>
     <lastmod>2025-12-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -590,7 +381,7 @@
   </url>
   
   <url>
-    <loc>http://www.ephesus.top/tags/roguelike/</loc>
+    <loc>http://www.ephesus.top/tags/tomenet/</loc>
     <lastmod>2025-12-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -612,13 +403,6 @@
   
   <url>
     <loc>http://www.ephesus.top/tags/Maunal/</loc>
-    <lastmod>2025-12-02</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>http://www.ephesus.top/tags/Avanor/</loc>
     <lastmod>2025-12-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
