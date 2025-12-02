@@ -72,6 +72,7 @@ skip_render:
   - files/hxh_civ/*
   - files/hxh_civ/*/*
   - files/hxh_civ/*/*/*
+  - files/hxh_civ/*/*/*/*
 
 # Writing
 new_post_name: :title.md # File name of new posts
