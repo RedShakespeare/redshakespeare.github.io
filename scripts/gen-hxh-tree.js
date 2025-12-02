@@ -4,7 +4,6 @@ const fs = require('fs');
 const path = require('path');
 
 function shouldIgnore(name) {
-  // 你可以按需增删
   if (name === 'tree.json') return true;
   if (name === 'index.html') return true;
   if (name === '.DS_Store' || name === 'Thumbs.db') return true;
@@ -32,7 +31,7 @@ function walk(dirAbs, relBase) {
       children.push({
         type: 'dir',
         name: ent.name,
-        rel, // 相对 hxh_civ 根目录的路径（不编码）
+        rel,
         children: walk(abs, rel),
       });
     } else if (ent.isFile()) {
@@ -40,7 +39,7 @@ function walk(dirAbs, relBase) {
       children.push({
         type: 'file',
         name: ent.name,
-        rel,       // 相对路径（不编码）
+        rel,
         size: st.size,
         mtime: st.mtimeMs,
       });
@@ -49,23 +48,20 @@ function walk(dirAbs, relBase) {
   return children;
 }
 
-function generate() {
+// 生成器：让 Hexo 直接把 tree.json 输出到 public/
+hexo.extend.generator.register('hxh_tree_json', function () {
   const rootAbs = path.join(hexo.base_dir, 'source', 'files', 'hxh_civ');
-  const outAbs = path.join(rootAbs, 'tree.json');
-
-  if (!fs.existsSync(rootAbs)) {
-    hexo.log.warn('[hxh_tree] missing dir: ' + rootAbs);
-    return;
-  }
+  if (!fs.existsSync(rootAbs)) return [];
 
   const tree = {
     generatedAt: Date.now(),
     children: walk(rootAbs, ''),
   };
 
-  fs.writeFileSync(outAbs, JSON.stringify(tree, null, 2), 'utf8');
-  hexo.log.info('[hxh_tree] wrote: ' + outAbs);
-}
-
-// 确保每次 hexo generate 前都会刷新
-hexo.extend.filter.register('before_generate', generate);
+  return [
+    {
+      path: 'files/hxh_civ/tree.json',
+      data: JSON.stringify(tree, null, 2),
+    },
+  ];
+});
