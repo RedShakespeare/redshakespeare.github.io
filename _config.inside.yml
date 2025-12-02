@@ -143,7 +143,7 @@ sns:
 # Sidebar footer copyright info
 footer:
   # Set to false to hide.
-  copyright: '&copy; 2023-2024 💫 <a href="http://www.ephesus.top">Silencess</a>'
+  copyright: '&copy; 2023-2025 💫 <a href="http://www.ephesus.top">Silencess</a>'
 
   # Set to false to hide Hexo link.
   powered: false

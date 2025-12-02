@@ -1,0 +1,46 @@
+name: Build Hexo and Deploy to main
+
+on:
+  push:
+    branches: [ "src" ]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: hexo-deploy
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout src
+        uses: actions/checkout@v4
+        with:
+          ref: src
+          fetch-depth: 0
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install deps
+        run: npm ci || npm i
+
+      - name: Generate
+        run: |
+          npx hexo clean
+          npx hexo generate
+          # 可选：避免 Jekyll 处理导致下划线目录被忽略
+          touch public/.nojekyll
+
+      - name: Deploy public/ to main root
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          branch: main
+          folder: public
+          clean: true
+          commit-message: "deploy: ${{ github.sha }}"
