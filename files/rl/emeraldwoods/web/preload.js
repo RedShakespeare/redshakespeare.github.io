@@ -1,1 +1,0 @@
-window.addEventListener("DOMContentLoaded",(()=>{const e=(e,n)=>{const o=document.getElementById(e);o&&(o.innerText=n)};for(const n of["chrome","node","electron"])e(`${n}-version`,process.versions[n])}));
