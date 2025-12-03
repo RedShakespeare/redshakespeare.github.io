@@ -56,6 +56,69 @@
   </url>
   
   <url>
+    <loc>http://www.ephesus.top/files/rl/emeraldwoods/web/data/items.json</loc>
+    
+    <lastmod>2025-12-03</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.ephesus.top/files/rl/emeraldwoods/web/data/notes.json</loc>
+    
+    <lastmod>2025-12-03</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.ephesus.top/files/rl/emeraldwoods/web/data/races.json</loc>
+    
+    <lastmod>2025-12-03</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.ephesus.top/files/rl/emeraldwoods/web/data/scenario.json</loc>
+    
+    <lastmod>2025-12-03</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.ephesus.top/files/rl/emeraldwoods/web/data/plants.json</loc>
+    
+    <lastmod>2025-12-03</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.ephesus.top/files/rl/emeraldwoods/web/data/worldObjects.json</loc>
+    
+    <lastmod>2025-12-03</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.ephesus.top/files/rl/emeraldwoods/web/data/onboarding.json</loc>
+    
+    <lastmod>2025-12-03</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>http://www.ephesus.top/files/rl/emeraldwoods/web/data/achievements.json</loc>
     
     <lastmod>2025-12-03</lastmod>
@@ -93,69 +156,6 @@
   
   <url>
     <loc>http://www.ephesus.top/files/rl/emeraldwoods/web/data/displayConfig.json</loc>
-    
-    <lastmod>2025-12-03</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://www.ephesus.top/files/rl/emeraldwoods/web/data/items.json</loc>
-    
-    <lastmod>2025-12-03</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://www.ephesus.top/files/rl/emeraldwoods/web/data/notes.json</loc>
-    
-    <lastmod>2025-12-03</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://www.ephesus.top/files/rl/emeraldwoods/web/data/onboarding.json</loc>
-    
-    <lastmod>2025-12-03</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://www.ephesus.top/files/rl/emeraldwoods/web/data/plants.json</loc>
-    
-    <lastmod>2025-12-03</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://www.ephesus.top/files/rl/emeraldwoods/web/data/races.json</loc>
-    
-    <lastmod>2025-12-03</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://www.ephesus.top/files/rl/emeraldwoods/web/data/scenario.json</loc>
-    
-    <lastmod>2025-12-03</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://www.ephesus.top/files/rl/emeraldwoods/web/data/worldObjects.json</loc>
     
     <lastmod>2025-12-03</lastmod>
     
@@ -299,7 +299,7 @@
   </url>
   
   <url>
-    <loc>http://www.ephesus.top/2024/practice_and_atmospheric/</loc>
+    <loc>http://www.ephesus.top/2024/man_behind_curtain/</loc>
     
     <lastmod>2025-12-03</lastmod>
     
@@ -308,7 +308,7 @@
   </url>
   
   <url>
-    <loc>http://www.ephesus.top/2024/man_behind_curtain/</loc>
+    <loc>http://www.ephesus.top/2024/practice_and_atmospheric/</loc>
     
     <lastmod>2025-12-03</lastmod>
     
