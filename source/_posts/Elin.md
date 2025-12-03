@@ -1,7 +1,7 @@
 ---
 title: Elin | 北提里斯成神手札
 date: 2025-12-3 02:08:19
-tag: [Avanor, roguelike, 实况, hxh]
+tag: [Elin, roguelike, 实况, hxh]
 
 
 
