@@ -26,6 +26,8 @@ and limited to the Worker, R2 binding, and route permissions it needs.
 
 The workflow configures rclone with `no_check_bucket = true`, which is required
 when these R2 credentials are scoped to a specific bucket.
+It also sets `no_head = true` because R2 can return HTTP 501 for rclone's HEAD
+check of an object that does not yet exist.
 
 ## Initial Migration
 
