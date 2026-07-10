@@ -3,16 +3,27 @@ name: Build Hexo and Deploy to main
 on:
   push:
     branches: [ "src" ]
+  workflow_dispatch:
+    inputs:
+      sync_mode:
+        description: "R2 asset sync mode"
+        required: true
+        default: incremental
+        type: choice
+        options:
+          - incremental
+          - full
 
 permissions:
   contents: write
 
 concurrency:
   group: hexo-deploy
-  cancel-in-progress: true
+  # R2 mirror runs must finish; cancelling one can leave objects missing.
+  cancel-in-progress: false
 
 jobs:
-  build:
+  sync-assets:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout src
@@ -20,6 +31,48 @@ jobs:
         with:
           ref: src
           fetch-depth: 0
+          lfs: false
+
+      - name: Detect R2 asset changes
+        id: assets
+        run: node tools/sync-r2-assets.js --detect
+        env:
+          SYNC_MODE: ${{ inputs.sync_mode || 'incremental' }}
+          GITHUB_EVENT_BEFORE: ${{ github.event.before }}
+          GITHUB_SHA: ${{ github.sha }}
+
+      - name: Install R2 sync tools
+        if: steps.assets.outputs.mode != 'none'
+        run: |
+          sudo apt-get update
+          sudo apt-get install --yes git-lfs rclone
+
+      - name: Sync assets to R2
+        if: steps.assets.outputs.mode != 'none'
+        run: node tools/sync-r2-assets.js --sync --mode "${{ steps.assets.outputs.mode }}"
+        env:
+          R2_REMOTE: r2:ephesus-files/files
+          R2_ACCOUNT_ID: ${{ secrets.R2_ACCOUNT_ID }}
+          RCLONE_CONFIG_R2_TYPE: s3
+          RCLONE_CONFIG_R2_PROVIDER: Cloudflare
+          RCLONE_CONFIG_R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          RCLONE_CONFIG_R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+          RCLONE_CONFIG_R2_ENDPOINT: https://${{ secrets.R2_ACCOUNT_ID }}.r2.cloudflarestorage.com
+          RCLONE_CONFIG_R2_REGION: auto
+          RCLONE_CONFIG_R2_FORCE_PATH_STYLE: "true"
+          GITHUB_EVENT_BEFORE: ${{ github.event.before }}
+          GITHUB_SHA: ${{ github.sha }}
+
+  build:
+    needs: sync-assets
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout src
+        uses: actions/checkout@v4
+        with:
+          ref: src
+          fetch-depth: 0
+          lfs: false
 
       - name: Setup Node
         uses: actions/setup-node@v4
@@ -30,12 +83,34 @@ jobs:
       - name: Install deps
         run: npm ci || npm i
 
+      - name: Hydrate Pages LFS asset
+        run: |
+          git lfs pull --include="source/img/df.zip"
+
       - name: Generate
         run: |
           npx hexo clean
           npx hexo generate
+          if [ "${R2_ASSETS_ENABLED}" = "true" ]; then
+            rm -rf public/files
+          fi
           # 可选：避免 Jekyll 处理导致下划线目录被忽略
           touch public/.nojekyll
+        env:
+          R2_ASSETS_ENABLED: ${{ vars.R2_ASSETS_ENABLED }}
+
+      - name: Verify generated asset policy
+        run: |
+          if [ "${R2_ASSETS_ENABLED}" = "true" ] && [ -e public/files ]; then
+            echo "public/files must be served by R2 once migration is enabled"
+            exit 1
+          fi
+          if [ "${R2_ASSETS_ENABLED}" = "true" ] && rg -l --glob '*' 'version https://git-lfs.github.com/spec/v1' public; then
+            echo "Generated site contains Git LFS pointer files"
+            exit 1
+          fi
+        env:
+          R2_ASSETS_ENABLED: ${{ vars.R2_ASSETS_ENABLED }}
 
       - name: Deploy public/ to main root
         uses: JamesIves/github-pages-deploy-action@v4

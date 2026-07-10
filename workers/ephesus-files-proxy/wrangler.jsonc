@@ -1,0 +1,18 @@
+{
+  "name": "ephesus-files-proxy",
+  "main": "src/index.js",
+  "compatibility_date": "2026-07-10",
+  "workers_dev": false,
+  "r2_buckets": [
+    {
+      "binding": "EPHESUS_FILES",
+      "bucket_name": "ephesus-files"
+    }
+  ],
+  "routes": [
+    {
+      "pattern": "www.ephesus.top/files/*",
+      "zone_name": "ephesus.top"
+    }
+  ]
+}
