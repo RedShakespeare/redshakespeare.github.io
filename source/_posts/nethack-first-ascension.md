@@ -1,7 +1,7 @@
 ---
 title: NetHack 首次飞升经历
-date: 2025-05-20 01:28:00
-updated: 2026-07-11 00:40:00
+date: 2026-07-11 00:40:00
+updated: 2026-07-11 00:49:00
 author: 花市灯如昼
 categories:
   - 游戏记录
@@ -17,8 +17,6 @@ description: 记录 Stonycloud 在 NetHack 中历经三局冒险，最终首次�
 时间：2025 年 5 月 20 日
 
 记录一下 NetHack 游戏中，我 Stonycloud 首次飞升为半神（即通关）的经历。NetHack 是一个始于 1985 年的开源角色扮演游戏，也是四大 classic Roguelike 之一（其实有五个）。在正式通关之前，已经玩了将近一个月。该游戏有相当多的 instakill（机制秒杀），需要对很多情况积累一定的对策。文明作者说，游戏是一系列有趣的决策。而 NetHack 或许也只是游戏本体 NetHack Wiki 的一系列阅读顺序（笑）。
-
-<!-- more -->
 
 ## 第一局：天胡开局，死于吊桥
 
