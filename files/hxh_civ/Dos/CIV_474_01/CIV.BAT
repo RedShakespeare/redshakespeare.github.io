@@ -1,3 +1,0 @@
-cd \mps\civ
-civ
-
