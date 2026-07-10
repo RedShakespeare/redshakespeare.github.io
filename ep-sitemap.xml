@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://www.ephesus.top/2026/nethack-first-ascension/</loc>
+    <loc>http://www.ephesus.top/links/index.html</loc>
     
     <lastmod>2026-07-10</lastmod>
     
@@ -12,15 +12,6 @@
   
   <url>
     <loc>http://www.ephesus.top/roguelike/index.html</loc>
-    
-    <lastmod>2026-07-10</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://www.ephesus.top/links/index.html</loc>
     
     <lastmod>2026-07-10</lastmod>
     
@@ -65,16 +56,7 @@
   </url>
   
   <url>
-    <loc>http://www.ephesus.top/files/rl/emeraldwoods/web/data/cooking.json</loc>
-    
-    <lastmod>2026-07-10</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://www.ephesus.top/files/rl/emeraldwoods/web/data/crafting.json</loc>
+    <loc>http://www.ephesus.top/files/rl/emeraldwoods/web/data/worldObjects.json</loc>
     
     <lastmod>2026-07-10</lastmod>
     
@@ -92,6 +74,15 @@
   </url>
   
   <url>
+    <loc>http://www.ephesus.top/files/rl/emeraldwoods/web/data/cooking.json</loc>
+    
+    <lastmod>2026-07-10</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>http://www.ephesus.top/files/rl/emeraldwoods/web/data/displayConfig.json</loc>
     
     <lastmod>2026-07-10</lastmod>
@@ -101,7 +92,16 @@
   </url>
   
   <url>
-    <loc>http://www.ephesus.top/files/rl/emeraldwoods/web/data/notes.json</loc>
+    <loc>http://www.ephesus.top/files/rl/emeraldwoods/web/data/crafting.json</loc>
+    
+    <lastmod>2026-07-10</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.ephesus.top/files/rl/emeraldwoods/web/data/onboarding.json</loc>
     
     <lastmod>2026-07-10</lastmod>
     
@@ -119,7 +119,7 @@
   </url>
   
   <url>
-    <loc>http://www.ephesus.top/files/rl/emeraldwoods/web/data/onboarding.json</loc>
+    <loc>http://www.ephesus.top/files/rl/emeraldwoods/web/data/notes.json</loc>
     
     <lastmod>2026-07-10</lastmod>
     
@@ -138,15 +138,6 @@
   
   <url>
     <loc>http://www.ephesus.top/files/rl/emeraldwoods/web/data/races.json</loc>
-    
-    <lastmod>2026-07-10</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://www.ephesus.top/files/rl/emeraldwoods/web/data/worldObjects.json</loc>
     
     <lastmod>2026-07-10</lastmod>
     
@@ -182,6 +173,33 @@
   </url>
   
   <url>
+    <loc>http://www.ephesus.top/2024/practice_and_atmospheric/</loc>
+    
+    <lastmod>2026-07-10</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.ephesus.top/2025/server/</loc>
+    
+    <lastmod>2026-07-10</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.ephesus.top/2026/python_pipe_library/</loc>
+    
+    <lastmod>2026-07-10</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>http://www.ephesus.top/2026/tggw/</loc>
     
     <lastmod>2026-07-10</lastmod>
@@ -209,7 +227,7 @@
   </url>
   
   <url>
-    <loc>http://www.ephesus.top/2024/practice_and_atmospheric/</loc>
+    <loc>http://www.ephesus.top/2024/dejavu/</loc>
     
     <lastmod>2026-07-10</lastmod>
     
@@ -218,7 +236,7 @@
   </url>
   
   <url>
-    <loc>http://www.ephesus.top/2026/python_pipe_library/</loc>
+    <loc>http://www.ephesus.top/2023/demogorgon_patch_1/</loc>
     
     <lastmod>2026-07-10</lastmod>
     
@@ -227,7 +245,7 @@
   </url>
   
   <url>
-    <loc>http://www.ephesus.top/2025/server/</loc>
+    <loc>http://www.ephesus.top/2024/demogorgon_patch_2/</loc>
     
     <lastmod>2026-07-10</lastmod>
     
@@ -245,15 +263,6 @@
   </url>
   
   <url>
-    <loc>http://www.ephesus.top/2024/dwarfs_best_friend/</loc>
-    
-    <lastmod>2026-07-10</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>http://www.ephesus.top/2024/demogorgon_patch_4/</loc>
     
     <lastmod>2026-07-10</lastmod>
@@ -263,7 +272,7 @@
   </url>
   
   <url>
-    <loc>http://www.ephesus.top/2024/in_decline/</loc>
+    <loc>http://www.ephesus.top/2024/dwarfs_best_friend/</loc>
     
     <lastmod>2026-07-10</lastmod>
     
@@ -273,6 +282,15 @@
   
   <url>
     <loc>http://www.ephesus.top/2024/foocubus/</loc>
+    
+    <lastmod>2026-07-10</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.ephesus.top/2024/in_decline/</loc>
     
     <lastmod>2026-07-10</lastmod>
     
@@ -299,15 +317,6 @@
   </url>
   
   <url>
-    <loc>http://www.ephesus.top/2024/magma/</loc>
-    
-    <lastmod>2026-07-10</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>http://www.ephesus.top/2024/man_behind_curtain/</loc>
     
     <lastmod>2026-07-10</lastmod>
@@ -317,52 +326,7 @@
   </url>
   
   <url>
-    <loc>http://www.ephesus.top/2025/Elin/</loc>
-    
-    <lastmod>2026-07-10</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://www.ephesus.top/2022/another_yasd/</loc>
-    
-    <lastmod>2026-07-10</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://www.ephesus.top/2024/come_outside/</loc>
-    
-    <lastmod>2026-07-10</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://www.ephesus.top/2024/dejavu/</loc>
-    
-    <lastmod>2026-07-10</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://www.ephesus.top/2024/demogorgon_patch_2/</loc>
-    
-    <lastmod>2026-07-10</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://www.ephesus.top/2023/demogorgon_patch_1/</loc>
+    <loc>http://www.ephesus.top/2024/magma/</loc>
     
     <lastmod>2026-07-10</lastmod>
     
@@ -380,6 +344,42 @@
   </url>
   
   <url>
+    <loc>http://www.ephesus.top/2023/ChatGPT-receipt/</loc>
+    
+    <lastmod>2026-07-10</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.ephesus.top/2022/another_yasd/</loc>
+    
+    <lastmod>2026-07-10</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.ephesus.top/2025/Elin/</loc>
+    
+    <lastmod>2026-07-10</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.ephesus.top/2024/come_outside/</loc>
+    
+    <lastmod>2026-07-10</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>http://www.ephesus.top/2024/Avanor/</loc>
     
     <lastmod>2026-07-10</lastmod>
@@ -389,7 +389,7 @@
   </url>
   
   <url>
-    <loc>http://www.ephesus.top/2023/ChatGPT-receipt/</loc>
+    <loc>http://www.ephesus.top/2026/nethack-first-ascension/</loc>
     
     <lastmod>2026-07-10</lastmod>
     
@@ -407,7 +407,14 @@
 
   
   <url>
-    <loc>http://www.ephesus.top/tags/tomenet/</loc>
+    <loc>http://www.ephesus.top/tags/Avanor/</loc>
+    <lastmod>2026-07-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.ephesus.top/tags/roguelike/</loc>
     <lastmod>2026-07-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -428,14 +435,7 @@
   </url>
   
   <url>
-    <loc>http://www.ephesus.top/tags/roguelike/</loc>
-    <lastmod>2026-07-10</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>http://www.ephesus.top/tags/Avanor/</loc>
+    <loc>http://www.ephesus.top/tags/tomenet/</loc>
     <lastmod>2026-07-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -457,13 +457,6 @@
   
   <url>
     <loc>http://www.ephesus.top/tags/Maunal/</loc>
-    <lastmod>2026-07-10</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>http://www.ephesus.top/tags/Elin/</loc>
     <lastmod>2026-07-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -492,6 +485,13 @@
   
   <url>
     <loc>http://www.ephesus.top/tags/AO3/</loc>
+    <lastmod>2026-07-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.ephesus.top/tags/Elin/</loc>
     <lastmod>2026-07-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -540,6 +540,27 @@
   </url>
   
   <url>
+    <loc>http://www.ephesus.top/tags/%E8%B5%84%E6%BA%90/</loc>
+    <lastmod>2026-07-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.ephesus.top/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/</loc>
+    <lastmod>2026-07-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.ephesus.top/tags/dgamelaunch/</loc>
+    <lastmod>2026-07-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>http://www.ephesus.top/tags/%E6%95%99%E7%A8%8B/</loc>
     <lastmod>2026-07-10</lastmod>
     <changefreq>weekly</changefreq>
@@ -569,27 +590,6 @@
   
   <url>
     <loc>http://www.ephesus.top/tags/pipe/</loc>
-    <lastmod>2026-07-10</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>http://www.ephesus.top/tags/%E8%B5%84%E6%BA%90/</loc>
-    <lastmod>2026-07-10</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>http://www.ephesus.top/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/</loc>
-    <lastmod>2026-07-10</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>http://www.ephesus.top/tags/dgamelaunch/</loc>
     <lastmod>2026-07-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
