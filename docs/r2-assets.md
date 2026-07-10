@@ -24,6 +24,9 @@ Create the R2 credentials with Object Read & Write access limited to the
 `ephesus-files` bucket. The Worker token should be separate from the R2 token
 and limited to the Worker, R2 binding, and route permissions it needs.
 
+The workflow configures rclone with `no_check_bucket = true`, which is required
+when these R2 credentials are scoped to a specific bucket.
+
 ## Initial Migration
 
 1. Add the R2 secrets and push this workflow while `R2_ASSETS_ENABLED` is not

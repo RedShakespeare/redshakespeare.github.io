@@ -60,6 +60,7 @@ jobs:
           RCLONE_CONFIG_R2_ENDPOINT: https://${{ secrets.R2_ACCOUNT_ID }}.r2.cloudflarestorage.com
           RCLONE_CONFIG_R2_REGION: auto
           RCLONE_CONFIG_R2_FORCE_PATH_STYLE: "true"
+          RCLONE_CONFIG_R2_NO_CHECK_BUCKET: "true"
           GITHUB_EVENT_BEFORE: ${{ github.event.before }}
           GITHUB_SHA: ${{ github.sha }}
 
