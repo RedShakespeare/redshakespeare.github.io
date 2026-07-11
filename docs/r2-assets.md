@@ -8,6 +8,16 @@ directly at `https://dl.ephesus.top/files/rl/game.zip`.
 resource browser requests it at runtime; it is refreshed whenever that tree
 changes.
 
+`files/hxh_civ/theme.json` is also generated during synchronization. It is a
+small public manifest for the standalone HXH CIV page and contains the current
+Inside site title, profile, navigation, footer, colors, and fonts. Changes to
+`_config.yml` or `_config.inside.yml` refresh this manifest even when no files
+under `source/files/` changed.
+
+The Pages build writes the same manifest to `public/files/hxh_civ/` before an
+optional R2-only deployment removes `public/files/`, so the page remains in
+sync during the staged migration as well.
+
 The `ephesus-files-proxy` Worker routes `www.ephesus.top/files/*` to the same
 objects. Existing site links therefore remain unchanged after Pages stops
 publishing `files/`.

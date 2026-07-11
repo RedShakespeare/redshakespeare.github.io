@@ -5,10 +5,17 @@ const { spawnSync } = require('child_process');
 const os = require('os');
 const path = require('path');
 const { generateTree } = require('./hxh-tree');
+const { generateHxhTheme } = require('./hxh-theme');
 
 const SOURCE_PREFIX = 'source/files/';
 const DEFAULT_REMOTE = 'r2:ephesus-files/files';
 const ZERO_SHA = /^0+$/;
+const HXH_THEME_INPUTS = [
+  '_config.yml',
+  '_config.inside.yml',
+  'tools/hxh-theme.js',
+  'source/files/hxh_civ/index.html',
+];
 
 function fail(message) {
   console.error(`R2 asset sync: ${message}`);
@@ -83,6 +90,16 @@ function requestedMode() {
   return mode;
 }
 
+function hasHxhThemeChanges(base, head) {
+  const output = run('git', ['diff', '--name-only', base, head, '--', ...HXH_THEME_INPUTS]);
+  return output.trim().length > 0;
+}
+
+function collectChanges(base, head) {
+  const changes = parseDiff(base, head);
+  return { ...changes, hxhTheme: hasHxhThemeChanges(base, head) };
+}
+
 function detectMode() {
   if (requestedMode() === 'full') return 'full';
 
@@ -90,8 +107,9 @@ function detectMode() {
   const head = process.env.GITHUB_SHA || 'HEAD';
   if (!gitCommitExists(base) || !gitCommitExists(head)) return 'full';
 
-  const { uploads, deletes } = parseDiff(base, head);
-  return uploads.length || deletes.length ? 'incremental' : 'none';
+  const { uploads, deletes, hxhTheme } = collectChanges(base, head);
+  if (uploads.length || deletes.length) return 'incremental';
+  return hxhTheme ? 'theme' : 'none';
 }
 
 function isLfsPointer(path) {
@@ -148,22 +166,49 @@ function refreshHxhTree(remote, mode, changes) {
   }
 }
 
+function refreshHxhTheme(remote) {
+  const directory = mkdtempSync(path.join(os.tmpdir(), 'ephesus-hxh-theme-'));
+  const themePath = path.join(directory, 'theme.json');
+  try {
+    writeFileSync(themePath, `${JSON.stringify(generateHxhTheme(), null, 2)}\n`);
+    run('rclone', ['copyto', themePath, `${remote}/hxh_civ/theme.json`, '--progress'], {
+      stdio: 'inherit',
+    });
+  } finally {
+    rmSync(directory, { recursive: true, force: true });
+  }
+}
+
+function shouldRefreshHxhTheme(mode, changes) {
+  return mode === 'full' || mode === 'theme' || changes.hxhTheme;
+}
+
 function sync(mode) {
   const remote = process.env.R2_REMOTE || DEFAULT_REMOTE;
   const base = process.env.GITHUB_EVENT_BEFORE;
   const head = process.env.GITHUB_SHA || 'HEAD';
-  const changes = mode === 'incremental' ? parseDiff(base, head) : { uploads: [], deletes: [] };
+  const changes = mode === 'incremental' ? collectChanges(base, head) : {
+    uploads: [],
+    deletes: [],
+    hxhTheme: mode === 'full' || mode === 'theme',
+  };
 
-  hydrate(changes.uploads, mode);
+  if (mode !== 'theme') hydrate(changes.uploads, mode);
   // Listing the destination prefix verifies the scoped bucket credentials
   // without requiring permission to enumerate every bucket in the account.
   run('rclone', ['lsf', remote, '--max-depth', '1'], { stdio: 'inherit' });
+
+  if (mode === 'theme') {
+    refreshHxhTheme(remote);
+    return;
+  }
 
   if (mode === 'full') {
     run('rclone', ['sync', 'source/files', remote, '--fast-list', '--delete-during', '--progress'], {
       stdio: 'inherit',
     });
     refreshHxhTree(remote, mode, changes);
+    refreshHxhTheme(remote);
     return;
   }
 
@@ -177,20 +222,35 @@ function sync(mode) {
     run('rclone', ['deletefile', `${remote}/${objectPath(path)}`], { stdio: 'inherit' });
   }
   refreshHxhTree(remote, mode, changes);
+  if (shouldRefreshHxhTheme(mode, changes)) refreshHxhTheme(remote);
 }
 
-const args = new Set(process.argv.slice(2));
-if (args.has('--detect')) {
-  const mode = detectMode();
-  console.log(`mode=${mode}`);
-  if (process.env.GITHUB_OUTPUT) {
-    require('fs').appendFileSync(process.env.GITHUB_OUTPUT, `mode=${mode}\n`);
+function main() {
+  const args = new Set(process.argv.slice(2));
+  if (args.has('--detect')) {
+    const mode = detectMode();
+    console.log(`mode=${mode}`);
+    if (process.env.GITHUB_OUTPUT) {
+      require('fs').appendFileSync(process.env.GITHUB_OUTPUT, `mode=${mode}\n`);
+    }
+    return;
   }
-} else if (args.has('--sync')) {
-  const modeIndex = process.argv.indexOf('--mode');
-  const mode = modeIndex === -1 ? detectMode() : process.argv[modeIndex + 1];
-  if (!['incremental', 'full'].includes(mode)) fail(`invalid sync mode ${mode}`);
-  sync(mode);
-} else {
+  if (args.has('--sync')) {
+    const modeIndex = process.argv.indexOf('--mode');
+    const mode = modeIndex === -1 ? detectMode() : process.argv[modeIndex + 1];
+    if (!['incremental', 'full', 'theme'].includes(mode)) fail(`invalid sync mode ${mode}`);
+    sync(mode);
+    return;
+  }
   fail('use --detect or --sync');
 }
+
+if (require.main === module) main();
+
+module.exports = {
+  HXH_THEME_INPUTS,
+  collectChanges,
+  detectMode,
+  hasHxhThemeChanges,
+  shouldRefreshHxhTheme,
+};

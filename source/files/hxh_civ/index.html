@@ -1,112 +1,729 @@
 <!doctype html>
 <html lang="zh-CN">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>HXH CIV Files</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f3f6f7">
+  <title>HXH CIV Files — Ephesus</title>
+  <link rel="icon" href="https://www.ephesus.top/favicon.png">
+  <link id="theme-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Baloo+Bhaijaan|Inconsolata|Josefin+Sans|Montserrat">
   <style>
-    body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;max-width:980px;margin:32px auto;padding:0 16px}
-    .toolbar{display:flex;gap:12px;align-items:center;margin:16px 0}
-    input{flex:1;padding:10px 12px;border:1px solid #ddd;border-radius:10px}
-    .meta{color:#666;font-size:12px}
-    ul{list-style:none;padding-left:18px;margin:6px 0}
-    li{margin:6px 0}
-    details{border:1px solid #eee;border-radius:12px;padding:8px 10px;background:#fafafa}
-    summary{cursor:pointer;font-weight:600}
-    a{color:#0b66ff;text-decoration:none}
-    a:hover{text-decoration:underline}
-    .row{display:flex;gap:10px;align-items:baseline;flex-wrap:wrap}
-    .size{color:#888;font-size:12px}
+    :root {
+      --hxh-accent: #673ab7;
+      --hxh-foreground: #363636;
+      --hxh-border: #e0e0e0;
+      --hxh-background: #f3f6f7;
+      --hxh-sidebar-background: #673ab7;
+      --hxh-card: #ffffff;
+      --hxh-content-width: 660px;
+      --hxh-font-base: 'Josefin Sans', 'PingFang SC', sans-serif;
+      --hxh-font-logo: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+      --hxh-font-menu: 'Baloo Bhaijaan', 'Josefin Sans', 'PingFang SC', sans-serif;
+      --hxh-font-label: Montserrat, 'Josefin Sans', 'PingFang SC', sans-serif;
+      --hxh-font-heading: Consolas, 'Josefin Sans', 'PingFang SC', sans-serif;
+      --hxh-font-code: Inconsolata, monospace;
+      --hxh-shadow: 3px 4px 11px rgba(42, 43, 51, .1);
+    }
+
+    * { box-sizing: border-box; }
+    html { min-height: 100%; font-size: 14px; background: var(--hxh-background); }
+    body {
+      min-height: 100vh;
+      margin: 0;
+      color: var(--hxh-foreground);
+      background: var(--hxh-background);
+      font-family: var(--hxh-font-base);
+      line-height: 1.5;
+      text-rendering: geometricPrecision;
+      -webkit-font-smoothing: antialiased;
+      -webkit-text-size-adjust: 100%;
+    }
+    body[data-theme='dark'] { color-scheme: dark; --hxh-shadow: 3px 4px 11px rgba(0, 0, 0, .24); }
+    a { color: inherit; text-decoration: none; }
+    button, input { font: inherit; }
+    button { color: inherit; }
+    ::selection { color: #fff; background: var(--hxh-accent); }
+    ::-webkit-scrollbar { width: 8px; height: 6px; }
+    ::-webkit-scrollbar-thumb { background: color-mix(in srgb, var(--hxh-accent) 20%, transparent); }
+    ::-webkit-scrollbar-thumb:hover { background: color-mix(in srgb, var(--hxh-accent) 80%, transparent); }
+
+    .skip-link {
+      position: fixed;
+      z-index: 20;
+      top: .75rem;
+      left: .75rem;
+      padding: .5rem .75rem;
+      border-radius: 4px;
+      color: #fff;
+      background: var(--hxh-accent);
+      transform: translateY(-160%);
+      transition: transform .15s ease;
+    }
+    .skip-link:focus { transform: translateY(0); }
+
+    .sidebar {
+      position: fixed;
+      z-index: 8;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      width: 280px;
+      overflow-y: auto;
+      border-right: 1px solid var(--hxh-border);
+      color: #fff;
+      background: var(--hxh-sidebar-background);
+      transition: transform .25s ease, box-shadow .25s ease;
+    }
+    .sidebar-inner {
+      display: flex;
+      flex-direction: column;
+      min-height: 100%;
+      padding: 1rem;
+    }
+    .profile-card,
+    .sidebar-nav {
+      border-radius: 6px;
+      color: var(--hxh-foreground);
+      background: var(--hxh-card);
+    }
+    .profile-card {
+      overflow: hidden;
+      padding: 2.4rem 1.5rem 1.5rem;
+      text-align: center;
+    }
+    .avatar-link {
+      display: flex;
+      width: 8rem;
+      height: 8rem;
+      margin: auto;
+      overflow: hidden;
+      border: 1px solid color-mix(in srgb, var(--hxh-accent) 40%, transparent);
+      border-radius: 50%;
+      background: var(--hxh-card);
+    }
+    .avatar-link img { width: 100%; height: 100%; object-fit: cover; }
+    .site-title {
+      display: block;
+      margin: 1.35rem 0 1rem;
+      font-family: var(--hxh-font-logo);
+      font-size: 1.714rem;
+      transition: color .15s ease;
+    }
+    .site-title:hover, .site-title:focus { color: var(--hxh-accent); }
+    .profile-bio { margin: 0; opacity: .63; white-space: pre-line; }
+
+    .sidebar-nav { margin: 1rem 0; padding: 1rem 0; }
+    .sidebar-nav a {
+      position: relative;
+      display: block;
+      padding: .8rem 1.5rem;
+      overflow: hidden;
+      font-family: var(--hxh-font-menu);
+      line-height: 1.5;
+      transition: color .15s ease, background-color .15s ease;
+    }
+    .sidebar-nav a::after {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      content: '';
+      background: var(--hxh-accent);
+      opacity: 0;
+      transition: opacity .15s ease;
+    }
+    .sidebar-nav a:hover, .sidebar-nav a:focus { color: #fff; }
+    .sidebar-nav a:hover::after, .sidebar-nav a:focus::after { opacity: 1; }
+    .sidebar-nav a span { position: relative; z-index: 1; }
+
+    .sidebar-bottom { margin-top: auto; text-align: center; }
+    .social-links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin: 0 0 1rem;
+    }
+    .social-link {
+      display: grid;
+      width: 2.4rem;
+      height: 2.4rem;
+      margin: 0 2px;
+      place-items: center;
+      border-radius: 50%;
+      color: #fff;
+      transition: color .15s ease, background .15s ease;
+    }
+    .social-link:hover, .social-link:focus { color: var(--hxh-accent); background: #fff; }
+    .social-icon { display: grid; width: 1.15rem; height: 1.15rem; place-items: center; font-size: 1.15rem; }
+    .social-icon svg { width: 100%; height: 100%; fill: currentColor; }
+    .sidebar-footer { padding: .75rem .5rem; color: #fff; font-size: .85rem; line-height: 1.5; opacity: .86; }
+    .sidebar-footer a { border-bottom: 1px solid currentColor; }
+    .theme-toggle {
+      width: 2.4rem;
+      height: 2.4rem;
+      margin: 0 0 1rem;
+      border: 0;
+      border-radius: 50%;
+      color: #fff;
+      background: rgba(0, 0, 0, .38);
+      cursor: pointer;
+      transition: transform .15s ease, background .15s ease;
+    }
+    .theme-toggle:hover, .theme-toggle:focus { background: rgba(0, 0, 0, .62); transform: scale(1.08); }
+
+    .mobile-menu, .backdrop { display: none; }
+    .main {
+      min-height: 100vh;
+      margin-left: 280px;
+      padding: 3rem 1.5rem;
+    }
+    .resource-card {
+      max-width: var(--hxh-content-width);
+      margin: 0 auto;
+      overflow: hidden;
+      border-radius: 6px;
+      background: var(--hxh-card);
+      box-shadow: var(--hxh-shadow);
+    }
+    .page-header {
+      padding: 2.15rem 2.15rem 1.5rem;
+      border-bottom: 1px solid var(--hxh-border);
+      background: color-mix(in srgb, var(--hxh-accent) 5%, var(--hxh-card));
+    }
+    .eyebrow {
+      margin: 0 0 .5rem;
+      color: var(--hxh-accent);
+      font-family: var(--hxh-font-label);
+      font-size: .85rem;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    h1 { margin: 0; font-family: var(--hxh-font-heading); font-size: 1.785rem; font-weight: 400; line-height: 1.5; }
+    .page-description { margin: .5rem 0 0; opacity: .63; }
+    .content { padding: 1.5rem 2.15rem 2.15rem; }
+    .toolbar { display: flex; flex-wrap: wrap; gap: .75rem; align-items: center; margin-bottom: 1.25rem; }
+    .search-wrap { position: relative; flex: 1 1 20rem; }
+    .search-wrap::before { position: absolute; top: 50%; left: .85rem; content: '⌕'; opacity: .5; transform: translateY(-52%); }
+    #q {
+      width: 100%;
+      padding: .75rem .85rem .75rem 2.15rem;
+      border: 1px solid var(--hxh-border);
+      border-radius: 4px;
+      color: inherit;
+      background: transparent;
+      transition: border-color .15s ease, box-shadow .15s ease;
+    }
+    #q:focus { border-color: var(--hxh-accent); outline: 0; box-shadow: 0 0 0 3px color-mix(in srgb, var(--hxh-accent) 16%, transparent); }
+    .meta { color: var(--hxh-foreground); font-family: var(--hxh-font-label); font-size: .78rem; opacity: .63; }
+    .tree { min-height: 4rem; }
+    .tree-list { margin: 0; padding: 0; list-style: none; }
+    .directory { margin: .5rem 0; }
+    .directory > details { overflow: hidden; border: 1px solid var(--hxh-border); border-radius: 6px; }
+    .directory > details[open] { background: color-mix(in srgb, var(--hxh-accent) 3%, var(--hxh-card)); }
+    .directory summary {
+      position: relative;
+      display: flex;
+      align-items: center;
+      min-height: 2.8rem;
+      padding: .65rem 2.75rem .65rem 1rem;
+      cursor: pointer;
+      font-family: var(--hxh-font-heading);
+      list-style: none;
+      transition: color .15s ease, background .15s ease;
+    }
+    .directory summary::-webkit-details-marker { display: none; }
+    .directory summary::after {
+      position: absolute;
+      top: 50%;
+      right: 1rem;
+      content: '›';
+      color: var(--hxh-accent);
+      font-size: 1.5rem;
+      transform: translateY(-53%) rotate(0deg);
+      transition: transform .15s ease;
+    }
+    .directory details[open] > summary::after { transform: translateY(-53%) rotate(90deg); }
+    .directory summary:hover, .directory summary:focus { color: var(--hxh-accent); background: color-mix(in srgb, var(--hxh-accent) 6%, transparent); outline: 0; }
+    .directory-name::before { margin-right: .55rem; content: '▸'; color: var(--hxh-accent); font-size: .8em; }
+    .directory > details[open] > summary .directory-name::before { content: '▾'; }
+    .tree-children { margin: 0; padding: .35rem .75rem .75rem 1.25rem; list-style: none; }
+    .directory .directory { margin: .4rem 0 .4rem .35rem; }
+    .file { margin: 0; }
+    .file-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .5rem 1rem;
+      align-items: baseline;
+      padding: .5rem .65rem;
+      border-radius: 4px;
+    }
+    .file-row:hover { background: color-mix(in srgb, var(--hxh-accent) 6%, transparent); }
+    .file-link { min-width: 0; color: var(--hxh-accent); overflow-wrap: anywhere; }
+    .file-link:hover, .file-link:focus { text-decoration: underline; }
+    .size { color: var(--hxh-foreground); font-family: var(--hxh-font-label); font-size: .78rem; opacity: .63; white-space: nowrap; }
+    .message { margin: 1rem 0; padding: 1rem; border-left: 3px solid var(--hxh-accent); background: color-mix(in srgb, var(--hxh-accent) 7%, transparent); }
+    .message[role='alert'] { border-left-color: #c0392b; }
+
+    @media (max-width: 975px) {
+      .sidebar { box-shadow: 2px 0 18px rgba(0, 0, 0, .22); transform: translateX(-102%); }
+      body.sidebar-open { overflow: hidden; }
+      body.sidebar-open .sidebar { transform: translateX(0); }
+      .mobile-menu {
+        position: fixed;
+        z-index: 7;
+        top: 1rem;
+        left: 1rem;
+        display: grid;
+        width: 2.75rem;
+        height: 2.75rem;
+        padding: 0;
+        place-items: center;
+        border: 0;
+        border-radius: 50%;
+        color: #fff;
+        background: var(--hxh-accent);
+        box-shadow: var(--hxh-shadow);
+        cursor: pointer;
+      }
+      .mobile-menu span, .mobile-menu::before, .mobile-menu::after { position: absolute; width: 1.15rem; height: 2px; background: currentColor; content: ''; transition: transform .15s ease; }
+      .mobile-menu span { display: block; }
+      .mobile-menu::before { transform: translateY(-.36rem); }
+      .mobile-menu::after { transform: translateY(.36rem); }
+      body.sidebar-open .mobile-menu span { opacity: 0; }
+      body.sidebar-open .mobile-menu::before { transform: rotate(45deg); }
+      body.sidebar-open .mobile-menu::after { transform: rotate(-45deg); }
+      .backdrop { position: fixed; z-index: 6; inset: 0; border: 0; background: rgba(0, 0, 0, .38); }
+      body.sidebar-open .backdrop { display: block; }
+      .main { margin-left: 0; }
+    }
+    @media (max-width: 675px) {
+      html { font-size: 13px; }
+      .sidebar { width: min(280px, 85vw); }
+      .main { padding: 0; }
+      .resource-card { min-height: 100vh; border-radius: 0; box-shadow: none; }
+      .page-header { padding: 5.25rem 1.5rem 1.5rem; }
+      .content { padding: 1.5rem; }
+      .toolbar { display: block; }
+      .meta { display: block; margin-top: .75rem; }
+      .tree-children { padding-right: .45rem; padding-left: .65rem; }
+      .directory .directory { margin-left: .1rem; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; }
+    }
   </style>
 </head>
 <body>
-  <h1>文件下载</h1>
-  <div class="toolbar">
-    <input id="q" placeholder="搜索文件/文件夹…" />
-    <span class="meta" id="meta"></span>
-  </div>
-  <div id="root"></div>
+  <a class="skip-link" href="#content">跳至文件列表</a>
+  <button class="mobile-menu" id="menu-toggle" type="button" aria-label="打开站点导航" aria-controls="site-sidebar" aria-expanded="false"><span></span></button>
+  <aside class="sidebar" id="site-sidebar" aria-label="站点导航">
+    <div class="sidebar-inner">
+      <section class="profile-card" aria-label="站点资料">
+        <a class="avatar-link" id="avatar-link" href="https://www.ephesus.top/"><img id="avatar" src="https://www.ephesus.top/avatar.jpg" alt="Ephesus 头像"></a>
+        <a class="site-title" id="site-title" href="https://www.ephesus.top/">Ephesus</a>
+        <p class="profile-bio" id="profile-bio">你体验到一种不寻常的和平的感觉.</p>
+      </section>
+      <nav class="sidebar-nav" id="site-menu" aria-label="博客菜单">
+        <a href="https://www.ephesus.top/"><span>🏠 Writings</span></a>
+        <a href="https://www.ephesus.top/roguelike/"><span>💾 RLArchive</span></a>
+        <a href="https://www.ephesus.top/about/"><span>🌟 About</span></a>
+        <a href="https://www.ephesus.top/links/"><span>🔗 Links</span></a>
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="social-links" id="social-links" aria-label="社交链接"></div>
+        <button class="theme-toggle" id="theme-toggle" type="button" aria-label="切换深色模式" aria-pressed="false">◐</button>
+        <footer class="sidebar-footer" id="site-footer">© 2023-2026 💫 <a href="https://www.ephesus.top/">Silencess</a></footer>
+      </div>
+    </div>
+  </aside>
+  <button class="backdrop" id="sidebar-backdrop" type="button" aria-label="关闭站点导航" tabindex="-1"></button>
 
-<script>
-  const fmtSize = (n) => {
-    if (n == null) return "";
-    const units = ["B","KB","MB","GB","TB"];
-    let i = 0, x = n;
-    while (x >= 1024 && i < units.length - 1) { x /= 1024; i++; }
-    return (Math.round(x * 10) / 10) + " " + units[i];
-  };
+  <main class="main" id="content">
+    <article class="resource-card">
+      <header class="page-header">
+        <p class="eyebrow">HXH CIV Files</p>
+        <h1>文件下载</h1>
+        <p class="page-description">席德梅尔文明资源档案</p>
+      </header>
+      <div class="content">
+        <div class="toolbar">
+          <label class="search-wrap" for="q"><input id="q" type="search" placeholder="搜索文件/文件夹…" autocomplete="off"></label>
+          <span class="meta" id="meta"></span>
+        </div>
+        <div class="tree" id="root" aria-live="polite"></div>
+      </div>
+    </article>
+  </main>
 
-  // 把 "a/中文 file.zip" 这种相对路径，逐段 encode，保证链接可用
-  const encodeRel = (rel) => rel.split("/").map(s => encodeURIComponent(s)).join("/");
+  <script>
+    (() => {
+      'use strict';
 
-  const match = (name, q) => !q || name.toLowerCase().includes(q);
+      const THEME_STORAGE_KEY = 'hxh-civ-theme';
+      const INSIDE_STORAGE_KEY = '__inside__';
+      const ALLOWED_SVG_TAGS = new Set(['svg', 'path', 'g', 'circle', 'rect', 'polygon', 'polyline', 'line', 'ellipse']);
+      const ALLOWED_SVG_ATTRIBUTES = new Set(['viewBox', 'd', 'fill', 'fill-rule', 'clip-rule', 'cx', 'cy', 'r', 'x', 'y', 'width', 'height', 'points', 'transform', 'stroke', 'stroke-width', 'stroke-linecap', 'stroke-linejoin']);
+      const DEFAULT_THEME = {
+        site: { title: 'Ephesus', author: 'Silencess', url: 'https://www.ephesus.top/', language: 'en' },
+        profile: { avatar: 'https://www.ephesus.top/avatar.jpg', bio: '你体验到一种不寻常的和平的感觉.' },
+        appearance: {
+          default: {
+            accentColor: '#673ab7', foregroundColor: '#363636', borderColor: '#e0e0e0', background: '#f3f6f7', sidebarBackground: '#673ab7', cardBackground: '#ffffff', contentWidth: '660px',
+            font: { url: 'https://fonts.googleapis.com/css?family=Baloo+Bhaijaan|Inconsolata|Josefin+Sans|Montserrat', base: "'Josefin Sans', 'PingFang SC', sans-serif", logo: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif", menu: "'Baloo Bhaijaan', 'Josefin Sans', 'PingFang SC', sans-serif", label: "Montserrat, 'Josefin Sans', 'PingFang SC', sans-serif", heading: "Consolas, 'Josefin Sans', 'PingFang SC', sans-serif", code: 'Inconsolata, monospace', print: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" },
+          },
+          dark: {
+            accentColor: '#673ab7', foregroundColor: '#adbac7', borderColor: '#373e47', background: '#22272e', sidebarBackground: '#22272e', cardBackground: '#2d333b', contentWidth: '660px',
+            font: { url: 'https://fonts.googleapis.com/css?family=Baloo+Bhaijaan|Inconsolata|Josefin+Sans|Montserrat', base: "'Josefin Sans', 'PingFang SC', sans-serif", logo: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif", menu: "'Baloo Bhaijaan', 'Josefin Sans', 'PingFang SC', sans-serif", label: "Montserrat, 'Josefin Sans', 'PingFang SC', sans-serif", heading: "Consolas, 'Josefin Sans', 'PingFang SC', sans-serif", code: 'Inconsolata, monospace', print: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" },
+          },
+        },
+        menu: [
+          { label: '🏠 Writings', url: 'https://www.ephesus.top/' },
+          { label: '💾 RLArchive', url: 'https://www.ephesus.top/roguelike/' },
+          { label: '🌟 About', url: 'https://www.ephesus.top/about/' },
+          { label: '🔗 Links', url: 'https://www.ephesus.top/links/' },
+        ],
+        sns: [],
+        footer: { copyright: '© 2023-2026 💫 <a href="https://www.ephesus.top/">Silencess</a>' },
+      };
 
-  function renderNode(node, q) {
-    if (node.type === "file") {
-      if (!match(node.name, q)) return null;
+      const rootEl = document.getElementById('root');
+      const queryEl = document.getElementById('q');
+      const metaEl = document.getElementById('meta');
+      const sidebarEl = document.getElementById('site-sidebar');
+      const menuToggleEl = document.getElementById('menu-toggle');
+      const backdropEl = document.getElementById('sidebar-backdrop');
+      const themeToggleEl = document.getElementById('theme-toggle');
+      const fontEl = document.getElementById('theme-font');
+      const themeColorEl = document.querySelector('meta[name="theme-color"]');
+      let data = null;
+      let themeConfig = DEFAULT_THEME;
+      let themeName = readInitialTheme();
 
-      const li = document.createElement("li");
-      const href = "./" + encodeRel(node.rel);
-      li.innerHTML = `
-        <div class="row">
-          <a href="${href}" download>${node.name}</a>
-          <span class="size">${fmtSize(node.size)}</span>
-        </div>`;
-      return li;
-    }
+      const fmtSize = (n) => {
+        if (n == null) return '';
+        const units = ['B', 'KB', 'MB', 'GB', 'TB'];
+        let i = 0;
+        let x = n;
+        while (x >= 1024 && i < units.length - 1) { x /= 1024; i += 1; }
+        return `${Math.round(x * 10) / 10} ${units[i]}`;
+      };
 
-    // dir
-    const kids = [];
-    for (const ch of (node.children || [])) {
-      const el = renderNode(ch, q);
-      if (el) kids.push(el);
-    }
-    const selfMatch = match(node.name, q);
-    if (!selfMatch && kids.length === 0) return null;
+      const encodeRel = (rel) => rel.split('/').map((segment) => encodeURIComponent(segment)).join('/');
+      const match = (name, query) => !query || name.toLowerCase().includes(query);
 
-    const wrap = document.createElement("div");
-    const details = document.createElement("details");
-    details.open = q ? true : false;
+      function cloneObject(value) {
+        return JSON.parse(JSON.stringify(value));
+      }
 
-    const sum = document.createElement("summary");
-    sum.textContent = node.name;
+      function mergeThemeConfig(incoming) {
+        const merged = cloneObject(DEFAULT_THEME);
+        if (!incoming || typeof incoming !== 'object') return merged;
+        for (const key of ['site', 'profile', 'footer']) {
+          if (incoming[key] && typeof incoming[key] === 'object' && !Array.isArray(incoming[key])) {
+            Object.assign(merged[key], incoming[key]);
+          }
+        }
+        if (incoming.appearance && typeof incoming.appearance === 'object') {
+          for (const name of ['default', 'dark']) {
+            if (incoming.appearance[name] && typeof incoming.appearance[name] === 'object') {
+              Object.assign(merged.appearance[name], incoming.appearance[name]);
+              if (incoming.appearance[name].font && typeof incoming.appearance[name].font === 'object') {
+                Object.assign(merged.appearance[name].font, incoming.appearance[name].font);
+              }
+            }
+          }
+        }
+        if (Array.isArray(incoming.menu)) merged.menu = incoming.menu;
+        if (Array.isArray(incoming.sns)) merged.sns = incoming.sns;
+        return merged;
+      }
 
-    details.appendChild(sum);
+      function safeUrl(value, fallback = '') {
+        if (typeof value !== 'string' || !value.trim()) return fallback;
+        try {
+          const url = new URL(value, themeConfig.site.url);
+          return ['http:', 'https:', 'mailto:'].includes(url.protocol) ? url.href : fallback;
+        } catch {
+          return fallback;
+        }
+      }
 
-    const ul = document.createElement("ul");
-    for (const k of kids) ul.appendChild(k);
-    details.appendChild(ul);
+      function isExternal(url) {
+        try { return new URL(url).origin !== new URL(themeConfig.site.url).origin; } catch { return false; }
+      }
 
-    wrap.appendChild(details);
-    return wrap;
-  }
+      function applyTheme(name, persist = true) {
+        themeName = name === 'dark' ? 'dark' : 'default';
+        const appearance = themeConfig.appearance[themeName];
+        const style = document.documentElement.style;
+        const variables = {
+          '--hxh-accent': appearance.accentColor,
+          '--hxh-foreground': appearance.foregroundColor,
+          '--hxh-border': appearance.borderColor,
+          '--hxh-background': appearance.background,
+          '--hxh-sidebar-background': appearance.sidebarBackground,
+          '--hxh-card': appearance.cardBackground,
+          '--hxh-content-width': appearance.contentWidth,
+          '--hxh-font-base': appearance.font.base,
+          '--hxh-font-logo': appearance.font.logo,
+          '--hxh-font-menu': appearance.font.menu,
+          '--hxh-font-label': appearance.font.label,
+          '--hxh-font-heading': appearance.font.heading,
+          '--hxh-font-code': appearance.font.code,
+        };
+        Object.entries(variables).forEach(([key, value]) => style.setProperty(key, value));
+        document.body.dataset.theme = themeName;
+        document.documentElement.lang = themeConfig.site.language || 'en';
+        document.title = `HXH CIV Files — ${themeConfig.site.title}`;
+        themeColorEl.content = appearance.background;
+        if (appearance.font.url) fontEl.href = appearance.font.url.startsWith('//') ? `https:${appearance.font.url}` : appearance.font.url;
+        themeToggleEl.setAttribute('aria-pressed', String(themeName === 'dark'));
+        themeToggleEl.textContent = themeName === 'dark' ? '☀' : '◐';
+        themeToggleEl.setAttribute('aria-label', themeName === 'dark' ? '切换为浅色模式' : '切换为深色模式');
+        if (persist) {
+          try { localStorage.setItem(THEME_STORAGE_KEY, themeName); } catch { /* Storage is optional. */ }
+        }
+      }
 
-  async function main() {
-    const res = await fetch("./tree.json", { cache: "no-store" });
-    if (!res.ok) throw new Error("tree.json 加载失败");
-    const data = await res.json();
+      function readInitialTheme() {
+        try {
+          const localTheme = localStorage.getItem(THEME_STORAGE_KEY);
+          if (localTheme === 'default' || localTheme === 'dark') return localTheme;
+          const inside = JSON.parse(localStorage.getItem(INSIDE_STORAGE_KEY) || 'null');
+          if (inside && inside.theme && inside.theme.name === 'dark') return 'dark';
+        } catch { /* Fall back to the site default. */ }
+        return 'default';
+      }
 
-    document.getElementById("meta").textContent =
-      "生成时间: " + new Date(data.generatedAt).toLocaleString();
+      function createLink(url, text, className) {
+        const link = document.createElement('a');
+        link.href = safeUrl(url, themeConfig.site.url);
+        link.className = className;
+        if (isExternal(link.href)) {
+          link.target = '_blank';
+          link.rel = 'noopener noreferrer';
+        }
+        link.textContent = text;
+        return link;
+      }
 
-    const rootEl = document.getElementById("root");
-    const qEl = document.getElementById("q");
+      function sanitizeFooterHtml(html) {
+        const fragment = document.createDocumentFragment();
+        const template = document.createElement('template');
+        template.innerHTML = typeof html === 'string' ? html : '';
+        const allowed = new Set(['A', 'SPAN', 'I', 'B', 'STRONG', 'EM', 'BR']);
+        const copyNode = (node) => {
+          if (node.nodeType === Node.TEXT_NODE) return document.createTextNode(node.textContent || '');
+          if (node.nodeType !== Node.ELEMENT_NODE || !allowed.has(node.tagName)) return document.createTextNode(node.textContent || '');
+          const copy = document.createElement(node.tagName.toLowerCase());
+          if (node.tagName === 'A') {
+            const href = safeUrl(node.getAttribute('href'));
+            if (href) {
+              copy.href = href;
+              if (isExternal(href)) {
+                copy.target = '_blank';
+                copy.rel = 'noopener noreferrer';
+              }
+            }
+          }
+          for (const child of node.childNodes) copy.appendChild(copyNode(child));
+          return copy;
+        };
+        for (const child of template.content.childNodes) fragment.appendChild(copyNode(child));
+        return fragment;
+      }
 
-    const doRender = () => {
-      const q = (qEl.value || "").trim().toLowerCase();
-      rootEl.innerHTML = "";
-      const pseudoRoot = { type: "dir", name: "hxh_civ", children: data.children || [] };
-      const view = renderNode(pseudoRoot, q);
-      rootEl.appendChild(view || document.createTextNode("没有匹配结果"));
-    };
+      function createSafeSvg(markup) {
+        if (typeof markup !== 'string' || !markup.trim()) return null;
+        const parsed = new DOMParser().parseFromString(markup, 'image/svg+xml');
+        const source = parsed.documentElement;
+        if (source.localName !== 'svg' || source.namespaceURI !== 'http://www.w3.org/2000/svg') return null;
+        const copyNode = (node) => {
+          if (!ALLOWED_SVG_TAGS.has(node.localName)) return null;
+          const copy = document.createElementNS('http://www.w3.org/2000/svg', node.localName);
+          for (const attribute of node.attributes) {
+            if (ALLOWED_SVG_ATTRIBUTES.has(attribute.name)) copy.setAttribute(attribute.name, attribute.value);
+          }
+          for (const child of node.children) {
+            const childCopy = copyNode(child);
+            if (childCopy) copy.appendChild(childCopy);
+          }
+          return copy;
+        };
+        return copyNode(source);
+      }
 
-    qEl.addEventListener("input", doRender);
-    doRender();
-  }
+      function socialFallback(icon) {
+        return ({ email: '✉', twitter: '𝕏', feed: '◔' })[icon] || '↗';
+      }
 
-  main().catch(err => {
-    document.getElementById("root").textContent = "加载失败：" + err.message;
-  });
-</script>
+      function renderSidebar() {
+        const siteUrl = safeUrl(themeConfig.site.url, DEFAULT_THEME.site.url);
+        const avatarLink = document.getElementById('avatar-link');
+        const avatar = document.getElementById('avatar');
+        const siteTitle = document.getElementById('site-title');
+        avatarLink.href = siteUrl;
+        avatar.src = safeUrl(themeConfig.profile.avatar, DEFAULT_THEME.profile.avatar);
+        avatar.alt = `${themeConfig.site.title} 头像`;
+        siteTitle.href = siteUrl;
+        siteTitle.textContent = themeConfig.site.title;
+        document.getElementById('profile-bio').textContent = themeConfig.profile.bio || '';
+
+        const menu = document.getElementById('site-menu');
+        menu.replaceChildren();
+        themeConfig.menu.forEach((item) => {
+          if (!item || typeof item.label !== 'string') return;
+          const link = createLink(item.url, '', '');
+          const text = document.createElement('span');
+          text.textContent = item.label;
+          link.appendChild(text);
+          link.addEventListener('click', () => setSidebarOpen(false));
+          menu.appendChild(link);
+        });
+
+        const socialLinks = document.getElementById('social-links');
+        socialLinks.replaceChildren();
+        themeConfig.sns.forEach((item) => {
+          if (!item || typeof item.title !== 'string') return;
+          const link = createLink(item.url, '', 'social-link');
+          link.title = item.title;
+          link.setAttribute('aria-label', item.title);
+          const icon = document.createElement('span');
+          icon.className = 'social-icon';
+          const svg = createSafeSvg(item.template);
+          if (svg) {
+            svg.setAttribute('aria-hidden', 'true');
+            icon.appendChild(svg);
+          } else {
+            icon.textContent = socialFallback(item.icon);
+          }
+          link.appendChild(icon);
+          socialLinks.appendChild(link);
+        });
+
+        const footer = document.getElementById('site-footer');
+        footer.replaceChildren(sanitizeFooterHtml(themeConfig.footer.copyright));
+      }
+
+      function setSidebarOpen(open) {
+        document.body.classList.toggle('sidebar-open', open);
+        menuToggleEl.setAttribute('aria-expanded', String(open));
+        menuToggleEl.setAttribute('aria-label', open ? '关闭站点导航' : '打开站点导航');
+        if (!open) menuToggleEl.focus({ preventScroll: true });
+      }
+
+      function showMessage(message, isError = false) {
+        rootEl.replaceChildren();
+        const item = document.createElement('p');
+        item.className = 'message';
+        item.textContent = message;
+        if (isError) item.setAttribute('role', 'alert');
+        rootEl.appendChild(item);
+      }
+
+      function renderFile(node, query) {
+        if (!match(node.name, query)) return null;
+        const item = document.createElement('li');
+        item.className = 'file';
+        const row = document.createElement('div');
+        row.className = 'file-row';
+        const link = document.createElement('a');
+        link.className = 'file-link';
+        link.href = `./${encodeRel(node.rel)}`;
+        link.download = '';
+        link.textContent = node.name;
+        const size = document.createElement('span');
+        size.className = 'size';
+        size.textContent = fmtSize(node.size);
+        row.append(link, size);
+        item.appendChild(row);
+        return item;
+      }
+
+      function renderDirectory(node, query, depth) {
+        const children = [];
+        for (const child of node.children || []) {
+          const element = child.type === 'file'
+            ? renderFile(child, query)
+            : renderDirectory(child, query, depth + 1);
+          if (element) children.push(element);
+        }
+        const selfMatch = match(node.name, query);
+        if (!selfMatch && children.length === 0) return null;
+
+        const item = document.createElement('li');
+        item.className = 'directory';
+        const details = document.createElement('details');
+        details.open = Boolean(query) || depth === 0;
+        const summary = document.createElement('summary');
+        const name = document.createElement('span');
+        name.className = 'directory-name';
+        name.textContent = node.name;
+        summary.appendChild(name);
+        const list = document.createElement('ul');
+        list.className = 'tree-children';
+        children.forEach((child) => list.appendChild(child));
+        details.append(summary, list);
+        item.appendChild(details);
+        return item;
+      }
+
+      function renderTree() {
+        if (!data) return;
+        const query = (queryEl.value || '').trim().toLowerCase();
+        const root = { type: 'dir', name: 'hxh_civ', children: data.children || [] };
+        const rendered = renderDirectory(root, query, 0);
+        if (!rendered) {
+          showMessage('没有匹配结果');
+          return;
+        }
+        const list = document.createElement('ul');
+        list.className = 'tree-list';
+        list.appendChild(rendered);
+        rootEl.replaceChildren(list);
+      }
+
+      async function loadTree() {
+        try {
+          const response = await fetch('./tree.json', { cache: 'no-store' });
+          if (!response.ok) throw new Error('tree.json 加载失败');
+          data = await response.json();
+          const date = new Date(data.generatedAt);
+          metaEl.textContent = Number.isNaN(date.valueOf()) ? '' : `生成时间：${date.toLocaleString()}`;
+          renderTree();
+        } catch (error) {
+          showMessage(`加载失败：${error.message}`, true);
+        }
+      }
+
+      async function loadThemeConfig() {
+        try {
+          const response = await fetch('./theme.json', { cache: 'no-store' });
+          if (!response.ok) throw new Error('theme.json 加载失败');
+          const incoming = await response.json();
+          if (!incoming || incoming.version !== 1) throw new Error('theme.json 版本不受支持');
+          themeConfig = mergeThemeConfig(incoming);
+          renderSidebar();
+          applyTheme(themeName, false);
+        } catch {
+          // The page stays usable with its built-in theme while a deployment is in progress.
+        }
+      }
+
+      menuToggleEl.addEventListener('click', () => setSidebarOpen(!document.body.classList.contains('sidebar-open')));
+      backdropEl.addEventListener('click', () => setSidebarOpen(false));
+      document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape' && document.body.classList.contains('sidebar-open')) setSidebarOpen(false);
+      });
+      themeToggleEl.addEventListener('click', () => applyTheme(themeName === 'dark' ? 'default' : 'dark'));
+      queryEl.addEventListener('input', renderTree);
+
+      renderSidebar();
+      applyTheme(themeName, false);
+      loadThemeConfig();
+      loadTree();
+    })();
+  </script>
 </body>
 </html>
