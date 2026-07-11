@@ -7,7 +7,7 @@
     "clean": "hexo clean",
     "deploy": "hexo deploy",
     "server": "hexo server",
-    "test:hxh-theme": "node --test tools/hxh-theme.test.js"
+    "test:r2-assets": "node --test tools/sync-r2-assets.test.js"
   },
   "hexo": {
     "version": "6.3.0"
@@ -26,7 +26,6 @@
     "hexo-renderer-stylus": "^2.1.0",
     "hexo-server": "^3.0.0",
     "hexo-theme-inside": "^2.7.0",
-    "hexo-theme-landscape": "^0.0.3",
-    "js-yaml": "^4.1.0"
+    "hexo-theme-landscape": "^0.0.3"
   }
 }

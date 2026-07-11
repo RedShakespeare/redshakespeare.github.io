@@ -33,6 +33,15 @@ function fallbackType(key) {
   return FALLBACK_TYPES[extension];
 }
 
+function hxhCivPageUrl(request) {
+  const url = new URL(request.url);
+  if (!['/files/hxh_civ', '/files/hxh_civ/', '/files/hxh_civ/index.html'].includes(url.pathname)) {
+    return null;
+  }
+  url.pathname = '/hxh_civ/';
+  return url;
+}
+
 export default {
   async fetch(request, env) {
     if (!['GET', 'HEAD'].includes(request.method)) {
@@ -41,6 +50,9 @@ export default {
         headers: { Allow: 'GET, HEAD' },
       });
     }
+
+    const hxhCivPage = hxhCivPageUrl(request);
+    if (hxhCivPage) return Response.redirect(hxhCivPage, 302);
 
     const key = objectKey(request);
     if (!key) return new Response('Not Found', { status: 404 });

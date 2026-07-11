@@ -5,17 +5,10 @@ const { spawnSync } = require('child_process');
 const os = require('os');
 const path = require('path');
 const { generateTree } = require('./hxh-tree');
-const { generateHxhTheme } = require('./hxh-theme');
 
 const SOURCE_PREFIX = 'source/files/';
 const DEFAULT_REMOTE = 'r2:ephesus-files/files';
 const ZERO_SHA = /^0+$/;
-const HXH_THEME_INPUTS = [
-  '_config.yml',
-  '_config.inside.yml',
-  'tools/hxh-theme.js',
-  'source/files/hxh_civ/index.html',
-];
 const R2_SYNC_IMPLEMENTATION_INPUTS = ['tools/sync-r2-assets.js'];
 
 function fail(message) {
@@ -91,11 +84,6 @@ function requestedMode() {
   return mode;
 }
 
-function hasHxhThemeChanges(base, head) {
-  const output = run('git', ['diff', '--name-only', base, head, '--', ...HXH_THEME_INPUTS]);
-  return output.trim().length > 0;
-}
-
 function hasR2SyncImplementationChanges(base, head) {
   const output = run('git', ['diff', '--name-only', base, head, '--', ...R2_SYNC_IMPLEMENTATION_INPUTS]);
   return output.trim().length > 0;
@@ -105,7 +93,6 @@ function collectChanges(base, head) {
   const changes = parseDiff(base, head);
   return {
     ...changes,
-    hxhTheme: hasHxhThemeChanges(base, head),
     r2SyncImplementation: hasR2SyncImplementationChanges(base, head),
   };
 }
@@ -117,10 +104,10 @@ function detectMode() {
   const head = process.env.GITHUB_SHA || 'HEAD';
   if (!gitCommitExists(base) || !gitCommitExists(head)) return 'full';
 
-  const { uploads, deletes, hxhTheme, r2SyncImplementation } = collectChanges(base, head);
+  const { uploads, deletes, r2SyncImplementation } = collectChanges(base, head);
   if (r2SyncImplementation) return 'full';
   if (uploads.length || deletes.length) return 'incremental';
-  return hxhTheme ? 'theme' : 'none';
+  return 'none';
 }
 
 function isLfsPointer(path) {
@@ -179,23 +166,6 @@ function refreshHxhTree(remote, mode, changes) {
   }
 }
 
-function refreshHxhTheme(remote) {
-  const directory = mkdtempSync(path.join(os.tmpdir(), 'ephesus-hxh-theme-'));
-  const themePath = path.join(directory, 'theme.json');
-  try {
-    writeFileSync(themePath, `${JSON.stringify(generateHxhTheme(), null, 2)}\n`);
-    run('rclone', ['copyto', themePath, `${remote}/hxh_civ/theme.json`, '--progress'], {
-      stdio: 'inherit',
-    });
-  } finally {
-    rmSync(directory, { recursive: true, force: true });
-  }
-}
-
-function shouldRefreshHxhTheme(mode, changes) {
-  return mode === 'full' || mode === 'theme' || changes.hxhTheme;
-}
-
 function sync(mode) {
   const remote = process.env.R2_REMOTE || DEFAULT_REMOTE;
   const base = process.env.GITHUB_EVENT_BEFORE;
@@ -203,25 +173,18 @@ function sync(mode) {
   const changes = mode === 'incremental' ? collectChanges(base, head) : {
     uploads: [],
     deletes: [],
-    hxhTheme: mode === 'full' || mode === 'theme',
   };
 
-  if (mode !== 'theme') hydrate(changes.uploads, mode);
+  hydrate(changes.uploads, mode);
   // Listing the destination prefix verifies the scoped bucket credentials
   // without requiring permission to enumerate every bucket in the account.
   run('rclone', ['lsf', remote, '--max-depth', '1'], { stdio: 'inherit' });
-
-  if (mode === 'theme') {
-    refreshHxhTheme(remote);
-    return;
-  }
 
   if (mode === 'full') {
     run('rclone', ['sync', 'source/files', remote, '--fast-list', '--delete-during', '--progress'], {
       stdio: 'inherit',
     });
     refreshHxhTree(remote, mode, changes);
-    refreshHxhTheme(remote);
     return;
   }
 
@@ -235,7 +198,6 @@ function sync(mode) {
     run('rclone', ['deletefile', `${remote}/${objectPath(path)}`], { stdio: 'inherit' });
   }
   refreshHxhTree(remote, mode, changes);
-  if (shouldRefreshHxhTheme(mode, changes)) refreshHxhTheme(remote);
 }
 
 function main() {
@@ -251,7 +213,7 @@ function main() {
   if (args.has('--sync')) {
     const modeIndex = process.argv.indexOf('--mode');
     const mode = modeIndex === -1 ? detectMode() : process.argv[modeIndex + 1];
-    if (!['incremental', 'full', 'theme'].includes(mode)) fail(`invalid sync mode ${mode}`);
+    if (!['incremental', 'full'].includes(mode)) fail(`invalid sync mode ${mode}`);
     sync(mode);
     return;
   }
@@ -261,12 +223,9 @@ function main() {
 if (require.main === module) main();
 
 module.exports = {
-  HXH_THEME_INPUTS,
   R2_SYNC_IMPLEMENTATION_INPUTS,
   collectChanges,
   detectMode,
-  hasHxhThemeChanges,
   hasR2SyncImplementationChanges,
   objectPath,
-  shouldRefreshHxhTheme,
 };

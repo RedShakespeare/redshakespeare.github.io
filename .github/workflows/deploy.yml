@@ -37,10 +37,6 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: npm
-
-      - name: Install sync dependencies
-        run: npm ci
 
       - name: Detect R2 asset changes
         id: assets
@@ -102,12 +98,6 @@ jobs:
         run: |
           npx hexo clean
           npx hexo generate
-          # Hexo retains a legacy Page record for this route; overwrite it with
-          # the standalone source page when Pages still serves files directly.
-          mkdir -p public/files/hxh_civ
-          cp source/files/hxh_civ/index.html public/files/hxh_civ/index.html
-          # Keep the standalone HXH page synchronized when Pages still serves files directly.
-          node tools/hxh-theme.js --output public/files/hxh_civ/theme.json
           if [ "${R2_ASSETS_ENABLED}" = "true" ]; then
             rm -rf public/files
           fi
