@@ -4,6 +4,11 @@
 `files/` prefix, so a source path such as `source/files/rl/game.zip` is served
 directly at `https://dl.ephesus.top/files/rl/game.zip`.
 
+Incremental uploads are addressed relative to `source/files/`; this prevents
+the bucket's existing `files/` prefix from being duplicated as `files/files/`.
+Changes to `tools/sync-r2-assets.js` deliberately trigger one full mirror, so
+path-mapping fixes reconcile existing objects as well as future uploads.
+
 `files/hxh_civ/tree.json` is generated during synchronization because the
 resource browser requests it at runtime; it is refreshed whenever that tree
 changes.

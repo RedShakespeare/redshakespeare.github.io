@@ -6,7 +6,7 @@ const os = require('node:os');
 const path = require('node:path');
 const test = require('node:test');
 const { generateHxhTheme } = require('./hxh-theme');
-const { shouldRefreshHxhTheme } = require('./sync-r2-assets');
+const { R2_SYNC_IMPLEMENTATION_INPUTS, objectPath, shouldRefreshHxhTheme } = require('./sync-r2-assets');
 
 function withFixture(t, files) {
   const root = fs.mkdtempSync(path.join(os.tmpdir(), 'hxh-theme-test-'));
@@ -65,4 +65,13 @@ test('refreshes the theme manifest for config-only and full synchronization', ()
   assert.equal(shouldRefreshHxhTheme('incremental', { hxhTheme: true }), true);
   assert.equal(shouldRefreshHxhTheme('theme', { hxhTheme: false }), true);
   assert.equal(shouldRefreshHxhTheme('full', { hxhTheme: false }), true);
+});
+
+test('maps incremental source files beneath the existing R2 files prefix', () => {
+  assert.equal(objectPath('source/files/hxh_civ/index.html'), 'hxh_civ/index.html');
+  assert.equal(objectPath('source/files/rl/game.zip'), 'rl/game.zip');
+});
+
+test('treats sync implementation changes as a full mirror boundary', () => {
+  assert.deepEqual(R2_SYNC_IMPLEMENTATION_INPUTS, ['tools/sync-r2-assets.js']);
 });

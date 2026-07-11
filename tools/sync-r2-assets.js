@@ -16,6 +16,7 @@ const HXH_THEME_INPUTS = [
   'tools/hxh-theme.js',
   'source/files/hxh_civ/index.html',
 ];
+const R2_SYNC_IMPLEMENTATION_INPUTS = ['tools/sync-r2-assets.js'];
 
 function fail(message) {
   console.error(`R2 asset sync: ${message}`);
@@ -95,9 +96,18 @@ function hasHxhThemeChanges(base, head) {
   return output.trim().length > 0;
 }
 
+function hasR2SyncImplementationChanges(base, head) {
+  const output = run('git', ['diff', '--name-only', base, head, '--', ...R2_SYNC_IMPLEMENTATION_INPUTS]);
+  return output.trim().length > 0;
+}
+
 function collectChanges(base, head) {
   const changes = parseDiff(base, head);
-  return { ...changes, hxhTheme: hasHxhThemeChanges(base, head) };
+  return {
+    ...changes,
+    hxhTheme: hasHxhThemeChanges(base, head),
+    r2SyncImplementation: hasR2SyncImplementationChanges(base, head),
+  };
 }
 
 function detectMode() {
@@ -107,7 +117,8 @@ function detectMode() {
   const head = process.env.GITHUB_SHA || 'HEAD';
   if (!gitCommitExists(base) || !gitCommitExists(head)) return 'full';
 
-  const { uploads, deletes, hxhTheme } = collectChanges(base, head);
+  const { uploads, deletes, hxhTheme, r2SyncImplementation } = collectChanges(base, head);
+  if (r2SyncImplementation) return 'full';
   if (uploads.length || deletes.length) return 'incremental';
   return hxhTheme ? 'theme' : 'none';
 }
@@ -142,7 +153,9 @@ function hydrate(paths, mode) {
 
 function objectPath(sourcePath) {
   if (!sourcePath.startsWith(SOURCE_PREFIX)) fail(`unexpected source path ${sourcePath}`);
-  return sourcePath.slice('source/'.length);
+  // `remote` already ends with the bucket's `files/` prefix, so incremental
+  // uploads must be relative to source/files/ rather than source/.
+  return sourcePath.slice(SOURCE_PREFIX.length);
 }
 
 function refreshHxhTree(remote, mode, changes) {
@@ -249,8 +262,11 @@ if (require.main === module) main();
 
 module.exports = {
   HXH_THEME_INPUTS,
+  R2_SYNC_IMPLEMENTATION_INPUTS,
   collectChanges,
   detectMode,
   hasHxhThemeChanges,
+  hasR2SyncImplementationChanges,
+  objectPath,
   shouldRefreshHxhTheme,
 };
