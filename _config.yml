@@ -30,51 +30,10 @@ code_dir: downloads/code
 i18n_dir: :lang
 skip_render:
   - google1a76a4289e2a5783.html
-  - files/rl/nethack/nh-helper/*
-  - files/rl/nethack/nh-helper/stat/*
-  - files/rl/angband/angband_manual/_/static/css/*
-  - files/rl/angband/angband_manual/_/static/javascript/*
-  - files/rl/angband/angband_manual/en/latest/**
-  - files/rl/angband/angband_manual/en/latest/advertising/*
-  - files/rl/angband/angband_manual/en/latest/hacking/*
-  - files/rl/angband/angband_manual/en/latest/_static/*
-  - files/rl/adom/adomgb/*
-  - files/rl/moria/mmspoilers/*.html
-  - files/rl/moria/monsearch/*
-  - files/rl/moria/monsearch/*/*
-  - files/rl/moria/monsearch/*/*/*
-  - files/rl/moria/JSMoria/*
-  - files/rl/rogue/EpyxRogueDosManual/*
-  - files/rl/rogue/broken-connections/*
-  - files/rl/rogue/broken-connections/unicodetiles/*
-  - files/rl/rogue/broken-connections/howler/*
-  - files/rl/rogue/JSRogue/*
-  - files/rl/hack/JSHack/*
-  - files/rl/larn/JSLarn/*
-  - files/rl/larn/JSLarn12.5/*
-  - files/rl/larn/JSLarn12.5/*/*
-  - files/rl/larn/JSLarn12.5/*/*/*
-  - files/rl/omega/JSOmega/*
-  - files/rl/omega/omega-help-file/*
-  - files/rl/omega/omega-faq/*
   - lib/*
   - lib/fontawesome/*
   - lib/fontawesome/*/*
   - lib/fontawesome/svgs/*/*
-  - files/hxh_civ/Manual/*
-  - files/leyliner/*
-  - files/leyliner/js/*
-  - files/leyliner/js/lib/*
-  - files/leyliner/css/*
-  - files/leyliner/fonts/*
-  - files/leyliner/config/*
-  - files/rl/poa/zh_CN/*
-  - files/hxh_civ/*
-  - files/hxh_civ/*/*
-  - files/hxh_civ/*/*/*
-  - files/hxh_civ/*/*/*/*
-  - files/cataclysmIdle/*
-  - files/cataclysmIdle/*/*
 
 # Writing
 new_post_name: :title.md # File name of new posts
