@@ -182,6 +182,8 @@ test('renderPlayer retains the theme-scoped component markup for legacy episodes
   assert.match(html, /<audio class="podcast-player__audio" controls preload="metadata">/);
   assert.match(html, /data-podcast-action="play"/);
   assert.match(html, /class="podcast-player__range podcast-player__progress"/);
+  assert.match(html, /podcast-player__header[\s\S]*podcast-player__status[\s\S]*podcast-player__meta/);
+  assert.match(html, /podcast-player__status-icon/);
   assert.match(html, /class="podcast-player__footer"/);
   assert.match(html, /podcast-player__footer[\s\S]*podcast-player__download[\s\S]*podcast-player__volume-control/);
   assert.match(html, /podcast-player__volume-control[\s\S]*data-podcast-action="mute"/);
@@ -199,6 +201,8 @@ test('custom player assets define both colour palettes and react to theme change
   assert.match(PLAYER_STYLE, /height: \.3rem/);
   assert.match(PLAYER_STYLE, /border-radius: 99px/);
   assert.match(PLAYER_STYLE, /\.podcast-player__footer \{[\s\S]*padding: \.5rem \.45rem 0/);
+  assert.match(PLAYER_STYLE, /\.podcast-player__header \{[\s\S]*justify-content: space-between/);
+  assert.match(PLAYER_STYLE, /@keyframes podcast-player-spin/);
   assert.match(PLAYER_STYLE, /\.podcast-player__progress \{[\s\S]*margin-right: \.2rem/);
   assert.match(PLAYER_STYLE, /podcast-player__volume-button/);
   assert.doesNotMatch(PLAYER_STYLE, /#a78bfa/);
@@ -206,6 +210,9 @@ test('custom player assets define both colour palettes and react to theme change
   assert.match(PLAYER_STYLE, /::-moz-range-progress/);
   assert.match(PLAYER_SCRIPT, /document\.addEventListener\('inside:theme'/);
   assert.match(PLAYER_SCRIPT, /new MutationObserver/);
+  assert.match(PLAYER_SCRIPT, /audio\.addEventListener\('loadstart', showLoading\)/);
+  assert.match(PLAYER_SCRIPT, /audio\.addEventListener\('canplay', clearStatus\)/);
+  assert.match(PLAYER_SCRIPT, /音频加载失败，请尝试下载音频。/);
 });
 
 test('dry run registers the player but never the RSS generator', () => {

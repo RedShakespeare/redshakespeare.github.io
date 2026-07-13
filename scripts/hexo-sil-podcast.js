@@ -58,13 +58,41 @@ const PLAYER_STYLE = `
   display: flex;
   flex-wrap: wrap;
   align-items: baseline;
-  justify-content: flex-end;
+  justify-content: space-between;
   gap: .25rem 1rem;
 }
 .podcast-player__meta {
   color: var(--podcast-ink);
   font-size: .85rem;
   opacity: .85;
+}
+.podcast-player__status {
+  display: none;
+  align-items: center;
+  min-height: 1.36rem;
+  color: var(--podcast-ink);
+  font-size: .8rem;
+}
+.podcast-player[data-podcast-loading="true"] .podcast-player__status,
+.podcast-player[data-podcast-error="true"] .podcast-player__status {
+  display: inline-flex;
+}
+.podcast-player__status-icon {
+  display: none;
+  width: 1rem;
+  height: 1rem;
+  margin-right: .4rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-width: 2;
+}
+.podcast-player[data-podcast-loading="true"] .podcast-player__status-icon {
+  display: block;
+  animation: podcast-player-spin .8s linear infinite;
+}
+@keyframes podcast-player-spin {
+  to { transform: rotate(360deg); }
 }
 .podcast-player__audio {
   display: block;
@@ -207,15 +235,6 @@ const PLAYER_STYLE = `
   border-radius: 50%;
   background: var(--podcast-ink);
 }
-.podcast-player__status {
-  display: none;
-  margin-top: .35rem;
-  color: var(--podcast-ink);
-  font-size: .8rem;
-}
-.podcast-player[data-podcast-error="true"] .podcast-player__status {
-  display: block;
-}
 .podcast-player__download {
   display: inline-block;
   padding: .2rem .45rem;
@@ -302,7 +321,8 @@ const PLAYER_SCRIPT = `
     const current = player.querySelector('.podcast-player__current');
     const duration = player.querySelector('.podcast-player__duration');
     const status = player.querySelector('.podcast-player__status');
-    if (!audio || !playButton || !muteButton || !progress || !volume || !current || !duration || !status) return;
+    const statusText = player.querySelector('.podcast-player__status-text');
+    if (!audio || !playButton || !muteButton || !progress || !volume || !current || !duration || !status || !statusText) return;
 
     player.dataset.podcastReady = 'true';
     player.dataset.podcastEnhanced = 'true';
@@ -314,11 +334,26 @@ const PLAYER_SCRIPT = `
       playButton.setAttribute('aria-pressed', playing ? 'true' : 'false');
     }
 
+    function showLoading() {
+      delete player.dataset.podcastError;
+      player.dataset.podcastLoading = 'true';
+      statusText.textContent = '';
+      status.setAttribute('aria-label', '正在加载音频');
+    }
+
+    function clearStatus() {
+      delete player.dataset.podcastLoading;
+      delete player.dataset.podcastError;
+      statusText.textContent = '';
+      status.removeAttribute('aria-label');
+    }
+
     function syncDuration() {
       if (!Number.isFinite(audio.duration) || audio.duration <= 0) return;
       progress.max = String(audio.duration);
       duration.textContent = formatTime(audio.duration);
       syncTime();
+      clearStatus();
     }
 
     function syncTime() {
@@ -340,8 +375,10 @@ const PLAYER_SCRIPT = `
     }
 
     function showError() {
+      delete player.dataset.podcastLoading;
       player.dataset.podcastError = 'true';
-      status.textContent = '音频加载失败，请尝试下载音频。';
+      statusText.textContent = '音频加载失败，请尝试下载音频。';
+      status.setAttribute('aria-label', statusText.textContent);
     }
 
     playButton.addEventListener('click', () => {
@@ -376,10 +413,15 @@ const PLAYER_SCRIPT = `
       audio.volume = Number(volume.value);
     });
 
+    audio.addEventListener('loadstart', showLoading);
     audio.addEventListener('loadedmetadata', syncDuration);
     audio.addEventListener('durationchange', syncDuration);
+    audio.addEventListener('canplay', clearStatus);
     audio.addEventListener('timeupdate', syncTime);
-    audio.addEventListener('play', syncPlaying);
+    audio.addEventListener('play', () => {
+      syncPlaying();
+      clearStatus();
+    });
     audio.addEventListener('pause', syncPlaying);
     audio.addEventListener('ended', syncPlaying);
     audio.addEventListener('volumechange', syncVolume);
@@ -389,6 +431,7 @@ const PLAYER_SCRIPT = `
     syncTime();
     syncVolume();
     if (audio.readyState >= 1) syncDuration();
+    else showLoading();
   }
 
   function refreshPlayers() {
@@ -728,6 +771,7 @@ function renderPlayer(episode) {
   return `${PLAYER_START}
 <aside class="podcast-player" data-podcast-player aria-label="播客播放器">
   <div class="podcast-player__header">
+    <span class="podcast-player__status" role="status" aria-live="polite"><svg class="podcast-player__status-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a9 9 0 1 0 9 9"/></svg><span class="podcast-player__status-text"></span></span>
     <span class="podcast-player__meta">${escapeXml(metadata)}</span>
   </div>
   <audio class="podcast-player__audio" controls preload="metadata">
@@ -753,7 +797,6 @@ function renderPlayer(episode) {
       <input class="podcast-player__range podcast-player__volume" type="range" min="0" max="1" step="0.01" value="1" aria-label="音量">
     </div>
   </div>
-  <span class="podcast-player__status" role="status" aria-live="polite"></span>
 </aside>
 ${PLAYER_END}`;
 }
