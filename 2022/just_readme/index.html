@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="zh-Hans">
 <head><!-- hexo injector head_begin start -->
-<script src="/config.2380763734d9a9ac4155.js"></script>
+<script src="/config.7a14001c91b5e4b12984.js"></script>
 <!-- hexo injector head_begin end -->
 <meta charset="utf-8">
 <title>“仅仅因为它写着‘READ ME’并不意味着你必须这么做” - Ephesus</title>
@@ -31,63 +31,6 @@
 
 <!-- hexo injector head_end start -->
 <style>
-.podcast-player {
-  margin: 1.5rem 0;
-  padding: 1rem;
-  border: 1px solid var(--inside-border-color);
-  border-left: 3px solid var(--inside-accent-color);
-  border-radius: 3px;
-  background: var(--inside-card-background, #fff);
-  color: inherit;
-  line-height: 1.6;
-}
-.podcast-player__header {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: .25rem 1rem;
-}
-.podcast-player__label {
-  color: var(--inside-accent-color);
-  font-family: var(--inside-font-heading);
-  font-size: .95rem;
-  letter-spacing: .04em;
-}
-.podcast-player__meta {
-  color: inherit;
-  font-size: .85rem;
-  opacity: .7;
-}
-.podcast-player audio {
-  display: block;
-  width: 100%;
-  min-height: 2.5rem;
-  margin: .75rem 0;
-  accent-color: var(--inside-accent-color);
-}
-.podcast-player audio:focus-visible,
-.podcast-player__download:focus-visible {
-  outline: 2px solid var(--inside-accent-color);
-  outline-offset: 2px;
-}
-.podcast-player__download {
-  display: inline-block;
-  padding: .2rem .45rem;
-  border-radius: 3px;
-  color: var(--inside-accent-color);
-  font-size: .85rem;
-  transition: background-color .15s ease-in-out, color .15s ease-in-out;
-}
-.podcast-player__download:hover {
-  color: #fff;
-  background: var(--inside-accent-color);
-}
-@media screen and (max-width: 675px) {
-  .podcast-player { padding: .75rem; }
-}
-</style>
-<style>
 is-j.φcm .φct > a.φcs{
   position: relative;
   font-size: 0 !important;
@@ -99,6 +42,346 @@ is-j.φcm .φct > a.φcs::before{
   line-height: 1.2;
 }
 </style>
-<style is="theme">html{--inside-accent-color:#673ab7;--inside-foreground-color:#363636;--inside-border-color:#e0e0e0;--inside-background:#f3f6f7;--inside-sidebar-background:#673ab7;--inside-card-background:#fff;--inside-font-base:'Josefin Sans','PingFang SC';--inside-font-logo:-apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;--inside-font-menu:Baloo Bhaijaan,'Josefin Sans','PingFang SC';--inside-font-heading:Consolas,'Josefin Sans','PingFang SC';--inside-font-label:Montserrat,'Josefin Sans','PingFang SC';--inside-font-code:Inconsolata,monospace;--inside-font-print:-apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;--inside-content-width:660px;--inside-highlight-00:#ffffff;--inside-highlight-01:#e0e0e0;--inside-highlight-02:#f3f6f7;--inside-highlight-03:#95a5b3;--inside-highlight-04:#363636;--inside-highlight-05:#262b2f;--inside-highlight-06:#000000;--inside-highlight-07:#000000;--inside-highlight-08:#5d6c7b;--inside-highlight-09:#40464a;--inside-highlight-0a:#2980b9;--inside-highlight-0b:#be516e;--inside-highlight-0c:#237dac;--inside-highlight-0d:#944770;--inside-highlight-0e:#239371;--inside-highlight-0f:#edf0f3;--inside-card-color:#fff;--inside-accent-color-005:rgba(103,58,183,.05);--inside-accent-color-01:rgba(103,58,183,.1);--inside-accent-color-02:rgba(103,58,183,.2);--inside-accent-color-04:rgba(103,58,183,.4);--inside-accent-color-08:rgba(103,58,183,.8)}</style><script src="/theme.9ecc9ab1.js"></script><link href="//fonts.googleapis.com/css?family=Baloo+Bhaijaan|Inconsolata|Josefin+Sans|Montserrat" rel="stylesheet"></link><link href="/lib/fontawesome/css/fontawesome.min.css" rel="stylesheet"><link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"><link href="/styles.91e7dfca63c7c151daa6.css" rel="stylesheet"><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head>
-<body lang="zh-Hans"><!-- hexo injector body_begin start --><is-a></is-a><!-- hexo injector body_begin end --><!-- hexo injector body_end start --><script src="/lib/Valine.min.js"></script><script src="/runtime.1ed960b0635ea0669f87.js"></script><script src="/polyfills.b7bf56fc45f931a8b83e.js"></script><script src="/main.543c891b4aad158701f3.js"></script><!-- hexo injector body_end end --></body>
+
+<style>
+.podcast-player {
+  --podcast-surface: #fff;
+  --podcast-ink: #7c3aed;
+  --podcast-rail: #ede9fe;
+  --podcast-border: #ddd6fe;
+  --podcast-hover: #f5f3ff;
+  --podcast-focus: #7c3aed;
+  margin: 1.5rem 0;
+  padding: 1rem;
+  border: 1px solid var(--podcast-border);
+  border-left: 3px solid var(--podcast-ink);
+  border-radius: 8px;
+  background: var(--podcast-surface);
+  color: var(--podcast-ink);
+  color-scheme: light;
+  line-height: 1.6;
+}
+.podcast-player[data-podcast-theme="dark"] {
+  --podcast-surface: #000;
+  --podcast-ink: #a78bfa;
+  --podcast-rail: #2e1065;
+  --podcast-border: #4c1d95;
+  --podcast-hover: #1a0b32;
+  --podcast-focus: #c4b5fd;
+  color-scheme: dark;
+}
+.podcast-player__header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: flex-end;
+  gap: .25rem 1rem;
+}
+.podcast-player__meta {
+  color: var(--podcast-ink);
+  font-size: .85rem;
+  opacity: .85;
+}
+.podcast-player__audio {
+  display: block;
+  width: 100%;
+  min-height: 2.5rem;
+  margin: .75rem 0;
+  accent-color: var(--podcast-ink);
+}
+.podcast-player[data-podcast-enhanced="true"] .podcast-player__audio {
+  display: none;
+}
+.podcast-player__controls {
+  display: none;
+  grid-template-columns: auto auto minmax(4rem, 1fr) auto auto minmax(4rem, 7rem);
+  align-items: center;
+  gap: .5rem;
+  margin: .6rem 0;
+}
+.podcast-player[data-podcast-enhanced="true"] .podcast-player__controls {
+  display: grid;
+}
+.podcast-player__button {
+  display: inline-grid;
+  width: 2.25rem;
+  height: 2.25rem;
+  padding: 0;
+  border: 1px solid var(--podcast-border);
+  border-radius: 50%;
+  place-items: center;
+  background: transparent;
+  color: var(--podcast-ink);
+  cursor: pointer;
+  transition: background-color .15s ease-in-out, border-color .15s ease-in-out, color .15s ease-in-out;
+}
+.podcast-player__button:hover {
+  border-color: var(--podcast-ink);
+  background: var(--podcast-hover);
+}
+.podcast-player__button:focus-visible,
+.podcast-player__range:focus-visible,
+.podcast-player__download:focus-visible {
+  outline: 2px solid var(--podcast-focus);
+  outline-offset: 2px;
+}
+.podcast-player__icon {
+  width: 1rem;
+  height: 1rem;
+  fill: currentColor;
+}
+.podcast-player__icon--pause,
+.podcast-player__icon--muted {
+  display: none;
+}
+.podcast-player[data-podcast-playing="true"] .podcast-player__icon--play,
+.podcast-player[data-podcast-muted="true"] .podcast-player__icon--volume {
+  display: none;
+}
+.podcast-player[data-podcast-playing="true"] .podcast-player__icon--pause,
+.podcast-player[data-podcast-muted="true"] .podcast-player__icon--muted {
+  display: block;
+}
+.podcast-player__time {
+  min-width: 2.9rem;
+  color: var(--podcast-ink);
+  font-size: .8rem;
+  font-variant-numeric: tabular-nums;
+  text-align: center;
+}
+.podcast-player__range {
+  width: 100%;
+  height: 1.75rem;
+  margin: 0;
+  appearance: none;
+  -webkit-appearance: none;
+  background: transparent;
+  cursor: pointer;
+}
+.podcast-player__range::-webkit-slider-runnable-track {
+  height: .3rem;
+  border-radius: 99px;
+  background: linear-gradient(to right, var(--podcast-ink) 0 var(--podcast-range-fill, 0%), var(--podcast-rail) var(--podcast-range-fill, 0%) 100%);
+}
+.podcast-player__range::-webkit-slider-thumb {
+  width: .85rem;
+  height: .85rem;
+  margin-top: -.275rem;
+  border: 2px solid var(--podcast-surface);
+  border-radius: 50%;
+  appearance: none;
+  -webkit-appearance: none;
+  background: var(--podcast-ink);
+}
+.podcast-player__range::-moz-range-track {
+  height: .3rem;
+  border-radius: 99px;
+  background: var(--podcast-rail);
+}
+.podcast-player__range::-moz-range-progress {
+  height: .3rem;
+  border-radius: 99px;
+  background: var(--podcast-ink);
+}
+.podcast-player__range::-moz-range-thumb {
+  width: .65rem;
+  height: .65rem;
+  border: 2px solid var(--podcast-surface);
+  border-radius: 50%;
+  background: var(--podcast-ink);
+}
+.podcast-player__status {
+  display: none;
+  grid-column: 1 / -1;
+  color: var(--podcast-ink);
+  font-size: .8rem;
+}
+.podcast-player[data-podcast-error="true"] .podcast-player__status {
+  display: block;
+}
+.podcast-player__download {
+  display: inline-block;
+  padding: .2rem .45rem;
+  border-radius: 3px;
+  color: var(--podcast-ink);
+  font-size: .85rem;
+  transition: background-color .15s ease-in-out, color .15s ease-in-out;
+}
+.podcast-player__download:hover {
+  background: var(--podcast-hover);
+}
+@media screen and (max-width: 675px) {
+  .podcast-player { padding: .75rem; }
+}
+@media screen and (max-width: 500px) {
+  .podcast-player__controls {
+    grid-template-columns: auto auto minmax(3rem, 1fr) auto auto;
+    gap: .4rem;
+  }
+  .podcast-player__volume { display: none; }
+  .podcast-player__time { min-width: 2.5rem; }
+}
+</style><style is="theme">html{--inside-accent-color:#673ab7;--inside-foreground-color:#363636;--inside-border-color:#e0e0e0;--inside-background:#f3f6f7;--inside-sidebar-background:#673ab7;--inside-card-background:#fff;--inside-font-base:'Josefin Sans','PingFang SC';--inside-font-logo:-apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;--inside-font-menu:Baloo Bhaijaan,'Josefin Sans','PingFang SC';--inside-font-heading:Consolas,'Josefin Sans','PingFang SC';--inside-font-label:Montserrat,'Josefin Sans','PingFang SC';--inside-font-code:Inconsolata,monospace;--inside-font-print:-apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;--inside-content-width:660px;--inside-highlight-00:#ffffff;--inside-highlight-01:#e0e0e0;--inside-highlight-02:#f3f6f7;--inside-highlight-03:#95a5b3;--inside-highlight-04:#363636;--inside-highlight-05:#262b2f;--inside-highlight-06:#000000;--inside-highlight-07:#000000;--inside-highlight-08:#5d6c7b;--inside-highlight-09:#40464a;--inside-highlight-0a:#2980b9;--inside-highlight-0b:#be516e;--inside-highlight-0c:#237dac;--inside-highlight-0d:#944770;--inside-highlight-0e:#239371;--inside-highlight-0f:#edf0f3;--inside-card-color:#fff;--inside-accent-color-005:rgba(103,58,183,.05);--inside-accent-color-01:rgba(103,58,183,.1);--inside-accent-color-02:rgba(103,58,183,.2);--inside-accent-color-04:rgba(103,58,183,.4);--inside-accent-color-08:rgba(103,58,183,.8)}</style><script src="/theme.9ecc9ab1.js"></script><link href="//fonts.googleapis.com/css?family=Baloo+Bhaijaan|Inconsolata|Josefin+Sans|Montserrat" rel="stylesheet"></link><link href="/lib/fontawesome/css/fontawesome.min.css" rel="stylesheet"><link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"><link href="/styles.91e7dfca63c7c151daa6.css" rel="stylesheet"><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head>
+<body lang="zh-Hans"><!-- hexo injector body_begin start --><is-a></is-a><!-- hexo injector body_begin end --><!-- hexo injector body_end start -->
+<script>
+(() => {
+  'use strict';
+
+  const PLAYER_SELECTOR = '.podcast-player[data-podcast-player]';
+  let refreshScheduled = false;
+
+  function formatTime(value) {
+    const seconds = Math.max(0, Math.floor(Number(value) || 0));
+    const hours = Math.floor(seconds / 3600);
+    const minutes = Math.floor((seconds % 3600) / 60);
+    const remaining = String(seconds % 60).padStart(2, '0');
+    return hours ? hours + ':' + String(minutes).padStart(2, '0') + ':' + remaining : minutes + ':' + remaining;
+  }
+
+  function luminance(value) {
+    const hex = String(value || '').trim().match(/^#([0-9a-f]{3}|[0-9a-f]{6})$/i);
+    const rgb = String(value || '').match(/rgba?\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)/i);
+    let channels;
+    if (hex) {
+      const source = hex[1].length === 3 ? hex[1].split('').map(part => part + part).join('') : hex[1];
+      channels = [0, 2, 4].map(offset => Number.parseInt(source.slice(offset, offset + 2), 16));
+    } else if (rgb) {
+      channels = [Number(rgb[1]), Number(rgb[2]), Number(rgb[3])];
+    }
+    if (!channels) return 1;
+    return (channels[0] * 0.2126 + channels[1] * 0.7152 + channels[2] * 0.0722) / 255;
+  }
+
+  function isDarkTheme() {
+    const style = getComputedStyle(document.documentElement);
+    const card = style.getPropertyValue('--inside-card-background') || style.getPropertyValue('--inside-background');
+    return luminance(card) < 0.5;
+  }
+
+  function setRangeFill(input, value, maximum) {
+    const percent = maximum > 0 ? Math.max(0, Math.min(100, value / maximum * 100)) : 0;
+    input.style.setProperty('--podcast-range-fill', percent + '%');
+  }
+
+  function initialisePlayer(player) {
+    if (player.dataset.podcastReady === 'true') return;
+
+    const audio = player.querySelector('.podcast-player__audio');
+    const playButton = player.querySelector('[data-podcast-action="play"]');
+    const muteButton = player.querySelector('[data-podcast-action="mute"]');
+    const progress = player.querySelector('.podcast-player__progress');
+    const volume = player.querySelector('.podcast-player__volume');
+    const current = player.querySelector('.podcast-player__current');
+    const duration = player.querySelector('.podcast-player__duration');
+    const status = player.querySelector('.podcast-player__status');
+    if (!audio || !playButton || !muteButton || !progress || !volume || !current || !duration || !status) return;
+
+    player.dataset.podcastReady = 'true';
+    player.dataset.podcastEnhanced = 'true';
+
+    function syncPlaying() {
+      const playing = !audio.paused && !audio.ended;
+      player.dataset.podcastPlaying = playing ? 'true' : 'false';
+      playButton.setAttribute('aria-label', playing ? '暂停' : '播放');
+      playButton.setAttribute('aria-pressed', playing ? 'true' : 'false');
+    }
+
+    function syncDuration() {
+      if (!Number.isFinite(audio.duration) || audio.duration <= 0) return;
+      progress.max = String(audio.duration);
+      duration.textContent = formatTime(audio.duration);
+      syncTime();
+    }
+
+    function syncTime() {
+      const maximum = Number(progress.max);
+      const position = Number.isFinite(audio.currentTime) ? Math.min(audio.currentTime, maximum || audio.currentTime) : 0;
+      progress.value = String(position);
+      current.textContent = formatTime(position);
+      progress.setAttribute('aria-valuetext', formatTime(position));
+      setRangeFill(progress, position, maximum);
+    }
+
+    function syncVolume() {
+      const muted = audio.muted || audio.volume === 0;
+      player.dataset.podcastMuted = muted ? 'true' : 'false';
+      muteButton.setAttribute('aria-label', muted ? '取消静音' : '静音');
+      muteButton.setAttribute('aria-pressed', muted ? 'true' : 'false');
+      volume.value = String(audio.volume);
+      setRangeFill(volume, audio.volume, 1);
+    }
+
+    function showError() {
+      player.dataset.podcastError = 'true';
+      status.textContent = '音频加载失败，请尝试下载音频。';
+    }
+
+    playButton.addEventListener('click', () => {
+      if (audio.paused || audio.ended) {
+        if (audio.ended) audio.currentTime = 0;
+        audio.play().catch(showError);
+      } else {
+        audio.pause();
+      }
+    });
+
+    muteButton.addEventListener('click', () => {
+      if (audio.muted || audio.volume === 0) {
+        audio.muted = false;
+        audio.volume = Number(player.dataset.podcastLastVolume || .8);
+      } else {
+        player.dataset.podcastLastVolume = String(audio.volume || .8);
+        audio.muted = true;
+      }
+    });
+
+    progress.addEventListener('input', () => {
+      const position = Number(progress.value);
+      if (Number.isFinite(position) && Number.isFinite(audio.duration)) audio.currentTime = position;
+      current.textContent = formatTime(position);
+      progress.setAttribute('aria-valuetext', formatTime(position));
+      setRangeFill(progress, position, Number(progress.max));
+    });
+
+    volume.addEventListener('input', () => {
+      audio.muted = false;
+      audio.volume = Number(volume.value);
+    });
+
+    audio.addEventListener('loadedmetadata', syncDuration);
+    audio.addEventListener('durationchange', syncDuration);
+    audio.addEventListener('timeupdate', syncTime);
+    audio.addEventListener('play', syncPlaying);
+    audio.addEventListener('pause', syncPlaying);
+    audio.addEventListener('ended', syncPlaying);
+    audio.addEventListener('volumechange', syncVolume);
+    audio.addEventListener('error', showError);
+
+    syncPlaying();
+    syncTime();
+    syncVolume();
+    if (audio.readyState >= 1) syncDuration();
+  }
+
+  function refreshPlayers() {
+    refreshScheduled = false;
+    const theme = isDarkTheme() ? 'dark' : 'light';
+    document.querySelectorAll(PLAYER_SELECTOR).forEach(player => {
+      player.dataset.podcastTheme = theme;
+      initialisePlayer(player);
+    });
+  }
+
+  function scheduleRefresh() {
+    if (refreshScheduled) return;
+    refreshScheduled = true;
+    (window.requestAnimationFrame || window.setTimeout)(refreshPlayers);
+  }
+
+  document.addEventListener('inside', scheduleRefresh);
+  document.addEventListener('inside:theme', scheduleRefresh);
+  new MutationObserver(scheduleRefresh).observe(document.body, { childList: true, subtree: true });
+  scheduleRefresh();
+})();
+</script><script src="/lib/Valine.min.js"></script><script src="/runtime.1ed960b0635ea0669f87.js"></script><script src="/polyfills.b7bf56fc45f931a8b83e.js"></script><script src="/main.543c891b4aad158701f3.js"></script><!-- hexo injector body_end end --></body>
 </html>
