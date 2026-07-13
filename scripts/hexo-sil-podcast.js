@@ -30,11 +30,11 @@ const PLAYER_STYLE = `
 <style>
 .podcast-player {
   --podcast-surface: #fff;
-  --podcast-ink: var(--inside-accent-color, #673ab7);
-  --podcast-rail: var(--inside-accent-color-01, rgba(103, 58, 183, .1));
-  --podcast-border: var(--inside-accent-color-02, rgba(103, 58, 183, .2));
-  --podcast-hover: var(--inside-accent-color-005, rgba(103, 58, 183, .05));
-  --podcast-focus: var(--inside-accent-color, #673ab7);
+  --podcast-ink: #8064a2;
+  --podcast-rail: #eee8f5;
+  --podcast-border: #d9cee8;
+  --podcast-hover: #f5f1fa;
+  --podcast-focus: #8064a2;
   margin: 1.5rem 0;
   padding: 1rem;
   border: 1px solid var(--podcast-border);
@@ -81,7 +81,7 @@ const PLAYER_STYLE = `
   grid-template-columns: auto auto minmax(4rem, 1fr) auto;
   align-items: center;
   gap: .5rem;
-  margin: .6rem 0 .2rem;
+  margin: .4rem 0 .2rem;
 }
 .podcast-player[data-podcast-enhanced="true"] .podcast-player__controls {
   display: grid;
@@ -100,12 +100,18 @@ const PLAYER_STYLE = `
   flex: 0 1 10rem;
   align-items: center;
   gap: .55rem;
+  margin-right: .65rem;
 }
 .podcast-player[data-podcast-enhanced="true"] .podcast-player__volume-control {
   display: flex;
 }
 .podcast-player__volume {
   min-width: 4.75rem;
+}
+.podcast-player__volume-button {
+  flex: 0 0 2.25rem;
+  aspect-ratio: 1;
+  border-radius: 50%;
 }
 .podcast-player__button {
   display: inline-grid;
@@ -156,7 +162,7 @@ const PLAYER_STYLE = `
 }
 .podcast-player__range {
   width: 100%;
-  height: 1.75rem;
+  height: 1.5rem;
   margin: 0;
   appearance: none;
   -webkit-appearance: none;
@@ -164,14 +170,14 @@ const PLAYER_STYLE = `
   cursor: pointer;
 }
 .podcast-player__range::-webkit-slider-runnable-track {
-  height: .3rem;
-  border-radius: 99px;
+  height: .55rem;
+  border-radius: 999px;
   background: linear-gradient(to right, var(--podcast-ink) 0 var(--podcast-range-fill, 0%), var(--podcast-rail) var(--podcast-range-fill, 0%) 100%);
 }
 .podcast-player__range::-webkit-slider-thumb {
-  width: .85rem;
-  height: .85rem;
-  margin-top: -.275rem;
+  width: .95rem;
+  height: .95rem;
+  margin-top: -.2rem;
   border: 2px solid var(--podcast-surface);
   border-radius: 50%;
   appearance: none;
@@ -179,18 +185,18 @@ const PLAYER_STYLE = `
   background: var(--podcast-ink);
 }
 .podcast-player__range::-moz-range-track {
-  height: .3rem;
-  border-radius: 99px;
+  height: .55rem;
+  border-radius: 999px;
   background: var(--podcast-rail);
 }
 .podcast-player__range::-moz-range-progress {
-  height: .3rem;
-  border-radius: 99px;
+  height: .55rem;
+  border-radius: 999px;
   background: var(--podcast-ink);
 }
 .podcast-player__range::-moz-range-thumb {
-  width: .65rem;
-  height: .65rem;
+  width: .75rem;
+  height: .75rem;
   border: 2px solid var(--podcast-surface);
   border-radius: 50%;
   background: var(--podcast-ink);
@@ -231,6 +237,7 @@ const PLAYER_STYLE = `
     min-width: 6.5rem;
     max-width: 8rem;
     gap: .4rem;
+    margin-right: .3rem;
   }
   .podcast-player__volume { min-width: 3.75rem; }
   .podcast-player__time { min-width: 2.5rem; }
@@ -709,8 +716,7 @@ async function normaliseEpisode(post, siteUrl, defaultExplicit, runtime) {
 
 function renderPlayer(episode) {
   const metadata = [
-    episode.episode === null ? '' : `第 ${episode.episode} 集`,
-    episode.duration
+    episode.episode === null ? '' : `第 ${episode.episode} 集`
   ].filter(Boolean).join(' · ');
   const playerAudio = episode.playerAudio || episode.audio;
 
@@ -735,7 +741,7 @@ function renderPlayer(episode) {
   <div class="podcast-player__footer">
     <a class="podcast-player__download" href="${escapeXml(playerAudio)}" target="_blank" rel="noopener">下载音频</a>
     <div class="podcast-player__volume-control" role="group" aria-label="音量控制">
-      <button class="podcast-player__button" type="button" data-podcast-action="mute" aria-label="静音" aria-pressed="false">
+      <button class="podcast-player__button podcast-player__volume-button" type="button" data-podcast-action="mute" aria-label="静音" aria-pressed="false">
         <svg class="podcast-player__icon podcast-player__icon--volume" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10v4h4l5 4V6L7 10zm12.5 2a3.5 3.5 0 0 0-2-3.15v6.29A3.5 3.5 0 0 0 15.5 12zm-2-8.2v2.06a6.5 6.5 0 0 1 0 12.28v2.06a8.5 8.5 0 0 0 0-16.4z"/></svg>
         <svg class="podcast-player__icon podcast-player__icon--muted" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10v4h4l5 4V6L7 10zm10.9 2 2.1 2.1 2.1-2.1 1.4 1.4-2.1 2.1 2.1 2.1-1.4 1.4-2.1-2.1-2.1 2.1-1.4-1.4 2.1-2.1-2.1-2.1z"/></svg>
       </button>
