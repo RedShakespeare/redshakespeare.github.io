@@ -6,8 +6,6 @@ const test = require('node:test');
 const {
   buildFeed,
   normaliseEpisode,
-  PLAYER_SCRIPT,
-  PLAYER_STYLE,
   registerPlugin,
   renderPlayer,
   toPodcastConfig
@@ -151,6 +149,18 @@ test('buildFeed rejects duplicated audio URLs and GUIDs', async () => {
   await assert.rejects(buildFeed([first, second], config(), siteUrl), /duplicate podcast\.audio URL/);
 });
 
+test('ordinary article music is excluded from the podcast feed', async () => {
+  const musicArticle = post({
+    source: 'source/_posts/music.md',
+    title: 'Music Article',
+    podcast: false,
+    music: { file: 'podcast/Minecraft-08-Minecraft.mp3' }
+  });
+  const feed = await buildFeed([musicArticle], config(), siteUrl, new Date('2026-07-13T00:00:00Z'));
+  assert.doesNotMatch(feed, /<item>/);
+  assert.doesNotMatch(feed, /Minecraft-08-Minecraft/);
+});
+
 test('local file mode derives metadata and uses separate player and RSS URLs', async () => {
   const episode = await normaliseEpisode(localPost(), siteUrl, false, runtime());
 
@@ -176,56 +186,28 @@ test('local file mode rejects legacy fields and paths outside the configured dir
   );
 });
 
-test('renderPlayer retains the theme-scoped component markup for legacy episodes', async () => {
+test('renderPlayer delegates legacy episodes to the shared audio component', async () => {
   const html = renderPlayer(await normaliseEpisode(post(), siteUrl, false));
-  assert.match(html, /class="podcast-player" data-podcast-player/);
-  assert.match(html, /<audio class="podcast-player__audio" controls preload="metadata">/);
-  assert.match(html, /data-podcast-action="play"/);
-  assert.match(html, /class="podcast-player__range podcast-player__progress"/);
-  assert.match(html, /podcast-player__header[\s\S]*podcast-player__status[\s\S]*podcast-player__meta/);
-  assert.match(html, /podcast-player__status-icon/);
-  assert.match(html, /class="podcast-player__footer"/);
-  assert.match(html, /podcast-player__footer[\s\S]*podcast-player__download[\s\S]*podcast-player__volume-control/);
-  assert.match(html, /podcast-player__volume-control[\s\S]*data-podcast-action="mute"/);
+  assert.match(html, /<!-- hexo-sil-audio:start -->/);
+  assert.match(html, /class="sil-audio-player" data-sil-audio-player/);
+  assert.match(html, /<audio class="sil-audio-player__audio" controls preload="metadata">/);
+  assert.match(html, /data-sil-audio-action="play"/);
+  assert.match(html, /class="sil-audio-player__range sil-audio-player__progress"/);
+  assert.match(html, /sil-audio-player__header[\s\S]*sil-audio-player__status[\s\S]*sil-audio-player__meta/);
+  assert.match(html, /class="sil-audio-player__footer"/);
+  assert.match(html, /sil-audio-player__footer[\s\S]*sil-audio-player__download[\s\S]*sil-audio-player__volume-control/);
   assert.match(html, /Episode &amp; One/);
   assert.doesNotMatch(html, /第 1 集/);
-  assert.doesNotMatch(html, /podcast-player__label/);
+  assert.doesNotMatch(html, /podcast-player/);
   assert.doesNotMatch(html, /<span[^>]*>播客<\/span>/);
 });
 
-test('custom player assets define both colour palettes and react to theme changes', () => {
-  assert.match(PLAYER_STYLE, /--podcast-surface: #fff/);
-  assert.match(PLAYER_STYLE, /--podcast-surface: #000/);
-  assert.match(PLAYER_STYLE, /--podcast-ink: #8064a2/);
-  assert.match(PLAYER_STYLE, /\.podcast-player__range \{[\s\S]*border-radius: 8px/);
-  assert.match(PLAYER_STYLE, /height: \.3rem/);
-  assert.match(PLAYER_STYLE, /border-radius: 99px/);
-  assert.match(PLAYER_STYLE, /--podcast-stack-gap: 1rem/);
-  assert.match(PLAYER_STYLE, /\.podcast-player__header \{[\s\S]*flex-wrap: nowrap[\s\S]*min-height: 2\.25rem[\s\S]*justify-content: space-between/);
-  assert.match(PLAYER_STYLE, /\.podcast-player__meta \{[\s\S]*text-overflow: ellipsis/);
-  assert.match(PLAYER_STYLE, /\.podcast-player__controls \{[\s\S]*margin: var\(--podcast-stack-gap\) 0 0/);
-  assert.match(PLAYER_STYLE, /\.podcast-player__footer \{[\s\S]*padding: var\(--podcast-stack-gap\) \.45rem 0/);
-  assert.match(PLAYER_STYLE, /\.podcast-player__footer \{[\s\S]*flex-wrap: nowrap/);
-  assert.match(PLAYER_STYLE, /max-width: 675px\) \{[\s\S]*--podcast-stack-gap: \.75rem/);
-  assert.match(PLAYER_STYLE, /@keyframes podcast-player-spin/);
-  assert.match(PLAYER_STYLE, /\.podcast-player__progress \{[\s\S]*margin-right: \.2rem/);
-  assert.match(PLAYER_STYLE, /podcast-player__volume-button/);
-  assert.doesNotMatch(PLAYER_STYLE, /#a78bfa/);
-  assert.match(PLAYER_STYLE, /::-webkit-slider-runnable-track/);
-  assert.match(PLAYER_STYLE, /::-moz-range-progress/);
-  assert.match(PLAYER_SCRIPT, /document\.addEventListener\('inside:theme'/);
-  assert.match(PLAYER_SCRIPT, /new MutationObserver/);
-  assert.match(PLAYER_SCRIPT, /audio\.addEventListener\('loadstart', showLoading\)/);
-  assert.match(PLAYER_SCRIPT, /audio\.addEventListener\('canplay', clearStatus\)/);
-  assert.match(PLAYER_SCRIPT, /音频加载失败，请尝试下载音频。/);
-});
-
-test('dry run registers the player but never the RSS generator', () => {
+test('dry run registers the podcast filter but never the RSS generator', () => {
   const hexo = mockHexo(true);
   registerPlugin(hexo);
 
   assert.equal(hexo.calls.filters.length, 1);
-  assert.deepEqual(hexo.calls.injectors.map(call => call.position), ['head_end', 'body_end']);
+  assert.equal(hexo.calls.injectors.length, 0);
   assert.equal(hexo.calls.generators.length, 0);
   assert.match(hexo.calls.logs.join('\n'), /podcast\.xml will not be generated/);
 });
@@ -237,9 +219,9 @@ test('the registered asynchronous filter injects a player before the article bod
 
   await hexo.calls.filters[0].fn(data);
 
-  assert.match(data.content, /^<!-- podcast-player:start -->/);
-  assert.match(data.content, /<audio class="podcast-player__audio" controls preload="metadata">/);
-  assert.match(data.content, /data-podcast-action="play"/);
+  assert.match(data.content, /^<!-- hexo-sil-audio:start -->/);
+  assert.match(data.content, /<audio class="sil-audio-player__audio" controls preload="metadata">/);
+  assert.match(data.content, /data-sil-audio-action="play"/);
   assert.match(data.content, /Article body$/);
 });
 

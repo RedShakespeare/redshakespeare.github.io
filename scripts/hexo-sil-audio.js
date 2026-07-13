@@ -1,0 +1,348 @@
+'use strict';
+
+const fs = require('node:fs/promises');
+const path = require('node:path');
+
+const PLAYER_START = '<!-- hexo-sil-audio:start -->';
+const PLAYER_END = '<!-- hexo-sil-audio:end -->';
+const DURATION_PATTERN = /^(?:\d{1,3}:)?[0-5]\d:[0-5]\d$/;
+const AUDIO_MIME_TYPES = new Map([
+  ['.mp3', 'audio/mpeg'], ['.m4a', 'audio/mp4'], ['.m4b', 'audio/mp4'], ['.mp4', 'audio/mp4'],
+  ['.aac', 'audio/aac'], ['.ogg', 'audio/ogg'], ['.opus', 'audio/opus'], ['.wav', 'audio/wav'],
+  ['.wave', 'audio/wav'], ['.flac', 'audio/flac'], ['.aif', 'audio/aiff'], ['.aiff', 'audio/aiff'], ['.webm', 'audio/webm']
+]);
+
+let musicMetadata;
+const localMetadataCache = new Map();
+
+const PLAYER_STYLE = `
+<style>
+.sil-audio-player { --sil-audio-surface:#fff;--sil-audio-ink:#8064a2;--sil-audio-rail:#eee8f5;--sil-audio-border:#d9cee8;--sil-audio-hover:#f5f1fa;--sil-audio-focus:#8064a2;--sil-audio-stack-gap:1rem;margin:1.5rem 0;padding:var(--sil-audio-stack-gap);border:1px solid var(--sil-audio-border);border-left:3px solid var(--sil-audio-ink);border-radius:8px;background:var(--sil-audio-surface);color:var(--sil-audio-ink);color-scheme:light;line-height:1.6 }
+.sil-audio-player[data-sil-audio-theme="dark"] { --sil-audio-surface:#000;--sil-audio-ink:var(--inside-accent-color,#673ab7);--sil-audio-rail:var(--inside-accent-color-02,rgba(103,58,183,.2));--sil-audio-border:var(--inside-accent-color-04,rgba(103,58,183,.4));--sil-audio-hover:var(--inside-accent-color-01,rgba(103,58,183,.1));--sil-audio-focus:var(--inside-accent-color,#673ab7);color-scheme:dark }
+.sil-audio-player__header { display:flex;flex-wrap:nowrap;min-height:2.25rem;align-items:center;justify-content:space-between;gap:.25rem 1rem }
+.sil-audio-player__meta { min-width:0;margin-left:auto;color:var(--sil-audio-ink);font-size:.85rem;opacity:.85;overflow:hidden;text-overflow:ellipsis;white-space:nowrap }
+.sil-audio-player__status { display:none;flex:0 1 auto;align-items:center;min-height:1.36rem;color:var(--sil-audio-ink);font-size:.8rem;white-space:nowrap }
+.sil-audio-player[data-sil-audio-loading="true"] .sil-audio-player__status,.sil-audio-player[data-sil-audio-error="true"] .sil-audio-player__status { display:inline-flex }
+.sil-audio-player__status-icon { display:none;width:1rem;height:1rem;margin-right:.4rem;fill:none;stroke:currentColor;stroke-linecap:round;stroke-width:2 }
+.sil-audio-player[data-sil-audio-loading="true"] .sil-audio-player__status-icon { display:block;animation:sil-audio-player-spin .8s linear infinite }
+@keyframes sil-audio-player-spin { to { transform:rotate(360deg) } }
+.sil-audio-player__audio { display:block;width:100%;min-height:2.5rem;margin:.75rem 0;accent-color:var(--sil-audio-ink) }
+.sil-audio-player[data-sil-audio-enhanced="true"] .sil-audio-player__audio { display:none }
+.sil-audio-player__controls { display:none;grid-template-columns:auto auto minmax(4rem,1fr) auto;align-items:center;gap:.5rem;margin:var(--sil-audio-stack-gap) 0 0 }
+.sil-audio-player[data-sil-audio-enhanced="true"] .sil-audio-player__controls { display:grid }
+.sil-audio-player__footer { display:flex;flex-wrap:nowrap;align-items:center;justify-content:space-between;gap:1rem;padding:var(--sil-audio-stack-gap) .45rem 0 }
+.sil-audio-player__volume-control { display:none;min-width:8rem;max-width:10rem;flex:0 1 10rem;align-items:center;gap:.55rem;margin-right:.65rem }
+.sil-audio-player[data-sil-audio-enhanced="true"] .sil-audio-player__volume-control { display:flex }
+.sil-audio-player__volume { min-width:4.75rem }
+.sil-audio-player__volume-button { flex:0 0 2.25rem;aspect-ratio:1;border-radius:50% }
+.sil-audio-player__button { display:inline-grid;width:2.25rem;height:2.25rem;padding:0;border:1px solid var(--sil-audio-border);border-radius:50%;place-items:center;background:transparent;color:var(--sil-audio-ink);cursor:pointer;transition:background-color .15s ease-in-out,border-color .15s ease-in-out,color .15s ease-in-out }
+.sil-audio-player__button:hover { border-color:var(--sil-audio-ink);background:var(--sil-audio-hover) }
+.sil-audio-player__button:focus-visible,.sil-audio-player__range:focus-visible,.sil-audio-player__download:focus-visible { outline:2px solid var(--sil-audio-focus);outline-offset:2px }
+.sil-audio-player__icon { width:1rem;height:1rem;fill:currentColor }
+.sil-audio-player__icon--pause,.sil-audio-player__icon--muted { display:none }
+.sil-audio-player[data-sil-audio-playing="true"] .sil-audio-player__icon--play,.sil-audio-player[data-sil-audio-muted="true"] .sil-audio-player__icon--volume { display:none }
+.sil-audio-player[data-sil-audio-playing="true"] .sil-audio-player__icon--pause,.sil-audio-player[data-sil-audio-muted="true"] .sil-audio-player__icon--muted { display:block }
+.sil-audio-player__time { min-width:2.9rem;color:var(--sil-audio-ink);font-size:.8rem;font-variant-numeric:tabular-nums;text-align:center }
+.sil-audio-player__range { width:100%;height:1.75rem;margin:0;border-radius:8px;appearance:none;-webkit-appearance:none;background:transparent;cursor:pointer }
+.sil-audio-player__progress { width:auto;min-width:0;margin-right:.2rem }
+.sil-audio-player__range::-webkit-slider-runnable-track { height:.3rem;border-radius:99px;background:linear-gradient(to right,var(--sil-audio-ink) 0 var(--sil-audio-range-fill,0%),var(--sil-audio-rail) var(--sil-audio-range-fill,0%) 100%) }
+.sil-audio-player__range::-webkit-slider-thumb { width:.85rem;height:.85rem;margin-top:-.275rem;border:2px solid var(--sil-audio-surface);border-radius:50%;appearance:none;-webkit-appearance:none;background:var(--sil-audio-ink) }
+.sil-audio-player__range::-moz-range-track { height:.3rem;border-radius:99px;background:var(--sil-audio-rail) }
+.sil-audio-player__range::-moz-range-progress { height:.3rem;border-radius:99px;background:var(--sil-audio-ink) }
+.sil-audio-player__range::-moz-range-thumb { width:.65rem;height:.65rem;border:2px solid var(--sil-audio-surface);border-radius:50%;background:var(--sil-audio-ink) }
+.sil-audio-player__download { display:inline-block;flex:0 0 auto;padding:.2rem .45rem;border-radius:3px;color:var(--sil-audio-ink);font-size:.85rem;white-space:nowrap;transition:background-color .15s ease-in-out,color .15s ease-in-out }
+.sil-audio-player__download:hover { background:var(--sil-audio-hover) }
+@media screen and (max-width:675px) { .sil-audio-player { --sil-audio-stack-gap:.75rem } }
+@media screen and (max-width:500px) { .sil-audio-player__controls { grid-template-columns:auto auto minmax(3rem,1fr) auto;gap:.4rem }.sil-audio-player__footer { gap:.7rem;padding-inline:.2rem }.sil-audio-player__volume-control { min-width:6.5rem;max-width:8rem;gap:.4rem;margin-right:.3rem }.sil-audio-player__volume { min-width:3.75rem }.sil-audio-player__time { min-width:2.5rem } }
+</style>`;
+
+const PLAYER_SCRIPT = `
+<script>
+(() => {
+  'use strict';
+  const selector = '.sil-audio-player[data-sil-audio-player]';
+  let refreshScheduled = false;
+  const formatTime = value => { const seconds=Math.max(0,Math.floor(Number(value)||0));const hours=Math.floor(seconds/3600);const minutes=Math.floor((seconds%3600)/60);const remaining=String(seconds%60).padStart(2,'0');return hours?hours+':'+String(minutes).padStart(2,'0')+':'+remaining:minutes+':'+remaining; };
+  function luminance(value) { const hex=String(value||'').trim().match(/^#([0-9a-f]{3}|[0-9a-f]{6})$/i);const rgb=String(value||'').match(/rgba?\\(\\s*(\\d+)\\s*,\\s*(\\d+)\\s*,\\s*(\\d+)/i);let channels;if(hex){const source=hex[1].length===3?hex[1].split('').map(part=>part+part).join(''):hex[1];channels=[0,2,4].map(offset=>Number.parseInt(source.slice(offset,offset+2),16));}else if(rgb){channels=[Number(rgb[1]),Number(rgb[2]),Number(rgb[3])];}return channels?(channels[0]*.2126+channels[1]*.7152+channels[2]*.0722)/255:1; }
+  function isDarkTheme() { const style=getComputedStyle(document.documentElement);const card=style.getPropertyValue('--inside-card-background')||style.getPropertyValue('--inside-background');return luminance(card)<.5; }
+  function setRangeFill(input,value,maximum) { const percent=maximum>0?Math.max(0,Math.min(100,value/maximum*100)):0;input.style.setProperty('--sil-audio-range-fill',percent+'%'); }
+  function initialise(player) {
+    if(player.dataset.silAudioReady==='true') return;
+    const audio=player.querySelector('.sil-audio-player__audio');const play=player.querySelector('[data-sil-audio-action="play"]');const mute=player.querySelector('[data-sil-audio-action="mute"]');const progress=player.querySelector('.sil-audio-player__progress');const volume=player.querySelector('.sil-audio-player__volume');const current=player.querySelector('.sil-audio-player__current');const duration=player.querySelector('.sil-audio-player__duration');const status=player.querySelector('.sil-audio-player__status');const statusText=player.querySelector('.sil-audio-player__status-text');
+    if(!audio||!play||!mute||!progress||!volume||!current||!duration||!status||!statusText) return;
+    player.dataset.silAudioReady='true';player.dataset.silAudioEnhanced='true';
+    const syncPlaying=()=>{const playing=!audio.paused&&!audio.ended;player.dataset.silAudioPlaying=playing?'true':'false';play.setAttribute('aria-label',playing?'暂停':'播放');play.setAttribute('aria-pressed',playing?'true':'false');};
+    const showLoading=()=>{delete player.dataset.silAudioError;player.dataset.silAudioLoading='true';statusText.textContent='';status.setAttribute('aria-label','正在加载音频');};
+    const clearStatus=()=>{delete player.dataset.silAudioLoading;delete player.dataset.silAudioError;statusText.textContent='';status.removeAttribute('aria-label');};
+    const syncTime=()=>{const maximum=Number(progress.max);const position=Number.isFinite(audio.currentTime)?Math.min(audio.currentTime,maximum||audio.currentTime):0;progress.value=String(position);current.textContent=formatTime(position);progress.setAttribute('aria-valuetext',formatTime(position));setRangeFill(progress,position,maximum);};
+    const syncDuration=()=>{if(!Number.isFinite(audio.duration)||audio.duration<=0) return;progress.max=String(audio.duration);duration.textContent=formatTime(audio.duration);syncTime();clearStatus();};
+    const syncVolume=()=>{const muted=audio.muted||audio.volume===0;player.dataset.silAudioMuted=muted?'true':'false';mute.setAttribute('aria-label',muted?'取消静音':'静音');mute.setAttribute('aria-pressed',muted?'true':'false');volume.value=String(audio.volume);setRangeFill(volume,audio.volume,1);};
+    const showError=()=>{delete player.dataset.silAudioLoading;player.dataset.silAudioError='true';statusText.textContent='音频加载失败，请尝试下载音频。';status.setAttribute('aria-label',statusText.textContent);};
+    play.addEventListener('click',()=>{if(audio.paused||audio.ended){if(audio.ended) audio.currentTime=0;audio.play().catch(showError);}else audio.pause();});
+    mute.addEventListener('click',()=>{if(audio.muted||audio.volume===0){audio.muted=false;audio.volume=Number(player.dataset.silAudioLastVolume||.8);}else{player.dataset.silAudioLastVolume=String(audio.volume||.8);audio.muted=true;}});
+    progress.addEventListener('input',()=>{const position=Number(progress.value);if(Number.isFinite(position)&&Number.isFinite(audio.duration)) audio.currentTime=position;current.textContent=formatTime(position);progress.setAttribute('aria-valuetext',formatTime(position));setRangeFill(progress,position,Number(progress.max));});
+    volume.addEventListener('input',()=>{audio.muted=false;audio.volume=Number(volume.value);});
+    audio.addEventListener('loadstart',showLoading);audio.addEventListener('loadedmetadata',syncDuration);audio.addEventListener('durationchange',syncDuration);audio.addEventListener('canplay',clearStatus);audio.addEventListener('timeupdate',syncTime);audio.addEventListener('play',()=>{syncPlaying();clearStatus();});audio.addEventListener('pause',syncPlaying);audio.addEventListener('ended',syncPlaying);audio.addEventListener('volumechange',syncVolume);audio.addEventListener('error',showError);
+    syncPlaying();syncTime();syncVolume();if(audio.readyState>=1) syncDuration();else showLoading();
+  }
+  function refresh() { refreshScheduled=false;const theme=isDarkTheme()?'dark':'light';document.querySelectorAll(selector).forEach(player=>{player.dataset.silAudioTheme=theme;initialise(player);}); }
+  function scheduleRefresh() { if(refreshScheduled) return;refreshScheduled=true;(window.requestAnimationFrame||window.setTimeout)(refresh); }
+  document.addEventListener('inside',scheduleRefresh);document.addEventListener('inside:theme',scheduleRefresh);new MutationObserver(scheduleRefresh).observe(document.body,{childList:true,subtree:true});scheduleRefresh();
+})();
+</script>`;
+
+function isObject(value) {
+  return value !== null && typeof value === 'object' && !Array.isArray(value);
+}
+
+function audioError(post, message) {
+  const identifier = post && (post.source || post.path || post.title) || 'unknown post';
+  return new Error(`Audio metadata error in ${identifier}: ${message}`);
+}
+
+function escapeHtml(value) {
+  return String(value == null ? '' : value)
+    .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&apos;');
+}
+
+function formatDuration(seconds) {
+  const total = Math.max(1, Math.round(seconds));
+  const hours = Math.floor(total / 3600);
+  const minutes = Math.floor((total % 3600) / 60);
+  const remaining = total % 60;
+  const pad = value => String(value).padStart(2, '0');
+  return hours ? `${pad(hours)}:${pad(minutes)}:${pad(remaining)}` : `${pad(minutes)}:${pad(remaining)}`;
+}
+
+function normaliseRelativeDirectory(value, fallback, field) {
+  const directory = String(value == null ? fallback : value).trim().replace(/\\/g, '/').replace(/^\/+|\/+$/g, '');
+  const segments = directory.split('/');
+  if (!directory || segments.some(segment => !segment || segment === '.' || segment === '..')) {
+    throw new Error(`Audio configuration error: ${field} must be a non-empty relative directory.`);
+  }
+  return directory;
+}
+
+function toAudioConfig(siteConfig = {}) {
+  const raw = isObject(siteConfig.audio) ? siteConfig.audio : {};
+  const media = isObject(raw.media) ? raw.media : {};
+  return {
+    media: {
+      sourceDir: normaliseRelativeDirectory(media.source_dir, 'source/files', 'media.source_dir'),
+      publicPath: normaliseRelativeDirectory(media.public_path, 'files', 'media.public_path')
+    }
+  };
+}
+
+function audioRuntime(runtime = {}) {
+  const media = isObject(runtime.media) ? runtime.media : {};
+  return {
+    baseDir: runtime.baseDir || process.cwd(),
+    root: runtime.root || '/',
+    media: {
+      sourceDir: normaliseRelativeDirectory(media.sourceDir, 'source/files', 'media.source_dir'),
+      publicPath: normaliseRelativeDirectory(media.publicPath, 'files', 'media.public_path')
+    }
+  };
+}
+
+function normaliseLocalFile(post, value) {
+  const file = String(value || '').trim();
+  if (!file) throw audioError(post, '`file` must be a non-empty relative path.');
+  if (/[^\x21-\x7E]/.test(file)) throw audioError(post, '`file` must use an ASCII path.');
+  if (file.includes('\\') || file.startsWith('/') || file.includes('?') || file.includes('#')) {
+    throw audioError(post, '`file` must be a plain relative path below audio.media.source_dir.');
+  }
+  const segments = file.split('/');
+  if (segments.some(segment => !segment || segment === '.' || segment === '..')) {
+    throw audioError(post, '`file` must not contain empty, dot, or parent path segments.');
+  }
+  return file;
+}
+
+function localPublicPath(root, publicPath, file) {
+  const prefix = String(root || '/').replace(/\\/g, '/').replace(/^\/+/, '').replace(/\/+$/, '');
+  return `/${[prefix, publicPath, file].filter(Boolean).join('/')}`;
+}
+
+function getMusicMetadata() {
+  if (!musicMetadata) musicMetadata = require('music-metadata');
+  return musicMetadata;
+}
+
+async function readLocalMetadata(post, localPath, stat) {
+  const key = `${localPath}:${stat.size}:${stat.mtimeMs}`;
+  let entry = localMetadataCache.get(key);
+  if (!entry) {
+    entry = Promise.resolve().then(() => getMusicMetadata().parseFile(localPath, { duration: true }));
+    localMetadataCache.set(key, entry);
+  }
+  try {
+    const metadata = await entry;
+    const duration = Number(metadata && metadata.format && metadata.format.duration);
+    if (!Number.isFinite(duration) || duration <= 0) throw new Error('could not determine a positive duration');
+    return { duration, title: String(metadata && metadata.common && metadata.common.title || '').trim() };
+  } catch (error) {
+    localMetadataCache.delete(key);
+    throw audioError(post, `could not read local audio metadata: ${error.message}`);
+  }
+}
+
+async function normaliseLocalAudio(post, fileValue, runtime) {
+  const file = normaliseLocalFile(post, fileValue);
+  const options = audioRuntime(runtime);
+  const sourceRoot = path.resolve(options.baseDir, options.media.sourceDir);
+  const localPath = path.resolve(sourceRoot, file);
+  if (!localPath.startsWith(`${sourceRoot}${path.sep}`)) throw audioError(post, '`file` must resolve below audio.media.source_dir.');
+
+  let stat;
+  try {
+    stat = await fs.lstat(localPath);
+  } catch (error) {
+    throw audioError(post, `local audio file does not exist: ${file} (${error.code || error.message}).`);
+  }
+  if (!stat.isFile()) throw audioError(post, `local audio path is not a regular file: ${file}.`);
+  if (!Number.isSafeInteger(stat.size) || stat.size <= 0) throw audioError(post, `local audio file must have a positive byte size: ${file}.`);
+
+  const type = AUDIO_MIME_TYPES.get(path.extname(file).toLowerCase());
+  if (!type) throw audioError(post, '`file` has an unsupported audio extension. Supported extensions: ' + Array.from(AUDIO_MIME_TYPES.keys()).join(', ') + '.');
+
+  const metadata = await readLocalMetadata(post, localPath, stat);
+  return {
+    file,
+    type,
+    length: stat.size,
+    duration: formatDuration(metadata.duration),
+    embeddedTitle: metadata.title,
+    playerAudio: localPublicPath(options.root, options.media.publicPath, file)
+  };
+}
+
+function remoteFileName(url) {
+  const value = decodeURIComponent(url.pathname.split('/').pop() || '');
+  return value || url.hostname;
+}
+
+function titleFor(post, data, fallback) {
+  return String(data.title || '').trim() || String(post && post.title || '').trim() || String(fallback || '').trim() || '音频';
+}
+
+async function normaliseAudio(post, data, runtime) {
+  if (!isObject(data)) throw audioError(post, '`music` must be a mapping.');
+  const hasFile = Object.prototype.hasOwnProperty.call(data, 'file') && String(data.file || '').trim() !== '';
+  const hasRemote = Object.prototype.hasOwnProperty.call(data, 'audio') && String(data.audio || '').trim() !== '';
+  if (hasFile === hasRemote) throw audioError(post, '`music` must define exactly one of `file` or `audio`.');
+
+  if (hasFile) {
+    const local = await normaliseLocalAudio(post, data.file, runtime);
+    return { ...local, title: titleFor(post, data, local.embeddedTitle || path.basename(local.file, path.extname(local.file))) };
+  }
+
+  const value = String(data.audio || '');
+  if (/[^\x21-\x7E]/.test(value)) throw audioError(post, '`audio` must use an ASCII URL.');
+  let url;
+  try {
+    url = new URL(value);
+  } catch {
+    throw audioError(post, '`audio` must be an absolute HTTPS URL.');
+  }
+  if (url.protocol !== 'https:') throw audioError(post, '`audio` must use HTTPS.');
+  const explicitType = String(data.type || '');
+  if (explicitType && !/^audio\/[a-z0-9.+-]+$/i.test(explicitType)) throw audioError(post, '`type` must be an audio MIME type.');
+  const explicitDuration = String(data.duration || '');
+  if (explicitDuration && !DURATION_PATTERN.test(explicitDuration)) throw audioError(post, '`duration` must be MM:SS or HH:MM:SS.');
+  return {
+    audio: url.href,
+    playerAudio: url.href,
+    type: explicitType || AUDIO_MIME_TYPES.get(path.extname(url.pathname).toLowerCase()) || '',
+    duration: explicitDuration,
+    title: titleFor(post, data, remoteFileName(url))
+  };
+}
+
+function renderAudioPlayer(audio) {
+  const playerAudio = audio.playerAudio || audio.audio;
+  const type = audio.type ? ` type="${escapeHtml(audio.type)}"` : '';
+  const duration = audio.duration || '--:--';
+  return `${PLAYER_START}
+<aside class="sil-audio-player" data-sil-audio-player aria-label="音频播放器">
+  <div class="sil-audio-player__header">
+    <span class="sil-audio-player__status" role="status" aria-live="polite"><svg class="sil-audio-player__status-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a9 9 0 1 0 9 9"/></svg><span class="sil-audio-player__status-text"></span></span>
+    <span class="sil-audio-player__meta">${escapeHtml(audio.title)}</span>
+  </div>
+  <audio class="sil-audio-player__audio" controls preload="metadata"><source src="${escapeHtml(playerAudio)}"${type}>你的浏览器不支持 HTML5 音频播放。</audio>
+  <div class="sil-audio-player__controls" role="group" aria-label="音频控制">
+    <button class="sil-audio-player__button" type="button" data-sil-audio-action="play" aria-label="播放" aria-pressed="false"><svg class="sil-audio-player__icon sil-audio-player__icon--play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg><svg class="sil-audio-player__icon sil-audio-player__icon--pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 5h4v14H7zm6 0h4v14h-4z"/></svg></button>
+    <span class="sil-audio-player__time sil-audio-player__current" aria-live="off">0:00</span>
+    <input class="sil-audio-player__range sil-audio-player__progress" type="range" min="0" max="100" step="0.1" value="0" aria-label="播放进度" aria-valuetext="0:00">
+    <span class="sil-audio-player__time sil-audio-player__duration">${escapeHtml(duration)}</span>
+  </div>
+  <div class="sil-audio-player__footer">
+    <a class="sil-audio-player__download" href="${escapeHtml(playerAudio)}" target="_blank" rel="noopener">下载音频</a>
+    <div class="sil-audio-player__volume-control" role="group" aria-label="音量控制"><button class="sil-audio-player__button sil-audio-player__volume-button" type="button" data-sil-audio-action="mute" aria-label="静音" aria-pressed="false"><svg class="sil-audio-player__icon sil-audio-player__icon--volume" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10v4h4l5 4V6L7 10zm12.5 2a3.5 3.5 0 0 0-2-3.15v6.29A3.5 3.5 0 0 0 15.5 12zm-2-8.2v2.06a6.5 6.5 0 0 1 0 12.28v2.06a8.5 8.5 0 0 0 0-16.4z"/></svg><svg class="sil-audio-player__icon sil-audio-player__icon--muted" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10v4h4l5 4V6L7 10zm10.9 2 2.1 2.1 2.1-2.1 1.4 1.4-2.1 2.1 2.1 2.1-1.4 1.4-2.1-2.1-2.1 2.1-1.4-1.4 2.1-2.1-2.1-2.1z"/></svg></button><input class="sil-audio-player__range sil-audio-player__volume" type="range" min="0" max="1" step="0.01" value="1" aria-label="音量"></div>
+  </div>
+</aside>
+${PLAYER_END}`;
+}
+
+function hasMusicMetadata(post) {
+  return post && post.music !== undefined && post.music !== false;
+}
+
+function parseMusicTagArgs(args) {
+  if (!args.length) return {};
+  const allowed = new Set(['file', 'audio', 'title', 'type', 'duration']);
+  const values = {};
+  for (const argument of args) {
+    const separator = String(argument).indexOf('=');
+    if (separator <= 0) throw new Error('Music tag arguments must use key=value syntax.');
+    const key = String(argument).slice(0, separator).trim();
+    if (!allowed.has(key)) throw new Error(`Music tag does not support \`${key}\`.`);
+    if (Object.prototype.hasOwnProperty.call(values, key)) throw new Error(`Music tag defines \`${key}\` more than once.`);
+    values[key] = String(argument).slice(separator + 1).trim().replace(/^(?:"([\s\S]*)"|'([\s\S]*)')$/, '$1$2');
+  }
+  return values;
+}
+
+function mergeMusic(defaults, overrides) {
+  const result = { ...(isObject(defaults) ? defaults : {}), ...overrides };
+  if (Object.prototype.hasOwnProperty.call(overrides, 'file')) delete result.audio;
+  if (Object.prototype.hasOwnProperty.call(overrides, 'audio')) delete result.file;
+  return result;
+}
+
+function registerAudioPlugin(hexo) {
+  const config = toAudioConfig(hexo.config);
+  const runtime = { baseDir: hexo.base_dir || process.cwd(), root: hexo.config.root || '/', media: config.media };
+  hexo.extend.injector.register('head_end', PLAYER_STYLE);
+  hexo.extend.injector.register('body_end', PLAYER_SCRIPT);
+  hexo.extend.tag.register('music', async function (args) {
+    const overrides = parseMusicTagArgs(args);
+    return renderAudioPlayer(await normaliseAudio(this, mergeMusic(this.music, overrides), runtime));
+  }, { async: true });
+  hexo.extend.filter.register('after_post_render', async function (data) {
+    if (!hasMusicMetadata(data) || String(data.content || '').includes(PLAYER_START)) return data;
+    data.content = `${renderAudioPlayer(await normaliseAudio(data, data.music, runtime))}\n\n${data.content || ''}`;
+    return data;
+  });
+}
+
+if (typeof hexo !== 'undefined') registerAudioPlugin(hexo);
+
+module.exports = {
+  AUDIO_MIME_TYPES,
+  PLAYER_END,
+  PLAYER_SCRIPT,
+  PLAYER_START,
+  PLAYER_STYLE,
+  audioError,
+  formatDuration,
+  hasMusicMetadata,
+  mergeMusic,
+  normaliseAudio,
+  normaliseLocalAudio,
+  parseMusicTagArgs,
+  registerAudioPlugin,
+  renderAudioPlayer,
+  toAudioConfig
+};

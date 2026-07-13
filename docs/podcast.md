@@ -1,9 +1,8 @@
 # hexo-sil-podcast 使用说明
 
 `hexo-sil-podcast` 是本仓库的本地 Hexo 插件，实现在
-`scripts/hexo-sil-podcast.js`。它会为带 `podcast` front matter 的文章插入
-原生音频播放器；正式发布时另行生成播客订阅源。普通博客 RSS `/atom.xml`
-不会包含音频 enclosure。
+`scripts/hexo-sil-podcast.js`。它会为带 `podcast` front matter 的文章生成播客订阅源；
+播放器由独立的 `hexo-sil-audio` 提供。普通博客 RSS `/atom.xml` 不会包含音频 enclosure。
 
 ## 网站中的位置
 
@@ -155,8 +154,8 @@ npm run build
 npm run server
 ```
 
-打开新文章，确认播放器、时长和下载链接正常。播放器沿用 Inside 主题的卡片背景、
-边框、紫色强调色与字体；播放器头部仅显示集数和时长。启用 JavaScript 时，播放器提供
+打开新文章，确认播放器、时长和下载链接正常。播放器由 `hexo-sil-audio` 统一提供，沿用
+Inside 主题的卡片背景、边框、紫色强调色与字体；播放器头部显示文章标题。启用 JavaScript 时，播放器提供
 播放、进度、音量与下载控制。进度位于主行，下载位于下方左侧，音量位于下方右侧；
 浅色模式为白底浅紫色与淡紫轨道，深色模式为黑底主题深紫色。禁用 JavaScript 时会
 回退到浏览器原生音频控件。
@@ -165,6 +164,7 @@ npm run server
 
 ```bash
 npm run test:hexo-sil-podcast
+npm run test:hexo-sil-audio
 npm run test:hexo-sil-podcast-inside
 npm run build
 ```

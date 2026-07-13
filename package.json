@@ -8,6 +8,7 @@
     "deploy": "hexo deploy",
     "postinstall": "node tools/apply-optional-inside-patch.js",
     "server": "hexo server",
+    "test:hexo-sil-audio": "node --test test/hexo-sil-audio.test.js",
     "test:hexo-sil-podcast-inside": "node --test test/hexo-sil-podcast-inside.test.js",
     "test:r2-assets": "node --test tools/sync-r2-assets.test.js",
     "test:hexo-sil-podcast": "node --test test/hexo-sil-podcast.test.js"

@@ -147,6 +147,11 @@ feed:
   path: atom.xml
   limit: 25
   icon: favicon.png
+audio:
+  # hexo-sil-audio: local music files used by ordinary articles.
+  media:
+    source_dir: source/files
+    public_path: /files/
 podcast:
   # hexo-sil-podcast: preview article players first. Set to false only when ready to publish podcast.xml.
   dry_run: true
