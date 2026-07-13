@@ -146,4 +146,28 @@ feed:
   type: atom
   path: atom.xml
   limit: 25
-  icon: favicon.png 
+  icon: favicon.png
+podcast:
+  # hexo-sil-podcast: preview article players first. Set to false only when ready to publish podcast.xml.
+  dry_run: true
+  path: podcast.xml
+  title: Ephesus
+  description: Roguelike Temple of Silencess
+  author: Silencess
+  email: silencess.m@gmail.com
+  language: zh-CN
+  link: /
+  # Temporary 500px icon. Replace with a 1400-3000px square cover before submission.
+  image: favicon.png
+  category:
+    text: Leisure
+    subcategory: Games
+  # Local episode files in source/files are published by the R2 asset workflow.
+  # The article player uses public_path; the podcast RSS enclosure uses url.
+  media:
+    source_dir: source/files
+    public_path: /files/
+    url: https://dl.ephesus.top/files/
+  explicit: false
+  # 0 keeps the full published episode catalogue in the podcast feed.
+  limit: 0
