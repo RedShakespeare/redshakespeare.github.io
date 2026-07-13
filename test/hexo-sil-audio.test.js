@@ -93,10 +93,13 @@ test('Ephesus skin owns the player appearance while the core retains interaction
   assert.match(css, /--sil-audio-surface:#000/);
   assert.match(css, /--sil-audio-ink:#8064a2/);
   assert.match(css, /--sil-audio-stack-gap:1rem/);
+  assert.match(css, /--sil-audio-coordinate-inset-left:calc\(var\(--sil-audio-stack-gap\) \+ var\(--sil-audio-accent-border-width\)\)/);
+  assert.match(css, /--sil-audio-coordinate-inset-right:calc\(var\(--sil-audio-stack-gap\) \+ var\(--sil-audio-border-width\)\)/);
   assert.match(css, /sil-audio-player__header \{ display:flex;flex-wrap:nowrap/);
-  assert.match(css, /sil-audio-player__controls \{ display:none;min-height:2\.25rem;grid-template-columns:minmax\(0,1fr\) minmax\(0,8fr\) minmax\(0,1fr\);align-items:center/);
-  assert.match(css, /sil-audio-player__footer \{ display:grid;min-height:2\.25rem;grid-template-columns:repeat\(5,minmax\(0,1fr\)\);align-items:center/);
+  assert.match(css, /sil-audio-player__controls \{ display:none;min-height:2\.25rem;grid-template-columns:minmax\(0,1fr\) minmax\(0,8fr\) minmax\(0,1fr\);align-items:center;margin:var\(--sil-audio-stack-gap\) calc\(0px - var\(--sil-audio-coordinate-inset-right\)\) 0 calc\(0px - var\(--sil-audio-coordinate-inset-left\)\)/);
+  assert.match(css, /sil-audio-player__footer \{ display:grid;min-height:2\.25rem;grid-template-columns:repeat\(5,minmax\(0,1fr\)\);align-items:center;margin:0 calc\(0px - var\(--sil-audio-coordinate-inset-right\)\) 0 calc\(0px - var\(--sil-audio-coordinate-inset-left\)\);padding:var\(--sil-audio-stack-gap\) 0 0/);
   assert.match(css, /sil-audio-player__progress \{ grid-column:2;width:100%;min-width:0/);
+  assert.match(css, /sil-audio-player__range \{ box-sizing:border-box;width:100%;height:1\.75rem;margin:0;border:0;padding:0/);
   assert.match(css, /sil-audio-player__current \{ grid-column:1;justify-self:center;text-align:center/);
   assert.match(css, /sil-audio-player__duration \{ grid-column:5;justify-self:center;text-align:center/);
   assert.match(css, /@keyframes sil-audio-player-title-scroll/);
