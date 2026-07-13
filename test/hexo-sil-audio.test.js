@@ -94,9 +94,11 @@ test('Ephesus skin owns the player appearance while the core retains interaction
   assert.match(css, /--sil-audio-ink:#8064a2/);
   assert.match(css, /--sil-audio-stack-gap:1rem/);
   assert.match(css, /sil-audio-player__header \{ display:flex;flex-wrap:nowrap/);
-  assert.match(css, /sil-audio-player__controls \{ display:none;min-height:2\.25rem;grid-template-columns:minmax\(0,1fr\);align-items:center/);
+  assert.match(css, /sil-audio-player__controls \{ display:none;min-height:2\.25rem;grid-template-columns:minmax\(0,1fr\) minmax\(0,8fr\) minmax\(0,1fr\);align-items:center/);
   assert.match(css, /sil-audio-player__footer \{ display:grid;min-height:2\.25rem;grid-template-columns:repeat\(5,minmax\(0,1fr\)\);align-items:center/);
-  assert.match(css, /sil-audio-player__progress \{ width:100%;min-width:0/);
+  assert.match(css, /sil-audio-player__progress \{ grid-column:2;width:100%;min-width:0/);
+  assert.match(css, /sil-audio-player__current \{ grid-column:1;justify-self:center;text-align:center/);
+  assert.match(css, /sil-audio-player__duration \{ grid-column:5;justify-self:center;text-align:center/);
   assert.match(css, /@keyframes sil-audio-player-title-scroll/);
   assert.match(css, /@keyframes sil-audio-player-spin/);
   assert.doesNotMatch(css, /podcast-player/);
