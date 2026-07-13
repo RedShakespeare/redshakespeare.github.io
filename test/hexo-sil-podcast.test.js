@@ -200,8 +200,13 @@ test('custom player assets define both colour palettes and react to theme change
   assert.match(PLAYER_STYLE, /\.podcast-player__range \{[\s\S]*border-radius: 8px/);
   assert.match(PLAYER_STYLE, /height: \.3rem/);
   assert.match(PLAYER_STYLE, /border-radius: 99px/);
-  assert.match(PLAYER_STYLE, /\.podcast-player__footer \{[\s\S]*padding: \.5rem \.45rem 0/);
-  assert.match(PLAYER_STYLE, /\.podcast-player__header \{[\s\S]*justify-content: space-between/);
+  assert.match(PLAYER_STYLE, /--podcast-stack-gap: 1rem/);
+  assert.match(PLAYER_STYLE, /\.podcast-player__header \{[\s\S]*flex-wrap: nowrap[\s\S]*min-height: 2\.25rem[\s\S]*justify-content: space-between/);
+  assert.match(PLAYER_STYLE, /\.podcast-player__meta \{[\s\S]*text-overflow: ellipsis/);
+  assert.match(PLAYER_STYLE, /\.podcast-player__controls \{[\s\S]*margin: var\(--podcast-stack-gap\) 0 0/);
+  assert.match(PLAYER_STYLE, /\.podcast-player__footer \{[\s\S]*padding: var\(--podcast-stack-gap\) \.45rem 0/);
+  assert.match(PLAYER_STYLE, /\.podcast-player__footer \{[\s\S]*flex-wrap: nowrap/);
+  assert.match(PLAYER_STYLE, /max-width: 675px\) \{[\s\S]*--podcast-stack-gap: \.75rem/);
   assert.match(PLAYER_STYLE, /@keyframes podcast-player-spin/);
   assert.match(PLAYER_STYLE, /\.podcast-player__progress \{[\s\S]*margin-right: \.2rem/);
   assert.match(PLAYER_STYLE, /podcast-player__volume-button/);

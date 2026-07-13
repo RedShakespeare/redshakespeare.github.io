@@ -35,8 +35,9 @@ const PLAYER_STYLE = `
   --podcast-border: #d9cee8;
   --podcast-hover: #f5f1fa;
   --podcast-focus: #8064a2;
+  --podcast-stack-gap: 1rem;
   margin: 1.5rem 0;
-  padding: 1rem;
+  padding: var(--podcast-stack-gap);
   border: 1px solid var(--podcast-border);
   border-left: 3px solid var(--podcast-ink);
   border-radius: 8px;
@@ -56,22 +57,30 @@ const PLAYER_STYLE = `
 }
 .podcast-player__header {
   display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
+  flex-wrap: nowrap;
+  min-height: 2.25rem;
+  align-items: center;
   justify-content: space-between;
   gap: .25rem 1rem;
 }
 .podcast-player__meta {
+  min-width: 0;
+  margin-left: auto;
   color: var(--podcast-ink);
   font-size: .85rem;
   opacity: .85;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 .podcast-player__status {
   display: none;
+  flex: 0 1 auto;
   align-items: center;
   min-height: 1.36rem;
   color: var(--podcast-ink);
   font-size: .8rem;
+  white-space: nowrap;
 }
 .podcast-player[data-podcast-loading="true"] .podcast-player__status,
 .podcast-player[data-podcast-error="true"] .podcast-player__status {
@@ -109,17 +118,18 @@ const PLAYER_STYLE = `
   grid-template-columns: auto auto minmax(4rem, 1fr) auto;
   align-items: center;
   gap: .5rem;
-  margin: .4rem 0 .2rem;
+  margin: var(--podcast-stack-gap) 0 0;
 }
 .podcast-player[data-podcast-enhanced="true"] .podcast-player__controls {
   display: grid;
 }
 .podcast-player__footer {
   display: flex;
+  flex-wrap: nowrap;
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
-  padding: .5rem .45rem 0;
+  padding: var(--podcast-stack-gap) .45rem 0;
 }
 .podcast-player__volume-control {
   display: none;
@@ -237,17 +247,19 @@ const PLAYER_STYLE = `
 }
 .podcast-player__download {
   display: inline-block;
+  flex: 0 0 auto;
   padding: .2rem .45rem;
   border-radius: 3px;
   color: var(--podcast-ink);
   font-size: .85rem;
+  white-space: nowrap;
   transition: background-color .15s ease-in-out, color .15s ease-in-out;
 }
 .podcast-player__download:hover {
   background: var(--podcast-hover);
 }
 @media screen and (max-width: 675px) {
-  .podcast-player { padding: .75rem; }
+  .podcast-player { --podcast-stack-gap: .75rem; }
 }
 @media screen and (max-width: 500px) {
   .podcast-player__controls {
