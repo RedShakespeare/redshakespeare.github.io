@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="zh-Hans">
 <head><!-- hexo injector head_begin start -->
-<script src="/config.683e99e172e00d2c6e53.js"></script>
+<script src="/config.a9d26d61168154b0e2d7.js"></script>
 <!-- hexo injector head_begin end -->
 <meta charset="utf-8">
 <title>The Ground Gives Way 思路简述 - Ephesus</title>
@@ -32,11 +32,11 @@
 <style>
 .podcast-player {
   --podcast-surface: #fff;
-  --podcast-ink: var(--inside-accent-color, #673ab7);
-  --podcast-rail: var(--inside-accent-color-01, rgba(103, 58, 183, .1));
-  --podcast-border: var(--inside-accent-color-02, rgba(103, 58, 183, .2));
-  --podcast-hover: var(--inside-accent-color-005, rgba(103, 58, 183, .05));
-  --podcast-focus: var(--inside-accent-color, #673ab7);
+  --podcast-ink: #8064a2;
+  --podcast-rail: #eee8f5;
+  --podcast-border: #d9cee8;
+  --podcast-hover: #f5f1fa;
+  --podcast-focus: #8064a2;
   margin: 1.5rem 0;
   padding: 1rem;
   border: 1px solid var(--podcast-border);
@@ -83,7 +83,7 @@
   grid-template-columns: auto auto minmax(4rem, 1fr) auto;
   align-items: center;
   gap: .5rem;
-  margin: .6rem 0 .2rem;
+  margin: .4rem 0 .2rem;
 }
 .podcast-player[data-podcast-enhanced="true"] .podcast-player__controls {
   display: grid;
@@ -102,12 +102,18 @@
   flex: 0 1 10rem;
   align-items: center;
   gap: .55rem;
+  margin-right: .65rem;
 }
 .podcast-player[data-podcast-enhanced="true"] .podcast-player__volume-control {
   display: flex;
 }
 .podcast-player__volume {
   min-width: 4.75rem;
+}
+.podcast-player__volume-button {
+  flex: 0 0 2.25rem;
+  aspect-ratio: 1;
+  border-radius: 50%;
 }
 .podcast-player__button {
   display: inline-grid;
@@ -158,7 +164,7 @@
 }
 .podcast-player__range {
   width: 100%;
-  height: 1.75rem;
+  height: 1.5rem;
   margin: 0;
   appearance: none;
   -webkit-appearance: none;
@@ -166,14 +172,14 @@
   cursor: pointer;
 }
 .podcast-player__range::-webkit-slider-runnable-track {
-  height: .3rem;
-  border-radius: 99px;
+  height: .55rem;
+  border-radius: 999px;
   background: linear-gradient(to right, var(--podcast-ink) 0 var(--podcast-range-fill, 0%), var(--podcast-rail) var(--podcast-range-fill, 0%) 100%);
 }
 .podcast-player__range::-webkit-slider-thumb {
-  width: .85rem;
-  height: .85rem;
-  margin-top: -.275rem;
+  width: .95rem;
+  height: .95rem;
+  margin-top: -.2rem;
   border: 2px solid var(--podcast-surface);
   border-radius: 50%;
   appearance: none;
@@ -181,18 +187,18 @@
   background: var(--podcast-ink);
 }
 .podcast-player__range::-moz-range-track {
-  height: .3rem;
-  border-radius: 99px;
+  height: .55rem;
+  border-radius: 999px;
   background: var(--podcast-rail);
 }
 .podcast-player__range::-moz-range-progress {
-  height: .3rem;
-  border-radius: 99px;
+  height: .55rem;
+  border-radius: 999px;
   background: var(--podcast-ink);
 }
 .podcast-player__range::-moz-range-thumb {
-  width: .65rem;
-  height: .65rem;
+  width: .75rem;
+  height: .75rem;
   border: 2px solid var(--podcast-surface);
   border-radius: 50%;
   background: var(--podcast-ink);
@@ -233,6 +239,7 @@
     min-width: 6.5rem;
     max-width: 8rem;
     gap: .4rem;
+    margin-right: .3rem;
   }
   .podcast-player__volume { min-width: 3.75rem; }
   .podcast-player__time { min-width: 2.5rem; }
