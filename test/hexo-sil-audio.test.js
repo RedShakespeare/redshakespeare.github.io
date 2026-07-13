@@ -111,6 +111,13 @@ test('Ephesus skin owns the player appearance while the core retains interaction
   assert.doesNotMatch(PLAYER_SCRIPT, /sil-audio-player__volume/);
   assert.doesNotMatch(PLAYER_SCRIPT, /--inside-/);
   assert.match(PLAYER_SCRIPT, /document\.addEventListener\('inside:theme'/);
+  assert.match(PLAYER_SCRIPT, /const playerRefreshers = new WeakMap\(\);/);
+  assert.match(PLAYER_SCRIPT, /window\.addEventListener\('resize',scheduleRefresh\)/);
+  assert.doesNotMatch(PLAYER_SCRIPT, /window\.addEventListener\('resize',syncTitle\)/);
+  assert.equal((PLAYER_SCRIPT.match(/window\.addEventListener\('resize'/g) || []).length, 1);
+  assert.match(PLAYER_SCRIPT, /function observeMutations\(records\)/);
+  assert.match(PLAYER_SCRIPT, /node\.matches\(selector\)\|\|node\.querySelector\(selector\)/);
+  assert.match(PLAYER_SCRIPT, /new MutationObserver\(observeMutations\)/);
 });
 
 test('audio player has symmetric progress controls and a three-button footer', () => {
