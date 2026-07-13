@@ -195,8 +195,10 @@ test('custom player assets define both colour palettes and react to theme change
   assert.match(PLAYER_STYLE, /--podcast-surface: #fff/);
   assert.match(PLAYER_STYLE, /--podcast-surface: #000/);
   assert.match(PLAYER_STYLE, /--podcast-ink: #8064a2/);
-  assert.match(PLAYER_STYLE, /height: \.55rem/);
-  assert.match(PLAYER_STYLE, /border-radius: 999px/);
+  assert.match(PLAYER_STYLE, /\.podcast-player__range \{[\s\S]*border-radius: 8px/);
+  assert.match(PLAYER_STYLE, /height: \.3rem/);
+  assert.match(PLAYER_STYLE, /border-radius: 99px/);
+  assert.match(PLAYER_STYLE, /\.podcast-player__progress \{[\s\S]*margin-right: \.2rem/);
   assert.match(PLAYER_STYLE, /podcast-player__volume-button/);
   assert.doesNotMatch(PLAYER_STYLE, /#a78bfa/);
   assert.match(PLAYER_STYLE, /::-webkit-slider-runnable-track/);
