@@ -84,7 +84,7 @@ appearance:
   # ]
 
   darkmode:
-    accent_color: '673ab7' #'#539bf5'
+    accent_color: '#673ab7' #'#539bf5'
     foreground_color: '#adbac7'
     border_color: '#373e47'
     background: '#22272e'

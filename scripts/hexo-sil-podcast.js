@@ -30,11 +30,11 @@ const PLAYER_STYLE = `
 <style>
 .podcast-player {
   --podcast-surface: #fff;
-  --podcast-ink: #7c3aed;
-  --podcast-rail: #ede9fe;
-  --podcast-border: #ddd6fe;
-  --podcast-hover: #f5f3ff;
-  --podcast-focus: #7c3aed;
+  --podcast-ink: var(--inside-accent-color, #673ab7);
+  --podcast-rail: var(--inside-accent-color-01, rgba(103, 58, 183, .1));
+  --podcast-border: var(--inside-accent-color-02, rgba(103, 58, 183, .2));
+  --podcast-hover: var(--inside-accent-color-005, rgba(103, 58, 183, .05));
+  --podcast-focus: var(--inside-accent-color, #673ab7);
   margin: 1.5rem 0;
   padding: 1rem;
   border: 1px solid var(--podcast-border);
@@ -47,11 +47,11 @@ const PLAYER_STYLE = `
 }
 .podcast-player[data-podcast-theme="dark"] {
   --podcast-surface: #000;
-  --podcast-ink: #a78bfa;
-  --podcast-rail: #2e1065;
-  --podcast-border: #4c1d95;
-  --podcast-hover: #1a0b32;
-  --podcast-focus: #c4b5fd;
+  --podcast-ink: var(--inside-accent-color, #673ab7);
+  --podcast-rail: var(--inside-accent-color-02, rgba(103, 58, 183, .2));
+  --podcast-border: var(--inside-accent-color-04, rgba(103, 58, 183, .4));
+  --podcast-hover: var(--inside-accent-color-01, rgba(103, 58, 183, .1));
+  --podcast-focus: var(--inside-accent-color, #673ab7);
   color-scheme: dark;
 }
 .podcast-player__header {
@@ -78,13 +78,34 @@ const PLAYER_STYLE = `
 }
 .podcast-player__controls {
   display: none;
-  grid-template-columns: auto auto minmax(4rem, 1fr) auto auto minmax(4rem, 7rem);
+  grid-template-columns: auto auto minmax(4rem, 1fr) auto;
   align-items: center;
   gap: .5rem;
-  margin: .6rem 0;
+  margin: .6rem 0 .2rem;
 }
 .podcast-player[data-podcast-enhanced="true"] .podcast-player__controls {
   display: grid;
+}
+.podcast-player__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: .3rem .45rem 0;
+}
+.podcast-player__volume-control {
+  display: none;
+  min-width: 8rem;
+  max-width: 10rem;
+  flex: 0 1 10rem;
+  align-items: center;
+  gap: .55rem;
+}
+.podcast-player[data-podcast-enhanced="true"] .podcast-player__volume-control {
+  display: flex;
+}
+.podcast-player__volume {
+  min-width: 4.75rem;
 }
 .podcast-player__button {
   display: inline-grid;
@@ -176,7 +197,7 @@ const PLAYER_STYLE = `
 }
 .podcast-player__status {
   display: none;
-  grid-column: 1 / -1;
+  margin-top: .35rem;
   color: var(--podcast-ink);
   font-size: .8rem;
 }
@@ -199,10 +220,19 @@ const PLAYER_STYLE = `
 }
 @media screen and (max-width: 500px) {
   .podcast-player__controls {
-    grid-template-columns: auto auto minmax(3rem, 1fr) auto auto;
+    grid-template-columns: auto auto minmax(3rem, 1fr) auto;
     gap: .4rem;
   }
-  .podcast-player__volume { display: none; }
+  .podcast-player__footer {
+    gap: .7rem;
+    padding-inline: .2rem;
+  }
+  .podcast-player__volume-control {
+    min-width: 6.5rem;
+    max-width: 8rem;
+    gap: .4rem;
+  }
+  .podcast-player__volume { min-width: 3.75rem; }
   .podcast-player__time { min-width: 2.5rem; }
 }
 </style>`;
@@ -701,14 +731,18 @@ function renderPlayer(episode) {
     <span class="podcast-player__time podcast-player__current" aria-live="off">0:00</span>
     <input class="podcast-player__range podcast-player__progress" type="range" min="0" max="100" step="0.1" value="0" aria-label="播放进度" aria-valuetext="0:00">
     <span class="podcast-player__time podcast-player__duration">${escapeXml(episode.duration)}</span>
-    <button class="podcast-player__button" type="button" data-podcast-action="mute" aria-label="静音" aria-pressed="false">
-      <svg class="podcast-player__icon podcast-player__icon--volume" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10v4h4l5 4V6L7 10zm12.5 2a3.5 3.5 0 0 0-2-3.15v6.29A3.5 3.5 0 0 0 15.5 12zm-2-8.2v2.06a6.5 6.5 0 0 1 0 12.28v2.06a8.5 8.5 0 0 0 0-16.4z"/></svg>
-      <svg class="podcast-player__icon podcast-player__icon--muted" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10v4h4l5 4V6L7 10zm10.9 2 2.1 2.1 2.1-2.1 1.4 1.4-2.1 2.1 2.1 2.1-1.4 1.4-2.1-2.1-2.1 2.1-1.4-1.4 2.1-2.1-2.1-2.1z"/></svg>
-    </button>
-    <input class="podcast-player__range podcast-player__volume" type="range" min="0" max="1" step="0.01" value="1" aria-label="音量">
-    <span class="podcast-player__status" role="status" aria-live="polite"></span>
   </div>
-  <a class="podcast-player__download" href="${escapeXml(playerAudio)}" target="_blank" rel="noopener">下载音频</a>
+  <div class="podcast-player__footer">
+    <a class="podcast-player__download" href="${escapeXml(playerAudio)}" target="_blank" rel="noopener">下载音频</a>
+    <div class="podcast-player__volume-control" role="group" aria-label="音量控制">
+      <button class="podcast-player__button" type="button" data-podcast-action="mute" aria-label="静音" aria-pressed="false">
+        <svg class="podcast-player__icon podcast-player__icon--volume" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10v4h4l5 4V6L7 10zm12.5 2a3.5 3.5 0 0 0-2-3.15v6.29A3.5 3.5 0 0 0 15.5 12zm-2-8.2v2.06a6.5 6.5 0 0 1 0 12.28v2.06a8.5 8.5 0 0 0 0-16.4z"/></svg>
+        <svg class="podcast-player__icon podcast-player__icon--muted" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10v4h4l5 4V6L7 10zm10.9 2 2.1 2.1 2.1-2.1 1.4 1.4-2.1 2.1 2.1 2.1-1.4 1.4-2.1-2.1-2.1 2.1-1.4-1.4 2.1-2.1-2.1-2.1z"/></svg>
+      </button>
+      <input class="podcast-player__range podcast-player__volume" type="range" min="0" max="1" step="0.01" value="1" aria-label="音量">
+    </div>
+  </div>
+  <span class="podcast-player__status" role="status" aria-live="polite"></span>
 </aside>
 ${PLAYER_END}`;
 }

@@ -182,7 +182,9 @@ test('renderPlayer retains the theme-scoped component markup for legacy episodes
   assert.match(html, /<audio class="podcast-player__audio" controls preload="metadata">/);
   assert.match(html, /data-podcast-action="play"/);
   assert.match(html, /class="podcast-player__range podcast-player__progress"/);
-  assert.match(html, /data-podcast-action="mute"/);
+  assert.match(html, /class="podcast-player__footer"/);
+  assert.match(html, /podcast-player__footer[\s\S]*podcast-player__download[\s\S]*podcast-player__volume-control/);
+  assert.match(html, /podcast-player__volume-control[\s\S]*data-podcast-action="mute"/);
   assert.match(html, /第 1 集 · 00:42:10/);
   assert.doesNotMatch(html, /podcast-player__label/);
   assert.doesNotMatch(html, /<span[^>]*>播客<\/span>/);
@@ -191,7 +193,8 @@ test('renderPlayer retains the theme-scoped component markup for legacy episodes
 test('custom player assets define both colour palettes and react to theme changes', () => {
   assert.match(PLAYER_STYLE, /--podcast-surface: #fff/);
   assert.match(PLAYER_STYLE, /--podcast-surface: #000/);
-  assert.match(PLAYER_STYLE, /--podcast-ink: #a78bfa/);
+  assert.match(PLAYER_STYLE, /--podcast-ink: var\(--inside-accent-color, #673ab7\)/);
+  assert.doesNotMatch(PLAYER_STYLE, /#a78bfa/);
   assert.match(PLAYER_STYLE, /::-webkit-slider-runnable-track/);
   assert.match(PLAYER_STYLE, /::-moz-range-progress/);
   assert.match(PLAYER_SCRIPT, /document\.addEventListener\('inside:theme'/);
