@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="zh-Hans">
 <head><!-- hexo injector head_begin start -->
-<script src="/config.7a14001c91b5e4b12984.js"></script>
+<script src="/config.683e99e172e00d2c6e53.js"></script>
 <!-- hexo injector head_begin end -->
 <meta charset="utf-8">
 <title>标签 : Python - Ephesus</title>
@@ -26,26 +26,13 @@
 
 <!-- hexo injector head_end start -->
 <style>
-is-j.φcm .φct > a.φcs{
-  position: relative;
-  font-size: 0 !important;
-  line-height: 1 !important;
-}
-is-j.φcm .φct > a.φcs::before{
-  content: "🧁" !important;
-  font-size: 14px;
-  line-height: 1.2;
-}
-</style>
-
-<style>
 .podcast-player {
   --podcast-surface: #fff;
-  --podcast-ink: #7c3aed;
-  --podcast-rail: #ede9fe;
-  --podcast-border: #ddd6fe;
-  --podcast-hover: #f5f3ff;
-  --podcast-focus: #7c3aed;
+  --podcast-ink: var(--inside-accent-color, #673ab7);
+  --podcast-rail: var(--inside-accent-color-01, rgba(103, 58, 183, .1));
+  --podcast-border: var(--inside-accent-color-02, rgba(103, 58, 183, .2));
+  --podcast-hover: var(--inside-accent-color-005, rgba(103, 58, 183, .05));
+  --podcast-focus: var(--inside-accent-color, #673ab7);
   margin: 1.5rem 0;
   padding: 1rem;
   border: 1px solid var(--podcast-border);
@@ -58,11 +45,11 @@ is-j.φcm .φct > a.φcs::before{
 }
 .podcast-player[data-podcast-theme="dark"] {
   --podcast-surface: #000;
-  --podcast-ink: #a78bfa;
-  --podcast-rail: #2e1065;
-  --podcast-border: #4c1d95;
-  --podcast-hover: #1a0b32;
-  --podcast-focus: #c4b5fd;
+  --podcast-ink: var(--inside-accent-color, #673ab7);
+  --podcast-rail: var(--inside-accent-color-02, rgba(103, 58, 183, .2));
+  --podcast-border: var(--inside-accent-color-04, rgba(103, 58, 183, .4));
+  --podcast-hover: var(--inside-accent-color-01, rgba(103, 58, 183, .1));
+  --podcast-focus: var(--inside-accent-color, #673ab7);
   color-scheme: dark;
 }
 .podcast-player__header {
@@ -89,13 +76,34 @@ is-j.φcm .φct > a.φcs::before{
 }
 .podcast-player__controls {
   display: none;
-  grid-template-columns: auto auto minmax(4rem, 1fr) auto auto minmax(4rem, 7rem);
+  grid-template-columns: auto auto minmax(4rem, 1fr) auto;
   align-items: center;
   gap: .5rem;
-  margin: .6rem 0;
+  margin: .6rem 0 .2rem;
 }
 .podcast-player[data-podcast-enhanced="true"] .podcast-player__controls {
   display: grid;
+}
+.podcast-player__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: .3rem .45rem 0;
+}
+.podcast-player__volume-control {
+  display: none;
+  min-width: 8rem;
+  max-width: 10rem;
+  flex: 0 1 10rem;
+  align-items: center;
+  gap: .55rem;
+}
+.podcast-player[data-podcast-enhanced="true"] .podcast-player__volume-control {
+  display: flex;
+}
+.podcast-player__volume {
+  min-width: 4.75rem;
 }
 .podcast-player__button {
   display: inline-grid;
@@ -187,7 +195,7 @@ is-j.φcm .φct > a.φcs::before{
 }
 .podcast-player__status {
   display: none;
-  grid-column: 1 / -1;
+  margin-top: .35rem;
   color: var(--podcast-ink);
   font-size: .8rem;
 }
@@ -210,13 +218,35 @@ is-j.φcm .φct > a.φcs::before{
 }
 @media screen and (max-width: 500px) {
   .podcast-player__controls {
-    grid-template-columns: auto auto minmax(3rem, 1fr) auto auto;
+    grid-template-columns: auto auto minmax(3rem, 1fr) auto;
     gap: .4rem;
   }
-  .podcast-player__volume { display: none; }
+  .podcast-player__footer {
+    gap: .7rem;
+    padding-inline: .2rem;
+  }
+  .podcast-player__volume-control {
+    min-width: 6.5rem;
+    max-width: 8rem;
+    gap: .4rem;
+  }
+  .podcast-player__volume { min-width: 3.75rem; }
   .podcast-player__time { min-width: 2.5rem; }
 }
-</style><style is="theme">html{--inside-accent-color:#673ab7;--inside-foreground-color:#363636;--inside-border-color:#e0e0e0;--inside-background:#f3f6f7;--inside-sidebar-background:#673ab7;--inside-card-background:#fff;--inside-font-base:'Josefin Sans','PingFang SC';--inside-font-logo:-apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;--inside-font-menu:Baloo Bhaijaan,'Josefin Sans','PingFang SC';--inside-font-heading:Consolas,'Josefin Sans','PingFang SC';--inside-font-label:Montserrat,'Josefin Sans','PingFang SC';--inside-font-code:Inconsolata,monospace;--inside-font-print:-apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;--inside-content-width:660px;--inside-highlight-00:#ffffff;--inside-highlight-01:#e0e0e0;--inside-highlight-02:#f3f6f7;--inside-highlight-03:#95a5b3;--inside-highlight-04:#363636;--inside-highlight-05:#262b2f;--inside-highlight-06:#000000;--inside-highlight-07:#000000;--inside-highlight-08:#5d6c7b;--inside-highlight-09:#40464a;--inside-highlight-0a:#2980b9;--inside-highlight-0b:#be516e;--inside-highlight-0c:#237dac;--inside-highlight-0d:#944770;--inside-highlight-0e:#239371;--inside-highlight-0f:#edf0f3;--inside-card-color:#fff;--inside-accent-color-005:rgba(103,58,183,.05);--inside-accent-color-01:rgba(103,58,183,.1);--inside-accent-color-02:rgba(103,58,183,.2);--inside-accent-color-04:rgba(103,58,183,.4);--inside-accent-color-08:rgba(103,58,183,.8)}</style><script src="/theme.9ecc9ab1.js"></script><link href="//fonts.googleapis.com/css?family=Baloo+Bhaijaan|Inconsolata|Josefin+Sans|Montserrat" rel="stylesheet"></link><link href="/lib/fontawesome/css/fontawesome.min.css" rel="stylesheet"><link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"><link href="/styles.91e7dfca63c7c151daa6.css" rel="stylesheet"><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head>
+</style>
+<style>
+is-j.φcm .φct > a.φcs{
+  position: relative;
+  font-size: 0 !important;
+  line-height: 1 !important;
+}
+is-j.φcm .φct > a.φcs::before{
+  content: "🧁" !important;
+  font-size: 14px;
+  line-height: 1.2;
+}
+</style>
+<style is="theme">html{--inside-accent-color:#673ab7;--inside-foreground-color:#363636;--inside-border-color:#e0e0e0;--inside-background:#f3f6f7;--inside-sidebar-background:#673ab7;--inside-card-background:#fff;--inside-font-base:'Josefin Sans','PingFang SC';--inside-font-logo:-apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;--inside-font-menu:Baloo Bhaijaan,'Josefin Sans','PingFang SC';--inside-font-heading:Consolas,'Josefin Sans','PingFang SC';--inside-font-label:Montserrat,'Josefin Sans','PingFang SC';--inside-font-code:Inconsolata,monospace;--inside-font-print:-apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;--inside-content-width:660px;--inside-highlight-00:#ffffff;--inside-highlight-01:#e0e0e0;--inside-highlight-02:#f3f6f7;--inside-highlight-03:#95a5b3;--inside-highlight-04:#363636;--inside-highlight-05:#262b2f;--inside-highlight-06:#000000;--inside-highlight-07:#000000;--inside-highlight-08:#5d6c7b;--inside-highlight-09:#40464a;--inside-highlight-0a:#2980b9;--inside-highlight-0b:#be516e;--inside-highlight-0c:#237dac;--inside-highlight-0d:#944770;--inside-highlight-0e:#239371;--inside-highlight-0f:#edf0f3;--inside-card-color:#fff;--inside-accent-color-005:rgba(103,58,183,.05);--inside-accent-color-01:rgba(103,58,183,.1);--inside-accent-color-02:rgba(103,58,183,.2);--inside-accent-color-04:rgba(103,58,183,.4);--inside-accent-color-08:rgba(103,58,183,.8)}</style><script src="/theme.9ecc9ab1.js"></script><link href="//fonts.googleapis.com/css?family=Baloo+Bhaijaan|Inconsolata|Josefin+Sans|Montserrat" rel="stylesheet"></link><link href="/lib/fontawesome/css/fontawesome.min.css" rel="stylesheet"><link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"><link href="/styles.91e7dfca63c7c151daa6.css" rel="stylesheet"><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head>
 <body lang="zh-Hans"><!-- hexo injector body_begin start --><is-a></is-a><!-- hexo injector body_begin end --><!-- hexo injector body_end start -->
 <script>
 (() => {
