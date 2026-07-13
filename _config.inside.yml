@@ -111,6 +111,7 @@ profile:
 # Sidebar navigation links
 menu:
   🏠 Writings: /
+  🎙 Podcasts: /tags/Podcast/
   💾 RLArchive: /roguelike
   🌟 About: /about
   🔗 Links: /links

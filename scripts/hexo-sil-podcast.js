@@ -29,61 +29,346 @@ const localMetadataCache = new Map();
 const PLAYER_STYLE = `
 <style>
 .podcast-player {
+  --podcast-surface: #fff;
+  --podcast-ink: #7c3aed;
+  --podcast-rail: #ede9fe;
+  --podcast-border: #ddd6fe;
+  --podcast-hover: #f5f3ff;
+  --podcast-focus: #7c3aed;
   margin: 1.5rem 0;
   padding: 1rem;
-  border: 1px solid var(--inside-border-color);
-  border-left: 3px solid var(--inside-accent-color);
-  border-radius: 3px;
-  background: var(--inside-card-background, #fff);
-  color: inherit;
+  border: 1px solid var(--podcast-border);
+  border-left: 3px solid var(--podcast-ink);
+  border-radius: 8px;
+  background: var(--podcast-surface);
+  color: var(--podcast-ink);
+  color-scheme: light;
   line-height: 1.6;
+}
+.podcast-player[data-podcast-theme="dark"] {
+  --podcast-surface: #000;
+  --podcast-ink: #a78bfa;
+  --podcast-rail: #2e1065;
+  --podcast-border: #4c1d95;
+  --podcast-hover: #1a0b32;
+  --podcast-focus: #c4b5fd;
+  color-scheme: dark;
 }
 .podcast-player__header {
   display: flex;
   flex-wrap: wrap;
   align-items: baseline;
-  justify-content: space-between;
+  justify-content: flex-end;
   gap: .25rem 1rem;
 }
-.podcast-player__label {
-  color: var(--inside-accent-color);
-  font-family: var(--inside-font-heading);
-  font-size: .95rem;
-  letter-spacing: .04em;
-}
 .podcast-player__meta {
-  color: inherit;
+  color: var(--podcast-ink);
   font-size: .85rem;
-  opacity: .7;
+  opacity: .85;
 }
-.podcast-player audio {
+.podcast-player__audio {
   display: block;
   width: 100%;
   min-height: 2.5rem;
   margin: .75rem 0;
-  accent-color: var(--inside-accent-color);
+  accent-color: var(--podcast-ink);
 }
-.podcast-player audio:focus-visible,
+.podcast-player[data-podcast-enhanced="true"] .podcast-player__audio {
+  display: none;
+}
+.podcast-player__controls {
+  display: none;
+  grid-template-columns: auto auto minmax(4rem, 1fr) auto auto minmax(4rem, 7rem);
+  align-items: center;
+  gap: .5rem;
+  margin: .6rem 0;
+}
+.podcast-player[data-podcast-enhanced="true"] .podcast-player__controls {
+  display: grid;
+}
+.podcast-player__button {
+  display: inline-grid;
+  width: 2.25rem;
+  height: 2.25rem;
+  padding: 0;
+  border: 1px solid var(--podcast-border);
+  border-radius: 50%;
+  place-items: center;
+  background: transparent;
+  color: var(--podcast-ink);
+  cursor: pointer;
+  transition: background-color .15s ease-in-out, border-color .15s ease-in-out, color .15s ease-in-out;
+}
+.podcast-player__button:hover {
+  border-color: var(--podcast-ink);
+  background: var(--podcast-hover);
+}
+.podcast-player__button:focus-visible,
+.podcast-player__range:focus-visible,
 .podcast-player__download:focus-visible {
-  outline: 2px solid var(--inside-accent-color);
+  outline: 2px solid var(--podcast-focus);
   outline-offset: 2px;
+}
+.podcast-player__icon {
+  width: 1rem;
+  height: 1rem;
+  fill: currentColor;
+}
+.podcast-player__icon--pause,
+.podcast-player__icon--muted {
+  display: none;
+}
+.podcast-player[data-podcast-playing="true"] .podcast-player__icon--play,
+.podcast-player[data-podcast-muted="true"] .podcast-player__icon--volume {
+  display: none;
+}
+.podcast-player[data-podcast-playing="true"] .podcast-player__icon--pause,
+.podcast-player[data-podcast-muted="true"] .podcast-player__icon--muted {
+  display: block;
+}
+.podcast-player__time {
+  min-width: 2.9rem;
+  color: var(--podcast-ink);
+  font-size: .8rem;
+  font-variant-numeric: tabular-nums;
+  text-align: center;
+}
+.podcast-player__range {
+  width: 100%;
+  height: 1.75rem;
+  margin: 0;
+  appearance: none;
+  -webkit-appearance: none;
+  background: transparent;
+  cursor: pointer;
+}
+.podcast-player__range::-webkit-slider-runnable-track {
+  height: .3rem;
+  border-radius: 99px;
+  background: linear-gradient(to right, var(--podcast-ink) 0 var(--podcast-range-fill, 0%), var(--podcast-rail) var(--podcast-range-fill, 0%) 100%);
+}
+.podcast-player__range::-webkit-slider-thumb {
+  width: .85rem;
+  height: .85rem;
+  margin-top: -.275rem;
+  border: 2px solid var(--podcast-surface);
+  border-radius: 50%;
+  appearance: none;
+  -webkit-appearance: none;
+  background: var(--podcast-ink);
+}
+.podcast-player__range::-moz-range-track {
+  height: .3rem;
+  border-radius: 99px;
+  background: var(--podcast-rail);
+}
+.podcast-player__range::-moz-range-progress {
+  height: .3rem;
+  border-radius: 99px;
+  background: var(--podcast-ink);
+}
+.podcast-player__range::-moz-range-thumb {
+  width: .65rem;
+  height: .65rem;
+  border: 2px solid var(--podcast-surface);
+  border-radius: 50%;
+  background: var(--podcast-ink);
+}
+.podcast-player__status {
+  display: none;
+  grid-column: 1 / -1;
+  color: var(--podcast-ink);
+  font-size: .8rem;
+}
+.podcast-player[data-podcast-error="true"] .podcast-player__status {
+  display: block;
 }
 .podcast-player__download {
   display: inline-block;
   padding: .2rem .45rem;
   border-radius: 3px;
-  color: var(--inside-accent-color);
+  color: var(--podcast-ink);
   font-size: .85rem;
   transition: background-color .15s ease-in-out, color .15s ease-in-out;
 }
 .podcast-player__download:hover {
-  color: #fff;
-  background: var(--inside-accent-color);
+  background: var(--podcast-hover);
 }
 @media screen and (max-width: 675px) {
   .podcast-player { padding: .75rem; }
 }
+@media screen and (max-width: 500px) {
+  .podcast-player__controls {
+    grid-template-columns: auto auto minmax(3rem, 1fr) auto auto;
+    gap: .4rem;
+  }
+  .podcast-player__volume { display: none; }
+  .podcast-player__time { min-width: 2.5rem; }
+}
 </style>`;
+
+const PLAYER_SCRIPT = `
+<script>
+(() => {
+  'use strict';
+
+  const PLAYER_SELECTOR = '.podcast-player[data-podcast-player]';
+  let refreshScheduled = false;
+
+  function formatTime(value) {
+    const seconds = Math.max(0, Math.floor(Number(value) || 0));
+    const hours = Math.floor(seconds / 3600);
+    const minutes = Math.floor((seconds % 3600) / 60);
+    const remaining = String(seconds % 60).padStart(2, '0');
+    return hours ? hours + ':' + String(minutes).padStart(2, '0') + ':' + remaining : minutes + ':' + remaining;
+  }
+
+  function luminance(value) {
+    const hex = String(value || '').trim().match(/^#([0-9a-f]{3}|[0-9a-f]{6})$/i);
+    const rgb = String(value || '').match(/rgba?\\(\\s*(\\d+)\\s*,\\s*(\\d+)\\s*,\\s*(\\d+)/i);
+    let channels;
+    if (hex) {
+      const source = hex[1].length === 3 ? hex[1].split('').map(part => part + part).join('') : hex[1];
+      channels = [0, 2, 4].map(offset => Number.parseInt(source.slice(offset, offset + 2), 16));
+    } else if (rgb) {
+      channels = [Number(rgb[1]), Number(rgb[2]), Number(rgb[3])];
+    }
+    if (!channels) return 1;
+    return (channels[0] * 0.2126 + channels[1] * 0.7152 + channels[2] * 0.0722) / 255;
+  }
+
+  function isDarkTheme() {
+    const style = getComputedStyle(document.documentElement);
+    const card = style.getPropertyValue('--inside-card-background') || style.getPropertyValue('--inside-background');
+    return luminance(card) < 0.5;
+  }
+
+  function setRangeFill(input, value, maximum) {
+    const percent = maximum > 0 ? Math.max(0, Math.min(100, value / maximum * 100)) : 0;
+    input.style.setProperty('--podcast-range-fill', percent + '%');
+  }
+
+  function initialisePlayer(player) {
+    if (player.dataset.podcastReady === 'true') return;
+
+    const audio = player.querySelector('.podcast-player__audio');
+    const playButton = player.querySelector('[data-podcast-action="play"]');
+    const muteButton = player.querySelector('[data-podcast-action="mute"]');
+    const progress = player.querySelector('.podcast-player__progress');
+    const volume = player.querySelector('.podcast-player__volume');
+    const current = player.querySelector('.podcast-player__current');
+    const duration = player.querySelector('.podcast-player__duration');
+    const status = player.querySelector('.podcast-player__status');
+    if (!audio || !playButton || !muteButton || !progress || !volume || !current || !duration || !status) return;
+
+    player.dataset.podcastReady = 'true';
+    player.dataset.podcastEnhanced = 'true';
+
+    function syncPlaying() {
+      const playing = !audio.paused && !audio.ended;
+      player.dataset.podcastPlaying = playing ? 'true' : 'false';
+      playButton.setAttribute('aria-label', playing ? '暂停' : '播放');
+      playButton.setAttribute('aria-pressed', playing ? 'true' : 'false');
+    }
+
+    function syncDuration() {
+      if (!Number.isFinite(audio.duration) || audio.duration <= 0) return;
+      progress.max = String(audio.duration);
+      duration.textContent = formatTime(audio.duration);
+      syncTime();
+    }
+
+    function syncTime() {
+      const maximum = Number(progress.max);
+      const position = Number.isFinite(audio.currentTime) ? Math.min(audio.currentTime, maximum || audio.currentTime) : 0;
+      progress.value = String(position);
+      current.textContent = formatTime(position);
+      progress.setAttribute('aria-valuetext', formatTime(position));
+      setRangeFill(progress, position, maximum);
+    }
+
+    function syncVolume() {
+      const muted = audio.muted || audio.volume === 0;
+      player.dataset.podcastMuted = muted ? 'true' : 'false';
+      muteButton.setAttribute('aria-label', muted ? '取消静音' : '静音');
+      muteButton.setAttribute('aria-pressed', muted ? 'true' : 'false');
+      volume.value = String(audio.volume);
+      setRangeFill(volume, audio.volume, 1);
+    }
+
+    function showError() {
+      player.dataset.podcastError = 'true';
+      status.textContent = '音频加载失败，请尝试下载音频。';
+    }
+
+    playButton.addEventListener('click', () => {
+      if (audio.paused || audio.ended) {
+        if (audio.ended) audio.currentTime = 0;
+        audio.play().catch(showError);
+      } else {
+        audio.pause();
+      }
+    });
+
+    muteButton.addEventListener('click', () => {
+      if (audio.muted || audio.volume === 0) {
+        audio.muted = false;
+        audio.volume = Number(player.dataset.podcastLastVolume || .8);
+      } else {
+        player.dataset.podcastLastVolume = String(audio.volume || .8);
+        audio.muted = true;
+      }
+    });
+
+    progress.addEventListener('input', () => {
+      const position = Number(progress.value);
+      if (Number.isFinite(position) && Number.isFinite(audio.duration)) audio.currentTime = position;
+      current.textContent = formatTime(position);
+      progress.setAttribute('aria-valuetext', formatTime(position));
+      setRangeFill(progress, position, Number(progress.max));
+    });
+
+    volume.addEventListener('input', () => {
+      audio.muted = false;
+      audio.volume = Number(volume.value);
+    });
+
+    audio.addEventListener('loadedmetadata', syncDuration);
+    audio.addEventListener('durationchange', syncDuration);
+    audio.addEventListener('timeupdate', syncTime);
+    audio.addEventListener('play', syncPlaying);
+    audio.addEventListener('pause', syncPlaying);
+    audio.addEventListener('ended', syncPlaying);
+    audio.addEventListener('volumechange', syncVolume);
+    audio.addEventListener('error', showError);
+
+    syncPlaying();
+    syncTime();
+    syncVolume();
+    if (audio.readyState >= 1) syncDuration();
+  }
+
+  function refreshPlayers() {
+    refreshScheduled = false;
+    const theme = isDarkTheme() ? 'dark' : 'light';
+    document.querySelectorAll(PLAYER_SELECTOR).forEach(player => {
+      player.dataset.podcastTheme = theme;
+      initialisePlayer(player);
+    });
+  }
+
+  function scheduleRefresh() {
+    if (refreshScheduled) return;
+    refreshScheduled = true;
+    (window.requestAnimationFrame || window.setTimeout)(refreshPlayers);
+  }
+
+  document.addEventListener('inside', scheduleRefresh);
+  document.addEventListener('inside:theme', scheduleRefresh);
+  new MutationObserver(scheduleRefresh).observe(document.body, { childList: true, subtree: true });
+  scheduleRefresh();
+})();
+</script>`;
 
 function isObject(value) {
   return value !== null && typeof value === 'object' && !Array.isArray(value);
@@ -400,15 +685,29 @@ function renderPlayer(episode) {
   const playerAudio = episode.playerAudio || episode.audio;
 
   return `${PLAYER_START}
-<aside class="podcast-player" aria-label="播客播放器">
+<aside class="podcast-player" data-podcast-player aria-label="播客播放器">
   <div class="podcast-player__header">
-    <span class="podcast-player__label">播客</span>
     <span class="podcast-player__meta">${escapeXml(metadata)}</span>
   </div>
-  <audio controls preload="metadata">
+  <audio class="podcast-player__audio" controls preload="metadata">
     <source src="${escapeXml(playerAudio)}" type="${escapeXml(episode.type)}">
     你的浏览器不支持 HTML5 音频播放。
   </audio>
+  <div class="podcast-player__controls" role="group" aria-label="音频控制">
+    <button class="podcast-player__button" type="button" data-podcast-action="play" aria-label="播放" aria-pressed="false">
+      <svg class="podcast-player__icon podcast-player__icon--play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+      <svg class="podcast-player__icon podcast-player__icon--pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 5h4v14H7zm6 0h4v14h-4z"/></svg>
+    </button>
+    <span class="podcast-player__time podcast-player__current" aria-live="off">0:00</span>
+    <input class="podcast-player__range podcast-player__progress" type="range" min="0" max="100" step="0.1" value="0" aria-label="播放进度" aria-valuetext="0:00">
+    <span class="podcast-player__time podcast-player__duration">${escapeXml(episode.duration)}</span>
+    <button class="podcast-player__button" type="button" data-podcast-action="mute" aria-label="静音" aria-pressed="false">
+      <svg class="podcast-player__icon podcast-player__icon--volume" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10v4h4l5 4V6L7 10zm12.5 2a3.5 3.5 0 0 0-2-3.15v6.29A3.5 3.5 0 0 0 15.5 12zm-2-8.2v2.06a6.5 6.5 0 0 1 0 12.28v2.06a8.5 8.5 0 0 0 0-16.4z"/></svg>
+      <svg class="podcast-player__icon podcast-player__icon--muted" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10v4h4l5 4V6L7 10zm10.9 2 2.1 2.1 2.1-2.1 1.4 1.4-2.1 2.1 2.1 2.1-1.4 1.4-2.1-2.1-2.1 2.1-1.4-1.4 2.1-2.1-2.1-2.1z"/></svg>
+    </button>
+    <input class="podcast-player__range podcast-player__volume" type="range" min="0" max="1" step="0.01" value="1" aria-label="音量">
+    <span class="podcast-player__status" role="status" aria-live="polite"></span>
+  </div>
   <a class="podcast-player__download" href="${escapeXml(playerAudio)}" target="_blank" rel="noopener">下载音频</a>
 </aside>
 ${PLAYER_END}`;
@@ -541,6 +840,7 @@ function registerPlugin(hexo) {
   };
 
   hexo.extend.injector.register('head_end', PLAYER_STYLE);
+  hexo.extend.injector.register('body_end', PLAYER_SCRIPT);
   hexo.extend.filter.register('before_post_render', async function (data) {
     if (!hasPodcastMetadata(data)) return data;
     const episode = await normaliseEpisode(data, siteUrl, config.explicit, runtime);
@@ -568,6 +868,7 @@ if (typeof hexo !== 'undefined') registerPlugin(hexo);
 module.exports = {
   AUDIO_MIME_TYPES,
   PLAYER_END,
+  PLAYER_SCRIPT,
   PLAYER_START,
   PLAYER_STYLE,
   buildFeed,

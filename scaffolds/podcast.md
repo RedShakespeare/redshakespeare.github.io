@@ -2,6 +2,7 @@
 title: {{ title }}
 date: {{ date }}
 tags:
+  - Podcast
 podcast:
   file: podcast/episode-001.mp3
   episode: 1

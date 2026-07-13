@@ -6,6 +6,8 @@ const test = require('node:test');
 const {
   buildFeed,
   normaliseEpisode,
+  PLAYER_SCRIPT,
+  PLAYER_STYLE,
   registerPlugin,
   renderPlayer,
   toPodcastConfig
@@ -176,9 +178,24 @@ test('local file mode rejects legacy fields and paths outside the configured dir
 
 test('renderPlayer retains the theme-scoped component markup for legacy episodes', async () => {
   const html = renderPlayer(await normaliseEpisode(post(), siteUrl, false));
-  assert.match(html, /class="podcast-player"/);
-  assert.match(html, /<audio controls preload="metadata">/);
+  assert.match(html, /class="podcast-player" data-podcast-player/);
+  assert.match(html, /<audio class="podcast-player__audio" controls preload="metadata">/);
+  assert.match(html, /data-podcast-action="play"/);
+  assert.match(html, /class="podcast-player__range podcast-player__progress"/);
+  assert.match(html, /data-podcast-action="mute"/);
   assert.match(html, /第 1 集 · 00:42:10/);
+  assert.doesNotMatch(html, /podcast-player__label/);
+  assert.doesNotMatch(html, /<span[^>]*>播客<\/span>/);
+});
+
+test('custom player assets define both colour palettes and react to theme changes', () => {
+  assert.match(PLAYER_STYLE, /--podcast-surface: #fff/);
+  assert.match(PLAYER_STYLE, /--podcast-surface: #000/);
+  assert.match(PLAYER_STYLE, /--podcast-ink: #a78bfa/);
+  assert.match(PLAYER_STYLE, /::-webkit-slider-runnable-track/);
+  assert.match(PLAYER_STYLE, /::-moz-range-progress/);
+  assert.match(PLAYER_SCRIPT, /document\.addEventListener\('inside:theme'/);
+  assert.match(PLAYER_SCRIPT, /new MutationObserver/);
 });
 
 test('dry run registers the player but never the RSS generator', () => {
@@ -186,7 +203,7 @@ test('dry run registers the player but never the RSS generator', () => {
   registerPlugin(hexo);
 
   assert.equal(hexo.calls.filters.length, 1);
-  assert.equal(hexo.calls.injectors.length, 1);
+  assert.deepEqual(hexo.calls.injectors.map(call => call.position), ['head_end', 'body_end']);
   assert.equal(hexo.calls.generators.length, 0);
   assert.match(hexo.calls.logs.join('\n'), /podcast\.xml will not be generated/);
 });
@@ -199,7 +216,8 @@ test('the registered asynchronous filter injects a player before the article bod
   await hexo.calls.filters[0].fn(data);
 
   assert.match(data.content, /^<!-- podcast-player:start -->/);
-  assert.match(data.content, /<audio controls preload="metadata">/);
+  assert.match(data.content, /<audio class="podcast-player__audio" controls preload="metadata">/);
+  assert.match(data.content, /data-podcast-action="play"/);
   assert.match(data.content, /Article body$/);
 });
 
