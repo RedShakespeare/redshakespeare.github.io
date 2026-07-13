@@ -12,6 +12,5 @@ Disallow: /js/
 Disallow: /css/
 Disallow: /links/
 Disallow: /files/
-Disallow: /sitemap.xml
 
-Sitemap: http://www.ephesus.top/ep-sitemap.xml
+Sitemap: https://www.ephesus.top/ep-sitemap.xml
