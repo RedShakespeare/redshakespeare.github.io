@@ -271,14 +271,14 @@ function renderAudioPlayer(audio) {
   </div>
   <audio class="sil-audio-player__audio" controls preload="metadata"><source src="${escapeHtml(playerAudio)}"${type}>你的浏览器不支持 HTML5 音频播放。</audio>
   <div class="sil-audio-player__controls" role="group" aria-label="音频控制">
-    <span class="sil-audio-player__time sil-audio-player__current" aria-live="off">0:00</span>
     <input class="sil-audio-player__range sil-audio-player__progress" type="range" min="0" max="100" step="0.1" value="0" aria-label="播放进度" aria-valuetext="0:00">
-    <span class="sil-audio-player__time sil-audio-player__duration">${escapeHtml(duration)}</span>
   </div>
   <div class="sil-audio-player__footer">
+    <span class="sil-audio-player__time sil-audio-player__current" aria-live="off">0:00</span>
     <button class="sil-audio-player__button sil-audio-player__volume-button" type="button" data-sil-audio-action="mute" aria-label="静音" aria-pressed="false"><svg class="sil-audio-player__icon sil-audio-player__icon--volume" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10v4h4l5 4V6L7 10zm12.5 2a3.5 3.5 0 0 0-2-3.15v6.29A3.5 3.5 0 0 0 15.5 12zm-2-8.2v2.06a6.5 6.5 0 0 1 0 12.28v2.06a8.5 8.5 0 0 0 0-16.4z"/></svg><svg class="sil-audio-player__icon sil-audio-player__icon--muted" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10v4h4l5 4V6L7 10zm10.9 2 2.1 2.1 2.1-2.1 1.4 1.4-2.1 2.1 2.1 2.1-1.4 1.4-2.1-2.1-2.1 2.1-1.4-1.4 2.1-2.1-2.1-2.1z"/></svg></button>
     <button class="sil-audio-player__button sil-audio-player__play-button" type="button" data-sil-audio-action="play" aria-label="播放" aria-pressed="false"><svg class="sil-audio-player__icon sil-audio-player__icon--play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg><svg class="sil-audio-player__icon sil-audio-player__icon--pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 5h4v14H7zm6 0h4v14h-4z"/></svg></button>
     <a class="sil-audio-player__button sil-audio-player__download" href="${escapeHtml(playerAudio)}" target="_blank" rel="noopener" aria-label="下载音频" title="下载音频"><svg class="sil-audio-player__icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M11 3h2v10.17l3.59-3.58L18 11l-6 6-6-6 1.41-1.41L11 13.17zM5 19h14v2H5z"/></svg></a>
+    <span class="sil-audio-player__time sil-audio-player__duration">${escapeHtml(duration)}</span>
   </div>
 </aside>
 ${PLAYER_END}`;

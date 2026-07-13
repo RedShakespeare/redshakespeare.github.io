@@ -94,8 +94,9 @@ test('Ephesus skin owns the player appearance while the core retains interaction
   assert.match(css, /--sil-audio-ink:#8064a2/);
   assert.match(css, /--sil-audio-stack-gap:1rem/);
   assert.match(css, /sil-audio-player__header \{ display:flex;flex-wrap:nowrap/);
-  assert.match(css, /sil-audio-player__controls \{ display:none;min-height:2\.25rem;grid-template-columns:4rem minmax\(4rem,1fr\) 4rem/);
-  assert.match(css, /sil-audio-player__footer \{ display:grid;min-height:2\.25rem;grid-template-columns:1fr auto 1fr/);
+  assert.match(css, /sil-audio-player__controls \{ display:none;min-height:2\.25rem;grid-template-columns:minmax\(0,1fr\);align-items:center/);
+  assert.match(css, /sil-audio-player__footer \{ display:grid;min-height:2\.25rem;grid-template-columns:repeat\(5,minmax\(0,1fr\)\);align-items:center/);
+  assert.match(css, /sil-audio-player__progress \{ width:100%;min-width:0/);
   assert.match(css, /@keyframes sil-audio-player-title-scroll/);
   assert.match(css, /@keyframes sil-audio-player-spin/);
   assert.doesNotMatch(css, /podcast-player/);
@@ -110,8 +111,8 @@ test('Ephesus skin owns the player appearance while the core retains interaction
 test('audio player has symmetric progress controls and a three-button footer', () => {
   const player = renderAudioPlayer({ playerAudio: '/files/music/example.mp3', type: 'audio/mpeg', duration: '03:21', title: 'A very long audio title' });
   assert.match(player, /sil-audio-player__meta-text">A very long audio title/);
-  assert.match(player, /sil-audio-player__current[\s\S]*sil-audio-player__progress[\s\S]*sil-audio-player__duration/);
-  assert.match(player, /sil-audio-player__volume-button[\s\S]*sil-audio-player__play-button[\s\S]*sil-audio-player__download/);
+  assert.match(player, /sil-audio-player__controls[\s\S]*sil-audio-player__progress[\s\S]*sil-audio-player__footer/);
+  assert.match(player, /sil-audio-player__footer[\s\S]*sil-audio-player__current[\s\S]*sil-audio-player__volume-button[\s\S]*sil-audio-player__play-button[\s\S]*sil-audio-player__download[\s\S]*sil-audio-player__duration/);
   assert.match(player, /sil-audio-player__download[\s\S]*aria-label="下载音频"/);
   assert.doesNotMatch(player, /sil-audio-player__volume" type="range"/);
 });
