@@ -8,12 +8,12 @@ subtitle:
 description: Roguelike Temple of Silencess
 keywords: roguelike
 author: Silencess
-language: en
+language: zh-Hans
 timezone: 'Asia/Shanghai'
 
 # URL
 ## Set your site url here. For example, if you use GitHub Page, set url as 'https://username.github.io/project'
-url: http://www.ephesus.top/
+url: https://www.ephesus.top/
 permalink: :year/:title/
 permalink_defaults:
 pretty_urls:
@@ -31,51 +31,28 @@ i18n_dir: :lang
 skip_render:
   - google1a76a4289e2a5783.html
   - js/hxh-civ-tree.js
-  - files/rl/nethack/nh-helper/*
-  - files/rl/nethack/nh-helper/stat/*
-  - files/rl/angband/angband_manual/_/static/css/*
-  - files/rl/angband/angband_manual/_/static/javascript/*
+  - files/rl/nethack/nh-helper/**
+  - files/rl/angband/angband_manual/_/static/{css,javascript}/**
   - files/rl/angband/angband_manual/en/latest/**
-  - files/rl/angband/angband_manual/en/latest/advertising/*
-  - files/rl/angband/angband_manual/en/latest/hacking/*
-  - files/rl/angband/angband_manual/en/latest/_static/*
-  - files/rl/adom/adomgb/*
-  - files/rl/moria/mmspoilers/*.html
-  - files/rl/moria/monsearch/*
-  - files/rl/moria/monsearch/*/*
-  - files/rl/moria/monsearch/*/*/*
-  - files/rl/moria/JSMoria/*
-  - files/rl/rogue/EpyxRogueDosManual/*
-  - files/rl/rogue/broken-connections/*
-  - files/rl/rogue/broken-connections/unicodetiles/*
-  - files/rl/rogue/broken-connections/howler/*
-  - files/rl/rogue/JSRogue/*
-  - files/rl/hack/JSHack/*
-  - files/rl/larn/JSLarn/*
-  - files/rl/larn/JSLarn12.5/*
-  - files/rl/larn/JSLarn12.5/*/*
-  - files/rl/larn/JSLarn12.5/*/*/*
+  - files/rl/adom/adomgb/**
+  - files/rl/moria/mmspoilers/**
+  - files/rl/moria/monsearch/**
+  - files/rl/moria/JSMoria/**
+  - files/rl/rogue/EpyxRogueDosManual/**
+  - files/rl/rogue/broken-connections/**
+  - files/rl/rogue/JSRogue/**
+  - files/rl/hack/JSHack/**
+  - files/rl/larn/JSLarn/**
+  - files/rl/larn/JSLarn12.5/**
+  # Keep this shallow: JSomega/index.html needs Hexo to refresh hashed assets.
   - files/rl/omega/JSOmega/*
-  - files/rl/omega/omega-help-file/*
-  - files/rl/omega/omega-faq/*
-  - lib/*
-  - lib/fontawesome/*
-  - lib/fontawesome/*/*
-  - lib/fontawesome/svgs/*/*
-  - files/hxh_civ/Manual/*
-  - files/leyliner/*
-  - files/leyliner/js/*
-  - files/leyliner/js/lib/*
-  - files/leyliner/css/*
-  - files/leyliner/fonts/*
-  - files/leyliner/config/*
-  - files/rl/poa/zh_CN/*
-  - files/hxh_civ/*
-  - files/hxh_civ/*/*
-  - files/hxh_civ/*/*/*
-  - files/hxh_civ/*/*/*/*
-  - files/cataclysmIdle/*
-  - files/cataclysmIdle/*/*
+  - files/rl/omega/omega-help-file/**
+  - files/rl/omega/omega-faq/**
+  - lib/**
+  - files/hxh_civ/**
+  - files/leyliner/**
+  - files/rl/poa/zh_CN/**
+  - files/cataclysmIdle/**
 
 # Writing
 new_post_name: :title.md # File name of new posts
@@ -128,7 +105,8 @@ meta_generator: true
 date_format: YYYY-MM-DD
 time_format: HH:mm:ss
 ## updated_option supports 'mtime', 'date', 'empty'
-updated_option: 'mtime'
+## To republish an edited post to RSS, set its `updated` value in front matter.
+updated_option: 'date'
 
 # Pagination
 ## Set per_page to 0 to disable pagination
@@ -142,6 +120,7 @@ include:
   - "files/rl/angband/angband_manual/en/latest/_static/**"
 exclude:
 ignore:
+  - '**/.DS_Store'
 
 # Extensions
 
