@@ -23,7 +23,39 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  preflight:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout src
+        uses: actions/checkout@v4
+        with:
+          ref: src
+          fetch-depth: 0
+          lfs: false
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install deps
+        run: npm ci || npm i
+
+      - name: Hydrate Pages LFS asset
+        run: git lfs pull --include="source/img/df.zip"
+
+      - name: Run podcast preflight
+        run: |
+          npm run test:hexo-sil-audio
+          npm run test:hexo-sil-podcast
+          npm run test:hexo-sil-podcast-inside
+          npm run test:podcast-feed-verifier
+          npx hexo clean
+          npx hexo generate --bail
+
   sync-assets:
+    needs: preflight
     runs-on: ubuntu-latest
     steps:
       - name: Checkout src
@@ -71,7 +103,7 @@ jobs:
           GITHUB_SHA: ${{ github.sha }}
 
   build:
-    needs: sync-assets
+    needs: [preflight, sync-assets]
     runs-on: ubuntu-latest
     steps:
       - name: Checkout src
@@ -97,7 +129,7 @@ jobs:
       - name: Generate
         run: |
           npx hexo clean
-          npx hexo generate
+          npx hexo generate --bail
           if [ "${R2_ASSETS_ENABLED}" = "true" ]; then
             rm -rf public/files
           fi

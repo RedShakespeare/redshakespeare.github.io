@@ -1,6 +1,8 @@
 'use strict';
 
 const assert = require('node:assert/strict');
+const fs = require('node:fs/promises');
+const os = require('node:os');
 const path = require('node:path');
 const test = require('node:test');
 const {
@@ -32,7 +34,7 @@ function config(overrides = {}) {
       email: 'silencess.m@gmail.com',
       language: 'zh-CN',
       link: '/',
-      image: 'favicon.png',
+      image: 'https://cdn.example.test/podcast-cover.jpg',
       category: { text: 'Leisure', subcategory: 'Games' },
       explicit: false,
       limit: 0,
@@ -100,8 +102,10 @@ function mockHexo(dryRun) {
       description: 'Roguelike Temple',
       author: 'Silencess',
       podcast: {
-        dry_run: dryRun,
-        email: 'silencess.m@gmail.com'
+      dry_run: dryRun,
+      email: 'silencess.m@gmail.com',
+      image: 'https://cdn.example.test/podcast-cover.jpg',
+      category: { text: 'Leisure', subcategory: 'Games' }
       }
     },
     log: {
@@ -125,6 +129,7 @@ test('buildFeed writes one stable, escaped legacy podcast item', async () => {
   assert.match(feed, /<content:encoded><!\[CDATA\[<p>Show notes &amp; details<\/p>\]\]><\/content:encoded>/);
   assert.match(feed, /<enclosure url="https:\/\/dl\.ephesus\.top\/files\/podcast\/episode-001\.mp3" length="12345678" type="audio\/mpeg"\/>/);
   assert.match(feed, /<guid isPermaLink="false">https:\/\/dl\.ephesus\.top\/files\/podcast\/episode-001\.mp3<\/guid>/);
+  assert.match(feed, /<itunes:explicit>false<\/itunes:explicit>/);
   assert.match(feed, /<lastBuildDate>Fri, 10 Jul 2026 12:00:00 \+0000<\/lastBuildDate>/);
   assert.doesNotMatch(feed, /2026-07-13/);
 });
@@ -138,6 +143,11 @@ test('buildFeed rejects an invalid public contact address', async () => {
   await assert.rejects(buildFeed([post()], config({ email: 'not-an-email' }), siteUrl), /valid public contact address/);
 });
 
+test('buildFeed rejects unsupported Apple categories and empty published catalogues', async () => {
+  await assert.rejects(buildFeed([post()], config({ category: { text: 'Leisure', subcategory: 'Computer Games' } }), siteUrl), /category\.subcategory/);
+  await assert.rejects(buildFeed([], config(), siteUrl), /at least one published episode/);
+});
+
 test('buildFeed rejects duplicated audio URLs and GUIDs', async () => {
   const first = post();
   const second = post({
@@ -149,16 +159,14 @@ test('buildFeed rejects duplicated audio URLs and GUIDs', async () => {
   await assert.rejects(buildFeed([first, second], config(), siteUrl), /duplicate podcast\.audio URL/);
 });
 
-test('ordinary article music is excluded from the podcast feed', async () => {
+test('ordinary article music cannot create an empty published podcast feed', async () => {
   const musicArticle = post({
     source: 'source/_posts/music.md',
     title: 'Music Article',
     podcast: false,
     music: { file: 'podcast/Minecraft-08-Minecraft.mp3' }
   });
-  const feed = await buildFeed([musicArticle], config(), siteUrl, new Date('2026-07-13T00:00:00Z'));
-  assert.doesNotMatch(feed, /<item>/);
-  assert.doesNotMatch(feed, /Minecraft-08-Minecraft/);
+  await assert.rejects(buildFeed([musicArticle], config(), siteUrl, new Date('2026-07-13T00:00:00Z')), /at least one published episode/);
 });
 
 test('local file mode derives metadata and uses separate player and RSS URLs', async () => {
@@ -173,6 +181,31 @@ test('local file mode derives metadata and uses separate player and RSS URLs', a
 
   const feed = await buildFeed([localPost()], config(), siteUrl, new Date('2026-07-13T00:00:00Z'), runtime());
   assert.match(feed, /enclosure url="https:\/\/dl\.ephesus\.top\/files\/podcast\/Minecraft-08-Minecraft\.mp3" length="4117599" type="audio\/mpeg"/);
+});
+
+test('publication mode rejects the temporary favicon and accepts a local compliant cover', async () => {
+  await assert.rejects(buildFeed([post()], config({ image: 'favicon.png' }), siteUrl, new Date('2026-07-13T00:00:00Z'), runtime()), /1400-3000px/);
+
+  const temp = await fs.mkdtemp(path.join(os.tmpdir(), 'hexo-sil-podcast-cover-'));
+  const sourceDir = path.join(temp, 'source');
+  const jpeg = (width, height) => Buffer.from([0xff, 0xd8, 0xff, 0xc0, 0x00, 0x0b, 0x08, height >> 8, height & 0xff, width >> 8, width & 0xff, 0x01, 0x01, 0x11, 0x00]);
+  const png = (width, height, colorType) => Buffer.concat([
+    Buffer.from([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a, 0x00, 0x00, 0x00, 0x0d]), Buffer.from('IHDR'),
+    Buffer.from([width >> 24, width >> 16, width >> 8, width, height >> 24, height >> 16, height >> 8, height, 0x08, colorType, 0x00, 0x00, 0x00]),
+    Buffer.alloc(4), Buffer.alloc(4), Buffer.from('IEND'), Buffer.alloc(4)
+  ]);
+  await fs.mkdir(sourceDir, { recursive: true });
+  await fs.writeFile(path.join(sourceDir, 'podcast-cover.jpg'), jpeg(1400, 1400));
+  await fs.writeFile(path.join(sourceDir, 'wide.jpg'), jpeg(1500, 1400));
+  await fs.writeFile(path.join(sourceDir, 'transparent.png'), png(1400, 1400, 6));
+  try {
+    const feed = await buildFeed([post()], config({ image: 'podcast-cover.jpg' }), siteUrl, new Date('2026-07-13T00:00:00Z'), runtime({ baseDir: temp, sourceDir: 'source' }));
+    assert.match(feed, /https:\/\/www\.ephesus\.top\/podcast-cover\.jpg/);
+    await assert.rejects(buildFeed([post()], config({ image: 'wide.jpg' }), siteUrl, new Date('2026-07-13T00:00:00Z'), runtime({ baseDir: temp, sourceDir: 'source' })), /must be square/);
+    await assert.rejects(buildFeed([post()], config({ image: 'transparent.png' }), siteUrl, new Date('2026-07-13T00:00:00Z'), runtime({ baseDir: temp, sourceDir: 'source' })), /must not contain an alpha channel/);
+  } finally {
+    await fs.rm(temp, { recursive: true, force: true });
+  }
 });
 
 test('local file mode rejects legacy fields and paths outside the configured directory', async () => {

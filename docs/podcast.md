@@ -46,10 +46,21 @@ podcast:
 出现失效链接。设为 `false` 会关闭扩展并隐藏该侧栏菜单；播放器、文章和播客 RSS 均不受
 影响。
 
-准备公开订阅源时，将 `dry_run` 改成 `false`，换掉临时 `favicon.png` 封面（应为
-1400–3000px 的正方形图片），执行 `npm run build`，然后部署。订阅地址是
-`https://www.ephesus.top/podcast.xml`。RSS 的 `lastBuildDate` 取最新一集的发布日期，
-不会因单纯重新构建而变化。
+准备公开订阅源时，将 `dry_run` 改成 `false`，换掉临时 `favicon.png` 封面。站内封面只接受
+无透明通道的 PNG/JPEG、1400–3000px 正方形图片；当前的 500px RGBA favicon 会被正式构建拒绝。
+还必须至少有一集已发布播客、有效的 HTTPS 频道 URL，以及 Apple Podcasts 支持的分类。
+
+执行 `npm run build` 后再部署。GitHub Actions 会先运行相同的完整预检；任何 RSS 校验或 Hexo
+生成失败都会阻止 R2 同步和 Pages 部署。部署完成后运行：
+
+```bash
+npm run verify:podcast
+```
+
+该命令会检查公开的 `https://www.ephesus.top/podcast.xml`、封面和每个 enclosure 的 HTTPS、HEAD、
+Range、内容类型与字节数。验证其他环境时使用
+`npm run verify:podcast -- --url https://example.com/podcast.xml`。线上验证不会回滚既有部署，
+因为 Pages URL 只有部署后才能访问。RSS 的 `lastBuildDate` 取最新一集的发布日期，不会因单纯重新构建而变化。
 
 ## 推荐：本地音频自动模式
 
@@ -167,6 +178,7 @@ Ephesus 皮肤；播放器头部显示文章标题。启用 JavaScript 时，播
 npm run test:hexo-sil-podcast
 npm run test:hexo-sil-audio
 npm run test:hexo-sil-podcast-inside
+npm run test:podcast-feed-verifier
 npm run build
 ```
 
@@ -179,8 +191,8 @@ npm run build
 | `email` | 公开的联系和平台所有权验证邮箱 |
 | `language` | 频道语言，例如 `zh-CN` |
 | `link` | 节目主页链接 |
-| `image` | 频道封面；正式提交前必须为合规方形封面 |
-| `category` | iTunes 主分类与子分类 |
+| `image` | 频道封面；站内图片必须是无透明通道的 1400–3000px PNG/JPEG 正方形 |
+| `category` | 必填；Apple Podcasts 精确主分类与可选子分类 |
 | `explicit` | 默认的成人内容标记 |
 | `limit` | `0` 表示输出全部已发布集数；正整数表示最新 N 集 |
 | `inside.enabled` | `true` 时启用独立的 Inside 播客列表；`false` 时隐藏其侧栏入口 |
@@ -189,4 +201,7 @@ npm run build
 | `media.url` | RSS enclosure 使用的绝对 HTTPS 发布根 URL |
 
 当 `dry_run: false` 时，`title`、`description`、`author`、`email`、
-`language` 和 `image` 都不能为空；邮箱必须是可公开使用的有效联系地址。
+`language`、`image` 和 `category.text` 都不能为空；邮箱必须是可公开使用的有效联系地址，
+频道链接、RSS、封面与 enclosure 都必须为 ASCII HTTPS URL。分类名称区分大小写，必须与 Apple
+Podcasts 分类表精确一致；例如当前的 `Leisure / Games` 有效。正式 feed 至少包含一集已发布文章，
+`itunes:explicit` 输出为 `true` 或 `false`。

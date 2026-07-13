@@ -1,6 +1,12 @@
 'use strict';
 
 const {
+  assertWellFormedXml,
+  resolveHttpsUrl,
+  validateFeedConfig,
+  validatePublicationArtwork
+} = require('./podcast-rss');
+const {
   AUDIO_MIME_TYPES,
   PLAYER_END,
   PLAYER_SCRIPT,
@@ -41,14 +47,6 @@ function removePlayerMarkup(value) {
   return String(value == null ? '' : value).replace(new RegExp(`${PLAYER_START}[\\s\\S]*?${PLAYER_END}\\s*`, 'g'), '');
 }
 
-function toAbsoluteUrl(value, siteUrl, message) {
-  try {
-    return new URL(String(value), siteUrl).href;
-  } catch {
-    throw new Error(message || 'Invalid URL.');
-  }
-}
-
 function normaliseRelativeDirectory(value, fallback, field) {
   const directory = String(value == null ? fallback : value).trim().replace(/\\/g, '/').replace(/^\/+|\/+$/g, '');
   const segments = directory.split('/');
@@ -85,14 +83,6 @@ function toPodcastConfig(siteConfig = {}) {
   };
 }
 
-function validateFeedConfig(config) {
-  for (const field of ['title', 'description', 'author', 'email', 'language', 'image']) {
-    if (!config[field]) throw new Error(`Podcast configuration error: ${field} is required when dry_run is false.`);
-  }
-  if (!/^\S+@\S+\.\S+$/.test(config.email)) throw new Error('Podcast configuration error: email must be a valid public contact address.');
-  if (!Number.isSafeInteger(config.limit) || config.limit < 0) throw new Error('Podcast configuration error: limit must be a non-negative integer.');
-}
-
 function hasPodcastMetadata(post) {
   return post && post.podcast !== undefined && post.podcast !== false;
 }
@@ -104,9 +94,17 @@ function validateEpisodeFields(post, data, audio, type, length, duration, siteUr
   if (season !== null && (!Number.isSafeInteger(season) || season <= 0)) throw podcastError(post, '`podcast.season` must be a positive integer.');
   const episodeType = String(data.episode_type || 'full').toLowerCase();
   if (!EPISODE_TYPES.has(episodeType)) throw podcastError(post, '`podcast.episode_type` must be full, trailer, or bonus.');
+  if (!String(post.title || '').trim()) throw podcastError(post, 'post title is required.');
   const guid = String(data.guid || audio);
   if (!guid) throw podcastError(post, '`podcast.guid` must not be empty.');
-  const image = data.image ? toAbsoluteUrl(data.image, siteUrl, '`podcast.image` must be a valid URL.') : '';
+  let image = '';
+  if (data.image) {
+    try {
+      image = resolveHttpsUrl(data.image, siteUrl, '`podcast.image` must resolve to an ASCII HTTPS URL.');
+    } catch (error) {
+      throw podcastError(post, error.message.replace(/^Podcast metadata error[^:]*:\s*/, ''));
+    }
+  }
   return {
     title: String(post.title || ''), audio, playerAudio, type, length, duration, episode, season, episodeType,
     explicit: data.explicit === undefined ? defaultExplicit : data.explicit === true,
@@ -197,7 +195,7 @@ function assertUniqueEpisodes(entries) {
 }
 
 function postUrl(post, siteUrl) {
-  return toAbsoluteUrl(post.permalink || post.path || '', siteUrl, 'Podcast post must have a valid permalink.');
+  return resolveHttpsUrl(post.permalink || post.path || '', siteUrl, 'Podcast post must resolve to an ASCII HTTPS permalink.');
 }
 
 function buildItem(post, episode, siteUrl) {
@@ -209,7 +207,7 @@ function buildItem(post, episode, siteUrl) {
     `    <description>${escapeXml(description)}</description>`, `    <content:encoded>${cdata(showNotes || description)}</content:encoded>`,
     `    <enclosure url="${escapeXml(episode.audio)}" length="${episode.length}" type="${escapeXml(episode.type)}"/>`,
     `    <itunes:duration>${escapeXml(episode.duration)}</itunes:duration>`, `    <itunes:episodeType>${escapeXml(episode.episodeType)}</itunes:episodeType>`,
-    `    <itunes:explicit>${episode.explicit ? 'yes' : 'no'}</itunes:explicit>`
+    `    <itunes:explicit>${episode.explicit ? 'true' : 'false'}</itunes:explicit>`
   ];
   if (episode.season !== null) lines.push(`    <itunes:season>${episode.season}</itunes:season>`);
   if (episode.episode !== null) lines.push(`    <itunes:episode>${episode.episode}</itunes:episode>`);
@@ -219,39 +217,37 @@ function buildItem(post, episode, siteUrl) {
 }
 
 async function buildFeed(posts, config, siteUrl, now = new Date(), runtime) {
-  validateFeedConfig(config);
+  validateFeedConfig(config, siteUrl);
   const entries = await getPublishedEpisodes(posts, siteUrl, config.explicit, now, runtime);
   assertUniqueEpisodes(entries);
   const limited = config.limit > 0 ? entries.slice(0, config.limit) : entries;
-  const channelUrl = toAbsoluteUrl(config.link, siteUrl, 'Podcast configuration error: link must be a valid URL.');
-  const imageUrl = toAbsoluteUrl(config.image, siteUrl, 'Podcast configuration error: image must be a valid URL.');
-  const feedUrl = toAbsoluteUrl(config.path, siteUrl, 'Podcast configuration error: path must be a valid URL.');
+  if (!limited.length) throw new Error('Podcast publication error: at least one published episode is required when dry_run is false.');
+  const channelUrl = resolveHttpsUrl(config.link, siteUrl, 'Podcast configuration error: link must resolve to an ASCII HTTPS URL.');
+  const imageUrl = resolveHttpsUrl(config.image, siteUrl, 'Podcast configuration error: image must resolve to an ASCII HTTPS URL.');
+  const feedUrl = resolveHttpsUrl(config.path, siteUrl, 'Podcast configuration error: path must resolve to an ASCII HTTPS URL.');
+  await validatePublicationArtwork(imageUrl, limited, siteUrl, runtime);
   const lines = [
     '<?xml version="1.0" encoding="UTF-8"?>', '<rss version="2.0" xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom">', '<channel>',
     `  <title>${escapeXml(config.title)}</title>`, `  <link>${escapeXml(channelUrl)}</link>`, `  <description>${escapeXml(config.description)}</description>`, `  <language>${escapeXml(config.language)}</language>`,
     `  <atom:link href="${escapeXml(feedUrl)}" rel="self" type="application/rss+xml"/>`, `  <itunes:title>${escapeXml(config.title)}</itunes:title>`, `  <itunes:author>${escapeXml(config.author)}</itunes:author>`, `  <itunes:summary>${escapeXml(config.description)}</itunes:summary>`,
     '  <itunes:owner>', `    <itunes:name>${escapeXml(config.author)}</itunes:name>`, `    <itunes:email>${escapeXml(config.email)}</itunes:email>`, '  </itunes:owner>',
-    `  <itunes:explicit>${config.explicit ? 'yes' : 'no'}</itunes:explicit>`, '  <itunes:type>episodic</itunes:type>', `  <itunes:image href="${escapeXml(imageUrl)}"/>`,
+    `  <itunes:explicit>${config.explicit ? 'true' : 'false'}</itunes:explicit>`, '  <itunes:type>episodic</itunes:type>', `  <itunes:image href="${escapeXml(imageUrl)}"/>`,
     '  <image>', `    <url>${escapeXml(imageUrl)}</url>`, `    <title>${escapeXml(config.title)}</title>`, `    <link>${escapeXml(channelUrl)}</link>`, '  </image>', '  <generator>hexo-sil-podcast</generator>'
   ];
-  if (config.category.text) {
-    lines.push(`  <itunes:category text="${escapeXml(config.category.text)}">`);
-    if (config.category.subcategory) lines.push(`    <itunes:category text="${escapeXml(config.category.subcategory)}"/>`);
-    lines.push('  </itunes:category>');
-  }
+  lines.push(`  <itunes:category text="${escapeXml(config.category.text)}">`);
+  if (config.category.subcategory) lines.push(`    <itunes:category text="${escapeXml(config.category.subcategory)}"/>`);
+  lines.push('  </itunes:category>');
   if (limited.length) lines.push(`  <lastBuildDate>${formatRfc2822(limited[0].post.date)}</lastBuildDate>`);
   lines.push(...limited.map(({ post, episode }) => buildItem(post, episode, siteUrl)), '</channel>', '</rss>', '');
-  return lines.join('\n');
-}
-
-function warnAboutArtwork(hexo, config) {
-  if (config.image === 'favicon.png') hexo.log.warn('Podcast cover uses favicon.png. Replace it with a 1400-3000px square image before submitting to podcast directories.');
+  const feed = lines.join('\n');
+  assertWellFormedXml(feed);
+  return feed;
 }
 
 function registerPlugin(hexo) {
   const config = toPodcastConfig(hexo.config);
   const siteUrl = hexo.config.url;
-  const runtime = { baseDir: hexo.base_dir || process.cwd(), root: hexo.config.root || '/', media: config.media };
+  const runtime = { baseDir: hexo.base_dir || process.cwd(), root: hexo.config.root || '/', sourceDir: hexo.config.source_dir || 'source', media: config.media };
   hexo.extend.filter.register('before_post_render', async function (data) {
     if (!hasPodcastMetadata(data)) return data;
     data.content = `${renderPlayer(await normaliseEpisode(data, siteUrl, config.explicit, runtime))}\n\n${data.content || ''}`;
@@ -261,8 +257,7 @@ function registerPlugin(hexo) {
     hexo.log.info('Podcast dry run enabled: player preview is active and podcast.xml will not be generated.');
     return;
   }
-  validateFeedConfig(config);
-  warnAboutArtwork(hexo, config);
+  validateFeedConfig(config, siteUrl);
   hexo.extend.generator.register('podcast', async locals => ({ path: config.path, data: await buildFeed(locals.posts, config, siteUrl, new Date(), runtime) }));
 }
 
