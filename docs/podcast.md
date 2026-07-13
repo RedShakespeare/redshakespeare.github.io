@@ -8,8 +8,12 @@
 ## 网站中的位置
 
 播客文章同时是 Show Notes，因此会保留在首页 `Writings`，可被普通文章搜索、归档和
-RSS 收录。侧栏的 `🎙 Podcasts` 指向 `/tags/Podcast/`，用于集中浏览节目；每一集都
-必须保留 `Podcast` 标签。播客脚手架已默认写入该标签。
+RSS 收录。`hexo-sil-podcast` 本体不依赖具体主题；当前 Inside 主题的播客列表由独立扩展
+`hexo-sil-podcast-inside` 提供。
+
+扩展可用时，侧栏的 `🎙 Podcasts` 指向 `/podcasts/`，页面使用与 `Writings` 相同的列表、
+分页和卡片样式，并按 `podcast` front matter 筛选文章，而不是按标签筛选。脚手架仍默认写入
+`Podcast` 标签：这是扩展缺失或与定制主题不兼容时自动回退到 `/tags/Podcast/` 的兼容入口。
 
 ## 工作模式
 
@@ -18,6 +22,8 @@ RSS 收录。侧栏的 `🎙 Podcasts` 指向 `/tags/Podcast/`，用于集中浏
 ```yaml
 podcast:
   dry_run: true
+  inside:
+    enabled: true
   path: podcast.xml
   media:
     source_dir: source/files
@@ -28,6 +34,18 @@ podcast:
 `dry_run: true` 是当前默认值：文章播放器照常生成，但不会生成
 `public/podcast.xml`，也不会改变 `/atom.xml`。它适合调试前端；若节目已公开
 订阅，不要重新打开它，否则下一次部署会移除 `/podcast.xml`。
+
+### Inside 列表扩展
+
+`podcast.inside.enabled` 默认为 `true`。启用后，安装依赖时会由
+`tools/apply-optional-inside-patch.js` 在当前的 Inside 编译产物中寻找四个精确锚点；全部
+匹配时才插入 `/podcasts/` 路由和独立分页支持。它只替换这些最小片段，不会以官方主题包
+覆盖你的定制主题。
+
+若当前主题版本或定制方式使任一锚点不匹配，扩展不会修改任何主题文件；构建时会给出警告，
+并将侧栏菜单自动指向 `/tags/Podcast/`。因此保留 `Podcast` 标签即可正常继续发布，不会
+出现失效链接。设为 `false` 会关闭扩展并隐藏该侧栏菜单；播放器、文章和播客 RSS 均不受
+影响。
 
 准备公开订阅源时，将 `dry_run` 改成 `false`，换掉临时 `favicon.png` 封面（应为
 1400–3000px 的正方形图片），执行 `npm run build`，然后部署。订阅地址是
@@ -147,6 +165,7 @@ npm run server
 
 ```bash
 npm run test:hexo-sil-podcast
+npm run test:hexo-sil-podcast-inside
 npm run build
 ```
 
@@ -163,6 +182,7 @@ npm run build
 | `category` | iTunes 主分类与子分类 |
 | `explicit` | 默认的成人内容标记 |
 | `limit` | `0` 表示输出全部已发布集数；正整数表示最新 N 集 |
+| `inside.enabled` | `true` 时启用独立的 Inside 播客列表；`false` 时隐藏其侧栏入口 |
 | `media.source_dir` | 本地音频源目录，相对于仓库根目录 |
 | `media.public_path` | 文章播放器使用的站内公开路径 |
 | `media.url` | RSS enclosure 使用的绝对 HTTPS 发布根 URL |

@@ -150,6 +150,9 @@ feed:
 podcast:
   # hexo-sil-podcast: preview article players first. Set to false only when ready to publish podcast.xml.
   dry_run: true
+  # hexo-sil-podcast-inside: set false to hide the Podcasts menu and disable its Inside list integration.
+  inside:
+    enabled: true
   path: podcast.xml
   title: Ephesus
   description: Roguelike Temple of Silencess
