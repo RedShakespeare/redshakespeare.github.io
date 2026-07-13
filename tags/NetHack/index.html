@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="zh-Hans">
 <head><!-- hexo injector head_begin start -->
-<script src="/config.f53210edb7c8a289e370.js"></script>
+<script src="/config.82854f01e1b524ca4b62.js"></script>
 <!-- hexo injector head_begin end -->
 <meta charset="utf-8">
 <title>标签 : NetHack - Ephesus</title>
@@ -33,8 +33,9 @@
   --podcast-border: #d9cee8;
   --podcast-hover: #f5f1fa;
   --podcast-focus: #8064a2;
+  --podcast-stack-gap: 1rem;
   margin: 1.5rem 0;
-  padding: 1rem;
+  padding: var(--podcast-stack-gap);
   border: 1px solid var(--podcast-border);
   border-left: 3px solid var(--podcast-ink);
   border-radius: 8px;
@@ -54,15 +55,51 @@
 }
 .podcast-player__header {
   display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  justify-content: flex-end;
+  flex-wrap: nowrap;
+  min-height: 2.25rem;
+  align-items: center;
+  justify-content: space-between;
   gap: .25rem 1rem;
 }
 .podcast-player__meta {
+  min-width: 0;
+  margin-left: auto;
   color: var(--podcast-ink);
   font-size: .85rem;
   opacity: .85;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.podcast-player__status {
+  display: none;
+  flex: 0 1 auto;
+  align-items: center;
+  min-height: 1.36rem;
+  color: var(--podcast-ink);
+  font-size: .8rem;
+  white-space: nowrap;
+}
+.podcast-player[data-podcast-loading="true"] .podcast-player__status,
+.podcast-player[data-podcast-error="true"] .podcast-player__status {
+  display: inline-flex;
+}
+.podcast-player__status-icon {
+  display: none;
+  width: 1rem;
+  height: 1rem;
+  margin-right: .4rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-width: 2;
+}
+.podcast-player[data-podcast-loading="true"] .podcast-player__status-icon {
+  display: block;
+  animation: podcast-player-spin .8s linear infinite;
+}
+@keyframes podcast-player-spin {
+  to { transform: rotate(360deg); }
 }
 .podcast-player__audio {
   display: block;
@@ -79,17 +116,18 @@
   grid-template-columns: auto auto minmax(4rem, 1fr) auto;
   align-items: center;
   gap: .5rem;
-  margin: .4rem 0 .2rem;
+  margin: var(--podcast-stack-gap) 0 0;
 }
 .podcast-player[data-podcast-enhanced="true"] .podcast-player__controls {
   display: grid;
 }
 .podcast-player__footer {
   display: flex;
+  flex-wrap: nowrap;
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
-  padding: .5rem .45rem 0;
+  padding: var(--podcast-stack-gap) .45rem 0;
 }
 .podcast-player__volume-control {
   display: none;
@@ -205,28 +243,21 @@
   border-radius: 50%;
   background: var(--podcast-ink);
 }
-.podcast-player__status {
-  display: none;
-  margin-top: .35rem;
-  color: var(--podcast-ink);
-  font-size: .8rem;
-}
-.podcast-player[data-podcast-error="true"] .podcast-player__status {
-  display: block;
-}
 .podcast-player__download {
   display: inline-block;
+  flex: 0 0 auto;
   padding: .2rem .45rem;
   border-radius: 3px;
   color: var(--podcast-ink);
   font-size: .85rem;
+  white-space: nowrap;
   transition: background-color .15s ease-in-out, color .15s ease-in-out;
 }
 .podcast-player__download:hover {
   background: var(--podcast-hover);
 }
 @media screen and (max-width: 675px) {
-  .podcast-player { padding: .75rem; }
+  .podcast-player { --podcast-stack-gap: .75rem; }
 }
 @media screen and (max-width: 500px) {
   .podcast-player__controls {
@@ -312,7 +343,8 @@ is-j.φcm .φct > a.φcs::before{
     const current = player.querySelector('.podcast-player__current');
     const duration = player.querySelector('.podcast-player__duration');
     const status = player.querySelector('.podcast-player__status');
-    if (!audio || !playButton || !muteButton || !progress || !volume || !current || !duration || !status) return;
+    const statusText = player.querySelector('.podcast-player__status-text');
+    if (!audio || !playButton || !muteButton || !progress || !volume || !current || !duration || !status || !statusText) return;
 
     player.dataset.podcastReady = 'true';
     player.dataset.podcastEnhanced = 'true';
@@ -324,11 +356,26 @@ is-j.φcm .φct > a.φcs::before{
       playButton.setAttribute('aria-pressed', playing ? 'true' : 'false');
     }
 
+    function showLoading() {
+      delete player.dataset.podcastError;
+      player.dataset.podcastLoading = 'true';
+      statusText.textContent = '';
+      status.setAttribute('aria-label', '正在加载音频');
+    }
+
+    function clearStatus() {
+      delete player.dataset.podcastLoading;
+      delete player.dataset.podcastError;
+      statusText.textContent = '';
+      status.removeAttribute('aria-label');
+    }
+
     function syncDuration() {
       if (!Number.isFinite(audio.duration) || audio.duration <= 0) return;
       progress.max = String(audio.duration);
       duration.textContent = formatTime(audio.duration);
       syncTime();
+      clearStatus();
     }
 
     function syncTime() {
@@ -350,8 +397,10 @@ is-j.φcm .φct > a.φcs::before{
     }
 
     function showError() {
+      delete player.dataset.podcastLoading;
       player.dataset.podcastError = 'true';
-      status.textContent = '音频加载失败，请尝试下载音频。';
+      statusText.textContent = '音频加载失败，请尝试下载音频。';
+      status.setAttribute('aria-label', statusText.textContent);
     }
 
     playButton.addEventListener('click', () => {
@@ -386,10 +435,15 @@ is-j.φcm .φct > a.φcs::before{
       audio.volume = Number(volume.value);
     });
 
+    audio.addEventListener('loadstart', showLoading);
     audio.addEventListener('loadedmetadata', syncDuration);
     audio.addEventListener('durationchange', syncDuration);
+    audio.addEventListener('canplay', clearStatus);
     audio.addEventListener('timeupdate', syncTime);
-    audio.addEventListener('play', syncPlaying);
+    audio.addEventListener('play', () => {
+      syncPlaying();
+      clearStatus();
+    });
     audio.addEventListener('pause', syncPlaying);
     audio.addEventListener('ended', syncPlaying);
     audio.addEventListener('volumechange', syncVolume);
@@ -399,6 +453,7 @@ is-j.φcm .φct > a.φcs::before{
     syncTime();
     syncVolume();
     if (audio.readyState >= 1) syncDuration();
+    else showLoading();
   }
 
   function refreshPlayers() {

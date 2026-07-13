@@ -23,7 +23,7 @@
     <published>2026-07-13T14:00:00.000Z</published>
     <updated>2026-07-13T06:00:00.000Z</updated>
     
-    <content type="html"><![CDATA[<!-- podcast-player:start --><aside class="podcast-player" data-podcast-player aria-label="播客播放器">  <div class="podcast-player__header">    <span class="podcast-player__meta">[测试播客] Minecraft - 08. Minecraft</span>  </div>  <audio class="podcast-player__audio" controls preload="metadata">    <source src="/files/podcast/Minecraft-08-Minecraft.mp3" type="audio/mpeg">    你的浏览器不支持 HTML5 音频播放。  </audio>  <div class="podcast-player__controls" role="group" aria-label="音频控制">    <button class="podcast-player__button" type="button" data-podcast-action="play" aria-label="播放" aria-pressed="false">      <svg class="podcast-player__icon podcast-player__icon--play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>      <svg class="podcast-player__icon podcast-player__icon--pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 5h4v14H7zm6 0h4v14h-4z"/></svg>    </button>    <span class="podcast-player__time podcast-player__current" aria-live="off">0:00</span>    <input class="podcast-player__range podcast-player__progress" type="range" min="0" max="100" step="0.1" value="0" aria-label="播放进度" aria-valuetext="0:00">    <span class="podcast-player__time podcast-player__duration">04:14</span>  </div>  <div class="podcast-player__footer">    <a class="podcast-player__download" href="/files/podcast/Minecraft-08-Minecraft.mp3" target="_blank" rel="noopener">下载音频</a>    <div class="podcast-player__volume-control" role="group" aria-label="音量控制">      <button class="podcast-player__button podcast-player__volume-button" type="button" data-podcast-action="mute" aria-label="静音" aria-pressed="false">        <svg class="podcast-player__icon podcast-player__icon--volume" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10v4h4l5 4V6L7 10zm12.5 2a3.5 3.5 0 0 0-2-3.15v6.29A3.5 3.5 0 0 0 15.5 12zm-2-8.2v2.06a6.5 6.5 0 0 1 0 12.28v2.06a8.5 8.5 0 0 0 0-16.4z"/></svg>        <svg class="podcast-player__icon podcast-player__icon--muted" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10v4h4l5 4V6L7 10zm10.9 2 2.1 2.1 2.1-2.1 1.4 1.4-2.1 2.1 2.1 2.1-1.4 1.4-2.1-2.1-2.1 2.1-1.4-1.4 2.1-2.1-2.1-2.1z"/></svg>      </button>      <input class="podcast-player__range podcast-player__volume" type="range" min="0" max="1" step="0.01" value="1" aria-label="音量">    </div>  </div>  <span class="podcast-player__status" role="status" aria-live="polite"></span></aside><!-- podcast-player:end --><p>这是 <code>hexo-sil-podcast</code> 的本地测试文章。</p><p>音频文件保存在 <code>source/files/podcast/Minecraft-08-Minecraft.mp3</code>。插件会自动读取文件大小、时长与 MIME 类型；本地播放器使用站内 <code>/files/</code> 路径，正式 RSS enclosure 则使用 R2 的稳定直链。</p>]]></content>
+    <content type="html"><![CDATA[<!-- podcast-player:start --><aside class="podcast-player" data-podcast-player aria-label="播客播放器">  <div class="podcast-player__header">    <span class="podcast-player__status" role="status" aria-live="polite"><svg class="podcast-player__status-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a9 9 0 1 0 9 9"/></svg><span class="podcast-player__status-text"></span></span>    <span class="podcast-player__meta">[测试播客] Minecraft - 08. Minecraft</span>  </div>  <audio class="podcast-player__audio" controls preload="metadata">    <source src="/files/podcast/Minecraft-08-Minecraft.mp3" type="audio/mpeg">    你的浏览器不支持 HTML5 音频播放。  </audio>  <div class="podcast-player__controls" role="group" aria-label="音频控制">    <button class="podcast-player__button" type="button" data-podcast-action="play" aria-label="播放" aria-pressed="false">      <svg class="podcast-player__icon podcast-player__icon--play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>      <svg class="podcast-player__icon podcast-player__icon--pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 5h4v14H7zm6 0h4v14h-4z"/></svg>    </button>    <span class="podcast-player__time podcast-player__current" aria-live="off">0:00</span>    <input class="podcast-player__range podcast-player__progress" type="range" min="0" max="100" step="0.1" value="0" aria-label="播放进度" aria-valuetext="0:00">    <span class="podcast-player__time podcast-player__duration">04:14</span>  </div>  <div class="podcast-player__footer">    <a class="podcast-player__download" href="/files/podcast/Minecraft-08-Minecraft.mp3" target="_blank" rel="noopener">下载音频</a>    <div class="podcast-player__volume-control" role="group" aria-label="音量控制">      <button class="podcast-player__button podcast-player__volume-button" type="button" data-podcast-action="mute" aria-label="静音" aria-pressed="false">        <svg class="podcast-player__icon podcast-player__icon--volume" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10v4h4l5 4V6L7 10zm12.5 2a3.5 3.5 0 0 0-2-3.15v6.29A3.5 3.5 0 0 0 15.5 12zm-2-8.2v2.06a6.5 6.5 0 0 1 0 12.28v2.06a8.5 8.5 0 0 0 0-16.4z"/></svg>        <svg class="podcast-player__icon podcast-player__icon--muted" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10v4h4l5 4V6L7 10zm10.9 2 2.1 2.1 2.1-2.1 1.4 1.4-2.1 2.1 2.1 2.1-1.4 1.4-2.1-2.1-2.1 2.1-1.4-1.4 2.1-2.1-2.1-2.1z"/></svg>      </button>      <input class="podcast-player__range podcast-player__volume" type="range" min="0" max="1" step="0.01" value="1" aria-label="音量">    </div>  </div></aside><!-- podcast-player:end --><p>这是 <code>hexo-sil-podcast</code> 的本地测试文章。</p><p>音频文件保存在 <code>source/files/podcast/Minecraft-08-Minecraft.mp3</code>。插件会自动读取文件大小、时长与 MIME 类型；本地播放器使用站内 <code>/files/</code> 路径，正式 RSS enclosure 则使用 R2 的稳定直链。</p>]]></content>
     
     
       
@@ -241,13 +241,13 @@
     
     
     
+    <category term="cdda" scheme="https://www.ephesus.top/tags/cdda/"/>
+    
     <category term="同人" scheme="https://www.ephesus.top/tags/%E5%90%8C%E4%BA%BA/"/>
     
     <category term="翻译" scheme="https://www.ephesus.top/tags/%E7%BF%BB%E8%AF%91/"/>
     
     <category term="AO3" scheme="https://www.ephesus.top/tags/AO3/"/>
-    
-    <category term="cdda" scheme="https://www.ephesus.top/tags/cdda/"/>
     
   </entry>
   
@@ -491,13 +491,13 @@
     
     
     
-    <category term="NetHack" scheme="https://www.ephesus.top/tags/NetHack/"/>
-    
     <category term="同人" scheme="https://www.ephesus.top/tags/%E5%90%8C%E4%BA%BA/"/>
     
     <category term="翻译" scheme="https://www.ephesus.top/tags/%E7%BF%BB%E8%AF%91/"/>
     
     <category term="AO3" scheme="https://www.ephesus.top/tags/AO3/"/>
+    
+    <category term="NetHack" scheme="https://www.ephesus.top/tags/NetHack/"/>
     
   </entry>
   
@@ -523,13 +523,13 @@
     
     
     
-    <category term="NetHack" scheme="https://www.ephesus.top/tags/NetHack/"/>
-    
     <category term="同人" scheme="https://www.ephesus.top/tags/%E5%90%8C%E4%BA%BA/"/>
     
     <category term="翻译" scheme="https://www.ephesus.top/tags/%E7%BF%BB%E8%AF%91/"/>
     
     <category term="AO3" scheme="https://www.ephesus.top/tags/AO3/"/>
+    
+    <category term="NetHack" scheme="https://www.ephesus.top/tags/NetHack/"/>
     
   </entry>
   
@@ -555,13 +555,13 @@
     
     
     
-    <category term="NetHack" scheme="https://www.ephesus.top/tags/NetHack/"/>
-    
     <category term="同人" scheme="https://www.ephesus.top/tags/%E5%90%8C%E4%BA%BA/"/>
     
     <category term="翻译" scheme="https://www.ephesus.top/tags/%E7%BF%BB%E8%AF%91/"/>
     
     <category term="AO3" scheme="https://www.ephesus.top/tags/AO3/"/>
+    
+    <category term="NetHack" scheme="https://www.ephesus.top/tags/NetHack/"/>
     
   </entry>
   
@@ -587,13 +587,13 @@
     
     
     
-    <category term="NetHack" scheme="https://www.ephesus.top/tags/NetHack/"/>
-    
     <category term="同人" scheme="https://www.ephesus.top/tags/%E5%90%8C%E4%BA%BA/"/>
     
     <category term="翻译" scheme="https://www.ephesus.top/tags/%E7%BF%BB%E8%AF%91/"/>
     
     <category term="AO3" scheme="https://www.ephesus.top/tags/AO3/"/>
+    
+    <category term="NetHack" scheme="https://www.ephesus.top/tags/NetHack/"/>
     
   </entry>
   
@@ -712,13 +712,13 @@
     
     
     
-    <category term="NetHack" scheme="https://www.ephesus.top/tags/NetHack/"/>
-    
     <category term="同人" scheme="https://www.ephesus.top/tags/%E5%90%8C%E4%BA%BA/"/>
     
     <category term="翻译" scheme="https://www.ephesus.top/tags/%E7%BF%BB%E8%AF%91/"/>
     
     <category term="AO3" scheme="https://www.ephesus.top/tags/AO3/"/>
+    
+    <category term="NetHack" scheme="https://www.ephesus.top/tags/NetHack/"/>
     
   </entry>
   
@@ -771,13 +771,13 @@
     
     
     
-    <category term="NetHack" scheme="https://www.ephesus.top/tags/NetHack/"/>
-    
     <category term="同人" scheme="https://www.ephesus.top/tags/%E5%90%8C%E4%BA%BA/"/>
     
     <category term="翻译" scheme="https://www.ephesus.top/tags/%E7%BF%BB%E8%AF%91/"/>
     
     <category term="AO3" scheme="https://www.ephesus.top/tags/AO3/"/>
+    
+    <category term="NetHack" scheme="https://www.ephesus.top/tags/NetHack/"/>
     
   </entry>
   
