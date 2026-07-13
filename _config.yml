@@ -148,10 +148,14 @@ feed:
   limit: 25
   icon: favicon.png
 audio:
-  # hexo-sil-audio: local music files used by ordinary articles.
+  # hexo-sil-audio: local music files, built-in Ephesus skin, and optional site-local overrides.
   media:
     source_dir: source/files
     public_path: /files/
+  skin:
+    builtin: ephesus
+    # Loaded after the built-in skin. Set builtin to false for a fully custom skin.
+    # override: /css/hexo-sil-audio.local.css
 podcast:
   # hexo-sil-podcast: preview article players first. Set to false only when ready to publish podcast.xml.
   dry_run: true

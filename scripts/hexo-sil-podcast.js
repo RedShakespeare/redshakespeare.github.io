@@ -5,7 +5,6 @@ const {
   PLAYER_END,
   PLAYER_SCRIPT,
   PLAYER_START,
-  PLAYER_STYLE,
   formatDuration,
   normaliseLocalAudio,
   renderAudioPlayer
@@ -270,6 +269,6 @@ function registerPlugin(hexo) {
 if (typeof hexo !== 'undefined') registerPlugin(hexo);
 
 module.exports = {
-  AUDIO_MIME_TYPES, PLAYER_END, PLAYER_SCRIPT, PLAYER_START, PLAYER_STYLE, buildFeed, formatDuration,
+  AUDIO_MIME_TYPES, PLAYER_END, PLAYER_SCRIPT, PLAYER_START, buildFeed, formatDuration,
   getPublishedEpisodes, hasPodcastMetadata, normaliseEpisode, registerPlugin, renderPlayer, toPodcastConfig, validateFeedConfig
 };

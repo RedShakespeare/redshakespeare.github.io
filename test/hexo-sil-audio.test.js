@@ -1,11 +1,12 @@
 'use strict';
 
 const assert = require('node:assert/strict');
+const fs = require('node:fs/promises');
 const path = require('node:path');
 const test = require('node:test');
 const {
+  BUILTIN_SKINS,
   PLAYER_SCRIPT,
-  PLAYER_STYLE,
   mergeMusic,
   normaliseAudio,
   parseMusicTagArgs,
@@ -21,13 +22,14 @@ function post(overrides = {}) {
   return { source: 'source/_posts/music.md', path: '2026/music/', title: 'Article Title', ...overrides };
 }
 
-function mockHexo() {
-  const calls = { filters: [], injectors: [], tags: [] };
+function mockHexo({ root = '/', audio = {} } = {}) {
+  const calls = { filters: [], generators: [], injectors: [], tags: [] };
   return {
     base_dir: baseDir,
-    config: { root: '/', audio: { media: { source_dir: 'source/files', public_path: '/files/' } } },
+    config: { root, audio: { media: { source_dir: 'source/files', public_path: '/files/' }, ...audio } },
     extend: {
       filter: { register: (name, fn) => calls.filters.push({ name, fn }) },
+      generator: { register: (name, fn) => calls.generators.push({ name, fn }) },
       injector: { register: (position, value) => calls.injectors.push({ position, value }) },
       tag: { register: (name, fn, options) => calls.tags.push({ name, fn, options }) }
     },
@@ -37,9 +39,15 @@ function mockHexo() {
 
 test('audio configuration has independent local media defaults', () => {
   assert.deepEqual(toAudioConfig({}).media, { sourceDir: 'source/files', publicPath: 'files' });
+  assert.deepEqual(toAudioConfig({}).skin, { builtin: 'ephesus', override: '' });
   assert.deepEqual(toAudioConfig({ audio: { media: { source_dir: 'source/audio', public_path: '/audio/' } } }).media, {
     sourceDir: 'source/audio', publicPath: 'audio'
   });
+  assert.deepEqual(toAudioConfig({ audio: { skin: { builtin: false, override: '/css/player.css' } } }).skin, {
+    builtin: false, override: '/css/player.css'
+  });
+  assert.throws(() => toAudioConfig({ audio: { skin: { builtin: 'inside' } } }), /skin\.builtin/);
+  assert.throws(() => toAudioConfig({ audio: { skin: { override: 'css/player.css' } } }), /root-relative CSS path/);
 });
 
 test('local music derives its player path and uses the requested title priority', async () => {
@@ -78,24 +86,45 @@ test('music tag arguments support quoted values and override the Front Matter so
   assert.throws(() => parseMusicTagArgs(['file=one.mp3', 'unknown=yes']), /does not support/);
 });
 
-test('audio player owns the former podcast colours, layout, and load-state behaviour', () => {
-  assert.match(PLAYER_STYLE, /--sil-audio-surface:#fff/);
-  assert.match(PLAYER_STYLE, /--sil-audio-surface:#000/);
-  assert.match(PLAYER_STYLE, /--sil-audio-ink:#8064a2/);
-  assert.match(PLAYER_STYLE, /--sil-audio-stack-gap:1rem/);
-  assert.match(PLAYER_STYLE, /sil-audio-player__header \{ display:flex;flex-wrap:nowrap/);
-  assert.match(PLAYER_STYLE, /sil-audio-player__footer \{ display:flex;flex-wrap:nowrap/);
-  assert.match(PLAYER_STYLE, /@keyframes sil-audio-player-spin/);
-  assert.doesNotMatch(PLAYER_STYLE, /podcast-player/);
+test('Ephesus skin owns the player appearance while the core retains interaction state', async () => {
+  const css = await fs.readFile(BUILTIN_SKINS.ephesus.sourcePath, 'utf8');
+  assert.equal(BUILTIN_SKINS.ephesus.outputPath, 'css/hexo-sil-audio.css');
+  assert.match(css, /--sil-audio-surface:#fff/);
+  assert.match(css, /--sil-audio-surface:#000/);
+  assert.match(css, /--sil-audio-ink:#8064a2/);
+  assert.match(css, /--sil-audio-stack-gap:1rem/);
+  assert.match(css, /sil-audio-player__header \{ display:flex;flex-wrap:nowrap/);
+  assert.match(css, /sil-audio-player__controls \{ display:none;min-height:2\.25rem;grid-template-columns:4rem minmax\(4rem,1fr\) 4rem/);
+  assert.match(css, /sil-audio-player__footer \{ display:grid;min-height:2\.25rem;grid-template-columns:1fr auto 1fr/);
+  assert.match(css, /@keyframes sil-audio-player-title-scroll/);
+  assert.match(css, /@keyframes sil-audio-player-spin/);
+  assert.doesNotMatch(css, /podcast-player/);
   assert.match(PLAYER_SCRIPT, /silAudioLoading/);
   assert.match(PLAYER_SCRIPT, /音频加载失败，请尝试下载音频。/);
+  assert.match(PLAYER_SCRIPT, /silAudioTitleOverflow/);
+  assert.doesNotMatch(PLAYER_SCRIPT, /sil-audio-player__volume/);
+  assert.doesNotMatch(PLAYER_SCRIPT, /--inside-/);
   assert.match(PLAYER_SCRIPT, /document\.addEventListener\('inside:theme'/);
+});
+
+test('audio player has symmetric progress controls and a three-button footer', () => {
+  const player = renderAudioPlayer({ playerAudio: '/files/music/example.mp3', type: 'audio/mpeg', duration: '03:21', title: 'A very long audio title' });
+  assert.match(player, /sil-audio-player__meta-text">A very long audio title/);
+  assert.match(player, /sil-audio-player__current[\s\S]*sil-audio-player__progress[\s\S]*sil-audio-player__duration/);
+  assert.match(player, /sil-audio-player__volume-button[\s\S]*sil-audio-player__play-button[\s\S]*sil-audio-player__download/);
+  assert.match(player, /sil-audio-player__download[\s\S]*aria-label="下载音频"/);
+  assert.doesNotMatch(player, /sil-audio-player__volume" type="range"/);
 });
 
 test('music plugin injects shared assets once, renders tags inline, and avoids duplicate defaults', async () => {
   const hexo = mockHexo();
   registerAudioPlugin(hexo);
   assert.deepEqual(hexo.calls.injectors.map(call => call.position), ['head_end', 'body_end']);
+  assert.equal(hexo.calls.generators[0].name, 'hexo-sil-audio-skin');
+  assert.match(hexo.calls.injectors[0].value, /href="\/css\/hexo-sil-audio\.css"/);
+  const skinRoute = await hexo.calls.generators[0].fn();
+  assert.equal(skinRoute.path, 'css/hexo-sil-audio.css');
+  assert.match(skinRoute.data.toString(), /sil-audio-player__footer/);
   assert.equal(hexo.calls.tags[0].name, 'music');
   assert.equal(hexo.calls.tags[0].options.async, true);
   assert.equal(hexo.calls.filters[0].name, 'after_post_render');
@@ -112,4 +141,19 @@ test('music plugin injects shared assets once, renders tags inline, and avoids d
   const inlineHtml = await hexo.calls.tags[0].fn.call(post({ music: { file: 'podcast/Minecraft-08-Minecraft.mp3' } }), ['title="Placed track"']);
   assert.match(inlineHtml, /Placed track/);
   assert.match(inlineHtml, /Minecraft-08-Minecraft\.mp3/);
+});
+
+test('custom skin overrides load after Ephesus and can replace it entirely', () => {
+  const layered = mockHexo({ root: '/blog/', audio: { skin: { builtin: 'ephesus', override: '/css/audio-local.css' } } });
+  registerAudioPlugin(layered);
+  assert.deepEqual(layered.calls.injectors.map(call => call.position), ['head_end', 'head_end', 'body_end']);
+  assert.match(layered.calls.injectors[0].value, /href="\/blog\/css\/hexo-sil-audio\.css"/);
+  assert.match(layered.calls.injectors[1].value, /href="\/blog\/css\/audio-local\.css"/);
+  assert.equal(layered.calls.generators.length, 1);
+
+  const replacement = mockHexo({ audio: { skin: { builtin: false, override: '/css/my-audio-skin.css' } } });
+  registerAudioPlugin(replacement);
+  assert.deepEqual(replacement.calls.injectors.map(call => call.position), ['head_end', 'body_end']);
+  assert.match(replacement.calls.injectors[0].value, /href="\/css\/my-audio-skin\.css"/);
+  assert.equal(replacement.calls.generators.length, 0);
 });
