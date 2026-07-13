@@ -185,8 +185,8 @@ test('renderPlayer retains the theme-scoped component markup for legacy episodes
   assert.match(html, /class="podcast-player__footer"/);
   assert.match(html, /podcast-player__footer[\s\S]*podcast-player__download[\s\S]*podcast-player__volume-control/);
   assert.match(html, /podcast-player__volume-control[\s\S]*data-podcast-action="mute"/);
-  assert.match(html, /第 1 集/);
-  assert.doesNotMatch(html, /第 1 集 · 00:42:10/);
+  assert.match(html, /Episode &amp; One/);
+  assert.doesNotMatch(html, /第 1 集/);
   assert.doesNotMatch(html, /podcast-player__label/);
   assert.doesNotMatch(html, /<span[^>]*>播客<\/span>/);
 });
@@ -198,6 +198,7 @@ test('custom player assets define both colour palettes and react to theme change
   assert.match(PLAYER_STYLE, /\.podcast-player__range \{[\s\S]*border-radius: 8px/);
   assert.match(PLAYER_STYLE, /height: \.3rem/);
   assert.match(PLAYER_STYLE, /border-radius: 99px/);
+  assert.match(PLAYER_STYLE, /\.podcast-player__footer \{[\s\S]*padding: \.5rem \.45rem 0/);
   assert.match(PLAYER_STYLE, /\.podcast-player__progress \{[\s\S]*margin-right: \.2rem/);
   assert.match(PLAYER_STYLE, /podcast-player__volume-button/);
   assert.doesNotMatch(PLAYER_STYLE, /#a78bfa/);

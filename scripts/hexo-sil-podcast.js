@@ -91,7 +91,7 @@ const PLAYER_STYLE = `
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
-  padding: .3rem .45rem 0;
+  padding: .5rem .45rem 0;
 }
 .podcast-player__volume-control {
   display: none;
@@ -543,6 +543,7 @@ function validateEpisodeFields(post, data, audio, type, length, duration, siteUr
   }
 
   return {
+    title: String(post.title || ''),
     audio,
     playerAudio,
     type,
@@ -721,9 +722,7 @@ async function normaliseEpisode(post, siteUrl, defaultExplicit, runtime) {
 }
 
 function renderPlayer(episode) {
-  const metadata = [
-    episode.episode === null ? '' : `第 ${episode.episode} 集`
-  ].filter(Boolean).join(' · ');
+  const metadata = String(episode.title || '');
   const playerAudio = episode.playerAudio || episode.audio;
 
   return `${PLAYER_START}
