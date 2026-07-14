@@ -9,9 +9,9 @@ the bucket's existing `files/` prefix from being duplicated as `files/files/`.
 Changes to `tools/sync-r2-assets.js` deliberately trigger one full mirror, so
 path-mapping fixes reconcile existing objects as well as future uploads.
 
-`files/hxh_civ/tree.json` is generated during synchronization because the
-resource browser requests it at runtime; it is refreshed whenever that tree
-changes.
+Archive directory indexes are published by the `hexo-sil-archive` plugin below
+`/archive-data/`, independently of the mirrored file URLs. R2 synchronization
+therefore only mirrors the actual files beneath `source/files/`.
 
 The HXH CIV browser itself is a regular Hexo page at `/hxh_civ/`, so it uses
 the installed Inside theme directly. `/files/hxh_civ/` remains a legacy entry

@@ -30,8 +30,6 @@ code_dir: downloads/code
 i18n_dir: :lang
 skip_render:
   - google1a76a4289e2a5783.html
-  - css/hxh-civ.css
-  - js/hxh-civ-tree.js
   - files/rl/nethack/nh-helper/**
   - files/rl/angband/angband_manual/_/static/{css,javascript}/**
   - files/rl/angband/angband_manual/en/latest/**
@@ -157,6 +155,20 @@ audio:
     builtin: ephesus
     # Loaded after the built-in skin. Set builtin to false for a fully custom skin.
     # override: /css/hexo-sil-audio.local.css
+archive:
+  # hexo-sil-archive: searchable file collections rendered with the {% archive %} tag.
+  skin:
+    builtin: ephesus
+    # override: /css/hexo-sil-archive.local.css
+  # Tag arguments override collection settings, which override these defaults.
+  defaults:
+    source_dir: files
+    title: 搜索...
+    placeholder: 输入文件名或目录名
+    hint: 支持搜索文件名和目录名称
+  collections:
+    hxh-civ:
+      source_dir: files/hxh_civ
 podcast:
   # hexo-sil-podcast: preview article players first. Set to false only when ready to publish podcast.xml.
   dry_run: true

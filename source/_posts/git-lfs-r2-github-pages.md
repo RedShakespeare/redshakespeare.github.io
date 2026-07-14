@@ -115,7 +115,7 @@ git lfs pull --include=source/files/**
 ```
 拉取 所有 lfs 文件；增量同步则会先看看改动文件是不是 LFS 指针，若是才会执行 `git lfs pull --include=对应路径`。改一篇文章不需要把几个 G 的东西全下回来。
 
-有个特殊场景是黄小琥文明收藏的浏览页面`files/hxh_civ/tree.json`。它由 `scripts/gen-hxh-tree.js` 生成，内容是`hxh_civ` 目录的目录树。同步脚本在完整同步、或发现 `source/files/hxh_civ/` 有改动时，会复用 `tools/hxh-tree.js` 重新生成 JSON，再传到 R2。生成页面的时候，这个 helper 会从 LFS 指针里读取文件的实际大小而不是lfs指针的大小（全是130B）。
+资料库页面由 `hexo-sil-archive` 在生成站点时读取对应目录，并在 `/archive-data/` 发布目录树 JSON。文件下载仍走 R2，但索引 JSON 不再放在 `files/` 下，因此同步脚本不需要为任何特定资料库补生成文件。生成目录树时，插件会从 LFS 指针读取声明的实际文件大小，而不是指针文件本身的大小（全是130B）。
 
 工作流中和同步相关的部分如下：
 

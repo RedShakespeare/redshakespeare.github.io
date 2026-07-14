@@ -1,10 +1,7 @@
 'use strict';
 
-const { existsSync, openSync, readSync, closeSync, mkdtempSync, rmSync, writeFileSync } = require('fs');
+const { existsSync, openSync, readSync, closeSync } = require('fs');
 const { spawnSync } = require('child_process');
-const os = require('os');
-const path = require('path');
-const { generateTree } = require('./hxh-tree');
 
 const SOURCE_PREFIX = 'source/files/';
 const DEFAULT_REMOTE = 'r2:ephesus-files/files';
@@ -145,27 +142,6 @@ function objectPath(sourcePath) {
   return sourcePath.slice(SOURCE_PREFIX.length);
 }
 
-function refreshHxhTree(remote, mode, changes) {
-  const affected = mode === 'full' || [...changes.uploads, ...changes.deletes].some(
-    (sourcePath) => sourcePath.startsWith('source/files/hxh_civ/'),
-  );
-  if (!affected) return;
-
-  const directory = mkdtempSync(path.join(os.tmpdir(), 'ephesus-hxh-tree-'));
-  const treePath = path.join(directory, 'tree.json');
-  try {
-    writeFileSync(
-      treePath,
-      `${JSON.stringify(generateTree(path.join('source', 'files', 'hxh_civ')), null, 2)}\n`,
-    );
-    run('rclone', ['copyto', treePath, `${remote}/hxh_civ/tree.json`, '--progress'], {
-      stdio: 'inherit',
-    });
-  } finally {
-    rmSync(directory, { recursive: true, force: true });
-  }
-}
-
 function sync(mode) {
   const remote = process.env.R2_REMOTE || DEFAULT_REMOTE;
   const base = process.env.GITHUB_EVENT_BEFORE;
@@ -184,7 +160,6 @@ function sync(mode) {
     run('rclone', ['sync', 'source/files', remote, '--fast-list', '--delete-during', '--progress'], {
       stdio: 'inherit',
     });
-    refreshHxhTree(remote, mode, changes);
     return;
   }
 
@@ -197,7 +172,6 @@ function sync(mode) {
   for (const path of changes.deletes) {
     run('rclone', ['deletefile', `${remote}/${objectPath(path)}`], { stdio: 'inherit' });
   }
-  refreshHxhTree(remote, mode, changes);
 }
 
 function main() {

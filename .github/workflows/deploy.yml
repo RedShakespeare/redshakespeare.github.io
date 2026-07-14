@@ -48,6 +48,7 @@ jobs:
       - name: Run podcast preflight
         run: |
           npm run test:hexo-sil-audio
+          npm run test:hexo-sil-archive
           npm run test:hexo-sil-podcast
           npm run test:hexo-sil-podcast-inside
           npm run test:podcast-feed-verifier
