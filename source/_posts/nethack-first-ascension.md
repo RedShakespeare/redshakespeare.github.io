@@ -3,8 +3,6 @@ title: NetHack 首次飞升经历
 date: 2026-07-11 00:40:00
 updated: 2026-07-11 00:49:00
 author: 花市灯如昼
-categories:
-  - 游戏记录
 tags:
   - NetHack
   - Roguelike
