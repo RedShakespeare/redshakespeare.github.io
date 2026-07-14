@@ -2,7 +2,7 @@
 
 const assert = require('node:assert/strict');
 const test = require('node:test');
-const { parseArgs, request, verifyPublishedFeed } = require('../tools/verify-podcast-feed');
+const { parseArgs, request, verifyPublishedFeed } = require('hexo-sil-podcast/verify');
 
 const FEED_URL = 'https://www.example.test/podcast.xml';
 const IMAGE_URL = 'https://cdn.example.test/podcast-cover.jpg';

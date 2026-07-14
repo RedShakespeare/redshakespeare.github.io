@@ -1,7 +1,6 @@
 # hexo-sil-podcast 使用说明
 
-`hexo-sil-podcast` 是本仓库的本地 Hexo 插件，实现在
-`scripts/hexo-sil-podcast.js`。它会为带 `podcast` front matter 的文章生成播客订阅源；
+`hexo-sil-podcast` 是本站通过 npm 安装的 Hexo 插件。它会为带 `podcast` front matter 的文章生成播客订阅源；
 播放器由独立的 `hexo-sil-audio` 提供。普通博客 RSS `/atom.xml` 不会包含音频 enclosure。
 
 ## 网站中的位置
@@ -39,7 +38,7 @@ podcast:
 ### Inside 列表扩展
 
 `podcast.inside.enabled` 默认为 `true`。启用后，安装依赖时会由
-`tools/apply-optional-inside-patch.js` 在当前的 Inside 编译产物中寻找四个精确锚点；全部
+`hexo-sil-podcast-inside` 的 postinstall 在当前的 Inside 编译产物中寻找四个精确锚点；全部
 匹配时才插入 `/podcasts/` 路由和独立分页支持。它只替换这些最小片段，不会以官方主题包
 覆盖你的定制主题。
 

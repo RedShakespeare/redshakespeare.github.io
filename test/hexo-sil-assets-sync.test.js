@@ -1,14 +1,20 @@
 'use strict';
 
 const assert = require('node:assert/strict');
+const path = require('node:path');
 const test = require('node:test');
-const { R2_SYNC_IMPLEMENTATION_INPUTS, objectPath } = require('../plugins/hexo-sil-assets/legacy-sync');
+const { loadAssetsConfig } = require('hexo-sil-assets/config');
 
-test('maps incremental assets beneath the existing R2 files prefix', () => {
-  assert.equal(objectPath('source/files/hxh_civ/index.html'), 'hxh_civ/index.html');
-  assert.equal(objectPath('source/files/rl/game.zip'), 'rl/game.zip');
-});
-
-test('treats sync implementation changes as a full mirror boundary', () => {
-  assert.deepEqual(R2_SYNC_IMPLEMENTATION_INPUTS, ['plugins/hexo-sil-assets/legacy-sync.js']);
+test('legacy sync keeps the established R2 mirror boundary', () => {
+  const config = loadAssetsConfig(path.resolve(__dirname, '..'));
+  assert.deepEqual(config.legacySync, {
+    source: 'source/files',
+    remote: 'r2:ephesus-files/files',
+    implementationInputs: [
+      'hexo-sil-assets.config.js',
+      'package.json',
+      'package-lock.json',
+      '.github/workflows/deploy.yml'
+    ]
+  });
 });

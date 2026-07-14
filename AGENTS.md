@@ -4,10 +4,11 @@
 
 This is a Hexo site. Author content lives in `source/`: posts are in
 `source/_posts/`, pages in named directories, and site settings in `_config.yml`.
-Local Hexo extension entrypoints live in `scripts/`; the full R2 asset plugin is
-under `plugins/hexo-sil-assets/`, and skins are under `assets/hexo-sil-*/skins/`.
-Other Node maintenance tools are in `tools/`, tests in `test/`, and the
-Cloudflare R2 proxy Worker in `workers/ephesus-files-proxy/`.
+Site-specific Hexo extensions live in `scripts/`. The published `hexo-sil-*`
+plugins are npm dependencies; their site-level R2 maintenance settings live in
+`hexo-sil-assets.config.js`. Other Node maintenance tools are in `tools/`, tests
+in `test/`, and the Cloudflare R2 proxy Worker is in
+`workers/ephesus-files-proxy/`.
 
 `source/_data/assets.json` is the asset metadata manifest. Do not hand-edit its
 hashes, sizes, or audio metadata. Use the asset scripts instead.
@@ -18,8 +19,8 @@ hashes, sizes, or audio metadata. Use the asset scripts instead.
 - `npm run build` generates the site; `npm run clean` clears generated output.
 - `npm run test:hexo-sil-audio`, `npm run test:hexo-sil-archive`, and
   `npm run test:hexo-sil-podcast` run focused Node test suites.
-- `npm run test:assets` validates asset-tool behaviour; run the relevant focused
-  test after editing a plugin or tool.
+- `npm run test:assets` validates the public asset API and this site's asset
+  configuration; run the relevant focused test after changing plugin settings.
 - `npm run assets:seed` refreshes the manifest in legacy mode without uploading.
 
 ## R2 Asset Updates
@@ -39,7 +40,7 @@ commit R2-managed binaries.
 ## Coding Style & Naming Conventions
 
 Use CommonJS and `'use strict';` in repository Node scripts. Follow the existing
-two-space JavaScript indentation, semicolons, and single quotes. Keep plugin
+two-space JavaScript indentation, semicolons, and single quotes. Keep integration
 names and CSS selectors namespaced as `hexo-sil-*` and `sil-*-*`. Prefer small,
 pure configuration helpers. Preserve CSS selector naming and light/dark custom
 property structure.

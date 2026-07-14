@@ -1,6 +1,6 @@
 # hexo-sil-archive 使用说明
 
-`hexo-sil-archive` 是本仓库的本地 Hexo 插件，用于生成可筛选、可下载的资料库。启用资产集成时读取
+`hexo-sil-archive` 是本站通过 npm 安装的 Hexo 插件，用于生成可筛选、可下载的资料库。启用资产集成时读取
 版本化清单；资产插件缺失时从 `source/<prefix>/` 生成同样的目录树。
 
 ## 配置

@@ -12,7 +12,7 @@ const {
   hasInsidePatch,
   registerInsidePlugin,
   toInsidePodcastConfig
-} = require('../scripts/hexo-sil-podcast-inside');
+} = require('hexo-sil-podcast-inside');
 
 function createPatchedTheme(t) {
   const root = fs.mkdtempSync(path.join(os.tmpdir(), 'hexo-sil-podcast-inside-'));

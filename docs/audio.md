@@ -1,6 +1,6 @@
 # hexo-sil-audio 使用说明
 
-`hexo-sil-audio` 是本仓库的本地 Hexo 插件，提供普通文章音乐和播客共用的播放器。
+`hexo-sil-audio` 是本站通过 npm 安装的 Hexo 插件，提供普通文章音乐和播客共用的播放器。
 核心负责音频元数据、HTML 结构、无障碍属性和播放交互；外观由可替换的皮肤负责。它不会生成
 RSS，也不会把音乐加入 `/podcasts/`。
 
@@ -28,7 +28,7 @@ audio:
 ## 播放器皮肤
 
 默认内置皮肤名为 `ephesus`。构建时插件会自动生成 `/css/hexo-sil-audio.css`，并在页面中加载它；
-因此未来作为 npm 插件安装时，默认样式也会随包提供，无须复制 CSS 文件。
+默认样式随 npm 包提供，无须在网站仓库中复制 CSS 文件。
 
 `audio.skin.override` 是可选的站内根路径 CSS（例如 `/css/hexo-sil-audio.local.css`），在默认皮肤
 之后加载，可只覆盖需要调整的规则。它必须是以 `/` 开头、以 `.css` 结尾的站内路径，不能包含

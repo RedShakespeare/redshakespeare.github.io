@@ -17,8 +17,8 @@ const {
   renderArchiveCard,
   resolveArchive,
   toArchiveConfig
-} = require('../scripts/hexo-sil-archive');
-const { createAssetCapability, serialiseManifest } = require('../plugins/hexo-sil-assets');
+} = require('hexo-sil-archive');
+const { createAssetCapability, serialiseManifest } = require('hexo-sil-assets');
 
 const baseDir = path.resolve(__dirname, '..');
 

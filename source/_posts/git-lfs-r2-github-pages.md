@@ -86,7 +86,7 @@ R2 里的旧对象有些没有 content type。Worker 会先写回 R2 的 HTTP me
 
 ## Actions 怎样同步
 
-同步脚本在 `plugins/hexo-sil-assets/legacy-sync.js`。它拿到这次 push 前后的 SHA，先运行以下指令：
+同步脚本在 `tools/sync-r2-assets.js`。它拿到这次 push 前后的 SHA，先运行以下指令：
 
 ```shell
 git diff --name-status -z --find-renames BASE HEAD -- source/files
@@ -115,7 +115,7 @@ git lfs pull --include=source/files/**
 ```
 拉取 所有 lfs 文件；增量同步则会先看看改动文件是不是 LFS 指针，若是才会执行 `git lfs pull --include=对应路径`。改一篇文章不需要把几个 G 的东西全下回来。
 
-资料库页面由 `hexo-sil-archive` 在生成站点时读取对应目录，并在 `/archive-data/` 发布目录树 JSON。文件下载仍走 R2，但索引 JSON 不再放在 `files/` 下，因此同步脚本不需要为任何特定资料库补生成文件。生成目录树时，插件会从 LFS 指针读取声明的实际文件大小，而不是指针文件本身的大小（全是130B）。
+有个特殊场景是黄小琥文明收藏的浏览页面`files/hxh_civ/tree.json`。它由 `scripts/gen-hxh-tree.js` 生成，内容是`hxh_civ` 目录的目录树。同步脚本在完整同步、或发现 `source/files/hxh_civ/` 有改动时，会复用 `tools/hxh-tree.js` 重新生成 JSON，再传到 R2。生成页面的时候，这个 helper 会从 LFS 指针里读取文件的实际大小而不是lfs指针的大小（全是130B）。
 
 工作流中和同步相关的部分如下：
 
@@ -462,3 +462,26 @@ Worker CI/CD 需要 API token 与 Account ID；路由部署需要 `Workers Route
 此后 Pages 会移除 `files/`，由 Worker/R2 提供内容。
 
 > 不要把 `R2_ASSETS_ENABLED` 创建为 Secret，它是普通 Actions Variable。
+
+---
+
+## 更新：资料库索引改由 Hexo 生成（2026-07-14）
+
+本文发布后，黄小琥文明收藏使用的专用 `files/hxh_civ/tree.json` 流程被提取为通用的
+`hexo-sil-archive` 插件。资料库页面现在由 Hexo 构建时读取对应目录，并把目录树 JSON 发布到
+`/archive-data/`；下载文件仍使用原来的 R2 路径，资产同步不再负责生成或上传资料库索引。
+
+## 更新：资产工具提取为本地插件（2026-07-14）
+
+最初位于 `tools/sync-r2-assets.js` 的同步实现随后被整合到站内的
+`plugins/hexo-sil-assets/legacy-sync.js`。清单、R2 客户端和维护命令也统一进入
+`plugins/hexo-sil-assets/`，但本文记录的 object key、rclone 镜像和增量同步策略没有改变。
+
+## 更新：资产工具迁移到 npm 插件（2026-07-14）
+
+本地资产插件之后又被提取并发布为 `hexo-sil-assets` npm 插件。当前网站通过该包提供的
+`hexo-sil-assets` 和 `hexo-sil-assets-legacy-sync` 命令维护资产，站点专属的目录映射、发布检查、
+Git 分支以及 Legacy rclone 镜像参数统一保存在根目录的 `hexo-sil-assets.config.js`。
+
+这次调整只改变工具的安装和维护方式，没有改变本文记录的 R2 object key、Worker 路由以及
+Legacy 同步策略。上文保留的是最初实现和部署时的原始流程。

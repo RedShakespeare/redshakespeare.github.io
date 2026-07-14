@@ -44,7 +44,7 @@ jobs:
 
       - name: Determine asset pipeline mode
         id: asset-pipeline
-        run: node plugins/hexo-sil-assets/cli.js mode
+        run: npm run assets:mode
 
       - name: Hydrate Pages LFS asset
         if: steps.asset-pipeline.outputs.mode == 'legacy'
@@ -80,15 +80,19 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
+          cache: npm
+
+      - name: Install deps
+        run: npm ci || npm i
 
       - name: Determine asset pipeline mode
         id: asset-pipeline
-        run: node plugins/hexo-sil-assets/cli.js mode
+        run: npm run assets:mode
 
       - name: Detect R2 asset changes
         id: assets
         if: steps.asset-pipeline.outputs.mode == 'legacy'
-        run: node plugins/hexo-sil-assets/legacy-sync.js --detect
+        run: npm run assets:legacy-sync -- --detect
         env:
           SYNC_MODE: ${{ inputs.sync_mode || 'incremental' }}
           GITHUB_EVENT_BEFORE: ${{ github.event.before }}
@@ -102,9 +106,8 @@ jobs:
 
       - name: Sync assets to R2
         if: steps.asset-pipeline.outputs.mode == 'legacy' && steps.assets.outputs.mode != 'none'
-        run: node plugins/hexo-sil-assets/legacy-sync.js --sync --mode "${{ steps.assets.outputs.mode }}"
+        run: npm run assets:legacy-sync -- --sync --mode "${{ steps.assets.outputs.mode }}"
         env:
-          R2_REMOTE: r2:ephesus-files/files
           R2_ACCOUNT_ID: ${{ secrets.R2_ACCOUNT_ID }}
           RCLONE_CONFIG_R2_TYPE: s3
           RCLONE_CONFIG_R2_PROVIDER: Cloudflare
@@ -140,7 +143,7 @@ jobs:
 
       - name: Determine asset pipeline mode
         id: asset-pipeline
-        run: node plugins/hexo-sil-assets/cli.js mode
+        run: npm run assets:mode
 
       - name: Hydrate Pages LFS asset
         if: steps.asset-pipeline.outputs.mode == 'legacy'

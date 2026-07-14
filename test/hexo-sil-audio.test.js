@@ -13,8 +13,8 @@ const {
   registerAudioPlugin,
   renderAudioPlayer,
   toAudioConfig
-} = require('../scripts/hexo-sil-audio');
-const { createAssetCapability } = require('../plugins/hexo-sil-assets');
+} = require('hexo-sil-audio');
+const { createAssetCapability } = require('hexo-sil-assets');
 
 const baseDir = path.resolve(__dirname, '..');
 const runtime = {

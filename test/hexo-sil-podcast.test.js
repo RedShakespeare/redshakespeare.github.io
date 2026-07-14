@@ -11,8 +11,8 @@ const {
   registerPlugin,
   renderPlayer,
   toPodcastConfig
-} = require('../scripts/hexo-sil-podcast');
-const { createAssetCapability } = require('../plugins/hexo-sil-assets');
+} = require('hexo-sil-podcast');
+const { createAssetCapability } = require('hexo-sil-assets');
 
 const siteUrl = 'https://www.ephesus.top/';
 const baseDir = path.resolve(__dirname, '..');
