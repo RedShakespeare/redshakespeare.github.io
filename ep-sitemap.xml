@@ -74,7 +74,7 @@
   </url>
   
   <url>
-    <loc>https://www.ephesus.top/files/rl/emeraldwoods/web/data/items.json</loc>
+    <loc>https://www.ephesus.top/files/rl/emeraldwoods/web/data/notes.json</loc>
     
     <lastmod>2026-07-14</lastmod>
     
@@ -83,7 +83,7 @@
   </url>
   
   <url>
-    <loc>https://www.ephesus.top/files/rl/emeraldwoods/web/data/notes.json</loc>
+    <loc>https://www.ephesus.top/files/rl/emeraldwoods/web/data/items.json</loc>
     
     <lastmod>2026-07-14</lastmod>
     
@@ -469,6 +469,27 @@
   </url>
   
   <url>
+    <loc>https://www.ephesus.top/tags/ChatGPT/</loc>
+    <lastmod>2026-07-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.ephesus.top/tags/AI/</loc>
+    <lastmod>2026-07-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.ephesus.top/tags/Maunal/</loc>
+    <lastmod>2026-07-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://www.ephesus.top/tags/Elin/</loc>
     <lastmod>2026-07-14</lastmod>
     <changefreq>weekly</changefreq>
@@ -504,27 +525,6 @@
   </url>
   
   <url>
-    <loc>https://www.ephesus.top/tags/ChatGPT/</loc>
-    <lastmod>2026-07-14</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.ephesus.top/tags/AI/</loc>
-    <lastmod>2026-07-14</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.ephesus.top/tags/Maunal/</loc>
-    <lastmod>2026-07-14</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://www.ephesus.top/tags/cdda/</loc>
     <lastmod>2026-07-14</lastmod>
     <changefreq>weekly</changefreq>
@@ -540,13 +540,6 @@
   
   <url>
     <loc>https://www.ephesus.top/tags/Losing-is-Fun/</loc>
-    <lastmod>2026-07-14</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.ephesus.top/tags/%E7%9F%AE%E4%BA%BA%E5%B0%8F%E9%98%9F/</loc>
     <lastmod>2026-07-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -595,14 +588,7 @@
   </url>
   
   <url>
-    <loc>https://www.ephesus.top/tags/Podcast/</loc>
-    <lastmod>2026-07-14</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.ephesus.top/tags/Test/</loc>
+    <loc>https://www.ephesus.top/tags/%E7%9F%AE%E4%BA%BA%E5%B0%8F%E9%98%9F/</loc>
     <lastmod>2026-07-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -617,6 +603,20 @@
   
   <url>
     <loc>https://www.ephesus.top/tags/%E6%B8%B8%E6%88%8F%E9%80%9A%E5%85%B3/</loc>
+    <lastmod>2026-07-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.ephesus.top/tags/Podcast/</loc>
+    <lastmod>2026-07-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.ephesus.top/tags/Test/</loc>
     <lastmod>2026-07-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>

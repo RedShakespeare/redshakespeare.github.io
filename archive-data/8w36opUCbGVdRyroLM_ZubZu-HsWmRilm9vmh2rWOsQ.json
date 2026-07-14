@@ -49,12 +49,6 @@
         },
         {
           "type": "file",
-          "name": "index.html",
-          "rel": "Cheat/index.html",
-          "size": 4270
-        },
-        {
-          "type": "file",
           "name": "JCivED-0.0.22a.zip",
           "rel": "Cheat/JCivED-0.0.22a.zip",
           "size": 1341988
@@ -682,12 +676,6 @@
               "name": "ICONPGT2.PIC",
               "rel": "Dos/CIV_474_01/ICONPGT2.PIC",
               "size": 10227
-            },
-            {
-              "type": "file",
-              "name": "index.html",
-              "rel": "Dos/CIV_474_01/index.html",
-              "size": 4316
             },
             {
               "type": "file",
@@ -1760,12 +1748,6 @@
             },
             {
               "type": "file",
-              "name": "index.html",
-              "rel": "Dos/CIV_474_03/index.html",
-              "size": 4316
-            },
-            {
-              "type": "file",
               "name": "INSTALL.BAT",
               "rel": "Dos/CIV_474_03/INSTALL.BAT",
               "size": 1670
@@ -2826,12 +2808,6 @@
               "name": "ICONPGT2.PIC",
               "rel": "Dos/CIV_474_04/ICONPGT2.PIC",
               "size": 10227
-            },
-            {
-              "type": "file",
-              "name": "index.html",
-              "rel": "Dos/CIV_474_04/index.html",
-              "size": 4316
             },
             {
               "type": "file",
@@ -3898,12 +3874,6 @@
             },
             {
               "type": "file",
-              "name": "index.html",
-              "rel": "Dos/CIV_474_05/index.html",
-              "size": 4306
-            },
-            {
-              "type": "file",
               "name": "INSTALL.BAT",
               "rel": "Dos/CIV_474_05/INSTALL.BAT",
               "size": 1670
@@ -4955,12 +4925,6 @@
             },
             {
               "type": "file",
-              "name": "index.html",
-              "rel": "Dos/CIV_474_05Fr/index.html",
-              "size": 4324
-            },
-            {
-              "type": "file",
               "name": "INTRO.TXT",
               "rel": "Dos/CIV_474_05Fr/INTRO.TXT",
               "size": 952
@@ -5991,12 +5955,6 @@
               "name": "ICONPGT2.PIC",
               "rel": "Dos/CIV_475_01/ICONPGT2.PIC",
               "size": 10227
-            },
-            {
-              "type": "file",
-              "name": "index.html",
-              "rel": "Dos/CIV_475_01/index.html",
-              "size": 4316
             },
             {
               "type": "file",
@@ -7195,12 +7153,6 @@
             },
             {
               "type": "file",
-              "name": "index.html",
-              "rel": "Dos/CIV_475_01Rus/index.html",
-              "size": 4316
-            },
-            {
-              "type": "file",
               "name": "INTRO.TXT",
               "rel": "Dos/CIV_475_01Rus/INTRO.TXT",
               "size": 951
@@ -8264,12 +8216,6 @@
             },
             {
               "type": "file",
-              "name": "index.html",
-              "rel": "Dos/CIV_475_02G/index.html",
-              "size": 4318
-            },
-            {
-              "type": "file",
               "name": "INSTALL.BAT",
               "rel": "Dos/CIV_475_02G/INSTALL.BAT",
               "size": 1430
@@ -8725,12 +8671,6 @@
               "size": 7946
             }
           ]
-        },
-        {
-          "type": "file",
-          "name": "index.html",
-          "rel": "Dos/index.html",
-          "size": 4262
         }
       ]
     },
@@ -8767,12 +8707,6 @@
               "name": "disk04.img",
               "rel": "IMG Dos/IMG_474_01/disk04.img",
               "size": 737280
-            },
-            {
-              "type": "file",
-              "name": "index.html",
-              "rel": "IMG Dos/IMG_474_01/index.html",
-              "size": 4330
             }
           ]
         },
@@ -8792,12 +8726,6 @@
               "name": "disk2.img",
               "rel": "IMG Dos/IMG_474_04/disk2.img",
               "size": 1474560
-            },
-            {
-              "type": "file",
-              "name": "index.html",
-              "rel": "IMG Dos/IMG_474_04/index.html",
-              "size": 4330
             }
           ]
         },
@@ -8811,12 +8739,6 @@
               "name": "civilization.img",
               "rel": "IMG Dos/IMG_475_01/civilization.img",
               "size": 3145728
-            },
-            {
-              "type": "file",
-              "name": "index.html",
-              "rel": "IMG Dos/IMG_475_01/index.html",
-              "size": 4330
             }
           ]
         },
@@ -8836,20 +8758,8 @@
               "name": "disk2.img",
               "rel": "IMG Dos/IMG_475_02G/disk2.img",
               "size": 1228800
-            },
-            {
-              "type": "file",
-              "name": "index.html",
-              "rel": "IMG Dos/IMG_475_02G/index.html",
-              "size": 4334
             }
           ]
-        },
-        {
-          "type": "file",
-          "name": "index.html",
-          "rel": "IMG Dos/index.html",
-          "size": 4284
         }
       ]
     },
@@ -8905,12 +8815,6 @@
           "name": "Dos_TXT_FAQ.txt",
           "rel": "Manual/Dos_TXT_FAQ.txt",
           "size": 133547
-        },
-        {
-          "type": "file",
-          "name": "index.html",
-          "rel": "Manual/index.html",
-          "size": 588
         },
         {
           "type": "file",
@@ -9008,12 +8912,6 @@
           "name": "CIV_SS.7z",
           "rel": "Other Platform/CIV_SS.7z",
           "size": 55901438
-        },
-        {
-          "type": "file",
-          "name": "index.html",
-          "rel": "Other Platform/index.html",
-          "size": 4314
         }
       ]
     },
@@ -9033,12 +8931,6 @@
           "name": "HD.jpg",
           "rel": "Picture/HD.jpg",
           "size": 544347
-        },
-        {
-          "type": "file",
-          "name": "index.html",
-          "rel": "Picture/index.html",
-          "size": 4278
         },
         {
           "type": "file",
@@ -9087,12 +8979,6 @@
               "name": "euromod.zip",
               "rel": "Scenario/JustForWin/euromod.zip",
               "size": 17178
-            },
-            {
-              "type": "file",
-              "name": "index.html",
-              "rel": "Scenario/JustForWin/index.html",
-              "size": 4326
             },
             {
               "type": "file",
@@ -9155,12 +9041,6 @@
           "name": "Dune.7z",
           "rel": "Scenario/Dune.7z",
           "size": 32367
-        },
-        {
-          "type": "file",
-          "name": "index.html",
-          "rel": "Scenario/index.html",
-          "size": 4290
         },
         {
           "type": "file",
@@ -9240,12 +9120,6 @@
           "name": "CivWin_Soundtrack_Overhaul_Mod.7z",
           "rel": "Sound/CivWin_Soundtrack_Overhaul_Mod.7z",
           "size": 41154261
-        },
-        {
-          "type": "file",
-          "name": "index.html",
-          "rel": "Sound/index.html",
-          "size": 4280
         }
       ]
     },
@@ -9264,12 +9138,6 @@
               "name": "civhackfat1-0-2.sit.hqx",
               "rel": "Update/PowerMac Fix/civhackfat1-0-2.sit.hqx",
               "size": 20085
-            },
-            {
-              "type": "file",
-              "name": "index.html",
-              "rel": "Update/PowerMac Fix/index.html",
-              "size": 4334
             }
           ]
         },
@@ -9296,12 +9164,6 @@
           "name": "Dos_To_v5.zip",
           "rel": "Update/Dos_To_v5.zip",
           "size": 138698
-        },
-        {
-          "type": "file",
-          "name": "index.html",
-          "rel": "Update/index.html",
-          "size": 4274
         }
       ]
     },
@@ -9333,12 +9195,6 @@
           "name": "CivWin.zip",
           "rel": "Win/CivWin.zip",
           "size": 4956371
-        },
-        {
-          "type": "file",
-          "name": "index.html",
-          "rel": "Win/index.html",
-          "size": 4272
         }
       ]
     },
@@ -9353,12 +9209,6 @@
       "name": "hxh_civ.7z",
       "rel": "hxh_civ.7z",
       "size": 346305855
-    },
-    {
-      "type": "file",
-      "name": "index.html",
-      "rel": "index.html",
-      "size": 495
     }
   ]
 }
