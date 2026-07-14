@@ -9,7 +9,7 @@ toc: false
 
 <section class="hxh-civ-search" role="search" aria-labelledby="hxh-civ-search-label" aria-busy="true">
   <div class="hxh-civ-search__header">
-    <label class="hxh-civ-search__label" id="hxh-civ-search-label" for="hxh-civ-query">筛选资料</label>
+    <label class="hxh-civ-search__label" id="hxh-civ-search-label" for="hxh-civ-query">搜索...</label>
     <p class="hxh-civ-search__meta" id="hxh-civ-meta" aria-live="polite">正在加载目录…</p>
   </div>
   <div class="hxh-civ-search__control">
