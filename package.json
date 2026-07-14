@@ -13,15 +13,15 @@
     "test:assets": "node --test test/assets.test.js",
     "test:hexo-sil-podcast-inside": "node --test test/hexo-sil-podcast-inside.test.js",
     "test:podcast-feed-verifier": "node --test test/verify-podcast-feed.test.js",
-    "test:r2-assets": "node --test tools/sync-r2-assets.test.js",
+    "test:r2-assets": "node --test test/hexo-sil-assets-sync.test.js",
     "test:hexo-sil-podcast": "node --test test/hexo-sil-podcast.test.js",
     "verify:podcast": "node tools/verify-podcast-feed.js",
-    "assets:seed": "node tools/assets.js seed",
-    "assets:verify": "node tools/assets.js verify",
-    "assets:pull": "node tools/assets.js pull",
-    "assets:migrate": "node tools/assets.js migrate",
-    "assets:delete": "node tools/assets.js delete",
-    "publish": "node tools/assets.js publish"
+    "assets:seed": "node plugins/hexo-sil-assets/cli.js seed",
+    "assets:verify": "node plugins/hexo-sil-assets/cli.js verify",
+    "assets:pull": "node plugins/hexo-sil-assets/cli.js pull",
+    "assets:migrate": "node plugins/hexo-sil-assets/cli.js migrate",
+    "assets:delete": "node plugins/hexo-sil-assets/cli.js delete",
+    "publish": "node plugins/hexo-sil-assets/cli.js publish"
   },
   "hexo": {
     "version": "6.3.0"

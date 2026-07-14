@@ -1,5 +1,7 @@
 'use strict';
 
+const path = require('node:path');
+
 const {
   assertWellFormedXml,
   resolveHttpsUrl,
@@ -13,9 +15,10 @@ const {
   PLAYER_START,
   formatDuration,
   normaliseLocalAudio,
-  renderAudioPlayer
+  normaliseMediaUrl,
+  renderAudioPlayer,
+  toAudioConfig
 } = require('./hexo-sil-audio');
-const { normaliseManifestPath } = require('../tools/assets-manifest');
 
 const EPISODE_TYPES = new Set(['full', 'trailer', 'bonus']);
 const DURATION_PATTERN = /^(?:\d{1,3}:)?[0-5]\d:[0-5]\d$/;
@@ -61,7 +64,16 @@ function toPodcastConfig(siteConfig = {}) {
   const raw = isObject(siteConfig.podcast) ? siteConfig.podcast : {};
   const category = isObject(raw.category) ? raw.category : {};
   const media = isObject(raw.media) ? raw.media : {};
-  const assets = isObject(siteConfig.assets) ? siteConfig.assets : {};
+  const assets = raw.assets == null ? {} : raw.assets;
+  if (!isObject(assets)) throw new Error('Podcast configuration error: assets must be a mapping.');
+  for (const field of ['manifest', 'object_prefix', 'public_path']) {
+    if (Object.prototype.hasOwnProperty.call(media, field)) {
+      const replacement = field === 'manifest' ? 'assets.manifest' : 'media.prefix';
+      throw new Error(`Podcast configuration error: media.${field} was replaced by ${replacement}.`);
+    }
+  }
+  const audioMedia = toAudioConfig(siteConfig).media;
+  const prefix = normaliseRelativeDirectory(media.prefix, audioMedia.prefix, 'media.prefix');
   const feedPath = String(raw.path || 'podcast.xml').replace(/^\/+/, '');
   if (!feedPath || feedPath.includes('..')) throw new Error('Podcast configuration error: path must be a site-relative file path.');
   return {
@@ -77,11 +89,11 @@ function toPodcastConfig(siteConfig = {}) {
     category: { text: String(category.text || ''), subcategory: String(category.subcategory || '') },
     explicit: raw.explicit === true,
     limit: raw.limit == null ? 0 : Number(raw.limit),
+    assets: { enabled: assets.enabled === true },
     media: {
-      manifestPath: normaliseManifestPath(media.manifest || assets.manifest || 'source/_data/assets.json', 'media.manifest'),
-      objectPrefix: normaliseRelativeDirectory(media.object_prefix, 'files', 'media.object_prefix'),
-      publicPath: normaliseRelativeDirectory(media.public_path, 'files', 'media.public_path'),
-      url: String(media.url || '')
+      prefix,
+      sourceDir: normaliseRelativeDirectory(media.source_dir, prefix, 'media.source_dir'),
+      url: normaliseMediaUrl(media.url, 'media.url', 'Podcast')
     }
   };
 }
@@ -136,18 +148,6 @@ function normaliseRemoteEpisode(post, siteUrl, defaultExplicit) {
   return validateEpisodeFields(post, data, audioUrl.href, type, length, duration, siteUrl, defaultExplicit, audioUrl.href);
 }
 
-function localAudioUrl(post, file, url) {
-  if (!url || /[^\x21-\x7E]/.test(url)) throw podcastError(post, '`podcast.media.url` must be an absolute HTTPS URL when `podcast.file` is used.');
-  let base;
-  try {
-    base = new URL(url.endsWith('/') ? url : `${url}/`);
-  } catch {
-    throw podcastError(post, '`podcast.media.url` must be an absolute HTTPS URL when `podcast.file` is used.');
-  }
-  if (base.protocol !== 'https:') throw podcastError(post, '`podcast.media.url` must use HTTPS when `podcast.file` is used.');
-  return new URL(file, base).href;
-}
-
 async function normaliseLocalEpisode(post, siteUrl, defaultExplicit, runtime) {
   const data = post.podcast;
   const legacyFields = ['audio', 'type', 'length', 'duration'].filter(field => Object.prototype.hasOwnProperty.call(data, field));
@@ -158,7 +158,12 @@ async function normaliseLocalEpisode(post, siteUrl, defaultExplicit, runtime) {
   } catch (error) {
     throw new Error(error.message.replace(/^Audio metadata error/, 'Podcast metadata error'));
   }
-  const audio = localAudioUrl(post, local.file, runtime.media.url);
+  let audio;
+  try {
+    audio = resolveHttpsUrl(local.playerAudio, siteUrl, '`podcast.file` must resolve to an ASCII HTTPS URL.');
+  } catch (error) {
+    throw podcastError(post, error.message.replace(/^Podcast metadata error[^:]*:\s*/, ''));
+  }
   return validateEpisodeFields(post, data, audio, local.type, local.length, local.duration, siteUrl, defaultExplicit, local.playerAudio);
 }
 
@@ -250,7 +255,20 @@ async function buildFeed(posts, config, siteUrl, now = new Date(), runtime) {
 function registerPlugin(hexo) {
   const config = toPodcastConfig(hexo.config);
   const siteUrl = hexo.config.url;
-  const runtime = { baseDir: hexo.base_dir || process.cwd(), root: hexo.config.root || '/', sourceDir: hexo.config.source_dir || 'source', media: config.media };
+  let warnedMissingAssets = false;
+  const runtime = {
+    baseDir: hexo.base_dir || process.cwd(),
+    sourceRoot: hexo.source_dir || path.join(hexo.base_dir || process.cwd(), hexo.config.source_dir || 'source'),
+    root: hexo.config.root || '/',
+    assetsEnabled: config.assets.enabled,
+    getAssetCapability: () => hexo.sil && hexo.sil.assets,
+    onMissingAssets: () => {
+      if (warnedMissingAssets) return;
+      warnedMissingAssets = true;
+      if (hexo.log && hexo.log.warn) hexo.log.warn('hexo-sil-podcast: assets integration is enabled but hexo-sil-assets is not installed; using legacy local files.');
+    },
+    media: config.media
+  };
   hexo.extend.filter.register('before_post_render', async function (data) {
     if (!hasPodcastMetadata(data)) return data;
     data.content = `${renderPlayer(await normaliseEpisode(data, siteUrl, config.explicit, runtime))}\n\n${data.content || ''}`;

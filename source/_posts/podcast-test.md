@@ -15,4 +15,4 @@ podcast:
 
 这是 `hexo-sil-podcast` 的本地测试文章。
 
-音频的维护副本位于 `source/files/podcast/Minecraft-08-Minecraft.mp3`。`npm run publish` 会把文件元数据写入资产清单；播放器使用站内 `/files/` 路径，正式 RSS enclosure 则使用 R2 的稳定直链。
+音频的维护副本位于 `source/files/podcast/Minecraft-08-Minecraft.mp3`。`npm run publish` 会把文件元数据写入资产清单；播放器使用站内 `/files/` 路径，正式 RSS enclosure 则由站点 URL 解析为同一路径并通过 Worker 访问 R2。

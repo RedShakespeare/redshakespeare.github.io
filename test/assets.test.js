@@ -5,22 +5,52 @@ const fs = require('node:fs/promises');
 const os = require('node:os');
 const path = require('node:path');
 const test = require('node:test');
-const { loadAssetManifest, serialiseManifest, treeFromManifest } = require('../tools/assets-manifest');
-const { diffManifest, lfsPointer, parseArguments, scanLocalAssets } = require('../tools/assets');
-const { R2Client, requiredEnvironment } = require('../tools/r2-client');
+const {
+  createAssetCapability,
+  loadAssetManifest,
+  normaliseManifest,
+  registerAssetsPlugin,
+  serialiseManifest,
+  treeFromManifest
+} = require('../plugins/hexo-sil-assets');
+const { diffManifest, lfsPointer, parseArguments, scanLocalAssets } = require('../plugins/hexo-sil-assets/cli');
+const { R2Client, requiredEnvironment } = require('../plugins/hexo-sil-assets/lib/r2-client');
 
 test('asset manifest is stable, validates checksums, and creates sorted archive trees', () => {
   const manifest = JSON.parse(serialiseManifest({
     'files/library/z.txt': { size: 1, sha256: 'b'.repeat(64), type: 'text/plain' },
     'files/library/a/one.txt': { size: 2, sha256: 'a'.repeat(64), type: 'text/plain' }
   }));
-  const normalised = require('../tools/assets-manifest').normaliseManifest(manifest);
+  const normalised = normaliseManifest(manifest);
   assert.equal(normalised.state, 'legacy');
   const tree = treeFromManifest(normalised, 'files/library');
   assert.deepEqual(tree.children.map(entry => entry.name), ['a', 'z.txt']);
   assert.equal(tree.children[0].children[0].rel, 'a/one.txt');
-  assert.throws(() => require('../tools/assets-manifest').normaliseManifest({ version: 1, objects: { 'files/a': { size: 1, sha256: 'nope', type: 'text/plain' } } }), /SHA-256/);
-  assert.throws(() => require('../tools/assets-manifest').normaliseManifest({ version: 1, state: 'unsafe', objects: {} }), /state/);
+  assert.throws(() => normaliseManifest({ version: 1, objects: { 'files/a': { size: 1, sha256: 'nope', type: 'text/plain' } } }), /SHA-256/);
+  assert.throws(() => normaliseManifest({ version: 1, state: 'unsafe', objects: {} }), /state/);
+});
+
+test('Hexo capability exposes one resettable manifest service', async t => {
+  const root = await fs.mkdtemp(path.join(os.tmpdir(), 'ephesus-capability-'));
+  t.after(() => fs.rm(root, { recursive: true, force: true }));
+  const data = path.join(root, 'source', '_data');
+  await fs.mkdir(data, { recursive: true });
+  await fs.writeFile(path.join(data, 'assets.json'), serialiseManifest({
+    'files/a.txt': { size: 1, sha256: 'a'.repeat(64), type: 'text/plain' }
+  }));
+  const capability = createAssetCapability({ baseDir: root });
+  assert.equal(capability.state, 'legacy');
+  assert.equal(capability.getObject('files/a.txt').size, 1);
+  assert.equal(capability.tree('files').children[0].name, 'a.txt');
+
+  const filters = [];
+  const hexo = {
+    base_dir: root,
+    config: { assets: { manifest: 'source/_data/assets.json' } },
+    extend: { filter: { register: (name, fn) => filters.push({ name, fn }) } }
+  };
+  assert.equal(registerAssetsPlugin(hexo), hexo.sil.assets);
+  assert.equal(filters[0].name, 'before_generate');
 });
 
 test('scanner preserves Git LFS object sizes and detects manifest changes', async t => {

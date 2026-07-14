@@ -4,9 +4,10 @@
 
 This is a Hexo site. Author content lives in `source/`: posts are in
 `source/_posts/`, pages in named directories, and site settings in `_config.yml`.
-Local Hexo extensions live in `scripts/`; skins are under
-`assets/hexo-sil-*/skins/`. Node maintenance tools are in `tools/`, tests in
-`test/`, and the Cloudflare R2 proxy Worker in `workers/ephesus-files-proxy/`.
+Local Hexo extension entrypoints live in `scripts/`; the full R2 asset plugin is
+under `plugins/hexo-sil-assets/`, and skins are under `assets/hexo-sil-*/skins/`.
+Other Node maintenance tools are in `tools/`, tests in `test/`, and the
+Cloudflare R2 proxy Worker in `workers/ephesus-files-proxy/`.
 
 `source/_data/assets.json` is the asset metadata manifest. Do not hand-edit its
 hashes, sizes, or audio metadata. Use the asset scripts instead.

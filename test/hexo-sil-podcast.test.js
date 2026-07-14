@@ -12,6 +12,7 @@ const {
   renderPlayer,
   toPodcastConfig
 } = require('../scripts/hexo-sil-podcast');
+const { createAssetCapability } = require('../plugins/hexo-sil-assets');
 
 const siteUrl = 'https://www.ephesus.top/';
 const baseDir = path.resolve(__dirname, '..');
@@ -38,10 +39,9 @@ function config(overrides = {}) {
       category: { text: 'Leisure', subcategory: 'Games' },
       explicit: false,
       limit: 0,
+      assets: { enabled: true },
       media: {
-        source_dir: 'source/files',
-        public_path: '/files/',
-        url: 'https://dl.ephesus.top/files/',
+        prefix: 'files',
         ...mediaOverrides
       },
       ...rest
@@ -53,6 +53,8 @@ function runtime(overrides = {}) {
   return {
     baseDir,
     root: '/',
+    assetsEnabled: true,
+    assetCapability: createAssetCapability({ baseDir }),
     media: config().media,
     ...overrides
   };
@@ -95,6 +97,8 @@ function mockHexo(dryRun) {
   const calls = { filters: [], generators: [], injectors: [], logs: [] };
   return {
     base_dir: baseDir,
+    source_dir: path.join(baseDir, 'source'),
+    sil: { assets: createAssetCapability({ baseDir }) },
     config: {
       url: siteUrl,
       root: '/',
@@ -102,10 +106,11 @@ function mockHexo(dryRun) {
       description: 'Roguelike Temple',
       author: 'Silencess',
       podcast: {
-      dry_run: dryRun,
-      email: 'silencess.m@gmail.com',
-      image: 'https://cdn.example.test/podcast-cover.jpg',
-      category: { text: 'Leisure', subcategory: 'Games' }
+        dry_run: dryRun,
+        assets: { enabled: true },
+        email: 'silencess.m@gmail.com',
+        image: 'https://cdn.example.test/podcast-cover.jpg',
+        category: { text: 'Leisure', subcategory: 'Games' }
       }
     },
     log: {
@@ -169,18 +174,48 @@ test('ordinary article music cannot create an empty published podcast feed', asy
   await assert.rejects(buildFeed([musicArticle], config(), siteUrl, new Date('2026-07-13T00:00:00Z')), /at least one published episode/);
 });
 
-test('local file mode derives metadata and uses separate player and RSS URLs', async () => {
+test('local file mode derives metadata and resolves RSS URLs from the site', async () => {
   const episode = await normaliseEpisode(localPost(), siteUrl, false, runtime());
 
   assert.equal(episode.type, 'audio/mpeg');
   assert.equal(episode.length, 4117599);
   assert.equal(episode.duration, '04:14');
-  assert.equal(episode.audio, 'https://dl.ephesus.top/files/podcast/Minecraft-08-Minecraft.mp3');
+  assert.equal(episode.audio, 'https://www.ephesus.top/files/podcast/Minecraft-08-Minecraft.mp3');
   assert.equal(episode.playerAudio, '/files/podcast/Minecraft-08-Minecraft.mp3');
   assert.match(renderPlayer(episode), /src="\/files\/podcast\/Minecraft-08-Minecraft\.mp3"/);
 
   const feed = await buildFeed([localPost()], config(), siteUrl, new Date('2026-07-13T00:00:00Z'), runtime());
-  assert.match(feed, /enclosure url="https:\/\/dl\.ephesus\.top\/files\/podcast\/Minecraft-08-Minecraft\.mp3" length="4117599" type="audio\/mpeg"/);
+  assert.match(feed, /enclosure url="https:\/\/www\.ephesus\.top\/files\/podcast\/Minecraft-08-Minecraft\.mp3" length="4117599" type="audio\/mpeg"/);
+});
+
+test('podcast prefix inherits audio and media.url replaces player and RSS locations', async () => {
+  const inherited = toPodcastConfig({ audio: { media: { prefix: 'media' } }, podcast: {} });
+  assert.equal(inherited.media.prefix, 'media');
+  assert.equal(inherited.media.sourceDir, 'media');
+  const externalConfig = config({ media: { url: 'https://media.example.test/podcast/' } });
+  const episode = await normaliseEpisode(localPost(), siteUrl, false, {
+    ...runtime(),
+    media: externalConfig.media
+  });
+  assert.equal(episode.playerAudio, 'https://media.example.test/podcast/podcast/Minecraft-08-Minecraft.mp3');
+  assert.equal(episode.audio, episode.playerAudio);
+});
+
+test('podcast file mode also falls back to legacy local audio without the asset capability', async () => {
+  let warnings = 0;
+  const episode = await normaliseEpisode(localPost(), siteUrl, false, {
+    ...runtime(),
+    assetCapability: null,
+    onMissingAssets: () => { warnings += 1; }
+  });
+  assert.equal(episode.length, 4117599);
+  assert.equal(episode.audio, 'https://www.ephesus.top/files/podcast/Minecraft-08-Minecraft.mp3');
+  assert.equal(warnings, 1);
+});
+
+test('removed media fields fail with their prefix replacement', () => {
+  assert.throws(() => config({ media: { object_prefix: 'files' } }), /media\.prefix/);
+  assert.throws(() => config({ media: { public_path: 'files' } }), /media\.prefix/);
 });
 
 test('publication mode rejects the temporary favicon and accepts a local compliant cover', async () => {

@@ -1,5 +1,7 @@
 'use strict';
 
+// Shared manifest contract for Hexo integrations and asset maintenance commands.
+
 const fs = require('node:fs');
 const path = require('node:path');
 

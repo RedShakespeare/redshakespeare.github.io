@@ -86,7 +86,7 @@ R2 里的旧对象有些没有 content type。Worker 会先写回 R2 的 HTTP me
 
 ## Actions 怎样同步
 
-同步脚本在 `tools/sync-r2-assets.js`。它拿到这次 push 前后的 SHA，先运行以下指令：
+同步脚本在 `plugins/hexo-sil-assets/legacy-sync.js`。它拿到这次 push 前后的 SHA，先运行以下指令：
 
 ```shell
 git diff --name-status -z --find-renames BASE HEAD -- source/files

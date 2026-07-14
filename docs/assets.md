@@ -1,8 +1,8 @@
 # R2 资产维护
 
 本站的大型静态资产的目标发布源是 R2。`source/_data/assets.json` 清单包含对象大小、SHA-256、MIME
-类型，以及音频的时长和标题；Hexo 构建、资料库、音频播放器和播客 RSS 都只读取这个清单，而不读取
-二进制文件。
+类型，以及音频的时长和标题。显式开启各插件的 assets 集成后，Hexo 构建从该清单读取；若
+`hexo-sil-assets` 未安装，则各插件回退到 `source/<prefix>/` 的 legacy 文件。
 
 清单的 `state` 是受 Git 版本控制的迁移开关：当前 `legacy` 状态保留旧的 LFS/rclone 部署桥接；只有
 `npm run assets:migrate -- --finalize` 将每个 R2 对象验证完成后，才会写入 `r2` 状态。`r2` 状态的
@@ -85,8 +85,9 @@ npm run publish -- --prefix files/podcast
 
 ## 资料库、音频和播客
 
-- 资料库使用 R2 object key 前缀，例如 `prefix: files/hxh_civ`；`source_dir` 仍可暂时使用，但只是兼容别名，不再代表本地目录。
-- 普通音频和播客仍可写 `file: podcast/example.mp3`。插件从清单读取字节数、MIME 和时长；不需要手工填写这些字段。
+- 资料库、普通音频和播客统一使用 `prefix`，例如 `files/hxh_civ`；它同时是清单键前缀与默认站内路径。
+- `source_dir` 相对于 Hexo `source/`，仅在 legacy 本地目录与 prefix 不同时配置。
+- 普通音频和播客仍可写 `file: podcast/example.mp3`。资产集成可用时从清单读取字节数、MIME 和时长；legacy 回退时直接读取本地文件。
 - `/files/...` 链接保持不变。`/img/df.zip` 同样保留，由 Worker 映射到 R2。
 
 ## 一次性迁移与审计

@@ -6,7 +6,7 @@ const { spawnSync } = require('child_process');
 const SOURCE_PREFIX = 'source/files/';
 const DEFAULT_REMOTE = 'r2:ephesus-files/files';
 const ZERO_SHA = /^0+$/;
-const R2_SYNC_IMPLEMENTATION_INPUTS = ['tools/sync-r2-assets.js'];
+const R2_SYNC_IMPLEMENTATION_INPUTS = ['plugins/hexo-sil-assets/legacy-sync.js'];
 
 function fail(message) {
   console.error(`R2 asset sync: ${message}`);

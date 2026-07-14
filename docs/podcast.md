@@ -24,11 +24,12 @@ podcast:
   inside:
     enabled: true
   path: podcast.xml
+  assets:
+    enabled: true
   media:
-    manifest: source/_data/assets.json
-    object_prefix: files
-    public_path: /files/
-    url: https://dl.ephesus.top/files/
+    # prefix: files
+    # source_dir: files
+    # url: https://media.example.com/files/
 ```
 
 `dry_run: true` 是当前默认值：文章播放器照常生成，但不会生成
@@ -94,13 +95,11 @@ podcast:
 - 音频时长，写入播放器和 `itunes:duration`；
 - 文件扩展名对应的 MIME 类型。
 
-文章页面的播放器和下载链接指向
-`/files/podcast/episode-001.mp3`，因此本地 Hexo 服务器和站内页面都能直接使用。
-RSS enclosure 与默认 GUID 则使用
-`https://dl.ephesus.top/files/podcast/episode-001.mp3`；这正是 `podcast.media.url`
-的用途。R2 资产发布工具会把本地 `source/files/` 的变更发布到这一路径。
+文章页面的播放器和下载链接指向 `/files/podcast/episode-001.mp3`。RSS enclosure 与默认 GUID 会用
+站点 `url` 解析为 `https://www.ephesus.top/files/podcast/episode-001.mp3`，由现有 Worker 转发到 R2。
+只有媒体需要直接使用其他 HTTPS 域名时才配置 `podcast.media.url`；它会同时覆盖页面与 RSS 地址。
 
-`podcast.file` 必须在资产清单的 `podcast.media.object_prefix` 下，不能使用 `..`、反斜杠、
+`podcast.file` 必须位于有效 `podcast.media.prefix` 下；该 prefix 未配置时继承 `audio.media.prefix`。路径不能使用 `..`、反斜杠、
 查询字符串或非 ASCII 文件名，也不能同时保留旧的 `audio`、`type`、`length`、
 `duration` 字段。插件会拒绝清单中不存在、缺少时长或未知格式的文件。
 
@@ -197,10 +196,9 @@ npm run build
 | `explicit` | 默认的成人内容标记 |
 | `limit` | `0` 表示输出全部已发布集数；正整数表示最新 N 集 |
 | `inside.enabled` | `true` 时启用独立的 Inside 播客列表；`false` 时隐藏其侧栏入口 |
-| `media.manifest` | 版本化资产清单路径，相对于仓库根目录 |
-| `media.object_prefix` | 音频对象在清单与 R2 中的前缀，默认 `files` |
-| `media.public_path` | 文章播放器使用的站内公开路径 |
-| `media.url` | RSS enclosure 使用的绝对 HTTPS 发布根 URL |
+| `media.prefix` | 清单键和站内媒体路径前缀；缺省时继承 `audio.media.prefix` |
+| `media.source_dir` | legacy 本地目录，相对于 `source/`；默认等于有效 prefix |
+| `media.url` | 可选外部 HTTPS 媒体根 URL；同时覆盖页面与 RSS 地址 |
 
 当 `dry_run: false` 时，`title`、`description`、`author`、`email`、
 `language`、`image` 和 `category.text` 都不能为空；邮箱必须是可公开使用的有效联系地址，

@@ -15,10 +15,10 @@ const {
   manifestFilePath,
   normaliseObjectKey,
   serialiseManifest
-} = require('./assets-manifest');
-const { createR2Client, hashFile } = require('./r2-client');
+} = require('./lib/manifest');
+const { createR2Client, hashFile } = require('./lib/r2-client');
 
-const REPOSITORY_ROOT = path.resolve(__dirname, '..');
+const REPOSITORY_ROOT = path.resolve(__dirname, '../..');
 const WORKSPACE_PATH = path.join(REPOSITORY_ROOT, '.assets-workspace.json');
 const GITIGNORE_PATH = path.join(REPOSITORY_ROOT, '.gitignore');
 const R2_ASSET_IGNORE_RULES = ['source/files/**', 'source/img/df.zip'];

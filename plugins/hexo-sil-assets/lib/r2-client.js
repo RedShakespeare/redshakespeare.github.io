@@ -1,5 +1,7 @@
 'use strict';
 
+// Cloudflare R2 transport used by the hexo-sil-assets maintenance CLI.
+
 const crypto = require('node:crypto');
 const fs = require('node:fs');
 const fsp = require('node:fs/promises');

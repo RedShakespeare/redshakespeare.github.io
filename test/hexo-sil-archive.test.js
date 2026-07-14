@@ -18,18 +18,20 @@ const {
   resolveArchive,
   toArchiveConfig
 } = require('../scripts/hexo-sil-archive');
-const { serialiseManifest } = require('../tools/assets-manifest');
+const { createAssetCapability, serialiseManifest } = require('../plugins/hexo-sil-assets');
 
 const baseDir = path.resolve(__dirname, '..');
 
 function mockHexo({ root = '/', archive, workingDir = baseDir } = {}) {
-  const calls = { generators: [], injectors: [], tags: [] };
+  const calls = { generators: [], injectors: [], tags: [], logs: [] };
   return {
     base_dir: workingDir,
+    source_dir: path.join(workingDir, 'source'),
+    sil: { assets: createAssetCapability({ baseDir: workingDir }) },
+    log: { warn: message => calls.logs.push(message) },
     config: {
       root,
-      assets: { manifest: 'source/_data/assets.json' },
-      archive: archive === undefined ? { defaults: { source_dir: 'files' } } : archive
+      archive: archive === undefined ? { assets: { enabled: true }, defaults: { prefix: 'files' } } : archive
     },
     extend: {
       generator: { register: (name, fn) => calls.generators.push({ name, fn }) },
@@ -59,22 +61,22 @@ test('archive configuration derives public paths and applies tag, collection, th
   });
 
   assert.deepEqual(resolveArchive(config, { collection: 'hxh-civ' }), {
+    prefix: 'files/hxh_civ',
     sourceDir: 'files/hxh_civ',
-    publicPath: 'files/hxh_civ',
     title: '文明搜索',
     placeholder: '默认占位',
     hint: '默认提示'
   });
   assert.deepEqual(resolveArchive(config, parseArchiveTagArgs(['collection=hxh-civ', 'title=\"标签标题\"'])), {
+    prefix: 'files/hxh_civ',
     sourceDir: 'files/hxh_civ',
-    publicPath: 'files/hxh_civ',
     title: '标签标题',
     placeholder: '默认占位',
     hint: '默认提示'
   });
   assert.deepEqual(resolveArchive(config, parseArchiveTagArgs(['prefix=files/rl'])), {
+    prefix: 'files/rl',
     sourceDir: 'files/rl',
-    publicPath: 'files/rl',
     title: '默认搜索',
     placeholder: '默认占位',
     hint: '默认提示'
@@ -83,19 +85,20 @@ test('archive configuration derives public paths and applies tag, collection, th
   assert.throws(() => resolveArchive(config, { collection: 'missing' }), /unknown collection/);
   assert.throws(() => parseArchiveTagArgs(['source_dir=files/a', 'source_dir=files/b']), /more than once/);
   assert.throws(() => parseArchiveTagArgs(['folder=files/a']), /does not support/);
+  assert.throws(() => parseArchiveTagArgs(['public_path=files/a']), /does not support/);
 });
 
 test('archive card serialises resolved data and can be rediscovered from rendered content', () => {
   const card = renderArchiveCard({
+    prefix: 'downloads/library',
     sourceDir: 'files/library',
-    publicPath: 'downloads/library',
     title: 'A < B',
     placeholder: 'Find',
     hint: 'Hint'
   }, { root: '/blog/' });
-  assert.ok(card.includes('data-sil-archive-tree="/blog/archive-data/tx9_-GzdD961fbTe0fglO1L1o4KjM5nh8fYWw-HtmLQ.json"'));
+  assert.ok(card.includes(`data-sil-archive-tree="/blog/${archiveTreePath('downloads/library')}"`));
   assert.match(card, /A &lt; B/);
-  assert.deepEqual(extractArchiveCards({ pages: [{ content: card }] }), [{ sourceDir: 'files/library', publicPath: 'downloads/library' }]);
+  assert.deepEqual(extractArchiveCards({ pages: [{ content: card }] }), [{ prefix: 'downloads/library', sourceDir: 'files/library' }]);
 });
 
 test('tree routes include configured and tag-defined collections with LFS sizes', async t => {
@@ -108,9 +111,9 @@ test('tree routes include configured and tag-defined collections with LFS sizes'
     'files/library/large.bin': { size: 987654, sha256: 'b'.repeat(64), type: 'application/octet-stream' }
   }));
 
-  const config = toArchiveConfig({ archive: { collections: { library: { prefix: 'files/library' } } } });
+  const config = toArchiveConfig({ archive: { assets: { enabled: true }, collections: { library: { prefix: 'files/library' } } } });
   const card = renderArchiveCard(resolveArchive(config, { collection: 'library' }));
-  const routes = buildArchiveRoutes({ pages: [{ content: card }], posts: [] }, config, { baseDir: temporary, manifestPath: 'source/_data/assets.json' });
+  const routes = buildArchiveRoutes({ pages: [{ content: card }], posts: [] }, config, { baseDir: temporary, assetCapability: createAssetCapability({ baseDir: temporary }) });
   assert.equal(routes.length, 1);
   assert.equal(routes[0].path, archiveTreePath('files/library'));
   const tree = JSON.parse(routes[0].data);
@@ -120,28 +123,36 @@ test('tree routes include configured and tag-defined collections with LFS sizes'
   assert.equal(tree.children[1].size, 987654);
 
   const conflicting = renderArchiveCard({
+    prefix: 'files/library',
     sourceDir: 'files/other',
-    publicPath: 'files/library',
     title: 'Other',
     placeholder: 'Find',
     hint: 'Hint'
   });
   assert.throws(
-    () => buildArchiveRoutes({ pages: [{ content: card + conflicting }], posts: [] }, config, { baseDir: temporary, manifestPath: 'source/_data/assets.json' }),
+    () => buildArchiveRoutes({ pages: [{ content: card + conflicting }], posts: [] }, config, { baseDir: temporary, assetCapability: createAssetCapability({ baseDir: temporary }) }),
     /maps to both/
   );
+});
 
-  const alternateUrl = renderArchiveCard({
-    sourceDir: 'files/library',
-    publicPath: 'mirrors/library',
-    title: 'Mirror',
-    placeholder: 'Find',
-    hint: 'Hint'
+test('enabled integration falls back to a legacy source directory when the capability is absent', async t => {
+  const temporary = await fsp.mkdtemp(path.join(os.tmpdir(), 'hexo-sil-archive-legacy-'));
+  t.after(() => fsp.rm(temporary, { recursive: true, force: true }));
+  const library = path.join(temporary, 'source', 'legacy-library');
+  await fsp.mkdir(library, { recursive: true });
+  await fsp.writeFile(path.join(library, 'guide.txt'), 'guide');
+  let warnings = 0;
+  const config = toArchiveConfig({
+    archive: { assets: { enabled: true }, collections: { library: { prefix: 'files/library', source_dir: 'legacy-library' } } }
   });
-  assert.equal(
-    buildArchiveRoutes({ pages: [{ content: card + alternateUrl }], posts: [] }, config, { baseDir: temporary, manifestPath: 'source/_data/assets.json' }).length,
-    1
-  );
+  const routes = buildArchiveRoutes({ pages: [], posts: [] }, config, {
+    baseDir: temporary,
+    sourceRoot: path.join(temporary, 'source'),
+    onMissingAssets: () => { warnings += 1; }
+  });
+  const tree = JSON.parse(routes[0].data);
+  assert.equal(tree.children[0].name, 'guide.txt');
+  assert.equal(warnings, 1);
 });
 
 test('Ephesus skin mirrors the audio card frame and runtime supports SPA cards', async () => {

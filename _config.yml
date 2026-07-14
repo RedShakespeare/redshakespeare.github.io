@@ -150,17 +150,20 @@ assets:
   # The manifest's state switches the deployment from the legacy mirror to R2 after npm run assets:migrate -- --finalize.
   manifest: source/_data/assets.json
 audio:
-  # hexo-sil-audio reads local-file metadata from assets.manifest.
+  assets:
+    enabled: true
   media:
-    manifest: source/_data/assets.json
-    object_prefix: files
-    public_path: /files/
+    prefix: files
+    # source_dir: files
+    # url: https://media.example.com/files/
   skin:
     builtin: ephesus
     # Loaded after the built-in skin. Set builtin to false for a fully custom skin.
     # override: /css/hexo-sil-audio.local.css
 archive:
   # hexo-sil-archive: searchable file collections rendered with the {% archive %} tag.
+  assets:
+    enabled: true
   skin:
     builtin: ephesus
     # override: /css/hexo-sil-archive.local.css
@@ -191,13 +194,12 @@ podcast:
   category:
     text: Leisure
     subcategory: Games
-  # `file` metadata comes from assets.manifest; R2 is the binary source of truth.
-  # The article player uses public_path; the podcast RSS enclosure uses url.
+  assets:
+    enabled: true
   media:
-    manifest: source/_data/assets.json
-    object_prefix: files
-    public_path: /files/
-    url: https://dl.ephesus.top/files/
+    # prefix defaults to audio.media.prefix.
+    # source_dir: files
+    # url: https://media.example.com/files/
   explicit: false
   # 0 keeps the full published episode catalogue in the podcast feed.
   limit: 0

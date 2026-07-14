@@ -14,19 +14,29 @@ const {
   renderAudioPlayer,
   toAudioConfig
 } = require('../scripts/hexo-sil-audio');
+const { createAssetCapability } = require('../plugins/hexo-sil-assets');
 
 const baseDir = path.resolve(__dirname, '..');
-const runtime = { baseDir, root: '/', media: { manifestPath: 'source/_data/assets.json', objectPrefix: 'files', publicPath: 'files' } };
+const runtime = {
+  baseDir,
+  root: '/',
+  assetsEnabled: true,
+  assetCapability: createAssetCapability({ baseDir }),
+  media: { prefix: 'files', sourceDir: 'files', url: '' }
+};
 
 function post(overrides = {}) {
   return { source: 'source/_posts/music.md', path: '2026/music/', title: 'Article Title', ...overrides };
 }
 
 function mockHexo({ root = '/', audio = {} } = {}) {
-  const calls = { filters: [], generators: [], injectors: [], tags: [] };
+  const calls = { filters: [], generators: [], injectors: [], tags: [], logs: [] };
   return {
     base_dir: baseDir,
-    config: { root, assets: { manifest: 'source/_data/assets.json' }, audio: { media: { manifest: 'source/_data/assets.json', object_prefix: 'files', public_path: '/files/' }, ...audio } },
+    source_dir: path.join(baseDir, 'source'),
+    sil: { assets: createAssetCapability({ baseDir }) },
+    log: { warn: message => calls.logs.push(message) },
+    config: { root, audio: { assets: { enabled: true }, media: { prefix: 'files' }, ...audio } },
     extend: {
       filter: { register: (name, fn) => calls.filters.push({ name, fn }) },
       generator: { register: (name, fn) => calls.generators.push({ name, fn }) },
@@ -37,17 +47,20 @@ function mockHexo({ root = '/', audio = {} } = {}) {
   };
 }
 
-test('audio configuration reads local-file metadata from the asset manifest', () => {
-  assert.deepEqual(toAudioConfig({}).media, { manifestPath: 'source/_data/assets.json', objectPrefix: 'files', publicPath: 'files' });
+test('audio configuration uses one prefix and optional legacy or external overrides', () => {
+  assert.deepEqual(toAudioConfig({}).assets, { enabled: false });
+  assert.deepEqual(toAudioConfig({}).media, { prefix: 'files', sourceDir: 'files', url: '' });
   assert.deepEqual(toAudioConfig({}).skin, { builtin: 'ephesus', override: '' });
-  assert.deepEqual(toAudioConfig({ assets: { manifest: 'source/_data/custom-assets.json' }, audio: { media: { object_prefix: 'audio', public_path: '/audio/' } } }).media, {
-    manifestPath: 'source/_data/custom-assets.json', objectPrefix: 'audio', publicPath: 'audio'
+  assert.deepEqual(toAudioConfig({ audio: { assets: { enabled: true }, media: { prefix: 'audio', source_dir: 'legacy/audio', url: 'https://media.example.test/audio' } } }).media, {
+    prefix: 'audio', sourceDir: 'legacy/audio', url: 'https://media.example.test/audio/'
   });
   assert.deepEqual(toAudioConfig({ audio: { skin: { builtin: false, override: '/css/player.css' } } }).skin, {
     builtin: false, override: '/css/player.css'
   });
   assert.throws(() => toAudioConfig({ audio: { skin: { builtin: 'inside' } } }), /skin\.builtin/);
   assert.throws(() => toAudioConfig({ audio: { skin: { override: 'css/player.css' } } }), /root-relative CSS path/);
+  assert.throws(() => toAudioConfig({ audio: { media: { object_prefix: 'files' } } }), /media\.prefix/);
+  assert.throws(() => toAudioConfig({ audio: { media: { url: 'https://example.test/files?token=secret' } } }), /query string/);
 });
 
 test('local music derives its player path and uses the requested title priority', async () => {
@@ -69,6 +82,34 @@ test('HTTPS music can omit MIME type and waits for browser metadata duration', a
   assert.equal(audio.duration, '');
   assert.equal(audio.title, 'Article Title');
   assert.match(renderAudioPlayer(audio), /--:--/);
+});
+
+test('media.url replaces the local player and download location', async () => {
+  const external = await normaliseAudio(post(), { file: 'podcast/Minecraft-08-Minecraft.mp3' }, {
+    ...runtime,
+    media: { ...runtime.media, url: 'https://media.example.test/assets/' }
+  });
+  assert.equal(external.playerAudio, 'https://media.example.test/assets/podcast/Minecraft-08-Minecraft.mp3');
+});
+
+test('enabled integration safely falls back to legacy local files when the capability is absent', async () => {
+  let warnings = 0;
+  const legacy = await normaliseAudio(post(), { file: 'podcast/Minecraft-08-Minecraft.mp3' }, {
+    ...runtime,
+    assetCapability: null,
+    onMissingAssets: () => { warnings += 1; }
+  });
+  assert.equal(legacy.length, 4117599);
+  assert.equal(legacy.duration, '04:14');
+  assert.equal(legacy.playerAudio, '/files/podcast/Minecraft-08-Minecraft.mp3');
+  assert.equal(warnings, 1);
+});
+
+test('an installed but broken manifest capability fails instead of falling back', async () => {
+  await assert.rejects(normaliseAudio(post(), { file: 'podcast/Minecraft-08-Minecraft.mp3' }, {
+    ...runtime,
+    assetCapability: { getObject: () => { throw new Error('Asset manifest error: broken manifest.'); } }
+  }), /broken manifest/);
 });
 
 test('music validation rejects ambiguous sources and unsafe local paths', async () => {

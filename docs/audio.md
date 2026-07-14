@@ -6,21 +6,24 @@ RSS，也不会把音乐加入 `/podcasts/`。
 
 ## 配置
 
-本地音频维护时仍可位于 `source/files/`，但发布与构建从资产清单读取元数据，并以 `/files/` 提供：
+`prefix` 同时表示资产清单键前缀和默认站内路径。启用资产插件时从清单读取元数据；插件未安装时回退到
+`source/<prefix>/` 的 legacy 文件：
 
 ```yaml
 audio:
+  assets:
+    enabled: true
   media:
-    manifest: source/_data/assets.json
-    object_prefix: files
-    public_path: /files/
+    prefix: files
+    # source_dir: files
+    # url: https://media.example.com/files/
   skin:
     builtin: ephesus
     # override: /css/hexo-sil-audio.local.css
 ```
 
-`manifest`、`object_prefix` 和 `public_path` 都可修改为安全的相对路径。普通文章音乐不使用
-`podcast.media`，后者仍只用于播客 RSS enclosure。
+`source_dir` 相对于 Hexo 的 `source/`，只在 legacy 本地目录与 prefix 不同时填写。`url` 只在音频位于
+外部 HTTPS 域名时填写；一旦配置，播放器和下载链接都会改用该外链基址。
 
 ## 播放器皮肤
 
@@ -81,8 +84,8 @@ music:
 显式 `file` 或 `audio` 会替换默认音源。只要文章内存在音乐标签，就不会再在开头重复插入
 默认播放器；因此一篇文章可以放置多首音乐。
 
-音源必须唯一选择清单内的 `file` 或绝对 HTTPS `audio`。`file` 相对于
-`audio.media.object_prefix`，支持 MP3、M4A/M4B/MP4、AAC、OGG、Opus、WAV、FLAC、AIFF 和
+音源必须唯一选择 prefix 下的 `file` 或绝对 HTTPS `audio`。`file` 相对于
+`audio.media.prefix`，支持 MP3、M4A/M4B/MP4、AAC、OGG、Opus、WAV、FLAC、AIFF 和
 WebM；时长与 MIME 类型在 `npm run publish` 时写入清单。外链音频的时长会在浏览器取得元数据后显示。
 
 播放器标题依次使用：显式 `music.title` 或标签 `title`、文章标题、清单中的音频内嵌标题、文件名。
