@@ -92,6 +92,15 @@
   </url>
   
   <url>
+    <loc>https://www.ephesus.top/files/rl/emeraldwoods/web/data/onboarding.json</loc>
+    
+    <lastmod>2026-07-14</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://www.ephesus.top/files/rl/emeraldwoods/web/data/plants.json</loc>
     
     <lastmod>2026-07-14</lastmod>
@@ -120,15 +129,6 @@
   
   <url>
     <loc>https://www.ephesus.top/files/rl/emeraldwoods/web/data/worldObjects.json</loc>
-    
-    <lastmod>2026-07-14</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.ephesus.top/files/rl/emeraldwoods/web/data/onboarding.json</loc>
     
     <lastmod>2026-07-14</lastmod>
     
@@ -434,7 +434,14 @@
 
   
   <url>
-    <loc>https://www.ephesus.top/tags/tomenet/</loc>
+    <loc>https://www.ephesus.top/tags/Avanor/</loc>
+    <lastmod>2026-07-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.ephesus.top/tags/roguelike/</loc>
     <lastmod>2026-07-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -455,7 +462,7 @@
   </url>
   
   <url>
-    <loc>https://www.ephesus.top/tags/roguelike/</loc>
+    <loc>https://www.ephesus.top/tags/tomenet/</loc>
     <lastmod>2026-07-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -533,13 +540,6 @@
   
   <url>
     <loc>https://www.ephesus.top/tags/Losing-is-Fun/</loc>
-    <lastmod>2026-07-14</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.ephesus.top/tags/Avanor/</loc>
     <lastmod>2026-07-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
