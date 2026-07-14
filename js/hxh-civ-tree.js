@@ -2,7 +2,9 @@
   const root = document.getElementById('hxh-civ-root');
   const queryInput = document.getElementById('hxh-civ-query');
   const meta = document.getElementById('hxh-civ-meta');
-  if (!root || !queryInput || !meta || root.dataset.hxhCivReady === 'true') return;
+  const clearButton = document.getElementById('hxh-civ-clear');
+  const search = queryInput?.closest('.hxh-civ-search');
+  if (!root || !queryInput || !meta || !clearButton || root.dataset.hxhCivReady === 'true') return;
 
   root.dataset.hxhCivReady = 'true';
 
@@ -91,6 +93,15 @@
     root.replaceChildren(renderEntries(tree.children, query));
     const visibleFiles = visibleFileCount(tree.children, query);
     meta.textContent = query ? `找到 ${visibleFiles} 个文件。` : `共 ${countFiles(tree.children)} 个文件。`;
+    clearButton.hidden = !queryInput.value;
+    clearButton.disabled = queryInput.disabled || !queryInput.value;
+  }
+
+  function clearQuery(tree) {
+    if (!queryInput.value) return;
+    queryInput.value = '';
+    render(tree);
+    queryInput.focus();
   }
 
   fetch('/files/hxh_civ/tree.json', { cache: 'no-store' })
@@ -101,10 +112,19 @@
     .then((tree) => {
       if (!tree || !Array.isArray(tree.children)) throw new Error('invalid tree');
       queryInput.disabled = false;
+      search?.setAttribute('aria-busy', 'false');
       queryInput.addEventListener('input', () => render(tree));
+      queryInput.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape' && queryInput.value) {
+          event.preventDefault();
+          clearQuery(tree);
+        }
+      });
+      clearButton.addEventListener('click', () => clearQuery(tree));
       render(tree);
     })
     .catch(() => {
       meta.textContent = '目录加载失败，请稍后重试。';
+      search?.setAttribute('aria-busy', 'false');
     });
 })();
