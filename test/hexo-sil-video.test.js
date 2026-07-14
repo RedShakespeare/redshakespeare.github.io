@@ -9,15 +9,18 @@ const test = require('node:test');
 const subsrt = require('subsrt');
 const {
   BUILTIN_SKINS,
+  FULLSCREEN_UI_HIDE_DELAY,
   PLAYER_START,
   RUNTIME_ROUTES,
+  VOLUME_CLOSE_DELAY,
   mergeVideo,
   normaliseVideo,
   parseVideoTagArgs,
   registerVideoPlugin,
   renderVideoPlayer,
   runtimeRouteData,
-  toVideoConfig
+  toVideoConfig,
+  volumeLevel
 } = require('../plugins/hexo-sil-video');
 
 const fixtureRoot = fsSync.mkdtempSync(path.join(os.tmpdir(), 'hexo-sil-video-'));
@@ -159,6 +162,13 @@ test('rendered player exposes native fallback, custom controls, downloads, and r
   assert.match(html, /data-sil-video-action="rate"[^>]*>1×/);
   assert.match(html, /data-sil-video-action="repeat"/);
   assert.match(html, /data-sil-video-action="fullscreen"/);
+  assert.match(html, /data-sil-video-stage/);
+  assert.match(html, /sil-video-player__icon--once/);
+  assert.match(html, /sil-video-player__icon--repeat/);
+  assert.match(html, /sil-video-player__icon--volume-low/);
+  assert.match(html, /sil-video-player__icon--volume-medium/);
+  assert.match(html, /sil-video-player__icon--volume-high/);
+  assert.match(html, /orient="vertical"/);
   assert.match(html, /下载简体中文字幕/);
   assert.match(html, /data-sil-video-model="[A-Za-z0-9+/=]+"/);
   assert.doesNotMatch(html, /<script class="sil-video-player__model"/);
@@ -178,6 +188,18 @@ test('SRT conversion produces an ASS track suitable for JASSUB', () => {
   const converted = subsrt.convert('1\n00:00:00,000 --> 00:00:01,000\nHello\n', { from: 'srt', to: 'ass' });
   assert.match(converted, /ScriptType: v4\.00\+/);
   assert.match(converted, /Dialogue: 0,0:00:00\.00,0:00:01\.00/);
+});
+
+test('volume levels expose muted and one-to-three-wave thresholds', () => {
+  assert.equal(VOLUME_CLOSE_DELAY, 800);
+  assert.equal(FULLSCREEN_UI_HIDE_DELAY, 2500);
+  assert.equal(volumeLevel(0, false), 'muted');
+  assert.equal(volumeLevel(0.2, false), 'low');
+  assert.equal(volumeLevel(1 / 3, false), 'low');
+  assert.equal(volumeLevel(0.5, false), 'medium');
+  assert.equal(volumeLevel(2 / 3, false), 'medium');
+  assert.equal(volumeLevel(0.9, false), 'high');
+  assert.equal(volumeLevel(1, true), 'muted');
 });
 
 test('plugin registers skin, runtime assets, tag, and duplicate-safe post injection', async () => {
@@ -207,7 +229,20 @@ test('Ephesus skin and runtime retain the specified palette and interaction cont
   assert.match(css, /--sil-video-surface:#000/);
   assert.match(css, /--sil-video-ink:#673ab7/);
   assert.match(css, /sil-video-player__volume-popover/);
+  assert.match(css, /border-left-width:3px/);
+  assert.match(css, /sil-video-player__video:focus-visible \{ outline:1px solid/);
+  assert.match(css, /sil-video-player__volume \{[^}]*writing-mode:vertical-lr/);
+  assert.doesNotMatch(css, /volume-control:focus-within/);
+  assert.match(css, /sil-video-player__stage:fullscreen/);
+  assert.match(css, /data-sil-video-ui-hidden/);
+  assert.doesNotMatch(css, /sil-video-player:fullscreen/);
   assert.match(runtimeSource, /const rates = \[1, 1\.25, 1\.5, 1\.75, 2, 0\.5, 0\.75\]/);
+  assert.match(runtimeSource, /stage\.requestFullscreen\(\)/);
+  assert.doesNotMatch(runtimeSource, /player\.requestFullscreen\(\)/);
+  assert.match(runtimeSource, /document\.fullscreenElement === stage/);
+  assert.match(runtimeSource, /subtitleRenderer\.resize\(true\)/);
+  assert.match(runtimeSource, /window\.setTimeout\([\s\S]*VOLUME_CLOSE_DELAY/);
+  assert.match(runtimeSource, /window\.setTimeout\([\s\S]*FULLSCREEN_UI_HIDE_DELAY/);
   assert.match(runtimeSource, /event\.key === 'Enter'/);
   assert.match(runtimeSource, /event\.key === 'Escape'/);
   assert.match(runtimeSource, /document\.exitFullscreen\(\)/);
