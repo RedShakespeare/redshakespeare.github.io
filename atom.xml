@@ -6,7 +6,7 @@
   <link href="https://www.ephesus.top/atom.xml" rel="self"/>
   
   <link href="https://www.ephesus.top/"/>
-  <updated>2026-07-13T06:00:00.000Z</updated>
+  <updated>2026-07-14T10:00:00.000Z</updated>
   <id>https://www.ephesus.top/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>[测试视频] 本地 MP4 播放</title>
+    <link href="https://www.ephesus.top/2026/video-test/"/>
+    <id>https://www.ephesus.top/2026/video-test/</id>
+    <published>2026-07-14T18:00:00.000Z</published>
+    <updated>2026-07-14T10:00:00.000Z</updated>
+    
+    <content type="html"><![CDATA[<!-- hexo-sil-video:start --><aside class="sil-video-player" data-sil-video-player data-sil-video-model="eyJzdWJ0aXRsZXMiOltdLCJmb250cyI6e30sImZhbGxiYWNrRm9udCI6IiIsInJ1bnRpbWUiOnsic2NyaXB0IjoiL2pzL2hleG8tc2lsLXZpZGVvLmpzIiwid29ya2VyIjoiL2pzL2hleG8tc2lsLXZpZGVvLXdvcmtlci5qcyIsIndhc20iOiIvd2FzbS9oZXhvLXNpbC12aWRlby53YXNtIiwibW9kZXJuV2FzbSI6Ii93YXNtL2hleG8tc2lsLXZpZGVvLW1vZGVybi53YXNtIiwiZGVmYXVsdEZvbnQiOiIvZm9udHMvaGV4by1zaWwtdmlkZW8tZGVmYXVsdC53b2ZmMiJ9fQ==" tabindex="0" aria-label="视频播放器" style="--sil-video-aspect-ratio:16/9">  <header class="sil-video-player__header"><span class="sil-video-player__title">本地 MP4 测试视频</span><span class="sil-video-player__status" data-sil-video-status role="status" aria-live="polite"></span></header>  <div class="sil-video-player__viewport" data-sil-video-viewport>    <video class="sil-video-player__video" controls preload="metadata"><source src="/files/videos/3.mp4" type="video/mp4">你的浏览器不支持 HTML5 视频播放。</video>  </div>  <div class="sil-video-player__progress-row">    <span class="sil-video-player__time" data-sil-video-current>0:00</span>    <input class="sil-video-player__range sil-video-player__progress" data-sil-video-progress type="range" min="0" max="100" step="0.1" value="0" aria-label="播放进度" aria-valuetext="0:00">    <span class="sil-video-player__time" data-sil-video-duration>--:--</span>  </div>  <div class="sil-video-player__toolbar" role="group" aria-label="视频控制">    <button class="sil-video-player__button" data-sil-video-action="play" type="button" aria-label="播放" aria-pressed="false"><svg class="sil-video-player__icon sil-video-player__icon--play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg><svg class="sil-video-player__icon sil-video-player__icon--pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 5h4v14H7zm6 0h4v14h-4z"/></svg><svg class="sil-video-player__icon sil-video-player__icon--replay" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5a7 7 0 1 1-6.3 4H3l4-4 4 4H7.8A5 5 0 1 0 12 7z"/></svg></button>    <div class="sil-video-player__volume-control">      <button class="sil-video-player__button" data-sil-video-action="mute" type="button" aria-label="静音" aria-pressed="false"><svg class="sil-video-player__icon sil-video-player__icon--volume" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10v4h4l5 4V6L7 10zm12.5 2a3.5 3.5 0 0 0-2-3.15v6.29A3.5 3.5 0 0 0 15.5 12z"/></svg><svg class="sil-video-player__icon sil-video-player__icon--muted" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10v4h4l5 4V6L7 10zm11-1 6 6m0-6-6 6" fill="none" stroke="currentColor" stroke-width="2"/></svg></button>      <div class="sil-video-player__volume-popover"><input class="sil-video-player__range sil-video-player__volume" data-sil-video-volume type="range" min="0" max="1" step="0.05" value="1" aria-label="音量"></div>    </div>    <button class="sil-video-player__button sil-video-player__rate" data-sil-video-action="rate" type="button" aria-label="播放速度 1 倍">1×</button>    <button class="sil-video-player__button" data-sil-video-action="repeat" type="button" aria-label="播放一次" aria-pressed="false"><svg class="sil-video-player__icon sil-video-player__icon--repeat" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7h10l-2.5-2.5L16 3l5 5-5 5-1.5-1.5L17 9H7a3 3 0 0 0-3 3v1H2v-1a5 5 0 0 1 5-5zm10 8H7l2.5 2.5L8 19l-5-5 5-5 1.5 1.5L7 13h10a3 3 0 0 0 3-3V9h2v1a5 5 0 0 1-5 5z"/></svg></button>    <div class="sil-video-player__subtitle-control">      <button class="sil-video-player__button" data-sil-video-action="subtitles" type="button" aria-label="字幕" aria-expanded="false"><svg class="sil-video-player__icon sil-video-player__icon--subtitles" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5h18v14H3zm2 2v10h14V7zm1 6h5v2H6zm7 0h5v2h-5zM6 9h8v2H6z"/></svg></button>      <div class="sil-video-player__subtitle-menu" data-sil-video-subtitle-menu hidden></div>    </div>    <span class="sil-video-player__toolbar-spacer"></span>    <a class="sil-video-player__button" href="/files/videos/3.mp4" target="_blank" rel="noopener" aria-label="下载视频" title="下载视频"><svg class="sil-video-player__icon sil-video-player__icon--download" viewBox="0 0 24 24" aria-hidden="true"><path d="M11 3h2v10.2l3.6-3.6L18 11l-6 6-6-6 1.4-1.4 3.6 3.6zM5 19h14v2H5z"/></svg></a>    <button class="sil-video-player__button" data-sil-video-action="fullscreen" type="button" aria-label="进入全屏"><svg class="sil-video-player__icon sil-video-player__icon--fullscreen" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h6v2H6v4H4zm10 0h6v6h-2V6h-4zM4 14h2v4h4v2H4zm14 0h2v6h-6v-2h4z"/></svg></button>  </div>  <div class="sil-video-player__subtitle-downloads" data-sil-video-subtitle-downloads></div></aside><!-- hexo-sil-video:end --><p>这是 <code>hexo-sil-video</code> 的本地测试文章。</p><p>视频文件位于 <code>source/files/videos/3.mp4</code>，本测试不配置字幕。</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;!-- hexo-sil-video:start --&gt;
+&lt;aside class=&quot;sil-video-player&quot; data-sil-video-player data-sil-video-model=&quot;eyJzdWJ0aXRsZXMiOltdLCJmb250cyI6e3</summary>
+      
+    
+    
+    
+    
+    <category term="Test" scheme="https://www.ephesus.top/tags/Test/"/>
+    
+  </entry>
   
   <entry>
     <title>[测试播客] Minecraft - 08. Minecraft</title>
@@ -743,38 +766,6 @@
     <category term="AI" scheme="https://www.ephesus.top/tags/AI/"/>
     
     <category term="Maunal" scheme="https://www.ephesus.top/tags/Maunal/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>写在蒂尔之书中的又一场悲哀的死亡</title>
-    <link href="https://www.ephesus.top/2022/another_yasd/"/>
-    <id>https://www.ephesus.top/2022/another_yasd/</id>
-    <published>2022-04-10T23:56:02.000Z</published>
-    <updated>2022-04-10T15:56:02.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>原作：Kastaka</p><p>译：Silencess</p><p><strong>作者寄语：</strong></p><p>致soundingsea。</p><p>杰丝敏大步流星地踏上地牢入口氤氲潮气的石阶，身边陪着她的只有她可靠的小猫伊墨儿。她的身侧挂着母亲的佩剑；她的臂上戴着父亲准备的圆盾——那是他为她的旅程从矮人手上买来的。她身上还剩了把餐刀，但所有的光源和生火工具都已经毁在先前一场渡河事故中了。</p><p>地牢的洞穴闪烁着诱人而奇特的光芒。一切都是那么轻而易举。杀死狗头人。杀死壁虎。杀死蝙蝠。搜索暗门。她饥饿地盯着她唯一的口粮——长途跋涉已经几乎让她的补给消耗殆尽了——可她还是改吃了那条壁虎和一种奇奇怪怪、看起来有害的地衣。伊墨儿独自打倒了一头郊狼，因此它毫无争议地享用了它的战利品。</p><p>披甲的地精撩动着她的物欲，但她坚决克制了穿上那件地精盔甲的想法，唯恐那上面其实带有她所听闻的那些肮脏诅咒。她坚实可靠的盾牌尚能做好保护的工作。她也确信，自己更愿意把随意丢弃在地上的青玉戒指（旁边还有一大堆金币——那又是什么情况？）卖个好价钱，而不是冒险戴上它、迎接未知的馈赠或危险。除了这些以外，她还在地牢里听到过守卫的行进声和不知何人的数钱声，尽管在好一番搜寻后，这些声音仍然捉摸不定。</p><p>在她差点刺穿一位霍比特人之前，她还没意识到这一切可能比她以为的更加复杂。她刚刚打开了一扇门，里面是个矮小的人形身影，她举剑就刺……</p><p>“你干嘛呢？”霍比特人说，看起来有些恼怒。</p><p>“噢。”她惊愕地回应，慌忙停下战斗姿态，“呃。抱歉打扰您了，霍比特人先生。”</p><p>“你也确实该觉得抱歉。”那霍比特人抱怨着，“你们这些疯狂的冒险家，总是攥着凶器一路横冲直撞，下到这里来妨碍我们地下民族的正常生意。”</p><p>“啊……”她说，“呃。你听说过岩德护符吗？”</p><p>“哦，你也在做那个该死的愚蠢任务，是不是？”他回道，“又是带着小猫跑到这儿来的，我懂了。很遗憾，我实话跟你说吧小姐，你大概已经活不久了。在这地方我遇到过很多人，绝大多数都带着那种自负和青春的活力东奔西走，他们没一个能走多远的；只有那些回到这里安家立业的人才有希望，丫头。我劝你还是赶紧从地牢里逃出去吧，趁你还有机会。”</p><p>“还有其他人在寻找护符？”她问，简直不敢相信自己的耳朵。</p><p>“哦废话，”霍比特人说，“这种人一大群。不过我怀疑你一个都遇不上。都是独来独往的家伙，从来没见过哪里会同时出现两个。当然，死了的就更少了。”</p><p>她还想问其他问题，但他很不耐烦地打断了她。</p><p>“听着，我真是谢谢你没直接把我戳个窟窿，但我也有自己的生活要对付，明白？”</p><p>“您还能告诉我什么事吗？”她绝望地发问，“任何能帮我完成任务的事都行？”</p><p>“别喝泉水。”他撂下一句话，随后径直转身离开。</p><p>她回想起之前楼层遇到的泉水，心在自责中一点点往下沉。泉水上层尝起来有些污浊，确实，但是第二口水还挺振奋人心的啊。长途跋涉了这么久，她真的需要清澈宜人的流水，需要洗掉嘴里那些尸体的味道。</p><p>那次偶遇之后，她有一段时间几乎感觉自己像个英雄，一路踢开房门，还收集了一大把兽人匕首。但当她遭遇了某种僵尸时，令人眩晕的饥饿终究逼迫她咽下了最后一块口粮。现在地衣和黏液对她的口腹已经无能为力了。她狼吞虎咽地吃下两具丘陵兽人的尸体、差点噎住，随后才意识到自己刚刚把一块巨石推撞在一扇门上（也许是另一块巨石上），没办法把它移开了。她想哭。这会是她胜利进军的终点吗？就只是被岩石卡住，永远不可能完成任务？</p><p>她试着从其他分支下楼，又路过了刚才那位霍比特人，但他只是怜悯地看着她。她幻想着冲上去摇晃他、逼问他从哪里来的食物，甚至做一顿烤霍比特腿来犒劳自己；但她守序的天性在脑海中大喊，于是她只是对他礼貌地点了下头。她烦躁地跳着脚等小猫靠近身边。等伊墨儿终于慢悠悠地晃过来，她立即从楼梯上冲下去，不敢与霍比特人悲哀的眼神对视。</p><p>下面好黑。她摸着墙壁小心翼翼地选着前进的路，有水从很高的地方落在了她的头顶。侏儒们借着影子朝她投掷有害的药水合剂。她咽下它们中的一员，努力不去思考它有多么像人。伊墨儿叼回一串项链，她弯下腰摸了摸这可怜的小家伙。“我希望我有东西能喂你，”她轻叹，“可我没有。我连自己都喂不饱了。我还得背着这么多武器，我都不知道它们会不会有什么用处，也许有些其实只是垃圾。它们快把我压垮了。”</p><p>她看到一个侏儒掉进了陷坑里，但它挡住了她的去路，因此她没办法留它听天由命。吞食尸体现在已经成了日常。她杀死一头小马，把它生吞活剥，模模糊糊地想着也许她本可以拥有一匹战马，要是她手中有一点胡萝卜的话。虽然即使真有胡萝卜也早该在路上被她吃掉了，何况现在还以为一个人能在这种深处保持文明开化的话实在过于好笑。她搞丢了伊墨儿，然后又遇到了一只小野猫，露着满嘴尖牙朝她哈气。有一瞬间她差点把它当成了她那忠诚的伙伴，还以为伊墨儿终于被那一路追踪他们至此的狰狞饥饿彻底野化了。但当她结果了这只小猫之后她又找到了伊墨儿，它看起来瘦骨嶙峋，却比之前还要健康。</p><p>接着便是一场旷世大战，对手是个头超大的老鼠和蝙蝠群。当她终于擦掉眼中的鲜血、喘匀呼吸之后，她发现自己的小猫不再像小猫了，更像是一只独立自主的家猫。可怜的伊墨儿，要成长得这么快才行。</p><p>不久之后，一个矮人穿过了她前进的路线。她对他呼喊，希冀着在这片漆黑的地方找到一个盟友。毕竟，矮人们以对蒂尔的侍奉闻名，不是吗？</p><p>“你好，善良的矮人！”她喊。矮人也转过身来问候她。可令她万分惊恐的是，伊墨儿突然向这位绅士猛扑过去，开始激烈地攻击他，利爪在黑暗中闪着寒光。</p><p>“伊墨儿，不！”她失声高叫，“坏孩子！快回来！”</p><p>但伊墨儿完全没有理会她的呼号，依然极其狂燥顽固地吼叫着，杰丝敏只能无助地退开。她在绝望中误入了一个箭矢陷阱，而她甚至没怎么留意这件事。伊墨儿是被饥饿逼疯了吗，还是说她的猫猫朋友看出那个矮人其实是显而易见的敌人、而不是潜在的盟友了呢？他们俩究竟谁会赢呢？</p><p>至少第二个问题很快就有了答案。伊墨儿从黑暗中窜了出来，志得意满地把那矮人曾经穿着的斗篷丢在杰丝敏脚下。杰丝敏麻木地拾起那件斗篷，走回那片黑暗去寻找矮人的遗体。他的尸体，唉，已经被撕成碎片、完全没用了，但他那双铁鞋还是完好无损的，而且——奇迹中的奇迹——他还带着一把鹤嘴锄。现在她可以回去弥补她的错误了，在之前的冒险中关于岩石的那个错误。</p><p>“你真不应该这么做的，伊墨儿。”她责骂道，但猫猫早已经转头踏入那片黑暗，继续寻找下一个猎物去了。</p><hr><p>文中的绝大多数译名取自小鱼儿行者（SunnyYuer）的NetHack-cn repo（参见<a href="https://github.com/SunnyYuer/NetHack-cn%EF%BC%89" target="_blank">https://github.com/SunnyYuer/NetHack-cn）</a> ，包括标题里的“写在蒂尔之书中”。除了猫猫（猫猫！）。</p><p>感谢原作者Kastaka的授权。很难想象这是一篇关于NetHack的同人，但一切都非常合情合理、真实而残酷。我玩女武神的时候觉得基本是挥舞咖喱棒+银剑一路杀到星界无敌手，能从这样一个角度去重新看待战争的故事，确实也很受触动。有幸翻译，希望大家能喜欢这篇作品。</p><p>继续感谢NetHack群的大家陪伴我飞升xd</p><p>继续感谢Arlene Libitina姐的激励，这篇翻起来非常顺畅！</p><p>特别感谢Facebook人工智能研究所的机器学习专家何恺明老师，是他提出了残差网络让我痛苦不堪因此才来做这个翻译（</p><p>也非常感谢看到这里的你。</p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;p&gt;原作：Kastaka&lt;/p&gt;
-&lt;p&gt;译：Silencess&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;作者寄语：&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;致soundingsea。&lt;/p&gt;
-&lt;p&gt;杰丝敏大步流星地踏上地牢入口氤氲潮气的石阶，身边陪着她的只有她可靠的小猫伊墨儿。她的身侧挂着母亲的</summary>
-      
-    
-    
-    
-    
-    <category term="NetHack" scheme="https://www.ephesus.top/tags/NetHack/"/>
-    
-    <category term="同人" scheme="https://www.ephesus.top/tags/%E5%90%8C%E4%BA%BA/"/>
-    
-    <category term="翻译" scheme="https://www.ephesus.top/tags/%E7%BF%BB%E8%AF%91/"/>
-    
-    <category term="AO3" scheme="https://www.ephesus.top/tags/AO3/"/>
     
   </entry>
   
