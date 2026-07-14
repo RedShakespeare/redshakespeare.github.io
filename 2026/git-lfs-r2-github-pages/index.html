@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="zh-Hans">
 <head><!-- hexo injector head_begin start -->
-<script src="/config.14af1e2ed01c4758a921.js"></script>
+<script src="/config.a859eee11a408d545bde.js"></script>
 <!-- hexo injector head_begin end -->
 <meta charset="utf-8">
 <title>GitHub Pages + CloudFlare R2 cdn 工作流：以以弗所为例 - Ephesus</title>
@@ -31,7 +31,7 @@
 <meta name="twitter:image" content="https://www.ephesus.top/2026/git-lfs-r2-github-pages/avatar.jpg">
 <link rel="alternate" type="application/atom+xml" title="Ephesus" href="/atom.xml">
 
-<!-- hexo injector head_end start --><link rel="stylesheet" href="/css/hexo-sil-audio.css">
+<!-- hexo injector head_end start --><link rel="stylesheet" href="/css/hexo-sil-archive.css"><link rel="stylesheet" href="/css/hexo-sil-audio.css">
 <style>
 is-j.φcm .φct > a.φcs{
   position: relative;
@@ -44,8 +44,194 @@ is-j.φcm .φct > a.φcs::before{
   line-height: 1.2;
 }
 </style>
-<style is="theme">html{--inside-accent-color:#673ab7;--inside-foreground-color:#363636;--inside-border-color:#e0e0e0;--inside-background:#f3f6f7;--inside-sidebar-background:#673ab7;--inside-card-background:#fff;--inside-font-base:'Josefin Sans','PingFang SC';--inside-font-logo:-apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;--inside-font-menu:Baloo Bhaijaan,'Josefin Sans','PingFang SC';--inside-font-heading:Consolas,'Josefin Sans','PingFang SC';--inside-font-label:Montserrat,'Josefin Sans','PingFang SC';--inside-font-code:Inconsolata,monospace;--inside-font-print:-apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;--inside-content-width:660px;--inside-highlight-00:#ffffff;--inside-highlight-01:#e0e0e0;--inside-highlight-02:#f3f6f7;--inside-highlight-03:#95a5b3;--inside-highlight-04:#363636;--inside-highlight-05:#262b2f;--inside-highlight-06:#000000;--inside-highlight-07:#000000;--inside-highlight-08:#5d6c7b;--inside-highlight-09:#40464a;--inside-highlight-0a:#2980b9;--inside-highlight-0b:#be516e;--inside-highlight-0c:#237dac;--inside-highlight-0d:#944770;--inside-highlight-0e:#239371;--inside-highlight-0f:#edf0f3;--inside-card-color:#fff;--inside-accent-color-005:rgba(103,58,183,.05);--inside-accent-color-01:rgba(103,58,183,.1);--inside-accent-color-02:rgba(103,58,183,.2);--inside-accent-color-04:rgba(103,58,183,.4);--inside-accent-color-08:rgba(103,58,183,.8)}</style><script src="/theme.9ecc9ab1.js"></script><link href="//fonts.googleapis.com/css?family=Baloo+Bhaijaan|Inconsolata|Josefin+Sans|Montserrat" rel="stylesheet"></link><link href="/lib/fontawesome/css/fontawesome.min.css" rel="stylesheet"><link href="/css/hxh-civ.css" rel="stylesheet"><link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"><link href="/styles.91e7dfca63c7c151daa6.css" rel="stylesheet"><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head>
+<style is="theme">html{--inside-accent-color:#673ab7;--inside-foreground-color:#363636;--inside-border-color:#e0e0e0;--inside-background:#f3f6f7;--inside-sidebar-background:#673ab7;--inside-card-background:#fff;--inside-font-base:'Josefin Sans','PingFang SC';--inside-font-logo:-apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;--inside-font-menu:Baloo Bhaijaan,'Josefin Sans','PingFang SC';--inside-font-heading:Consolas,'Josefin Sans','PingFang SC';--inside-font-label:Montserrat,'Josefin Sans','PingFang SC';--inside-font-code:Inconsolata,monospace;--inside-font-print:-apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;--inside-content-width:660px;--inside-highlight-00:#ffffff;--inside-highlight-01:#e0e0e0;--inside-highlight-02:#f3f6f7;--inside-highlight-03:#95a5b3;--inside-highlight-04:#363636;--inside-highlight-05:#262b2f;--inside-highlight-06:#000000;--inside-highlight-07:#000000;--inside-highlight-08:#5d6c7b;--inside-highlight-09:#40464a;--inside-highlight-0a:#2980b9;--inside-highlight-0b:#be516e;--inside-highlight-0c:#237dac;--inside-highlight-0d:#944770;--inside-highlight-0e:#239371;--inside-highlight-0f:#edf0f3;--inside-card-color:#fff;--inside-accent-color-005:rgba(103,58,183,.05);--inside-accent-color-01:rgba(103,58,183,.1);--inside-accent-color-02:rgba(103,58,183,.2);--inside-accent-color-04:rgba(103,58,183,.4);--inside-accent-color-08:rgba(103,58,183,.8)}</style><script src="/theme.9ecc9ab1.js"></script><link href="//fonts.googleapis.com/css?family=Baloo+Bhaijaan|Inconsolata|Josefin+Sans|Montserrat" rel="stylesheet"></link><link href="/lib/fontawesome/css/fontawesome.min.css" rel="stylesheet"><link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"><link href="/styles.91e7dfca63c7c151daa6.css" rel="stylesheet"><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head>
 <body lang="zh-Hans"><!-- hexo injector body_begin start --><is-a></is-a><!-- hexo injector body_begin end --><!-- hexo injector body_end start -->
+<script>
+(() => {
+  'use strict';
+  const selector = '.sil-archive-card[data-sil-archive]';
+  const initialised = new WeakMap();
+  const treeCache = new Map();
+  let refreshScheduled = false;
+
+  function text(value) {
+    return document.createTextNode(value);
+  }
+
+  function formatSize(size) {
+    if (!Number.isFinite(size) || size < 0) return '';
+    const units = ['B', 'KB', 'MB', 'GB', 'TB'];
+    let value = size;
+    let unit = 0;
+    while (value >= 1024 && unit < units.length - 1) {
+      value /= 1024;
+      unit += 1;
+    }
+    return (value >= 10 || unit === 0 ? value.toFixed(0) : value.toFixed(1)) + ' ' + units[unit];
+  }
+
+  function luminance(value) {
+    const hex = String(value || '').trim().match(/^#([0-9a-f]{3}|[0-9a-f]{6})$/i);
+    const rgb = String(value || '').match(/rgba?\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)/i);
+    let channels;
+    if (hex) {
+      const source = hex[1].length === 3 ? hex[1].split('').map(part => part + part).join('') : hex[1];
+      channels = [0, 2, 4].map(offset => Number.parseInt(source.slice(offset, offset + 2), 16));
+    } else if (rgb) {
+      channels = [Number(rgb[1]), Number(rgb[2]), Number(rgb[3])];
+    }
+    return channels ? (channels[0] * 0.2126 + channels[1] * 0.7152 + channels[2] * 0.0722) / 255 : 1;
+  }
+
+  function setTheme(card) {
+    const target = document.body || document.documentElement;
+    card.dataset.silArchiveTheme = luminance(getComputedStyle(target).backgroundColor) < 0.5 ? 'dark' : 'light';
+  }
+
+  function downloadUrl(publicUrl, relativePath) {
+    const base = String(publicUrl || '').replace(/\/+$/, '');
+    return base + '/' + String(relativePath || '').split('/').map(encodeURIComponent).join('/');
+  }
+
+  function countFiles(entries) {
+    return entries.reduce((total, entry) => entry.type === 'file' ? total + 1 : total + countFiles(entry.children || []), 0);
+  }
+
+  function matchesName(entry, query) {
+    return (String(entry.name || '') + ' ' + String(entry.rel || '')).toLocaleLowerCase().includes(query);
+  }
+
+  function matches(entry, query) {
+    return !query || matchesName(entry, query) || entry.type === 'dir' && (entry.children || []).some(child => matches(child, query));
+  }
+
+  function visibleFileCount(entries, query) {
+    return entries.reduce((total, entry) => {
+      if (!matches(entry, query)) return total;
+      if (entry.type === 'file') return total + 1;
+      const children = entry.children || [];
+      return total + (matchesName(entry, query) ? countFiles(children) : visibleFileCount(children, query));
+    }, 0);
+  }
+
+  function renderEntries(entries, query, publicUrl, nested) {
+    const list = document.createElement('ul');
+    for (const entry of entries) {
+      if (!matches(entry, query)) continue;
+      const item = document.createElement('li');
+      if (entry.type === 'dir') {
+        const details = document.createElement('details');
+        details.open = !nested || Boolean(query);
+        const summary = document.createElement('summary');
+        summary.append(text(entry.name));
+        const childQuery = query && matchesName(entry, query) ? '' : query;
+        details.append(summary, renderEntries(entry.children || [], childQuery, publicUrl, true));
+        item.append(details);
+      } else if (entry.type === 'file' && typeof entry.rel === 'string') {
+        const link = document.createElement('a');
+        link.href = downloadUrl(publicUrl, entry.rel);
+        link.download = '';
+        link.append(text(entry.name));
+        item.append(link);
+        const size = formatSize(entry.size);
+        if (size) {
+          const detail = document.createElement('small');
+          detail.append(text(' (' + size + ')'));
+          item.append(detail);
+        }
+      } else {
+        continue;
+      }
+      list.append(item);
+    }
+    return list;
+  }
+
+  function loadTree(url) {
+    if (!treeCache.has(url)) {
+      treeCache.set(url, fetch(url, { cache: 'no-store' }).then(response => {
+        if (!response.ok) throw new Error('HTTP ' + response.status);
+        return response.json();
+      }).then(tree => {
+        if (!tree || !Array.isArray(tree.children)) throw new Error('invalid tree');
+        return tree;
+      }));
+    }
+    return treeCache.get(url);
+  }
+
+  function initialise(card) {
+    if (initialised.has(card)) return;
+    initialised.set(card, true);
+    const root = card.querySelector('.sil-archive-card__root');
+    const queryInput = card.querySelector('.sil-archive-card__input');
+    const meta = card.querySelector('.sil-archive-card__meta');
+    const clearButton = card.querySelector('.sil-archive-card__clear');
+    const treeUrl = card.dataset.silArchiveTree;
+    const publicUrl = card.dataset.silArchivePublicUrl;
+    if (!root || !queryInput || !meta || !clearButton || !treeUrl || !publicUrl) return;
+
+    card.setAttribute('aria-busy', 'true');
+    loadTree(treeUrl).then(tree => {
+      const render = () => {
+        const query = queryInput.value.trim().toLocaleLowerCase();
+        root.replaceChildren(renderEntries(tree.children, query, publicUrl, false));
+        const visibleFiles = visibleFileCount(tree.children, query);
+        meta.textContent = query ? '找到 ' + visibleFiles + ' 个文件。' : '共 ' + countFiles(tree.children) + ' 个文件。';
+        clearButton.hidden = !queryInput.value;
+        clearButton.disabled = queryInput.disabled || !queryInput.value;
+      };
+      const clearQuery = () => {
+        if (!queryInput.value) return;
+        queryInput.value = '';
+        render();
+        queryInput.focus();
+      };
+      queryInput.disabled = false;
+      queryInput.addEventListener('input', render);
+      queryInput.addEventListener('keydown', event => {
+        if (event.key === 'Escape' && queryInput.value) {
+          event.preventDefault();
+          clearQuery();
+        }
+      });
+      clearButton.addEventListener('click', clearQuery);
+      card.setAttribute('aria-busy', 'false');
+      render();
+    }).catch(() => {
+      card.dataset.silArchiveError = 'true';
+      card.setAttribute('aria-busy', 'false');
+      meta.textContent = '目录加载失败，请稍后重试。';
+    });
+  }
+
+  function refresh() {
+    refreshScheduled = false;
+    document.querySelectorAll(selector).forEach(card => {
+      setTheme(card);
+      initialise(card);
+    });
+  }
+
+  function scheduleRefresh() {
+    if (refreshScheduled) return;
+    refreshScheduled = true;
+    (window.requestAnimationFrame || window.setTimeout)(refresh);
+  }
+
+  function observeMutations(records) {
+    if (records.some(record => Array.from(record.addedNodes).some(node => node.nodeType === 1 && (node.matches(selector) || node.querySelector(selector))))) {
+      scheduleRefresh();
+    }
+  }
+
+  window.addEventListener('resize', scheduleRefresh);
+  document.addEventListener('inside', scheduleRefresh);
+  document.addEventListener('inside:theme', scheduleRefresh);
+  new MutationObserver(observeMutations).observe(document.body, { childList: true, subtree: true });
+  scheduleRefresh();
+})();
+</script>
 <script>
 (() => {
   'use strict';
