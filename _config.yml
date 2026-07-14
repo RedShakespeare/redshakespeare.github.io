@@ -30,6 +30,7 @@ code_dir: downloads/code
 i18n_dir: :lang
 skip_render:
   - google1a76a4289e2a5783.html
+  - css/hxh-civ.css
   - js/hxh-civ-tree.js
   - files/rl/nethack/nh-helper/**
   - files/rl/angband/angband_manual/_/static/{css,javascript}/**

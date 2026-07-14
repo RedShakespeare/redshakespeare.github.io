@@ -400,6 +400,7 @@ pwa:
 # Plugins
 plugins:
   - lib/fontawesome/css/fontawesome.min.css
+  - css/hxh-civ.css
   - //unpkg.com/browse/leancloud-storage@4.12.1/dist/
   - lib/Valine.min.js
   - position: comments
