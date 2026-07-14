@@ -3,8 +3,8 @@
 .sil-archive-card__header { display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:.25rem 1rem;margin-bottom:.75rem }
 .sil-archive-card__title { font-family:var(--inside-font-heading,inherit);font-size:1.1rem;font-weight:600 }
 .sil-archive-card__meta { margin:0;color:var(--sil-archive-ink);font-size:.875rem;font-variant-numeric:tabular-nums;opacity:.72;text-align:right }
-.sil-archive-card__control { position:relative;display:flex;align-items:center;min-height:44px;border:1px solid var(--sil-archive-border);border-radius:6px;background:transparent;transition:border-color .15s,box-shadow .15s }
-.sil-archive-card__control:focus-within { border-color:var(--sil-archive-ink);box-shadow:0 0 0 3px var(--sil-archive-rail) }
+.sil-archive-card__control { position:relative;display:flex;align-items:center;min-height:44px;border:1px solid var(--sil-archive-border);border-radius:6px;background:transparent;transition:border-color .15s }
+.sil-archive-card__control:focus-within { border-color:var(--sil-archive-ink) }
 .sil-archive-card__icon { position:absolute;left:.875rem;width:1.125rem;height:1.125rem;fill:none;stroke:currentColor;stroke-linecap:round;stroke-width:1.75;opacity:.62;pointer-events:none }
 .sil-archive-card__input { box-sizing:border-box;width:100%;min-height:42px;margin:0;border:0;padding:0 2.875rem;background:transparent;color:inherit;font:inherit }
 .sil-archive-card__input::-webkit-search-cancel-button { appearance:none }
@@ -12,7 +12,8 @@
 .sil-archive-card__input:disabled { cursor:wait;opacity:.55 }
 .sil-archive-card__clear { position:absolute;right:.5rem;display:grid;width:2rem;height:2rem;border:1px solid transparent;border-radius:50%;padding:0;place-items:center;background:var(--sil-archive-rail);color:inherit;cursor:pointer;font:inherit;font-size:1.35rem;line-height:1;opacity:.82;transition:background-color .15s,border-color .15s,color .15s,opacity .15s }
 .sil-archive-card__clear:hover { border-color:var(--sil-archive-ink);background:var(--sil-archive-hover);opacity:1 }
-.sil-archive-card__clear:focus-visible,.sil-archive-card__input:focus-visible { outline:2px solid var(--sil-archive-focus);outline-offset:2px }
+.sil-archive-card__clear:focus-visible { outline:2px solid var(--sil-archive-focus);outline-offset:2px }
+.sil-archive-card__input:focus-visible { outline:none }
 .sil-archive-card__hint { margin:.625rem 0 0;font-size:.875rem;opacity:.72 }
 .sil-archive-card__root { margin-top:1rem;color:var(--sil-archive-ink) }
 .sil-archive-card__root ul { margin:.5rem 0 0;padding-left:1.4rem }
