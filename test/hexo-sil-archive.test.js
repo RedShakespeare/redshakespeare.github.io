@@ -108,7 +108,10 @@ test('tree routes include configured and tag-defined collections with LFS sizes'
   await fsp.mkdir(manifestDirectory, { recursive: true });
   await fsp.writeFile(path.join(manifestDirectory, 'assets.json'), serialiseManifest({
     'files/library/nested/guide.txt': { size: 5, sha256: 'a'.repeat(64), type: 'text/plain; charset=utf-8' },
-    'files/library/large.bin': { size: 987654, sha256: 'b'.repeat(64), type: 'application/octet-stream' }
+    'files/library/large.bin': { size: 987654, sha256: 'b'.repeat(64), type: 'application/octet-stream' },
+    'files/library/index.html': { size: 8, sha256: 'c'.repeat(64), type: 'text/html' },
+    'files/library/nested/index.html': { size: 9, sha256: 'd'.repeat(64), type: 'text/html' },
+    'files/library/.hidden.txt': { size: 10, sha256: 'e'.repeat(64), type: 'text/plain' }
   }));
 
   const config = toArchiveConfig({ archive: { assets: { enabled: true }, collections: { library: { prefix: 'files/library' } } } });
@@ -119,8 +122,10 @@ test('tree routes include configured and tag-defined collections with LFS sizes'
   const tree = JSON.parse(routes[0].data);
   assert.equal(tree.children.length, 2);
   assert.equal(tree.children[0].name, 'nested');
+  assert.deepEqual(tree.children[0].children.map(entry => entry.name), ['guide.txt']);
   assert.equal(tree.children[1].name, 'large.bin');
   assert.equal(tree.children[1].size, 987654);
+  assert.doesNotMatch(routes[0].data, /index\.html|hidden/);
 
   const conflicting = renderArchiveCard({
     prefix: 'files/library',

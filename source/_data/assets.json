@@ -1312,11 +1312,6 @@
       "sha256": "c679c9e278ec51010a796dde87bed06d6824f135f5545f0aab51b8d2da59eada",
       "type": "application/zip"
     },
-    "files/hxh_civ/Cheat/index.html": {
-      "size": 4270,
-      "sha256": "6029d3a974df0b3f75de84a196c54be8255777a5ae48068d2fb6b8dc1ec48d2d",
-      "type": "text/html; charset=utf-8"
-    },
     "files/hxh_civ/Cheat/JCivED-0.0.22a.zip": {
       "size": 1341988,
       "sha256": "965dcfcaff63da7e2a2318ce1376356d616db8e85880042612a5e4f17a2d91d7",
@@ -1831,11 +1826,6 @@
       "size": 10227,
       "sha256": "c2e357e389e19ee004b646da58ec10f03a8f1697f84df37848080ec612722032",
       "type": "application/octet-stream"
-    },
-    "files/hxh_civ/Dos/CIV_474_01/index.html": {
-      "size": 4316,
-      "sha256": "116d9c2e87cd0dc986228d77c3ac80e768cdb2004e7e38eaa8f1f9973a739e23",
-      "type": "text/html; charset=utf-8"
     },
     "files/hxh_civ/Dos/CIV_474_01/INSTALL.BAT": {
       "size": 1670,
@@ -2722,11 +2712,6 @@
       "sha256": "c2e357e389e19ee004b646da58ec10f03a8f1697f84df37848080ec612722032",
       "type": "application/octet-stream"
     },
-    "files/hxh_civ/Dos/CIV_474_03/index.html": {
-      "size": 4316,
-      "sha256": "ad3fb9375bf87f4c0d566aa216c5a9709cd3609d2a20ef8a6f981b862930b600",
-      "type": "text/html; charset=utf-8"
-    },
     "files/hxh_civ/Dos/CIV_474_03/INSTALL.BAT": {
       "size": 1670,
       "sha256": "3d2451fcc623b74031f94632862ca4515c99c256233649af927f7071084eea2f",
@@ -3606,11 +3591,6 @@
       "size": 10227,
       "sha256": "c2e357e389e19ee004b646da58ec10f03a8f1697f84df37848080ec612722032",
       "type": "application/octet-stream"
-    },
-    "files/hxh_civ/Dos/CIV_474_04/index.html": {
-      "size": 4316,
-      "sha256": "373a16f8b29f775ed6e33124b8997fd54ff23f3adf72a1cdadd795205cca0859",
-      "type": "text/html; charset=utf-8"
     },
     "files/hxh_civ/Dos/CIV_474_04/INSTALL.BAT": {
       "size": 1670,
@@ -4492,11 +4472,6 @@
       "sha256": "c2e357e389e19ee004b646da58ec10f03a8f1697f84df37848080ec612722032",
       "type": "application/octet-stream"
     },
-    "files/hxh_civ/Dos/CIV_474_05/index.html": {
-      "size": 4306,
-      "sha256": "e577ab623bca8fa9640e830b621535449631cfd54fe640f0a6bba4946a9e39bf",
-      "type": "text/html; charset=utf-8"
-    },
     "files/hxh_civ/Dos/CIV_474_05/INSTALL.BAT": {
       "size": 1670,
       "sha256": "3d2451fcc623b74031f94632862ca4515c99c256233649af927f7071084eea2f",
@@ -5367,11 +5342,6 @@
       "sha256": "c2e357e389e19ee004b646da58ec10f03a8f1697f84df37848080ec612722032",
       "type": "application/octet-stream"
     },
-    "files/hxh_civ/Dos/CIV_474_05Fr/index.html": {
-      "size": 4324,
-      "sha256": "4e7b4b9d17ef409af7b25d3113d5540d5bd979902c27bb39de93c02c8f6bd460",
-      "type": "text/html; charset=utf-8"
-    },
     "files/hxh_civ/Dos/CIV_474_05Fr/INTRO.TXT": {
       "size": 952,
       "sha256": "a5be7e14cd5fefea2b9229b5696050e031ad6e3d08f8302eb69967813cbc3c8a",
@@ -6226,11 +6196,6 @@
       "size": 10227,
       "sha256": "c2e357e389e19ee004b646da58ec10f03a8f1697f84df37848080ec612722032",
       "type": "application/octet-stream"
-    },
-    "files/hxh_civ/Dos/CIV_475_01/index.html": {
-      "size": 4316,
-      "sha256": "5209b7b43f61afeea1da56be984d9111689fc9dee9bcc5403d6cee7136cde039",
-      "type": "text/html; charset=utf-8"
     },
     "files/hxh_civ/Dos/CIV_475_01/INSTALL.BAT": {
       "size": 1670,
@@ -7222,11 +7187,6 @@
       "sha256": "c2e357e389e19ee004b646da58ec10f03a8f1697f84df37848080ec612722032",
       "type": "application/octet-stream"
     },
-    "files/hxh_civ/Dos/CIV_475_01Rus/index.html": {
-      "size": 4316,
-      "sha256": "ad5a270aa811c2c99cbecf850c3640e0fdf726ce77cbb9e332f9c1fa94f7f0bc",
-      "type": "text/html; charset=utf-8"
-    },
     "files/hxh_civ/Dos/CIV_475_01Rus/INTRO.TXT": {
       "size": 951,
       "sha256": "7240df2839cf173663994b9d07314da49b6345515dfb3821333f6a39cbf7ae9a",
@@ -8107,11 +8067,6 @@
       "sha256": "c2e357e389e19ee004b646da58ec10f03a8f1697f84df37848080ec612722032",
       "type": "application/octet-stream"
     },
-    "files/hxh_civ/Dos/CIV_475_02G/index.html": {
-      "size": 4318,
-      "sha256": "9bf3908291ae582c7577e6f2eb831b0398b49d8510f95ec828597f047a323354",
-      "type": "text/html; charset=utf-8"
-    },
     "files/hxh_civ/Dos/CIV_475_02G/INSTALL.BAT": {
       "size": 1430,
       "sha256": "59442404cb68525a19a2235470c4ab190dd4fbb2620c6076f28f7328c6bccca0",
@@ -8492,11 +8447,6 @@
       "sha256": "e55fb5cb7f0687fa04913a78708a35b827e5e5caae926b69422709528eb321ca",
       "type": "application/octet-stream"
     },
-    "files/hxh_civ/Dos/index.html": {
-      "size": 4262,
-      "sha256": "f6fe9ac98f5ffc14f5242b60725d2863957d0bc097296c04eebd23c1e28aadb7",
-      "type": "text/html; charset=utf-8"
-    },
     "files/hxh_civ/hxh_civ.7z": {
       "size": 346305855,
       "sha256": "c8a94262f91ba01a7a94d1cefa9430acd199192e54fb2d5bf8ac3c6ada98f8f8",
@@ -8522,11 +8472,6 @@
       "sha256": "d12855f60247c22ce58b20983fce38e11ec576c2fbd41fa2d9279442fa4f565f",
       "type": "application/octet-stream"
     },
-    "files/hxh_civ/IMG Dos/IMG_474_01/index.html": {
-      "size": 4330,
-      "sha256": "9c159b35fd17b0512e5247ca5bced82ea7508dc2efe685761f7059a11a87cbb3",
-      "type": "text/html; charset=utf-8"
-    },
     "files/hxh_civ/IMG Dos/IMG_474_04/disk1.img": {
       "size": 1474560,
       "sha256": "7629fd5d512e87179719c5508754dc7c26ce518c3aa8e5e7b93233648e8c9ec3",
@@ -8537,20 +8482,10 @@
       "sha256": "f43ce868cb436dfc4df946cc855222e1ba26f68d69c38839141103c655e58de5",
       "type": "application/octet-stream"
     },
-    "files/hxh_civ/IMG Dos/IMG_474_04/index.html": {
-      "size": 4330,
-      "sha256": "6eb50b47ee51c5eb8145aeba0f8fdfcee7c31b6374c40b952d839fb1b88edb07",
-      "type": "text/html; charset=utf-8"
-    },
     "files/hxh_civ/IMG Dos/IMG_475_01/civilization.img": {
       "size": 3145728,
       "sha256": "78e23e7cf1dc9247a2b8ce22cb15ca6c2d88f11e2d750d9f71c79628c05a6701",
       "type": "application/octet-stream"
-    },
-    "files/hxh_civ/IMG Dos/IMG_475_01/index.html": {
-      "size": 4330,
-      "sha256": "1347279627b1146933bce1d902371725fff566f091e7fc1a0fc752ced5cbc4b5",
-      "type": "text/html; charset=utf-8"
     },
     "files/hxh_civ/IMG Dos/IMG_475_02G/disk1.img": {
       "size": 1228800,
@@ -8561,16 +8496,6 @@
       "size": 1228800,
       "sha256": "50516ffb7266cd2e4a2fbe9cd0196ccce65dbecafbefd442749d3b1ca5790479",
       "type": "application/octet-stream"
-    },
-    "files/hxh_civ/IMG Dos/IMG_475_02G/index.html": {
-      "size": 4334,
-      "sha256": "3816c1d5f2a7cf20f348db1c467b22038529466b7448bbe98f9967b4610e5aa6",
-      "type": "text/html; charset=utf-8"
-    },
-    "files/hxh_civ/IMG Dos/index.html": {
-      "size": 4284,
-      "sha256": "b080cdba80dab45334b8f13bc9ab0df5fc57c7ab787ea251a858ba113652582b",
-      "type": "text/html; charset=utf-8"
     },
     "files/hxh_civ/index.html": {
       "size": 495,
@@ -8611,11 +8536,6 @@
       "size": 133547,
       "sha256": "a7e716486894dd280c30b37b26ece26a772c2cb25a5dcc1d4d0be6a3a1b9d09d",
       "type": "text/plain; charset=utf-8"
-    },
-    "files/hxh_civ/Manual/index.html": {
-      "size": 588,
-      "sha256": "b79a7a84ada817be6cbbd523a08df40131ff67fbf07f89e9e7c9d54cef05b2a0",
-      "type": "text/html; charset=utf-8"
     },
     "files/hxh_civ/Manual/New_Feature.pdf": {
       "size": 2638855,
@@ -8697,11 +8617,6 @@
       "sha256": "23f3621812979bcd916c5a5677e8deeed0ef96f431a4656f52e39c7fe88a702d",
       "type": "application/x-7z-compressed"
     },
-    "files/hxh_civ/Other Platform/index.html": {
-      "size": 4314,
-      "sha256": "98af0dbe42bf8754ea530871ed992108aff60653a60bb1819293d2c3d9c6e23e",
-      "type": "text/html; charset=utf-8"
-    },
     "files/hxh_civ/Picture/EarthMap.png": {
       "size": 225556,
       "sha256": "0f36c8680e8de9556002330067f8b5ea1e533b8160f4e257d4c7ce5178fb972e",
@@ -8711,11 +8626,6 @@
       "size": 544347,
       "sha256": "ad7fc34d5ab0f0b74e9ec60f8417c13684a5054c22ef2fd8f9f6f7338f6adfe3",
       "type": "image/jpeg"
-    },
-    "files/hxh_civ/Picture/index.html": {
-      "size": 4278,
-      "sha256": "0a1664ddad3d6166b6a8380221c7a1274f684fbb494db4375ad569ff7cc1f187",
-      "type": "text/html; charset=utf-8"
     },
     "files/hxh_civ/Picture/Scan Photo.jpg": {
       "size": 1527916,
@@ -8736,11 +8646,6 @@
       "size": 32367,
       "sha256": "5a8e54f43dab003cd318ebe06d3358ed47752ab9810b35434f8e052dfab279fe",
       "type": "application/x-7z-compressed"
-    },
-    "files/hxh_civ/Scenario/index.html": {
-      "size": 4290,
-      "sha256": "a337fbac41d2e56be0f448909c79624d73501ba8a80e3d6429032ac63104f4a5",
-      "type": "text/html; charset=utf-8"
     },
     "files/hxh_civ/Scenario/JustForWin/atlantis.zip": {
       "size": 8754,
@@ -8766,11 +8671,6 @@
       "size": 17178,
       "sha256": "635adbbf66c7fdf36dd4f73719292b2d121312fa85002ed056956d5f036c6900",
       "type": "application/zip"
-    },
-    "files/hxh_civ/Scenario/JustForWin/index.html": {
-      "size": 4326,
-      "sha256": "3ff983d3dc4a6e9e1eb1b00e6673a17aed146bca2860876f04c5dd90e8df7f67",
-      "type": "text/html; charset=utf-8"
     },
     "files/hxh_civ/Scenario/JustForWin/mideastmed.zip": {
       "size": 17644,
@@ -8867,11 +8767,6 @@
       "sha256": "ac345bb537b64e468224488c69d9c83f18edc8e2e192f3e360019688063cfbd4",
       "type": "application/x-7z-compressed"
     },
-    "files/hxh_civ/Sound/index.html": {
-      "size": 4280,
-      "sha256": "e234d65819a9ec16c2423be3275a5cf723874bbc93c9ea2dd73f50094d0d29b0",
-      "type": "text/html; charset=utf-8"
-    },
     "files/hxh_civ/Update/CivNet_Stability.zip": {
       "size": 85362,
       "sha256": "3953d14803673830f8a2019725b6e075896d5829276572609d745bdc0eec4aab",
@@ -8892,20 +8787,10 @@
       "sha256": "aa5c76bdd26c928277513e38b6ab29a42ed21177651724ffb8db208e0e972758",
       "type": "application/zip"
     },
-    "files/hxh_civ/Update/index.html": {
-      "size": 4274,
-      "sha256": "160833ec2e57bdc5ec7a77e292c436415c20cfc0ece2cc45a26787268f21018b",
-      "type": "text/html; charset=utf-8"
-    },
     "files/hxh_civ/Update/PowerMac Fix/civhackfat1-0-2.sit.hqx": {
       "size": 20085,
       "sha256": "581ab83625efb46b49c85d4c777520eb48ec4ef2acaa046560e57eee2f1057bc",
       "type": "application/octet-stream"
-    },
-    "files/hxh_civ/Update/PowerMac Fix/index.html": {
-      "size": 4334,
-      "sha256": "e156b05de9ea3ffbd3351320bce07a801ca85b49f6f3a0603ff5ee1188b5f184",
-      "type": "text/html; charset=utf-8"
     },
     "files/hxh_civ/Win/CivWin_DosTile.zip": {
       "size": 76420,
@@ -8926,11 +8811,6 @@
       "size": 4956371,
       "sha256": "b36521489d04e82fa3fcd9394028ada2be895aefc51985304097c08cb984333f",
       "type": "application/zip"
-    },
-    "files/hxh_civ/Win/index.html": {
-      "size": 4272,
-      "sha256": "8d06f53c133a5b3cb42b12a46310da8df789ba262405a2e820413b189d92957c",
-      "type": "text/html; charset=utf-8"
     },
     "files/leyliner/config/gear.json": {
       "size": 2416,

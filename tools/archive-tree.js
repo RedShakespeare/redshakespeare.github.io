@@ -2,10 +2,7 @@
 
 const fs = require('node:fs');
 const path = require('node:path');
-
-function shouldIgnore(name) {
-  return name === 'tree.json' || name === 'index.html' || name === '.DS_Store' || name === 'Thumbs.db' || name.startsWith('.');
-}
+const { shouldIgnoreArchiveName } = require('./archive-ignore');
 
 function lfsSize(filePath, fallback) {
   const descriptor = fs.openSync(filePath, 'r');
@@ -29,7 +26,7 @@ function walk(directory, relativeBase) {
 
   const children = [];
   for (const entry of entries) {
-    if (shouldIgnore(entry.name)) continue;
+    if (shouldIgnoreArchiveName(entry.name)) continue;
 
     const absolutePath = path.join(directory, entry.name);
     const relativePath = relativeBase ? `${relativeBase}/${entry.name}` : entry.name;
@@ -53,4 +50,4 @@ function generateTree(rootPath) {
   return { generatedAt: Date.now(), children: walk(rootPath, '') };
 }
 
-module.exports = { generateTree, lfsSize, shouldIgnore };
+module.exports = { generateTree, lfsSize, shouldIgnore: shouldIgnoreArchiveName };

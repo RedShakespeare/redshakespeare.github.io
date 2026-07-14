@@ -5,6 +5,7 @@ const fsp = require('node:fs/promises');
 const path = require('node:path');
 const { createHash } = require('node:crypto');
 const { generateTree } = require('../tools/archive-tree');
+const { filterArchiveTree, shouldIgnoreArchiveName } = require('../tools/archive-ignore');
 
 const BUILTIN_SKINS = Object.freeze({
   ephesus: Object.freeze({
@@ -462,7 +463,7 @@ function buildArchiveRoutes(locals, config, runtime = {}) {
   return archives.map(archive => {
     let tree;
     if (capability) {
-      tree = capability.tree(archive.prefix);
+      tree = filterArchiveTree(capability.tree(archive.prefix));
       if (!tree.children.length) throw archiveError('prefix `' + archive.prefix + '` has no matching objects in the asset manifest.');
     } else {
       const sourceRoot = path.resolve(runtime.sourceRoot || path.join(runtime.baseDir || process.cwd(), 'source'));
@@ -515,11 +516,13 @@ module.exports = {
   buildArchiveRoutes,
   configuredArchives,
   extractArchiveCards,
+  filterArchiveTree,
   parseArchiveTagArgs,
   registerArchivePlugin,
   renderArchiveCard,
   resolveArchive,
   rootPublicPath,
+  shouldIgnoreArchiveName,
   toArchiveConfig,
   uniqueArchives,
   uniqueArchiveTrees
