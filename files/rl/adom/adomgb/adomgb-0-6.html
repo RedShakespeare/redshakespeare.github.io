@@ -1,0 +1,335 @@
+<html>
+<head>
+<title>Improved ADOM Guidebook - Attributes</title>
+<link rel="stylesheet" type="text/css" href="adomgb-body.css">
+</head>
+<body>
+<h1>Improved ADOM Guidebook</h1>
+<hr>
+<a href="adomgb-0-5.html">Previous</a> - <a href="toc.html">TOC</a> - <a href="adomgb-0-7.html">Next</a>
+<hr>
+<a href="#061">Increasing attributes</a> - <a href="#06111">Training explained</a> - <a href="#0612">Training with Garth</a> -
+<a href="#0613">Training with herbs</a> - <a href="#0614">Eating corpses</a> - <a href="#0615">Drinking potions</a> -
+<a href="#0616">Crystals of knowledge</a> - <a href="#062">Rearranging attributes</a> - <a href="#063">Increasing attributes beyond their usual limits</a> -
+<a href="#064">Luck</a> - <a href="#065">Speed</a> - <a href="#066">Vision</a>
+<hr>
+
+<h3 id="06">Attributes</h3>
+There are nine main attributes, and several secondary attributes, partially derived from the main ones. A basic description of them can be found in the
+<a href="adomman-J.html">ADOM Manual</a>. The current value for attributes is displayed on the main game screen. The current value and the potential maximum value
+for the attributes can be found on the screen shown by the <tt>@</tt> command. The attribute potential governs how high it may rise through training. Both attribute
+and attribute potential are values between 1 and 99 under all circumstances.<p>
+
+<table id="06-1" border=1><caption>Attribute effects</caption>
+<tr><th>Attribute <th>Effects
+<tr><td>Strength  <td><b>melee:</b> +1 to-hit +1 dmg from 14 St, each 2 pt; -1 to-hit -1 dmg from 8 St, each -2 pt<br><b>thrown rocks, slings, bows:</b> +1 dmg from 16 St, each 4 pt, max +6 at 36 St; -1 dmg from 8 St, each -4 pt<br><b>max HP:</b> +1 per 2 pt<br><b>carrying capacity:</b> <a href="adomgb-0-14.html#0el">0.14.21</a><br>kicking doors, stairs, destroying webs
+<tr><td>Learning  <td><b>skill increases:</b> +1 from 15 Le, each 5 pt<br><b>max spell power</b> is limited by Le*2<br><b>xp gains:</b> *(1+Le/1000) (almost 10% bonus at 99 Le)<br>learning spells, skills training, Bart's training, monster memory
+<tr><td>Willpower <td><b>spells: </b>bolts range, balls radius, most other spells effectiveness<br><b>Mindcraft:</b> both range and power depend on Willpower<br><b>max HP:</b> +1 per 2 pt<br><b>max PP:</b> +1 per LevelUp from 20 Wi, each 8 pt [1] (if Ma&lt;6, from 28 Wi)<br><b>resist monster spells/abilities:</b> confusion, paralyze, sleep, PP drain  
+<tr><td>Dexterity <td><b>missile:</b> +1 to-hit from 14 Dx, each 2 pt; -1 to-hit from 8 Dx, each -2 pt; +1 dmg from 16 Dx, each 4 pt<br><b>melee whips:</b> +1 dmg from 14 Dx, each 2 pt; -1 dmg from 8 Dx, each -2 pt<br><b>Speed:</b> +1 at 16 Dx, then +1 from 19 Dx each 4 pt; -1 from 7 Dx, each -1 pt<br><b>DV:</b> +1 from 14 Dx, each 2 pt; -1 from 8 Dx, each -2 pt<br><b>boomerangs, returning weapons:</b> +2 range if Dx&gt;15<br>resist being disarmed in melee, evade traps, catch returning weapons, use tool slot item while in webs  
+<tr><td>Toughness <td><b>max HP:</b> +1 per 2pt, +1 per LevelUp from 2 To, each 2 pt (Trolls get +30%)<br><b>PV:</b> +1 from 20 To, each 2 pt (max +20 PV at 58 To)<br>resist ongoing sickness, poison, paralysis; starting natural HP regeneration
+<tr><td>Charisma  <td><b>shop prices:</b> males get discount on initial prices -1% from 18 Ch, max -30% at 47 Ch<br><b>ordering companions</b><br>affects Haggling success chance 
+<tr><td>Appearance<td><b>shop prices:</b> females get +5% for every pt below 10 Ap, -2% for every pt above 10 Ap but max -50% at 35 Ap<br><b>corruption:</b> each CP gain *100/(90+Ap); each CP removal: *(0.9+Ap/100) (so 10 Ap means no changes)<br>affects number of neutral monsters generated    
+<tr><td>Mana      <td><b>max PP:</b> +1 per LevelUp from 16 Ma, each 4 pt [1]<br><b>resist monster spells/abilities:</b> attribute drain, curse, doppelganger confusion, slowing attacks<br>affects Luck (see later 0.6.4), starting natural PP regeneration 
+<tr><td>Perception<td><b>sight range in dungeons:</b> +1 at 5/10/20/25/30/40 Pe<br><b>missile: </b>+1 to-hit from 18 Pe, each 6 pt; +1 dmg from 15 Pe, each 4 pt<br>finding secret doors, hearing noises, improves Detect Traps skill, evading some door traps
+</table><p>
+[1] PC gets additional max PP on LevelUp based on combined Willpower and Mana as follows: if Wi&gt;1 and Ma&gt;1 +Level/3; if Wi&gt;19 and Ma&gt;5 +Level; if Wi&gt;27 and Ma&gt;15 +Level*2<p>  
+
+Attributes can increase or decrease for many reasons, some of which are detailed below. When (a base value of) an attribute changes, the following messages are generated:<p>
+
+<table id="060" border=1><caption>Attribute changes</caption>
+<tr><th>Attribute <th>Increases                             <th>Decreases
+<tr><td>Strength  <td>Your muscles feel stronger.           <td>Your muscles soften.
+<tr><td>Learning  <td>You feel studious.                    <td>Thinking seems to get tougher.
+<tr><td>Willpower <td>Your will seems inflexible.           <td>You feel soft-hearted.
+<tr><td>Dexterity <td>Your movements are getting swifter.   <td>You are getting shaky.
+<tr><td>Toughness <td>Your health increases.                <td>It seems that you are getting a cold.
+<tr><td>Charisma  <td>You feel very self-confident.         <td>You feel reserved.
+<tr><td>Appearance<td>Your looks improve.                   <td>You are growing a wart.
+<tr><td>Mana      <td>You feel more in touch with the world.<td>You are getting out of touch with everything.
+<tr><td>Perception<td>Your senses sharpen.                  <td>You seem to get less perceptive.
+</table><p>
+
+The base value of an attribute is the character's natural, unmodified score. Methods of training or raising attributes that only function at certain attribute levels use this value to
+determine whether they work.<p>
+
+The modified value or total value of an attribute is the character's score after any modifiers and temporary boosts are applied. This value determines the
+capabilities of the character for all purposes other than training or raising the base attribute. Semi-permanent attribute modifiers result from particular equipment, corruptions,
+or other special circumstances (such as daylight penalties for Orcs). Attribute boosts result from items such as boost potions; they wear off as turns pass. Although the total
+value of an attribute can never exceed 99, there is no limit to the amount of attribute boosting that can be accumulated.<p>
+
+<h4 id="061">0.6.1 Increasing attributes</h4>
+It is advantageous to raise attributes to the potential maximum and beyond. There are several ways to do this. Attributes may be increased to their potential
+maximum (and beyond) naturally by training the attribute.<p>
+
+<div class="resb">In R+, attributes cannot be raised beyond their potential by natural means. This means all of the methods described in this section, except 0.6.1.5 Potions, will
+work only up to the natural maximum. Additionally, when an attribute is reduced to 1 and further negative modifiers are to be applied to it, its potential starts taking hits.<p>
+</div>
+
+<h4 id="0611">0.6.1.1 Training attributes naturally</h4>
+Training or abusing an attribute increases a hidden value. The game checks the value periodically and has a chance to increase or decrease attributes depending on the magnitude
+of the total training values. Regardless of whether a change occurs, the training values are then brought closer to zero. A check for attribute changes is guaranteed to happen
+on level-up. An attribute cannot be trained if it is at its potential maximum.<p>
+
+<table border=1><caption>How to train attributes naturally</caption>
+<tr><th>Attribute<th>How to train (or abuse) naturally
+
+<tr><td rowspan=6>Strength
+<td>Burdened if St&lt;15, Strained if St&lt;16, Strained! if St&lt;18, Overburdened if St&lt;20
+<tr><td>kicking stairs trains St a lot (+20), but beware of stairs collapse (St/2000 chance)
+<tr><td>kicking down doors (not always)
+<tr><td>breaking webs if St&lt;15
+<tr><td>using pickaxe successfully on rock
+<tr><td>of weakness abuses St
+
+<tr><td rowspan=4>Learning
+<td>reading scrolls and spellbooks
+<tr><td>casting Identify
+<tr><td>potion of literacy (20/100/500 C/U/B)
+<tr><td>dull room abuses Le
+
+<tr><td rowspan=2>Willpower <td> casting spells/reading books while confused/stunned
+<tr><td>of surrending abuses Wi
+
+<tr><td rowspan=6>Dexterity
+<td>disarming traps
+<tr><td>evading door traps
+<tr><td>catching a returning missile weapon (Dx / 20 chance to catch)
+<tr><td>moving over discovered pit trap
+<tr><td>of fumbling abuses Dx
+<tr><td>Overburdened abuses Dx (-2)
+
+<tr><td rowspan=3>Toughness <td>cure sickness (1d10)
+<tr><td>waiting for sickness to wear out (+10)
+<tr><td>eating candy or gnomish candy abuses To (-5/-50)
+
+<tr><td rowspan=2>Charisma <td>successfully ordering companions
+<tr><td>offering peace
+
+<tr><td>Appearance <td>no known way to train naturally
+
+<tr><td rowspan=4>Mana
+<td>casting spells from PP, from HP abuses Ma -1d500+500
+<tr><td>evading undiscovered traps
+<tr><td>creating undead slaves (a lot, but costs Ma)
+<tr><td>Druid summoning monsters
+
+<tr><td rowspan=6>Perception
+<td>casting Knock
+<tr><td>drinking carrot juice, best if blessed (+6), cursed abuses (-6)
+<tr><td>disarming traps
+<tr><td>evading door traps
+<tr><td>finding secret doors
+<tr><td>being Blind for long periods
+</table><p>
+
+The Athletics skill also helps raise physical attributes (St, Dx, To) more quickly and has a half effect on Appearance. It trains twice as fast if attribute &lt; 10, and three
+times as fast if attribute &lt; 5. It happens at only level up, basic effect is skill level x 100.<p>
+
+<b id="06111">Training explained</b><br>
+<span class="credit">Credit Sorear's Wiki &ndash; <a href="http://www.it-is-law.com/adom/index.php?title=Stat_Training">Stat Training</a>.</span>
+Training value is associated with every attribute, ranging from -5000 to 5000. Natural training happens once in 500-1000 turns, and always at level up. Every level
+up trains every attribute by level if it's not at potential max. If St &lt; 10, train by 100 at level up, if &lt; 5 another 100. Also with Toughness.<p>
+
+There is a chance that the attribute will be increased or decreased on each check. No training occurs if Training=0, if Training&gt;0 then an attribute increase is possible, otherwise
+an attribute decrease is possible.<p>
+
+If the attribute isn't at maximum (or Training is negative), number from 1 to N is rolled randomly, and if abs(Training) &gt; RolledNumber, then the attribute is increased or
+decreased. It means the smaller N, the bigger chance for an attribute change. If Learning &gt; 9 (or Training is negative), N = X * (attribute+10), otherwise N = X * (attribute+20-Le).
+X=50 if Training is positive, X=10 if negative; it means negative training generates 5 times smaller N, thus is 5 times more effective. If the attribute was increased, Training is
+decreased by 1000 points, but not below zero. If an attribute decrease occured, Training is set to 0.<p>
+
+If the attribute is at its potential (and Training is positive), or it is not at potential but 1/10 chance, (another) number from 1 to attributePotential*100+750 is rolled randomly.
+If Training &gt; RolledNumber, then the attribute potential goes up and Training is decreased by (another) 2000 points, but not below 0.<p>
+
+Finally, another 1000 points of Training are removed, not below 0. To sum up, PC loses 1000 points of Training on unsuccessfull check, 2000 on attribute increase, 3000 on potential
+increase, and 4000 on attribute and potential increase.<p>
+
+<h4 id="0612">0.6.1.2 Training with Garth</h4>
+<img src="tiles/101.png" alt="garth" align="left">
+The dwarven weaponmaster Garth, found in Dwarftown, can be paid to increase attributes other than Appearance and Mana &ndash; section <a href="adomgb-3-5.html#355">3.5.5</a>
+for a bit more detail on training with Garth.<p>
+
+<h4 id="0613">0.6.1.3 Training attributes with herbs <tt>"</tt></h4>
+<img src="tiles/herb3.png" alt="herb" align="left">
+Two of the herbs can be used in order to increase attributes to a maximum of about 25-27 per attribute. These are:<p>
+<ul>
+<li>Morgia root &ndash; Willpower and Toughness (eat)<p>
+<img src="tiles/item194.png" alt="morgia root" align="left">
+Morgia Root trains Toughness up to 25, 5d100+200; trains Willpower up to 25, 50d10. B/U/C <i>doesn't matter</i>. About 18 are needed to guarantee
+Willpower increase, however usually about 8 is enough.
+<!--
+Eating 2 morgia roots, any status, will train Toughness. Eating 4 morgia roots, any status, will also train Willpower. If the attributes are already
+at their potential maximum, 8 morgia roots are required. Eating more than 8 at once is a waste of morgia roots. (given the exact formulae above, this
+could be regarded as myth) <p>-->
+
+<li>Moss of mareilon &ndash; Dexterity (use)<p>
+<img src="tiles/item193.png" alt="moss" align="left">
+Using Moss of Mareilon trains Dexterity up to 25, Cursed: -10d100, Uncursed: 10d100, Blessed: 60d30+30. About 6 blessed patches are needed to
+maximize chances for increase.
+<!--
+Using 2 blessed or uncursed mosses of mareilon trains Dexterity. Blessed herbs have much greater effect. If the Dexterity is already
+at its potential maximum, 4 mosses of mareilon are required. Using more than 4 at once is a waste of moss of mareilon.
+Using cursed mosses of mareilon abuses the Dexterity attribute. (given the exact formulae above, this could be regarded as myth) <p>-->
+</ul><p>
+
+<b>Tip:</b> when your Wi/To attributes or your Dx attribute is 24 and the natural maximum is greater than 24 (in
+other words, when one more increase would put you to 25), use all of the morgia and not cursed moss of marelion you can, since once you hit 25, the herbs
+become useless. But if you pack on the training at 24, you may still get another increase or two after you hit 25, from the remainder.<p>
+
+In any case, do not eat or use additional herbs until the attribute increases have taken effect &ndash; this may take a while.<p>
+<!--
+Note that training attributes in this way is more effective when the attributes are low. Eating four morgia, for
+instance, may cause two or three increases in Willpower and Toughness if the attributes are in the single digits. Once above ten, the attribute increases
+seem to occur one point at a time. (myth &ndash; see formulaes above)<p>-->
+
+<h4 id="0614">0.6.1.4 Increasing attributes by eating corpses <tt>%</tt></h4>
+<img src="tiles/item103.png" alt="corpse" align="left">
+Many corpses have an affect on attributes. Some simply increase a given attribute, others will increase one attribute while decreasing another. Some have a limit,
+that is, they will only increase an attribute to a certain number, after which they will have no effect. Others affect attributes regardless of their value.<p>
+
+For example, spellcaster corpses have 17% probability of granting +1 Ma, except for kobold shaman corpse, which always grants +1 Ma, but also causes sickness.
+Refer to section <a href="adomgb-0-3.html#033">0.3.3</a> for the other effects resulting from eating monster corpses.<p>
+
+<h4 id="0615">0.6.1.5 Increasing attributes with potions <tt>!</tt></h4>
+<img src="tiles/pot_uid.png" alt="potion" align="left">
+There are five kinds of potions that increase or decrease attributes directly: potions of -attribute-, potions of potential -attribute-, potions of boost
+-attribute-, potions of gain attributes and potions of carrot juice. Rearranging attributes is dealt with below.<p>
+
+Potions of -attribute- behave as follows:<p>
+<ul>
+<li><i>Uncursed potion of -attribute-</i>: increases the value of -attribute- by one, and increases potential maximum by one
+<li><i>Blessed potion of -attribute-</i>: increases the value of -attribute- by two, and increases potential maximum by two
+<li><i>Cursed potion of -attribute-</i>: decreases the value of -attribute- by one, and decreases potential maximum by one
+The effect of cursed potions of -attribute- and cursed potions of potential -attribute- is worse if the PC is Cursed and/or Doomed. -2 points if Cursed, -3 if Doomed, -4 if both.
+<li><i>Potion of potential -attribute-</i> does the same with attribute potential, which determines the natural maximum of your PC in that attribute. <big>Blessed ones grant
++3 increase.</big>
+<li><i>Potion of boost -attribute-</i> works like potion of -attribute-, but gives a bigger boost (3d3/2d3/1d3 B/U/C) that is <i>temporary</i>. These are useful when you need
+to get some attribute over a certain limit, such as the Wi: 32 border that allows for bigger ball spells. Another useful application is to use potions of boost learning just before
+a level increase, which will probably boost Learning enough to increase the number of skill increases allowed.
+<li><i>Potion of gain attributes</i> raises the value of a single attribute by one if uncursed or all attributes by one if blessed. Note that it only increases potential maximums
+to the resulting value of -attribute-, when necessary.
+<li><i>Potion of carrot juice</i> can be used to increase Perception. Drinking a blessed potion of carrot juice will increase Perception by +1 if below 20. Drinking an uncursed potion
+of carrot juice may increase Perception if the Pe score is very low. The message "Your eyesight seems to improve!" is generated. There is a special room effect "The air of this
+room is filled with the smell of carrots." which will cause a one-time +5 <big>+5/+3/+1 B/U/C</big> increase to Perception when a potion of carrot juice is consumed while in the room.
+</ul><p>
+
+<h4 id="0616">0.6.1.6 Crystals of knowledge <tt>*</tt></h4>
+<img src="tiles/item411.png" alt="cok" align="left">
+<tt>U</tt>sing crystals of knowledge has two possible effects: if the crystal is uncursed, a bit of the level layout around the PC is revealed. If the
+crystal is blessed, a 1d2 increase to the Learning attribute may also occur. There is a limit similar to that encountered with herbs: Learning increase
+mostly fails around 25-27 or so with blessed crystals of knowledge.<p>
+
+<h4 id="062">0.6.2 Rearranging attributes</h4>
+<h4 id="0621">0.6.2.1 Potions of exchange <tt>!</tt></h4>
+<img src="tiles/item105.png" alt="poex" align="left">
+Drinking a potion of exchange changes your attributes, not taking into account any effects from corruption or equipment. A cursed potion of exchange swaps six attributes
+randomly, an uncursed one twists five, and a blessed one swaps two attributes around.<p>
+
+<h4 id="0622">0.6.2.2 Potions of balance <tt>!</tt></h4>
+<img src="tiles/item104.png" alt="pob" align="left">
+Potions of balance can be very, very helpful if you know how to use them. When you drink one, the game calculates the average of all of your attributes,
+rounds it down, and adds a number depending on the potion's status. For a blessed potion, it's +3, uncursed 0, and cursed -3. The attribute changes are based
+on this final score.<p>
+
+If an attribute exceeds this score, it's lowered by one. If it's below this, it's raised by one. If it's equal, it remains unchanged.<p>
+
+Therefore, if you have a well-rounded character, with most or all attribute scores close to each other and drink a blessed potion of balance, you will get a
+boost to most or all attributes.<p>
+
+However, this only happens with 100-4*(attributeAverage-10) % chance. This means 100% chance for attribute averages of 10, 0% for 35. The B/U/C status of the potion is counted
+towards that attributeAverage as explained earlier. Otherwise, alignment is moved towards neutrality instead.<p>
+
+Note also that potions of balance take into account all attribute-modifying elements including worn equipment, wielded equipment and corruptions <big>in R+, base values are
+used</big>.<p>
+
+<h4 id="063">0.6.3 Increasing attributes beyond their usual limits</h4>
+<big>None of these methods work anymore, since in R+, all training uses base, not modified attributes.</big><p>
+Certain afflictions will lower attributes. While suffering from these, the PC can take advantage of this fact to increase her attributes. Once the affliction wears off or is
+removed, the attribute will recover and exceed the usual limit.<p>
+
+<b>Sickness:</b> -2 to several attributes; -5 to Toughness<p>
+
+<b>Starvation:</b> -4 to Strength as soon as Starving status is reached. As time passes, Strength, Learning, Willpower and Dexterity begin dropping. They will eventually reach
+half their starting value (Strength reaches half the value after the immediate -4). While the attributes are dropping, the PC is not in danger of starving to death. When the
+attributes reach the halfway point, the PC is in danger of dying and should eat something. Since Starvation halves attributes rather than simply decrementing them it is much
+more powerful than Sickness.<p>
+
+<b>Ring of weakness:</b> Decreases Strength to 2. Be careful to drop the inventory (and heavy worn equipment ie. Big Punch) before using rings of weakness.<p>
+
+An extremely convenient scenario for these tactics is mining out a level that supports herbs. Morgia roots and moss of mareilon train Toughness, Willpower and Dexterity. Stomacemptia
+can be used for Starvation. Mining will generate crystals of knowledge for training Learning and stone giant corpses for increasing Strength. Even better if it is near Dwarftown.
+Most PCs will not have the Mining skill or an artifact pickaxe and will need Glod's help repairing pickaxes for 1500 gold pieces. This exploit should raise these attributes into
+the 50s.<p>
+
+<b>Garth</b> (section <a href="adomgb-3-5.html#355">3.5.5</a>) is a potentially endless source of attribute increases for those attributes he trains. The limitless gold available
+from the Casino can be used for this.<p>
+
+<h4 id="064">0.6.4 Luck</h4>
+<span class="credit">Credit Sorear's Wiki &ndash; <a href="http://www.it-is-law.com/adom/index.php?title=Luck">Luck</a>.</span>
+Luck is a hidden property of the PC, which is not stored anywhere, but rolled whenever needed. This Guidebook sometimes references to Luck. The following table explains how Luck
+is calculated.<p>
+
+<table border=1><caption>Luck modifications</caption>
+<tr><th>Condition <th>Luck modification
+<tr><td>Being Blessed <td>+2
+<tr><td>Birthday <td>+1d12+1
+<tr><td>+Luck intrinsic <td>+3
+<tr><td>+Fate intrinsic <td>+6
+<tr><td>Correctly equipped item that grants +Luck <td>+2
+<tr><td>Correctly equipped item that grants +Fate <td>+4
+<tr><td>Correctly equipped item that increases Luck <td>+3
+<tr><td>Always <td>if 1d100 &lt; Ma then +Max(1d(Ma/10+2)-1,4)
+<tr><td>+Curs intrinsic <td>-2d2
+<tr><td>+Doom intrinsic <td>-3d5
+<tr><td>Correctly equipped item that grants +Curs <td>-1d(Number of +Curs items * 3)+1
+<tr><td>Correctly equipped item that grants +Doom <td>-1d(Number of +Doom items * 8)+1
+<tr><td>Savegame cheating <td>-1d200
+</table><p>
+
+The actual Luck roll is 1dGoodLuck-1 + BadLuck, where GoodLuck are conditions which increase Luck, and BadLuck are conditions which decrease luck (last 5 rows from the above table).
+This gives overall positive or negative bonus to the situation. Thus if BadLuck &lt; 0, there is always a chance of overall negative Luck result. Note that being Doomed (and Cursed)
+in itself will also further impact many situations beyond the Luck roll penalty above.<p>
+
+<h4 id="065">0.6.5 Speed</h4>
+The speed system is well covered in the <a href="adomman-O.html#Ob">ADOM Manual</a>. The following table quantitates the means of modifying speed.<p>
+
+<table border=1><caption>Speed modifiers</caption>
+<tr><th>Activity <th>Speed modifier
+<tr><td>Slowed (Slow Monster, or by an opponent) <td>	-50%
+<tr><td>Overburdened! <td>-40
+<tr><td>Strained! <td>-20
+<tr><td>Strained <td>-10
+<tr><td>Bloated <td>-10
+<tr><td>Burdened <td>-5
+<tr><td>Satiated <td>-5
+<tr><td>Drunk <td>-5
+<tr><td>Starving <td>-5
+<tr><td>Talents (Quick, Very Quick, Greased Lightning) <td>+2, +5, +9
+<tr><td>Athletics skill <td>up to +8
+<tr><td>Raven birthsign <td>+10
+<tr><td>Dexterity <td>+1 for every 4pt above 15 
+<tr><td>Dexterity <td>-1 for every pt below 8 
+<tr><td>Wish <td>+20d20, +1 permanent
+</table><p>
+
+Monks and Beastfighters also receive Speed bonuses as they level. Some items such as a quicksilver staff, ring/amulet of speed, and certain artifacts such as Black Torc,
+Ring of the Master Cat, or Boots of Great Speed can also increase Speed. Corpses of monster such as quicklings and claw bugs and potions of quickling blood can also increase
+base speed. Few corruptions also affect Speed. Slow Monster spell, boots of the slow shuffle, moloch armor, armor of sloth, high burden and high satiation can be used to
+guarantee Speed increases from corpses, akin to sickness/starvation training for attributes.<p>
+
+<h4 id="066">0.6.6 Vision</h4>
+<b>Dungeons</b><br>
+Visible distance in dungeons depends mainly on Perception as follows: Pe 1-4: 3 tiles, Pe 5-9: 4 tiles, Pe 10-19: 5 tiles, Pe 20-24: 6 tiles, Pe 25-29: 7 tiles, Pe 30-39: 8 tiles,
+Pe 40+: 9 tiles. Then add +3 for a torch lit in the tool slot, +Ma/3 with active Farsight spell, +4/+2/-2 from B/U/C necklace of the eye. Water Dragon Cave and Stone Dragon Caves
+have this distance reduced by 70%.<p>
+
+<b>Wilderness</b><br>
+In the open wilderness locations the visible distance is increased by 5 + min(Pe/5,8), but -(2-6) at night and -(1-3) at dusk or dawn. Orcs and Dark Elves get penalty at daylight
+instead. Also -2/+2 at the beginning/middle of any month, and around +10 for lit torch in the tool slot. Outside locations such as Terinyo get *1.5 instead. Note that (approximately)
+dawn is 6:00am - 7:00am, day is 7:00am - 8:00pm, dusk 8:00pm - 9:00pm, and night 9:00pm - 6:00am; this depends on exact day of year. On the overworld map, vision is limited to 2 tiles
+(night) or 3 tiles (day).<p>
+
+<hr>
+Updated August 17th, 2021
+</body>
+</html>

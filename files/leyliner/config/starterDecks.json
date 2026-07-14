@@ -1,0 +1,59 @@
+{
+    "ELEC": [
+        {
+            "Static Arc": 2
+        },
+        {
+            "Voltage Spike": 1
+        },
+        {
+            "Thunderclap": 1
+        },
+        {
+            "Move [ELEC]": 2
+        }
+    ],
+    "FIRE": [
+        {
+            "Wisp of Flame": 2
+        },
+        {
+            "Heat Wave": 1
+        },
+        {
+            "Burning Pitch": 1
+        },
+        {
+            "Move [FIRE]": 2
+        }
+    ],
+    "MOON": [
+        {
+            "New Moon": 2
+        },
+        {
+            "Werewolf": 1
+        },
+        {
+            "Gravity Slingshot": 1
+        },
+        {
+            "Move [MOON]": 2
+        }
+    ],
+    "BLOOD": [
+        {
+            "Blood Clot": 2
+        },
+        {
+            "Brutish Impulse": 1
+        },
+        {
+            "Deploy": 1
+        },
+        {
+            "Move [BLOOD]": 2
+        }
+    ]
+
+  }

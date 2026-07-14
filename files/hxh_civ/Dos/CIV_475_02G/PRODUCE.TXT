@@ -1,0 +1,122 @@
+00000000000000q000000000000◊00î00Ö00¨0040000000000000000
+0000000000000000000000000000000000000000000000000000000000000000
+000000000000000000000000000000000000000000000050000*0000000000
+00Í00000000o0000000000000000000000000000000000000000∆00Ø00
+0000000000æ00000000000000ÑR	00000000‚ıñ¶000000000000ö00
+000000000000˘*00ä000000{0000"û0000@00E00000000000∆
+000000000000000000ˆŸÅ0000000000c«0000000000”000000000000
+000000000000z00Ω000000000000000000_00ë00„≥00n00000000
+
+*Tempel
+*Gro·e Kirche
+*Kolosseum
+Bevîlkerung unzufrieden.^
+Wir sollten $RPLC1 bauen.
+
+*Kasernen
+Wir sollten $RPLC1 bauen.^
+Ziel: erfahrene Einheiten.
+
+*Kornkammer
+Wir sollten $RPLC1 bauen.^
+Ziel: StÑdtewachstum.^
+
+*Marktplatz
+*Bank
+Wir sollten $RPLC1 bauen.^
+Ziel: stÑrkere Wirtschaft.^
+
+*Bibliothek
+*UniversitÑt
+Wir sollten $RPLC1 bauen.^
+Ziel: Wissenszuwachs.^
+
+*Gericht
+Wir sollten $RPLC1 bauen.^
+Ziel: weniger Korruption.
+
+*Stadtmauern
+Wir sollten $RPLC1 bauen.^
+Ziel: Schutz der Stadt..
+
+*AquÑdukt
+Wir sollten $RPLC1 bauen.^
+Ziel: StÑdtewachstum.
+
+*Massentransit
+*Recycling-Anlage
+Wir sollten $RPLC1 bauen.^
+Ziel: weniger Verschmutzung.
+
+*Fabrik
+*Industriewerk
+*Kraftwerk
+*Wasserkraftwerk
+*Kernkraftwerk
+Wir sollten $RPLC1 bauen.^
+Ziel: hîhere ProduktivitÑt.
+
+*SDI
+Wir sollten $RPLC1 bauen.
+
+*RS-Struktur
+*RS-Komponente
+*RS-Modul
+Wir sollten $RPLC1 bauen,^
+Ziel: Besiedlung Planeten.
+
+*Siedler
+Wir sollten $RPLC1 bauen.^
+Ziel: Besiedlung Kontinent.
+
+*Miliz
+*Phalanx
+*Musketiere
+*SchÅtzen
+*Mech. Inf.
+Wir sollten $RPLC1 haben.^
+Ziel: StÑdteverteidigung.
+
+*Legion
+*Kavallerie
+*Ritter
+*Schleuder
+*Kanone
+*Streitwagen
+*Panzer
+*Artillerie
+*Jagdflugzeug
+*Bomber
+Wir sollten $RPLC1 haben.^
+Ziel: Feinde angreifen.
+
+*Dreiruderer
+*Segelschiff
+Wir sollten $RPLC1s bauen.^
+Ziel: Erforschung der Welt.
+
+*Fregatte
+*Panzerschiff
+*Kreuzer
+*Schlachtsf.
+*U-Boot
+Wir sollten $RPLC1s bauen.^
+Ziel: Seeherrschaft.
+
+*Flugzeugtrg.
+*Transportsf.
+*Kernwaffen
+Wir sollten $RPLC1 bauen.^
+
+*Diplomat
+Wir sollten $RPLC1 haben.^
+Ziel: Kontakt mit anderen^
+Zivilisationen.
+
+*Karawane
+Wir sollten $RPLC1 haben.^
+Ziel: Handelswege^
+zu anderen Zivilisationen.
+
+*END
+

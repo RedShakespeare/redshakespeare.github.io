@@ -1,0 +1,784 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Compiling Instructions &#8212; &lt;img&gt; The Angband Manual</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/better.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_/static/css/badge_only.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
+    <script async="async" src="../../../_/static/javascript/readthedocs-doc-embed.js"></script>
+    <link rel="canonical" href="compiling.html" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Debug Command Descriptions" href="debug.html" />
+    <link rel="prev" title="Modifying Angband" href="modifying.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+      <link rel="stylesheet" href="../_static/style.css" type="text/css" />
+  
+<!-- RTD Extra Head -->
+
+<link rel="stylesheet" href="../../../_/static/css/readthedocs-doc-embed.css" type="text/css" />
+
+<script type="application/json" id="READTHEDOCS_DATA">{"ad_free": false, "api_host": "https://readthedocs.org", "build_date": "2023-04-21T00:08:54Z", "builder": "sphinx", "canonical_url": null, "commit": "14f92695", "docroot": "/docs/", "features": {"docsearch_disabled": false}, "global_analytics_code": "UA-17997319-1", "language": "en", "page": "hacking/compiling", "programming_language": "c", "project": "angband", "proxied_api_host": "/_", "source_suffix": ".rst", "subprojects": {}, "theme": "better", "user_analytics_code": "", "version": "latest"}</script>
+
+<!--
+Using this variable directly instead of using `JSON.parse` is deprecated.
+The READTHEDOCS_DATA global variable will be removed in the future.
+-->
+<script type="text/javascript">
+READTHEDOCS_DATA = JSON.parse(document.getElementById('READTHEDOCS_DATA').innerHTML);
+</script>
+
+<script type="text/javascript" src="../../../_/static/javascript/readthedocs-analytics.js" async="async"></script>
+
+<!-- end RTD <extrahead> -->
+</head><body>
+<header id="pageheader">
+    <div style="display: flex; align-items: baseline;">
+        <h1>The Angband Manual</h1>
+        <span class="version">v4.2.4-264-g14f92695-dirty</span>
+    </div>
+    <img src="../_static/att.svg" style="height: 4rem;">
+</header>
+
+  <div class="related top">
+  <nav id="rellinks">
+    <ul>
+        <li>
+          &larr;
+          <a href="modifying.html" title="Previous document">Modifying Angband</a>
+        </li>
+        <li>
+          <a href="debug.html" title="Next document">Debug Command Descriptions</a>
+          &rarr;
+        </li>
+    </ul>
+  </nav>
+  <nav id="breadcrumbs">
+    <ul>
+      <li><a href="../index.html">Home</a></li> 
+    </ul>
+  </nav>
+  </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="compiling-instructions">
+<h1>Compiling Instructions<a class="headerlink" href="compiling.html#compiling-instructions" title="Permalink to this heading">¶</a></h1>
+<p>The methods for compiling Angband vary by platform and by build system. If
+you get Angband working on a different platform or build system please let us
+know so we can add to this file.  Unless otherwise noted, all the commands
+listed are to be run from top-level directory of the Angband source files.</p>
+<div class="contents local topic" id="contents">
+<p class="topic-title">Contents</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="compiling.html#macos" id="id5">macOS</a></p>
+<ul>
+<li><p><a class="reference internal" href="compiling.html#debug-build" id="id6">Debug build</a></p></li>
+<li><p><a class="reference internal" href="compiling.html#test-cases" id="id7">Test cases</a></p></li>
+<li><p><a class="reference internal" href="compiling.html#statistics-build" id="id8">Statistics build</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="compiling.html#linux-other-unix" id="id9">Linux / other UNIX</a></p>
+<ul>
+<li><p><a class="reference internal" href="compiling.html#native-builds" id="id10">Native builds</a></p></li>
+<li><p><a class="reference internal" href="compiling.html#compilation-with-cmake" id="id11">Compilation with CMake</a></p></li>
+<li><p><a class="reference internal" href="compiling.html#cross-building-for-windows-with-mingw" id="id12">Cross-building for Windows with Mingw</a></p></li>
+<li><p><a class="reference internal" href="compiling.html#id1" id="id13">Debug build</a></p></li>
+<li><p><a class="reference internal" href="compiling.html#id2" id="id14">Test cases</a></p></li>
+<li><p><a class="reference internal" href="compiling.html#id3" id="id15">Statistics build</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="compiling.html#windows" id="id16">Windows</a></p>
+<ul>
+<li><p><a class="reference internal" href="compiling.html#using-mingw" id="id17">Using MinGW</a></p></li>
+<li><p><a class="reference internal" href="compiling.html#using-cygwin-with-mingw" id="id18">Using Cygwin (with MinGW)</a></p></li>
+<li><p><a class="reference internal" href="compiling.html#using-msys2-with-mingw64" id="id19">Using MSYS2 (with MinGW64)</a></p></li>
+<li><p><a class="reference internal" href="compiling.html#using-eclipse-indigo-on-windows-with-mingw" id="id20">Using eclipse (Indigo) on Windows (with MinGW)</a></p></li>
+<li><p><a class="reference internal" href="compiling.html#using-visual-studio" id="id21">Using Visual Studio</a></p></li>
+<li><p><a class="reference internal" href="compiling.html#id4" id="id22">Statistics build</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="compiling.html#nintendo-ds-nintendo-3ds" id="id23">Nintendo DS / Nintendo 3DS</a></p>
+<ul>
+<li><p><a class="reference internal" href="compiling.html#debugging" id="id24">Debugging</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="compiling.html#cross-building-for-dos-with-djgpp" id="id25">Cross-building for DOS with DJGPP</a></p></li>
+<li><p><a class="reference internal" href="compiling.html#documentation" id="id26">Documentation</a></p></li>
+</ul>
+</div>
+<section id="macos">
+<h2><a class="toc-backref" href="compiling.html#id5">macOS</a><a class="headerlink" href="compiling.html#macos" title="Permalink to this heading">¶</a></h2>
+<p>To build the new Cocoa front-end:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">src</span>
+<span class="n">make</span> <span class="o">-</span><span class="n">f</span> <span class="n">Makefile</span><span class="o">.</span><span class="n">osx</span>
+</pre></div>
+</div>
+<p>That’ll create a self-contained Mac application, Angband.app, in the directory
+above src.  You may use that application where it is or move it to wherever
+is convenient for you.</p>
+<p>By default, the current Makefile.osx builds an application that’ll run natively
+on x86_64 or arm64 machines.  If only one of those architectures is of interest
+to you or the version of Xcode you have doesn’t support building both (a
+typical error message in that case is something like <code class="docutils literal notranslate"><span class="pre">/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/cdefs.h:784:2:</span> <span class="pre">error:</span> <span class="pre">Unsupported</span> <span class="pre">architecture</span></code>),
+you can change the architectures built by setting ARCHS on the command line of
+make.  To only build for x86_64, for instance, you would use:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">src</span>
+<span class="n">make</span> <span class="o">-</span><span class="n">f</span> <span class="n">Makefile</span><span class="o">.</span><span class="n">osx</span> <span class="n">clean</span>
+<span class="n">make</span> <span class="o">-</span><span class="n">f</span> <span class="n">Makefile</span><span class="o">.</span><span class="n">osx</span> <span class="n">ARCHS</span><span class="o">=</span><span class="n">x86_64</span>
+</pre></div>
+</div>
+<p>(the clean step is to ensure that nothing from a previous build would cause
+trouble; you’ll typically need to do that if you’ve built it before and then
+want to change the set of architectures to use).  To build for multiple
+architectures, use a list of architectures separated by whitespace, which
+you’ll have to quote.  This is the equivalent to what Makefile.osx does by
+default:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">make</span> <span class="o">-</span><span class="n">f</span> <span class="n">Makefile</span><span class="o">.</span><span class="n">osx</span> <span class="n">ARCHS</span><span class="o">=</span><span class="s2">&quot;x86_64 arm64&quot;</span>
+</pre></div>
+</div>
+<section id="debug-build">
+<h3><a class="toc-backref" href="compiling.html#id6">Debug build</a><a class="headerlink" href="compiling.html#debug-build" title="Permalink to this heading">¶</a></h3>
+<p>This will generate a debugging build like that described in the Linux section:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">src</span>
+<span class="n">make</span> <span class="o">-</span><span class="n">f</span> <span class="n">Makefile</span><span class="o">.</span><span class="n">osx</span> <span class="n">clean</span>
+<span class="n">make</span> <span class="o">-</span><span class="n">f</span> <span class="n">Makefile</span><span class="o">.</span><span class="n">osx</span> <span class="n">OPT</span><span class="o">=</span><span class="s2">&quot;-g -O1 -fno-omit-frame-pointer -fsanitize=undefined -fsanitize=address&quot;</span>
+</pre></div>
+</div>
+<p>The clean step is there to clean out object files that were compiled with the
+default options.  The “-g” adds debugging symbols.
+“-O1 -fno-omit-frame-pointer” dials back the optimization to get call stack
+traces that are easier to interpret.  For even clearer call stack traces, you
+could add “-fno-optimize-sibling-calls” to the options or omit optimization
+entirely by replacing “-O1 -fno-omit-frame-pointer” with “-O0”.
+“-fsanitize=address -fsanitize=undefined” enables the AddressSanitizer and
+UndefinedBehaviorSanitizer tools.</p>
+<p>To run the generated executable under Xcode’s command-line debugger, lldb, do
+this if you are already in the src directory from the compilation step:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="o">../</span><span class="n">Angband</span><span class="o">.</span><span class="n">app</span><span class="o">/</span><span class="n">Contents</span><span class="o">/</span><span class="n">MacOS</span>
+<span class="n">lldb</span> <span class="o">./</span><span class="n">angband</span>
+</pre></div>
+</div>
+</section>
+<section id="test-cases">
+<h3><a class="toc-backref" href="compiling.html#id7">Test cases</a><a class="headerlink" href="compiling.html#test-cases" title="Permalink to this heading">¶</a></h3>
+<p>To compile and run the unit tests, do this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">src</span>
+<span class="n">make</span> <span class="o">-</span><span class="n">f</span> <span class="n">Makefile</span><span class="o">.</span><span class="n">osx</span> <span class="n">tests</span>
+</pre></div>
+</div>
+<p>If you want to rerun just one part, say monster/attack, of the unit tests,
+that’s most easily done by:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">src</span><span class="o">/</span><span class="n">tests</span>
+<span class="n">monster</span><span class="o">/</span><span class="n">attack</span><span class="o">.</span><span class="n">exe</span>
+</pre></div>
+</div>
+<p>Previous versions put the test executables in src/tests/bin.  With those
+versions, the second line above would be:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">bin</span><span class="o">/</span><span class="n">monster</span><span class="o">/</span><span class="n">attack</span>
+</pre></div>
+</div>
+<p>The reason for changing directories to src/tests is to match up with how the
+tests were compiled:  they expect Angband’s configuration data to be in
+../../lib.</p>
+</section>
+<section id="statistics-build">
+<h3><a class="toc-backref" href="compiling.html#id8">Statistics build</a><a class="headerlink" href="compiling.html#statistics-build" title="Permalink to this heading">¶</a></h3>
+<p>The Mac front end bypasses main.c and can not use the statistics front end.
+It is possible to enable the debugging commands related to statistics (see
+the descriptions for <code class="docutils literal notranslate"><span class="pre">S</span></code>, <code class="docutils literal notranslate"><span class="pre">D</span></code>, and <code class="docutils literal notranslate"><span class="pre">P</span></code> in <a class="reference internal" href="debug.html#debugdungeon"><span class="std std-ref">Dungeon</span></a>).  To do so,
+include “-DUSE_STATS” in the setting for OPT passed to make.  The equivalent
+of the standard build with those debugging commands enabled would be:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">src</span>
+<span class="n">make</span> <span class="o">-</span><span class="n">f</span> <span class="n">Makefile</span><span class="o">.</span><span class="n">osx</span> <span class="n">OPT</span><span class="o">=</span><span class="s2">&quot;-DUSE_STATS -O2&quot;</span>
+</pre></div>
+</div>
+<p>If you had already built everything without statistcs enabled, you would need to
+run either “rm wiz-stats.o” or “make -f Makefile.osx clean” immediately after
+running “cd src”.</p>
+</section>
+</section>
+<section id="linux-other-unix">
+<h2><a class="toc-backref" href="compiling.html#id9">Linux / other UNIX</a><a class="headerlink" href="compiling.html#linux-other-unix" title="Permalink to this heading">¶</a></h2>
+<section id="native-builds">
+<h3><a class="toc-backref" href="compiling.html#id10">Native builds</a><a class="headerlink" href="compiling.html#native-builds" title="Permalink to this heading">¶</a></h3>
+<p>Linux builds using autotools. There are several different front ends that you
+can optionally build (GCU, SDL, SDL2, and X11) using arguments to configure
+such as –enable-sdl, –disable-x11, etc. Each front end has different
+dependencies (e.g. ncurses, SDL libraries, etc).</p>
+<p>If your source files are from cloning the git repository, you’ll first need
+to run this to create the configure script:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">./</span><span class="n">autogen</span><span class="o">.</span><span class="n">sh</span>
+</pre></div>
+</div>
+<p>That is not necessary if your source files are from the source archive,
+a .tar.gz file, for a release.</p>
+<p>To build Angband to be run in-place, then run this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">./</span><span class="n">configure</span> <span class="o">--</span><span class="k">with</span><span class="o">-</span><span class="n">no</span><span class="o">-</span><span class="n">install</span> <span class="p">[</span><span class="n">other</span> <span class="n">options</span> <span class="k">as</span> <span class="n">needed</span><span class="p">]</span>
+<span class="n">make</span>
+</pre></div>
+</div>
+<p>That’ll create an executable in the src directory.  You can run it from the
+same directory where you ran make with:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">src</span><span class="o">/</span><span class="n">angband</span>
+</pre></div>
+</div>
+<p>To see what command line options are accepted, use:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>src/angband -?
+</pre></div>
+</div>
+<p>Note that some of Angband’s makefiles (src/Makefile and src/tests/Makefile are
+the primary offenders) assume features present in GNU make.  If the default
+make on your system is not GNU make, you’ll likely have to replace instances
+of make in the quoted commands with whatever will run GNU make.  On OpenBSD,
+for instance, that is gmake (which can be installed by running “pkg_add gmake”).</p>
+<p>On systems where there’s several C compilers, ./configure may choose the
+wrong one.  One example of that is on OpenBSD 6.9 when building Angband with
+SDL2:  ./configure chooses gcc but the installed version of gcc can’t handle
+the SDL2 header files that are installed via pkg_add.  To override ./configure’s
+default selection of the compiler, use:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">env</span> <span class="n">CC</span><span class="o">=</span><span class="n">the_good_compiler</span> <span class="o">./</span><span class="n">configure</span> <span class="p">[</span><span class="n">the</span> <span class="n">appropriate</span> <span class="n">configure</span> <span class="n">options</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Replace the_good_compiler in that command with the command for running the
+compiler that you want.  For OpenBSD 6.9 when compiling with SDL2, you’d
+replace the_good_compiler with cc or clang.</p>
+<p>To build Angband to be installed in some other location, run this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">./</span><span class="n">configure</span> <span class="o">--</span><span class="n">prefix</span> <span class="o">/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span> <span class="p">[</span><span class="n">other</span> <span class="n">options</span> <span class="k">as</span> <span class="n">needed</span><span class="p">]</span>
+<span class="n">make</span>
+<span class="n">make</span> <span class="n">install</span>
+</pre></div>
+</div>
+<p>On some BSDs, you may need to copy install-sh into lib/ and various
+subdirectories of lib/ in order to install correctly.</p>
+</section>
+<section id="compilation-with-cmake">
+<h3><a class="toc-backref" href="compiling.html#id11">Compilation with CMake</a><a class="headerlink" href="compiling.html#compilation-with-cmake" title="Permalink to this heading">¶</a></h3>
+<p>The compilation process with CMake requires a version greater than 3,
+by default the compilation process uses the X11 front end unless
+one or more of the other graphical front ends are selected. The graphical front
+ends are: GCU, SDL, SDL2 and X11.  All of the following generate a
+self-contained directory, build, that you can move elsewhere or rename.  To
+run the result, change directories to build (or whatever you renamed it to) and
+run ./Angband .</p>
+<p>To build Angband with the X11 front end:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mkdir</span> <span class="n">build</span> <span class="o">&amp;&amp;</span> <span class="n">cd</span> <span class="n">build</span>
+<span class="n">cmake</span> <span class="o">..</span>
+<span class="n">make</span>
+</pre></div>
+</div>
+<p>If you want to build the X11 front end while building one of the other
+graphical front ends, the option to pass to cmake is -DSUPPORT_X11_FRONTEND=ON .</p>
+<p>To build Angband with the SDL front end:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mkdir</span> <span class="n">build</span> <span class="o">&amp;&amp;</span> <span class="n">cd</span> <span class="n">build</span>
+<span class="n">cmake</span> <span class="o">-</span><span class="n">DSUPPORT_SDL_FRONTEND</span><span class="o">=</span><span class="n">ON</span> <span class="o">..</span>
+<span class="n">make</span>
+</pre></div>
+</div>
+<p>To build Angband with the SDL2 front end:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mkdir</span> <span class="n">build</span> <span class="o">&amp;&amp;</span> <span class="n">cd</span> <span class="n">build</span>
+<span class="n">cmake</span> <span class="o">-</span><span class="n">DSUPPORT_SDL2_FRONTEND</span><span class="o">=</span><span class="n">ON</span> <span class="o">..</span>
+<span class="n">make</span>
+</pre></div>
+</div>
+<p>To build Angband with the GCU front end:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mkdir</span> <span class="n">build</span> <span class="o">&amp;&amp;</span> <span class="n">cd</span> <span class="n">build</span>
+<span class="n">cmake</span> <span class="o">-</span><span class="n">DSUPPORT_GCU_FRONTEND</span><span class="o">=</span><span class="n">ON</span> <span class="o">..</span>
+<span class="n">make</span>
+</pre></div>
+</div>
+<p>On OpenBSD (at least with OpenBSD 6.9), there’s known issues with detecting
+the software needed for the GCU front end.  As a workaround, you could use
+this instead:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>mkdir build &amp;&amp; cd build
+mkdir -p ncursesw/include/ncursesw
+ln -s /usr/include/ncurses.h ncursesw/include/ncursesw
+mkdir -p ncursesw/lib
+ln -s /usr/lib/libncursesw.so* ncursesw/lib
+cmake -DCMAKE_PREFIX_PATH=`pwd`/ncursesw -DSUPPORT_GCU_FRONTEND=ON ..
+make
+</pre></div>
+</div>
+<p>You can build support for more than one of the graphical front ends by setting
+all the desired SUPPORT_*_FRONTEND options when running cmake (the exception to
+this are the SDL and SDL2 which can not be built at the same time).  If you
+want the executable to have support for sound, pass -DSUPPORT_SDL_SOUND=ON or
+-DSUPPORT_SDL2_SOUND=ON to cmake (as with the SDL and SDL2 front ends, you
+can’t build support for both SDL and SDL2 sound; it is also not possible to
+build the SDL front end with SDL2 sound or the SDL2 front end with SDL sound).</p>
+<p>There are options to not build a self-contained installation and, instead,
+organize the files for a typical Linux or Unix layout.  One such option
+installs the executable as setgid so the high score and save files can be
+stored in a centralized location for multiple users.  To enable that option,
+pass -DSHARED_INSTALL=ON to cmake.  To specify the group used for the setgid
+executable, pass -DINSTALL_GROUP_ID=xxx to cmake where you replace xxx with
+the name or number of the group to use.  If you do not set the group, the games
+group will be used.  Another option creates a read-only installation with any
+variable state, including the high score and save files, stored on a per-user
+basis in the user’s own directories.  To enable that option, pass
+-DREADONLY_INSTALL=ON to cmake.  Turning on both SHARED_INSTALL and
+READONLY_INSTALL is not supported and will cause cmake to exit with an error.
+Turning either SHARED_INSTALL or READONLY_INSTALL when SUPPORT_WINDOWS_FRONTEND
+is on is also not supported and will cause cmake to exit with an error.  To
+customize where the shared and read-only installations place files, pass
+-DCMAKE_INSTALL_PREFIX=prefix to install all the files within the given prefix
+(i.e. using -DCMAKE_INSTALL_PREFIX=/opt/Angband-4.2.3 would place all the files
+within /opt/Angband-4.2.3 or its subdirectories).  For finer-grained placement
+of the files within the given prefix, you could also set CMAKE_INSTALL_BINDIR
+(for the subdirectory of prefix where the executable will be placed; by
+default that is bin), CMAKE_INSTALL_DATAROOTDIR (for the subdirectory of
+prefix to hold read-only data not configured for the site; by default that is
+share), CMAKE_INSTALL_SYSCONFDIR (for the subdrectory of prefix to hold data
+configured for the site; by default that is etc), and
+CMAKE_INSTALL_SHAREDSTATEDIR (for the subdirectory of prefix to hold writable
+persistent state; by default that is com).  Because paths to the data are
+hardwired in the executable, setting the destination directory when running
+make (i.e. by setting DESTDIR) is not supported and will not work in general:
+set the destination when running cmake by setting the variables mentioned above.</p>
+</section>
+<section id="cross-building-for-windows-with-mingw">
+<h3><a class="toc-backref" href="compiling.html#id12">Cross-building for Windows with Mingw</a><a class="headerlink" href="compiling.html#cross-building-for-windows-with-mingw" title="Permalink to this heading">¶</a></h3>
+<p>Many developers (as well as the auto-builder) build Angband for Windows using
+Mingw on Linux. This requires that the necessary Mingw packages are all
+installed.</p>
+<p>This type of build now also uses autotools so the overall procedure is very
+similar to that for a native build.  The key difference is setting up to
+cross-compile when running configure.</p>
+<p>If your source files are from cloning the git repository, you’ll first need
+to run this to create the configure script:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">./</span><span class="n">autogen</span><span class="o">.</span><span class="n">sh</span>
+</pre></div>
+</div>
+<p>That is not necessary if your source files are from the source archive,
+a .tar.gz file, for a release.</p>
+<p>Then configure the cross-comilation and perform the compilation itself:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">./</span><span class="n">configure</span> <span class="o">--</span><span class="n">enable</span><span class="o">-</span><span class="n">win</span> <span class="o">--</span><span class="n">build</span><span class="o">=</span><span class="n">i686</span><span class="o">-</span><span class="n">pc</span><span class="o">-</span><span class="n">linux</span><span class="o">-</span><span class="n">gnu</span> <span class="o">--</span><span class="n">host</span><span class="o">=</span><span class="n">i686</span><span class="o">-</span><span class="n">w64</span><span class="o">-</span><span class="n">mingw32</span>
+<span class="n">make</span> <span class="n">install</span>
+</pre></div>
+</div>
+<p>You may need to change the –build and –host options there to match your
+system. Mingw installs commands like ‘i686-w64-mingw32-gcc’. The value of –host
+should be that same command with the ‘-gcc’ removed. Instead of i686 you may
+see i686, amd64, etc. The value of –build should be the host you’re building
+on (see <a class="reference external" href="http://www.gnu.org/savannah-checkouts/gnu/autoconf/manual/autoconf-2.68/html_node/Specifying-Target-Triplets.html#Specifying%20Names">http://www.gnu.org/savannah-checkouts/gnu/autoconf/manual/autoconf-2.68/html_node/Specifying-Target-Triplets.html#Specifying%20Names</a> for
+gory details of how these triplets are arrived at).  The ‘make install’ step
+only works with very recent version.  For older ones, use this instead of the
+last step:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">make</span>
+<span class="n">cp</span> <span class="n">src</span><span class="o">/</span><span class="n">angband</span><span class="o">.</span><span class="n">exe</span> <span class="o">.</span>
+<span class="n">cp</span> <span class="n">src</span><span class="o">/</span><span class="n">win</span><span class="o">/</span><span class="n">dll</span><span class="o">/*.</span><span class="n">dll</span> <span class="o">.</span>
+</pre></div>
+</div>
+<p>To run the result, you can use wine like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">wine</span> <span class="n">angband</span><span class="o">.</span><span class="n">exe</span>
+</pre></div>
+</div>
+<p>TODO: except for recent versions (after Angband 4.2.3) you likely need to
+manually disable curses (add –disable-curses to the options passed to
+configure), or the host curses installation will be found causing the build
+process to fail when linking angband.exe (the error message will likely be
+“cannot find -lncursesw” and “cannot find -ltinfo”).  Most of the –with or
+–enable options for configure are not appropriate when using –enable-win.
+The ones that are okay are –with-private-dirs (on by default),
+–with-gamedata-in-lib (has no effect), –enable-release,
+–enable-more-gcc-warnings, and –enable-skip-old-int-typedefs.</p>
+</section>
+<section id="id1">
+<h3><a class="toc-backref" href="compiling.html#id13">Debug build</a><a class="headerlink" href="compiling.html#id1" title="Permalink to this heading">¶</a></h3>
+<p><strong>WARNING</strong> this build is intended primarily for debugging purposes. It might have a somewhat slower performance, higher memory requirements and panic saves don’t always work (in case of a crash there is a higher chance of losing progress).</p>
+<p>When debugging crashes it can be very useful to get more information about <em>what exactly</em> went wrong. There are many tools that can detect common issues and provide useful information. Two such tools that are best used together are AddressSanitizer (ASan) and UndefinedBehaviorSanitizer (UBSan). To use them you’ll need to enable them when compiling angband:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">./</span><span class="n">configure</span> <span class="p">[</span><span class="n">options</span><span class="p">]</span>
+<span class="n">SANITIZE_FLAGS</span><span class="o">=</span><span class="s2">&quot;-fsanitize=undefined -fsanitize=address&quot;</span> <span class="n">make</span>
+</pre></div>
+</div>
+<p>Note that compiling with this tools will require installing additional dependancies: libubsan libasan (names of the packages might be different in your distribution).</p>
+<p>There is probably a way to get these tools to work on Windows. If you know how, please add the information to this file.</p>
+</section>
+<section id="id2">
+<h3><a class="toc-backref" href="compiling.html#id14">Test cases</a><a class="headerlink" href="compiling.html#id2" title="Permalink to this heading">¶</a></h3>
+<p>To compile and run the unit tests if you used ./configure –with-no-install,
+do this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">make</span> <span class="n">tests</span>
+</pre></div>
+</div>
+<p>If you want to rerun just one part, say monster/attack, of the unit tests,
+that’s most easily done by directly running from the top-level directory:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">src</span><span class="o">/</span><span class="n">tests</span><span class="o">/</span><span class="n">monster</span><span class="o">/</span><span class="n">attack</span><span class="o">.</span><span class="n">exe</span>
+</pre></div>
+</div>
+<p>Previous versions put the test executables in src/tests/bin.  With those
+versions, the line above would be:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">src</span><span class="o">/</span><span class="n">tests</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">monster</span><span class="o">/</span><span class="n">attack</span>
+</pre></div>
+</div>
+<p>There’s a separate set of tests that use scripts to control a character in
+the full game.  To run those tests, you’ll need to enable the test module
+when running configure and then run the run-tests script in the top-level
+directory:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">./</span><span class="n">configure</span> <span class="o">--</span><span class="k">with</span><span class="o">-</span><span class="n">no</span><span class="o">-</span><span class="n">install</span> <span class="o">--</span><span class="n">enable</span><span class="o">-</span><span class="n">test</span>
+<span class="n">make</span>
+<span class="o">./</span><span class="n">run</span><span class="o">-</span><span class="n">tests</span>
+</pre></div>
+</div>
+<p>To compile and run the unit tests and run the run-tests script while using
+CMake, do the following:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mkdir</span> <span class="n">build</span> <span class="o">&amp;&amp;</span> <span class="n">cd</span> <span class="n">build</span>
+<span class="n">cmake</span> <span class="o">-</span><span class="n">DSUPPORT_TEST_FRONTEND</span><span class="o">=</span><span class="n">ON</span> <span class="o">..</span>
+<span class="n">make</span> <span class="n">alltests</span>
+</pre></div>
+</div>
+<p>If you only want the unit tests while using CMake, it’s a little simpler:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mkdir</span> <span class="n">build</span> <span class="o">&amp;&amp;</span> <span class="n">cd</span> <span class="n">build</span>
+<span class="n">cmake</span> <span class="o">..</span>
+<span class="n">make</span> <span class="n">allunittests</span>
+</pre></div>
+</div>
+</section>
+<section id="id3">
+<h3><a class="toc-backref" href="compiling.html#id15">Statistics build</a><a class="headerlink" href="compiling.html#id3" title="Permalink to this heading">¶</a></h3>
+<p>If building directly for Linux/Unix using configure, you can get the statistics
+front end and support for the debugging commands related to statistics (see
+the descriptions for <code class="docutils literal notranslate"><span class="pre">S</span></code>, <code class="docutils literal notranslate"><span class="pre">D</span></code>, and <code class="docutils literal notranslate"><span class="pre">P</span></code> in <a class="reference internal" href="debug.html#debugdungeon"><span class="std std-ref">Dungeon</span></a>) by
+including –enable-stats in the options to configure.  For that to work, you’ll
+need to have sqlite3’s headers and libraries installed (on Debian and Ubuntu,
+the libsqlite3-dev package and its dependencies provides those).   If using
+CMake, pass -DSUPPORT_STATS_FRONTEND=ON to cmake to get the statistics front
+end and support for the debugging commnands related to statistics; like builds
+with configure that use –enable-stats, that requires sqlite3.  With CMake, you
+also have an the option to only include support for the debugging commands
+related to statistics:  pass -DSUPPORT_STATS_BACKEND=ON to cmake and either do
+nothing for SUPPORT_STATS_FRONTEND or explicitly turn it off by passing
+-DSUPPORT_STATS_FRONTEND=OFF to cmake.</p>
+<p>When cross-compiling for Windows, the statistics front end is not useful
+(the Windows front end bypasses main.c and can not use the statistics front
+end).  With configure, you could include support for debugging commands
+related to statistics by setting CFLAGS to include -DUSE_STATS:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">./</span><span class="n">configure</span> <span class="p">[</span><span class="n">your</span> <span class="n">cross</span><span class="o">-</span><span class="n">compiling</span> <span class="n">options</span><span class="p">]</span> <span class="o">--</span><span class="n">enable</span><span class="o">-</span><span class="n">win</span> <span class="n">CFLAGS</span><span class="o">=-</span><span class="n">DUSE_STATS</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="windows">
+<h2><a class="toc-backref" href="compiling.html#id16">Windows</a><a class="headerlink" href="compiling.html#windows" title="Permalink to this heading">¶</a></h2>
+<section id="using-mingw">
+<h3><a class="toc-backref" href="compiling.html#id17">Using MinGW</a><a class="headerlink" href="compiling.html#using-mingw" title="Permalink to this heading">¶</a></h3>
+<p>This build now also uses autotools, so should be very similar to the Linux
+build. Open the MinGW shell (MSYS) by running msys.bat.</p>
+<p>If your source files are from cloning the git repository, you’ll first need
+to run this in the directory to create the configure script:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">./</span><span class="n">autogen</span><span class="o">.</span><span class="n">sh</span>
+</pre></div>
+</div>
+<p>That is not necessary if your source files are from the source archive,
+a .tar.gz file, for a release.</p>
+<p>Then run these commands:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">./</span><span class="n">configure</span> <span class="o">--</span><span class="n">enable</span><span class="o">-</span><span class="n">win</span>
+<span class="n">make</span> <span class="n">install</span>
+</pre></div>
+</div>
+<p>The last step only works with very recent versions.  For older ones, use
+“make” rather than “make install” and copy src/angband.exe,
+src/win/dll/libpng12.dll, and src/win/dll/zlib1.dll to the top-level directory.</p>
+</section>
+<section id="using-cygwin-with-mingw">
+<h3><a class="toc-backref" href="compiling.html#id18">Using Cygwin (with MinGW)</a><a class="headerlink" href="compiling.html#using-cygwin-with-mingw" title="Permalink to this heading">¶</a></h3>
+<p>Use this option if you want to build a native Windows executable that
+can run with or without Cygwin.</p>
+<p>Use the Cygwin setup.exe to install the mingw-gcc-core package and any
+dependencies suggested by the installer.</p>
+<p>If your source files are from cloning the git repository, you’ll first need
+to run this in the directory to create the configure script:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">./</span><span class="n">autogen</span><span class="o">.</span><span class="n">sh</span>
+</pre></div>
+</div>
+<p>That is not necessary if your source files are from the source archive,
+a .tar.gz file, for a release.</p>
+<p>Then run these commands:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">./</span><span class="n">configure</span> <span class="o">--</span><span class="n">enable</span><span class="o">-</span><span class="n">win</span> <span class="o">--</span><span class="n">host</span><span class="o">=</span><span class="n">i686</span><span class="o">-</span><span class="n">pc</span><span class="o">-</span><span class="n">mingw32</span>
+<span class="n">make</span> <span class="n">install</span>
+</pre></div>
+</div>
+<p>The last step only works with very recent versions.  For older ones, use
+“make” rather than “make install” and copy src/angband.exe,
+src/win/dll/libpng12.dll, and src/win/zlib1.dll to the top-level directory.</p>
+<p>If you want to build the Unix version of Angband that uses X11 or
+Curses and run it under Cygwin, then follow the native build
+instructions (./autogen.sh; ./configure; make; make install).</p>
+</section>
+<section id="using-msys2-with-mingw64">
+<h3><a class="toc-backref" href="compiling.html#id19">Using MSYS2 (with MinGW64)</a><a class="headerlink" href="compiling.html#using-msys2-with-mingw64" title="Permalink to this heading">¶</a></h3>
+<p>Install the dependencies by:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pacman</span> <span class="o">-</span><span class="n">S</span> <span class="n">make</span> <span class="n">mingw</span><span class="o">-</span><span class="n">w64</span><span class="o">-</span><span class="n">x86_64</span><span class="o">-</span><span class="n">toolchain</span> <span class="n">mingw</span><span class="o">-</span><span class="n">w64</span><span class="o">-</span><span class="n">x86_64</span><span class="o">-</span><span class="n">ncurses</span>
+</pre></div>
+</div>
+<p>Additional dependencies for SDL2 client:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pacman</span> <span class="o">-</span><span class="n">S</span> <span class="n">mingw</span><span class="o">-</span><span class="n">w64</span><span class="o">-</span><span class="n">x86_64</span><span class="o">-</span><span class="n">SDL2</span> <span class="n">mingw</span><span class="o">-</span><span class="n">w64</span><span class="o">-</span><span class="n">x86_64</span><span class="o">-</span><span class="n">SDL2_image</span> \
+        <span class="n">mingw</span><span class="o">-</span><span class="n">w64</span><span class="o">-</span><span class="n">x86_64</span><span class="o">-</span><span class="n">SDL2_ttf</span>
+</pre></div>
+</div>
+<p>Then run the following to compile with ncurses:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">src</span>
+<span class="n">make</span> <span class="o">-</span><span class="n">f</span> <span class="n">Makefile</span><span class="o">.</span><span class="n">msys2</span>
+</pre></div>
+</div>
+<p>For SDL2, do:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">src</span>
+<span class="n">make</span> <span class="o">-</span><span class="n">f</span> <span class="n">Makefile</span><span class="o">.</span><span class="n">msys2</span><span class="o">.</span><span class="n">sdl2</span>
+</pre></div>
+</div>
+<p>Very recent versions of Makefile.msys2.sdl2 allow use of SDL2 sound; to build
+with that you’ll need SDL2_mixer installed in addtion to the other SDL2
+libraries mentioned above:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pacman</span> <span class="o">-</span><span class="n">S</span> <span class="n">mingw</span><span class="o">-</span><span class="n">w64</span><span class="o">-</span><span class="n">x86_64</span><span class="o">-</span><span class="n">SDL2_mixer</span>
+</pre></div>
+</div>
+<p>Then the executable with SDL2 sound support can be built with:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">src</span>
+<span class="n">make</span> <span class="o">-</span><span class="n">f</span> <span class="n">Makefile</span><span class="o">.</span><span class="n">msys2</span><span class="o">.</span><span class="n">sdl2</span> <span class="n">SOUND</span><span class="o">=</span><span class="n">yes</span>
+</pre></div>
+</div>
+<p>Once built, go to the root of the source directory and start angband by:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">./</span><span class="n">angband</span><span class="o">.</span><span class="n">exe</span> <span class="o">-</span><span class="n">uPLAYER</span>
+</pre></div>
+</div>
+<p>The ncurses client may not be able to start properly from msys2 shell, try:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">start</span> <span class="n">bash</span>
+</pre></div>
+</div>
+<p>and run:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">export</span> <span class="n">TERM</span><span class="o">=</span>
+<span class="o">./</span><span class="n">angband</span><span class="o">.</span><span class="n">exe</span> <span class="o">-</span><span class="n">uPLAYER</span>
+</pre></div>
+</div>
+</section>
+<section id="using-eclipse-indigo-on-windows-with-mingw">
+<h3><a class="toc-backref" href="compiling.html#id20">Using eclipse (Indigo) on Windows (with MinGW)</a><a class="headerlink" href="compiling.html#using-eclipse-indigo-on-windows-with-mingw" title="Permalink to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>For eclipse with EGit, select File | Import…, Git | Projects from Git, Next &gt;</p></li>
+<li><p>Clone your/the upstream repo, or Add your existing cloned repo, Next &gt;</p></li>
+<li><p>Select “Use the New Projects Wizard”, Finish</p></li>
+<li><p>In the New Project Wizard, select C/C++ | Makefile Project with Existing Code, Next &gt;</p></li>
+<li><p>Give the project a name (Angband),
+* navigate to the repo you cloned in “Existing Code Location”,
+* Select “C”, but not “C++”
+* Choose “MinGW GCC” Toolchain, Finish</p></li>
+<li><p>Once the project is set up, r-click | Properties</p></li>
+<li><p>Go to C/C++ Build | Toolchain Editor, select “Gnu Make Builder” instead of “CDT Internal Builder”</p></li>
+<li><p>go to C/C++ Build, uncheck “Generate Makefiles automatically”</p></li>
+</ul>
+<p>You still need to run ./autogen.sh, if your source files are from cloning the
+git repository, and ./configure manually, outside eclipse (see above)</p>
+</section>
+<section id="using-visual-studio">
+<h3><a class="toc-backref" href="compiling.html#id21">Using Visual Studio</a><a class="headerlink" href="compiling.html#using-visual-studio" title="Permalink to this heading">¶</a></h3>
+<p>Blue Baron has detailed instructions for setting this up at:</p>
+<blockquote>
+<div><p>src/win/angband_visual_studio_step_by_step.txt</p>
+</div></blockquote>
+</section>
+<section id="id4">
+<h3><a class="toc-backref" href="compiling.html#id22">Statistics build</a><a class="headerlink" href="compiling.html#id4" title="Permalink to this heading">¶</a></h3>
+<p>The Windows front end bypasses main.c and can not use the statistics front end.
+It is possible to enable the debugging commands related to statistics (see
+the descriptions for <code class="docutils literal notranslate"><span class="pre">S</span></code>, <code class="docutils literal notranslate"><span class="pre">D</span></code>, and <code class="docutils literal notranslate"><span class="pre">P</span></code> in <a class="reference internal" href="debug.html#debugdungeon"><span class="std std-ref">Dungeon</span></a>).  To do
+so, set your compiler options so that the USE_STATS preprocessor macro is set.
+When using mingw (either stand-alone or as part of Cygwin) and configure,
+include CFLAGS=-DUSE_STATS in the options to configure to do that.</p>
+</section>
+</section>
+<section id="nintendo-ds-nintendo-3ds">
+<h2><a class="toc-backref" href="compiling.html#id23">Nintendo DS / Nintendo 3DS</a><a class="headerlink" href="compiling.html#nintendo-ds-nintendo-3ds" title="Permalink to this heading">¶</a></h2>
+<p>Builds for the Nintendo DS are made using devkitARM and libnds (or libctru for
+the Nintendo 3DS respectively). All required dependencies can be installed by
+selecting the appropriate package group while following the installation
+instructions for devkitPro ( <a class="reference external" href="https://devkitpro.org/wiki/Getting_Started">https://devkitpro.org/wiki/Getting_Started</a> ).</p>
+<p>The executable can then be built using:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">src</span>
+<span class="n">make</span> <span class="o">-</span><span class="n">f</span> <span class="n">Makefile</span><span class="o">.</span><span class="n">nds</span>
+</pre></div>
+</div>
+<p>This will generate <code class="docutils literal notranslate"><span class="pre">angband.nds</span></code> in the current directory. For the Nintendo
+3DS, replace the <code class="docutils literal notranslate"><span class="pre">Makefile.nds</span></code> part of the command with <code class="docutils literal notranslate"><span class="pre">Makefile.3ds</span></code>,
+and <code class="docutils literal notranslate"><span class="pre">angband.3dsx</span></code> will be generated instead.</p>
+<section id="debugging">
+<h3><a class="toc-backref" href="compiling.html#id24">Debugging</a><a class="headerlink" href="compiling.html#debugging" title="Permalink to this heading">¶</a></h3>
+<p>Homebrew can be debugged using a gdbstub-enabled emulator, such as a Windows Dev+ build
+of DeSmuMe (if you really dare to, note that it is very slow compared to real hardware)
+for the Nintendo DS or Citra for the Nintendo 3DS. A Nintendo 3DS that has been modified
+with custom firmware (such as Luma3DS) may also have the ability to debug homebrew on-device.</p>
+<p>It is recommended to set/export <code class="docutils literal notranslate"><span class="pre">NDS_DEBUG=1</span></code> and to do a clean build when debugging,
+as this disables some optimization and enables more debugging information.</p>
+<p>Once the GDB server has been set up (and the host and port noted), the GDB client
+can be loaded with the executable information:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">devkitARM</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">arm</span><span class="o">-</span><span class="n">none</span><span class="o">-</span><span class="n">eabi</span><span class="o">-</span><span class="n">gdb</span> <span class="n">angband</span><span class="o">.</span><span class="n">elf</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">angband.elf</span></code> file is a byproduct from the build process, and it has to match
+the executable that is currently running in the emulator or on the device.
+It is always named <code class="docutils literal notranslate"><span class="pre">angband.elf</span></code> for the Nintendo 3DS, and it’s always either
+<code class="docutils literal notranslate"><span class="pre">angband.arm7.elf</span></code> or <code class="docutils literal notranslate"><span class="pre">angband.arm9.elf</span></code> for the Nintendo DS, depending on
+which processor should be debugged (as the main game runs on the ARM9 core exclusively,
+this will almost always be the core that should be debugged).</p>
+<p>Once the GDB command prompt is available, the following command can be used to
+connect to the target device:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">target</span> <span class="n">remote</span> <span class="o">&lt;</span><span class="n">host</span><span class="o">&gt;</span><span class="p">:</span><span class="o">&lt;</span><span class="n">port</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>Afterwards, the debugging target will pause automatically and it can be debugged as usual
+using GDB.</p>
+</section>
+</section>
+<section id="cross-building-for-dos-with-djgpp">
+<h2><a class="toc-backref" href="compiling.html#id25">Cross-building for DOS with DJGPP</a><a class="headerlink" href="compiling.html#cross-building-for-dos-with-djgpp" title="Permalink to this heading">¶</a></h2>
+<p>These instructions were written using a Slackware64-15.0 host.</p>
+<p>Install the following cross-compiler:
+<a class="reference external" href="https://github.com/andrewwutw/build-djgpp">https://github.com/andrewwutw/build-djgpp</a></p>
+<blockquote>
+<div><p>git clone <a class="reference external" href="https://github.com/andrewwutw/build-djgpp.git">https://github.com/andrewwutw/build-djgpp.git</a>
+cd build-djgpp
+DJGPP_PREFIX=$HOME/local/cross-djgpp ./build-djgpp.sh 10.3.0</p>
+</div></blockquote>
+<p>Then build angband using the cross-compiler:</p>
+<blockquote>
+<div><p>cd angband/src
+PATH=$PATH:$HOME/local/cross-djgpp/bin
+make -f Makefile.ibm</p>
+</div></blockquote>
+<p>Optionally build the documentation (requires Sphinx):</p>
+<blockquote>
+<div><p>make -f Makefile.ibm docs</p>
+</div></blockquote>
+<p>To create the angband.zip distribution</p>
+<blockquote>
+<div><p>make -f Makefile.ibm dist</p>
+</div></blockquote>
+</section>
+<section id="documentation">
+<h2><a class="toc-backref" href="compiling.html#id26">Documentation</a><a class="headerlink" href="compiling.html#documentation" title="Permalink to this heading">¶</a></h2>
+<p>To convert the documentation from restructured text to the desired output
+format, you’ll need Sphinx ( <a class="reference external" href="https://www.sphinx-doc.org/en/master/">https://www.sphinx-doc.org/en/master/</a> )
+and, unless you change the theme in the documentation configuration, the
+sphinx-better-theme ( <a class="reference external" href="https://pypi.org/project/sphinx-better-theme/">https://pypi.org/project/sphinx-better-theme/</a> ; which
+can be installed via pip using:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">sphinx</span><span class="o">-</span><span class="n">better</span><span class="o">-</span><span class="n">theme</span>
+</pre></div>
+</div>
+<p>).</p>
+<p>With those utilities in place and sphinx-build in your path, you can perform
+the conversion by running:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">make</span> <span class="n">html</span>
+</pre></div>
+</div>
+<p>in the docs subdirectory of the top-level directory in the source files.
+That will generate a _build/html directory with the result of the conversion;
+_build/html/index.html is the top-level help with links to everything else.</p>
+<p>Other output formats besides HTML are possible.  Run:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">make</span>
+</pre></div>
+</div>
+<p>without any arguments in the docs subdirectory to see the formats that Sphinx
+can generate.</p>
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="../index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="compiling.html#">Compiling Instructions</a><ul>
+<li><a class="reference internal" href="compiling.html#macos">macOS</a><ul>
+<li><a class="reference internal" href="compiling.html#debug-build">Debug build</a></li>
+<li><a class="reference internal" href="compiling.html#test-cases">Test cases</a></li>
+<li><a class="reference internal" href="compiling.html#statistics-build">Statistics build</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="compiling.html#linux-other-unix">Linux / other UNIX</a><ul>
+<li><a class="reference internal" href="compiling.html#native-builds">Native builds</a></li>
+<li><a class="reference internal" href="compiling.html#compilation-with-cmake">Compilation with CMake</a></li>
+<li><a class="reference internal" href="compiling.html#cross-building-for-windows-with-mingw">Cross-building for Windows with Mingw</a></li>
+<li><a class="reference internal" href="compiling.html#id1">Debug build</a></li>
+<li><a class="reference internal" href="compiling.html#id2">Test cases</a></li>
+<li><a class="reference internal" href="compiling.html#id3">Statistics build</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="compiling.html#windows">Windows</a><ul>
+<li><a class="reference internal" href="compiling.html#using-mingw">Using MinGW</a></li>
+<li><a class="reference internal" href="compiling.html#using-cygwin-with-mingw">Using Cygwin (with MinGW)</a></li>
+<li><a class="reference internal" href="compiling.html#using-msys2-with-mingw64">Using MSYS2 (with MinGW64)</a></li>
+<li><a class="reference internal" href="compiling.html#using-eclipse-indigo-on-windows-with-mingw">Using eclipse (Indigo) on Windows (with MinGW)</a></li>
+<li><a class="reference internal" href="compiling.html#using-visual-studio">Using Visual Studio</a></li>
+<li><a class="reference internal" href="compiling.html#id4">Statistics build</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="compiling.html#nintendo-ds-nintendo-3ds">Nintendo DS / Nintendo 3DS</a><ul>
+<li><a class="reference internal" href="compiling.html#debugging">Debugging</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="compiling.html#cross-building-for-dos-with-djgpp">Cross-building for DOS with DJGPP</a></li>
+<li><a class="reference internal" href="compiling.html#documentation">Documentation</a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+<form class="search" action="../search.html" method="get">
+  <input type="text" name="q"
+   placeholder="type to search" />
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+  <div class="related bottom">
+  <nav id="rellinks">
+    <ul>
+        <li>
+          &larr;
+          <a href="modifying.html" title="Previous document">Modifying Angband</a>
+        </li>
+        <li>
+          <a href="debug.html" title="Next document">Debug Command Descriptions</a>
+          &rarr;
+        </li>
+    </ul>
+  </nav>
+  <nav id="breadcrumbs">
+    <ul>
+      <li><a href="../index.html">Home</a></li> 
+    </ul>
+  </nav>
+  </div>
+  <footer id="pagefooter">&copy; 2019, Angband developers past and present.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a>
+      5.3.0
+        with the <a href="http://github.com/irskep/sphinx-better-theme">
+          better</a> theme.
+
+  </footer>
+
+  
+  </body>
+</html>

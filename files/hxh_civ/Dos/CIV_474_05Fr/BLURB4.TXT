@@ -1,0 +1,303 @@
+000000000000000000000000y<00¬ Ÿ00ð?0000000000Š	"+×10000000000
+00008#0000C000000000000000000.0000000000000000000000000000†ä
+Ÿ')900000000000000Š:00000000000000000000000030000000000000000
+0000/00000000000000000000 =000000000000000000ç+0000000000000000
+0000000000F00y'%6á0000000000t0000000000000000000000000000
+00000000000000000000&00000000000000â(0000»@00000000000000000000
+000000ýÍC000000%0000000000·¦IA3000000000000Ê¯7±éF0000000000
+0000000000000000000000000000000000000000000000000000„0000000000
+
+*ROUTES
+Des routes de bonne qualit‚ ont am‚lior‚ les communications entre les villes. Ce
+progrŠs ‚tait important pour le commerce et pour des objectifs militaires. Les
+routes de bonne qualit‚ ‚taient utilisables pratiquement par tous les temps et
+des v‚hicules … roues æpouvaient parcourir beaucoup plus rapidement ces routes
+que les pistes sales. Par cons‚quent, les messagers … cheval, les chariots de
+marchandises et les unit‚s militaires pouvaient tous aller d'une partie …
+l'autre du r‚seau routier … une bonne vitesse. Les frontiŠres menac‚es ‚taient
+donc plus facilement accessibles aux arm‚es centralis‚es.
+
+*ROUTES 2
+Construites uniquement par des colons. Appuyez sur la touche Road (Route) (touche R) ou s‚lectionnez Build Road (construire route)
+dans le menu Orders (commandes). Tant que vous n'avez pas acquis la technique de construction de ponts, vous ne pouvez pas construire
+de routes sur les riviŠres.
+Les unit‚s qui passent d'un carr‚ de route … un autre utilisent
+1/3 de point de d‚placement, quel que soit le terrain. Les routes augmentent
+le commerce g‚n‚r‚ par les prairies, les plaines et les d‚serts.
+
+*CHEMINS DE FER
+Les chemins de fer ont r‚volutionn‚ le transport en offrant un moyen de
+transport relativement rapide et bon march‚ pour passagers, matiŠres premiŠres,
+produits finis et unit‚s militaires. Les chemins de fer ‚taient essentiels … la
+R‚volution industrielle. Non seulement ils favorisaient la croissance
+industrielle par une nette r‚duction des frais de transport mais ils
+encourageaient la recherche technologique.  Les progrŠs de la technologie et de
+l'ing‚nierie de la locomotive ont abouti … d'autres industries et applications.
+Les chemins de fer ont repr‚sent‚ les premiŠres grandes soci‚t‚s industrielles.
+
+*CHEMINS DE FER 2
+Construits seulement par des colons, uniquement dans des carr‚s qui contiennent d‚j… une route.
+Appuyez sur la touche Railroad (chemin de fer) (touche R).
+Les unit‚s passant d'un carr‚ de chemin de fer … un autre
+n'utilisent pas de points de d‚placement, quel que soit le terrain. Les chemins de fer augmentent
+de 1/2 (arrondi … la valeur inf‚rieure) la production de nourriture et de ressources dans un carr‚ de carte.
+Ils augmentent le commerce de la mˆme quantit‚ mais avant les effets de la
+R‚publique ou de la D‚mocratie.
+
+*IRRIGATION
+Quand les premiers paysans sont descendus des collines dans les vall‚es
+du Nil, du Tigre et de l'Euphrate, ils ont d– d‚velopper la technologie de
+l'irrigation. Les riviŠres passaient par des terres, arides pour la plupart
+… cause du manque de pr‚cipitations. L'irrigation permettait de puiser l'eau des
+riviŠres et d'arroser les terres environnantes pour faire pousser des plantes. Depuis ces premiers
+jours, l'irrigation est un outil important permettant aux paysans de faire pousser des plantes
+‚galement sur d'autres d‚serts. Les d‚serts trŠs productifs de Californie sont des exemples modernes.
+*IRRIGATION 2
+L'irrigation augmente la valeur alimentaire des carr‚s de riviŠres, de prairies, de plaines, de d‚serts et de collines.
+Seuls les carr‚s proches de l'eau verticalement ou horizontalement
+(oc‚an ou riviŠre) ou les carr‚s d'irrigation existante sont irrigables.
+
+*MINAGE
+Quand les humains dou‚s de raison ont ‚volu‚ pour la premiŠre fois, il ‚tait possible de trouver des d‚p“ts
+presque purs de plusieurs m‚taux sur la surface de la Terre. Les plus courants
+‚taient l'or, l'argent et le cuivre. Avec le temps, les d‚p“ts de la surface se sont
+‚puis‚s et les hommes ont commenc‚ … creuser dans le sol pour en trouver davantage. Le minage
+et l'excavation du sol dans le but de trouver des min‚raux continuent aujourd'hui mais
+la liste des matiŠres recherch‚es s'est nettement allong‚e. La d‚couverte de
+nouveaux m‚taux et ressources ou de nouvelles m‚thodes d'extraction a souvent transform‚
+des zones autrefois ind‚sirables en filons de p‚trole, d'uranium, de platine, etc.
+*MINAGE 2
+Le minage augmente la valeur de production des carr‚s de d‚sert (+1), de collines (+3)
+et de montagnes (+1).
+
+*FORTIFIER
+Les l‚gions romaines en campagne arrˆtaient leur d‚fil‚ assez t“t chaque soir pour
+construire un camp complŠtement fortifi‚ pour la nuit. Ils avaient appris la valeur des
+fortifications d‚fensives en cas d'attaque men‚e par l'ennemie. Lorsque c'‚tait possible,
+la norme de la plupart des arm‚es ‚tait de construire des fortifications de d‚fense d'un certain type
+… chaque fois qu'une attaque ‚tait attendue. Les d‚fenseurs fortifi‚s multipliaient leur force
+de combat et l'attaquant avait donc beaucoup plus de mal … les d‚loger.
+*FORTIFIER 2
+Les unit‚s fortifi‚es augmentent leurs valeurs de d‚fense de 50%.
+
+*FORTERESSE
+Les colons peuvent construire les forteresses dŠs que vous avez obtenu le
+progrŠs de la construction. Elles peuvent ˆtre construites sur tout carr‚ de
+terrain sauf si une ville s'y trouve. Les villes fond‚es dans un carr‚ de
+forteresse d‚truisent celle-ci. Les forteresses doublent la force de toutes les
+unit‚s de d‚fense aprŠs la prise en consid‚ration du terrain et de l'‚tat de
+v‚t‚ran. Les unit‚s d‚fendent les forteresses une par une.  Contrairement au
+combat en terrain normal, lorsqu'une unit‚ du carr‚ est d‚truite, les autres
+d‚fenseurs de la forteresse en question ne sont pas d‚truits.
+*FORTERESSE 2
+Construite uniquement par des colons. Appuyez sur la touche Fortress (touche F) ou choisissez l'option
+Fortress (Forteresse) … partir du menu Orders (commandes).
+Double la force des d‚fenseurs.
+Les unit‚s en d‚fendent une … la fois.
+Les forteresses ne doivent pas se trouver dans un carr‚ de ville.
+
+*PILLAGE
+Vous pouvez d‚truire les am‚liorations d'irrigation et de minage des ennemis en pla‡ant
+une unit‚ dans un carr‚ am‚lior‚ et en lui ordonnant de piller. Cette action r‚duit
+la production de la ville voisine et oblige l'ennemi … refaire le travail plus tard.
+Si vous avez des plans pour assi‚ger la ville ennemie, il vaut peut-ˆtre mieux
+ne pas faire de pillage parce que la ville et la production seront peut-ˆtre bient“t … vous.
+*PILLAGE 2
+Il est possible de piller les carr‚s am‚lior‚s par le minage ou par l'irrigation en appuyant sur la touche Pillage
+(Shift + P) ou en choisissant l'option Pillage … partir du menu Orders (commandes). Il faut
+qu'il reste des d‚placements … l'unit‚ qui fait le pillage.
+
+*D‚bander
+Parfois, vous aurez peut-ˆtre envie d'‚liminer des unit‚s alli‚es. Sans doute sont-elles obsolŠtes ou
+leur entretien co–te des ressources que vous souhaitez consacrer … d'autres objectifs. Elles
+rendent peut-ˆtre malheureux des habitants de leurs villes d'attache sous la R‚publique ou la D‚mocratie.
+Pour ‚liminer une unit‚ non d‚sir‚e, ordonnez-lui de se d‚bander. L'unit‚
+s'enlŠve de la carte et de l'‚cran d'affichage de sa ville d'attache.
+*D‚bander 2
+Pour d‚bander une unit‚ qui attend des
+ordres, appuyez sur la touche Disband (se d‚bander) (Shift + D) ou s‚lectionnez l'option Disband
+du menu Orders.
+
+*Unit‚s de v‚t‚rans
+Pendant la guerre de S‚cession, l'on disait que les unit‚s vertes qui n'avaient
+jamais ‚t‚ en combat en avaient "vu de belles" aprŠs avoir essuy‚ des tirs pour
+la premiŠre fois. Elles ‚taient d‚sormais compos‚es de v‚t‚rans. Elles avait
+assist‚ et particip‚ … quelque chose qui ne pouvait jamais ˆtre confi‚
+entiŠrement … ceux qui n'avaient pas l'exp‚rience. Les preuves historiques
+d‚montrent que les v‚t‚rans bien entraŒn‚s avaient beaucoup plus de chances de
+survivre et d'effectuer leurs missions de combat que les soldats sans
+exp‚rience.
+*Unit‚s de v‚t‚rans 2
+Les valeurs d'attaque et de d‚fense des unit‚s de v‚t‚rans augmentent de 50%.
+Les unit‚s peuvent devenir des v‚t‚rans lorsqu'elles gagnent une bataille ou lorsqu'elles sont construites dans une ville
+contenant une caserne.
+
+*ANARCHIE
+L'anarchie est la perte de contr“le de la situation par le gouvernement gouvernement. Elle entraŒne l'absence d'autorit‚
+politique ou d'objectif coh‚rent. Le gouvernement arrˆte de travailler et de fournir
+les services habituels. L'anarchie a ‚t‚ propos‚e s‚rieusement comme
+solution de remplacement du gouvernement mais n'a ‚t‚ accept‚e que de fa‡on marginale.
+Elle s'est produite plusieurs fois dans l'histoire suite … de grands bouleversements
+sociaux dus … une r‚volution, … une guerre, … une catastrophe naturelle ou … une maladie. Dans presque
+tous les cas, l'anarchie voulait dire panique, troubles, gaspillage et destruction.
+*ANARCHIE 2
+Les carr‚s qui produisent au moins trois unit‚s d'une denr‚e quelconque voient leur production r‚duite
+de 1. Par exemple, les carr‚s qui feraient normalement trois produits alimentaires
+n'en feraient que deux sous l'anarchie.
+Les unit‚s qui ne d‚passent pas la taille de la ville n'ont pas besoin d'ˆtre entretenues.
+Les unit‚s militaires qui se trouvent dans une ville diminuent le nombre de gens malheureux.
+Aucun imp“t n'est pr‚lev‚ et aucune connaissance n'est acquise.
+
+*DESPOTISME
+Le despotisme est une forme primitive de gouvernement pourtant utile
+… une civilisation d‚butante. En raison du minimum d'entretien n‚cessaire aux unit‚s,
+il est possible de faire jouer des arm‚es relativement importantes pour la population et de construire
+rapidement de nouveaux ‚l‚ments. Cependant, la croissance des villes est en fin de compte retard‚e par
+le despotisme et, pour qu'elles atteignent une taille importante, il faut
+adopter une nouvelle forme de gouvernement qui augmente la production de nourriture et
+de ressources. Le despotisme est surtout utile pendant l'expansion et en temps de guerre.
+*DESPOTISME 2
+Les carr‚s de production de 3 unit‚s ou plus en perdent une (3 unit‚s de nourriture ->2).
+Les unit‚s de ville d'attache dont la taille est inf‚rieure ou ‚gale … celle de la ville n'ont pas besoin
+d'entretien.
+Les unit‚s militaires qui se trouvent dans une ville diminuent le nombre de gens malheureux.
+
+*MONARCHIE
+La monarchie est la forme de gouvernement qui remplace le plus souvent le despotisme. Sous
+la monarchie, il est possible d'augmenter consid‚rablement la production de nourriture et de ressources
+par le minage et par l'irrigation, lorsque vos villes ont atteint une bonne taille.
+Peut-ˆtre la guerre est-elle quelque peu plus difficile … mener que sous le despotisme et
+la nouvelle production est-elle ralentie, mais vos villes peuvent finalement devenir beaucoup plus
+fortes et surmonter tout d'abord les handicaps que ce gouvernement risque de faire subir.
+*MONARCHIE 2
+Effets ‚conomiques normaux.
+L'entretien des unit‚s n‚cessite une ressource par tour.
+Les unit‚s militaires qui se trouvent dans une ville diminuent le nombre de gens malheureux.
+
+*COMMUNISME
+L'effet du communisme ressemble … celui d'une monarchie … une importante exception prŠs.
+Sous un gouvernement communiste, la corruption est au mˆme niveau dans toutes les villes.
+Ce fait le rend particuliŠrement attrayant pour les empires qui se sont ‚tendus sur de grandes
+distances. Normalement, dans ce cas, aux confins de l'empire, 
+la corruption peut ˆtre ‚norme. Mais sous le communisme, elle reste supportable.
+Dans sa capacit‚ … permettre une production plus grande que ne le permet le despotisme,
+le communisme ‚quivaut … la monarchie.
+*COMMUNISME 2
+Effets ‚conomiques normaux.
+L'entretien des unit‚s n‚cessite une ressource par tour.
+Les unit‚s militaires qui se trouvent dans une ville diminuent le nombre de gens malheureux.
+La corruption est la mˆme dans toutes les villes.
+
+*R‚publique
+La forme "r‚publicaine" de gouvernement incite … une plus grande libert‚
+‚conomique pour le peuple et donne lieu … de nettes augmentations du commerce.
+L'augmentation du commerce entraŒne une augmentation du nombre de produits de
+luxe, des revenus des imp“ts et de la recherche scientifique. Cependant, sous
+une r‚publique, la guerre est beaucoup plus difficile … mener parce que les
+unit‚s militaires hors de leurs villes d'attache rendent un habitant
+malheureux. La plupart des villes ne peuvent donc se permettre que quelques
+unit‚s militaires en campagne sans risquer les troubles civils. La r‚publique
+devient particuliŠrement utile quand vos villes sont devenues assez grandes.
+*R‚publique 2
++1 unit‚ de commerce par carr‚ o— le commerce existe.
+Il faut accepter toutes les offres de paix.
+Les unit‚s militaires dans une ville ne diminuent pas le nombre de gens malheureux - pas de loi martiale.
+Les unit‚s militaires hors des villes augmentent le nombre de gens malheureux.
+L'entretien des unit‚s n‚cessite une ressource par tour.
+
+*D‚mocratie
+Un gouvernement d‚mocratique augmente sensiblement le commerce de la mˆme fa‡on
+qu'une r‚publique et a un grand avantage suppl‚mentaire. Sous la d‚mocratie,
+les villes ne connaissent pas de corruption, d'o— une trŠs grande utilit‚ pour
+les grands empires. Cependant, la d‚mocratie comporte deux inconv‚nients
+particuliers. D'abord, les unit‚s militaires hors de leurs villes d'attache
+rendent malheureux deux habitants, et non pas un comme dans une r‚publique. La
+guerre est, de ce fait, particuliŠrement difficile … mener. Ensuite, si une
+ville en d‚mocratie connaŒt des troubles civils, le gouvernement est
+imm‚diatement renvers‚ et sombre dans l'anarchie pendant plusieurs tours.
+*D‚mocratie 2
++1 unit‚ de commerce par carr‚ o— le commerce existe.
+Il faut accepter toutes les offres de paix.
+Les unit‚s militaires dans une ville ne diminuent pas le nombre de gens malheureux - pas de loi martiale.
+Les unit‚s militaires hors des villes augmentent le nombre de gens malheureux.
+L'entretien des unit‚s n‚cessite une ressource par tour.
+Aucune corruption. Les troubles civils donnent lieu … l'anarchie.
+
+*POLLUTION
+La pollution peut ˆtre due … une grande production de ressources dans les villes, … des
+villes peupl‚es, … des armes nucl‚aires ou … la fusion d'une centrale nucl‚aire. Si une
+ville a un problŠme de pollution potentiel, les chemin‚es de la fenˆtre information
+de l'‚cran d'affichage de la ville indiquent le risque de pollution
+d'un carr‚ de carte environnant.
+*POLLUTION 2
+Un colon peut nettoyer la pollution d'un carr‚ de carte.
+Placez le colon dans le carr‚ et appuyez sur la touche Pollution (touche P) ou choisissez
+l'option Pollution du menu Orders (commandes). Le nettoyage de la pollution prend
+quatre tours. Si la pollution n'est pas contr“l‚e, le r‚chauffement de la terre risque de
+se produire.
+
+*FACTION
+Les unit‚s qui ont re‡u l'ordre de partir en faction sont indiqu‚es en fondu sur l'‚cran d'affichage du jeu
+et, de ce fait, ne clignotent pas … chaque tour en attendant des ordres. Cela est utile quand
+vous avez une unit‚ dans un carr‚ o— vous voulez la laisser et que vous ne la faites pas fortifier
+ou que vous ne pouvez pas la faire fortifier. De plus, les unit‚s de faction d'une ville sont automatiquement
+charg‚es sur les navires qui partent et qui peuvent les transporter.
+*FACTION 2
+Placez une unit‚ de faction en appuyant sur la touche Sentry (faction) (S) ou en choisissant
+cette option du menu Orders. Vous pouvez activer une unit‚ de faction en cliquant dessus
+avec le bouton gauche de la souris ou elle s'active quand une unit‚ ennemie arrive … proximit‚.
+
+*PRODUITS DE LUXE
+La provision de produits de luxe pour les habitants de vos villes est indiqu‚e par les
+losanges brillants dans la fenˆtre ressource de l'‚cran d'affichage de la ville.Chaque paire
+de produits de luxe rend heureux un habitant content ou content un habitant malheureux. La
+quantit‚ de produits de luxe faits par une ville d‚pend principalement du taux de produits
+de luxe de votre civilisation, pourcentage du commerce de chaque ville qui arrive sous forme
+de produits de luxe. Vous pouvez modifier ce taux en r‚ajustant votre taux d'imposition … partir
+du menu Game.
+*PRODUITS DE LUXE 2
+Vous pouvez ‚galement accroŒtre le taux de produits de luxe en construisant
+des am‚liorations que sont le march‚ et la banque et en transformant certains habitants en
+artistes.
+
+*Imp“ts
+Les imp“ts pr‚lev‚s par une ville sont indiqu‚s par les piŠces d'or dans la
+fenˆtre ressource de l'‚cran d'affichage de la carte de la ville. Les imp“ts pr‚lev‚s par la ville servent
+d'abord … l'entretien des am‚liorations qui existent
+dans la ville. Les surplus sont ajout‚s au tr‚sor et les nombres insuffisants sont
+retir‚s. La quantit‚ d'imp“ts fournie par une ville d‚pend
+principalement du taux d'imposition de la civilisation, pourcentage du commerce de chaque ville
+sous forme d'imp“ts. Vous pouvez modifier ce taux en r‚ajustant votre taux
+d'imposition … partir du menu Game (jeu).
+*Imp“ts 2
+Vous pouvez ‚galement augmenter les imp“ts en construisant des am‚liorations
+que sont la banque et le march‚ et en transformant certains habitants en percepteurs.
+
+*SCIENCE
+La recherche scientifique d'une ville est indiqu‚e par les ampoules
+dans la fenˆtre resource de l'‚cran d'affichage de la ville. La science d'une ville
+s'ajoute … la recherche pr‚c‚dente et, si la quantit‚ de recherche effectu‚e est suffisante,
+vous avez un nouveau progrŠs de civilisation. La quantit‚ de science d'une ville d‚pend principalement
+du taux de science de votre civilisation, pourcentage de
+commerce de chaque ville qui arrive sous la forme de nouvelles connaissances. Vous pouvez modifier ce taux en
+r‚ajustant votre taux de science … partir du menu Game.
+*SCIENCE 2
+Vous pouvez ‚galement augmenter la science
+en construisant des am‚liorations que sont la bibliothŠque et l'universit‚s, certaines merveilles et en
+transformant certains habitants en savants.
+
+*ITIN. COMMERCIAUX
+Les itin‚raires commerciaux sont ‚tablis quand vous envoyez une caravane dans
+une de vos villes situ‚e au moins … dix carr‚s de sa ville d'attache ou dans
+une ville rivale. L'arriv‚e d'une caravane entraŒne une rentr‚e imm‚diate
+d'argent comptant dans votre tr‚sor plus l'itin‚raire commercial. Les
+itin‚raires commerciaux augmentent par la suite le commerce g‚n‚r‚ par la ville
+d'attache de votre caravane … chaque tour … moins que la ville reli‚e soit
+d‚truite. La valeur d'un itin‚raire commercial est … son maximum quand il relie
+une ville rivale situ‚e sur un autre continent et augmente avec la taille des
+deux villes impliqu‚es et avec la distance qui les s‚pare.
+*ITIN. COMMERCIAUX 2
+Cr‚‚s par des caravanes.
+
+*END
+

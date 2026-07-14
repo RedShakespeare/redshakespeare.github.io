@@ -1,0 +1,128 @@
+#paper-doll-container{
+	position: relative;
+}
+
+#inventory-container{
+	display: flex;
+	flex-direction: row;
+}
+
+#inventory-description-container{
+	width: 700px;
+	height: 400px;
+}
+
+.gear-description{
+	border: 1px solid white;
+	box-sizing: border-box;
+	padding: 30px 30px 50px 30px;
+	color: white;
+	margin: 20px;
+	display: none;
+}
+
+.gear-description h1, .glowing-description h1{
+	font-size: 34px;
+	margin: 0 0 15px 0;
+	text-shadow: 0 0 3px white, 0 0 8px white;
+}
+
+#chest-pickup-container{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+}
+
+#chest-pickup-description{
+	min-width: 400px;
+	z-index: 100000;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+}
+
+.gear-slot{
+	width:  64px;
+	height: 64px;
+	box-sizing: border-box;
+	position: absolute;
+  	top: 0px;
+  	left: 0px;
+
+	background-image: url("../img/slot-background.png");
+  	image-rendering: pixelated;
+
+  	display: flex;
+  	align-items: center;
+  	justify-content: center;
+}
+
+.gear-slot-item{
+	width:  24px;
+	height: 24px;
+	box-sizing: border-box;
+
+	background-image: url("../img/ss.png");
+  	background-size: 384px 384px;
+  	transform: scale(2);
+	transform-origin: 12px 12px;
+  	image-rendering: pixelated;
+
+  	pointer-events: none;
+}
+
+#chest-image-container{
+	height: 175;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+#chest-image-container .gear-slot-item{
+	transform: scale(6);
+	transform-origin: 12px 0;
+}
+
+
+.gear-helm{
+	background-position: calc(0*-24px) calc(10*-24px);
+}
+
+
+.gear-pauldron{
+	background-position: calc(1*-24px) calc(10*-24px);
+}
+
+.gear-bird{
+	background-position: calc(2*-24px) calc(10*-24px);
+}
+
+.gear-plate{
+	background-position: calc(3*-24px) calc(10*-24px);
+}
+
+.gear-leggings{
+	background-position: calc(4*-24px) calc(10*-24px);
+}
+
+.gear-sword{
+	background-position: calc(5*-24px) calc(10*-24px);
+}
+
+.gear-staff{
+	background-position: calc(6*-24px) calc(10*-24px);
+}
+
+.gear-gauntlets{
+	background-position: calc(7*-24px) calc(10*-24px);
+}
+
+.gear-ring{
+	background-position: calc(8*-24px) calc(10*-24px);
+}
+
+.gear-boots{
+	background-position: calc(9*-24px) calc(10*-24px);
+}

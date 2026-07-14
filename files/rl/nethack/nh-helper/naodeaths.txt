@@ -1,0 +1,1455 @@
+  91920	killed by something, while helpless
+  45787	killed by a jackal
+  39983	killed by a soldier ant
+  39070	killed by a dwarf
+  35918	killed by a small mimic
+  35308	killed by a sewer rat
+  33326	killed by a wand
+  33082	killed by a gnome lord
+  33078	killed by a water moccasin
+  31232	killed by a giant bat
+  29748	killed by a fox
+  26900	killed by a rothe
+  26022	ascended
+  24920	killed by a gnome
+  23370	poisoned by a rotted creature corpse
+  22417	killed by something, while frozen by a monster's gaze
+  22051	killed by a giant ant
+  21295	killed by a shopkeeper
+  21256	killed by a water demon
+  19646	killed by something, while fainted from lack of food
+  18554	killed by a hobbit
+  16221	killed by something, while praying
+  16156	killed by a killer bee
+  15744	killed by a goblin
+  15555	killed by a kitten
+  15458	killed by a hill orc
+  15034	killed by a gas spore's explosion
+  14973	killed by a magic missile
+  14438	killed by a falling rock
+  13536	killed by a bolt of fire
+  13073	killed by a bolt of lightning
+  13041	killed by a bat
+  12573	killed by a little dog
+  11797	killed by a mumak
+  11629	killed by a newt
+  11550	killed by a bolt of cold
+  11479	killed by a black pudding
+  11355	killed by a pony
+  10874	killed by a rabid rat
+  10820	killed by a fire ant
+  10456	killed by a boulder
+  10351	killed by something, while sleeping
+   9890	killed by a wolf
+   9869	killed by a giant spider
+   9839	killed by an owlbear
+   9567	killed by a white unicorn
+   9425	died of starvation
+   9289	killed by a coyote
+   9265	killed by a leocrotta
+   8656	killed by an arrow
+   8536	killed by a giant rat
+   8145	killed by a wererat
+   7506	choked on something
+   7498	killed by a jaguar
+   6997	killed by a poisonous corpse
+   6997	killed by a Woodland-elf
+   6851	killed by a werejackal
+   6842	killed by a watch captain
+   6627	killed by kicking something
+   6603	killed by a gnome king
+   6448	killed by a system shock
+   6441	killed by the wrath of some god
+   6384	killed by a grid bug
+   5997	killed by a gray unicorn
+   5881	killed by a rope golem
+   5717	killed by a boiling potion
+   5597	killed by a crossbow bolt
+   5473	killed by a dwarf lord
+   5453	killed by a kobold zombie
+   5448	killed by a brown mold
+   5371	killed by an ape
+   5356	killed by a giant mimic
+   5267	killed by a water elemental
+   5218	killed by a hobgoblin
+   5189	killed by a kobold
+   5168	killed by a large mimic
+   5102	killed by a plains centaur
+   5004	killed by a dagger
+   4861	killed by an Uruk-hai
+   4777	killed by a death ray
+   4767	killed by a priest(ess) of some god
+   4650	killed by a dart
+   4637	killed by a gecko
+   4631	killed by a blue jelly
+   4448	killed by a dingo
+   4406	killed by a bugbear
+   4367	killed by a giant beetle
+   4231	killed by a minotaur
+   4195	killed by a gold golem
+   4112	killed by an iguana
+   4077	killed by a homunculus
+   4074	slipped while mounting a saddled creature
+   4031	killed by an electric shock
+   4022	killed by a werewolf
+   4003	petrified by a cockatrice
+   3899	killed by something, while reading a book
+   3775	killed by a gargoyle
+   3737	killed by a black unicorn
+   3728	killed by a panther
+   3708	killed by a human mummy
+   3670	killed by a snake
+   3639	killed by a raven
+   3576	killed by an imp
+   3552	killed by a housecat
+   3456	killed by an acidic corpse
+   3445	killed by a guard
+   3420	killed by a troll
+   3360	zapped oneself with a wand
+   3326	poisoned by an orcish arrow
+   3234	killed by a yeti
+   3232	killed by a dog
+   3205	killed by a scroll of earth
+   3097	killed by something, while frozen by a potion
+   3032	killed by a fall onto poison spikes
+   3017	fell into a pit
+   3004	killed by a Green-elf
+   2933	killed by a watchman
+   2882	killed by an ettin mummy
+   2854	killed by a crocodile
+   2853	petrified by a cockatrice corpse
+   2768	killed by a lynx
+   2703	killed by a manes
+   2660	poisoned by a killer bee
+   2512	killed by an unsuccessful polymorph
+   2506	killed by an orc zombie
+   2474	killed by a dwarf zombie
+   2436	killed by an energy vortex
+   2428	killed by a falling object
+   2417	killed by a cave spider
+   2352	killed by a horse
+   2339	petrified by a chickatrice
+   2320	killed by brainlessness
+   2317	killed by an orcish arrow
+   2296	killed by an air elemental
+   2247	killed by a kobold lord
+   2199	killed by a straw golem
+   2166	killed by a spotted jelly
+   2151	killed by a large kobold
+   2149	killed by an elf zombie
+   2080	killed by a large cat
+   2069	killed by a scroll of genocide
+   2050	killed by a blast of frost
+   2010	killed by a tengu
+   1892	killed by a djinni
+   1850	killed by a gnome zombie
+   1822	killed by a tiger
+   1818	killed by an orcish dagger
+   1797	killed by a winged gargoyle
+   1789	killed by a Mordor orc
+   1754	killed by contaminated water
+   1733	killed by a human zombie
+   1715	killed by a gnome mummy
+   1706	killed by an invisible stalker
+   1701	killed by a contaminated potion
+   1693	killed by strangulation
+   1686	killed by a dwarf king
+   1664	killed by a vampire bat
+   1654	killed by an ettin zombie
+   1640	killed by a winter wolf
+   1634	killed by something, while paralyzed by a monster
+   1622	killed by a bear trap
+   1617	killed by a winter wolf cub
+   1589	killed by a succubus
+   1560	killed by a little dart
+   1551	killed by a rock troll
+   1540	killed by a gnomish wizard
+   1537	killed by a rock piercer
+   1532	killed by a large dog
+   1521	killed by a warg
+   1461	killed by a Grey-elf
+   1448	killed by a quasit
+   1429	poisoned by a little dart
+   1373	killed by a rock mole
+   1368	killed by a mountain centaur
+   1341	killed by a gas cloud
+   1315	killed by a paper golem
+   1304	killed by an ogre
+   1290	killed by touching an artifact
+   1261	killed by Yeenoghu
+   1221	killed by an incubus
+   1218	zapped oneself with a spell
+   1190	killed by an ochre jelly
+   1188	killed by a vampire lord
+   1188	killed by a riding accident
+   1187	killed by an acid blob
+   1173	killed by a purple worm
+   1164	killed by a giant zombie
+   1135	killed by the ghost of someone
+   1131	killed by a warhorse
+   1107	killed by a soldier
+   1096	petrified by a chickatrice corpse
+   1068	killed by a vampire
+   1061	killed by a giant mummy
+   1057	killed by a potion of acid
+   1057	killed by a chameleon
+   1054	drowned in a pool of water by an electric eel
+   1037	killed by a forest centaur
+   1032	killed by an elven dagger
+   1020	killed by an elf-lord
+   1011	killed by a touch of death
+   1002	killed by an exploding wand
+   1000	killed by a kobold mummy
+    978	killed by an orc-captain
+    962	killed by an Olog-hai
+    961	killed by something, while sleeping off a magical draught
+    953	killed by a garter snake
+    945	killed by a lizard
+    945	killed by a Kop Sergeant
+    931	killed by something, while unconscious from rotten food
+    928	killed by a jabberwock
+    920	burned by a tower of flame
+    915	killed by an elf mummy
+    881	killed by a potion of holy water
+    880	killed by a xorn
+    878	killed by an invisible dwarf
+    870	killed by an invisible gnome lord
+    819	killed by a carnivorous bag
+    815	killed by a gray ooze
+    811	killed by a pyrolisk
+    806	killed by a fire elemental
+    801	killed by a land mine
+    797	killed by a red mold
+    794	killed by a mind flayer
+    788	killed by a blast of disintegration
+    778	killed by a captain
+    777	fell into a pit of iron spikes
+    761	killed by something, while dressing up
+    752	poisoned by a water moccasin
+    739	killed by a gremlin
+    733	killed by falling downstairs
+    708	killed by an orc mummy
+    701	killed by a dwarf mummy
+    697	killed by a baluchitherium
+    690	killed by a blast of fire
+    681	killed by a mastodon
+    678	drowned in a pool of water by a giant eel
+    653	petrified by Medusa
+    641	killed by an Elvenking
+    634	killed by overexertion
+    617	killed by a lieutenant
+    615	killed by a tower of flame
+    614	caught oneself in ones own magical blast
+    610	killed by a sergeant
+    606	killed by an invisible water demon
+    602	killed by a zruty
+    590	shot oneself with a death ray
+    585	killed by a master mind flayer
+    573	poisoned by a giant spider
+    571	killed by a wraith
+    569	killed by a burning scroll
+    567	poisoned by a rabid rat
+    563	killed by an ogre king
+    558	killed by a cadaver
+    558	killed by a barrow wight
+    556	killed by a carnivorous ape
+    555	killed by a sasquatch
+    550	killed by a Keystone Kop
+    545	fell onto a sink
+    539	killed by a shattered potion
+    537	killed by a green mold
+    537	drowned in a moat by a giant eel
+    520	killed by an elven arrow
+    512	poisoned by a soldier ant
+    501	killed by an iron ball collision
+    474	killed by a hallucinogen-distorted soldier ant
+    472	killed by the Oracle
+    465	killed by an ettin
+    465	killed by a ghoul
+    462	killed by Juiblex
+    460	killed by a magical explosion
+    457	killed by a flesh golem
+    455	killed by a Kop Lieutenant
+    454	killed by an explosion
+    450	poisoned by Juiblex
+    444	crushed to death by a collapsing drawbridge
+    442	poisoned by a dart
+    439	killed by a water troll
+    429	killed by a couatl of some god
+    426	poisoned by a snake
+    417	Crunched in the head by an iron ball
+    413	killed by a shuriken
+    410	petrified by a cockatrice egg
+    404	killed by something, while dragging an iron ball
+    401	killed by an exploding large box
+    400	killed by a leather golem
+    399	killed by an invisible hill orc
+    397	killed by an iron golem
+    386	killed by an ice vortex
+    383	killed by an ogre lord
+    383	killed by a stone giant
+    382	killed by a queen bee
+    380	killed by a scorpion
+    377	killed by a guardian naga hatchling
+    373	killed by an invisible titan
+    365	killed by a red naga hatchling
+    363	killed by a hallucinogen-distorted giant bat
+    362	caught oneself in ones own fireball
+    359	killed by an iron piercer
+    355	killed by a hallucinogen-distorted jackal
+    350	killed by a shark
+    350	killed by a golden naga hatchling
+    347	killed by an exploding rune
+    344	killed by a marilith
+    340	killed by an invisible golden naga
+    335	killed by a hallucinogen-distorted giant ant
+    334	killed by a hallucinogen-distorted rothe
+    332	killed by a black naga hatchling
+    328	killed by Master Kaen
+    327	killed by a fire giant
+    326	killed by something, while disrobing
+    320	killed by a thrown potion
+    315	killed by a centipede
+    309	killed by exhaustion
+    304	killed by something, while frozen by a trap
+    304	killed by an invisible gnome
+    304	killed by an earth elemental
+    303	killed by boiling potions
+    300	killed by a hallucinogen-distorted water moccasin
+    298	killed by a burning book
+    287	killed by an invisible gnome king
+    285	killed by genocidal confusion
+    283	killed by a hallucinogen-distorted dwarf
+    280	killed by an arch-lich
+    276	turned to slime by a green slime
+    274	killed by a couatl
+    273	killed by a hallucinogen-distorted gnome lord
+    273	killed by a disenchanter
+    265	dissolved in molten lava
+    262	killed by a hallucinogen-distorted water demon
+    261	killed by a fire vortex
+    261	caught oneself in ones own ball of lightning
+    260	poisoned by a vampire bat
+    258	killed by a dwarvish spear
+    253	killed by a hallucinogen-distorted watch captain
+    249	poisoned by Demogorgon
+    249	killed by something, while vomiting
+    245	killed by sipping boiling water
+    244	petrified by tasting cockatrice meat
+    237	killed by bumping into a wall
+    236	poisoned by a quasit
+    236	killed by a hallucinogen-distorted sewer rat
+    236	killed by a frost giant
+    235	killed by a silver dragon
+    234	killed by an exploding crystal ball
+    234	killed by Croesus
+    233	killed by a fog cloud
+    231	killed by an air elemental of some god
+    230	killed by an invisible hobbit
+    228	killed by a yellow dragon
+    228	killed by a xan
+    228	killed by a red dragon
+    227	killed by an ice troll
+    227	killed by a bone devil
+    225	killed by an umber hulk
+    223	killed by a vrock
+    221	poisoned by Pestilence
+    220	killed by a black dragon
+    220	caught oneself in ones own burning oil
+    217	killed by a hallucinogen-distorted mumak
+    217	drowned in a pool of water
+    216	killed by a spear
+    215	poisoned by a centipede
+    215	killed by a salamander
+    211	killed by a hallucinogen-distorted owlbear
+    207	killed by an invisible troll
+    206	killed by an invisible Woodland-elf
+    205	killed by tumbling down a flight of stairs
+    201	killed by an exploding chest
+    200	killed by something, while being frightened to death
+    200	killed by an invisible dwarf lord
+    200	killed by a leprechaun
+    200	crushed to death by an exploding drawbridge
+    199	killed by a cobra
+    197	killed by a black naga
+    195	killed by an incubus of some god
+    193	killed by the invisible Wizard of Yendor
+    193	killed by a poisoned blast
+    192	killed by a hell hound
+    191	killed by a hallucinogen-distorted pony
+    191	killed by a hallucinogen-distorted fox
+    191	killed by a gray dragon
+    190	killed by a hallucinogen-distorted killer bee
+    190	killed by a green dragon
+    189	killed by a blue dragon
+    188	killed by a hallucinogen-distorted little dog
+    188	killed by a hallucinogen-distorted gnome
+    188	killed by a Kop Kaptain
+    187	killed by an invisible plains centaur
+    187	killed by a baby crocodile
+    186	killed by something, while jumping around
+    186	killed by an invisible arch-lich
+    185	killed by a clay golem
+    182	killed by a barbed devil
+    181	killed by an Archon
+    179	killed by a hallucinogen-distorted kitten
+    178	killed by a pit viper
+    178	killed by Pestilence
+    178	killed by Ashikaga Takauji
+    177	killed by an invisible gargoyle
+    176	killed by a red naga
+    176	killed by a monkey
+    176	killed by a hallucinogen-distorted water elemental
+    176	killed by a hallucinogen-distorted hobbit
+    175	killed by a stone golem
+    174	killed by an Aleax
+    173	petrified by touching a cockatrice corpse bare-handed
+    171	killed oneself by breaking a wand
+    171	killed by a titan
+    171	killed by a gelatinous cube
+    170	killed by an invisible Archon
+    169	drowned in a moat
+    168	killed by a shocking sphere
+    166	killed by a succubus of some god
+    165	a trickery
+    164	killed by a hill giant
+    162	killed by a hallucinogen-distorted hill orc
+    159	killed by a hallucinogen-distorted leocrotta
+    158	killed by a hallucinogen-distorted wolf
+    157	killed by an orc shaman
+    154	killed by a hallucinogen-distorted fire ant
+    154	killed by a fire elemental of some god
+    153	burned by molten lava
+    151	killed by life drainage
+    150	killed by the high priest(ess) of some god
+    150	killed by a poisoned needle
+    150	killed by a giant eel
+    150	caught oneself in ones own ball of cold
+    149	killed by a hallucinogen-distorted bat
+    148	petrified by tasting chickatrice meat
+    148	killed by a psychic blast
+    147	killed by the Cyclops
+    147	killed by an invisible nalfeshnee
+    147	killed by an invisible master lich
+    146	killed by a contact-poisoned spellbook
+    145	killed by a flaming sphere
+    145	killed by a blast of acid
+    145	killed by Famine
+    144	starvation
+    144	killed by a hallucinogen-distorted small mimic
+    143	killed by an orange dragon
+    143	killed by an anti-magic implosion
+    142	killed by a water elemental of some god
+    142	killed by a freezing sphere
+    141	killed by a white dragon
+    140	killed by a hallucinogen-distorted giant rat
+    140	killed by a glass golem
+    138	killed by an invisible Uruk-hai
+    138	killed by a storm giant
+    138	killed by a balrog
+    137	killed by colliding with the ceiling
+    132	poisoned by a unicorn horn
+    132	killed by an invisible wererat
+    128	killed by an earth elemental of some god
+    127	killed while stuck in creature form
+    127	killed by the Wizard of Yendor
+    125	killed by an invisible watch captain
+    125	killed by a hallucinogen-distorted coyote
+    125	killed by Lord Surtur
+    124	killed by something, while trying to turn the monsters
+    124	killed by something, while taking off clothes
+    124	killed by an invisible priest(ess) of some god
+    123	killed oneself with ones bullwhip
+    122	poisoned by a crossbow bolt
+    121	killed by an invisible werewolf
+    121	killed by an invisible werejackal
+    121	killed by a pit fiend
+    116	killed by an invisible goblin
+    116	killed by an invisible Green-elf
+    116	killed by a died
+    115	killed by petrification
+    113	killed by a master lich
+    113	killed by a cloud of poison gas
+    111	killed by a knife
+    110	killed by an invisible bugbear
+    109	petrified by a soldier
+    108	killed by a hallucinogen-distorted jaguar
+    107	killed by an electric chair
+    106	killed by invisible Yeenoghu
+    105	killed by ones own pick-axe
+    105	killed by an elven spear
+    104	killed by an invisible winged gargoyle
+    104	killed by a hallucinogen-distorted plains centaur
+    104	killed by a blast of lightning
+    103	killed by an Angel of some god
+    102	killed by a nurse
+     98	poisoned by an arrow
+     98	killed by a hallucinogen-distorted watchman
+     97	killed by something, while fumbling
+     97	killed by an invisible soldier ant
+     97	killed by a hallucinogen-distorted white unicorn
+     96	killed by a hallucinogen-distorted giant spider
+     94	killed by a wood golem
+     93	killed by an invisible gnomish wizard
+     92	killed by an Angel
+     92	killed by an Aleax of some god
+     92	killed by a hallucinogen-distorted werejackal
+     89	petrified by touching a chickatrice corpse bare-handed
+     87	killed by a hallucinogen-distorted wererat
+     86	killed by an invisible rock troll
+     86	killed by a hallucinogen-distorted Woodland-elf
+     86	killed by a blast of missiles
+     85	poisoned by Scorpius
+     85	killed by a hallucinogen-distorted goblin
+     84	killed by invisible Nalzok
+     84	killed by a potion of unholy water
+     84	killed by a hezrou
+     83	killed by a hallucinogen-distorted newt
+     81	killed by an invisible demilich
+     81	killed by a hallucinogen-distorted ape
+     81	killed by a grappling hook
+     79	killed by a hallucinogen-distorted rabid rat
+     76	killed by Asmodeus
+     75	killed by an invisible lich
+     74	killed by a titanothere
+     74	killed by a horned devil
+     74	killed by a hallucinogen-distorted gecko
+     72	petrified by kicking something
+     72	killed by an invisible imp
+     72	killed by an invisible chameleon
+     72	killed by a kobold shaman
+     72	killed by a hallucinogen-distorted panther
+     71	killed by something, while frozen by a monster
+     71	killed by a hallucinogen-distorted gnome king
+     71	killed by a hallucinogen-distorted gargoyle
+     70	killed by a hallucinogen-distorted blue jelly
+     69	killed by a hallucinogen-distorted priest(ess) of some god
+     68	killed by a hallucinogen-distorted giant beetle
+     67	killed by an invisible minotaur
+     67	killed by a worthless piece of glass
+     67	dragged downstairs by an iron ball
+     66	killed by a skeleton
+     66	killed by a hallucinogen-distorted dog
+     65	killed by an invisible dwarf king
+     65	killed by a nalfeshnee
+     65	killed by a hallucinogen-distorted horse
+     64	turned into green slime
+     64	killed by Death
+     63	killed by a hallucinogen-distorted yeti
+     63	killed by a hallucinogen-distorted black pudding
+     62	killed by an invisible mountain centaur
+     61	killed by an invisible ogre
+     61	killed by an invisible Olog-hai
+     61	killed by an invisible Mordor orc
+     61	killed by a lich
+     61	killed by a hallucinogen-distorted lynx
+     60	killed by an invisible hobgoblin
+     60	killed by a hallucinogen-distorted hobgoblin
+     59	poisoned by a scorpion
+     59	killed by a hallucinogen-distorted rope golem
+     59	killed by a hallucinogen-distorted gray unicorn
+     59	killed by a guardian naga
+     58	killed by the hallucinogen-distorted Oracle
+     58	killed by a quantum mechanic
+     58	killed by a python
+     58	killed by a hallucinogen-distorted dingo
+     57	killed by the invisible Minion of Huhetotl
+     57	killed by an invisible Grey-elf
+     56	killed by ones own axe
+     56	killed by a hallucinogen-distorted kobold zombie
+     56	caught oneself in ones own death field
+     55	poisoned by a poison dart
+     55	petrified by a sergeant
+     55	killed by using a magical horn on oneself
+     55	killed by a hallucinogen-distorted werewolf
+     55	killed by a hallucinogen-distorted guard
+     55	killed by a hallucinogen-distorted Uruk-hai
+     55	killed by a hallucinogen-distorted Green-elf
+     54	killed by a hallucinogen-distorted housecat
+     54	killed by a hallucinogen-distorted bugbear
+     53	killed by the invisible Chromatic Dragon
+     53	killed by an invisible giant ant
+     53	killed by an ice devil
+     53	killed by a poison dart
+     53	killed by a hallucinogen-distorted gold golem
+     52	poisoned by a pit viper
+     52	killed by an invisible ki-rin
+     52	killed by a hallucinogen-distorted iguana
+     52	killed by a golden naga
+     52	drowned in a moat by a kraken
+     51	killed by an invisible vampire
+     51	killed by an invisible rothe
+     51	killed by an invisible homunculus
+     51	killed by a vampire in bat form
+     51	killed by a hallucinogen-distorted imp
+     51	killed by a hallucinogen-distorted grid bug
+     51	killed by a hallucinogen-distorted black unicorn
+     50	killed by an invisible xorn
+     50	killed by a hallucinogen-distorted large cat
+     50	killed by a doppelganger
+     50	drowned in deep water
+     49	killed by a hallucinogen-distorted brown mold
+     49	drowned in a moat by a couatl
+     48	killed by an invisible vampire lord
+     48	killed by an invisible tengu
+     48	killed by an invisible elf-lord
+     48	killed by an invisible captain
+     48	killed by a hallucinogen-distorted troll
+     47	killed by a lance
+     47	killed by a hallucinogen-distorted homunculus
+     46	killed by ones own battle-axe
+     46	killed by invisible Ixoth
+     46	killed by a violet fungus
+     46	killed by a hallucinogen-distorted dwarf lord
+     45	petrified by a captain
+     45	killed by a quivering blob
+     44	killed by an invisible kobold lord
+     43	killed by something, while moving through the air
+     43	killed by an invisible djinni
+     43	killed by an acidic glob
+     43	killed by a hallucinogen-distorted snake
+     43	killed by a glass piercer
+     43	crushed to death by a falling drawbridge
+     42	killed by an invisible succubus
+     42	killed by an invisible giant bat
+     42	killed by a mildly contaminated potion
+     41	killed by something, while being terrified of a demon
+     41	killed by invisible Orcus
+     40	killed by an invisible orc-captain
+     40	killed by an invisible kobold
+     40	killed by a spetum
+     40	killed by a hell hound pup
+     40	killed by a hallucinogen-distorted tengu
+     40	killed by a hallucinogen-distorted ettin mummy
+     39	killed by an invisible lieutenant
+     39	killed by a burning potion of oil
+     38	went to heaven prematurely
+     38	poisoned by a fall onto poison spikes
+     38	killed by shattered potions
+     38	killed by invisible Asmodeus
+     38	killed by a hallucinogen-distorted tiger
+     37	petrified by a lieutenant
+     37	killed by axing a hard object
+     37	killed by an invisible fire ant
+     37	killed by an exploding potion
+     37	killed by a rock
+     37	killed by a kraken
+     37	killed by a hallucinogen-distorted winter wolf cub
+     37	killed by a hallucinogen-distorted kobold lord
+     36	poisoned by a rotted glob of gray ooze
+     36	killed by an invisible mumak
+     36	killed by a ranseur
+     36	killed by a marilith of some god
+     36	killed by a hallucinogen-distorted ettin zombie
+     36	killed by a dust vortex
+     36	killed by a baby white dragon
+     35	killed by invisible Juiblex
+     35	killed by burning scrolls
+     35	killed by an invisible small mimic
+     35	killed by an invisible forest centaur
+     35	killed by a hallucinogen-distorted human mummy
+     34	killed by an invisible quasit
+     34	killed by an invisible pony
+     34	killed by a hallucinogen-distorted large dog
+     34	killed by a hallucinogen-distorted cave spider
+     33	killed by an invisible watchman
+     33	killed by an invisible mind flayer
+     33	killed by a steam vortex
+     33	killed by a hallucinogen-distorted spotted jelly
+     33	killed by a hallucinogen-distorted crocodile
+     33	killed by a baby orange dragon
+     32	killed by the invisible Dark One
+     32	killed by an invisible master mind flayer
+     32	killed by an invisible incubus
+     32	killed by a hallucinogen-distorted large mimic
+     32	killed by a hallucinogen-distorted kobold
+     32	killed by a baby gray dragon
+     32	killed by Demogorgon
+     31	squished under a boulder
+     31	petrified by tasting Medusa meat
+     31	killed by an invisible ogre king
+     31	killed by an invisible jaguar
+     31	killed by a hallucinogen-distorted dwarf zombie
+     31	killed by a baby yellow dragon
+     31	killed by a baby black dragon
+     31	committed suicide
+     30	killed by an invisible sergeant
+     30	killed by an invisible owlbear
+     30	killed by a shade
+     30	killed by a partisan
+     30	killed by a hallucinogen-distorted straw golem
+     30	killed by a baby silver dragon
+     30	killed by a baby green dragon
+     29	killed by an invisible water moccasin
+     29	killed by an invisible leocrotta
+     29	killed by a samurai
+     29	killed by a hallucinogen-distorted elf zombie
+     29	killed by a boomerang
+     29	killed by Nalzok
+     28	killed by invisible Demogorgon
+     28	killed by an acid venom
+     28	killed by a trapper
+     28	killed by a hallucinogen-distorted warhorse
+     27	killed by an invisible large kobold
+     27	killed by an invisible killer bee
+     27	killed by a vrock of some god
+     27	killed by a baby blue dragon
+     26	killed by invisible Master Kaen
+     26	killed by an invisible large mimic
+     26	killed by an invisible jabberwock
+     26	killed by an invisible giant mimic
+     26	killed by an electric eel
+     26	killed by a wumpus
+     26	killed by a ki-rin
+     26	killed by a hallucinogen-distorted vampire bat
+     26	killed by a hallucinogen-distorted quasit
+     26	killed by a hallucinogen-distorted large kobold
+     26	killed by a hallucinogen-distorted giant mimic
+     26	killed by a glaive
+     25	poisoned by a queen bee
+     25	killed by invisible Dispater
+     25	killed by an invisible stone giant
+     25	killed by an invisible guard
+     25	killed by a lurker above
+     25	killed by a hallucinogen-distorted gnome mummy
+     25	killed by a baby red dragon
+     24	killed by hallucinogen-distorted Yeenoghu
+     24	killed by a ya
+     24	killed by a ninja
+     24	killed by a hallucinogen-distorted vampire lord
+     24	killed by a hallucinogen-distorted orc zombie
+     24	killed by a hallucinogen-distorted gnome zombie
+     24	killed by a hallucinogen-distorted Mordor orc
+     24	killed by a hallucinogen-distorted Grey-elf
+     24	killed by Vlad the Impaler
+     23	petrified by elementary physics
+     23	petrified by a hallucinogen-distorted cockatrice
+     23	killed by an invisible water troll
+     23	killed by a long worm
+     23	killed by a hallucinogen-distorted soldier
+     23	killed by a hallucinogen-distorted mountain centaur
+     23	killed by a hallucinogen-distorted minotaur
+     23	killed by Orcus
+     22	teleported out of the dungeon and fell to ones death
+     22	killed by an invisible wraith
+     22	killed by an invisible gremlin
+     22	killed by an invisible barrow wight
+     22	killed by a hallucinogen-distorted manes
+     22	drowned in a pool of water by a couatl
+     21	petrified by trying to tin a cockatrice without gloves
+     21	killed by the Chromatic Dragon
+     21	killed by invisible Famine
+     21	killed by an unrefrigerated sip of juice
+     21	killed by an invisible manes
+     21	killed by an invisible Elvenking
+     21	killed by a woodchuck
+     20	killed by contaminated tap water
+     20	killed by an invisible ogre lord
+     20	killed by an invisible blue jelly
+     20	killed by an alchemic blast
+     20	killed by a sandestin
+     20	killed by a javelin
+     20	killed by a hallucinogen-distorted warg
+     20	killed by a hallucinogen-distorted dwarf king
+     20	killed by a demilich
+     20	drowned in a pool of water by a python
+     19	killed by invisible Croesus
+     19	killed by an orcish spear
+     19	killed by an invisible mastodon
+     19	killed by an invisible jackal
+     19	killed by an imperious order
+     19	killed by a vampire lord in bat form
+     19	killed by a human
+     19	killed by a hallucinogen-distorted kobold mummy
+     18	petrified by losing gloves while wielding a cockatrice corpse
+     18	killed by the invisible high priest(ess) of some god
+     18	killed by something, while gazing into a crystal ball
+     18	killed by invisible Pestilence
+     18	killed by an invisible samurai
+     18	killed by an invisible giant spider
+     18	killed by an invisible air elemental
+     18	killed by a hallucinogen-distorted winged gargoyle
+     18	killed by a hallucinogen-distorted djinni
+     18	killed by a hallucinogen-distorted carnivorous ape
+     17	killed by the Minion of Huhetotl
+     17	killed by bumping into a door
+     17	killed by an invisible fox
+     17	killed by a residual undead turning effect
+     17	killed by a hallucinogen-distorted winter wolf
+     17	killed by a hallucinogen-distorted rock mole
+     17	killed by a hallucinogen-distorted ogre
+     17	killed by a hallucinogen-distorted incubus
+     17	killed by a hallucinogen-distorted human zombie
+     17	killed by a guisarme
+     17	crushed to death by a closing drawbridge
+     16	killed by ones own dwarvish mattock
+     16	killed by an invisible water elemental
+     16	killed by an invisible soldier
+     16	killed by an invisible kitten
+     16	killed by a hallucinogen-distorted forest centaur
+     16	killed by Ixoth
+     16	died of exhaustion
+     15	poisoned by a cobra
+     15	killed by something, while hiding from thunderstorm
+     15	killed by self-genocide
+     15	killed by bumping into a boulder
+     15	killed by an invisible wolf
+     15	killed by an invisible rope golem
+     15	killed by an invisible hill giant
+     15	killed by a hallucinogen-distorted wraith
+     15	killed by a hallucinogen-distorted vampire
+     15	killed by a hallucinogen-distorted paper golem
+     15	killed by a hallucinogen-distorted garter snake
+     15	killed by a halberd
+     14	killed by something, while getting stoned
+     14	killed by an invisible orc shaman
+     14	killed by an invisible lynx
+     14	killed by an invisible little dog
+     14	killed by an invisible energy vortex
+     14	killed by a lucern hammer
+     14	killed by a hallucinogen-distorted giant mummy
+     14	killed by a hallucinogen-distorted acid blob
+     14	killed by a finger of death
+     14	killed by a cockatrice
+     13	petrified by a hallucinogen-distorted chickatrice
+     13	killed by invisible Lord Surtur
+     13	killed by an invisible large cat
+     13	killed by an invisible ape
+     13	killed by a silver arrow
+     13	killed by a hallucinogen-distorted succubus
+     13	killed by a hallucinogen-distorted giant zombie
+     12	poisoned by an elven arrow
+     12	petrified by an Archon
+     12	killed by the hallucinogen-distorted ghost of someone
+     12	killed by an invisible yeti
+     12	killed by an invisible white unicorn
+     12	killed by an invisible marilith
+     12	killed by an invisible fire giant
+     12	killed by an invisible bone devil
+     12	killed by an invisible baluchitherium
+     12	killed by an exploding ring
+     12	killed by a valkyrie
+     12	killed by a hallucinogen-distorted rock troll
+     12	killed by a hallucinogen-distorted gremlin
+     12	killed by a hallucinogen-distorted elf mummy
+     12	killed by a hallucinogen-distorted chameleon
+     12	killed by a bec de corbin
+     11	tower of flame
+     11	petrified by swallowing a cockatrice whole
+     11	petrified by a troll
+     11	killed by jumping out of a bear trap
+     11	killed by an invisible panther
+     11	killed by an invisible ice troll
+     11	killed by an invisible bat
+     11	killed by a hallucinogen-distorted sasquatch
+     11	killed by a hallucinogen-distorted raven
+     11	killed by a hallucinogen-distorted orc mummy
+     11	killed by a hallucinogen-distorted ogre lord
+     11	killed by a hallucinogen-distorted mastodon
+     11	killed by a hallucinogen-distorted gray ooze
+     11	killed by a hallucinogen-distorted Keystone Kop
+     11	killed by a barbarian
+     11	killed by a baby long worm
+     11	killed by Medusa
+     11	fell into a chasm
+     10	petrified by trying to help a cockatrice out of a pit
+     10	petrified by attempting to saddle a cockatrice
+     10	panic
+     10	killed by wedging into a narrow crevice
+     10	killed by sitting on an iron spike
+     10	killed by invisible Death
+     10	killed by invisible Ashikaga Takauji
+     10	killed by an invisible housecat
+     10	killed by an invisible giant mummy
+     10	killed by an invisible frost giant
+     10	killed by an invisible balrog
+     10	killed by an invisible Aleax
+     10	killed by a wizard
+     10	killed by a renegade priest(ess) of some god
+     10	killed by a knight
+     10	killed by a hallucinogen-distorted stone giant
+     10	killed by a hallucinogen-distorted red mold
+     10	killed by a hallucinogen-distorted pyrolisk
+     10	killed by a hallucinogen-distorted mind flayer
+     10	killed by a hallucinogen-distorted lizard
+     10	killed by a hallucinogen-distorted fire elemental
+     10	killed by a hallucinogen-distorted black naga hatchling
+     10	killed by a hallucinogen-distorted baluchitherium
+     10	killed by a green slime
+     10	killed by a cursed throne
+     10	killed by a bardiche
+     10	deliberately plunged into a pit
+      9	turned to slime by a cockatrice egg
+      9	poisoned by a couatl
+      9	petrified by removing gloves while wielding a cockatrice corpse
+      9	petrified by a watchman
+      9	petrified by a watch captain
+      9	petrified by a rock troll
+      9	killed by leg damage from being pulled out of a bear trap
+      9	killed by an invisible warhorse
+      9	killed by an invisible sewer rat
+      9	killed by an invisible black pudding
+      9	killed by a voulge
+      9	killed by a precious gem
+      9	killed by a hallucinogen-distorted scorpion
+      9	killed by a hallucinogen-distorted rock piercer
+      9	killed by a hallucinogen-distorted leather golem
+      9	killed by a hallucinogen-distorted barrow wight
+      9	killed by a baby purple worm
+      9	drowned in a swamp
+      9	(strange entry; empty reason)
+      8	poisoned by a rotten lump of royal jelly
+      8	petrified by trying to tin a chickatrice without gloves
+      8	petrified by an ogre king
+      8	petrified by a titan
+      8	petrified by a cockatrice, while helpless
+      8	killed by an invisible winter wolf cub
+      8	killed by an invisible green dragon
+      8	killed by an invisible gray unicorn
+      8	killed by an invisible gold golem
+      8	killed by an invisible ettin
+      8	killed by an invisible coyote
+      8	killed by a shito
+      8	killed by a monk
+      8	killed by a hallucinogen-distorted orc-captain
+      8	killed by a hallucinogen-distorted elf-lord
+      8	killed by a hallucinogen-distorted couatl of some god
+      8	killed by a hallucinogen-distorted Kop Sergeant
+      8	killed by a hallucinogen-distorted Kop Lieutenant
+      7	killed by the invisible Cyclops
+      7	killed by the Master Assassin
+      7	killed by elementary chemistry
+      7	killed by an invisible vrock
+      7	killed by an invisible storm giant
+      7	killed by an invisible human mummy
+      7	killed by an invisible hell hound
+      7	killed by an invisible hallucinogen-distorted stalker
+      7	killed by an invisible giant beetle
+      7	killed by an invisible cave spider
+      7	killed by a priest
+      7	killed by a piranha
+      7	killed by a hallucinogen-distorted sergeant
+      7	killed by a hallucinogen-distorted ogre king
+      7	killed by a hallucinogen-distorted incubus of some god
+      7	killed by a hallucinogen-distorted guardian naga hatchling
+      7	killed by a hallucinogen-distorted gnomish wizard
+      7	killed by a hallucinogen-distorted flesh golem
+      7	killed by a hallucinogen-distorted flaming sphere
+      7	killed by a hallucinogen-distorted dwarf mummy
+      7	killed by a hallucinogen-distorted Olog-hai
+      7	killed by a flint stone
+      7	killed by a bill-guisarme
+      6	turned to slime by a scroll of genocide
+      6	petrified by an Olog-hai
+      6	petrified by a cockatrice, while frozen by a monster's gaze
+      6	killed by an orc
+      6	killed by an invisible winter wolf
+      6	killed by an invisible tiger
+      6	killed by an invisible silver dragon
+      6	killed by an invisible raven
+      6	killed by an invisible ochre jelly
+      6	killed by an invisible large dog
+      6	killed by an invisible knight
+      6	killed by an invisible flesh golem
+      6	killed by an invisible fire vortex
+      6	killed by an invisible dingo
+      6	killed by an invisible couatl
+      6	killed by an invisible brown mold
+      6	killed by an invisible Kop Sergeant
+      6	killed by an elf
+      6	killed by an archeologist
+      6	killed by an abbot
+      6	killed by a warrior
+      6	killed by a tourist
+      6	killed by a jellyfish
+      6	killed by a healer
+      6	killed by a hallucinogen-distorted zruty
+      6	killed by a hallucinogen-distorted xan
+      6	killed by a hallucinogen-distorted ice troll
+      6	killed by Dispater
+      5	poisoned by a rotted glob of brown pudding
+      5	petrified by deliberately meeting Medusa's gaze
+      5	killed by the Master of Thieves
+      5	killed by handling Grimtooth
+      5	killed by crashing into iron bars
+      5	killed by an invisible rabid rat
+      5	killed by an invisible orc zombie
+      5	killed by an invisible incubus of some god
+      5	killed by an invisible ice devil
+      5	killed by an invisible horse
+      5	killed by an invisible dog
+      5	killed by an invisible crocodile
+      5	killed by an invisible black unicorn
+      5	killed by an invisible barbed devil
+      5	killed by a hallucinogen-distorted water troll
+      5	killed by a hallucinogen-distorted red naga hatchling
+      5	killed by a hallucinogen-distorted queen bee
+      5	killed by a hallucinogen-distorted master mind flayer
+      5	killed by a hallucinogen-distorted jabberwock
+      5	killed by a hallucinogen-distorted golden naga hatchling
+      5	killed by a hallucinogen-distorted couatl
+      5	killed by a hallucinogen-distorted captain
+      5	killed by a hallucinogen-distorted black naga
+      5	killed by a hallucinogen-distorted arch-lich
+      5	killed by a chickatrice
+      5	killed by a bone devil of some god
+      4	poisoned by a bone devil
+      4	petrified by swallowing a chickatrice whole
+      4	petrified by a storm giant
+      4	petrified by a hill giant
+      4	petrified by a forest centaur
+      4	petrified by a chickatrice, while helpless
+      4	petrified by a chameleon
+      4	killed by sitting in lava
+      4	killed by handling a silver dagger
+      4	killed by handling a ring of protection
+      4	killed by dangerous winds
+      4	killed by an invisible zruty
+      4	killed by an invisible straw golem
+      4	killed by an invisible spotted jelly
+      4	killed by an invisible queen bee
+      4	killed by an invisible purple worm
+      4	killed by an invisible giant rat
+      4	killed by an invisible gelatinous cube
+      4	killed by an invisible gecko
+      4	killed by an invisible carnivorous ape
+      4	killed by a silver spear
+      4	killed by a scroll of fire
+      4	killed by a hezrou of some god
+      4	killed by a hallucinogen-distorted xorn
+      4	killed by a hallucinogen-distorted pit fiend
+      4	killed by a hallucinogen-distorted ochre jelly
+      4	killed by a hallucinogen-distorted iron golem
+      4	killed by a hallucinogen-distorted hill giant
+      4	killed by a hallucinogen-distorted ghoul
+      4	killed by a hallucinogen-distorted gelatinous cube
+      4	killed by a hallucinogen-distorted frost giant
+      4	killed by a hallucinogen-distorted ettin
+      4	killed by a fauchard
+      4	killed by Scorpius
+      4	drowned in a pool of water by a kraken
+      4	drowned in a moat by a python
+      4	crushed to death underneath a drawbridge
+      3	unwisely tried to eat Famine
+      3	poisoned by the Oracle's rotted corpse
+      3	poisoned by a shuriken
+      3	poisoned by Medusa
+      3	petrified by trying to help a chickatrice out of a pit
+      3	petrified by touching chickatrice corpses bare-handed
+      3	petrified by chickatrice corpses
+      3	petrified by an ogre
+      3	petrified by an elf-lord
+      3	petrified by a plains centaur
+      3	petrified by a bugbear
+      3	killed by the invisible ghost of someone
+      3	killed by something, while opening a container
+      3	killed by handling a silver saber
+      3	killed by handling a shield of reflection
+      3	killed by handling a ring of regeneration
+      3	killed by an invisible yellow dragon
+      3	killed by an invisible warg
+      3	killed by an invisible snake
+      3	killed by an invisible scorpion
+      3	killed by an invisible sasquatch
+      3	killed by an invisible salamander
+      3	killed by an invisible ranger
+      3	killed by an invisible quantum mechanic
+      3	killed by an invisible pit fiend
+      3	killed by an invisible orange dragon
+      3	killed by an invisible newt
+      3	killed by an invisible leprechaun
+      3	killed by an invisible hallucinogen-distorted water demon
+      3	killed by an invisible hallucinogen-distorted troll
+      3	killed by an invisible grid bug
+      3	killed by an invisible gray dragon
+      3	killed by an invisible giant zombie
+      3	killed by an invisible ettin zombie
+      3	killed by an invisible ettin mummy
+      3	killed by an invisible disenchanter
+      3	killed by an invisible black naga hatchling
+      3	killed by an invisible Kop Lieutenant
+      3	killed by an invisible Kop Kaptain
+      3	killed by an invisible Angel of some god
+      3	killed by an invisible Angel
+      3	killed by an invisible Aleax of some god
+      3	killed by an apprentice
+      3	killed by a silver dagger
+      3	killed by a rogue
+      3	killed by a renegade Angel of some god
+      3	killed by a lemure
+      3	killed by a hallucinogen-distorted yellow dragon
+      3	killed by a hallucinogen-distorted white dragon
+      3	killed by a hallucinogen-distorted water elemental of some god
+      3	killed by a hallucinogen-distorted umber hulk
+      3	killed by a hallucinogen-distorted succubus of some god
+      3	killed by a hallucinogen-distorted stone golem
+      3	killed by a hallucinogen-distorted silver dragon
+      3	killed by a hallucinogen-distorted shocking sphere
+      3	killed by a hallucinogen-distorted red naga
+      3	killed by a hallucinogen-distorted purple worm
+      3	killed by a hallucinogen-distorted marilith
+      3	killed by a hallucinogen-distorted hezrou
+      3	killed by a hallucinogen-distorted green dragon
+      3	killed by a hallucinogen-distorted freezing sphere
+      3	killed by a hallucinogen-distorted fire giant
+      3	killed by a hallucinogen-distorted fire elemental of some god
+      3	killed by a hallucinogen-distorted disenchanter
+      3	killed by a hallucinogen-distorted cobra
+      3	killed by a hallucinogen-distorted black dragon
+      3	killed by a hallucinogen-distorted baby crocodile
+      3	killed by a hallucinogen-distorted Aleax
+      3	killed by a flesh golem of some god
+      3	deliberately plunged into a pit of iron spikes
+      2	unwisely tried to eat Pestilence
+      2	unwisely tried to eat Death
+      2	unwisely ate the body of Famine
+      2	unwisely ate the body of Death
+      2	trickery
+      2	poisoned by a rotted glob of black pudding
+      2	poisoned by a cloud of poison gas
+      2	petrified by tripping over a cockatrice corpse
+      2	petrified by touching cockatrice corpses bare-handed
+      2	petrified by losing gloves while wielding a chickatrice corpse
+      2	petrified by cockatrice corpses
+      2	petrified by an ogre lord
+      2	petrified by an invisible chickatrice
+      2	petrified by a scroll of genocide
+      2	petrified by a green slime
+      2	petrified by a fire giant
+      2	petrified by a cockatrice, while sleeping
+      2	petrified by a barrow wight
+      2	petrified by a Medusa
+      2	petrified by a Green-elf
+      2	killed by the Norn
+      2	killed by the Grand Master
+      2	killed by the Dark One
+      2	killed by molten lava
+      2	killed by invisible Thoth Amon
+      2	killed by handling a wand of teleportation
+      2	killed by handling a silver spear
+      2	killed by handling a ring of sustain ability
+      2	killed by handling a ring of searching
+      2	killed by handling a ring of polymorph control
+      2	killed by handling a ring of invisibility
+      2	killed by handling a ring of increase accuracy
+      2	killed by handling a ring of gain constitution
+      2	killed by chopping off ones own foot
+      2	killed by bumping into a tree
+      2	killed by an invisible vampire bat
+      2	killed by an invisible umber hulk
+      2	killed by an invisible tourist
+      2	killed by an invisible succubus of some god
+      2	killed by an invisible skeleton
+      2	killed by an invisible red naga
+      2	killed by an invisible priest
+      2	killed by an invisible paper golem
+      2	killed by an invisible leather golem
+      2	killed by an invisible ice vortex
+      2	killed by an invisible human zombie
+      2	killed by an invisible hallucinogen-distorted watch captain
+      2	killed by an invisible hallucinogen-distorted titan
+      2	killed by an invisible guardian naga
+      2	killed by an invisible gnome zombie
+      2	killed by an invisible gnome mummy
+      2	killed by an invisible fire elemental
+      2	killed by an invisible elf zombie
+      2	killed by an invisible earth elemental
+      2	killed by an invisible couatl of some god
+      2	killed by an invisible cobra
+      2	killed by an invisible cavewoman
+      2	killed by an invisible blue dragon
+      2	killed by an invisible black naga
+      2	killed by an invisible air elemental of some god
+      2	killed by an invisible Keystone Kop
+      2	killed by a war hammer
+      2	killed by a vampire lord in wolf form
+      2	killed by a vampire in vampire lord form
+      2	killed by a student
+      2	killed by a stone giant of some god
+      2	killed by a salamander priest(ess) of some god
+      2	killed by a rothe of some god
+      2	killed by a roshi
+      2	killed by a page
+      2	killed by a minotaur of some god
+      2	killed by a master mind flayer priest(ess) of some god
+      2	killed by a luckstone
+      2	killed by a large kobold of some god
+      2	killed by a hallucinogen-distorted vrock
+      2	killed by a hallucinogen-distorted violet fungus
+      2	killed by a hallucinogen-distorted salamander
+      2	killed by a hallucinogen-distorted red dragon
+      2	killed by a hallucinogen-distorted quantum mechanic
+      2	killed by a hallucinogen-distorted pit viper
+      2	killed by a hallucinogen-distorted monkey
+      2	killed by a hallucinogen-distorted lieutenant
+      2	killed by a hallucinogen-distorted green mold
+      2	killed by a hallucinogen-distorted fire vortex
+      2	killed by a hallucinogen-distorted earth elemental of some god
+      2	killed by a hallucinogen-distorted earth elemental
+      2	killed by a hallucinogen-distorted clay golem
+      2	killed by a hallucinogen-distorted barbed devil
+      2	killed by a hallucinogen-distorted Aleax of some god
+      2	killed by a gray unicorn priest(ess) of some god
+      2	killed by a gray dragon priest(ess) of some god
+      2	killed by a caveman
+      2	killed by a barbed devil of some god
+      2	killed by a Nazgul
+      2	killed by Moloch's indifference
+      2	killed by Mjollnir
+      2	killed by Lord Sato
+      2	killed by Lord Carnarvon
+      2	killed by Baalzebub
+      2	drowned in a drowning
+      2	crushed to death by a gas spore's explosion
+      2	burned by burning
+      1	unwisely ate the brain of Death
+      1	unwisely ate the body of Pestilence
+      1	turned to slime by an imperious order
+      1	turned to slime by a Keystone Kop
+      1	poisoned by an erinys
+      1	poisoned by an
+      1	poisoned by a silver arrow
+      1	poisoned by a poisoned needle
+      1	poisoned by a poisoned blast
+      1	petrified by wielding a cockatrice corpse bare-handed
+      1	petrified by wielding a chickatrice corpse bare-handed
+      1	petrified by stolen cockatrice corpse
+      1	petrified by genocidal confusion
+      1	petrified by an orc-captain
+      1	petrified by an archeologist
+      1	petrified by an aligned priest
+      1	petrified by an Uruk-hai
+      1	petrified by an Elvenking
+      1	petrified by a wizard
+      1	petrified by a wererat
+      1	petrified by a stone giant
+      1	petrified by a samurai
+      1	petrified by a salamander
+      1	petrified by a rogue
+      1	petrified by a ranger
+      1	petrified by a hobgoblin
+      1	petrified by a hobbit
+      1	petrified by a hill orc
+      1	petrified by a hallucinogen-distorted cockatrice, while fainted from lack of food
+      1	petrified by a hallucinogen-distorted chickatrice, while frozen by a monster's gaze
+      1	petrified by a goblin
+      1	petrified by a gnome lord
+      1	petrified by a gnome
+      1	petrified by a frost giant
+      1	petrified by a dwarf lord
+      1	petrified by a dwarf king
+      1	petrified by a cockatrice, while reading a book
+      1	petrified by a cockatrice, while frozen by a trap
+      1	petrified by a cockatrice, while disrobing
+      1	petrified by a chickatrice, while frozen by a monster's gaze
+      1	petrified by a chickatrice, while fainted from lack of food
+      1	petrified by a bone devil
+      1	petrified by a Kop Kaptain
+      1	petrified by a Keystone Kop
+      1	molten lava
+      1	killed by the invisible hallucinogen-distorted Minion of Huhetotl
+      1	killed by the invisible hallucinogen-distorted Dark One
+      1	killed by the invisible hallucinogen-distorted Chromatic Dragon
+      1	killed by the invisible Wizard of Yendor disguised as a floating eye
+      1	killed by the invisible Wizard of Yendor disguised as a cockatrice
+      1	killed by the invisible Oracle
+      1	killed by the invisible Master of Thieves
+      1	killed by the hallucinogen-distorted high priest(ess) of some god
+      1	killed by the hallucinogen-distorted Wizard of Yendor
+      1	killed by the Arch Priest
+      1	killed by something, while stuck in a spider web
+      1	killed by something, while losing The Game
+      1	killed by something, while dodging homework
+      1	killed by something, while digesting something
+      1	killed by sitting on lava
+      1	killed by invisible Vlad the Impaler
+      1	killed by handling the Bell of Opening
+      1	killed by handling silver arrows
+      1	killed by handling a wand of striking
+      1	killed by handling a wand of speed monster
+      1	killed by handling a wand of slow monster
+      1	killed by handling a wand of sleep
+      1	killed by handling a wand of secret door detection
+      1	killed by handling a wand of opening
+      1	killed by handling a wand of nothing
+      1	killed by handling a wand of make invisible
+      1	killed by handling a wand of magic missile
+      1	killed by handling a wand of light
+      1	killed by handling a wand of fire
+      1	killed by handling a wand of digging
+      1	killed by handling a wand of death
+      1	killed by handling a silver arrow
+      1	killed by handling a ring of warning
+      1	killed by handling a ring of teleport control
+      1	killed by handling a ring of stealth
+      1	killed by handling a ring of shock resistance
+      1	killed by handling a ring of see invisible
+      1	killed by handling a ring of polymorph
+      1	killed by handling a ring of poison resistance
+      1	killed by handling a ring of increase damage
+      1	killed by handling a ring of gain strength
+      1	killed by handling a ring of free action
+      1	killed by handling a ring of fire resistance
+      1	killed by handling a ring of conflict
+      1	killed by handling a ring of aggravate monster
+      1	killed by handling a ring of adornment
+      1	killed by handling Sting
+      1	killed by handling Grayswandir
+      1	killed by exploding potions
+      1	killed by boiling water
+      1	killed by an ochre jelly of some god
+      1	killed by an iron golem priest(ess) of some god
+      1	killed by an invisible valkyrie
+      1	killed by an invisible sandestin
+      1	killed by an invisible renegade priest(ess) of some god
+      1	killed by an invisible red naga hatchling
+      1	killed by an invisible red dragon
+      1	killed by an invisible pit viper
+      1	killed by an invisible marilith of some god
+      1	killed by an invisible lizard
+      1	killed by an invisible kobold zombie
+      1	killed by an invisible kobold mummy
+      1	killed by an invisible iron piercer
+      1	killed by an invisible horned devil
+      1	killed by an invisible hezrou
+      1	killed by an invisible hallucinogen-distorted yeti
+      1	killed by an invisible hallucinogen-distorted werewolf
+      1	killed by an invisible hallucinogen-distorted soldier
+      1	killed by an invisible hallucinogen-distorted queen bee
+      1	killed by an invisible hallucinogen-distorted leocrotta
+      1	killed by an invisible hallucinogen-distorted leather golem
+      1	killed by an invisible hallucinogen-distorted incubus
+      1	killed by an invisible hallucinogen-distorted ice devil
+      1	killed by an invisible hallucinogen-distorted golden naga
+      1	killed by an invisible hallucinogen-distorted gnome king
+      1	killed by an invisible hallucinogen-distorted dwarf lord
+      1	killed by an invisible hallucinogen-distorted dwarf king
+      1	killed by an invisible hallucinogen-distorted dwarf
+      1	killed by an invisible hallucinogen-distorted demilich
+      1	killed by an invisible hallucinogen-distorted bugbear
+      1	killed by an invisible hallucinogen-distorted ape
+      1	killed by an invisible guardian naga hatchling
+      1	killed by an invisible gray ooze
+      1	killed by an invisible glass golem
+      1	killed by an invisible elf mummy
+      1	killed by an invisible dwarf zombie
+      1	killed by an invisible doppelganger
+      1	killed by an invisible bone devil of some god
+      1	killed by an invisible black dragon
+      1	killed by an invisible barbarian
+      1	killed by an invisible baby white dragon
+      1	killed by an invisible baby red dragon
+      1	killed by an invisible baby orange dragon
+      1	killed by an invisible baby crocodile
+      1	killed by an invisible baby blue dragon
+      1	killed by an invisible archeologist
+      1	killed by an invisible aligned priest
+      1	killed by an ettin of some god
+      1	killed by an erinys
+      1	killed by an energy vortex of some god
+      1	killed by an elf mummy of some god
+      1	killed by an attendant
+      1	killed by an acolyte
+      1	killed by a yeti of some god
+      1	killed by a wraith of some god
+      1	killed by a winter wolf priest(ess) of some god
+      1	killed by a vampire in fog cloud form
+      1	killed by a titan priest(ess) of some god
+      1	killed by a thug
+      1	killed by a soldier ant priest(ess) of some god
+      1	killed by a shark priest(ess) of some god
+      1	killed by a rope golem of some god
+      1	killed by a rock mole of some god
+      1	killed by a red naga of some god
+      1	killed by a quivering blob of some god
+      1	killed by a priestess
+      1	killed by a plains centaur priest(ess) of some god
+      1	killed by a pit viper of some god
+      1	killed by a pit fiend priest(ess) of some god
+      1	killed by a piranha priest(ess) of some god
+      1	killed by a neanderthal
+      1	killed by a mastodon priest(ess) of some god
+      1	killed by a lynx of some god
+      1	killed by a lurker above priest(ess) of some god
+      1	killed by a jabberwock of some god
+      1	killed by a hunter
+      1	killed by a high priest(ess) of some god
+      1	killed by a hallucinogen-distorted wumpus
+      1	killed by a hallucinogen-distorted woodchuck
+      1	killed by a hallucinogen-distorted wood golem
+      1	killed by a hallucinogen-distorted vrock of some god
+      1	killed by a hallucinogen-distorted vampire lord in bat form
+      1	killed by a hallucinogen-distorted valkyrie
+      1	killed by a hallucinogen-distorted titanothere
+      1	killed by a hallucinogen-distorted storm giant
+      1	killed by a hallucinogen-distorted shark
+      1	killed by a hallucinogen-distorted rogue
+      1	killed by a hallucinogen-distorted renegade priest(ess) of some god
+      1	killed by a hallucinogen-distorted quivering blob
+      1	killed by a hallucinogen-distorted python
+      1	killed by a hallucinogen-distorted orc shaman
+      1	killed by a hallucinogen-distorted orange dragon
+      1	killed by a hallucinogen-distorted nurse
+      1	killed by a hallucinogen-distorted ninja
+      1	killed by a hallucinogen-distorted master lich
+      1	killed by a hallucinogen-distorted lich
+      1	killed by a hallucinogen-distorted leprechaun
+      1	killed by a hallucinogen-distorted kobold shaman
+      1	killed by a hallucinogen-distorted iron piercer
+      1	killed by a hallucinogen-distorted ice devil
+      1	killed by a hallucinogen-distorted horned devil
+      1	killed by a hallucinogen-distorted green dragon of some god
+      1	killed by a hallucinogen-distorted glass piercer
+      1	killed by a hallucinogen-distorted glass golem
+      1	killed by a hallucinogen-distorted giant eel
+      1	killed by a hallucinogen-distorted erinys
+      1	killed by a hallucinogen-distorted energy vortex
+      1	killed by a hallucinogen-distorted doppelganger
+      1	killed by a hallucinogen-distorted chickatrice
+      1	killed by a hallucinogen-distorted centipede
+      1	killed by a hallucinogen-distorted bone devil
+      1	killed by a hallucinogen-distorted baby yellow dragon
+      1	killed by a hallucinogen-distorted baby white dragon
+      1	killed by a hallucinogen-distorted baby blue dragon
+      1	killed by a hallucinogen-distorted Elvenking
+      1	killed by a hallucinogen-distorted Archon
+      1	killed by a guide
+      1	killed by a grid bug of some god
+      1	killed by a gremlin priest(ess) of some god
+      1	killed by a green dragon of some god
+      1	killed by a glass golem priest(ess) of some god
+      1	killed by a giant bat priest(ess) of some god
+      1	killed by a giant
+      1	killed by a ghoul of some god
+      1	killed by a ghost
+      1	killed by a fire ant of some god
+      1	killed by a dwarf zombie priest(ess) of some god
+      1	killed by a dwarf king of some god
+      1	killed by a doppelganger imitating the Wizard of some god
+      1	killed by a doppelganger imitating Yeenoghu
+      1	killed by a doppelganger imitating Scorpius
+      1	killed by a doppelganger imitating Death
+      1	killed by a dingo of some god
+      1	killed by a crocodile priest(ess) of some god
+      1	killed by a cone of cold
+      1	killed by a chieftain
+      1	killed by a chickatrice of some god
+      1	killed by a cavewoman
+      1	killed by a bone devil priest(ess) of some god
+      1	killed by a blue dragon priest(ess) of some god
+      1	killed by a black dragon priest(ess) of some god
+      1	killed by a black dragon of some god
+      1	killed by a bat of some god
+      1	killed by a baby orange dragon of some god
+      1	killed by a Mordor orc of some god
+      1	killed by a Kop Kaptain of some god
+      1	killed by a Grey-elf priest(ess) of some god
+      1	killed by Twoflower
+      1	killed by Thoth Amon
+      1	killed by Shaman Karnov
+      1	killed by Pelias
+      1	killed by Orion
+      1	killed by Neferet the Green
+      1	killed by King Arthur
+      1	killed by Hippocrates
+      1	killed by Geryon

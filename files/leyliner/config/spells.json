@@ -1,0 +1,3450 @@
+[
+  {
+    "name": "Icicle",
+    "type": "FROST",
+    "description": "KNOCKBACK 1",
+    "targeting": "PROJECTILE",
+    "range": 5,
+    "cost": 3,
+    "effects": [
+      {
+        "damage": 4
+      },
+      {
+        "knockback": 1
+      }
+    ]
+  },
+  {
+    "name": "Boreal Veil",
+    "type": "FROST",
+    "description": "FROZEN 2 any foe exactly 2 TILEs away.",
+    "targeting": "SELF",
+    "range": 2,
+    "cost": 5,
+    "effects": [
+      {
+        "frozen": 2
+      }
+    ]
+  },
+  {
+    "name": "Accelerated Thaw",
+    "type": "FROST",
+    "description": "Deal damage equal to triple the targets FROZEN duration",
+    "targeting": "SINGLE",
+    "range": 6,
+    "cost": 1,
+    "effects": [
+      {
+        "thaw": 3
+      }
+    ]
+  },
+  {
+    "name": "Ice Beam",
+    "type": "FROST",
+    "description": "Damage and FROZEN 1 all units in a beam",
+    "targeting": "BEAM",
+    "range": 6,
+    "cost": 5,
+    "effects": [
+      {
+        "damage": 4
+      },
+      {
+        "frozen": 1
+      }
+    ]
+  },
+  {
+    "name": "Permafrost",
+    "type": "FROST",
+    "description": "Place a FROST mana.  Place a FROST Mana.",
+    "targeting": "TILE",
+    "range": 2,
+    "cost": 0,
+    "effects": []
+  },
+  {
+    "name": "Crashing Wave",
+    "type": "FROST",
+    "description": "KNOCKBACK 2",
+    "targeting": "CONE",
+    "range": 1,
+    "radius": 3,
+    "cost": 3,
+    "effects": [
+      {
+        "damage": 6
+      },
+      {
+        "knockback": 2
+      }
+    ]
+  },
+  {
+    "name": "Ice Slick",
+    "type": "FROST",
+    "description": "Transforms mana into icy area that FROZEN 1 all units each turn.  Reverts into FROST mana after.",
+    "targeting": "MANA",
+    "range": 1,
+    "cost": 1,
+    "effects": [
+      {
+        "slick": 5
+      }
+    ]
+  },
+  {
+    "name": "Gelid Geyser",
+    "type": "FROST",
+    "description": "KNOCKBACK 1: away from the center.  Any unit in the center takes double damage and is FROZEN 1 instead.",
+    "targeting": "AOE",
+    "radius": 2,
+    "range": 6,
+    "cost": 8,
+    "effects": [
+      {
+        "damage": 10
+      },
+      {
+        "geyser": 1
+      }
+    ]
+  },
+  {
+    "name": "Encroaching Frost",
+    "type": "FROST",
+    "description": "Whenever Frost mana is added to a cluster, all units adjacent to that cluster are FROZEN 1",
+    "targeting": "TILE",
+    "range": 1,
+    "cost": 4,
+    "effects": [
+      {
+        "encroach": 1
+      }
+    ]
+  },
+  {
+    "name": "Shattering Winds",
+    "type": "FROST",
+    "description": "Repeat damage for each turn of FROZEN duration a unit may have.",
+    "targeting": "CONE",
+    "radius": 6,
+    "range": 1,
+    "cost": 7,
+    "effects": [
+      {
+        "damage": 8
+      },
+      {
+        "shatter": 1
+      }
+    ]
+  },
+  {
+    "name": "Polar Stasis",
+    "type": "FROST",
+    "description": "FROZEN 10",
+    "targeting": "SINGLE",
+    "range": 6,
+    "cost": 12,
+    "effects": [
+      {
+        "frozen": 10
+      }
+    ]
+  },
+  {
+    "name": "Glacial Calving",
+    "type": "FROST",
+    "description": "Repeat damage for each turn of FROZEN duration a unit may have.",
+    "targeting": "CONE",
+    "radius": 4,
+    "range": 1,
+    "cost": 5,
+    "effects": [
+      {
+        "damage": 2
+      },
+      {
+        "calving": 1
+      }
+    ]
+  },
+  {
+    "name": "Winter Witch",
+    "type": "FROST",
+    "description": "SUMMON an ally with 5hp that deals 5 damage at range 3.  Her attacks KNOCKBACK 1",
+    "targeting": "TILE",
+    "range": 3,
+    "cost": 4,
+    "effects": [
+      {
+        "summon": "Winter Witch"
+      }
+    ]
+  },
+  {
+    "name": "Queen of the Tundra",
+    "type": "FROST",
+    "description": "SUMMON an ally with 20hp that deals 15 damage in a BEAM range 5.  KNOCKBACK 1. Frost mana adjacent to her grow as per FROST mana",
+    "targeting": "TILE",
+    "range": 3,
+    "cost": 8,
+    "effects": [
+      {
+        "summon": "Winter Witch"
+      }
+    ]
+  },
+  {
+    "name": "Fireball",
+    "type": "FIRE",
+    "description": "Deal 10 damage in a 2 tile radius. POWERFUL.",
+    "targeting": "AOE",
+    "radius": 2,
+    "range": 3,
+    "cost": 2,
+    "prod": true,
+    "effects": [
+      {
+        "powerful":true
+      },
+      {
+        "damage": 10
+      }
+    ]
+  },
+  {
+    "name": "Pyromania",
+    "type": "FIRE",
+    "description": "Spell power increases by 10 until end of turn.",
+    "targeting": "SINGLE",
+    "range": 0,
+    "cost": 2,
+    "prod": true,
+    "exhaust": true,
+    "effects": [
+      {
+        "status": {
+          "stacks": 10,
+          "type": "Empowered"
+        }
+      }
+    ]
+  },
+  {
+    "name": "Firebomb",
+    "type": "FIRE",
+    "description": "Deal 20 damage in a 3 tile radius. POWERFUL",
+    "targeting": "AOE",
+    "radius": 2,
+    "range": 4,
+    "cost": 4,
+    "prod": true,
+    "effects": [
+      {
+        "damage": 20
+      }, 
+      {
+        "powerful":true
+      }
+    ]
+  },
+  {
+    "name": "Firebolt",
+    "type": "FIRE",
+    "description": "FLARE. Apply 5 BURNING.",
+    "targeting": "PROJECTILE",
+    "radius": 3,
+    "range": 3,
+    "cost": 1,
+    "prod": true,
+    "effects": [
+      {
+        "flare":true
+      },
+      {
+        "status": {
+          "stacks": 5,
+          "type": "Burning"
+        }
+      }
+    ]
+  },
+  {
+    "name": "Wisp of Flame",
+    "type": "FIRE",
+    "description": "Deal 3 damage.",
+    "targeting": "PROJECTILE",
+    "radius": 3,
+    "range": 3,
+    "cost": 0,
+    "prod": true,
+    "effects": [
+      {
+        "damage": 3
+      }
+    ]
+  },
+  {
+    "name": "Heat Wave",
+    "type": "FIRE",
+    "description": "Deal 6 damage in a 1 tile radius.",
+    "targeting": "AOE",
+    "radius": 1,
+    "range": 2,
+    "cost": 2,
+    "prod": true,
+    "effects": [
+      {
+        "damage": 8
+      }
+    ]
+  },  
+  {
+    "name": "Invoke Flames",
+    "type": "FIRE",
+    "description": "Create 3 FIRE mana. Draw 1. EXHAUST.",
+    "targeting": "INVOKE",
+    "range": 0,
+    "cost": 1,
+    "prod": true,
+    "exhaust": true,
+    "effects": [
+      {
+        "invoke": 3
+      },
+      {
+        "draw": true
+      }
+    ]
+  },
+  {
+    "name": "Tempering Cinders",
+    "type": "FIRE",
+    "description": "Grant ALLY 4 stacks of TEMPERED.",
+    "allyOnly": true,
+    "targeting": "SINGLE",
+    "range": 2,
+    "cost": 1,
+    "prod": true,
+    "effects": [
+      {
+        "status": {
+          "stacks": 4,
+          "type": "Tempered"
+        }
+      }
+    ]
+  },
+  {
+    "name": "Bathe In Flames",
+    "type": "FIRE",
+    "description": "Grant ALLY Fire Immunity. EXHAUST.",
+    "targeting": "SINGLE",
+    "allyOnly":true,
+    "range": 2,
+    "cost": 1,
+    "prod": true,
+    "exhaust":true,
+    "effects": [
+      {
+        "status": {
+          "stacks": 1,
+          "type": "FireImmunity"
+        }
+      }
+    ]
+  },
+  {
+    "name": "Supernova",
+    "type": "FIRE",
+    "description": "Deal 50 damage in a 9 tile radius. EXHAUST.",
+    "targeting": "AOE",
+    "ignoreLOS": true,
+    "radius": 9,
+    "range": 15,
+    "cost": 7,
+    "prod": true,
+    "exhaust": true,
+    "effects": [
+      {
+        "damage": 50
+      }
+    ]
+  },
+  {
+    "name": "Conflagration",
+    "type": "FIRE",
+    "description": "Add 2X BURNING in a 1 tile radius.",
+    "targeting": "AOE",
+    "radius": 1,
+    "range": 3,
+    "cost": -1,
+    "prod": true,
+    "effects": [
+      {
+        "status": {
+          "stacks": 2,
+          "type": "Burning"
+        }
+      }
+    ]
+  },
+  {
+    "name": "Stoke",
+    "type": "FIRE",
+    "description": "REKINDLE in a 6 tile radius",
+    "targeting": "AOE",
+    "radius": 6,
+    "range": 6,
+    "cost": 3,
+    "prod": true,
+    "effects": [
+      {
+        "rekindle": true
+      }
+    ]
+  },
+  {
+    "name": "Burning Knowledge",
+    "type": "FIRE",
+    "description": "Suffer 5 BURNING.  Draw 3.",
+    "targeting": "SINGLE",
+    "selfOnly":true,
+    "range": 0,
+    "cost": 1,
+    "prod": true,
+    "effects": [
+      {
+        "status": {
+          "stacks": 5,
+          "type": "Burning"
+        }
+      },
+      {
+        "draw": true
+      },
+      {
+        "draw": true
+      },
+      {
+        "draw": true
+      }
+    ]
+  },
+  {
+    "name": "Chroma Engine",
+    "type": "FIRE",
+    "description": "Draw 1 for each mana type in hand. EXHAUST.",
+    "targeting": "TILE",
+    "radius": 0,
+    "range": 0,
+    "cost": 1,
+    "prod": true,
+    "exhaust": true,
+    "effects": [
+      {
+        "chromaEngine": 1
+      }
+    ]
+  },
+  {
+    "name": "Burn",
+    "type": "FIRE",
+    "description": "Unplayable. Applies 4 BURNING at end of turn.",
+    "targeting": "TILE",
+    "radius": 0,
+    "range": 0,
+    "cost": 0,
+    "unplayable": true,
+    "endTurnEffects": [
+      {
+        "status": {
+          "stacks": 4,
+          "type": "Burning"
+        }
+      }
+    ],
+    "effects": []
+  },
+  {
+    "name": "Chroma Beam",
+    "type": "MOON",
+    "description": "Deal 8 damage for each mana type in hand. EXHAUST.",
+    "targeting": "BEAM",
+    "range": 4,
+    "cost": 1,
+    "prod": true,
+    "exhaust": true,
+    "effects": [
+      {
+        "chromaBeam": 8
+      },
+      {
+        "damage": 0
+      }
+    ]
+  },
+  {
+    "name": "Chroma Field",
+    "type": "ELEC",
+    "description": "Gain 8 SHIELD for each mana type in hand. EXHAUST.",
+    "targeting": "DIRECTIONAL",
+    "selfOnly": true,
+    "ignoreLOS": true,
+    "range": 999,
+    "cost": 1,
+    "prod": true,
+    "exhaust": true,
+    "effects": [
+      {
+        "chromaField": 8
+      }
+    ]
+  },
+  {
+    "name": "Chroma Burst",
+    "type": "BLOOD",
+    "description": "Create 2 BLOOD mana for each mana type in hand. EXHAUST.",
+    "targeting": "TILE",
+    "range": 0,
+    "cost": 1,
+    "prod": true,
+    "exhaust": true,
+    "effects": [
+      {
+        "chromaOven": 2
+      }
+    ]
+  },
+  {
+    "name": "Move [MOON]",
+    "type": "MOON",
+    "description": "Instantly move or attack",
+    "targeting": "TILE",
+    "range": 1,
+    "cost": 0,
+    "prod": true,
+    "effects": [
+      {
+        "freeMove": true
+      }
+    ]
+  },
+  {
+    "name": "Move [BLOOD]",
+    "type": "BLOOD",
+    "description": "Instantly move or attack",
+    "targeting": "TILE",
+    "range": 1,
+    "cost": 0,
+    "prod": true,
+    "effects": [
+      {
+        "freeMove": true
+      }
+    ]
+  },
+  {
+    "name": "Move [ELEC]",
+    "type": "ELEC",
+    "description": "Instantly move or attack",
+    "targeting": "TILE",
+    "range": 1,
+    "cost": 0,
+    "prod": true,
+    "effects": [
+      {
+        "freeMove": true
+      }
+    ]
+  },
+  {
+    "name": "Move [FIRE]",
+    "type": "FIRE",
+    "description": "Instantly move or attack",
+    "targeting": "TILE",
+    "range": 1,
+    "cost": 0,
+    "prod": true,
+    "effects": [
+      {
+        "freeMove": true
+      }
+    ]
+  },
+  {
+    "name": "Flame Jet",
+    "type": "FIRE",
+    "description": "BURNING 10.",
+    "targeting": "SINGLE",
+    "range": 4,
+    "cost": 2,
+    "prod": true,
+    "effects": [
+      {
+        "status": {
+          "stacks": 10,
+          "type": "Burning"
+        }
+      }
+    ]
+  },
+  {
+    "name": "Burning Pitch",
+    "type": "FIRE",
+    "description": "BURNING 4.",
+    "targeting": "SINGLE",
+    "range": 4,
+    "cost": 1,
+    "prod": true,
+    "effects": [
+      {
+        "status": {
+          "stacks": 4,
+          "type": "Burning"
+        }
+      }
+    ]
+  },
+  {
+    "name": "Dry Heat",
+    "type": "FIRE",
+    "description": "Target loses all statuses. Draw 1. EXHAUST.",
+    "targeting": "SINGLE",
+    "range": 4,
+    "cost": 0,
+    "prod": false,
+    "exhaust": true,
+    "effects": [
+      {
+        "purify":true
+      },
+      {
+        "draw":true
+      }
+    ]
+  },
+  {
+    "name": "Puff of Smoke",
+    "type": "FIRE",
+    "description": "Generate 2 FIRE mana. Teleport. EXHAUST.",
+    "targeting": "INVOKE",
+    "range": 5,
+    "cost": 3,
+    "prod": true,
+    "exhaust": true,
+    "effects": [
+      {
+        "invoke": 2
+      },
+      {
+        "teleportCaster":true
+      }
+    ]
+  },
+  {
+    "name": "Enkindle",
+    "type": "FIRE",
+    "description": "REKINDLE",
+    "targeting": "SINGLE",
+    "range": 5,
+    "cost": 1,
+    "prod": true,
+    "effects": [
+      {
+        "rekindle":true
+      }
+    ]
+  },
+  {
+    "name": "Flare Up",
+    "type": "FIRE",
+    "description": "FLARE",
+    "targeting": "SINGLE",
+    "range": 3,
+    "cost": 0,
+    "prod": true,
+    "effects": [
+      {
+        "flare":true
+      }
+    ]
+  },
+  {
+    "name": "Scarlet Flames",
+    "type": "FIRE",
+    "description": "SPREAD BURNING. FLARE in a 2 tile radius.",
+    "targeting": "AOE",
+    "radius":2,
+    "range": 3,
+    "cost": 3,
+    "prod": true,
+    "effects": [
+      {
+        "spreadStatus":{
+          "radius":2,
+          "status": "Burning"
+        }
+      },
+      {
+        "flare":true
+      }
+    ]
+  },
+  {
+    "name": "Napalm Strike",
+    "type": "FIRE",
+    "description": "FLARE. SPREAD BURNING.",
+    "targeting": "SINGLE",
+    "range": 5,
+    "cost": 5,
+    "prod": false,
+    "effects": [
+      {
+        "spreadStatus":{
+          "radius":2,
+          "status": "Burning"
+        }
+      },
+      {
+        "flare":true
+      }
+    ]
+  },
+  {
+    "name": "Harbinger of Flame",
+    "type": "FIRE",
+    "description": "In a 2 tile radius: BURNING 15, SPREAD BURNING, FLARE.",
+    "targeting": "AOE",
+    "radius": 2,
+    "range": 5,
+    "cost": 7,
+    "prod": true,
+    "effects": [
+      {
+        "status": {
+          "stacks": 15,
+          "type": "Burning"
+        }
+      },
+      {
+        "spreadStatus":{
+          "radius":2,
+          "status": "Burning"
+        }
+      },
+      {
+        "flare":true
+      }
+    ]
+  },
+  {
+    "name": "Flash Fire",
+    "type": "FIRE",
+    "description": "WIP",
+    "targeting": "SINGLE",
+    "range": 3,
+    "cost": 0,
+    "prod": false,
+    "effects": [
+      {
+        "closestHealthiestSpreadStatus":{
+          "radius":2,
+          "status": {
+            "stacks": 3,
+            "type": "Burning"
+          }
+        }
+      },
+      {
+        "flare":true
+      }
+    ]
+  },
+  {
+    "name": "Ashes To Ashes",
+    "type": "FIRE",
+    "description": "REKINDLE.  REKINDLE.  REKINDLE.",
+    "targeting": "SINGLE",
+    "range": 5,
+    "cost": 4,
+    "prod": true,
+    "effects": [
+      {
+        "rekindle":true
+      },
+      {
+        "rekindle":true
+      },
+      {
+        "rekindle":true
+      }
+    ]
+  },
+  {
+    "name": "Rake The Coals",
+    "type": "FIRE",
+    "description": "BURNING 6 in a 3 tile radius.",
+    "targeting": "AOE",
+    "range": 3,
+    "radius":3,
+    "cost": 2,
+    "prod": true,
+    "effects": [
+      {
+        "status": {
+          "stacks": 6,
+          "type": "Burning"
+        }
+      }
+    ]
+  },
+  {
+    "name": "Firestorm",
+    "type": "FIRE",
+    "description": "BURNING 20 in a 4 tile radius.",
+    "targeting": "AOE",
+    "range": 4,
+    "radius":4,
+    "cost": 5,
+    "prod": true,
+    "effects": [
+      {
+        "status": {
+          "stacks": 20,
+          "type": "Burning"
+        }
+      }
+    ]
+  },
+  {
+    "name": "Self Immolation",
+    "type": "FIRE",
+    "description": "REKINDLE target ALLY.  BURNING 20.",
+    "targeting": "SINGLE",
+    "allyOnly": true,
+    "range": 1,
+    "cost": 0,
+    "prod": false,
+    "effects": [
+      {
+        "rekindle":true
+      },
+      {
+        "status": {
+          "stacks": 20,
+          "type": "Burning"
+        }
+      }
+    ]
+  },
+  {
+    "name": "Fan the Flames",
+    "type": "FIRE",
+    "description": "Refresh any existing burns on the target",
+    "targeting": "SINGLE",
+    "range": 5,
+    "cost": 1,
+    "effects": [
+      {
+        "refresh": 0
+      }
+    ]
+  },
+  {
+    "name": "C's Ring of Fire",
+    "type": "FIRE",
+    "description": "Gives BURNING 5 for 15 turns to ALL units",
+    "targeting": "AOE",
+    "radius": 9,
+    "range": 0,
+    "cost": 3,
+    "effects": [
+      {
+        "status": {
+          "stacks": 15,
+          "type": "Burning"
+        }
+      }
+    ]
+  },
+  {
+    "name": "Fire Proof",
+    "type": "FIRE",
+    "description": "Take no damage from burning",
+    "targeting": "SINGLE",
+    "duration": 5,
+    "range": 2,
+    "cost": 2,
+    "effects": [
+      {
+        "fireproof": 1
+      }
+    ]
+  },
+  {
+    "name": "Conflagrate",
+    "type": "FIRE",
+    "description": "Refreshes any burning status duration on target and spreads it to nearby units within range",
+    "targeting": "AOE",
+    "radius": 2,
+    "range": 3,
+    "cost": 1,
+    "effects": [
+      {
+        "refresh": 1,
+        "spread": 2
+      }
+    ]
+  },
+  {
+    "name": "Chemical Burn",
+    "type": "FIRE",
+    "description": "Refresh all burns and create a duplicate of the strongest",
+    "targeting": "SINGLE",
+    "range": 5,
+    "cost": 2,
+    "effects": [
+      {
+        "refresh": 1,
+        "chemicalburn": 1
+      }
+    ]
+  },
+  {
+    "name": "Global Warming",
+    "type": "FIRE",
+    "description": "All BURNING can spread with refreshed duration to adjacent targets, all burning durations -1 turn.",
+    "targeting": "TILE",
+    "range": 2,
+    "cost": 3,
+    "effects": [
+      {
+        "globalwarming": 1
+      }
+    ]
+  },
+  {
+    "name": "Damp Fuel",
+    "type": "FIRE",
+    "description": "Create 4 smoke mana adjacent to fire mana consumed and create an extra smoke card in hand.",
+    "targeting": "TILE",
+    "range": 4,
+    "cost": 2,
+    "effects": [
+      {
+        "dampfuel": 1
+      }
+    ]
+  },
+  {
+    "name": "Flicker Flame",
+    "type": "FIRE",
+    "description": "SUMMON an ally that moves before and after it attacks.  5hp, inflicts BURNING 2.",
+    "targeting": "TILE",
+    "range": 2,
+    "cost": 4,
+    "effects": [
+      {
+        "summon": "Flicker Flame"
+      }
+    ]
+  },
+  {
+    "name": "Dragon",
+    "type": "FIRE",
+    "description": "SUMMON a 8/72 ally with 2 range.",
+    "targeting": "TILE",
+    "range": 2,
+    "cost": 5,
+    "prod": true,
+    "effects": [
+      {
+        "summon": "Dragon"
+      }
+    ]
+  },
+  {
+    "name": "Firestarter",
+    "type": "FIRE",
+    "description": "TOTEM: Add 5 damage for each fire mana consumed after spell cost.",
+    "targeting": "TILE",
+    "range": 2,
+    "cost": 3,
+    "prod": true,
+    "effects": [
+      {
+        "summon": "Firestarter Totem"
+      }
+    ]
+  },
+  {
+    "name": "Phoenix",
+    "type": "FIRE",
+    "description": "Summon a Phoenix who cannot attack, moves 3 and has 1 hp.  When it dies all targets in radius 3 lose all  BURNING dealing damage equal to their remaining duration, then sets BURNING 10 for 2 turns.  Revives in this square in 3 turns and cannot be revived any other way.",
+    "targeting": "TILE",
+    "range": 2,
+    "cost": 10,
+    "effects": [
+      {
+        "summon": "Phoenix"
+      }
+    ]
+  },
+  {
+    "name": "Full Moon",
+    "type": "MOON",
+    "description": "Deals 6 damage to a unit. Applies ILLUMINATED.",
+    "targeting": "SINGLE",
+    "range": 4,
+    "cost": 0,
+    "prod": true,
+    "effects": [
+      {
+        "damage": 6
+      },
+      {
+        "status": {
+          "stacks": 1,
+          "type": "Illuminated"
+        }
+      }
+    ]
+  },
+  {
+    "name": "New Moon",
+    "type": "MOON",
+    "description": "Deals 2 damage to a unit. Applies ILLUMINATED.",
+    "targeting": "SINGLE",
+    "range": 4,
+    "cost": 0,
+    "prod": true,
+    "effects": [
+      {
+        "damage": 2
+      },
+      {
+        "status": {
+          "stacks": 1,
+          "type": "Illuminated"
+        }
+      }
+    ]
+  },
+  {
+    "name": "Invoke Lunar Energies",
+    "type": "MOON",
+    "description": "Create 3 MOON mana. Draw 1. EXHAUST.",
+    "targeting": "INVOKE",
+    "range": 0,
+    "cost": 1,
+    "prod": true,
+    "exhaust": true,
+    "effects": [
+      {
+        "invoke": 3
+      },
+      {
+        "draw": true
+      }
+    ]
+  },
+  {
+    "name": "Moon Walk",
+    "type": "MOON",
+    "description": "Create 3 Moon Move cards in hand with exhaust. EXHAUST.",
+    "targeting": "TILE",
+    "range": 0,
+    "cost": 1,
+    "prod": true,
+    "exhaust": true,
+    "effects": [
+      {
+        "moonWalk": 3
+      }
+    ]
+  },
+  {
+    "name": "One",
+    "type": "MOON",
+    "description": "Instantly move or attack. EXHAUST. EPHEMERAL.",
+    "targeting": "TILE",
+    "range": 1,
+    "cost": 0,
+    "prod": false,
+    "exhaust":true,
+    "ephemeral":true,
+    "effects": [
+      {
+        "freeMove": true
+      }
+    ]
+  },
+  {
+    "name": "Giant",
+    "type": "MOON",
+    "description": "Instantly move or attack. EXHAUST. EPHEMERAL.",
+    "targeting": "TILE",
+    "range": 1,
+    "cost": 0,
+    "prod": false,
+    "exhaust":true,
+    "ephemeral":true,
+    "effects": [
+      {
+        "freeMove": true
+      }
+    ]
+  },
+  {
+    "name": "Leap",
+    "type": "MOON",
+    "description": "Instantly move or attack. EXHAUST. EPHEMERAL.",
+    "targeting": "TILE",
+    "range": 1,
+    "cost": 0,
+    "prod": false,
+    "exhaust":true,
+    "ephemeral":true,
+    "effects": [
+      {
+        "freeMove": true
+      }
+    ]
+  },
+  {
+    "name": "Orbital Strike",
+    "type": "MOON",
+    "description": "Deals 2X damage in a medium sized area.",
+    "targeting": "AOE",
+    "radius": 2,
+    "range": 5,
+    "cost": -1,
+    "prod": true,
+    "effects": [
+      {
+        "damage": 2
+      }
+    ]
+  },
+  {
+    "name": "Gravity Slingshot",
+    "type": "MOON",
+    "description": "Deals 1X damage in a small area.",
+    "targeting": "AOE",
+    "radius": 1,
+    "range": 6,
+    "cost": -1,
+    "prod": true,
+    "effects": [
+      {
+        "damage": 1
+      }
+    ]
+  },
+  {
+    "name": "Grace of Moonlight",
+    "type": "MOON",
+    "description": "Heal yourself for 1X and MINIONS for 5X. EXHAUST.",
+    "targeting": "AOE",
+    "range": 0,
+    "radius": 4,
+    "ignoreLOS": true,
+    "cost": -1,
+    "prod": true,
+    "exhaust": true,
+    "effects": [
+      {
+        "heal": 5
+      }
+    ]
+  },
+  {
+    "name": "Werewolf",
+    "type": "MOON",
+    "description": "SUMMON a 4/22 ally that occasionally lunges at enemies.",
+    "comment": "Lunges at one ILLUMINATED enemy within range 3 dealing free damage.  5 turn cooldown.",
+    "targeting": "SINGLE",
+    "range": 2,
+    "cost": 2,
+    "prod": true,
+    "effects": [
+      {
+        "summon": "Werewolf"
+      }
+    ]
+  },
+  {
+    "name": "Lunge",
+    "type": "MOON",
+    "description": "Lunges at one ILLUMINATED enemy within range 4 dealing free damage.  5 turn cooldown.",
+    "comment": "Lunges at one ILLUMINATED enemy within range 3 dealing free damage.  5 turn cooldown.",
+    "targeting": "SINGLE",
+    "range": 3,
+    "cost": 0,
+    "effects": [
+      {
+        "lunge": "VALUE DOES NOT MATTER"
+      },
+      {
+        "damage": 4
+      }
+    ]
+  },
+  {
+    "name": "Silver Light",
+    "type": "MOON",
+    "description": "Deal 17 damage in a beam. Applies 3 ILLUMINATED.",
+    "targeting": "BEAM",
+    "range": 15,
+    "cost": 3,
+    "prod": true,
+    "effects": [
+      {
+        "damage": 17
+      },
+      {
+        "status": {
+          "stacks": 3,
+          "type": "Illuminated"
+        }
+      }
+    ]
+  },
+  {
+    "name": "Gravity Well",
+    "type": "MOON",
+    "description": "Deals 8 damage, applies 3 ILLUMINATED, and pulls units inward.",
+    "targeting": "AOE",
+    "ignoreLOS": true,
+    "radius": 2,
+    "range": 4,
+    "cost": 4,
+    "prod": true,
+    "effects": [
+      {
+        "damage": 8
+      },
+      {
+        "status": {
+          "stacks": 3,
+          "type": "Illuminated"
+        }
+      },
+      {
+        "gravity": 1
+      }
+    ]
+  },
+  {
+    "name": "Investigator's Lamp",
+    "type": "MOON",
+    "description": "Adds 2 ILLUMINATED to enemies within 2 tiles.",
+    "targeting": "AOE",
+    "ignoreLOS": true,
+    "enemyOnly": true,
+    "radius": 2,
+    "range": 0,
+    "cost": 1,
+    "prod": true,
+    "effects": [
+      {
+        "status": {
+          "stacks": 2,
+          "type": "Illuminated"
+        }
+      }
+    ]
+  },
+  {
+    "name": "Interrogator's Lamp",
+    "type": "MOON",
+    "description": "Adds 6 ILLUMINATED to enemies in a beam.",
+    "targeting": "BEAM",
+    "enemyOnly": true,
+    "ignoreLOS": true,
+    "range": 15,
+    "cost": 2,
+    "prod": true,
+    "effects": [
+      {
+        "status": {
+          "stacks": 6,
+          "type": "Illuminated"
+        }
+      }
+    ]
+  },
+  {
+    "name": "Inquisitor's Lamp",
+    "type": "MOON",
+    "description": "Adds 20 ILLUMINATED to a single enemy target.",
+    "targeting": "SINGLE",
+    "enemyOnly": true,
+    "range": 3,
+    "cost": 5,
+    "prod": true,
+    "effects": [
+      {
+        "status": {
+          "stacks": 20,
+          "type": "Illuminated"
+        }
+      }
+    ]
+  },
+  {
+    "name": "Lunairetic",
+    "type": "MOON",
+    "description": "Doubles illuminated and deals 30 damage to enemies in a large area.",
+    "targeting": "AOE",
+    "radius": 6,
+    "range": 8,
+    "cost": 9,
+    "prod": true,
+    "effects": [
+      {
+        "lunairetic": 30
+      }
+    ]
+  },
+  {
+    "name": "Lunar Orbit",
+    "type": "MOON",
+    "description": "Units with ILLUMINATED are KNOCKBACK 1 towards the center. ILLUMINATED.",
+    "targeting": "AOE",
+    "radius": 3,
+    "range": 6,
+    "cost": 2,
+    "effects": [
+      {
+        "status": {
+          "stacks": 1,
+          "type": "Illuminated"
+        }
+      }
+    ]
+  },
+  {
+    "name": "Lycaon's Progeny",
+    "type": "MOON",
+    "description": "SUMMON a 10/81 ally.  His cleaving attack applies ILLUMINATED.",
+    "comment": "SUMMON an ally with 100% moon resist, 40 hp, and deals 10 damage.  ILLUMINATES adjacent foes after it attacks.  Deals double damage to ILLUMINATED foes.",
+    "targeting": "SINGLE",
+    "range": 3,
+    "cost": 6,
+    "prod": true,
+    "effects": [
+      {
+        "summon": "Son of Lycaon"
+      }
+    ]
+  },
+  {
+    "name": "Moon Cleave",
+    "type": "MOON",
+    "description": "Attack all units adjacent and applies illuminated.",
+    "comment": "Lunges at one ILLUMINATED enemy within range 3 dealing free damage.  5 turn cooldown.",
+    "targeting": {
+      "type": "AOE",
+      "ignoreSelf": true,
+      "ignoreAllies": true
+    },
+    "radius": 1,
+    "range": 0,
+    "cost": 0,
+    "effects": [
+      {
+        "damage": 10
+      },
+      {
+        "status": {
+          "stacks": 1,
+          "type": "Illuminated"
+        }
+      }
+    ]
+  },
+  {
+    "name": "Thunderbolt",
+    "type": "ELEC",
+    "description": "Deals 12 damage and SHOCKED in a beam. Generates 2 mana per target struck.",
+    "targeting": "BEAM",
+    "range": 6,
+    "cost": 2,
+    "prod": true,
+    "effects": [
+      {
+        "generateRandomManaAroundMonster": 2
+      },
+      {
+        "damage": 12
+      },
+      {
+        "status": {
+          "stacks": 1,
+          "type": "Shocked"
+        }
+      }
+    ]
+  },
+  {
+    "name": "Thunderclap",
+    "type": "ELEC",
+    "description": "Deals 6 damage and SHOCKED in a beam. Generates a mana randomly nearby.",
+    "targeting": "BEAM",
+    "range": 6,
+    "cost": 2,
+    "prod": true,
+    "effects": [
+      {
+        "generateRandomManaAroundMonster": 1
+      },
+      {
+        "damage": 6
+      },
+      {
+        "status": {
+          "stacks": 1,
+          "type": "Shocked"
+        }
+      }
+    ]
+  },
+  {
+    "name": "Zap",
+    "type": "ELEC",
+    "description": "Deals 6 damage and applies SHOCKED. POWERFUL.",
+    "targeting": "PROJECTILE",
+    "range": 4,
+    "cost": 0,
+    "prod": true,
+    "effects": [
+      {
+        "powerful":true
+      },
+      {
+        "damage": 6
+      },
+      {
+        "status": {
+          "stacks": 1,
+          "type": "Shocked"
+        }
+      }
+    ]
+  },
+  {
+    "name": "Static Arc",
+    "type": "ELEC",
+    "description": "Deals 2 damage and applies SHOCKED.",
+    "targeting": "PROJECTILE",
+    "range": 4,
+    "cost": 0,
+    "prod": true,
+    "effects": [
+      {
+        "damage": 2
+      },
+      {
+        "status": {
+          "stacks": 1,
+          "type": "Shocked"
+        }
+      }
+    ]
+  },
+  {
+    "name": "Overcharge",
+    "type": "ELEC",
+    "description": "Your next spell casts twice.",
+    "targeting": "SINGLE",
+    "range": 0,
+    "cost": 1,
+    "prod": true,
+    "effects": [
+      {
+        "overcharge": 1
+      }
+    ]
+  },
+  {
+    "name": "Chain Lightning",
+    "type": "ELEC",
+    "description": "Deals 15 damage and SHOCKED. Chains to units in range 2.",
+    "targeting": "SINGLE",
+    "range": 7,
+    "cost": 3, 
+    "prod": true,
+    "effects": [
+      {
+        "damage": 15 
+      },
+      {
+        "status": {
+          "stacks": 1,
+          "type": "Shocked"
+        }
+      },
+      {
+        "chainLightning": 999
+      }
+    ]
+  },
+  {
+    "name": "Voltage Spike",
+    "type": "ELEC",
+    "description": "Deals 4 damage and SHOCKED. Chains to one unit within range 2.",
+    "targeting": "SINGLE",
+    "range": 7,
+    "cost": 2, 
+    "prod": true,
+    "effects": [
+      {
+        "damage": 4 
+      },
+      {
+        "status": {
+          "stacks": 1,
+          "type": "Shocked"
+        }
+      },
+      {
+        "chainLightning": 1
+      }
+    ]
+  },
+  {
+    "name": "Storm of Vengeance",
+    "type": "ELEC",
+    "description": "Inflicts STORMED status that casts chain lightning on the target for 5 turns.",
+    "targeting": "SINGLE",
+    "duration": 5,
+    "radius": 5,
+    "range": 10,
+    "cost": 6,
+    "prod": true,
+    "effects": [
+      {
+        "status": {
+          "stacks": 1,
+          "type": "Stormed"
+        }
+      }
+    ]
+  },
+  {
+    "name": "Storm Bolt",
+    "type": "ELEC",
+    "comment": "Used exclusively by Storm of Vengeance",
+    "description": "Deals 15 damage and SHOCKS the target. Chains to units in range 2.",
+    "targeting": "SINGLE",
+    "range": 5,
+    "cost": 0,
+    "effects": [
+      {
+        "damage": 15
+      },
+      {
+        "status": {
+          "stacks": 1,
+          "type": "Shocked"
+        }
+      },
+      {
+        "chainLightning": 999
+      }
+    ]
+  },
+  {
+    "name": "Thunderbird",
+    "type": "ELEC",
+    "description": "SUMMON a 6/15 ally that zaps enemies up to 4 tiles away.",
+    "targeting": "TILE",
+    "range": 2,
+    "cost": 2,
+    "prod": false,
+    "effects": [
+      {
+        "summon": "Thunderbird"
+      }
+    ]
+  },
+  {
+    "name": "Electromagnetic Pulse",
+    "type": "ELEC",
+    "description": "Remove shocked from each enemy in the area and stun them for 2 turns",
+    "targeting": "AOE",
+    "radius": 7,
+    "range": 0,
+    "cost": 2,
+    "effects": [
+      {
+        "electromagneticpulse": 1
+      }
+    ]
+  },
+  {
+    "name": "Periodic Current",
+    "type": "ELEC",
+    "description": "Creates a totem that gives all units within 5 tiles shocked every 3 turns.",
+    "targeting": "TILE",
+    "range": 2,
+    "cost": 2,
+    "effects": [
+      {
+        "summon": "Periodic Current"
+      }
+    ]
+  },
+  {
+    "name": "Nikola's Engine",
+    "type": "ELEC",
+    "description": "SUMMON a 0/54 ally that applies SHOCKED to ALL units within 4 tiles.",
+    "targeting": "TILE",
+    "range": 2,
+    "cost": 3,
+    "prod": true,
+    "effects": [
+      {
+        "summon": "Nikola's Engine"
+      }
+    ]
+  },
+  {
+    "name": "Nikola",
+    "comment": "exclusively used by Nikola's Engine",
+    "type": "ELEC",
+    "description": "Shocks all in radius 4.",
+    "targeting": "AOE",
+    "radius": 4,
+    "range": 0,
+    "cost": 0,
+    "effects": [
+      {
+        "status": {
+          "stacks": 1,
+          "type": "Shocked"
+        }
+      }
+    ]
+  },
+  {
+    "name": "Raiju",
+    "type": "ELEC",
+    "description": "Summons Raiju. Any time SHOCKED triggers Raiju attacks the target then shocks itself.",
+    "targeting": "TILE",
+    "range": 2,
+    "cost": 9,
+    "prod": false,
+    "comment": "TODO: redesign, give a different ability",
+    "effects": [
+      {
+        "summon": "Raiju"
+      }
+    ]
+  },
+  {
+    "name": "Invoke Electricity",
+    "type": "ELEC",
+    "description": "Create 3 ELEC mana. Draw 1. EXHAUST.",
+    "targeting": "INVOKE",
+    "range": 0,
+    "cost": 1,
+    "prod": true,
+    "exhaust": true,
+    "effects": [
+      {
+        "invoke": 3
+      },
+      {
+        "draw": true
+      }
+    ]
+  },
+  {
+    "name": "Photovoltaic",
+    "type": "ELEC",
+    "description": "Your next spell costs 2 less. EXHAUST.",
+    "targeting": "SINGLE",
+    "range": 0,
+    "cost": 0,
+    "prod": true,
+    "exhaust": true,
+    "effects": [
+      {
+        "status": {
+          "stacks": 2,
+          "type": "Epiphany"
+        }
+      }
+    ]
+  },
+  {
+    "name": "Power Bank",
+    "type": "ELEC",
+    "description": "Gain X EPIPHANY stacks. EXHAUST.",
+    "targeting": "SINGLE",
+    "range": 0,
+    "cost": -1,
+    "prod": true,
+    "exhaust": true,
+    "effects": [
+      {
+        "status": {
+          "stacks": 1,
+          "type": "Epiphany"
+        }
+      }
+    ]
+  },
+  {
+    "name": "Unleash Electricity",
+    "type": "ELEC",
+    "description": "Gain 5 mana cards in hand. EXHAUST.",
+    "targeting": "TILE",
+    "range": 0,
+    "cost": 0,
+    "prod": false,
+    "exhaust": true,
+    "effects": [
+      {
+        "dormant": 5
+      }
+    ]
+  },
+  {
+    "name": "Ride the Lightning",
+    "type": "ELEC",
+    "description": "A beam dealing 9 damage and SHOCKED. Teleport to target tile.",
+    "targeting": "BEAM",
+    "range": 4,
+    "cost": 4,
+    "prod": true,
+    "effects": [
+      {
+        "damage": 9
+      },
+      {
+        "status": {
+          "stacks": 1,
+          "type": "Shocked"
+        }
+      },
+      {
+        "teleportCaster": true
+      }
+    ]
+  },
+  {
+    "name": "Zeus's Verdict",
+    "type": "ELEC",
+    "description": "Deals 6X damage to one unit and applies SHOCKED.",
+    "targeting": "SINGLE",
+    "range": 3,
+    "cost": -1,
+    "prod": true,
+    "effects": [
+      {
+        "damage": 6
+      },
+      {
+        "status": {
+          "stacks": 1,
+          "type": "Shocked"
+        }
+      }
+    ]
+  },
+  {
+    "name": "Dormant Electricity",
+    "type": "ELEC",
+    "description": "Unplayable. Dissipates between floors.",
+    "targeting": "TILE",
+    "range": 0,
+    "cost": 0,
+    "unplayable": true,
+    "effects": []
+  },
+  {
+    "name": "Blink",
+    "type": "CHAOS",
+    "description": "Teleport to a random location",
+    "targeting": "SINGLE",
+    "range": 0,
+    "cost": 2,
+    "effects": [
+      {
+        "blink": 1
+      }
+    ]
+  },
+  {
+    "name": "Teleport",
+    "type": "CHAOS",
+    "description": "After paying the cost teleport to a remaining wild CHAOS mana.",
+    "targeting": "SINGLE",
+    "range": -1,
+    "cost": 4,
+    "effects": [
+      {
+        "teleport": 1
+      }
+    ]
+  },
+  {
+    "name": "Disintegrate",
+    "type": "CHAOS",
+    "description": "CRITICAL. A beam that deals an increased 500% critical damage.  Critical hits can destroy walls.",
+    "targeting": "BEAM",
+    "range": 5,
+    "cost": 2,
+    "effects": [
+      {
+        "damage": 3,
+        "critical": 1,
+        "disintegrate": 1
+      }
+    ]
+  },
+  {
+    "name": "Paradox",
+    "type": "CHAOS",
+    "description": "Create two chaos mana each in random locations",
+    "targeting": "NONE",
+    "range": -1,
+    "cost": 0,
+    "effects": [
+      {
+        "paradox": 1
+      }
+    ]
+  },
+  {
+    "name": "Totemic Teleport",
+    "type": "CHAOS",
+    "description": "Teleport a totem to a location adjacent to a chaos mana.",
+    "targeting": "SINGLE",
+    "range": 3,
+    "cost": 4,
+    "effects": [
+      {
+        "teleport": 1
+      }
+    ]
+  },
+  {
+    "name": "Chaotic Tear",
+    "type": "CHAOS",
+    "description": "CRITICAL. Deal 3 damage.",
+    "targeting": "SINGLE",
+    "range": 3,
+    "cost": 1,
+    "effects": [
+      {
+        "damage": 3,
+        "critical": 1
+      }
+    ]
+  },
+  {
+    "name": "Heat Death",
+    "type": "CHAOS",
+    "description": "Consumes ALL chaos mana (minimum 12) dealing 10 damage per mana split randomly across ALL units except the caster.  Teleport all units randomly.",
+    "targeting": "AOE",
+    "range": -1,
+    "cost": 12,
+    "effects": [
+      {
+        "heat death": 1
+      }
+    ]
+  },
+  {
+    "name": "Entropic Burst",
+    "type": "CHAOS",
+    "description": "CRITICAL.  Deals 5 damage if this kills a unit repeat it's effect centered on a random unit that survived.",
+    "targeting": "AOE",
+    "radius": 3,
+    "range": 8,
+    "cost": 5,
+    "effects": [
+      {
+        "damage": 5,
+        "entropicburst": 1
+      }
+    ]
+  },
+  {
+    "name": "Entropic Tuning Fork",
+    "type": "CHAOS",
+    "description": "Spells gain a 20% increased chance to critical.  Spells that already have CRITICAL gain double this bonus.",
+    "targeting": "TILE",
+    "range": 4,
+    "cost": 4,
+    "effects": [
+      {
+        "summon": "Totem",
+        "entropictuningfork": 1
+      }
+    ]
+  },
+  {
+    "name": "Mandelbrot's Prophecy",
+    "type": "CHAOS",
+    "description": "CRITICAL. Deal 10 damage to all units within range 1 of a CHAOS mana.",
+    "targeting": "NONE",
+    "range": -1,
+    "cost": 1,
+    "effects": [
+      {
+        "mandelbrotsprophecy": 1
+      }
+    ]
+  },
+  {
+    "name": "Maddening Black Bile",
+    "type": "CHAOS",
+    "description": "SUMMON an ally with 10 hp that deals 5 damage (and can CRITICAL).  It teleports randomly every turn.",
+    "targeting": "TILE",
+    "range": 2,
+    "cost": 2,
+    "effects": [
+      {
+        "summon": "Maddening Black Bile"
+      }
+    ]
+  },
+  {
+    "name": "Maw of El'nortep",
+    "type": "CHAOS",
+    "description": "SUMMON an ally with 30hp that deals 10 damage to adjacent squares, CRITICAL.  It teleports randomly every turn.",
+    "targeting": "TILE",
+    "range": 2,
+    "cost": 6,
+    "effects": [
+      {
+        "summon": "Maw of El'nortep"
+      }
+    ]
+  },
+  {
+    "name": "Return to Dust",
+    "type": "EARTH",
+    "description": "Destroy ALL mana.  Fortify and damage reflection effects have unlimited duration and stacks.",
+    "targeting": "SINGLE",
+    "duration": -1,
+    "range": 0,
+    "cost": 0,
+    "effects": [
+      {
+        "returntodust": 1
+      }
+    ]
+  },
+  {
+    "name": "Church of Iron",
+    "type": "EARTH",
+    "description": "All Earth mana gains WALLED 3.",
+    "targeting": "NONE",
+    "range": -1,
+    "cost": 0,
+    "effects": [
+      {
+        "churchofiron": 3
+      }
+    ]
+  },
+  {
+    "name": "Mud Mound",
+    "type": "EARTH",
+    "description": "Convert target earth mana into a wall.",
+    "targeting": "TILE",
+    "range": 1,
+    "cost": 1,
+    "effects": [
+      {
+        "mudmound": 1
+      }
+    ]
+  },
+  {
+    "name": "Instant Armor",
+    "type": "EARTH",
+    "description": "Unit gains Fortify 3 for 10 turns.",
+    "targeting": "SINGLE",
+    "range": 4,
+    "cost": 2,
+    "effects": [
+      {
+        "fortify": 3
+      }
+    ]
+  },
+  {
+    "name": "Sediment Spikes",
+    "type": "EARTH",
+    "description": "Grant yourself and any adjacent earth mana cluster damage reflection 3, does not stack.",
+    "targeting": "SINGLE",
+    "range": 0,
+    "cost": 1,
+    "effects": [
+      {
+        "sedimentspikes": 3
+      }
+    ]
+  },
+  {
+    "name": "Sovereignty of Soil",
+    "type": "EARTH",
+    "description": "While this totem persists placing earth mana grants all mana walled 1.",
+    "targeting": "TILE",
+    "range": 2,
+    "cost": 4,
+    "effects": [
+      {
+        "sovereigntyofsoil": 1
+      }
+    ]
+  },
+  {
+    "name": "Mud Shot",
+    "type": "EARTH",
+    "description": "Deals 3 damage.",
+    "targeting": "PROJECTILE",
+    "range": 3,
+    "cost": 0,
+    "effects": [
+      {
+        "damage": 3
+      }
+    ]
+  },
+  {
+    "name": "Tremor Trebuchet",
+    "type": "EARTH",
+    "description": "Summons a totem that fires Mud Shot at nearby enemies.  Must be placed adjacent to earth mana.",
+    "targeting": "TILE",
+    "range": 2,
+    "cost": 2,
+    "effects": [
+      {
+        "summon": "Tremor Trebuchet"
+      }
+    ]
+  },
+  {
+    "name": "Wrecking Ball",
+    "type": "EARTH",
+    "description": "Move to target location dealing 10 damage to all units in the path.  Gain Fortify 4 and damage refelction 4.",
+    "targeting": "BEAM",
+    "range": 5,
+    "cost": 5,
+    "effects": [
+      {
+        "damage": 10,
+        "wreckingball": 4
+      }
+    ]
+  },
+  {
+    "name": "Earthquake",
+    "type": "EARTH",
+    "description": "Deal 35 damage to all units within range 10. Ignores walls.",
+    "targeting": "AOE",
+    "radius": 10,
+    "range": 0,
+    "cost": 8,
+    "effects": [
+      {
+        "damage": 35
+      }
+    ]
+  },
+  {
+    "name": "Sacred Ground",
+    "type": "EARTH",
+    "description": "Create earth mana in all adjacent spaces around target unit.",
+    "targeting": "SINGLE",
+    "range": 3,
+    "cost": 2,
+    "effects": [
+      {
+        "sacredground": 1
+      }
+    ]
+  },
+  {
+    "name": "Pound Dirt",
+    "type": "EARTH",
+    "description": "SUMMON an ally with 20hp that cannot move, deals 5 damage to adjacent squares each turn.",
+    "targeting": "TILE",
+    "range": 2,
+    "cost": 2,
+    "effects": [
+      {
+        "summon": "Pound Dirt"
+      }
+    ]
+  },
+  {
+    "name": "Command",
+    "type": "BLOOD",
+    "description": "Target MINION moves up to 1 space and makes a free attack on an enemy",
+    "targeting": "SINGLE",
+    "summonOnly": true,
+    "range": 5,
+    "cost": 0,
+    "prod": true,
+    "effects": [
+      {
+        "command": 1
+      }
+    ]
+  },
+  {
+    "name": "Recall",
+    "type": "BLOOD",
+    "description": "Allies within range 8 are teleported to the caster",
+    "targeting": "AOE",
+    "radius": 8,
+    "range": 0,
+    "cost": 3,
+    "effects": [
+      {
+        "recall": 1
+      }
+    ]
+  },
+  {
+    "name": "Invoke Blood",
+    "type": "BLOOD",
+    "description": "Create 3 BLOOD mana. Draw 1. EXHAUST.",
+    "targeting": "INVOKE",
+    "range": 0,
+    "cost": 1,
+    "prod": true,
+    "exhaust": true,
+    "effects": [
+      {
+        "invoke": 3
+      },
+      {
+        "draw": true
+      }
+    ]
+  },
+  {
+    "name": "Bloodletting",
+    "type": "BLOOD",
+    "description": "Pay 3 life to generate 3 BLOOD mana.",
+    "targeting": "INVOKE",
+    "range": 0,
+    "cost": 0,
+    "prod": true,
+    "effects": [
+      {
+        "invoke": 3
+      },
+      {
+        "sacrifice":3
+      }
+    ]
+  },
+  {
+    "name": "Draw Blood",
+    "type": "BLOOD",
+    "description": "Deal 5 damage and BOLSTER.",
+    "targeting": "SINGLE",
+    "range": 3,
+    "cost": 1,
+    "prod": true,
+    "effects": [
+      {
+        "damage": 5
+      },
+      {
+        "bolster": true
+      }
+    ]
+  },
+  {
+    "name": "Drain Life",
+    "type": "BLOOD",
+    "description": "Deal 8 damage in a beam and BOLSTER.",
+    "targeting": "BEAM",
+    "range": 7,
+    "cost": 2,
+    "prod": true,
+    "effects": [
+      {
+        "damage": 8
+      },
+      {
+        "bolster": true
+      }
+    ]
+  },
+  {
+    "name": "Firstborn Sin",
+    "type": "BLOOD",
+    "description": "Pay 5 life to create Firstborn Lust in hand. EXHAUST.",
+    "targeting": "SINGLE",
+    "range": 0,
+    "cost": 3,
+    "prod": true,
+    "exhaust":true,
+    "effects": [
+      {
+        "sacrifice":5
+      },
+      {
+        "firstborn": true
+      }
+    ]
+  },
+  {
+    "name": "Firstborn Lust",
+    "type": "BLOOD",
+    "description": "Pay 5 life to create Firstborn Gluttony in hand. Deal 15 damage. EXHAUST. EPHEMERAL.",
+    "targeting": "SINGLE",
+    "range": 5,
+    "cost": 0,
+    "prod": false,
+    "exhaust":true,
+    "ephemeral":true,
+    "effects": [
+      {
+        "sacrifice":5
+      },
+      {
+        "firstborn": true
+      },
+      {
+        "damage":15
+      }
+    ]
+  },
+  {
+    "name": "Firstborn Gluttony",
+    "type": "BLOOD",
+    "description": "Pay 10 life to create Firstborn Greed in hand. Deal 30 damage. EXHAUST. EPHEMERAL.",
+    "targeting": "SINGLE",
+    "range": 5,
+    "cost": 0,
+    "prod": false,
+    "exhaust":true,
+    "ephemeral":true,
+    "effects": [
+      {
+        "sacrifice":10
+      },
+      {
+        "firstborn": true
+      },
+      {
+        "damage":30
+      }
+    ]
+  },
+  {
+    "name": "Firstborn Greed",
+    "type": "BLOOD",
+    "description": "Pay 15 life to create Firstborn Sloth in hand. Deal 45 damage. EXHAUST. EPHEMERAL.",
+    "targeting": "SINGLE",
+    "range": 5,
+    "cost": 0,
+    "prod": false,
+    "exhaust":true,
+    "ephemeral":true,
+    "effects": [
+      {
+        "sacrifice":15
+      },
+      {
+        "firstborn": true
+      },
+      {
+        "damage":45
+      }
+    ]
+  },
+  {
+    "name": "Firstborn Sloth",
+    "type": "BLOOD",
+    "description": "Pay 20 life to create Firstborn Envy in hand. Deal 60 damage. EXHAUST. EPHEMERAL.",
+    "targeting": "SINGLE",
+    "range": 5,
+    "cost": 0,
+    "prod": false,
+    "exhaust":true,
+    "ephemeral":true,
+    "effects": [
+      {
+        "sacrifice":20
+      },
+      {
+        "firstborn": true
+      },
+      {
+        "damage":60
+      }
+    ]
+  },
+  {
+    "name": "Firstborn Envy",
+    "type": "BLOOD",
+    "description": "Pay 25 life to create Firstborn Wrath in hand. Deal 75 damage. EXHAUST. EPHEMERAL.",
+    "targeting": "SINGLE",
+    "range": 5,
+    "cost": 0,
+    "prod": false,
+    "exhaust":true,
+    "ephemeral":true,
+    "effects": [
+      {
+        "sacrifice":25
+      },
+      {
+        "firstborn": true
+      },
+      {
+        "damage":75
+      }
+    ]
+  },
+  {
+    "name": "Firstborn Wrath",
+    "type": "BLOOD",
+    "description": "Pay 30 life to create Firstborn Pride in hand. Deal 90 damage. EXHAUST. EPHEMERAL.",
+    "targeting": "SINGLE",
+    "range": 5,
+    "cost": 0,
+    "prod": false,
+    "exhaust":true,
+    "ephemeral":true,
+    "effects": [
+      {
+        "sacrifice":30
+      },
+      {
+        "firstborn": true
+      },
+      {
+        "damage":90
+      }
+    ]
+  },
+  {
+    "name": "Firstborn Pride",
+    "type": "BLOOD",
+    "description": "Pay 35 life to create Firstborn Pride in hand. Deal 105 damage. EXHAUST. EPHEMERAL.",
+    "targeting": "SINGLE",
+    "range": 5,
+    "cost": 0,
+    "prod": false,
+    "exhaust":true,
+    "ephemeral":true,
+    "effects": [
+      {
+        "sacrifice":35
+      },
+      {
+        "firstborn": true
+      },
+      {
+        "damage":105
+      }
+    ]
+  },
+  {
+    "name": "Heartripper",
+    "type": "BLOOD",
+    "description": "Pay 30 life to kill target.",
+    "targeting": "SINGLE",
+    "range": 3,
+    "cost": 3,
+    "prod": true,
+    "effects": [
+      {
+        "sacrifice":30
+      },
+      {
+        "obliterate": true
+      }
+    ]
+  },
+  {
+    "name": "Thicker than Water",
+    "type": "BLOOD",
+    "description": "Target MINION gains BERSERK 8",
+    "targeting": "SINGLE",
+    "summonOnly": true,
+    "range": 4,
+    "prod": false,
+    "cost": 1,
+    "effects": [
+      {
+        "status": {
+          "stacks": 8,
+          "type": "Berserk"
+        }
+      }
+    ]
+  },
+  {
+    "name": "Brutish Impulse",
+    "type": "BLOOD",
+    "description": "Target MINION gains 5 BERSERK stacks",
+    "targeting": "SINGLE",
+    "summonOnly": true,
+    "range": 4,
+    "prod": true,
+    "cost": 1,
+    "effects": [
+      {
+        "status": {
+          "stacks": 5,
+          "type": "Berserk"
+        }
+      }
+    ]
+  },
+  {
+    "name": "Engorge",
+    "type": "BLOOD",
+    "description": "Target MINION gains 10 max hp and heals 10.",
+    "targeting": "SINGLE",
+    "summonOnly": true,
+    "range": 3,
+    "prod": false,
+    "cost": 2,
+    "effects": [
+      {
+        "engorge": 1
+      }
+    ]
+  },
+  {
+    "name": "Sup of Blood",
+    "type": "BLOOD",
+    "description": "ENGORGE 10 target MINION.",
+    "targeting": "SINGLE",
+    "summonOnly": true,
+    "range": 4,
+    "prod": false,
+    "cost": 3,
+    "effects": [
+      {
+        "engorge": 1
+      }
+    ]
+  },
+  {
+    "name": "Deploy",
+    "type": "BLOOD",
+    "description": "Target MINION heals 10 and teleports next to the closest enemy.",
+    "targeting": "SINGLE",
+    "summonOnly": true,
+    "range": 6,
+    "cost": 2,
+    "prod": true,
+    "effects": [
+      {
+        "heal": 10
+      },
+      {
+        "engage": 1
+      }
+    ]
+  },
+
+  {
+    "name": "Marching Orders",
+    "type": "BLOOD",
+    "description": "MINIONS in a small AOE heal 10 and teleport next to their closest enemy.",
+    "targeting": "AOE",
+    "summonOnly": true,
+    "radius": 1,
+    "range": 6,
+    "cost": 1,
+    "prod": true,
+    "effects": [
+      {
+        "heal": 10
+      },
+      {
+        "engage": 1
+      }
+    ]
+  },
+  {
+    "name": "Sin of Gluttony",
+    "type": "BLOOD",
+    "description": "Allies in a small area ENGORGE 20",
+    "targeting": "AOE",
+    "summonOnly": true,
+    "radius": 1,
+    "range": 5,
+    "cost": 4,
+    "prod": true,
+    "effects": [
+      {
+        "engorge": 2
+      }
+    ]
+  },
+  {
+    "name": "Exsanguinate",
+    "type": "BLOOD",
+    "description": "Damage all units in radius 3 for 8 and BOLSTER.",
+    "targeting": {
+      "type": "AOE",
+      "ignoreSelf": true
+    },
+    "radius": 3,
+    "range": 0,
+    "cost": 6,
+    "prod": true,
+    "effects": [
+      {
+        "damage": 8
+      },
+      {
+        "bolster": true
+      }
+    ]
+  },
+  {
+    "name": "Small Price",
+    "type": "BLOOD",
+    "description": "Sacrifice target MINION to swap places with it. EXHAUST.",
+    "targeting": "TILE",
+    "summonOnly":true,
+    "range": 5,
+    "cost": 3,
+    "prod": true,
+    "exhaust": true,
+    "effects": [
+      {
+        "obliterate": true
+      },
+      {
+        "teleportCaster": true
+      }
+    ]
+  },
+  {
+    "name": "Feast of Flesh",
+    "type": "BLOOD",
+    "description": "MINIONS gain BERSERK 10, ENGORGE 20, and make a free attack. EXHAUST.",
+    "targeting": "AOE",
+    "summonOnly": true,
+    "radius": 6,
+    "range": 5,
+    "cost": 6,
+    "prod": true,
+    "exhaust": true,
+    "effects": [
+      {
+        "status": {
+          "stacks": 10,
+          "type": "Berserk"
+        }
+      },
+      {
+        "engorge": 2
+      },
+      {
+        "command": 1
+      }
+    ]
+  },
+  {
+    "name": "Blood Burst",
+    "type": "BLOOD",
+    "description": "SUMMON four 5/63 allies with half hp and VIGOR.",
+    "targeting": "SINGLE",
+    "range": 4,
+    "cost": 5,
+    "prod": false,
+    "effects": [
+      {
+        "summon": "Blood Polyp"
+      },
+      {
+        "summon": "Blood Polyp"
+      },
+      {
+        "summon": "Blood Polyp"
+      },
+      {
+        "summon": "Blood Polyp"
+      }
+    ]
+  },
+  {
+    "name": "Splatter",
+    "type": "BLOOD",
+    "description": "SUMMON eight 5/63 Blood Polyps with half hp and VIGOR.",
+    "targeting": "SINGLE",
+    "range": 5,
+    "cost": 7,
+    "prod": true,
+    "effects": [
+      {
+        "summon": "Blood Polyp"
+      },
+      {
+        "summon": "Blood Polyp"
+      },
+      {
+        "summon": "Blood Polyp"
+      },
+      {
+        "summon": "Blood Polyp"
+      },
+      {
+        "summon": "Blood Polyp"
+      },
+      {
+        "summon": "Blood Polyp"
+      },
+      {
+        "summon": "Blood Polyp"
+      },
+      {
+        "summon": "Blood Polyp"
+      }
+    ]
+  },
+  {
+    "name": "Boil the Blood",
+    "type": "BLOOD",
+    "description": "MINIONS in a small area gain 4X BERSERK stacks.",
+    "summonOnly": true,
+    "targeting": "AOE",
+    "radius": 1.5,
+    "range": 4,
+    "prod": true,
+    "cost": -1,
+    "effects": [
+      {
+        "status": {
+          "stacks": 4,
+          "type": "Berserk"
+        }
+      }
+    ]
+  },
+  {
+    "name": "Enrage",
+    "type": "BLOOD",
+    "description": "Target summon gains 15 stacks of BERSERK",
+    "targeting": "SINGLE",
+    "summonOnly": true,
+    "range": 5,
+    "prod": true,
+    "cost": 2,
+    "effects": [
+      {
+        "status": {
+          "stacks": 15,
+          "type": "Berserk"
+        }
+      }
+    ]
+  },
+  {
+    "name": "Incite Blood Riot",
+    "type": "BLOOD",
+    "description": "SUMMONS gain 10 BERSERK.",
+    "targeting": "AOE",
+    "summonOnly":true,
+    "radius": 15,
+    "prod": true,
+    "range": 6,
+    "cost": 4,
+    "effects": [
+      {
+        "status": {
+          "stacks": 10,
+          "type": "Berserk"
+        }
+      }
+    ]
+  },
+  {
+    "name": "Sycophancy",
+    "type": "BLOOD",
+    "description": "Damage allies for 30% of their max hp, cannot kill an ally.  Caster heals for half this amount.",
+    "targeting": "AOE",
+    "radius": 4,
+    "range": 0,
+    "cost": 2,
+    "effects": [
+      {
+        "berserk": 1
+      }
+    ]
+  },
+  {
+    "name": "Blood Polyp",
+    "type": "BLOOD",
+    "description": "SUMMON a 5/50 ally with half hp and VIGOR.",
+    "targeting": "TILE",
+    "range": 3,
+    "prod": true,
+    "cost": 1,
+    "effects": [
+      {
+        "summon": "Blood Polyp"
+      }
+    ]
+  },
+  {
+    "name": "Blood Clot",
+    "type": "BLOOD",
+    "description": "SUMMON a 2/20 ally.",
+    "targeting": "TILE",
+    "range": 3,
+    "prod": true,
+    "cost": 1,
+    "effects": [
+      {
+        "summon": "Blood Clot"
+      }
+    ]
+  },
+  {
+    "name": "Blood Droplet",
+    "type": "BLOOD",
+    "description": "SUMMON a 6/18 ally that hunts by scent.  Marks a distant enemy with BLOOD SCENT.",
+    "targeting": "TILE",
+    "range": 2,
+    "prod": false,
+    "cost": 0,
+    "effects": [
+      {
+        "summon": "Blood Droplet"
+      },
+      {
+        "bloodScent": true
+      }
+    ]
+  },
+  {
+    "name": "Blood Scent",
+    "type": "BLOOD",
+    "description": "Target enemy gains BLOOD SCENT. Draw card.",
+    "targeting": "SINGLE",
+    "range": 10,
+    "cost": 0,
+    "prod": false,
+    "effects": [
+      {
+        "targetScent":true
+      },
+      {
+        "draw": true
+      }
+    ]
+  },
+  {
+    "name": "Blood Slinger",
+    "type": "BLOOD",
+    "description": "SUMMON a 4/18 ally with range 4.",
+    "targeting": "TILE",
+    "range": 2,
+    "prod": true,
+    "cost": 3,
+    "effects": [
+      {
+        "summon": "Blood Slinger"
+      }
+    ]
+  },
+  {
+    "name": "Blood Sling",
+    "type": "BLOOD",
+    "description": "Fires a spear of crystallized blood from afar.",
+    "targeting": {
+      "type": "PROJECTILE",
+      "ignoreSelf": true,
+      "ignoreAllies": true
+    },
+    "monsterSpell":"true",
+    "range": 4,
+    "cost": 0,
+    "effects": [
+      {
+        "damage": 4
+      }
+    ]
+  },
+  {
+    "name": "Blood Rain",
+    "type": "BLOOD",
+    "description": "Hurls blood mana into the sky, raining down on allies: healing them for 20% of their max hp and placing a blood mana under their feet",
+    "targeting": "AOE",
+    "radius": 8,
+    "range": 4,
+    "cost": 9,
+    "effects": [
+      {
+        "bloodrain": 1
+      }
+    ]
+  },
+  {
+    "name": "Engorging Feast",
+    "type": "BLOOD",
+    "description": "Allies in range move up to 3 and perform an attack that deals double damage.  Allies gain half this amount as max&current HP.",
+    "targeting": "AOE",
+    "radius": 10,
+    "range": 0,
+    "cost": 9,
+    "effects": [
+      {
+        "engorgingfeast": 1
+      }
+    ]
+  },
+  {
+    "name": "Blood Golem",
+    "type": "BLOOD",
+    "description": "SUMMON a 5/108 ally.  Gains BERSERK each time it attacks.  Starts with VIGOR.",
+    "targeting": "TILE",
+    "range": 2,
+    "prod": true,
+    "cost": 6,
+    "effects": [
+      {
+        "summon": "Blood Golem"
+      }
+    ]
+  },
+  {
+    "name": "Droplet Swarm",
+    "type": "BLOOD",
+    "description": "SUMMON three 6/18 blind allies. Marks a distant enemy with BLOOD SCENT.",
+    "targeting": "SINGLE",
+    "range": 3,
+    "cost": 3,
+    "prod": false,
+    "effects": [
+      {
+        "summon": "Blood Droplet"
+      },
+      {
+        "summon": "Blood Droplet"
+      },
+      {
+        "summon": "Blood Droplet"
+      },
+      {
+        "bloodScent": true
+      }
+    ]
+  },
+  {
+    "name": "Mortality Salience",
+    "type": "REBIRTH",
+    "description": "Deal 6 damage to target enemy.",
+    "targeting": "SINGLE",
+    "range": 5,
+    "cost": 2,
+    "effects": [
+      {
+        "damage": 6
+      }
+    ]
+  },
+  {
+    "name": "Cycle of Undeath",
+    "type": "REBIRTH",
+    "description": "If a target's current health is less than 7 give it SAMSARA and kill it.",
+    "targeting": "SINGLE",
+    "range": 4,
+    "cost": 1,
+    "effects": [
+      {
+        "cycleofundeath": 1
+      }
+    ]
+  },
+  {
+    "name": "Promise of New Life",
+    "type": "REBIRTH",
+    "description": "Enemies in the area take 100% more damage for 1 turn, if they would die they full heal instead.",
+    "targeting": "AOE",
+    "radius": 2,
+    "duration": 1,
+    "range": 4,
+    "cost": 2,
+    "effects": [
+      {
+        "promiseofanewlife": 1
+      }
+    ]
+  },
+  {
+    "name": "Bargaining Denial",
+    "type": "REBIRTH",
+    "description": "Give yourself SAMSARA, reduce your max hp by 10.",
+    "targeting": "SINGLE",
+    "duration": -1,
+    "range": 0,
+    "cost": 8,
+    "effects": [
+      {
+        "bargainingdenial": 1,
+        "samsara": 1
+      }
+    ]
+  },
+  {
+    "name": "Lich's Phylactery",
+    "type": "REBIRTH",
+    "description": "Create a totem that upon taking lethal damage within 7 tiles, ressurect at 1 hp at the totem; then destroy the totem",
+    "targeting": "TILE",
+    "range": 2,
+    "cost": 5,
+    "effects": [
+      {
+        "summon": "Lich's Phylactery"
+      }
+    ]
+  },
+  {
+    "name": "Corpse Garden",
+    "type": "REBIRTH",
+    "description": "Target white mana with no adjacent white mana flourishes creating white mana in all spaces adjacent and diagonal",
+    "targeting": "TILE",
+    "range": 7,
+    "cost": 3,
+    "effects": [
+      {
+        "corpsegarden": 1
+      }
+    ]
+  },
+  {
+    "name": "Charnel Transformation",
+    "type": "REBIRTH",
+    "description": "Grant Target ally below half health SAMSARA, double its max hp, grant it +5 base damage, then kill it.",
+    "targeting": "SINGLE",
+    "range": 7,
+    "cost": 4,
+    "effects": [
+      {
+        "charneltransformation": 1,
+        "samsara": 1
+      }
+    ]
+  },
+  {
+    "name": "Hymn of the Einherjar",
+    "type": "REBIRTH",
+    "description": "Allies who die within range of the totem ressurect as a phantom. Phantoms may not be the target of Hymns.",
+    "targeting": "TILE",
+    "range": 2,
+    "cost": 4,
+    "radius": 4,
+    "effects": [
+      {
+        "hymnoftheeinherjar": 1
+      }
+    ]
+  },
+  {
+    "name": "Rapture",
+    "type": "REBIRTH",
+    "description": "Give all units below 11hp SAMSARA and kill them.",
+    "targeting": "NONE",
+    "range": -1,
+    "cost": 9,
+    "effects": [
+      {
+        "rapture": 1,
+        "samsara": 1
+      }
+    ]
+  },
+  {
+    "name": "Wendigo",
+    "type": "REBIRTH",
+    "description": "SUMMON an ally with 40 hp that deals 15 damage when it attacks, teleporting it and its target to  the same random location (together).  If this kills its target it creates another Wendigo from its corpse.",
+    "targeting": "TILE",
+    "range": 2,
+    "cost": 12,
+    "effects": [
+      {
+        "summon": "Wendigo"
+      }
+    ]
+  },
+  {
+    "name": "Smoke Screen",
+    "type": "SMOKE",
+    "description": "Enemies hit take no damage but become disoriented, moving in a random direction for 1 turn",
+    "targeting": "AOE",
+    "duration": 1,
+    "radius": 2,
+    "range": 6,
+    "cost": 1,
+    "effects": [
+      {
+        "smokescreen": 1
+      }
+    ]
+  },
+  {
+    "name": "Choking Smog",
+    "type": "SMOKE",
+    "description": "Creates a ball of smog that deals 2 damage.",
+    "targeting": "AOE",
+    "radius": 1,
+    "range": 3,
+    "cost": 2,
+    "effects": [
+      {
+        "damage": 2
+      }
+    ]
+  },
+  {
+    "name": "Insidious Rot",
+    "type": "DECAY",
+    "description": "Inflicts ROT 10 on a target.",
+    "targeting": "SINGLE",
+    "range": 4,
+    "cost": 1,
+    "effects": [
+      {
+        "ROT": 10
+      }
+    ]
+  },
+  {
+    "name": "Death Spores",
+    "type": "DECAY",
+    "description": "All mushrooms in the area inflict ROT 5 to all adjacent units.",
+    "targeting": "AOE",
+    "radius": 6,
+    "range": 0,
+    "cost": 3,
+    "effects": [
+      {
+        "deathspores": 5
+      }
+    ]
+  },
+  {
+    "name": "Putrid Volatility",
+    "type": "DECAY",
+    "description": "If the target dies they explode dealing damage equal to the amount of ROT damage they took during Putrid Volatility.",
+    "targeting": "SINGLE",
+    "duration": 4,
+    "range": 5,
+    "cost": 5,
+    "effects": [
+      {
+        "putridvolatility": 1
+      }
+    ]
+  },
+  {
+    "name": "Terminal Illness",
+    "type": "DECAY",
+    "description": "ROT duration values no longer decrement while this totem persists.  Enemies who die to DOT effects while afllicted by ROT create additional mushrooms.",
+    "targeting": "TILE",
+    "range": 2,
+    "cost": 4,
+    "effects": [
+      {
+        "terminalillness": 1
+      }
+    ]
+  },
+  {
+    "name": "Saprotrophic Absorbtion",
+    "type": "DECAY",
+    "description": "Converts mushrooms in the area into decay mana.",
+    "targeting": "AOE",
+    "radius": 6,
+    "range": 0,
+    "cost": 0,
+    "effects": [
+      {
+        "saprotrophicabsorbtion": 1
+      }
+    ]
+  },
+  {
+    "name": "Infectious Fever",
+    "type": "DECAY",
+    "description": "Target with ROT spreads its ROT to units in range.",
+    "targeting": "SINGLE",
+    "radius": 2,
+    "range": 3,
+    "cost": 0,
+    "effects": [
+      {
+        "spread": 2
+      }
+    ]
+  },
+  {
+    "name": "Jubokko",
+    "type": "DECAY",
+    "description": "SUMMON an ally who cannot move on its own with 20hp who deals 3 damage to all adjacent enemies. If a unit would die adjacent to the Jubokko, the Jubokko full heals.",
+    "targeting": "TILE",
+    "range": 2,
+    "cost": 3,
+    "effects": [
+      {
+        "summon": "Jubokko"
+      }
+    ]
+  },
+  {
+    "name": "Banshee",
+    "type": "DECAY",
+    "description": "SUMMON an ally with 40hp that deals 5 damage and inflicts ROT 10.  Any unit within radius 3 has their ROT durations doubled.  If this would cause a ROT duration to exceed the target's current hp it is killed, spawning an additional mushroom.",
+    "targeting": "TILE",
+    "range": 2,
+    "cost": 7,
+    "effects": [
+      {
+        "summon": "Banshee"
+      }
+    ]
+  },
+  {
+    "name": "Dangerous Mana",
+    "type": "COLORLESS",
+    "description": "While this totem perists damage from destroying mana increases by 1",
+    "targeting": "TILE",
+    "range": 2,
+    "cost": 4,
+    "effects": [
+      {
+        "summon": "Dangerous Mana"
+      }
+    ]
+  },
+  {
+    "name": "Evolving Mana",
+    "type": "COLORLESS",
+    "description": "When mana in range of this totem is destroyed, recreate it in an adjacent space. ",
+    "targeting": "TILE",
+    "radius": 2,
+    "range": 2,
+    "cost": 3,
+    "effects": [
+      {
+        "summon": "Evolving Mana"
+      }
+    ]
+  },
+  {
+    "name": "Unlimited Mana",
+    "type": "COLORLESS",
+    "description": "ALL remaining mana doubles into adjacent tiles.",
+    "targeting": "NONE",
+    "range": -1,
+    "cost": 12,
+    "effects": [
+      {
+        "unlimitedmana": 1
+      }
+    ]
+  },
+
+  {
+    "name": "Moon Aegis",
+    "type": "MOON",
+    "description": "Adds 12 SHIELD. Draw card.",
+    "targeting": "DIRECTIONAL",
+    "selfOnly": true,
+    "ignoreLOS": true,
+    "range": 999,
+    "cost": 1,
+    "prod": true,
+    "effects": [
+      {
+        "status": {
+          "stacks": 12,
+          "type": "Shield"
+        }
+      },
+      {
+        "draw": true
+      }
+    ]
+  },
+
+  {
+    "name": "Blood Aegis",
+    "type": "BLOOD",
+    "description": "Adds 8 SHIELD. Draw card.",
+    "targeting": "DIRECTIONAL",
+    "selfOnly": true,
+    "ignoreLOS": true,
+    "range": 999,
+    "cost": 1,
+    "prod": false,
+    "effects": [
+      {
+        "status": {
+          "stacks": 8,
+          "type": "Shield"
+        }
+      },
+      {
+        "draw": true
+      }
+    ]
+  },
+
+  {
+    "name": "Electric Aegis",
+    "type": "ELEC",
+    "description": "Adds 12 SHIELD. Draw card.",
+    "targeting": "DIRECTIONAL",
+    "selfOnly": true,
+    "ignoreLOS": true,
+    "range": 999,
+    "cost": 1,
+    "prod": true,
+    "effects": [
+      {
+        "status": {
+          "stacks": 12,
+          "type": "Shield"
+        }
+      },
+      {
+        "draw": true
+      }
+    ]
+  },
+
+  {
+    "name": "Fire Aegis",
+    "type": "FIRE",
+    "description": "Adds 15 SHIELD. Draw card.",
+    "targeting": "DIRECTIONAL",
+    "selfOnly": true,
+    "ignoreLOS": true,
+    "range": 999,
+    "cost": 1,
+    "prod": true,
+    "effects": [
+      {
+        "status": {
+          "stacks": 15,
+          "type": "Shield"
+        }
+      },
+      {
+        "draw": true
+      }
+    ]
+  },
+
+  {
+    "name": "Bulwark",
+    "type": "MOON",
+    "description": "Adds 20 SHIELD.",
+    "targeting": "DIRECTIONAL",
+    "selfOnly": true,
+    "ignoreLOS": true,
+    "range": 999,
+    "cost": 2,
+    "prod": true,
+    "effects": [
+      {
+        "status": {
+          "stacks": 20,
+          "type": "Shield"
+        }
+      }
+    ]
+  },
+  {
+    "name": "Moon Shield",
+    "type": "MOON",
+    "description": "Adds 8 SHIELD. EXHAUST.",
+    "exhaust": true,
+    "targeting": "DIRECTIONAL",
+    "selfOnly": true,
+    "ignoreLOS": true,
+    "range": 999,
+    "cost": 0,
+    "prod": true,
+    "effects": [
+      {
+        "status": {
+          "stacks": 8,
+          "type": "Shield"
+        }
+      }
+    ]
+  },
+  {
+    "name": "Moon Phase",
+    "type": "MOON",
+    "description": "PHASE 2.",
+    "targeting": "SINGLE",
+    "selfOnly": true,
+    "range": 0,
+    "cost": 0,
+    "prod": true,
+    "effects": [
+      {
+        "phase":2
+      }
+    ]
+  },
+  {
+    "name": "Lunar Tides",
+    "type": "MOON",
+    "description": "Draw 4 more cards next turn.",
+    "targeting": "SINGLE",
+    "selfOnly": true,
+    "range": 0,
+    "cost": 1,
+    "prod": true,
+    "exhaust": true,
+    "effects": [
+      {
+        "status": {
+          "stacks": 4,
+          "type": "OverDraw"
+        }
+      }
+    ]
+  },
+  {
+    "name": "Refuse Temptation",
+    "type": "MOON",
+    "description": "PHASE 1.  Gain 2 OVERDRAW.",
+    "targeting": "SINGLE",
+    "selfOnly": true,
+    "range": 0,
+    "cost": 1,
+    "prod": true,
+    "effects": [
+      {
+        "phase":1
+      },
+      {
+        "status": {
+          "stacks": 2,
+          "type": "OverDraw"
+        }
+      }
+    ]
+  },
+  {
+    "name": "Curse of Weight",
+    "type": "CURSE",
+    "description": "Does nothing.",
+    "targeting": "TILE",
+    "range": 0,
+    "cost": 0,
+    "unplayable": true,
+    "effects": []
+  },
+  {
+    "name": "Fire Shield",
+    "type": "FIRE",
+    "description": "Adds 8 SHIELD. EXHAUST.",
+    "exhaust": true,
+    "targeting": "DIRECTIONAL",
+    "selfOnly": true,
+    "ignoreLOS": true,
+    "range": 999,
+    "cost": 0,
+    "prod": true,
+    "effects": [
+      {
+        "status": {
+          "stacks": 8,
+          "type": "Shield"
+        }
+      }
+    ]
+  },
+  {
+    "name": "Fire Stance",
+    "type": "FIRE",
+    "description": "Gain 5 shield. Augment your shield to reflect 5 damage on block.",
+    "targeting": "DIRECTIONAL",
+    "selfOnly": true,
+    "ignoreLOS": true,
+    "range": 999,
+    "cost": 1,
+    "prod": true,
+    "effects": [
+      {
+        "status": {
+          "stacks": 5,
+          "type": "Shield"
+        }
+      },
+      {
+        "status": {
+          "stacks": 5,
+          "type": "FireStance"
+        }
+      }
+    ]
+  },
+
+  {
+    "name": "MURDER DEATH KILL",
+    "type": "MOON",
+    "description": "Kills a motherfucker.",
+    "targeting": "SINGLE",
+    "ignoreLOS": true,
+    "range": 20,
+    "cost": 0,
+    "prod": false,
+    "effects": [
+      {
+        "die": true
+      }
+    ]
+  },
+
+
+
+  {
+    "name": "Electric Shield",
+    "type": "ELEC",
+    "description": "Adds 8 SHIELD. EXHAUST.",
+    "exhaust": true,
+    "targeting": "DIRECTIONAL",
+    "selfOnly": true,
+    "ignoreLOS": true,
+    "range": 999,
+    "cost": 0,
+    "prod": true,
+    "effects": [
+      {
+        "status": {
+          "stacks": 8,
+          "type": "Shield"
+        }
+      }
+    ]
+  }
+]

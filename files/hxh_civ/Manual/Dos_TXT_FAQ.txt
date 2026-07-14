@@ -1,0 +1,2694 @@
+Welcome to the Civilization FAQ.          Minor update - 17th July, 1994
+
+For those with limited newsreaders, the FAQ can be obtained from
+
+  wcl-l.bham.ac.uk:/pub/djh/faqs/civilization.faq
+
+It has been brought to my attention that most newsreaders have a way to 
+quickly hop from section to section in a digest, by skipping between 
+Subject: lines.  Therefore, each section has been formatted like
+
+Subject:  1)  How can I tell which version of Civ I have?
+
+    and
+
+Subject:  2)  Which is the best version of Civ?
+
+and so on.  For example, rn uses ^G to hop from Subject: line to Subject:
+line; GNUS uses ^C^N and ^C^P, and so on.  Very useful.
+
+
+Before I get into the nitty-gritty of the game, I would like to thank
+personally a few people without whose help this FAQ would not be
+possible. In no particular order:
+
+  Albion      		Mark Lilback
+  Devin Ben-Hur   	Matt Malone
+  Ron Bense   		Skip Meister
+  Ralph Betza   	Bob O'Bob
+  David Gosselin    	James Ollinger
+  Bryce Harrington  	Mark Steer
+  Robert Johnson    	Garth Sweet
+  Roger Kemp    	Earnest To
+
+Special thanks are due to Maurice Schekkerman and Elliott Kleinrock,
+who sent me a large number of posts they had collected before I began
+compiling this FAQ.
+
+Note:  Elliott sent me the most comprehensive collection of tips I've
+yet seen, and much of the information that has been credited to "Rome
+on 640K" was sent by him.  I have yet to see this book, but it is on
+order at my local bookstore, and I look forward to reading it as much
+as I look forward to having time to play Civilization, instead of
+compiling the FAQ.  :)  If you don't have a copy of "Rome on 640K" yet
+(see below)---why?
+
+If I've left anybody out of the credits, I am terribly sorry; I do
+appreciate all the stuff that has been sent in, and if I've made any
+omissions, please let me know.
+
+If you have any questions, comments, criticisms or tips, I'd like to
+hear about them.  I can be reached at djh@wcl.bham.ac.uk [Dave].
+
+What is Civilization?  Civ is a computer game published by MicroProse, and 
+is available for the PC and Mac.  However, having said that, to me it's not
+so much of a game as a way of life.  Just ask anyone who has played 
+it. The aim of the game is to take a tribe, settle them, and try to create
+a civilization.  Along the way you develop new sciences, meet other tribes 
+(some warlike, some not), and visit new continents, all for the aim of 
+trying to get into space, and/or to be the dominant civilization.
+
+A lot of the information in this document is designed to give not only the 
+new player an insight into the game, showing the various strategies and 
+tricks, but to also provide the experienced player with information on how 
+to make his civilization stronger with the aim of getting a higher score. 
+In compiling the FAQ, I have both discovered features which have not only 
+improved my understanding of the game, but have made the game even more fun 
+to play.
+
+I will now proceed...
+
+Note: A : in the left-hand column denotes alteration, and a + denotes new.
+
+Section A:  General Information
+
+         1) How can I tell which version of Civ I have?
+         2) Which is the best version of Civ?
+         3) What is the Advisory Bug?
+         4) What is the Undefended City Bug?
+         5) What is the Civ score Bug?
+         6) What is the Bomber Bug?
+         7) What is the Date Line Bug?
+         8) What is the Ghost Civilization Bug?
+         9) What is the Tale of One City Bug?
+        10) Where is the map editor?
+:       11) Where can I get an updated version?
+:       12) What if I don't have FTP access?
+
+Section B: Cities
+
+         1) How do I make a city?
+         2) How do I make my city grow?
+         3) Should I have many cities or just a few?
+         4) Is there a limit to the size of my city?
+         5) How do you keep a city from getting unhappy?
+         6) How do I make an Elvis (or Taxman, or Scientist)?
+         7) How much money does a Taxman collect?
+         8) How many light bulbs does a Scientist create?
+         9) What is the difference between subvert a city and revolt?
+        10) Which is the best government type?
+        11) How does the computer cheat?
+        12) What is the highest population for a single city?
+        13) Why do I appear to get unhappy citizens for free?
+        14) Should I sell obsolete improvements?
+        15) What power plants are the best, and when can I build them?
+        16) What is the maximum number of happy people in a city?
+        17) What is most important in developing the assets of a city?
+
+Section C: Different game strategies
+
+         1) a) General strategies.
+            b) Despotic Conquest.
+            c) Democratic Ostrich.
+            d) Flexible Evolution.
+            e) Republic.
+            f) Pyramid.
+            g) High Tech.
+            h) Rich.
+            i) Mercenary.
+            j) Balanced.
+            k) Peaceful.
+            l) High Tech Conquest.
+            m) Hide in a Corner.
+            n) Archipelago.
+            o) Diploblitz.
+            p) Trading Cities.
+            q) Take No Prisoners.
+            r) The Helping Hand.
+            s) The Rock.
+            t) Replay.
+            u) Go see them or they will come see you.
+            v) Pillage to the Max.
+            w) Take the Best, Discard the Rest.
+         2) Colossal City Strategy.
+         3) President's Day Sale.
+         4) What is the best way to take an enemy city?
+         5) What are the best wonders to build?
+
+Section D: Tips and information
+
+         1) Final score.
+         2) Light bulb formula.
+         3) Money-saving tips.
+         4) Military advice.
+         5) Miscellaneous tricks and tips.
+         6) The Canal trick.
+         7) Railroads at sea.
+         8) Interaction with the various civilizations.
+         9) The pattern of special resource squares.
+        10) Defence and attack queries.
+        11) Appearance of new civilizations.
+        12) How do you calculate pollution?
+        13) How is the trade route income calculated?
+        14) How is the trade bonus calculated?
+        15) Any other trade information?
+        16) How is global warming calculated?
+        17) How is corruption calculated?
+
+Section E: Cheats
+
+         1) The Shift-56 cheat.
+         2) The Movement cheat.
+         3) The Settler cheat.
+         4) Ship movement cheat.
+         5) The Shipping Lanes cheat.
+         6) The Unloading ships cheat.
+         7) The Save game cheat.
+         8) The Settler movement cheat.
+         9) The Spaceship cheat!
+        10) The Settler/Railroad at sea cheat(?)
+        11) Hacking the .SVE file.
+:       12) Is there an easier way to hack the .SVE files?
+
+Section F: The future
+
+         1) Will there be a Civ II?
+         2) Civilization-Like Games.
+
+
+***************************************************************************
+                        G   E   N   E   R   A   L
+***************************************************************************
+
+Subject:  1) How can I tell which version of Civ I have?
+--------------------------------------------------------
+When you run Civ it asks various setup questions. The version number is on
+these screens. The number is 474 plus an increment, so v5 is shown 
+as 474.05. If you have an older version, you can get the latest version by 
+anonymous FTP from some of the big game sources such as ftp.uwp.edu.
+Note: Version numbers may be 475.X or 474.X, with the only difference
+being the distribution media.
+
+Subject:  2) Which is the best version of Civ?
+----------------------------------------------
+There has been much debate on Usenet about the various pros and cons of the 
+different versions.  The only two versions worth considering are 474.01 and 
+474.05 (versions 1 and 5). The easiest of the two is v1.  If you are playing 
+with v5, and not having much luck, revert back to v1.  This is also the 
+version that allows the Shift-56 Cheat, which can be a good way of learning 
+the ins and outs of the game.  However, if you like a challenge, then v5 is 
+really the only one to play. A further impetus to upgrade is that v5 contains 
+far less bugs. If you do get the latest version, the chances that the game 
+will not crash are far greater :) .  The biggest problem with v1 is the 
+Instant Advice bug, which is better known as the "Advisory Bug". This can be 
+temporarily avoided by turning Instant advice off.
+
+The following version information was compiled with the help of MicroProse:
+
+v1: The original game.
+
+v2: This version attempted---and failed---to fix the Advisory Bug.  It did
+    fix the Score Bug, and removed the Shift-56 Cheat.
+
+v3: Once again tried to fix the Advisory Bug, and failed again.  Added some
+    new pictures.  Added "very unhappy people."  Removed free barracks.  No
+    longer able to disband a population-1 city at Chieftain level by buying
+    a settler.  Transports no longer made people unhappy under a Democracy
+    or Republic.  Overall, the game became harder for veteran players.  This
+    version is harder to play than previous versions, mainly for people 
+    playing Despotic Conquest.
+
+v4: No changes; just converted for HD disks.           
+
+v5: The most recent failed attempt to repair the Advisory Bug. 
+    Note: There is no other difference between v3 and v5.
+
+For those who want more information about Civilization, there is a book
+called "Sid Meier's Civilization, or Rome on 640K a Day," by Johnny
+Wilson and Alan Emrich (ISBN 1-55958-191-3, US$18.95).  If your
+bookstore doesn't have it, tell them to contact St Martin's Press, 175
+Fifth Avenue, New York NY 10010, (212) 674-5151.  This is a highly
+recommended book.
+
+Subject:  3) What is the Advisory Bug?
+--------------------------------------
+I have never met this bug, but it is known by MicroProse, and has been
+reported by a number of sources.  
+
+  If you leave the "Advisors" option on, then if the Domestic or Military
+  advisors can't think of anything to suggest, the program dies.  This
+  will happen if your city has pretty much everything it needs or could
+  build.
+            ---Adam Ginsberg
+
+Subject:  4) What is the Undefended City Bug?
+---------------------------------------------
+Occasionally, when I have a lot of cities (around 50), I have one city that 
+shows up as undefended in the map display (no dark border) but in the city 
+display, shows fortified units inside. I usually take all of the units out 
+and then all back in to correct the situation. Sometimes I get the "Romans 
+plunder ..." message when I re-enter such a city and the population 
+decreases by one. If a computer civilization attacks a city that is shown to 
+be undefended, they capture it despite the fact that units are present in it.
+This has been detected in both v4 and v5.
+
+Subject:  5) What is the Civ score Bug?
+---------------------------------------
+Originally I thought this was connected with the advisory bug, but it
+turns out that it is something completely different.
+
+Bob O'Bob points out that every time he looks at "Civilization Score"
+that he gets scrambled oceans, or extra land at the North Pole, and
+that if he tries to move there, the screen goes crazy.  As a result,
+he's learned not to look at the Civilization Score anymore, because
+once the screen loops out, the save files become corrupted
+unrecoverably.  He suggests that if you must see your Civilization
+Score that you do a save *first*, and a restart afterward.
+
+He also points out that you can see the corruption in the small map:
+some of the people from the score screen remain on the map, and he
+believes that this is what screws up the .MAP file.  Occasionally,
+there's lots of new grassland around the North Pole, and even some
+"mystery houses."  Finally, he points out that you can go get the 50 coin
+prizes, if you care to go to the trouble, but that your system may not
+be as forgiving as his is.
+
+  This problem occurs when your population increases over some number of
+  millions, and the full width of the screen is used. They then get written 
+  into that portion of the map screen for some oddball reason. There is an 
+  advantage or two to gotten from doing this, although the game becomes a 
+  pain to play. Some of the grassland created becomes a mystery terrain type, 
+  with 112 food production (113 with irrigation, if you ever get that 
+  finished, plus 50% with railroads), 105 production (+50% with railroad) and 
+  99 trade (+50% with railroads). It takes forever to build roads/railroads 
+  on these squares, and I went back to an old save game where I didn't have 
+  this city, as the game developed too many problems to be playable, for me, 
+  at the time, although I should be able to have a city size of 1764 (roughly 
+  55 size classes per square, as 2 food is required per size). 
+  Note: your pollution would be impossible to deal with even two of these 
+  squares being utilized, as each produces 99 resources.
+            ---Ron Bense
+
+Subject:  6) The Bomber Bug
+---------------------------
+This bug has been reported recently.  It appears in v1 and 5.
+When a bomber has finished its turn, if you try to reactivate it, it
+will be destroyed.
+
+Subject:  7) The Date Line Bug
+------------------------------
+  You cannot fly all the way around the world.  There is a seam that extends 
+  from pole to pole.  You can spot this seam by looking at the world map and 
+  seeing where there is no land in a band from pole to pole.  On Earth, if 
+  you build a city in Brisbane Aust, you see a funny land type on the right 
+  side of the city display.  Anyway, if you try and fly a plane across this 
+  seam, it goes on a psycho goto away from the seam.
+            ---Matt Malone
+
+Subject:  8) The Ghost Civilization Bug
+---------------------------------------
+If you destroy a civilization BEFORE it builds its first city, you will
+not be able to conquer the world.  It seems that you need to destroy the
+civilizations capital for the computer to register its death.  This bug 
+occurs even if it is a computer controlled civilization that kills the 
+settler.
+
+Subject:  9) The Tale of One City Bug
+-------------------------------------
+  I found yet another bug in Civilization: when I captured Babylon, the
+  Babylonian capital, I got the message: "Due to the fall of their capital, 
+  the Babylonian Empire splits in a civil war. The country divides into loyal
+  (Babylonian) and rebel (American) factions." (or a message like that, you 
+  get the picture...)
+
+  Unfortunately, Babylon was the only city they had left, and the game
+  locked... (I suppose the computer can't divide 0 by 2).
+            ---Boudewijn
+
+Subject:  10) Where is the map editor?
+--------------------------------------
+There is now available a form of map editor that can be used from inside the
+game.  It is written by Holger Eichmann, and although a little awkward to
+use, it certainly appears to do the job.  The file is called civmap21.zip
+and can be obtained from wuarchive in the uploads directory.
+
+The following is quoted from Holgers distribution archive to give an idea of
+its complexity:
+
+  Here it is, version 2.1 of my Civilization Map Editor!  Due to version 
+  1.0 having some bugs and because this week my time is very limited, I want 
+  to ask you to test it a little bit.  When you try it, please send me a 
+  short mail stating whether or not it works (like: 'civ version 1: it runs' 
+  or 'version 5: nothing happens' or gladly something more detailed). 
+
+  How to start it?
+
+  First you have to change the following bytes in your civ.exe file e.g. by 
+  using a file editor (don't forget to make a security copy of your file 
+  before you do it):
+
+  version 1 + 2(?): E9 54 00 B8 32 00 -> E9 54 00 CD F1 90
+  version 3 + 4:    02 75 53 B8 32 00 -> 02 75 53 CD F1 90
+  version 5:        E9 59 00 B8 32 00 -> E9 59 00 CD F1 90
+
+  all versions: 3B C1 75 BB B8 01 00 -> CD F2 90 90 90 90 90
+
+  (You can get the version number of the civ.exe file by starting it. When
+  you are asked for your graphics and sound in the top window you will find 
+  a 474 followed by the version number (e.g. 474.05 for version 5)).
+  After that you only have to start civ_map2.exe before starting civ.exe 
+  (you have to make the changes first, because you have to insert an int $F1 
+  and $F2 call into the civ.exe file).  While playing you can switch the 
+  editor on/off by pressing the print screen key. 
+  You get the editor for a map field, when you right click on that field 
+  with your mouse.  For further informations see the .inf file of version 1.
+	---Holger Eichmann
+
+Subject:  11) Where can I get an updated version?
+-------------------------------------------------
+MicroProse does not charge for their updates.
+(LD charges not included :)) You can call their BBS at 410-785-1841 and 
+download the latest versions of Civ and their other titles as well...
+It is also available at 
+
+  ftp.uwp.edu:/pub/games/romulus/misc/civv05.zip.
+
+Subject:  12) What if I don't have FTP access?
+----------------------------------------------
+For those of you that do not have access to FTP, it is possible to obtain 
+both the FAQ and the upgrade via E-mail.  This can be done using an ftpmail 
+server.
+
+  TO: FTPMAIL@DECWRL.DEC.COM
+  *no subject*
+
+  ..... body of letter .....
+  reply you@your.own.address
+  connect ftp.uwp.edu
+  binary
+  uuencode
+  cd /pub/games/romulus/misc
+  get civv05.zip
+  quit
+
+You will then receive a number of mails numbered from 1 to n.  All you need
+to do now is run them through a uudecoder.
+
+For downloading the latest FAQ, you should send a request to my mail
+server with the following subject:
+
+	Civ FAQ please
+
+My address is DJH@WCL.BHAM.AC.UK
+
+The subject field is important as you will not receive the FAQ without it!
+Also, remember that the FAQ is large and some gateways object to mail larger
+than 64K.  If you do not receive a FAQ within three days (to cover weekends)
+then contact me with a different subject.
+
+Simple, really!
+
+
+***************************************************************************
+                        C   I   T   I   E   S
+***************************************************************************
+
+Subject:  1) How do I make a city?
+---------------------------------
+Apart from RTFM (Read The Flaming Manual), take a settler unit and find a 
+suitable place to build a city.  (It is my opinion that you should always 
+look around your continent before building a city, especially at the 
+beginning where you are very vulnerable.)  When you have found the site of 
+your city press the "B" key to build the city.
+
+Note:  Improve the land prior to building your city, as you will not be
+able to do this later on in the game.  Remember that cities automatically 
+build a road and irrigation, but you can still add a railroad, and this will 
+avoid losing 1/3 movement when taking a piece through a city.
+
+Subject:  2) How do I make my city grow?
+----------------------------------------
+The only way to make a city grow in terms of population is to feed it. The
+best way to feed a city is to provide squares with as much wheat as possible
+in them. The best way to do this is to irrigate and build roads in the 
+squares and then change to a republic/democracy. Your cities will have an 
+explosion in population. Remember you can change you government to suit your 
+needs. So after you change to republic/democracy you can change back, 
+although it is not really worth it unless you want to have a military 
+campaign.
+
+Although a city may be shown as size-2, this does not mean that the 
+population is twice that of a size-1.  The way the population is calculated
+is as follows:
+
+  Each size adds the new size times 10,000 to the population. 
+  1 -> 2 yields 10,000 + (2 * 10,000) = 30,000. 
+  A size 29 -> 30 yields 4,350,000 + (30 * 10,000) = 4,650,000.  
+  It takes two food units to increase a city by one.
+
+                       size * (size + 1)
+   Real population  =  ----------------- * 10000
+                               2
+
+Having said this, the actual population is not important in the final score
+calculation.  The important factor is the city size.  Each size increase 
+adds one citizen to the city screen.  A size-14 city will have 14 citizens.
+Each citizen is worth one point, with the exception of happy citizens which
+are worth two points.  With this in mind, it pays to increase the luxury tax
+to 100 percent the turn prior to completing the game.  This should turn any
+content citizens to happy, and possibly a few unhappy to happy as well.
+
+Subject:  3) Should I have many cities or just a few?
+-----------------------------------------------------
+I think the general view is MORE, MORE, MORE !!!
+I never play with more than about 30 cities as it gets boring trying to 
+look after them all, but some people just love 70+, and one person has 
+mentioned having over 250 (which must be an exaggeration, since the 
+savefile only has space for around 126 cities). 
+Here are a few comments from others:
+
+  More!! My normal strategy is to build as many cities as possible before
+  attacking anyone not in my immediate vicinity. When you have 60+ cities, 
+  it's very hard not to win the game. (I also stay in despotism and build 
+  cities 1 square apart from each other, just so they are production centres 
+  for military units when I do go to war. Until then, I just build settlers.)
+            ---Mark Lilback
+
+  More. A lot of cities close together are easier to defend, since you can
+  move attack units quickly between them to whichever cities are in trouble. 
+  Second, more cities mean greater population growth, which tends to be
+  critical in Civ. Greater population = more of everything + higher score. 
+  Spin off as many cities as you can early in the game, and then "perfect" 
+  them later on.
+            ---James Ollinger
+
+  More, the more the merrier. With more cities you can get more of
+  everything: resource, population, tax, science... Oh yeah, pollution and
+  unhappy people too. But the advantages certainly offset the disadvantages.
+            ---David Gosselin
+
+Subject:  4) Is there a limit to the size of my city?
+-----------------------------------------------------
+If you look at the window around the city it seems that the maximum size a
+city can attain is only about 15-20.  However this is a mistake as you can 
+improve the land extensively.  So how do you make LARGE (around 40) cities:
+
+Food production is the primary problem, although if you're in a democracy
+and have "we love..." days, your food production is really unimportant,  
+providing there is enough to make them grow.
+
+Pollution does become a problem as your city grows, and the following
+things have a known impact:
+
+        Mass Transit (needed at about size 20)
+        Recycling Centre (needed at about size 30)
+        Nuclear plant (needed around size 28-30)
+
+A nuclear plant increases production, yet decreases pollution. I've had a 
+city size-30 that had six smokestacks (60 tons) of pollution being produced 
+and minimal production (about 20-30 shields). I built the nuclear plant, and 
+the pollution vanished. Obviously it is a real pain building a nuclear 
+power plant in each city. An alternative (which will affect all your cities 
+on that continent) is to build Hoover's Dam instead. It has the same effect 
+as the nuclear Plant, but it acts on all cities on the continent, doesn't 
+have the risk of meltdown (before Fusion) and can be built at an earlier 
+stage (requires Electronics) A final method of building big cities is to remove 
+the most hostile opposition. Taking the Zulus is sometimes a good strategy, 
+since it removes the most militaristic civilization from the planet.
+
+Another thing to mention here is to "terraform" all land into food
+production when you get large cities and pollution is a problem. This takes 
+time, unless you use the settler cheat, but can significantly increase your 
+city sizes. Irrigate hills, plains, and jungles (twice), mine jungles with 
+gems and plains with horses. (*Don't* irrigate jungles+gems or swamp+oil
+as it destroys the special square - you end up with plain old grassland).
+
+The best producer of food is desert+oasis which gives 6 food units
+(irrigation+railroad). If by some fluke you managed to get a city 
+completely surrounded by oasis, its maximum size would be (6*21)/2=63.  
+Not very likely though, unless someone figures out the map editor.
+
+Subject:  5) How do you keep a city from getting unhappy?
+---------------------------------------------------------
+When playing Republic or Democracy it can be very difficult keeping cities
+from revolt. The obvious things to do are to build temples and coliseums, 
+but these cost to build and are a steady drain on finances. Another way is 
+to create some entertainers, but the loss in trade (from the unused square) 
+can make things even worse. Here are a few tips from various sources:
+
+  Raise your luxury rate and build wonders. If you go into republic or
+  democracy, you should have at least a 20% luxury rate. The increased trade 
+  values makes up for the loss of raising the luxury rate.
+            ---Mark Lilback
+
+  It can be tough. Look at how many military units are away from the city
+  (shown on a panel on the left side of the screen. All military units that 
+  are away from the city have little black sad faces on them) and try and
+  reduce that number. If your units are garrisoning another city, make those 
+  change their home city (with the H command) to wherever they're located.
+  Units that are in action will have to be dealt with differently. Try and 
+  get one or two units from each city so that all the cities have one or two 
+  units out--it spreads the burden around evenly. Also try and buy (bribes) 
+  as many enemy units as you can. When you buy an enemy unit and you aren't 
+  close to one of your own cities, that unit will have a "NONE" home city. 
+  You can field a decent army of units that won't create any unhappiness this
+  way... Also make sure to get the WOWs that make people happy--WOMEN'S
+  SUFFRAGE and J.S.BACH'S CATHEDRAL are the best.
+            ---James Ollinger
+
+  Well, set luxury rate higher, send out as many caravans as possible to
+  *large* enemy cities overseas and establish trade routes. If the other 
+  civilization is also under Republic/Democratic, 3 trade routes can get you 
+  close to 30 trades (only happened to me once). With more trade routes you 
+  can also put some luxury back to science. WoW are important too, Bach is a 
+  must especially on large continents, Woman's Suffrage is even more
+  important, especially if you want to fight a war under Republic or 
+  Democracy. And, primarily use diplomats as your attacking force, buying 
+  enemy cities really pays off since you will get defending units right away 
+  and city improvements.
+            ---David Gosselin
+
+Note: Bombers and nuclear units create unhappiness in their home city just
+by existing.
+
+Finally, remember that when playing Republic, the further your city is from 
+the capital, the higher the corruption rate.  It can sometimes pay to build a 
+courthouse instead of a temple, or even to move your palace to a more 
+centralised position.
+
+Subject:  6) How do I make an Elvis (or Taxman, or Scientist)?
+--------------------------------------------------------------
+To make an Elvis (formally known as an "entertainer") look at the city 
+portion of your city screen and click the mouse on one of the squares around 
+your city which you are currently using/drawing-resources-from. The little 
+wheat/shield symbols will disappear from that square and suddenly you have an 
+Elvis in the top left hand corner. This probably made a person happy (turned 
+them light blue) or got rid of an unhappy person. This is also how you change 
+the squares that you are currently using. Turn a square that you are using 
+into an Elvis and then click on another empty square to get rid of the Elvis 
+and make use of the resources in that formerly-empty square.
+
+To make a Taxman or Scientist, make an Elvis and then move the mouse up to
+the Elvis symbol and click on him. He then turns into a Scientist. Click on 
+him again and he turns into a tax collector. Once more and he's an Elvis
+again.
+
+For those using the keyboard:
+On the city screen press P. This brings up a flashing box which can be 
+moved around the city portion. Select one of the squares that is currently 
+in use and press return. This will remove the items from that square and
+create an Elvis. Then press 1 for the first specialist up to 8 for the
+last. Repeated presses of that digit1 will turn the icon through the three 
+types of specialist.  To return the resource to the city portion just select 
+an empty square and press return.
+
+Subject:  7) How much money does a Taxman collect?
+--------------------------------------------------
+A tax collector collects 2 coins (3 if city has marketplace; 4 if city has a
+bank)
+
+Subject:  8) How many light bulbs does a Scientist create?
+----------------------------------------------------------
+Each Scientist you make in a city adds 2 light bulbs to your total count. If
+the city making them has a library they're worth 3, (4 with university too) 
+But if the square you are abandoning by making the specialist had 3 trade
+arrows (ocean) I don't think you come out ahead. [Roger Kemp]
+
+Subject:  9) What is the difference between subvert a city and revolt?
+----------------------------------------------------------------------
+If you cause an enemy city to revolt, you lose some of its units, some of 
+its improvements and have an unhappy populace. However, if you subvert it 
+you keep all the installations and all of the military units, and the city
+tends to stay happy. Also, causing a city to revolt tends to break any peace 
+treaties whereas subvert doesn't.
+
+Also, subversion is only available when a peace treaty exists. It costs 
+twice as much as a revolt.
+
+Tip: Bankrupt an enemy civilization to make its cities cheaper to "incite 
+revolt": Choose an enemy city that is remote and not well defended (no city 
+walls). Pound the city just enough each turn to leave it undefended. The 
+enemy civilization will buy a defensive unit every turn at 120 or 210 coins 
+per turn to keep it defended. A city of 10 to start with can cost them 1400 
+or more to keep you from getting. Always take the city at 2 so that you can 
+sell the improvements. Not many civilizations can maintain this outlay of 
+cash and I have yet to see one that will just let you take the city to save 
+the money. After this is done a couple of times their well defended cities 
+are much cheaper to "incite revolt".
+
+Subject:  10) Which is the best government type?
+------------------------------------------------ 
+This really depends on your strategy.
+For a detailed look at the different pros and cons, look at the strategy
+section. However, there are two main options. If you are playing a military 
+game, with the aim of destroying the competition as soon as possible, then
+stick with despotism. Although resources are generated slower, your armies 
+do not use them up as fast. This means that one city can generate huge
+armies without much penalty. Any other strategy really requires Democracy.
+This government helps to increase trade, which in turn increases science and
+money. The only problem is that each military unit away from home causes 
+two unhappy people, and if a city revolts twice in succession, you have 
+anarchy for about 6 turns. Republic is a useful government if you have a 
+compact productive island. If your capital is located somewhere near the 
+centre of the island or in your best knowledge town then corruption is not 
+too much of a problem. Once you develop Women's Suffrage, being in a
+republic is like having a license to kill. In this government you still get 
+the growth and trade advantages that democracy gets. Most importantly you
+can still celebrate We-Love...  The knowledge advances don't come quite as 
+fast as democracy but you still get armor quick enough that you can go take 
+over the rest of the world.
+
+Despotism:  -1 to food, resources, and trade.  You get the highest
+corruption rate.  But you get 1 food requirement for settler support, and
+free military support.  You also get content citizens with military
+presence, and the senate won't force you into a peace treaty or deny you
+first strike capability.
+ 
+Anarchy:  Although the corruption rate is a little lower, you will suffer
+no taxes being collected, no light bulbs generated and maintenance costs
+are not paid.
+ 
+Monarchy:  No modifier to food, resources, or trade (which means it's a +1
+if you're moving up from anarchy or despotism).  Corruption is lower than
+anarchy.  Military support is 1 shield per unit.  2 food units for each
+settler unit.
+ 
+Communism:  Same as Monarchy, but the corruption level is "flattened." 
+Normally corruption rises as the distance to the capitol increases, so in
+large empires, you can go to communism and have it all averaged out. 
+Everyone gets the same level of corruption no matter what.  This is great
+if you've got the palace in the center of the map and most of the empire
+is out on the fringe.  
+ 
+Republic:  The senate now gets veto power and can force you into a peace
+treaty if the opponent offers one (just refuse to parlay).  There is no
+modifier for food or resources.  Trade resources are +1.  Corruption is
+lower than Monarchy.  Military support is 1 shield per unit and an
+unhappiness for every unit that's away from home.  2 food units for
+settlers.
+ 
+Democracy:  Same as republic, but two sad faces (even more unhappiness)
+for units away from home, but 0 corruption.  In a democracy--more than a 
+turn or two of civil unrest throws you into anarchy.
+
+Subject:  11) How does the computer cheat?
+------------------------------------------
+The computer is known to cheat in a number of ways.
+
+  a) Computer triremes are allowed to move as sails. This means that they
+     don't sink when out at sea.
+
+  b) Wonders are built randomly, whenever the computer feels like it.
+
+  c) Improvements (at Emperor level) for the computer are at 1/3 normal cost.
+
+  d) Technologies are achieved at silly rates with only a couple of cities.
+
+  e) Cities that are suffering civil disorder do not have production
+     penalties.
+
+  f) Caravans are *teleported* to remote cities immediately.
+
+  g) [Computer opponents make contact with any piece, not just diplomats.]
+     Actually, it appears that diplomats are allowed to teleport to wherever 
+     the computer has a piece.  This means that if the computer has a 
+     military piece stationed next to one of your cities, the computer can 
+     teleport a diplomat to that square and steal a technology!
+
+  h) The computer sometimes builds multiple cities before its first settler
+     is created. (However, when playing the Russians, human players sometimes 
+     get two settlers!)
+
+  i) Also, production in cities at emperor level continues, even if the city
+     is shy the necessary resources to maintain what it has.
+
+There are probably more, but these few show how difficult it can be to beat
+the computer. It is also a good excuse for some to use the various *human* 
+cheats without feel guilty.
+
+Subject:  12) What is the highest population for a single city?
+---------------------------------------------------------------
+In theory 63, but in practise there are reports of cities between 39 - 44.
+For the 63 monster you would need all squares to be irrigated, railroaded 
+oasis.  Each of these squares would give off 6 wheat icons!!  Not likely 
+without cheating, so here are some other comments.
+
+Size 44. To get enough food to support a monster like this, you need to be
+positioned in an area where all of the surrounding squares are either
+Grassland or River. They should all be irrigated and Railroaded. Cities 
+like this look nice, but are really quite useless towards the end, since 
+there is nothing left for them to build, requiring a switch to build/sell 
+SDI defenses. (Does ANYBODY use these?)
+
+Only the first 8 specialists do anything for you; the others look like
+Taxmen but produce no money. Therefore, a city of size 29 is no better than 
+a city of size 28, except for the final score; and except that you can also 
+use such a city to spin off settlers, bring the population back down to 28, 
+and use the settlers to build new cities, all the while keeping the city
+"maxxed out".
+
+  If you change byte 10 (0x0a) of the save file to a 7, you'll be
+  playing at a difficulty level 3 steps harder than Emperor. There is
+  a little bug at this level, and computer-owned cities grow
+  limitlessly. I [Ralph Betza] once owned a city with a population of 110,
+  which I bought from the Chinese. Starvation followed, of course...
+	---Ralph Betza
+
+Subject:  13) Why do I appear to get unhappy citizens for free?
+---------------------------------------------------------------
+A post from Jas (jpacker) states:
+
+As I understand it, the number of happy citizens per city that you get for
+free, as it were, is based upon the level you play at (6 free content ones 
+at Chieftain, 2 at Emperor). After that size is reached, any people over
+that number are automatically unhappy, unless appeased by a temple
+cathedral, coliseum, or other improvement that fixes unhappy folk (like 
+some wonders). Another thing that makes unhappy people content in any
+government but Republic or Democracy, is martial law. One person is made 
+happy for each military unit you have sitting in the city, keeping the
+peace.
+
+Subject:  14) Should I sell obsolete improvements?
+--------------------------------------------------
+In theory, the answer to this is yes, but in reality it depends on which
+improvement you are referring to.  People have mentioned that you should
+sell libraries once you have universities.  DON'T!.  They still add to
+your light bulb supply, as do marketplaces with banks.  The only safe
+ones to sell are factories after manufacturing plants, and all varieties
+of power plants after building the Hoover Dam.  The latter only affects
+cities on the same continent as the dam.
+
+Subject:  15) What power plants are the best, and when can I build them?
+------------------------------------------------------------------------
+This mainly depends on the position of your city, and the order you
+discover the various technologies.  The first you will be able to build
+is the power plant.  This increases production, but also pollution.  You
+will need to discover the steam engine to build these.
+
+As soon as you discover electronics you will be able to build hydroplants
+in all cities next to rivers or ocean.  These give the same increase in
+production as power plants, but actually help to reduce pollution.  
+Remember that you will also be able to build the Hoover dam, which will 
+give hydropower to all cities on the same continent.
+
+When you discover nuclear fission you will be able to build nuclear power
+stations.  These, like hydro, will reduce pollution.  However, until you
+discover nuclear fusion, there is a danger of meltdown.
+
+Once you have discovered fusion, the only difference between nuclear and
+hydro is the maintenance cost; hydrocosts four coins, and nuclear only two 
+coins.  Nuclear are also cheaper to build; 160 shields against 240 for hydro.
+
+Lastly, remember that you have to sell one type before building another.
+
+Subject:  16) What is the maximum number of happy people in a city?
+-------------------------------------------------------------------
+  A friend of mine noted that you cannot get more than 11 happy people in a
+  city no matter how high you set the luxuries.  This means that We-Love-the
+  President will only happen until the city hits size 23.  However, if you  
+  build cure for cancer you get a twelfth happy person, the city hits size 25 
+  and then a 13th person is now happy.  After this point the city will    
+  continue to celebrate [and grow] until it runs out of food (a new happy is 
+  made every two steps).  I haven't rigorously tested this hypothesis but it 
+  was true in the last game I played.
+            ---Roger Kemp
+
+Subject:  17) What is most important in developing the assets of a city?
+------------------------------------------------------------------------
+I've found that roads and irrigation are most important. Roads not only
+give you trade, but they make your units move faster, which makes it easier 
+to amass firepower between cities for a common defence against invasions. 
+In other words, if one city looks like it will be attacked, it is far easier 
+to bring out the knights/catapults/cannon/armor/whatever to the city's 
+defence if there is a good network of roads. I also give higher priority to 
+irrigation. Irrigation means wheat, which means population. Population 
+increases trade, coins, and light bulbs. A city with a lot of mines and no 
+population will watch those mines go unused. But a city with a lot of wheat 
+production grows fast. Generally, I find it best when a city has maybe one 
+or two forest squares, one or two mining areas, and the rest are irrigated. 
+And everything has a road/railroad on it.
+
+
+**************************************************************************
+ D  I  F  F  E  R  E  N  T     G  A  M  E    S  T  R  A  T  E  G  I  E  S
+**************************************************************************
+
+Part of this next section is being compiled from a *single* post from 
+Ralph Betza.  Although many people have mentioned one or two strategies, 
+Ralph really does cover a lot!
+
+Subject:  a) General strategies
+
+In the middle-early days, say after you have started 4 or 5 good cities, in
+order to keep science at 100% and still have money, build a few cities in
+resource-rich and food-poor places, and have them build and sell barracks. 
+Don't waste that oil square down in the tundra, Build a tiny city! This
+kind of city should have a stable population of 1 or 2.
+
+Later on, don't forget to build the SETI Program. Everybody always mentions
+the other important Wonders (Women's Suffrage, Bach's Cathedral, the Hoover 
+Dam) but SETI is just as important at the stage of the game where it becomes 
+possible.
+
+Subject:  b) Despotic Conquest
+
+Maximum city size is 6 at Emperor level. Build many cities, build no
+improvements except barracks.  A possible exception to this rule is to build 
+a few libraries near the palace. Another exception: Cities of 5 or more that 
+aren't near the front line may be better off with a temple instead of 2 
+phalanxes.
+
+Begin with your science at 100%; develop bronze, wheel, iron, math, writing,
+navigation, magnetism (optional), then stop and set taxes to 100%, 
+and science 0%.  You now have all the tech you'll ever need, so don't waste 
+money on research. (And be sure not to develop gunpowder!)
+
+Build lots of phalanxes, chariots, legions, catapults, ships, settlers, and
+diplomats. Let me clarify that: by "lots of ...", I mean "infinite numbers 
+of them". A dozen ships might be enough, but you can never have too many
+chariots.
+
+Use the "goto" command to simplify moving them around. Attack at all times.
+Build no Wonders, build no caravans; never stop building spears and swords, 
+and never stop using them. Ignore all treaties and entreaties, but make
+peace whenever possible (peace might protect your units from attack until 
+you break the treaty; and you just might collect some tribute). Don't
+worry about your losses, just keep attacking; a bloodless turn is a waste 
+of time.
+
+When you capture a city, sell all its improvements and starve the city down
+to a manageable size.
+
+When you invade by ship, build cities on the new landmass. If they survive,
+the military units they build will be helpful. If not, so what? You have
+more where they came from!
+
+Best result: I beat twelve other civilizations, and conquered the world by 
+900BC  (I finished the game in one evening, without staying up late!).  If 
+the last reincarnation hadn't been in such an inconvenient place, I would 
+have done it in 1200BC.  Most of the time, however, conquest is complete by
+400BC.
+
+You can always play Despotic Conquest, regardless of the world you find
+yourself starting with, and you can always win without using any of the many 
+ways to cheat. When you choose any other strategy, you are deliberately 
+risking a loss in order to make the game more interesting. Winning the same 
+way all the time is boring. If you don't lose sometimes, you are doing
+something wrong.
+
+Note: halvorsen@nbivax.nbi.dk does it differently, and conquers the world 
+later but with higher scores.  He likes to go with Monarchy, Hanging 
+gardens, and no barracks. You can probably find a different way to do it...
+
+Subject:  c) Democratic Ostrich
+
+You find yourself alone on a landmass large enough to support 5 or more
+max-sized cities, with decent city sites. Build them, and start making 
+roads and irrigation. Try to keep all cities at roughly the same stage of 
+development.
+
+Research bronze, democracy; become democratic. Build Bach's Cathedral!!!
+Now you can have one military unit outside each city. Research Steam
+Engine; patrol your shores with ironclads. After railroads, it gets easy. 
+You can choose to build a spaceship or to go out with transports plus
+battleships and conquer everybody.
+
+Most important trick: every so often, boost luxuries way up high for a few
+turns, and make your cities grow ("Presidents' Day Sale"). You don't need 
+granaries because of this, and the occasional famine is easily repaired.
+
+Finances: You will have many city improvements to pay maintenance on. You
+have to take some taxes in cash. Libraries, universities, markets, banks, 
+all are important. Stockpile caravans when in doubt.
+
+Once you build Suffrage, things get really easy.
+
+Note: Monarchy is often a useful intermediate stage.
+
+Subject:  d) Flexible Evolution
+
+You find yourself with neighbours, on a landmass of unknown size. Play as in
+Despotic Conquest, but build your cities farther apart, so you can change
+over to democracy if you want to.
+
+After you get the continent to yourself, consider how many military units
+you have left, the state of your cities, and how far advanced your
+technology is compared to the date. You may be forced to continue with 
+Despotic Conquest; or you may be able to change to monarchy and then
+democracy if you prefer. The mechanics of the change are interesting, so I 
+choose democracy when there is any doubt -- at the risk of losing, of
+course!
+
+Subject:  e) Republic
+
+There are several things about Republic that make it an interesting
+alternative to Democracy; and you can develop the Republic much sooner than 
+Democracy.
+
+First of all, civil disorder won't make the government fail. All you lose
+is the output from the city that's in disorder. You can use a disorderly 
+city to support a small army in the field...
+
+Secondly, military unhappiness is less. You can have one unit out without
+disorder, even before you build Bach, just by making one Elvis. If this
+stabilizes the city's population, just make that city a barracks-factory.
+
+Third, once you build Suffrage, military units cause NO unhappiness. You
+can enjoy a high-tech Republican Conquest! You might not get a great score, 
+because it's likely to be after 2000AD. when you finally conquer the
+world, but it's fun...
+
+Fourth, if your empire is geographically small, so that everything is near
+the palace, you get just as much trade with the Republic as you could with 
+Democracy.
+
+Subject:  f) Pyramid
+
+You just captured the Pyramids! If you're in Monarchy, quickly change to
+Communism. The only thing that changes is that you have less corruption. In 
+the long run, communism doesn't give you enough trade to support all the
+city improvements, and you have to change again.
+
+What else are the Pyramids good for? Perhaps you'd like to go democratic,
+but haven't developed it.
+
+In theory, you should be able to take advantage of the Pyramids by changing
+governments often, to suit changing circumstances. I haven't been able to
+make this happen yet.
+
+Subject:  g) High Tech
+
+In the Republic or in the Democratic Ostrich, keep your treasury small and
+science high. The goal is advances every turn, and see how early you can
+launch the spaceship. You'd like the game to be peaceful...
+
+The problem with this is that I have read that launching the spaceship
+before time runs at one year per turn is risky; if the spaceship lands 
+"between turns", it is effectively lost. Therefore, I always wind up
+waiting around until 1750 (or is it 1850 ?) when the time-scale changes 
+the last time.
+
+Subject:  h) Rich
+
+In any form of government, keep science at a minimum. If Ostrich, use cash
+to help build cathedrals and factories in the resource-poor cities. If
+Conquest, use the cash to subvert enemy cities.
+
+Subject:  i) Mercenary
+
+While playing Rich, try to buy as many enemy units as possible so you can
+have a whole army owned by NONE.
+
+Subject:  j) Balanced
+
+Advances every 6 to 8 turns are all you really need. After you build SETI,
+you can get advances every 2 turns with no trouble. Keep your taxes and
+science balanced.
+
+In the Ostrich, the difference between Rich, Balanced, and High-Tech might
+be just a matter of 10 per cent.
+
+Subject:  k) Peaceful
+
+Try to get through the whole game without fighting a war.
+
+I managed this in only one game, where I cheated, edited the save file from
+3980BC, and started out with a huge London that had population 49, all
+improvements, all Wonders, a few extra settlers owned by NONE, two
+battleships from NONE, 4000 coins, and every technology I wanted to have. I 
+pumped out diplomats by the score, played Mercenary to the hilt, and kept
+all 6 other civilizations at one tiny city each for the whole game. They 
+never even met each other, so *nobody* fought any wars! Except for the
+barbarians, it was a completely bloodless game.
+
+I've tried very hard to have a peaceful game without cheating, and I'll try
+again; but they always sneak-attack me, or make unreasonable demands.
+
+The only way to stop them is to intimidate them, it seems; so things never
+get peaceful until I'm so strong that the computer civilizations are afraid.
+
+Subject:  l) High-Tech Conquest
+
+High-tech war involves larger numbers of stronger units than you use in
+Despotic Conquest, and can get quite interesting. Usually, I run these wars 
+half-heartedly, but one time I was bombing the Romans with half my cities
+and lackadaisically building a spaceship with a few others, and the
+Babylonians built a small ship and launched it! I had 17 years to take 
+Babylon, with no forces near it, and it wasn't even on the coast! I
+succeeded with the last-minute help of a nuke (build manhattan project, 
+next turn buy the nuke in a captured Babylonian city, next turn boom! and 
+walk in, just in time), but it was hectic.
+
+Another time, a Babylonian battleship got me really mad, so I changed the
+production of all my cities to nukes, and nuked them repeatedly, an average 
+of 5 explosions per turn for 20 or more turns; 6 cycles of global warming! 
+I finally managed to destroy all 8 of their cities without capturing any -- 
+nuke the same city several times in one turn to get its population down to 
+1, then run in with a Mech Infantry unit. I got a lousy score, thanks to
+all the pollution.
+
+In order to get into these situations, you have to leave the enemy alone.
+Several of the computer civilizations will develop high tech, but they are 
+all weak at the beginning of the game. Choosing 6 civilizations seems to
+help, as well; both the Indians and the Mongols seem to be stuck on
+Conquest -- if you put the Mongols and Babylonians on the same landmass in 
+4000BC, the Mongols win every time. I often choose 6 and play pink in order 
+to have the best chance of getting a high-tech opponent.
+
+The Romans always get high tech, but never build enough cities or enough
+units; the Babylonians seem to be consistently the most interesting. The 
+light blues rarely survive into the A.D. years, so the yellows are the
+second most interesting opponent.
+
+Subject:  m) Hide in a Corner
+
+Once in a while, instead of trying to build as many cities as possible as
+quickly as possible at the start of the game, try sticking to one or two
+cities for the first 1000-1500-2000 years. Not until you have reasonably 
+powerful cities do you send out an expedition, either a colonization
+expedition with two settlers plus a few phalanxes and legions, or an army 
+of conquest, at least 4 chariots with more to come, plus a settler to build 
+a military road.
+
+This strategy is indicated when your first explorer finds that you are
+stuck in a lousy corner of what looks like it might be a large land mass, 
+and there are no decent city sites near you.
+
+One advantage of waiting is that the enemy cities can grow large enough to
+be really worth capturing, and might contain a few WOWs.
+
+I had this work out well just recently. My first explorer went a long,
+winding way and saw a road; I pulled it back, and it seems that nobody 
+noticed my visit. The Romans and Zulus wiped everybody else out and lined 
+up against each other; the distance was so great that my first wave of
+chariots took 200 years to arrive, but thanks to the two settlers building 
+a road, the second wave was right behind. Because all their military units 
+were out in the field facing each other down, their cities were lightly
+defended. What a surprise when my hosts swept down upon them! Zimbabwe and 
+Caesarea (each of which was larger than both my cities put together) were 
+mine at the first stroke, and their vast armies in the field vanished. Rome 
+held out for hundreds of years after the rest, but after it fell, I had
+more than a dozen good-sized captured cities, decent technology due to 
+captures, and despite having waited 1500 years before beginning the
+conquest, I was still on track to go Democratic with my captured Pyramids 
+and bulging treasury. The rest was boring...
+
+Subject:  n) Archipelago
+
+You find yourself alone on a small island with room for only 1 or 2
+cities...
+
+Actually, I have done the Ostrich with just 2 cities; but they were
+resource-rich city sites. The disadvantage of islands is that two important 
+Wonders work only on cities on one landmass.
+
+If you get a foothold on a major landmass, you can just convert to one of
+the other plans; but if the first thing you find is another island, you're 
+in for it. After 3 or 4 islands, you might as well deliberately avoid the 
+mainland and instead scout out as many small chunks as you can find, just 
+to make things interesting.
+
+So far, every time I have customized for small land mass, I wound up on the
+biggest chunk around, with neighbours. Maybe the game deliberately avoids
+putting you on places that are too small.
+
+Subject:  o) Diploblitz
+
+After Ostriching for a while, you eventually become very rich. Your
+treasury doesn't collect interest, so you might as well use it.
+
+If you just land a few diplomats, the enemy may sneak attack and kill them
+all; so what I do is fill up 3 or more transports with diplomats and land 
+them all at once. You can usually unload 5 diplomats per turn per transport 
+without stacking them; bribe any units that happen to be standing on the
+shore. If you unload 15 diplomats in one turn, at least some will survive!
+
+As the first wave moves inland, the second is unloaded. The first wave buys
+any military unit it sees, and of course subverts any city it can. The
+transports go back for more diplomats. You can conquer a whole civilization 
+this way, in just two or three turns; which is fun to watch on the replay!
+
+If you don't have enough cash to buy a city, industrial sabotage is nice.
+Doing it just once per turn is almost useless, though; the computer can buy 
+back whatever you destroy. The right way to do it is to hit one city with 6 
+or 8 diplomats in one turn -- when the cathedral, bank, city walls, and
+factory are all gone in one turn, what's poor Caesar to do?
+
+In short, the idea of the diploblitz is not to use diplomats by ones or
+twos, but by bucketloads.
+
+Subject:  p) Trading Cities
+
+You find yourself woefully behind in technology. The enemy is spreading out
+over a large continent.
+
+Scout around the edges and find a small city you can afford to buy. Post a
+bunch of diplomats nearby. Steal a tech and buy the city, thereby gaining 
+two advances. Now make the population into Taxmen, sell the improvements, 
+and leave the city undefended. When the enemy takes it back, steal another 
+tech and buy the city again! It will be cheaper to buy it this time -- you 
+sold all the improvements and the population is smaller.
+
+Repeat as needed until the city is completely destroyed. Find another small
+city and do it again.
+
+Subject:  q) Take No Prisoners
+
+Your homeland is full of big, beautiful cities. Your army has overrun the
+enemy but you don't feel like managing any of the crappy cities the
+computer built.
+
+After you kill the last defender, don't take the city! If the computer has
+any money left, it will make a new defender, which you can also kill -- it 
+won't be fortified, after all.
+
+Hit the city with a Diploblitz and keep it empty. Eventually, you may get
+it down to a population of 1, and can then simply destroy it. Otherwise, 
+maybe some barbarians will come along...
+
+Here's an interesting goal: try to get a whole enemy civilization into this
+state! If its treasury is empty and every city is in disorder, can it ever 
+recover?
+
+  If an entire civilization is in disorder yes it can recover. I have seen 
+  it happen in enemy civilizations of 3-5 cities near the brink of falling. 
+  It happened to me once. Following an attack ALL of my cities were in 
+  disorder, I was poor but not being attacked immediately.  After several 
+  turns in this state, I started getting messages "Antioch builds temple" 
+  etc. I checked the cities, they were in disorder but they were building. 
+  I recovered after a bit of this and going luxuries 100%.
+            ---[Matt Malone]
+
+Subject:  r) The Helping Hand
+
+You have lots of bombers or battleships handy, but no ground units nearby;
+besides, you don't feel like dealing with any new cities.
+
+If a different enemy civilization has a unit near the city, or if
+barbarians are on the way, just kill all the defenders and watch what 
+happens. You can weaken the strongest enemy this way.
+
+By the way, the enemy civilization that takes over the empty city will *not* 
+feel any sense of gratitude.
+
+Subject:  s) The Rock
+
+Sometimes you can throw a monkey wrench into an enemy civilization and take 
+it completely out of the game by posting one lousy phalanx on top of a
+mountain. This only works at an early stage of the game, and the victim 
+must have no open land for expansion -- either on an island, or blocked 
+into a corner.
+
+Instead of building triremes and settlers, and instead of advancing
+quietly, the enemy civilization builds lots of cavalry and legions and 
+chariots, surrounds the rock, and keeps moving its units around. It's fun to 
+watch them riding around your mountain, brandishing their swords, waving 
+torches, and shouting imprecations.
+
+Eventually they sneak attack, and lose dozens of units. Then they make
+outrageous demands, tell you to prepare for war, ride around and shout, and 
+eventually attack and lose more units. By the time they destroy that
+phalanx, you're ready to put a rifleman up there, and they're still 
+undeveloped!
+
+This depends on the leader's personality; it works against the Russians and
+the French, but not against the Romans or Chinese.
+
+Of course, to ensure against losses, you want to scout around their coast
+and find as many rocks as possible, because if they manage to get rid of 
+all your outposts, they'll start behaving reasonably again, but one phalanx 
+on a mountain top is all you really need to make it work!
+
+Subject:  t) Replay
+
+Always make a save file in 3980 B.C.; as soon as you finish the game,
+consider starting over in the same world but following a completely
+different strategy.
+
+In the replay, you have the advantage of knowing more or less what the
+world looks like, which spoils things a bit; but in compensation, you have 
+the chance to change history.
+
+A diskette full of old 3980 B.C. save files is nice to have, especially if
+it contains interesting worlds. After a while, you don't remember much
+about the world, and can replay without spoiling the mystery of discovering 
+the unknown. When you get an interesting world, you may also want to share 
+it with someone.
+
+Note: you need both the CIVIL?.SVE and CIVIL?.MAP file!
+
+Here are a few from Matt Malone:
+
+Subject:  u) Go See Them or They Will Come See You
+
+A variant of "The Rock" strategy, the "Go See Them or They Will Come See 
+You" strategy is ideal when another civilization is much stronger than you 
+are. If you are defensively weak and cannot mount a reasonably good attack 
+against them, send an occupation force. I have found that for all 
+civilizations, if there is an active enemy unit (not just fortified) 
+reasonably close to a city then that city will not send out ships to find 
+you.  The main objective is to keep a presence but if some pillaging can be 
+done with minimal risk I have my occupation force do that.  A civilization 
+of ten cities on an island may require three such presences, scattered, 
+preferably on mountain tops, to keep them at home. This does not necessarily 
+cripple the civilization in the same way as The Rock does but it keeps them 
+at home and gives you some breathing space.
+
+Subject:  v) Pillage to the Max.
+
+When I am in a weak position relative to a computer civilization and the 
+seas are still relatively safe, I conquer their weakest city, take their 
+best defensive technology, i.e., conscription for riflemen. I build a mess 
+of rifleman and go pillage all of their improvements concentrating first on 
+irrigation. The shift of land usage from production to food necessary in 
+their cities slows their production of military units and usually starts to 
+starve them for cities > 8. This hobbles them and gives you time to catch
+up. At first the losses of units will be high but once pillaged to the max, 
+even the most powerful civilization is a pussycat. Their cities will be well
+defended so I don't recommend attacking them directly until you have 
+stronger attack units present and the walls are down. Bucket-loads of 
+diplomats used for sabotage is a good intermediate step.
+
+Subject:  w) Take the Best, Discard the Rest
+
+When you are way behind but have a strong production potential take the 
+following technologies (in about this order):
+
+  trade: to make caravans to use as currency through the WOW ==> battleship
+         production change
+  conscription: rifleman are so cheap and hard to kill that I sometimes let
+         an enemy battleship attack a walled city with riflemen as my
+         cheapest way to destroy the ship.
+  steel: battleships, and never waste your time building a non-veteran
+         battleship.
+  railroad: to increase the output of mines, increase the food output on
+         some squares to allow a shift to utilize more mines or forests.
+  industrialization: transports. Factory: Only where you have a large
+         production capability and they will pay you back fast for the 
+         shields lost from attack units in building the factory.
+  mass production: submarines - make them veterans too - a pack of properly
+         spaced submarines are a great defense esp with the Mag. Exp.
+         wonder.
+  advanced flight: bombers + aircraft carriers - more use when you are
+         chasing down the last and mopping up the last well defended inland 
+         cities in a declining but rich civilization that are too expensive 
+         to incite a revolt in.
+  flight: take this one only after you have problems with your bombers
+         being lost to other civilizations or them hitting you big time with 
+         bombers - sometimes I don't have that problem - or if you have 
+         everything else you need. Good recon and bomber elimination. Also 
+         useful in maintaining a pillaged to the max state - great against 
+         settlers.
+  rocketry+fission: Nukes - If you nuke them, they will nuke you if they have
+         them.  I have never been nuked unless I nuke a civilization that has 
+         already built a nuke. I hear the Russians and Americans may not 
+         hold to this pattern. 
+         Note: A number of people have commented on the validity of the above 
+         paragraph.  I have yet to be nuked first, but apparently it does 
+         happen!  Beware!
+                         
+Assuming the sea is not safe enough for bucketloads of diplomats to have
+any reasonable chance of making it to the enemy civilization (without 
+cheating), use battleships to pound the weakest coastal cities and take them 
+over with a sail of riflemen. Turn the cities into cash: Sell improvements 
+that aid happiness and change the population to Taxmen. Sell other 
+improvements.  Sell banks and marketplaces last. Sell city walls when the 
+population of the city = the number of units you have defending the city. 
+Let the enemy destroy the city. Leave them with nothing to take back. Repeat 
+for all coastal cities until the sea is safer. By this time you have a large
+treasury, and inciting revolt is easy. Choose large cities, incite revolt, 
+and turn them into cash. You should get enough to incite another revolt in 
+a few turns. Advanced civilization falls. Reason: they usually do not have 
+railroads between cities to reinforce whatever city is being attacked. 
+Suggestion: make sure all of your cities are linked by railways. Fortify 
+units on mountain top rail passes to prevent a city from being cut off too 
+easily and to prevent the enemy units from sweeping your civilization 
+through your own rails should one of your cities fall. Nothing like enemy 
+armor on your rails to ruin your day.
+
+Subject:  2) Colossal City Strategy
+-----------------------------------
+ 
+I have deliberately kept this separate from the other strategy section as
+it really is a game apart.
+
+  The long-awaited Colossal City strategy is not a strategy. Instead, it's
+  just a simple trick that makes any high-tech strategy work much better.
+
+  It's this simple: build the Colossus and Copernicus' Observatory in the
+  same city.
+
+  Of course, you want that city to be your capital, so that there's no
+  corruption; of course, you want it to grow big and have a university and 
+  lots of nice trade routes.
+
+  Of course, you want to build the Colossus as soon as possible.
+  (   I have done it by 2800 BC without cheating! Lucky villages and
+  (   ransom from barbarian leaders did the job. Building it with
+  (   caravans alone, 2300 BC is good; and perhaps the resources you
+  (   invested building it so early would have been better spent
+  (   making more settlers and more cities...)
+  Therefore, you want to develop trade as soon as possible.
+
+  Note: since the computer cheats in building its Wonders, if someone else
+  builds the Colossus first it's not unreasonable to use the save-game cheat 
+  to stop them.
+
+  Combining the Ostrich strategy with the Colossal City makes it possible to
+  reach future tech before 1 AD without cheating; if you have a gold mine 
+  and swamp+oil in the Colossal City's zone of influence, that's all (almost 
+  all) the good luck you need.
+
+  Building these two Wonders, and building a Cathedral and University in one
+  city while the others are small, is hard to do unless there are a few
+  resource-rich cities near the Colossal City.
+
+  In fact, this does force a Colossal Strategy for the early part of the
+  game. Build as many cities as possible; the outer ones fight wars and 
+  build more cities, while the inner ones just build caravans. All but one 
+  of the cities stays small; the Colossal City must grow, grow, grow, so it 
+  needs a temple and a granary and a library and a university and a 
+  cathedral. The division of labor, with different cities doing different 
+  things, makes it interesting.
+
+  Customizing for "Large Land Mass" is helpful.
+
+  To reach Future Tech by 1 AD, go to democracy as soon as possible, and set
+  luxuries to 30%, taxes 30%, science 40%; research will slow down for a few 
+  years, but you'll collect a lot of money with which you can build
+  cathedrals, marketplaces, banks, aqueducts, and so on, and very soon 
+  you'll be up to "advances: 1 turns". 30% luxuries is just enough to keep 
+  everybody happy all the time, and to cause occasional "we love the
+  president" days, in cities that complete their markets and banks and get 
+  trade routes.
+
+  To play a strategy that wouldn't work without the Colossal City, stay in
+  Despotism until you build Suffrage and then go to Republic -- you'll only 
+  be up to Automobile or so by 1 AD, and your scraggly little cities will
+  have trouble building those expensive armor units, but you'll have fun 
+  winning. Keep building caravans, keep science at 100% as long as possible, 
+  make factories in a few cities (using the caravans to do so), and pay the 
+  rent by building and selling city walls, and by sacking enemy cities. You
+  may *need* to follow this plan if you have a land war against a tough
+  opponent on a huge continent. This plan is fun because you don't have to 
+  go into a shell (like the Ostrich), and you don't have to concentrate
+  single-mindedly on military affairs (as in Conquest); instead, you get to 
+  do a little bit of everything.
+	---Ralph Betza
+
+Subject:  3) President's Day Sale
+---------------------------------
+This is another posting from Ralph Betza that was forwarded to me. As usual
+it makes for interesting reading.
+
+  PROLOGUE
+  ========
+
+  Someone else wrote that Civ "is all about trade". For a while, I was ready 
+  to argue that it's all about resources. Now I think it's all about timing.
+
+  The big timing thing is to time the growth of your infrastructure so that 
+  it matches the growth of your population.
+
+  If the population outgrows the infrastructure, you get civil disorder; if 
+  the infrastructure outgrows the population, the maintenance drains your 
+  treasury.
+
+  If your land is rich in resources, the infrastructure grows faster than 
+  the population, but if it is resource-poor, the population grows faster.
+
+  It is also a good idea to time the growth of your core homeland cities so 
+  that all are at about the same level; you do this by making the settlers 
+  you need from the larger cities to bring them down to the level of the 
+  smaller cities. What you gain by this will be discussed later.
+
+  If you are rich in resources, you want to time your research so that you 
+  always have a WOW to work on (or you can just build lots of caravans and 
+  leave them parked around the countryside).  If you are poor in resources, 
+  you have to "BUY" the completion of as many improvements as possible, and 
+  time these purchases effectively.
+
+  PRESIDENT'S DAY SALE!!
+  ======================
+
+  President's Day Sale: as a democracy, set the luxury rate as high as 
+  possible for a few turns and make your cities grow quickly.  "For a few 
+  turns" is important -- you have to know when to stop.
+
+  The well-timed President's Day sale, I think, is the key to winning with 
+  democracy. Many people have posted complaints about running out of money. 
+  Many have posted complaints about falling behind in technology. I say they 
+  failed to hold President's Day Sales, and that's why they got into 
+  trouble.
+
+  Many posts have referred to this as a way to run up the score at the end 
+  of the game. I find this to be much more important at an earlier stage: 
+  By the time you get to democracy, you probably already have temples, 
+  marketplaces, and libraries. You now need to make settlers and adjust 
+  production to squares rich in resources or trade but weak in food, in 
+  order to slow down the population growth. You have to build Bach, and a 
+  cathedral in each city, before you can let the population grow.
+
+  For example, before you discover religion, you have a maximum city size of 
+  4 (at Emperor level, and presuming you don't want to make any Elvises or 
+  allocate taxes to luxuries; also presuming you don't feel like building a 
+  Colosseum before building a Cathedral).
+
+  Once you discover religion, of course you get all your cities working to 
+  build caravans and help build Bach; the minute you build it, your maximum 
+  city size becomes 6.
+
+  The minute you build Bach, you set all your cities to building cathedrals. 
+  When they finish, the maximum city size will be 10.
+
+  Don't wait for the cathedrals to be finished! Now is the time!  Running a 
+  President's Day Sale for 6 turns is a *very* *important* strategical move.
+
+  The way to do this is, first of all, look at every city and adjust its 
+  production squares so you get as much trade as possible, plus a small food 
+  and resource surplus; then set the luxury rate to 40 per cent and consult 
+  your attitude advisor. Perhaps you can get away with as little as 30 per 
+  cent luxuries; perhaps you need sixty percent. If one city is less happy 
+  than the others, maybe you can use an Elvis there. Once it's all set up, 
+  change the rest of your taxes to cash -- you will need to buy some 
+  cathedrals. Make sure you have the "end of turn" option set! Next turn, do 
+  it all over again: check every city, because you don't want the 
+  celebration to be cancelled in even one city! This is a lot of work, but 
+  the sale will only run for a few turns, so it's okay. During the sale, you 
+  will have to buy the cathedral for your biggest city, and the next 
+  biggest; when you start to run out of money, cut the sale short.
+
+  The right time to start the sale is a problem. The sooner the better is 
+  the general rule, but starting too early means that not all the cities 
+  will have cathedrals yet at the end of the sale (because you run out of 
+  money to buy them).
+
+  You have to stop when your populations get to 10, because you don't have 
+  colossea or aqueducts yet. You might need to keep 20% luxuries for a while 
+  if some of the cities haven't finished their cathedrals and you can't 
+  afford to buy them yet; but the goal is to get luxuries back down to 0.
+
+  By the end of the sale, your population has just about doubled, and so has 
+  your total amount of trade; you must pay for more maintenance now, because 
+  of the new cathedrals, but you can do so with a smaller percentage of the 
+  total than you could before the sale; and you can allocate a higher 
+  percentage of a larger total to science.
+
+  The importance of this was demonstrated to me by a recent game where I 
+  forgot to do it. It was at Emperor level with all cheating strictly 
+  forbidden, and I was stuck on a small piece of land with lots of tundra 
+  and mountains; four cities was all I had room for.  I had neighbors in the 
+  early days, and by the time I got rid of them, built my four cities, 
+  developed democracy, and built Bach, it was 1 A.D. I played up to about 
+  1300 A.D. and hardly advanced at all -- railroads still far away, a few 
+  scraggly colonies on other islands, populations in the core cities barely 
+  up to 10. Overnight, I realized what I had done wrong, and went rooting 
+  through the autosaved files to see if there was a point in history where 
+  I could correct it; how lucky that 1 A.D. was just perfect!
+
+  I started over from there, ran a sale right away, and about a thousand 
+  years later on I ran another sale for the benefit of my colonies.
+
+  What a difference! By the same date, circa 1300AD, I had four thriving 
+  cities with populations from 17 to 20, two nice colonies with populations 
+  of 10 and ready to expand, railroads being built around all the cities, 
+  banks and universities and factories in all the core cities, a battleship 
+  half finished, a healthy treasury, with the Suffrage and Darwin WOWs 
+  already built. Instead of being a second-rate nation, I was the leading 
+  civilization on the globe -- and all because of President's Day!
+
+    The Romans had railroads and a few ironclads, but no factories
+    or battleships; the French had riflemen, but none of the rest;
+    the other civilizations were still coming around in rowboats.
+
+  In other games, I had waited until I got railroads to hold the first 
+  PrezDay; but normally I have more than four cities! Because I had stronger 
+  starting positions the other times, I never realized just how powerful 
+  PrezDay is. With a decent (or good) starting position, I expect to be at 
+  least 500 (or 1000) years ahead of where I was in this game, and that 
+  would allow me to win even with a belated use of the President's Day sale; 
+  now I'm looking forward to seeing how far I can get with a well-timed one 
+  after a good start!
+
+  SYNTHESIS
+  =========
+
+  Note that running a good Pres Day Sale requires you to manage your cities 
+  so that as many as possible are at the same stage of development at the 
+  same time, because the most effective time to do it is just when the 
+  infrastructure outpaces the population.
+
+  Therefore the two themes of timing and PrezDay are strongly related after 
+  all!
+
+  You have little control over how fast you can build the infrastructure; 
+  all you can do is build as quickly as possible and choose the order in 
+  which things should be built.
+
+  Population growth, on the other hand, is the thing you *can* control; and 
+  so timing is a matter of slowing down the population growth at some points 
+  and speeding it up at others.
+	---Ralph Betza
+
+Subject:  3) What is the best way of taking an enemy city?
+----------------------------------------------------------
+
+Surefire way for musket/cannon-level cities with city walls:
+1.  Build lots of cannon, diplomats (4-6), and settlers (2-3).
+2.  Move a veteran musketeer adjacent to the city to take and fortify.
+3.  Move a settler to the musketeer and build a fort around him.
+4.  Use other settlers to build a road to the musketeer, if necessary.
+5.  Stockpile several cannon and diplomats in the fort.
+6.  When you are ready, have the diplomats sabotage the city walls, if
+    any (it may take several tries).
+7.  Bombard the city with the cannon until it is yours.
+8.  Move the Musketeer into the city to take possession and be its first
+    guard.
+
+I personally believe the best way to take a city is with a diplomat, by
+subverting the city. Just keep all military units for defensive purposes. 
+Then once the city has been bought then build (buy) a diplomat as the first 
+thing you make.
+
+Subject:  4) What are the best Wonders to build?
+------------------------------------------------
+Miscellaneous notes from "Rome on 640K a Day"
+
+The Colossus of Rhodes
+  Function: One additional arrow of trade is created in every City Map square 
+            which already generates an arrow.
+     Notes: Wonders don't come cheaper that this. Combine the Colossus and a 
+            representative government and one can watch the coins pour into 
+            the coffers. Electricity is far enough away to make the Colossus 
+            a good investment if built early on.
+
+The Oracle
+  Function: Doubles the effect of Temple improvements.
+     Notes: One of the better ancient wonders, the Oracle can often avert a 
+            player's need for costly Colosseums until Cathedrals can be 
+            built.  Consequently, the Oracle is a good sacrifice.
+
+The Pyramids
+  Function: The owner may change governments without passing through Anarchy 
+            and may choose from any of the 5 government types, even if yet 
+            undiscovered.
+     Notes: The greatest ancient wonder, the Pyramids have the longest life 
+            and much to offer. Being able to switch between wartime and 
+            peacetime governments with the ease of drawing and holstering a 
+            pistol is an incredible advantage.
+
+Copernicus' Observatory
+  Function: Doubles the light bulb production in the city after all 
+            adjustments for Libraries, Universities, and Einsteins. 
+     Notes: One of the less expensive medieval wonders, Copernicus' 
+            Observatory is also one of the quickest to become obsolete 
+            because of the desirability of the Automobile advance. For 
+            smaller empires or those with a single trading city, this 
+            wonder can reap considerable rewards.
+ Add. Note: Does not seem to become obsolete when Automobile discovered !?!
+
+Isaac Newton's College
+  Function: Increase light bulb production of all Libraries and Universities 
+            from 50% each to 83% each (for a total of 166% when both exist).
+     Notes: This snazzy little number is perfect for the empire with many 
+            cities, producing many light bulbs. The broad increase in light 
+            bulb production lasts for quite a while although eventually what 
+            goes up must come down.
+
+Shakespeare's Theatre
+  Function: All unhappy citizens in the city stay content.
+     Notes: Shakespeare's Theatre creates a unique (though brief) opportunity 
+            under a representative government to both increase the population 
+            of a city by creating Elvii there and having several "We Love the 
+            President" days, and also to send a massive army from the city 
+            off to war.
+
+Hoover Dam
+  Function: The Hoover Dam is equivalent to having a hydro Plant in every 
+            city on the continent, increasing production and reducing 
+            pollution.
+     Notes: The number 2 "must have" wonder, especially if one is situated on 
+            a large chunk of land.
+
+SETI Program
+  Function: Increases light bulb production in all cities by 50% after all 
+            adjustments for Libraries, Universities, and Einsteins.
+     Notes: Possession of this wonder might make pursuing Futuristic Advances 
+            more worthwhile than "going hedonistic" once all advances have 
+            been made.
+
+Women's Suffrage
+  Function: In a representative government, one less unhappy person is 
+            generated when an air unit is built or other military units leave 
+            their home city.
+     Notes: By far the best wonder of the world to have. Reducing the 
+            greatest obstacle to military expansion under the highly 
+            productive representative governments, this wonder is the 
+            equivalent of Thor's Hammer or Zeus' Bolt.
+
+
+**************************************************************************
+             T  I  P  S     A  N  D     I  N  F  O  
+**************************************************************************
+
+Subject:  1) Final score
+------------------------
+There are many factors to the end score, but the main bonuses are
+described below (courtesy Roger Kemp):
+
+There are two different ways that percentages are calculated:
+
+a) If you take over the world, your score is determined SOLELY by the date
+in which you finish. Wonders, pollution, population etc. have no effect on 
+the score. I believe the exact formula is something like: you get 1000
+points for taking over the world by year 2000 and you get an extra 2 points 
+for each turn (not year) in advance of the year 2000 if you finish the game 
+early. Take this score and divide by 10 to get your percentage. This means 
+that the maximum reasonable score you could get (taking over the whole world 
+around 2000BC) is somewhere around 180%. There is also some sort of
+reduction modifier if you start with less than seven initial civilizations. 
+
+Note that if you play on a lower level your final percentage is also
+multiplied by 0.2, 0.4, 0.6, or 0.8 depending on whether you play chieftain, 
+level, prince level, etc.
+
+b) If you launch into space (I don't know why anyone would bother playing
+the game and pursue this course 8-) you can get those 300% scores that
+people brag about. You'd just have to kill off all but one enemy city and 
+keep peace while you filled the world with people. What a boring game 8-)
+
+Finally remember if you can't be touched, try and develop as many future
+techs as possible since they add 5 to your score at the end.
+
+Subject:  2) Lightbulb formula
+------------------------------
+Here's the formula from "Rome on 640K a Day":
+ LightBulbs = PreviousAdvances * DifficultyModifier * TimeModifier
+ DifficultyModifier =
+     6, Chief
+     8, Warlord
+    10, Prince
+    12, King
+    14, Emperor
+ TimeModifier = 1 if Year <= 0AD, or, 2 if Year > 0AD
+ In addition, the first advance always requires at least 10 lightbulbs
+ regardless of difficulty level.
+
+Subject:  3) Money-saving tips
+------------------------------
+  a) If you have a city that has built all that it needs, build an unwanted
+     structure such as city walls, temple, SDI defence, etc.  Once it is 
+     completed, sell it and rebuild.
+
+  b) Do not keep improvements that are not necessary.  If your population is
+     very happy, sell colosseums and temples.  Colosseums alone cost 4 coins 
+     a turn.  If there is no military threat, sell off barracks and city 
+     walls.
+
+  c) If you are relocating the palace you should sell off the old one.
+     Otherwise the original one will disappear on completion.  Remember that
+     without a palace, corruption will rise.
+
+  d) Just before you complete your research of gunpowder and combustion, 
+     remember to sell your barracks.  Any existing ones will become redundant
+     straight after, so you may as well make a few gold coins.
+
+  e) Switching to Nuclear power (after Fusion makes it safe) from hydro or 
+     Power Plants, will save 2 gold coins per turn.  Also remember to sell 
+     off any power sources on the same continent as your Hoover Dam.
+
+  f) The purchase cost of Wonders is 4 coins per shield, so if you wish to
+     purchase one quickly, it definately pays to buy something small to 
+     start off the shields.
+
+Subject:  4) Military advice
+----------------------------
+  a) Timing if very important in battles, so use the WAIT command frequently.
+     Always move the fastest, best defending units first to make sure that 
+     the coast is clear.  This way, knights, for example, will find 
+     undiscovered enemy units instead of catapults.  (The knights can move 
+     back whereas the catapults will be open for attack).
+
+  b) Never stack units!  Unlike standard wargames, stacked units do not
+     combine their defence points.  If one unit is destroyed, all units are
+     destroyed.
+
+     There is one exception to this rule:  when the units are stacked within 
+     a fortress (built by a settler).  These units will be destroyed one 
+     at a time, so they last a lot longer than normal, especially if you 
+     build the fortress on a mountain!
+
+  c) Don't forget to upgrade your defending pieces.  There is nothing worse 
+     than find one of your cities defended by militia surrounded by enemy 
+     armor!
+
+  d) Remember that veteran units are 50% stronger on attack/defence.
+     Because of this, it obviously makes more sense to use veteran troops 
+     whenever possible.  There are two ways to create these troops.  First,
+     have an untrained unit survive a battle (in which case it has a 50% 
+     chance of being awarded with veteran status).  The second is to build 
+     one in a city that has a barracks. This is the safer option.
+
+  e) Use an overall strategy of fortifying high defence pieces and using high
+     attack pieces as sentries.  Remember:  in a coastal city, if you 
+     build a boat, any sentried pieces will climb aboard as it sails away.  
+     This will often leave the city undefended!
+
+  f) City walls are useful for many things.  Not only do they multiply 
+     defence values by 3, they also protect the population of the city (there 
+     is no population decrease after enemy attacks).
+
+  g) You can use a bomber to protect a vulnerable city by parking it in the
+     air outside the city. It appears that when moving it's pieces the 
+     computer moves them in a set order (probably the order in which they 
+     were built).  This often means that it moves half of its ground units 
+     (which can't get past your bomber) before finally bringing out a fighter 
+     to kill the bomber (if it ever does actually attack the bomber). This 
+     can give you time to fortify the city.
+
+  h) When you are at advanced technology levels and attacking cities, have
+     two bombers that alternate turns in sitting above your attacking force. 
+     The enemy can only attack you with fighters because there is an air unit 
+     in the square and attack 4 vs defence 13 for a fortified, veteran mech. 
+     inf is a good bet, besides fighters are very expensive.
+
+  i) In a sea warfare game, consider using nukes on enemy battleships and
+     carriers at sea because there is no pollution. In addition, computer 
+     civilizations usually send out other units with such a major unit and a 
+     nuke can usually destroy 2 extra enemy units. With the Magellan's 
+     Expedition, an old sail or submarine has enough movement to be 
+     efficiently used as bait to draw the enemy group closer together so 
+     more can be destroyed at once.
+
+  j) Most units can't move from the zone of control of an enemy piece into
+     another square in an opposing zone of control, unless you already have a 
+     piece in the target square.  Planes, diplomats and caravans are 
+     exceptions to this, but they DO count as a piece in that square. This 
+     allows you to walk around enemy armies: send the diplomat forward one 
+     square, move the real troops into the square, advance the diplomat 
+     again ...
+
+  k) Finally, remember that it is quite easy to save the game before a major
+     battle---if you lose, reload !
+
+Subject:  5) Miscellaneous tricks and tips
+------------------------------------------
+Here are few tips and tricks that I have collected from Usenet over the
+last few months.
+
+  a) Structures (temples etc.) are cheaper than units that move (i.e.,
+     military, settlers...) If you want to buy a quick rifleman to defend a 
+     town it's much cheaper to select a temple, buy it and then change back 
+     to a rifleman. The added cost for military units is based on the 
+     following formula (from "Rome on 640k a Day"):
+
+       cost = (ms * 2) + (ms * ms/20)
+  
+       where ms is "missing shields"
+
+     Note: Remember, as stated in the manual; improvements cost two coins 
+     per missing shield (*OR FOUR* if no shields are currently in the 
+     Production box)  Usually, just wait a turn to get a couple of shields, 
+     then buy. If absolutely necessary, buy the cheapest unit/improvement 
+     available to get some production, then switch to your final goal and 
+     buy it.
+
+  b) You can use caravans to build things other than wonders. When you take
+     over an enemy city you usually need a cathedral or walls or something 
+     of the sort so I throw a few caravans in the transport with my armors. 
+     When I take over the city I switch what it's building over to a wonder, 
+     contribute the caravans to the wonder and switch it back to the 
+     cathedral. You can use this on your own cities as well. If you have a 
+     fabulous production town and want to kick start the other cities, build 
+     caravans and throw them into the other cities wonders and switch them 
+     to whatever you want. I build a lot of factories this way.  Building 
+     caravans is like putting money in the bank.
+
+  c) Once you have railroads take a settler into a transport onto one of the
+     fish squares that is being used and activate the settler. Press "r" on 
+     the settler for making a road (on water!!) and then "r" again for a 
+     railroad.  You now have a railroad on the fish which gives you the 
+     increased production and trade that railroads normally give. 
+     Unfortunately you can't walk pieces onto the square as if it were a 
+     bridge.  This trick works for normal sea squares, increasing trade 
+     production.
+
+  d) I've noticed that if you attack a city with 4 defenders, this doesn't 
+     seem to enter after the first three have been defeated. (Does the 
+     computer take some sort of morale into account? I've not seen it 
+     documented anywhere, but once they lose two or three units, the rest 
+     seem to loose disproportionately, even if they're all the same type of 
+     unit, and they have barracks [i.e., all are vets]).
+
+  e) To get size 40+ cities, play in the Americas:  there are two sites 
+     which have maximum grasslands production!
+
+  f) Build the UN. Then build diplomats and artillery. Change government to
+     Communist. Roll your artillery up to an enemy city. Make peace with 
+     your diplomat. (Because of the UN, they have to agree.) Next turn, take 
+     the city, roll your artillery up to the next city, and make peace 
+     again. This works for a while, but I always find that when I am too 
+     much more powerful than the other civilizations, they always break 
+     their treaties. This tactic works with the Great wall and catapults as 
+     well.
+
+  g) When you're a Repubublic or Democracy and you meet a new civilization 
+     that you wish to destroy, don't talk to their emissaries.  If you do, 
+     your council will force a treaty.
+
+Subject:  6) The Canal trick
+----------------------------
+This is an excellent idea received from Matt Malone.
+
+  a) Build a city on an isthmus. Enter ships from one side, leave from the
+     other. Instant canal. Similarly a chain of cities for longer canals. 
+     Also good for access to inland seas.
+  b) Build a walled city on a mountain as the gateway from an inland sea to
+     the ocean (veteran. riflemen defense = 5*1.5*3*3 > 63). It provides a 
+     bay that is impervious to enemy ships and several city sites that are 
+     "coastal" - i.e., able to build ships - while not being subject to sea 
+     attacks until the gateway city falls.
+  c) Land a settler and build a city between an enemy city that is not 
+     coastal and the ocean to create a canal to allow a battleship to pound 
+     the enemy city directly. If your canal city is walled the effective 
+     defense with a veteran battleship is 12*1.5*3 = 54!  Good odds in any 
+     attack except against bombers.
+
+Subject:  7) Railroads at sea
+-----------------------------
+It is perfectly possible to build a railroad on water.  To do so, first
+load a settler into a floating vessel.  Then move the vessel to the place
+you wish to build the railroad.  Wake the settler and make him build a
+road.  When this is completed build the railroad.  Simple really!
+The main advantage is the increased trade and food that can be gained 
+from a railroad enhanced square (+1 trade for ocean, +1 trade & food for 
+ocean/fish).  It is also possible to use these railroads as a bridge.  All
+that is necessary is that each square also contains a vessel.  Should you
+move the vessel, this has the effect of breaking the bridge.  Pieces will
+only be able to cross where the railroad crosses a vessel.  The exception
+to this is vessels!
+
+Subject:  8) Interaction with the various civilizations.
+--------------------------------------------------------
+There was a discussion recently concerning the pros and cons of the various
+computer controlled civilizations.  Here is a brief summary of some of the 
+points made.
+
+8a) Which civilization should I choose to play ?
+------------------------------------------------
+This depends on your game strategy.  If you play Earth and intend to 
+concentrate on technology, then either the Aztecs or the Americans are
+a good choice.  This will usually give you a whole continent to yourself,
+(once you've destroyed the other one) and will leave all of the more
+militaristic opponents to fight it out between themselves.  If you just
+want to conquer as quick as possible then it pays to remove civilizations 
+such as the Zulus, Greeks, and Russians.  One way to remove the Zulus (for 
+example) is to play the Zulus.  This works fine except when playing Earth.  
+The Zulus always start in Africa, which doesn't have much in the way of good
+building areas.  Another way to remove the Zulus is to play the Egyptians.
+Because they are both "Greens" you will never have both in the same game.
+Another thing to remember when playing Earth is that, if you play any
+civilization other than the Americans or Aztecs, the Aztecs will always be 
+the most technically advanced civilization.  While you are fighting to stay 
+alive, the Aztecs will remove the Americans and concentrate on technology.  
+To avoid this you can be the Egyptians (Yellow).  One other thing to 
+remember is that the Russians tend to start with two settlers.  This can be 
+a real help at the start of a game.
+
+When starting a game, consider what your strategy is likely to be.  Remember
+what the various civilizations colours are, and remember that on Earth each 
+civilization starts at its historical capital.
+
+8b) Should I consider who I trade technologies with ?
+-----------------------------------------------------
+Most definitely !  You don't want to give the wheel to the Zulus now, do 
+you ?
+
+  Another thing to consider early on is whether or not to trade technologies
+  with a particular enemy.  I always develop the wheel first and then pursue
+  purely "brainy" advances (writing, literacy etc.).  If I meet up with 
+  Mongols, Zulus or Russians I don't trade with them unless I have a couple 
+  of chariots built and am ready to kill them in the next few turns anyways.  
+  At the other end I will quite willingly trade with the Babylonians, 
+  Egyptians, Americans, and to a lesser extent Romans and Chinese because 
+  they will take developmental technologies like Alphabet, Writing, 
+  C-Burial, Code-of-Laws before the wheel.
+	---Roger Kemp
+
+Subject:  9) The pattern of special resource squares.
+-----------------------------------------------------
+It appears that there is a pattern to the way resources are placed on the
+map---those special squares such as fish, gold, oil, etc.  Once again I
+will hand the subject over to Ralph Betza.
+
+  The algorithm used for putting special resources on the map is such
+  that wherever you see a special square, there is likely to be
+  another one a long-Knight's jump to the northeast -- that's 3
+  squares North and one square East -- and to the southwest.
+
+  Fairly often, there are two strings of special squares, a
+  long-Knight's move apart, giving:
+
+    .  .  .  S  .  .  .
+    .  .  .  .  .  .  S
+    .  .  .  .  .  .  .
+    .  .  S  .  .  .  .
+    .  .  .  .  .  S  .
+    .  .  .  C  .  .  .
+    .  S  .  .  .  .  .
+    .  .  .  .  S  .  .
+    .  .  .  .  .  .  .
+    S  .  .  .  .  .  .
+    .  .  .  S  .  .  .
+
+  If you build a city at C, it can use four special squares at S!
+
+[some deleted]
+
+  According to this analysis, when you see a forest square with game,
+  or a plains square with horses, or a swamp with gems, or oil or gold
+  or fishies, and the next square in the pattern (a long-Knight's jump
+  away) is a grassland square with no resources,
+       Mine That Square!
+  More than half the time, when the trees grow, you see a little
+  orange beastie on the square.
+
+  In order to get a feel for the pattern, look at a screenful of ocean
+  and see where the little fishes are. You will see that the pattern
+  is imperfect, and that is why mining the grassland square doesn't
+  always work.
+
+  So far, I have only made this trick work with grassland squares.
+  I would *love* to be able to make gold mines appear this way; or
+  even coal.
+	---Ralph Betza
+
+Subject:  10) Defence and attack queries
+----------------------------------------
+This collection of tips has been compiled by Mark Steer.
+
+a) How does the computer decide combat results?
+The computer "pulls a piece of paper out of a hat" in the sense that there 
+are as many bits of paper marked with "Attacker wins" in the hat as the
+attackers strength.  Also there are as many pieces of paper marked with 
+"Defender Wins" in the hat as the defenders strength.  So in theory a 
+trireme can defeat a battleship, but the odds are 12-1 against.
+
+b) How do I work out my attackers strength?
+Attacking strength = Attacking force * 1.5(veteran)* road MP's/3,
+where Attacking force = 1 for militia, 4 for a knight etc.
+The strength of attacking Barbarians is reduced on the lower levels.
+
+c) How do I work out my defensive strength?
+Defensive strength = Defensive force * 1.5(veteran)* terrain bonus * one of 
+the following, 1.5 (fortified), 2 (fortress sq), 3 (city walls).
+city wall bonus is disregarded by bombers and artillery, battleships behind 
+city walls do receive *3 bonus.
+
+i.e., So, a veteran battleship, in a city behind walls = 12 * 1.5 * 3 = 54 
+
+Remember: a veteran is caused by a unit that has survived one battle, or a 
+unit that was built in a city containing a barracks.
+
+d) What are the terrain bonuses?
+ 
+  Forrest/Game  50%   Mountains/Gold 200%
+  Hills/Coal   100%   River           50%
+  Jungle/Gems   50%   Swamp/Oil       50%
+
+i.e., So, a veteran rifleman on a mountain, in a 
+fortress = 5 * 1.5 * 2 * 2 = 30 - enough to see off most invaders
+
+e) Any other defensive hints?
+Put a settler on a ship, move it to an inlet you want defended, tell the 
+settler to build a fortress.  Each time the ship wants to move press space.  
+Hey Presto a fortress at sea just right for a battleship!
+
+Bob O'Bobs stab at a _real_ algorithm:
+  A few new terms:
+    V : if unit is Veteran, V=1.5; else V=1.0
+    M : if unit has at least one full movement point, M=1.0;
+        else if unit has 0.2 (2/3), M=2/3; else M=1/3
+    T : terrain defense bonus, (in %/100+1)
+          50% bonus, T=1.5
+         100% bonus, T=2.0
+         200% bonus, T=3.0
+
+    F1: if defender is fortified, F1=1.5; else F1=1.0
+    F2: if defender is in Fortress, F2=2.0; else F2=1.0
+    F3: if defender  is behind City Walls
+           and defender is not an Air unit
+           and attacker is not Bomber
+           and attacker is not Artillery
+      then F3=3.0; else F3=1.0
+
+    AS = AF * V * M
+
+    DS = DF * V * T * max(F1, F2, F3)
+	---Bob O'Bob
+
+Subject:  11) Appearance of new civilizations.
+----------------------------------------------
+  As you have no doubt noted, dead rivals have a way of rising from the 
+  ashes.  There are a few important things you should know about these 
+  resurrections.  Before 0 AD the "twin cousin" of a vanquished civilization 
+  will appear anywhere not in immediate proximity to an existing city. After 
+  0 AD these civilizations will only reappear on unsettled continents, and 
+  after 1750 no new civilizations will appear at all.  New Civilizations are 
+  not "born stupid".  Each technology that the human player possess will have 
+  a 50% chance of becoming a starting technology for the reemerging 
+  civilization.  They will still be behind in the tech race, but not as badly 
+  as if they had to reinvent The Wheel.
+	---'Rome on 640k a day'  
+
+Subject:  12) How do you calculate pollution?
+---------------------------------------------
+The book "Rome on 640K a Day" gives the formula for
+calculating the probability of pollution around a city each turn.
+According to the book:
+
+Each city has a "tolerance" for 20 Smokestack Points per turn. Each point 
+generated beyond that become a smokestack on the city display, representing 
+a 1% chance per turn that a square around the city will become polluted.
+  
+     Smokestack Points = Industrial Pollution + Pop. Pollution
+  
+     Industrial Pollution = # of shields generated by city.
+     Divide by 2 if city has hydro or nuclear Plant; OR
+     Divide by 3 if city has a Recycling Center.
+  
+     Population Pollution = City Size * Pollution Modifier.
+
+        Pollution Modifiers = 0.25 with Industrialization;
+            0.50 with Automobile;
+            0.75 with Mass Production;
+            1.00 with Plastics;
+            0.00 with Mass Transit.
+  Note: Mass Transit eliminates Population Pollution.
+
+Subject:  13) How is the trade route income calculated?
+-------------------------------------------------------
+The manual states that the trade income between two cities is affected by 
+the distance between them.  This is not true!  The distance is only used
+for calculating the Trade Bonus.  The following is from Rome on 640k a day:
+
+  Additional Trade = (Trade Source + Trade Dest + 4) / 8
+
+  Additional Trade = the number of trade arrows added to a city's current 
+                     arrow production as the result of a trade route.
+  Trade Source = # of Arrows in the Source city.
+  Trade Dest = # of Arrows in Destination city
+  Additional Trade is halved if both cities are from the same civilization.
+
+Subject:  14) How is the trade bonus calculated?
+------------------------------------------------
+  Bonus = (Distance +10) * (TSource + TDest) / 24
+   *.5  if both are on same continent.
+   *.5  if both are same civilization (player)
+   *.66 if you have railroads
+   *.66 if you have flight
+  (these can *all* be applied, too, if all are true, leaving less than 11%)
+
+Subject:  15) Any other trade information?
+------------------------------------------
+In the lifetime of cities, total trade can go up and down.  If one of your 
+cities has a route with a city that's turned into a loser, sending a fourth 
+caravan somewhere useful will cause the worst of the four to be dropped.  
+Remember, you can "H" a caravan to give it a new home, if your city's busy 
+building something else.
+
+Subject:  16) How is global warming calculated?
+-----------------------------------------------
+Eight pollution square are enough to trigger the 1st bout of global warming. 
+After that, each additional bout requires two more polluted squares than the 
+previous.
+ 
+Note: these are the number of polluted squares visible to the player. Thus, 
+out of sight, out of formula.
+  
+    Sun Icon Colour     # of Visible Polluted Squares
+    -------------------------------------------------
+    Dark Red            0-1
+    Light Red           2-3
+    Yellow              4-5
+    White               6+
+ 
+Subject:  17) How is corruption calculated?
+-------------------------------------------
+  Corruption = (Total Trade * Distance * 3) / (10 * Govt)
+    Corruption is halved if a Courthouse or Palace is present.
+  
+  Distance = City's distance from capital city. Under
+    Communism distance is always equal to 10 squares. With no palace, 
+    distance is always equal to 32.
+  
+  Govt = Government modifier; Despotism = 8; Anarchy = 12; Monarchy = 16;
+    Communism = 20; Republic = 24; Democracy = 0.
+ 
+
+***************************************************************************
+                        C   H   E   A   T   S
+***************************************************************************
+
+There are lots of ways to cheat, but most of them make the game less
+interesting. The one exception is editing the save file. I play most games 
+honestly, and don't edit the save file just for the sake of winning;
+sometimes I edit the save file in order to create unusual and interesting 
+situations.
+
+(I try never to cheat at all, but occasionally can't resist using the
+fast-settler.)
+
+Editing the save file just to give yourself huge amounts of cash is boring.
+Be creative! Give the Romans a battleship in 3980 BC and see if you can
+still beat them! Try playing difficulty level 5, which is worse than
+Emperor, but start yourself with extra advantages to make up for it. Edit 
+the unit definitions and play with different kinds of military units. Be 
+the barbarians.
+
+At difficulty level 6, you have no contented citizens at all, even when your 
+city size is 1 (one!). The computer does not labor under such a disadvantage; 
+its unhappiness is still Prince level, I think. The computer builds a militia 
+with about 3 or 4 resources. You need a lot of extra advantages to win at
+difficulty level 6.
+
+To play at difficulty level 6, you must change the tenth byte of the save file 
+to a 6. There is always a chance that the game will crash when you save, 
+because the difficulty level is used to index the strings "Chieftain.
+"Emperor". So far I never had a crash.
+
+To play the barbarians, change byte 2 to a zero. If there are no barbarian 
+units, you get a "Centuries Later..." ending; this means you need to give 
+yourself a Barbarian settler, by writing, at offset 0x26c0 of the file,
+    00XX YY00 0300 ff00 ff00 ffff
+where XX and YY are the latitude and longitude; try 2020 as a start.
+
+I described above a game where I edited the save file to give myself an
+incredible advantage, and then set myself an unusual goal in addition to 
+the normal goal of just winning.
+
+Another time recently, I was getting too many barbarians. I was handling
+them easily, but got tired of them. I don't like the barbarians, and I wish 
+Civ had an option to turn them off. I saved, quit, and deleted all the
+barbarian units! I got a 400 year breathing space out of that...
+
+The most famous ("infamous") known cheats are:
+
+Subject:  1) The Shift-56 cheat
+-------------------------------
+Note: The cheat only requires %^ (shift 56).
+This is the Shift-56 (sometimes shift 1 to 8) cheat, only available in 
+v1.0. It was the player-test mode for Microprose play testers. 
+Refresh the map after pressing Shift 1-8 (by moving the cursor or pressing 
+t twice) and you will see the map of the whole world. You can click on the 
+cities of other players and unfortify their troops and sell their city
+improvements      
+
+F7 will show you the development profile of each civilization, showing you 
+all their advances and allowing you to see if they have a vendetta against 
+you.
+
+F8 shows you the powergraph and allows you to see a replay up to that point.
+
+F9 shows numbers representing the attack points, defense points, and 3 of
+the cities the computer uses to calculate battle, on each continent (along 
+with giving the size of each continent in land squares.
+
+F10 shows a complete world map.
+
+The other function keys sometimes do their normal functions, but they mess
+up the display a lot of the time. Just a word of warning.
+
+Subject:  2) The Movement Cheat
+-------------------------------
+Any piece that sentries in a town before the end of its movement can be
+unsentried and REGAINS ITS FULL MOVEMENT for the turn. What this means is 
+that if you have roads linking your cities together and a chariot in a city 
+on one side of your continent, you can move it all the way to the other
+side of the continent in one turn. All you do is sentry it in each city 
+along the way (as long as each city is <=5 squares away). In fact if you 
+have some invaders to kill, you can kill one, sentry it in a nearby city, 
+unsentry it, kill the second, move into the city again all in one turn.
+This is how I defend 10 cities with 4 chariots
+
+Subject:  3) The Settler Cheat
+------------------------------
+(Spoils the game) Most settler functions take from 2 to 12 turns to 
+accomplish. Any of them can be accomplished in one turn by putting the 
+settler a square, pressing R or M or I or whatever, clicking on the settler 
+to make it blink again (which seemingly aborts the function) and pressing R 
+again. Keep repeating this process until the road or irrigation is
+finished. If you turn on the End-of-Turn feature, this helps you perform the 
+desired function in one turn. Otherwise you could just keep some nearby
+piece blinking so that the turn doesn't end before you've milked the cheat 
+for all it's worth. Irrigating swamp takes 10 or 11 turns so this cheat is 
+real handy.
+
+Subject:  4a) Ship Movement Cheat
+---------------------------------
+With two ships (Sail, Frigate and Transport) you can move anywhere in the
+world, provided you have one ground unit aboard. The process is to move one 
+ship (needs to be able to take one unit) until it has one MP, place it in
+sentry mode, move the next ship (the one with at least one unit in it) next 
+to it and "unload" the unit into the sentry mode ship. Then place the just 
+unloaded ship (with most likely 1 MP) into sentry mode and repeat with the 
+ship just loaded (It will have its normal MP restored, wonders are not
+included). Repeat this process until you get where you want to go. (Note: 
+sometimes the computer will flash "end of turn" after placing a ship into 
+sentry mode, even though you just transferred a unit and the other ship
+should be active. Just click onto the supposedly active ship, hit a
+key/button, and the ship should become fully active again. I've also 
+noticed what appears to be a glitch after doing this for a while in one 
+turn. It seems the computer knows you're doing something not quite right, 
+or the programming is straining with the large number of moves.
+
+Note: Apparently, this cheat *does* work with triremes, provided you do not
+sentry them away from land.
+
+Subject:  4b) Ship Movement Cheat
+---------------------------------
+This sub-section is a contribution from Bob O'Bob and when combined with the
+settler cheat makes the game almost impossible to lose!
+
+  (and you thought the settler cheat spoiled the game...)
+  ALL ships can have unlimited movement.  This includes having a battleship
+  bombard a city an unlimited number of times, or until it loses ;-).  
+ 
+  This is really based on the original ship movement cheat, but is so much
+  more powerful, and in a way so much simpler to implement, that I'm 
+  surprised it has not been written up before. In use, it is very similar to 
+  the movement cheat of sentrying units in towns. If any ship is sentried 
+  before its movement points (MPs) are used up, it can be awakened by any 
+  ship that can respond to the "U"nload command on the same square.  The 
+  sentried ship(s) will wake up with full MPs (not counting WoW extras). The 
+  simplest form of this will allow you to map the whole ocean with only two 
+  sails.  Starting on the same square, move one until it has only one MP 
+  left, then sentry it.  Move the other to the same square and unload it.  
+  Sentry the second, and unload the first. Now, both have full MPs again!  
+  Or, for a real thrill, make a convoy out of a battleship and two 
+  transports.  Two transports are needed to wake each other up, because the 
+  battleship does not react to the unload command.  The transports can be 
+  *completely* full, too, another advantage over the earlier ship movement 
+  cheat.  One "convoy" like this, with the liberal application of the 
+  save-game cheat, can wipe out all enemy units on coastal squares or in 
+  coastal cities - in a single turn. Like the settler cheat, actually doing 
+  this can get boring, both in terms of how many motions it takes and in how 
+  easy things get.
+ 
+  Warnings: do not "U"nload a ship on a square where a bomber has ended its
+  turn without a carrier or city underneath it. This may cause the bomber
+  to run out of fuel. When stacking large numbers of units (including cargo)
+  to be awakened by a single ship "U"nloading, there may be a maximum number
+  of units awakened by a single "U" command (it appears to be 8) and you
+  might have to "U" more than once to get them all.  Remember, the last
+  ship arriving still has to sentry and be awakened to keep a whole convoy
+  together.
+ 
+  I'm still looking for a method of giving air units unlimited life, and 
+  yes, a carrier *can* wake up a battleship.
+ 
+  Note: _once_, while working with five sails and fifteen "cargo" units,
+  I managed to have a caravan unit out on the ocean, alone, blinking.
+  I was so surprised that I forgot to make a save file. If I _could_
+  duplicate this, I would tell you how, and what it's good for. If anyone
+  sees such an occurrance, *make a save file* and let me know!
+	---Bob O'Bob
+
+Subject:  5) The Shipping Lanes Cheat
+-------------------------------------
+You can make enough transport-type ships, string them along in a convoy,
+just enough spaces apart that you use up the full MP of each one, and start 
+from one shore, move the ship on top of the next, use that ship to go to
+the next... and your troops will move with the active ship, provided it can 
+carry them all.
+
+Note: If you string along enough ships to make a complete circle, with ships
+moving each way between each pair of ports, you can move one ship-load each 
+way, each turn.
+
+Subject:  6) The Unloading Ships Cheat
+--------------------------------------
+This one is when you wish to unload units in a city. Dock the ship, and go
+into the city description screen (click on city) and then click on the
+units in sentry mode you just delivered. They will then have full MP
+restored, and you can continue to move them normally at this point. (With 
+Railroad (RR), this cheat allows for faster deployment across continents 
+between your cities and/or ships.) Note that a unit can have several full 
+moves in one turn this way.
+
+Subject:  7) The Save Game Cheat
+--------------------------------
+Apart from the obvious reasons for saving regularly. It is well known that
+the computer cheats when it comes to World Wonders. They appear to be
+awarded randomly to any city the computer likes. If one gets awarded, it is 
+possible to go back to your last save, and the chances are that it won't be 
+awarded again for a while.
+
+Another use for the save option is when you are having problems attacking
+your enemies because of an uncooperative senate.
+	1. Have a revolution
+	2. Attack whoever you wish
+	3. Save the game
+	4. Reload it
+	5. You will be prompted for the type of government you require
+Thanks to Evan for that one.
+
+Subject:  8) The Settler Movement Cheat
+---------------------------------------
+Move the settler 2 squares along a road, then tell it to do something. Now 
+wake it up and move it another two squares. This means you can move a
+settler a minimum of 13 squares along a road before the development of 
+railroad. If you move them along a mountain range where it takes a long 
+time to build mines, or across swamp you can move about 19 squares in one 
+turn (tell the settlers to mine the mountain/hill or clear the swamp).
+
+Subject:  9) The Spaceship Cheat!
+---------------------------------
+Not too sure if this is a cheat or a bug, but I thought I would include it
+anyway.  Pointed out to me by Don Davis (nod sivad).
+
+It is possible to launch a spaceship with 0% chance of success.  All it
+needs is a habitation module and a connected engine.  I've never lost any
+of these ships.  This has saved my butt a couple of times when engaged
+in a space race.  I call this a cheat because the 100% success rate must
+be due to a bug.
+
+Subject:  10) The Settler/Railroad at Sea Cheat
+-----------------------------------------------
+  Unload the settler and build, now wake the settler up and build until the 
+  road/railroad is built. Now move the transport one square and unload the 
+  settler - now you can get more production out of this busy little settler. 
+  If you have enough transports you could theoretically railroad every sea
+  sector with only one settler.
+	---mperry
+
+  Here's how to do it:
+  Have a settler in a ship.  
+  Command the ship to "U"nload.
+  Command the settler to "R"oad.
+  Click on the ship. (I'm assuming you have a mouse)
+  Click on the settler's icon in the pop-up, "waking up" the settler
+  Press some key or click elsewhere to clear the pop-up (I press "R")
+  Go back to the step of commanding the settler to "R"oad.
+  Once the settler completes a phase (road or rail) the ship underneath
+  it must move once, to make it willing to start again.
+  I find it best to use *two* settlers; for each sea square one builds
+  the road, the other builds the rail; then move the ship.  With two ships
+  and a ship movement cheat (q.v.) there is no theoretical limit to how
+  much of the ocean can be railroaded in a single turn
+	---Bob O'Bob
+
+Subject:  11) Hacking the .SVE file
+-----------------------------------
+An amusing and informative post for those that wish to hack the .SVE files
+themselves.  Remember, there are easier ways to do this !?!
+
+=====
+CIVILIZATION - What a great game! :)
+
+  Want to go back in time?
+  Want to play a different civilization?
+  Want to make the game easier or harder without starting over?
+  Want to give civilizations more appropriate names?
+  Want to really speed up scientific research?
+  Want to give yourself (or another civilization) lots of cash?
+  Want to reduce the number of civilizations in your current game?
+          Or increase it?
+  Want to play with a couple of friends?
+  Want to change the computer players' tax/science/luxuries ratio's?
+          Or your own?
+
+Here's how to do it:
+  First off, a few helpful hints:
+         1) use a HEX editor (BEAV, available on the net is a good choice)
+         2) always remember that ALL numbers in the game are represented by 
+            2 byte LSB,MSB format numbers in the .SVE files.  (At least, 
+            this seems to be the case. :)
+         3) most numbers have an upper limit, either game imposed or 
+            compiler imposed.  For instance, you can't have more than 32000 
+            in cash - that's game imposed.  Even if you could have more 
+            than 32000, you couldn't have more than 32767 because 1 bit of 
+            the 16 bits used for each number is used to indicate that the
+            number is negative - this is compiler imposed.
+         4) make backups of your .SVE files before changing them.
+
+Ok, here's the format for each question:
+  (question)
+        (byte start address in HEX to change in .SVE file,length in decimal)
+        (valid range in decimal if known)
+        (explanatory text)
+
+And here are the questions again:
+
+  Want to go back in time?
+         8,2
+         before 4000BC has worked, after 2200AD may also work
+         Changing the current year allows you to play the game forever and 
+         achieve phenomenal scores.  
+
+  Want to play a different civilization?
+         2,2
+         the range is 1-7.  choosing 0 would make you the barbarians.
+         Now you can change to whatever civilization is winning at the 
+         moment or simply see what each one of them can see.  This does 
+         screw up the little map on your main screen, but you can live with 
+         it. :)  
+         NOTE: This number is very important for other questions.  For any
+         question that applies to multiple civilizations (more cash, more 
+         lightbulbs for science, etc) you need to multiple this number by 
+         the number of bytes used for each civilization's set of values, and 
+         add it to the byte start address.
+
+   Want to make the game easier or harder without starting over?
+         A,2
+         the range is 0-4.
+         This is the difficulty rating.  A 0 is for Chieftain and a 4 is for 
+         Emperor.  I haven't tested anything above 4, I shudder to think 
+         what the game might do, considering how badly it cheats on 4.
+
+   Want to give civilizations more appropriate names?
+         This one is special, because it really encompasses three similar 
+         areas.  
+         10, 14  - This is for the Leaders' names
+         80, 12  - This is for the PLURAL spelling of the civilization name
+         E0, 11  - This is for the singular spelling of the civilization 
+                   name         
+         Any character you like, plus the following special ones: 
+                 # = Stick figure
+                 $ = coin
+                 ^ = check mark
+                 { = wheat stalk
+                 } = trade arrows
+                 \ = diamond
+                 | = shield
+                 ~ = light bulb
+                 _ = sun
+         If the new name is shorter than the allowed space, the next byte at 
+         the end of the name should be a 0 (this prevents junk remaining 
+         from the previous name from showing up).
+
+   Want to really speed up scientific research?
+         148, 2
+         0-lots :)
+         This figure must NEVER exceed the amount required for the next 
+         advance.  If it does, you'll never get the next advance.  The 
+         amount required for the next advance is based on the difficulty 
+         level (0-4), and how many advances you already have (invented, 
+         stolen, or found makes no difference :).  The number of lightbulbs 
+         needed for each new advance is:
+         (difficulty level+3)*2*(# of advances you already have).  
+         NOTE: In the beginning advances are slightly harder at the low 
+         difficulty levels (weird, huh?) AND after 0 AD the number doubles 
+         (i.e., add a *2 to the equation above).
+
+   Want to give yourself (or another civilization) lots of cash?
+         138, 2
+         -32000 (or so) to +32000
+         Don't make this number a negative - you'll lose EVERYTHING.
+         This number won't go above 32000, so spend money if you start to 
+         get close to it.
+
+   Want to reduce the number of civilizations in your current game?
+   Or increase it?
+         93BC, 2
+         0-6
+         The range is only 0-6 because the Barbarians always exist, and 
+         there can only be 7 civilizations.  If you drop this number down 
+         to 0, the computer will probably ignore all the civilizations 
+         except yours and the barbarians.
+
+   Want to play with a couple of friends?
+         By playing with the number of civilizations, and changing the 
+         player civilization number, you should be able to play a 
+         multi-player game.  
+         NOTE: Due to the required save, edit, and reload steps 
+         such a game will take a LONG time to play.
+
+   Want to change the computer players' tax/science/luxuries ratio's?
+   Or your own?
+         0738, 2 - This is the tax rate
+         8BB4, 2 - This is the science rate
+         0-10 combined total
+         The ratios are determined in the following order: tax, science, 
+         luxury.  Taxes are checked first, and the value is subtracted from 
+         10.  Then science is subtracted from the new value.  The resulting
+         value is placed in Luxuries.  NOTE: Taxes are generated first, so 
+         if you set taxes at or above 10, science and luxuries gain NOTHING 
+         no matter what the numbers show.  This can be verified by hitting
+         the F5 key.  
+        
+Brought to you by Charlemagne, Emperor of the World (several times over :)
+        also known as: Charles_K_Hughes@cup.portal.com
+=====
+
+Subject:  12) Is there an easier way to hack the .SVE files?
+------------------------------------------------------------
+Yes!  There is an excellent program called civedit3.zip.  It is available
+at ftp.uwp.edu in directory pub/games/romulus/misc.  See GENERAL section 9)
+for details of obtaining it.
+
+
+***************************************************************************
+                T   H   E       F   U   T   U   R   E
+***************************************************************************
+
+Subject:  1) Will there be a Civ II?
+------------------------------------
+MicroProse has no plans at the moment to produce a sequel to Civilization.
+However with so much interest on the Net and If people push and hassle them 
+enough, who knows..?
+
+Note: After a recent communication with MicroProse I was informed that they
+will be converting Civ to work under Windows.  This will include high
+resolution graphics and "probably" a few enhancements and additions!  The 
+person I spoke with said it would "probably" be more of a rewrite than a 
+conversion.  Maybe they will finally fix the Advisory Bug after all ;)
+
+Further Note: Civ for Windows has now been released, but details are only
+coming in slowly.  It appears to be a complete conversion and not a rewrite
+as suggested before.  There have also been a number of complains about the
+overall speed of the game, and the fact that you now require 2-4 meg of
+memory instead if 640K.
+
+Subject:  2) Civilization-Like Games.
+-------------------------------------
+A post from Bryce Harrington that I felt should be included in the FAQ.  I
+expect that it will be added to in future editions.
+
+"I loved Civilization.  What other games are out there that are similar
+to it?"
+
+I have not yet seen a game that I like better than Civilization.  There
+are not many that "clone" it, but there are many that are similar to
+it in some ways.  Here is a list of games and some short comments on
+them.  [If anyone has additions/corrections, PLEASE include them]
+
+Railroad Tycoon:  Operate a railroad.  Pre-Civilization Microprose Game.
+
+        SimCity:  Great simulation of the development  of a city.  It is a 
+                  *Simulation* game - no opponents, no "winning".  You must 
+                  build a city up by zoning land, setting budgets, repairing
+                  damage from disasters, fighting crime, pollution, etc.  If
+                  you love developing your civilization and hate having to 
+                  compete with other civilizations, you'd enjoy this game.
+
+       SimEarth:  Play God with planet Earth.
+
+        Populus:  Play God against another civilization.  Cause earthquakes, 
+                  raise land from the sea.  Haven't played it, though.
+
+  Empire Deluxe:
+
+           Risk:  Many versions of it exist for the computer.  Much simpler 
+                  than Civilization, but worth trying out.  The board game 
+                  version was more popular than the board game version of 
+                  Civilization. If Civilization gives you a headache, 
+                  try this.
+
+        Castles:  Play the leader of a medieval king building castles and 
+                  fighting off the Celts.  Good with graphics, you actually
+                  watch little men with hammers and saws building away.  You
+                  determine the number of men working on the different 
+                  sections of the castle.  Celts may attack before you 
+                  finish, so keep some soldiers ready.  Has limited but 
+                  interesting plotlines that you are able to manipulate 
+                  by making decisions:
+                  " What do you do:
+                  1.  Apologize and give 100 pounds tribute to Celts
+                  2.  Promise to make amends, but do nothing.
+                  3.  Send Celtic messenger's head back on a platter."
+                  If you like watching your civilization grow, but prefer 
+                  combat and diplomacy, you'd like Castles.
+
+  Spaceward Ho!:  I hear it is like Civilization in space.  Control
+                  production of planets in you federation.  
+
+                  The following is from Eric R:
+                  -----
+                  Basically, start on a planet ideal for you.  Build ships 
+                  to explore+colonize nearby worlds.  Terraform to make the 
+                  planets habitable + mine to get metal to build more 
+                  ships.  Research six different areas of technology to get 
+                  faster, longer range, more powerful ships which take less 
+                  metal to build.  A variety of human and computer 
+                  opponents are trying to do the same thing.  (Although 
+                  their idea of an ideal planet is different from yours.)
+
+                  Size and shape of galaxy are customizable.  Computer 
+                  opponents get advantages to make up for AI, although I 
+                  find the AI to be pretty good overall.  The Mac version 
+                  networks in seconds: don't know how good the PC will be.
+
+                  There's a lot of humor in the game: sending a ship to a 
+                  planet causes the computer to say "YAHH!", many other 
+                  sound effects are similar.  The ships you design during 
+                  the game play often have very funny pictures. (My 
+                  favorite looks like a skull+ribcage with a V-8 motor in 
+                  the back.)
+
+                  I'm not sure how the Windows version compares rulewise: 
+                  the Mac version just underwent a major upgrade to add 
+                  alliances, improved shipbuilding finances, better 
+                  messaging between players, etc.
+
+                  Overall, I love it.  Be forewarned: getting this game 
+                  while still interested in Civ may end in ruined career, 
+                  marriage, etc...
+                  -----
+
+  Buzz Aldrin's 
+Race into Space:  Haven't played it, but looks like you can control the 
+                  production/distribution of resources into a space program.
+
+         Realms 
+    of Conquest:  Very similar to Castles, but has cities which you can 
+                  control production in (build city walls, expand city, 
+                  improve health, train army, etc).  You use your cities 
+                  to build an army, then direct it to go to an enemy city 
+                  and besiege it until it surrenders.  Your armies can fight
+                  the enemies' armies on battle fields in real time and in 
+                  3D overview.  If you prefer the combat in Civilization and 
+                  don't like spending the time constructing stuff, making 
+                  trade routes, getting advances, etc, then you might like 
+                  this game.
+
+
+That's really about it. Again if there are any comments, criticisms or bits
+I have left out, give me an email at:
+
+                djh@wcl.bham.ac.uk or
+
+Thanks for reading and have fun. :)
+
+
+
+
+
+
+
+--
+Dave - Maintainer of the 'Games Domain' W3 site.
+
+Over 140 Games related links including FAQs, Home pages, 'Net games,
+Walkthroughs, FTP sites, and loads more.  These can all be viewed on
+W3 by pointing to: http://wcl-rs.bham.ac.uk/GamesDomain

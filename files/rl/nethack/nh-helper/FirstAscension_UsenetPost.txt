@@ -1,0 +1,134 @@
+
+From: [...] (Janis Papanagnou)
+Newsgroups: rec.games.roguelike.nethack
+Subject: Ascension (long)
+Date: 3 Nov 1994 16:48:40 +0100
+
+
+
+
+
+I dare wasting bandwidth - it is my 1st ascension.  I'm just too happy.
+Please forgive;  demi-gods are only human, though :-)
+
+
+        "Goodbye Janis the Demigod ..."
+                "So thou thought thou couldst kill me, fool."
+                        "I'll be back."
+
+
+Lost my kingdom at Molochs', and reaching level 1 with the amulet in my
+hands, I have had to return down to the mines again ...
+
+1  Janis-K  ascended to demigod-hood  179 [219]        (Nethack 3.1.3)
+
+ What's that ??!  A Knight ?  I never really wanted to play a Knight !
+ (Must be one of the games "just let us start for 3 dungeon levels or 4" ...)
+ ... and now made my very first ascension with that guy.
+ He started lawful, and finished chaotic (got the taste of life).
+
+Some specials (at least for me) in this game:
+ No cursed bell trick;  no wish for artifact;  got artifact weapons only
+ from offering;  no extra altar in the whole game, only minetown (aligned),
+ death valley, Orcus' town, Molochs sanctum;  found and ignored Demonbane;
+ had two AoLS and did not need them;  had and lost RoReg, RoC, RoID, and
+ many good wands, to a "chest attack" in Vlads tower;  besides THE WoW, I
+ only found one magic lamp;  got teleport control prior to teleport.
+
+ The most remarkable, however, was:
+   MY KNIGHT HAS NO SERIOUS STUPID MOVE DONE  (OK, he'd be dead, otherwise :-)
+   (But "YASD" is always my major enemy in the game !!!)
+ Some small mistakes could not be avoided:
+   a fall in the moat once, but reached the shore alife, and
+   the lost of many good items (rings and ray wands) to an electric chest
+ And one major one - so that I thought, my adventurer will fail again:
+   I deposit my blessed bag of holding on Sanctum level to ease the fight,
+   and the last thing I have heard of it was "a crunshing sound".
+
+ This mistake made the game more interesting again - I thought, I will not
+ survive -, for several reasons:
+   I was at Level 50, deep in the dungeons, when it happend;
+   all my holy water, and my scrolls of remove curse were in the bag
+   (do you know of the effect of an applied cursed unicorn horn);
+   about 20 wands of digging (20 more at level 1, to be prepared for the
+   earth level), and many ray wands vanished with the bag, so that I have
+   to fight the monsters face to face;
+   many gold and gems get lost in the bag (that finally will reduce my
+   score), along with my second blessed luckstone;
+   many teleport scrolls that would have saved my magic power, and some
+   potions of speed, that would have given me a move bonus.
+ Finally back on level 1 it turned out, that I will need another bag to
+ prepare my inventory for the Elemental Planes.  I could not remember
+ where some bag lies around in the dungeons; so I decided to go back to
+ the gnomish mines - The Amulet in my pack - full of dread.  Until my
+ Knight has been reaching the mine town, nothing approppriate has been
+ found.  In a hardware store (after purging the shopkeaper), I decided
+ to use my only wand of polymorph for a desperate polypile try - the
+ first and only in that game.  After four zaps, the Knight managed to
+ get a bag (which finally turned out to be an oilskin sack), and, with
+ a bit relief, he hopefully returned to level 1, to collect most stuff.
+ For my pickaxe has become cursed, I left back many more gems and gold,
+ to take all wands of digging with me.
+
+ The Elemental Planes were no major problem; I only trembled in the Air
+ Plane: a Ki-Rin tries to extinguish my Knight, which hardly survived,
+ and second: a mind flayer approaches, and no magic portal to find. (My
+ last two deaths have been caused by them, so I was heavily frightend !)
+ But with ONE foot distance, a portal took me away.  In the Water Plane
+ the Wizard made a poor try to steal the Amulet; but where should he go
+ to ?  The Astral Plane should not be a problem with my helm of opposite
+ alignment; and yet the first altar was mine.
+
+The final data:
+ HP:173 [219]  AC:-22  STR:25 (18/65)  DEX:12  CON:18  INT:10  WIS:18  CHR:18
+               EXP:25     Moves:81025     mostly burdened, sometimes stressed
+Intrinsics:
+ piously aligned,
+ telepathic, teleport + control, invisible + see invisible,
+ very fast, stealthy, aggravate monster,
+ poison/fire/cold/shock/sleep/disintegration/hallucination resistent,
+ life saved (not needed), protected, reflection,
+ jump,
+ magic protected,
+ extreemly lucky, extra luck, no good/bad luck timeout
+
+approx. 220.000 $ Gems,  approx. 50.000 $ Gold,
+much gold and precious gems got lost with a blessed BoH
+
+Inventory (excerpt):
+ [ " ]  AoY, plastic AoY, AoLS (worn), cursed AoLS  (AoLS never needed)
+ [ = ]  blessed +3 RoID (always worn), blessed RoL, RoC (seldom used)
+ [ ) ]  +6 Grayswandir (worn; phantastic; it sears through Gehennom),
+        cursed +6 Snickersnee
+ [ [ ]  cursed +3 GDSM, +0 CoP, blessed +3 SoR, blessed +3 BoS,
+        blessed rustproof +3 HoOA, blessed rustproof +3 GoP
+ [ + ]  Book of the Dead
+ [ ( ]  Oilskin sack, drum of earthquake (7), blindfold, skeleton key,
+        blessed Magic Mirror of Merlin, Bell of Opening, +0 unicorn horn
+        Candelabrum of Invokation
+ [ * ]  luckstone (has been blessed most time, as was his lost sibling)
+
+Vanquished monsters (excerpt):
+ [ @ ]  Wizard of Yendor (14 times), High Priest, Croesus, Medusa
+ [ & ]  Death (2 times), Asmodeus, Yeenoghu, Juiblex, 3 djinn, 16 vrocks,
+        6 horned devils, 4 mariliths, 5 erinyeses, 6 nalfeshnees
+ [ A ]  1 Ki-Rin (nasty), 5 Archons (annoying),  Couatls
+ [ L ]  3 Master liches (before genocided; very annoying without teleport)
+ [ H ]  3 Titans, 22 Minotauri
+ [ D ]  33 adult Dragons (before genocided)
+ [ E ]  89 Elementals
+ [ W ]  10 Nazgul (shouldn't there be only 9 of them in a game ?)
+ [ Y ]  4 Sasquatches
+ [ N ]  2 golden Nagas
+ [ c ]  35 cockatrices (quicker than a ring of conflict)
+ [ i ]  2 tengus (no more required for teleport control)
+ [ q ]  5 mumakil
+ [ h ]  6 mind flayer
+
+        2868 creatures
+
+Genocided 31 species, just before facing The Wizard:  D, H, L, T
+
+That's it,
+Janis
+

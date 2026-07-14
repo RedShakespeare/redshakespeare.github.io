@@ -1,0 +1,366 @@
+<html>
+<head>
+<title>Improved ADOM Guidebook - Magic</title>
+<link rel="stylesheet" type="text/css" href="adomgb-body.css">
+</head>
+<body>
+<h1>Improved ADOM Guidebook</h1>
+<hr>
+<a href="adomgb-0-4.html">Previous</a> - <a href="toc.html">TOC</a> - <a href="adomgb-0-6.html">Next</a>
+<hr>
+<a href="#051">Spells</a> - <a href="#0515">Learning mechanics</a> - <a href="#051t">Spells table</a> - <a href="#052">Writing scrolls</a> -
+<a href="#053">Mindcraft</a> - <a href="#0531">Confusion Blast</a> - <a href="#0532">Mindcraft powers</a>
+<hr>
+<h3 id="05">Magic</h3>
+Books and scrolls can be <tt>r</tt>ead. Learned spells are cast &ndash; <tt>Z</tt>. You can also mark learned spells for quick selection via the <tt>:Z</tt> command.
+Mindcraft is invoked by pressing <tt>Ctrl-i</tt>. It only works for Mindcrafters though. Magical writing sets are <tt>u</tt>sed.
+<big>As of R+, spells cannot be cast while wielding two shields.</big><p>
+
+<h4 id="051">0.5.1 Spells</h4>
+There is a description of available spells in the <a href="adomman-L.html">ADOM Manual</a>. The range and damage information has been removed from the manual in ADOM 1.1.x+.
+Accordingly they are tabulated below.<p>
+
+Wizards, Priests, Druids, and Necromancers are 10 times more likely to find spellbooks. Paladins 2.5 times.<p>
+
+<h4 id="0511">0.5.1.1 Casting</h4>
+Note that spells become more costly to cast (in terms of PP) as the number of available castings decreases. Thus a spell will increase in cost as the number
+of available castings decreases below 100 or so, becoming very noticeable as the number drops below about 30. This is class dependent but will affect all
+classes to differing extents. Note also that the number of available castings is not a simple "decrement by one each time the spell is cast" type of formula.
+Again depending on class, the difficulty of casting the spell and probably other factors this will vary. For example, casting Light with 1000 castings available
+to a level 40 Wizard may decrease the available castings by one, while casting Death Ray with 20 castings available with a level 30 Archer may reduce the
+available castings to zero. These are purely hypothetical examples but should give an idea of the trends.<p>
+
+<h4 id="0512">0.5.1.2 Ball spells</h4>
+Ball spells are extraordinarily useful since no monsters shrug them off. They are wonderful when the PC is surrounded, of course.
+It is worth switching to Coward tactics and waiting to be completely surrounded before casting. Since they are relatively costly in terms of PP, it is useful to
+destroy the maximum number of enemies with each casting. Fire magic is particularly effective against cold-based creatures and undead including mummies.
+Cold magic is particularly effective against fire-based creatures. The diameter of ball spells is dependent upon Willpower / 8.
+However, this diameter only increases as a multiple of sixteen since ball spells radiate symmetrically; the minimum diameter is two. Therefore getting Willpower to 24,
+for instance, does not increase the diameter. Willpower must be increased to 32 for the diameter to increase to four, 48 for the diameter to increase to six,
+64 for the diameter to increase to eight, 80 for diameter of 10, and 96 for diameter of 12.<p>
+
+<h4 id="0513">0.5.1.3 Wish</h4>
+Wish is a unique spell. It is very difficult to learn, probably impossible if the PC has teleportitis. Such PCs must travel to a location where teleportation is impossible,
+such as the the Assassin's Guild, the Tomb of the High Kings or the elemental temples (the desirability is in that order due to background corruption in all of those locations).
+Furthermore, PCs will usually reach Starving! status while attempting to learn Wish. Removing all artifacts (except those that increase Learning) and Invisibility-granting
+items prior to reading the book is recommendable. Otherwise, their food consumption penalties really stack given the long amount of time it takes to learn Wish. Other tactics
+to deal with this include eating a blessed stomafillia to become Bloated, waiting just until the PC returns to Satiated, then eating another blessed stomafillia. It may be
+necessary to drink additional satiating potions, such as potions of toughness or potential toughness, even when the double blessed stomafillia tactic is used. Alternatively,
+PCs without Teleportitis can use a room that has the "rich flavor" special effect, where PCs will never become hungry. Wish is extraordinarly expensive to cast and also drains
+a random attribute -10 when cast. If the PC must cast it, be prepared for the attribute drain. Plan to cast it in a special room that lowers spell costs, and on Silvernight
+or Darknight, if possible, according to alignment. <big>Note that teleporting no longer interrupts reading, making learning Wish a bit easier.</big><p>
+
+<h4 id="0514">0.5.1.4 Other spells</h4>
+Bless damages undead. Healing spells can be cast at monsters including companions (but don't use them on slaves!). Lightning, Magic Missile, Stun Ray and Death Ray bolts will
+bounce off the walls, but not doors. Nothing is resistant to a Magic Missile. Magic Lock will close and lock a door in one turn. Anywhere Earthquake generates rocks will be
+turned into a normal ground tile &ndash; this can be used to destroy water tiles and make them passable. Some spell durations stack. Bless, Strength of Atlas, Invisibility and
+Farsight all stack. Calm Monster doesn't work on monsters generated in tension rooms, threat rooms and vaults. It just results in "The [monster] ignores your spell". In addition,
+Arena opponents and Keethrax' animals won't be affected by the Calm Monster spell. <big>Mystic Shovel damages stone monsters.</big> Scare Monster is only effective against humanoids,
+animals, and all unclassified monsters except wall beasts.<p>
+
+<h4 id="0515">0.5.1.5 Learning spells mechanics</h4>
+<table border=1><caption>Class table</caption>
+<tr><th>Class         <th>Base  <th>Le mod<th>Failure
+<tr><td>Archer        <td>-20   <td>1     <td>15
+<tr><td>Assassin      <td>-15   <td>1.5   <td>20
+<tr><td>Barbarian     <td>-30   <td>0.125 <td>-20
+<tr><td>Bard          <td>5     <td>2     <td>30
+<tr><td>Beastfighter  <td>10    <td>1     <td>20
+<tr><td>Druid         <td>20    <td>2     <td>30
+<tr><td>Elementalist  <td>20    <td>3     <td>50
+<tr><td>Farmer        <td>-10   <td>1     <td>10
+<tr><td>Fighter       <td>-20   <td>1     <td>15
+<tr><td>Healer        <td>10    <td>2.333 <td>35
+<tr><td>Paladin       <td>-5    <td>1.5   <td>25
+<tr><td>Priest        <td>30    <td>2.5   <td>40
+<tr><td>Merchant      <td>-20   <td>2     <td>20
+<tr><td>Mindcrafter   <td>-40   <td>0.25  <td>-10
+<tr><td>Monk          <td>-10   <td>1.5   <td>20
+<tr><td>Necromancer   <td>20    <td>3     <td>40
+<tr><td>Ranger        <td>-15   <td>1.5   <td>25
+<tr><td>Thief         <td>0     <td>2     <td>20
+<tr><td>Weaponsmith   <td>-10   <td>1.5   <td>20
+<tr><td>Wizard        <td>30    <td>3     <td>50
+<tfoot>
+<tr><td>Chaos Knight  <td>?     <td>?     <td>?
+<tr><td>Duelist       <td>?     <td>?     <td>?
+</tfoot></table><p>
+
+<b>Book charges</b><br>
+Books start with 2d3 charges and disappear when it reaches 0. The number charges left is hidden to the player. Successfully reading a book deducts one charge.<p>
+
+<b>Learning spells</b><br>
+Reading a spellbook takes 3 + Cost turns, succeed or fail. "Shelves of books" room effect halves this time. There are 11 possible bonuses to learning a spell:<p>
+<ol>
+<li>We start off with class. Priests and Wizards have +30, Mindcrafters -40, other classes in between; see "Base" in the table above.
+<li>Learning is counted in next; +1/8*Le for Barbarians, +3*Le for Wizards, Necromancers, Elementalists, and in between for others; see "Le mod" in the table above.
+<li>Next comes the difficulty based on the specific spellbook (Darkness and Light are lowest with +6, Wish is highest -100).
+<li>Pure spellcasters (except Elementalists) attempting to learn purely arcane spells get -10, other combinations get +10.
+<li>You are penalized -1 per remaining turn of drunkenness.
+<li>You are rewarded +20 for a blessed book and penalized -20 for cursed.
+<li>You are rewarded for your level. Pure spellcasters (Druids, Priests, Wizards, Necromancers, and Elementalists) get +Min(75,2*level). All other non-Mindcrafter
+non-Trolls get +1*level. Mindcrafters and Troll non-casters get nothing.
+<li>+Concentration/5.
+<li>+Literacy/10.
+<li>Druids and Necromancers receive +40 for their specific starting book, lightning bolt and frost bolt, respectively.
+<li>Characters born under Book receive +20.
+</ol><p>
+
+All of this combines together for some kind of BaseValue. Now you choose whether to cast or read the book. If you read it, there's a
+straight up Literacy roll. Basically, your Literacy skill is a percentage chance of successfully reading the book. If you
+fail the check, you "cannot decipher the runes" and nothing else happens (even with 100 Literacy there is 1% chance of automatic failure).
+Now if BaseValue &gt; 1d100 you succeed in learning the spell. Otherwise, you fail. SuccessMargin = BaseValue-1d100 previously rolled.<p>
+
+<b>On success</b><br>
+You gain castings and train Learning. Learning training is 2*Cost, or Cost/2 if you had some castings already.<p>
+If ExistingCastings &lt; 30, then CastingsGained = Min(200 + Le*4, Max(20, Max(5, SuccessMargin - ExistingCastings) * Max(1, Le/4)));
+else CastingsGained = Max(5, Max(1, Le/8) * SuccessMargin).<p>
+
+CastingsGained is then reduced by ExistingCastings and level - CastingsGained *= (100 - 3 * (ExistingCastings/50 + lvl/3)) / 100.
+Reduction is never worse than 25% of previous value and never reduces CastingsGained below 1.<p>
+
+Next, Cup is +20% CastingsGained, Good and Great Book Learner talents are each +10%.<p>
+
+<b>On failure</b><br>
+If you fail to read the book successfully, it depends on SuccessMargin (negative in this case) plus a Failure
+value for each class your chances of the book doing something nasty versus your chances to just not learning anything.
+See "Failure" in the table above.<p>
+
+If the value is now positive, nothing happens. Otherwise, you get a random penalty from the 11 equally probable effects:<p>
+
+<table border=1><caption>Failed spellbook reading</caption>
+<tr><th>#<th>Message<th>Effect
+<tr><td>1<td>The spellbook is suddenly gone! <td rowspan=2>spellbook disappears
+<tr><td>2<td>The spellbook bursts into flames and is destroyed!
+<tr><td>3<td>You are stunned by the power of the runes! <td>stunned for 4d(Cost/2) turns
+<tr><td>4<td>You suddenly feel very confused. <td>confused for 5dCost turns
+<tr><td>5<td>Your eyes refuse to further concentrate on this spellbook! <td>blinded for 2dCost turns
+<tr><td>6<td>The magical energies drain your healh! <td>-1 To
+<tr><td>7<td>The power of the spell partially drains your life force! <td>1dCost damage
+<tr><td>8<td>The spellbook explodes into a ball of fire! <td>fireball &ndash; 4d(Cost/4) fire damage to PC, equipment and inventory; spellbook is destroyed
+<tr><td rowspan=2>9<td>Suddenly you stand somewhere else. <td>teleportation
+<tr><td>You feel dizzy.<td>would have teleported, but the dungeon level doesn't allow it &ndash; so confuse for 5d5 turns instead
+<tr><td rowspan=2>10<td>Your feel your power draining away! <td>reduce PP by 2*Cost
+<tr><td>You feel hollow. <td>would have reduced PP, but PP is already 0, so no effect
+<tr><td rowspan=2>11<td>Suddenly a pit opens beneath your feet. You fall into it! <td>pit is created [1]; some HP might be lost during the fall
+<tr><td>The ground suddenly rumbles! <td>would have created a pit, but the dungeon level doesn't allow it (wilderness); no effect
+</table><p>
+
+[1] If you're standing on a grave, it'll dig the grave. Gravedigging is always a chaotic act though, even when done in this way.<p>
+
+<b>Summary</b><br>
+To sum up, chance of successfuly learning a spell predominantly depends on class (pretty self explanatory to the extent
+spellcasters read better). Also birthsign (Book helps), whether you're drunk, the difficulty of the spellbook, whether you're a Mindcrafter/Troll,
+B/U/C status of the spellbook, Learning, Concentration, Literacy, and experience level factor in &ndash; the higher of these the better.<p>
+
+<h4 id="0516">0.5.1.6 Spell list</h4>
+Notation for spells:<p>
+<ul>
+<li>W &ndash; Willpower of the PC
+<li>M &ndash; Mana of the PC
+<li>L &ndash; Level of the PC
+<li>P &ndash; Spell Power for the given spell
+<li>R &ndash; Maximum range (as determined by the range formula)
+<li>R* &ndash; Remaining range points when target is hit
+<li>M{x, y} &ndash; take the maximum of x and y
+<li>m{x, y} &ndash; take the minimum of x and y
+<li>B{l, V, h} &ndash; value V, but minimum l and maximum h
+</ul><p>
+
+For Darkness, Light, and ball spells, "Range" means "Radius". Chance is relative probability of a spellbook to be generated. It also hints at spell difficulty.<p>
+
+<table id="05161" border=1><caption>Spells</caption>
+<tr><th>Spell<th>Pict<th>Base cost<th>Range: Duration<th>Damage<th>Items with similar effect<th>Chance
+<tr><td>Acid Ball / Rain Of Sorrow (A)<td><img src="tiles/aba.png" alt="Acid Ball" height=45><td>35 <td> M{2, W/8}<td>M{3, L/4 + 2}d9 + L + P <td>&nbsp;<td>40
+<tr><td>Acid Bolt (A,C)<td><img src="tiles/ab.png" alt="Acid Bolt" height=45><td>15 <td>W/4 + L/4 + 2 <td>M{4, (L + P)/3}d8 + R*<td>wand of acid<td>40
+<tr><td>Bless (C)<td><img src="tiles/bl.png" alt="Bless" height=45><td>8 <td>1: 1dW + 2*(M + P)<td>to undead: 4d4 + W + P<td>potion of holy water <td>40
+<tr><td>Burning Hands / Baptism of Fire (A,C)<td><img src="tiles/bh.png" alt="Burning Hands" height=45><td>8 <td>1 <td>m{15, L}d3 + L + P<td>torch, everburning torch<td>100
+<tr><td>Calm Monster (A,C)<td><img src="tiles/cm.png" alt="Calm Monster" height=45><td>8 <td>1 <td>&nbsp;<td>&nbsp;<td>100
+<tr><td>Create Item / Divine Favor (A,C)<td><img src="tiles/ci.png" alt="Create Item" height=45><td>250 <td>&nbsp;<td>&nbsp;<td>scroll of item creation<td>4
+<tr><td>Cure Critical Wounds (C)<td><img src="tiles/ccw.png" alt="Cure Critical Wounds" height=45><td>15 <td>1 <td>cures 4d8 + 4 + 2*P<td>[2]<td>20
+<tr><td>Cure Disease (C)<td><img src="tiles/cd.png" alt="Cure Disease" height=45><td>8 <td>&nbsp;<td>&nbsp;<td>curacia mancox<td>40
+<tr><td>Cure Light Wounds (C)<td><img src="tiles/clw.png" alt="Cure Light Wounds" height=45><td>5 <td>1 <td>cures 1d8 + 1 + 0.66*P<td>[2]<td>100
+<tr><td>Cure Serious Wounds (C)<td><img src="tiles/csw.png" alt="Cure Serious Wounds" height=45><td>10 <td>1 <td>cures 2d10 + 2 + P<td>[2]<td>20
+<tr><td>Darkness (A,C)<td><img src="tiles/da.png" alt="Darkness" height=45><td>4 <td>M{4, (W + P)/4}<td>&nbsp;<td>scroll of darkness, crystal of darkness<td>300
+<tr><td>Death Ray / Greater Divine Touch (A,C)<td><img src="tiles/dr.png" alt="Death Ray" height=45><td>100 <td>B{2, (W + P)/8, 16} <td>&nbsp;<td>wand of death<td>20
+<tr><td>Destroy Undead / Dispel Undead (C)<td><img src="tiles/du.png" alt="Destroy Undead" height=45><td>8 <td>1 <td>(L + 1)d6 + W + P<td>holy symbol<td>20
+<tr><td>Disarm Trap (C)<td><img src="tiles/dt.png" alt="Disarm Trap" height=45><td>10 <td>1 <td>&nbsp;<td>&nbsp;<td>40
+<tr><td>Earthquake (C)<td><img src="tiles/ea.png" alt="Earthquake" height=45><td>80 <td>&nbsp;<td>&nbsp;<td>wand of earthquakes<td>4
+<tr><td>Farsight (A,C)<td><img src="tiles/fa.png" alt="Farsight" height=45><td>17 <td>(M + P)*10<td>&nbsp;<td>necklace of the eye<td>40
+<tr><td>Fire Bolt / Hellish Flames (A,C)<td><img src="tiles/fb.png" alt="Fire Bolt" height=45><td>10 <td>W/4 + L/4 + 2<td>M{4, (L + P)/3}d6 + R*<td>wand of fire<td>100
+<tr><td>Fireball / Major Punishment (A)<td><img src="tiles/fba.png" alt="Fireball" height=45><td>20 <td>M{2, W/8} <td>M{3, L/4 + 2}d6 + L + P<td>wand of fireballs<td>40
+<tr><td>Frost Bolt / Nether Bolt (A,C)<td><img src="tiles/ib.png" alt="Frost Bolt" height=45><td>12 <td>W/4 + L/4 + 2<td> M{4, (L + P)/3}d6 + R*<td>wand of cold<td>100
+<tr><td>Greater Identify / Greater Enlightenment (A,C)<td><img src="tiles/gi.png" alt="Greater Identify" height=45><td>100 <td>&nbsp;<td>&nbsp;<td>scroll of great identify<td>4
+<tr><td>Heal (C)<td><img src="tiles/he.png" alt="Heal" height=45><td>40 <td>1 <td>cures 10d6 + 10 + 4*P<td>[2]<td>4
+<tr><td>Ice Ball / Freezing Fury (A)<td><img src="tiles/iba.png" alt="Ice Ball" height=45><td>25 <td>M{2, W/8} <td>M{3, L/4 + 2}d7 + L + P<td>&nbsp;<td>40
+<tr><td>Identify / Enlightenment (A,C)<td><img src="tiles/id.png" alt="Identify" height=45><td>75 <td>&nbsp;<td>&nbsp;<td>scroll of identify<td>4
+<tr><td>Improved Fireball / Invoked Devastation (A)<td><img src="tiles/if.png" alt="Improved Fireball" height=45><td>30 <td>M{2, W/8}<td>(2 + (L + P)/5)d8 + L<td>crystal of fire<td>20
+<tr><td>Invisibility / Veil Of The Gods (A)<td><img src="tiles/in.png" alt="Invisibility" height=45><td>10 <td>1: (L + P + 3)d6 <td>&nbsp;<td>potion of invisibility, ring of invisibility, cloak of invisibility<td>100
+<tr><td>Knock / Divine Key (A)<td><img src="tiles/kn.png" alt="Knock" height=45><td>12 <td>1 <td>&nbsp;<td>wand of knocking<td>200
+<tr><td>Know Alignment (C)<td><img src="tiles/ka.png" alt="Know Alignment" height=45><td>10 <td>1 <td>&nbsp;<td>&nbsp;<td>40
+<tr><td>Light (A,C)<td><img src="tiles/li.png" alt="Light" height=45><td>3 <td>M{4, (W + P)/4}<td>&nbsp;<td>wand of light, scroll of light, crystal of light<td>300
+<tr><td>Lightning Ball / Heavenly Fury (A)<td><img src="tiles/lba.png" alt="Lightning Ball" height=45><td>30 <td>M{2, W/8} <td>M{3, L/4 + 2}d8 + L + P<td>&nbsp;<td>40
+<tr><td>Lightning Bolt / Divine Wrath (A,C)<td><img src="tiles/lb.png" alt="Lightning Bolt" height=45><td>13 <td>W/4 + L/4 + 2<td>M{4, (L + P)/3}d6 + R*<td>wand of lightning<td>100
+<tr><td>Magic Lock / Seal of the Spheres (A)<td><img src="tiles/ml.png" alt="Magic Lock" height=45><td>8 <td>1 <td>&nbsp;<td>keys, cursed wand of knocking<td>100
+<tr><td>Magic Map / Knowledge of the Ancients <big>Clairvoyance</big> (A,C)<td><img src="tiles/mm.png" alt="Magic Map" height=45><td>40 <td>&nbsp;<td>&nbsp;<td>scroll of magic mapping, crystal of knowledge<td>40
+<tr><td>Magic Missile / Minor Punishment (A)<td><img src="tiles/mmi.png" alt="Magic Missile" height=45><td>8 <td>W/4 + L/4 + 2<td>M{2, (L + P)/3}d4 + R*<td>wand of magic missiles<td>200
+<tr><td>Mystic Shovel / Divine Digger (A,C)<td><img src="tiles/ms.png" alt="Mystic Shovel" height=45><td>100 <td>B{2, (W + P)/5, 10}<td>&nbsp;<td>wand of digging, pickaxe<td>20
+<tr><td>Neutralize Poison (C)<td><img src="tiles/np.png" alt="Neutralize Poison" height=45><td>10 <td>&nbsp;<td>&nbsp;<td>potion of cure poison, alraunia antidote<td>40
+<tr><td>Petrification (C)<td><img src="tiles/pe.png" alt="Petrification" height=45><td>120 <td>1 <td>&nbsp;<td>&nbsp;<td>4
+<tr><td>Remove Curse (A,C)<td><img src="tiles/rc.png" alt="Remove Curse" height=45><td>50 <td>&nbsp;<td>&nbsp;<td>scroll of uncursing<td>40
+<tr><td>Revelation (C)<td><img src="tiles/re.png" alt="Revelation" height=45><td>33 <td>&nbsp;<td>&nbsp;<td>potion of insight<td>40
+<tr><td>Scare Monster / Holy Awe (A,C)<td><img src="tiles/sm.png" alt="Scare Monster" height=45><td>12 <td>1: Ld4 + P<td>&nbsp;<td>&nbsp;<td>40
+<tr><td>Slow Monster (A)<td><img src="tiles/slm.png" alt="Slow Monster" height=45><td>7 <td>1: 3d(W + P)<td>&nbsp;<td>cursed potion of quickling blood<td>200
+<tr><td>Slow Poison (C)<td><img src="tiles/slp.png" alt="Slow Poison" height=45><td>6 <td>&nbsp;<td>&nbsp;<td>cursed potion of cure poison, cursed alraunia antidote<td>100
+<tr><td>Strength Of Atlas / Lordly Might (A) [1]<td><img src="tiles/soa.png" alt="Strength of Atlas" height=45><td>10 <td>(W + P)*20<td>&nbsp;<td>blessed girdle of carrying<td>100
+<tr><td>Stun Ray / Lesser Divine Touch (A,C)<td><img src="tiles/sr.png" alt="Stun Ray" height=45><td>8 <td>M{3, (W + P)/4, 12}: (W + P)*0.75<td>&nbsp;<td>wand of stunning<td>100
+<tr><td>Summon Monsters (A,C)<td><img src="tiles/sum.png" alt="Summon Monsters" height=45><td>30 <td>&nbsp;<td>&nbsp;<td>wand of monster creation, scroll of familiar summoning, figurine of wondrous power<td>20
+<tr><td>Teleportation / Ethereal Bridge (A)<td><img src="tiles/te.png" alt="Teleportation" height=45><td>22 <big>[3]</big><td>1 <td>&nbsp;<td>wand of teleportation, scroll of teleportation<td>100
+<tr><td>Web (A)<td><img src="tiles/we.png" alt="Web" height=45><td>12 <td>B{3, (W + P)/4, 12}<td>&nbsp;<td>wand of webbing<td>100
+<tr><td>Wish / Divine Intervention (A,C)<td><img src="tiles/wi.png" alt="Wish" height=45><td>3000 <td>&nbsp;<td>&nbsp;<td>wand of wishing, blessed ring of djinni summoning<td>1
+</table><p>
+
+[1] Increases carrying capacity by Mana * 1000.<p>
+[2] Potion of healing, potion of extra healing, potion of ultra healing, spensesweed, pepper petal, crystal of health.<p>
+<big>[3] Teleportation cost is 22 + (2*NumberOfCorruptions) + (1.5*DL), rounded down.</big><p>
+
+<h4 id="052">0.5.2 Writing scrolls</h4>
+Scrolls can be written if the PC is literate, has seen an example of the scroll, has a magical writing set and a blank scroll to write on. The player uses the set, along with
+a blank scroll, and is given the option to specify a type of scroll to create, which must be one that the PC has identified. If the attempt is successful, the result is a scroll
+of the player's choosing, possibly coupled with the loss of power points, hit points, and the Mana attribute.<p>
+
+Blank scrolls can be found in the dungeons (usually an unlabeled scroll, although this is not guaranteed), or they can be created by dipping other scrolls into <i>normal</i> water
+&ndash; not holy water or unholy water. Be aware that the cost for writing scrolls of corruption removal is high &ndash; there is a permanent loss of two or three Mana points for
+<i>Wizards</i>, apparently depending on the B/U/C status of the magical writing set and the blank scroll. The Mana cost for non-Wizards is significantly higher, ten Mana points is
+typical. In addition, any combination of a blessed MWS with an uncursed blank scroll or an uncursed MWS with a blessed or uncursed blank scroll will result in a loss of hitpoints.
+This loss range from 70 to 145 HP with an experience level one Wizard PC. The HP loss may go down with increasing experience level for Wizards. The HP consequences for non-Wizards
+may be more dramatic (ie. deadly).<p>
+
+Writing other scrolls does not have such drastic consequences. Scrolls which are particularly hard to write (in order of decreasing difficulty) include: scroll of corruption removal
+(10 Mana cost), scroll of education (7), scroll of protection/defense (6), scroll of increase melee accuracy/damage (5), scroll of item creation (4), crumpled scroll (3). Monks don't
+lose Mana when creating scrolls, but they do lose PP and HP as normal. Wizards, Priests and Necromancers have the Mana cost significantly reduced.<p>
+<ul>
+<li>Using blessed equipment reduces the cost (both scroll and writing set). Cursed equipment increases it.
+<li>If Literacy &lt; 1d130 the cost is increased; later you need to pass a straight Literacy roll to succeed at writing at all.
+<li>Wizards get a difficulty reduction here (halved, before scroll type is factored in).
+<li>Monks don't suffer the negative effects of writing a difficult scroll like other classes do. Wizards and Priests suffer the effects less than others (/2, /4).
+<li>Writing scrolls costs PP, and if your PP is too low you'll take damage.
+<li>It is not possible to make copies of artifact scrolls.
+</ul><p>
+
+<h4 id="053">0.5.3 Mindcraft</h4>
+<a href="adomman-M.html">ADOM Manual</a> has a section describing Mindcraft, containing descriptions, formulaes and level availibilities for all Mindcraft powers.<p>
+
+Mindcraft is the unique power of the Mindcrafter. Although it appears similar to spellcasting, it is in fact an entirely different discipline; whereas wizardry is devoted to arcane
+power brought out by long study, mindcrafting focuses on drawing out the inherent capabilities of the brain to link with other brains, creating force blasts, reinforcing one's body
+and even translocating beings. As such, it behaves differently to normal magic. Mindcraft does not require any equivalent of "spell knowledge" to be invoked. Its powers may be used
+an unlimited number of times. Unlike spells, Mindcraft powers cannot be fueled by HP when possessing insufficient PP.<p>
+
+<table border=1><caption>Mindcraft PP cost</caption>
+<tr><th>Level <th>TPC<th> COB<th> COW<th> MBL<th> MSH<th> MWV <th>TBL<th> EOM<th> GMB<th> GTB<th> REG<th> TPS<th> TPO<th> GMW
+<tr><td>1 <td>N/A<td>8
+<tr><td>2 <td>N/A<td>8
+<tr><td>3 <td>N/A<td>7<td>24
+<tr><td>4 <td>N/A<td>7<td>24
+<tr><td>5 <td>N/A<td>7<td>24
+<tr><td>6 <td>N/A<td>6<td>23<td>18
+<tr><td>7 <td>N/A<td>6<td>23<td>18
+<tr><td>8 <td>N/A<td>6<td>23<td>18
+<tr><td>9 <td>N/A<td>5<td>22<td>17<td>5/T
+<tr><td>10<td>N/A<td>5<td>22<td>17<td>4/T
+<tr><td>11<td>N/A<td>5<td>22<td>17<td>4/T
+<tr><td>12<td>N/A<td>4<td>21<td>16<td>4/T
+<tr><td>13<td>N/A<td>4<td>21<td>16<td>4/T<td>47
+<tr><td>14<td>N/A<td>4<td>21<td>16<td>4/T<td>46
+<tr><td>15<td>N/A<td>3<td>20<td>15<td>3/T<td>45<td>30
+<tr><td>16<td>N/A<td>3<td>20<td>15<td>3/T<td>44<td>28
+<tr><td>17<td>N/A<td>3<td>20<td>15<td>3/T<td>43<td>26
+<tr><td>18<td>N/A<td>3<td>19<td>14<td>3/T<td>42<td>24<td>6
+<tr><td>19<td>N/A<td>3<td>19<td>14<td>3/T<td>41<td>22<td>6
+<tr><td>20<td>N/A<td>3<td>19<td>14<td>2/T<td>40<td>20<td>6
+<tr><td>21<td>N/A<td>3<td>18<td>13<td>2/T<td>39<td>18<td>5
+<tr><td>22<td>N/A<td>3<td>18<td>13<td>2/T<td>38<td>18<td>5
+<tr><td>23<td>N/A<td>3<td>18<td>13<td>2/T<td>37<td>18<td>5
+<tr><td>24<td>N/A<td>3<td>17<td>12<td>2/T<td>36<td>18<td>4
+<tr><td>25<td>N/A<td>3<td>17<td>12<td>2/T<td>35<td>18<td>4<td>27
+<tr><td>26<td>N/A<td>3<td>17<td>12<td>2/T<td>34<td>18<td>4<td>27
+<tr><td>27<td>N/A<td>3<td>16<td>11<td>2/T<td>33<td>18<td>3<td>26
+<tr><td>28<td>N/A<td>3<td>16<td>11<td>2/T<td>32<td>18<td>3<td>26
+<tr><td>29<td>N/A<td>3<td>16<td>11<td>2/T<td>31<td>18<td>3<td>26
+<tr><td>30<td>N/A<td>3<td>15<td>10<td>2/T<td>30<td>18<td>3<td>25<td>60
+<tr><td>31<td>N/A<td>3<td>15<td>10<td>2/T<td>29<td>18<td>3<td>25<td>58
+<tr><td>32<td>N/A<td>3<td>15<td>10<td>2/T<td>28<td>18<td>3<td>25<td>56
+<tr><td>33<td>N/A<td>3<td>14<td>9 <td>2/T<td>27<td>18<td>3<td>24<td>54
+<tr><td>34<td>N/A<td>3<td>14<td>9 <td>2/T<td>26<td>18<td>3<td>24<td>52
+<tr><td>35<td>N/A<td>3<td>14<td>9 <td>2/T<td>25<td>18<td>3<td>24<td>50<td>5/T
+<tr><td>36<td>N/A<td>3<td>13<td>8 <td>2/T<td>24<td>18<td>3<td>23<td>48<td>5/T
+<tr><td>37<td>N/A<td>3<td>13<td>8 <td>2/T<td>23<td>18<td>3<td>23<td>46<td>5/T
+<tr><td>38<td>N/A<td>3<td>13<td>8 <td>2/T<td>22<td>18<td>3<td>23<td>44<td>5/T
+<tr><td>39<td>N/A<td>3<td>12<td>7 <td>2/T<td>21<td>18<td>3<td>22<td>42<td>5/T
+<tr><td>40<td>N/A<td>3<td>12<td>7 <td>2/T<td>20<td>18<td>3<td>22<td>40<td>4/T<td>35
+<tr><td>41<td>N/A<td>3<td>12<td>7 <td>2/T<td>19<td>18<td>3<td>22<td>38<td>4/T<td>35
+<tr><td>42<td>N/A<td>3<td>11<td>6 <td>2/T<td>18<td>18<td>3<td>21<td>36<td>4/T<td>35
+<tr><td>43<td>N/A<td>3<td>11<td>6 <td>2/T<td>17<td>18<td>3<td>21<td>34<td>4/T<td>35
+<tr><td>44<td>N/A<td>3<td>11<td>6 <td>2/T<td>16<td>18<td>3<td>21<td>32<td>4/T<td>35
+<tr><td>45<td>N/A<td>3<td>10<td>5 <td>2/T<td>15<td>18<td>3<td>20<td>30<td>4/T<td>35<td>35
+<tr><td>46<td>N/A<td>3<td>10<td>5 <td>2/T<td>15<td>18<td>3<td>20<td>28<td>4/T<td>35<td>35
+<tr><td>47<td>N/A<td>3<td>10<td>5 <td>2/T<td>15<td>18<td>3<td>20<td>26<td>4/T<td>35<td>35
+<tr><td>48<td>N/A<td>3<td>9 <td>5 <td>2/T<td>15<td>18<td>3<td>19<td>25<td>4/T<td>35<td>35
+<tr><td>49<td>N/A<td>3<td>9 <td>5 <td>2/T<td>15<td>18<td>3<td>19<td>25<td>4/T<td>35<td>35
+<tr><td>50<td>N/A<td>3<td>9 <td>5 <td>2/T<td>15<td>18<td>3<td>19<td>25<td>3/T<td>35<td>35<td>50
+</table><p>
+N/A: this is for free<br>
+x/T: x per turn<p>
+
+<h4 id="0531">0.5.3.1 Confusion Blast</h4>
+Note that Confusion Blast, available to experience level one Mindcrafters, works analoguously to Ventriloquism (section <a href="adomgb-0-4.html">0.4</a>).
+It confuses a monster who then does not alert other monsters on the level. It has a range of 3 + (Willpower + Level) / 8 tiles. If it hits an undead monster,
+the Mindcrafter takes 4d4 damage (4d4/2 at level 50) and no further effect. Mindless monsters, including insects and the Eternal Guardian, are immune, as are all constructs.
+Corrupting monsters will corrupt the PC as for a single melee hit (divided by 4 at level 32); however they <i>are</i> affected normally. The monster will not be affected
+if it passes a spell resistance save with an attack power of Level. If it is affected, it will be confused for Level + 1dWi-1 turns.<p>
+
+<table id="0532" border=1>
+<caption>0.5.3.2 Mindcraft powers list
+<span class="credit">Credit ADOM Wiki &ndash; <a href="http://ancardia.wikia.com/wiki/Mindcraft">Mindcraft</a>.</span></caption>
+<tr><th>Abbr<th>Pict                             <th width="200">Mindcraft Power    <th>Type    <th>Level  <th>Description
+<tr><td>TPC <td><img src="tiles/tpc.png" alt="TPC" height=45><td>Teleport Control   <td>&nbsp;  <td>1      <td>Intrinsic teleport control which cannot be lost.
+<tr><td>COB <td><img src="tiles/cob.png" alt="COB" height=45><td>Confusion Blast    <td>TP      <td>1      <td>Bolt which travels in a straight line and performs a confusion attack on every creature it passes through. Range and confusion duration are increased by Willpower and experience level.
+<tr><td>COW <td><img src="tiles/cow.png" alt="COW" height=45><td>Confusion Wave     <td>TP      <td>3      <td>Performs a confusion attack on every creature in an area around the PC. Radius and confusion duration are increased by Willpower and experience level.
+<tr><td>MBL <td><img src="tiles/mbl.png" alt="MBL" height=45><td>Mind Blast         <td>TP      <td>6      <td>Bolt which travels in a straight line and performs a damaging attack on every creature it passes through. Range is increased by Willpower and experience level.
+<tr><td>MSH <td><img src="tiles/msh.png" alt="MSH" height=45><td>Mental Shield      <td>S       <td>9      <td>While active, increases DV and PV.
+<tr><td>MWV <td><img src="tiles/mwv.png" alt="MWV" height=45><td>Mind Wave          <td>TP      <td>13     <td>Performs a damaging attack on every creature in an area around the PC. Radius is increased by Willpower and experience level.
+<tr><td>TBL <td><img src="tiles/tbl.png" alt="TBL" height=45><td>Telekinetic Blast  <td>TK      <td>15     <td>Emits a physical force blast on an adjacent target. Will destroy any trapped door unless it is occupied by monster which can pass through walls (eg. ghost, earth elemental).
+<tr><td>EOM <td><img src="tiles/eom.png" alt="EOM" height=45><td>Eyes of the Mind   <td>TP      <td>18     <td>Shows all creatures with minds [1] on the level.
+<tr><td>GMB <td><img src="tiles/gmb.png" alt="GMB" height=45><td>Greater Mental Blast<td>TP     <td>25     <td>More damaging and costly version of Mind Blast.
+<tr><td>GTB <td><img src="tiles/gtb.png" alt="GTB" height=45><td>Greater Telekinetic Blast<td>TK<td>30     <td>Emits a physical force blast on any tile in the visible range of the PC. Chance to destroy any diggable wall unless it is occupied by a monster which can pass through walls.
+<tr><td>REG <td><img src="tiles/reg.png" alt="REG" height=45><td>Regeneration       <td>S       <td>35     <td>While active, grants the PC an additional source of Regeneration.
+<tr><td>TPS <td><img src="tiles/tps.png" alt="TPS" height=45><td>Teleport Self      <td>TK      <td>40     <td>Teleports PC.
+<tr><td>TPO <td><img src="tiles/tpo.png" alt="TPO" height=45><td>Teleport Other     <td>TK      <td>45     <td>Teleports adjacent creature.
+<tr><td>GMW <td><img src="tiles/gmw.png" alt="GMW" height=45><td>Greater Mental Wave<td>TP      <td>50     <td>More damaging and costly version of Mind Wave.
+</table><p>
+
+[1] Monsters undetectable with Eyes of the Mind: green slime, green blob, all statues, all golems, steel zombie, steel horror, animated armor, zombie.<p>
+
+Type of power:<p>
+<ul>
+<li>TP &ndash; Telepathic &ndash; these powers go through walls and doors, and ignore DV and PV, but do not work on the mindless creatures, constructs or undead.
+Linking with undead brains damages the Mincrafter, while corrupted minds transfer some of their corruption. Corrupted beings are 
+still telepathically damaged or confused. Corrupted beings that are immune to the power (mindless or immune to confusion) will not corrupt the Mindcrafter.
+These powers are subject to spell resistance.<p>
+
+Monsters unaffected by TP powers: all constructs, all undead, all plants, all jellies except for gelatinous cube and gibbering mouther, all insects except for
+ankheg, giant bee queen, giant bee warrior, and giant ant queen, bulette, carrion crawler, chaos spawn, Dorn Beast, hydra, moloch, rabid dog, swamp hydra, all worms.<p>
+
+<li>TK &ndash; Telekinetic &ndash; these powers like project a bolt of force energy that acts like physical attack, which never misses but is reduced by
+target's PV. Thus it can be used on all enemies (except monsters who can pass through walls, such as ghosts and shadows) without any psychic backslash from undead or
+corruption from chaos creatures.<p>
+
+<li>S &ndash; Sustained &ndash; these powers enhance the Mindcrafter as long as they are active. Such abilities will continuously deplete power points
+while active but can be turned on and off at will.<p>   
+
+</ul><p>
+
+<hr>
+Updated September 20th, 2016
+</body>
+</html>

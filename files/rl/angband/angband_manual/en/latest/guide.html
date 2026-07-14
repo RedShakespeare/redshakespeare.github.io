@@ -1,0 +1,678 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>A Players’ Guide to Angband &#8212; &lt;img&gt; The Angband Manual</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/better.css" />
+    <link rel="stylesheet" type="text/css" href="../../_/static/css/badge_only.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
+    <script async="async" src="../../_/static/javascript/readthedocs-doc-embed.js"></script>
+    <link rel="canonical" href="guide.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Frequently Asked Questions" href="faq.html" />
+    <link rel="prev" title="A quick demonstration" href="a-quick-demo.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+      <link rel="stylesheet" href="_static/style.css" type="text/css" />
+  
+<!-- RTD Extra Head -->
+
+<link rel="stylesheet" href="../../_/static/css/readthedocs-doc-embed.css" type="text/css" />
+
+<script type="application/json" id="READTHEDOCS_DATA">{"ad_free": false, "api_host": "https://readthedocs.org", "build_date": "2023-04-21T00:08:54Z", "builder": "sphinx", "canonical_url": null, "commit": "14f92695", "docroot": "/docs/", "features": {"docsearch_disabled": false}, "global_analytics_code": "UA-17997319-1", "language": "en", "page": "guide", "programming_language": "c", "project": "angband", "proxied_api_host": "/_", "source_suffix": ".rst", "subprojects": {}, "theme": "better", "user_analytics_code": "", "version": "latest"}</script>
+
+<!--
+Using this variable directly instead of using `JSON.parse` is deprecated.
+The READTHEDOCS_DATA global variable will be removed in the future.
+-->
+<script type="text/javascript">
+READTHEDOCS_DATA = JSON.parse(document.getElementById('READTHEDOCS_DATA').innerHTML);
+</script>
+
+<script type="text/javascript" src="../../_/static/javascript/readthedocs-analytics.js" async="async"></script>
+
+<!-- end RTD <extrahead> -->
+</head><body>
+<header id="pageheader">
+    <div style="display: flex; align-items: baseline;">
+        <h1>The Angband Manual</h1>
+        <span class="version">v4.2.4-264-g14f92695-dirty</span>
+    </div>
+    <img src="_static/att.svg" style="height: 4rem;">
+</header>
+
+  <div class="related top">
+  <nav id="rellinks">
+    <ul>
+        <li>
+          &larr;
+          <a href="a-quick-demo.html" title="Previous document">A quick demonstration</a>
+        </li>
+        <li>
+          <a href="faq.html" title="Next document">Frequently Asked Questions</a>
+          &rarr;
+        </li>
+    </ul>
+  </nav>
+  <nav id="breadcrumbs">
+    <ul>
+      <li><a href="index.html">Home</a></li> 
+    </ul>
+  </nav>
+  </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="a-players-guide-to-angband">
+<h1>A Players’ Guide to Angband<a class="headerlink" href="guide.html#a-players-guide-to-angband" title="Permalink to this heading">¶</a></h1>
+<p>This guide assumes familiarity with the basic mechanics of the game. If you’re
+completely new to Angband, check out the user’s manual and just start playing,
+get into the dungeon and try, well, whatever seems to be prudent. You’ll
+probably die rather quickly, but the following will make much more sense to you
+if you have just a little actual gameplay experience.</p>
+<p>This guide was written for Angband 3.5.0, and is now a little out of date
+(although the worst of the obsolete stuff has been cleaned out).  It is still
+a handy source of hints and advice; just don’t take it as an authority.</p>
+<section id="the-basics">
+<h2>The basics<a class="headerlink" href="guide.html#the-basics" title="Permalink to this heading">¶</a></h2>
+<p>As borrowed from a classic rgra post, there’s not much that you actually have
+to do. Your one and only mission is to slay Morgoth on dungeon level 100. In
+order to get there, you need to go down a lot of stairs and kill Sauron on
+dungeon level 99. That’s about it - everything else is optional. Of course,
+before you can kill Sauron you’ll need lots of experience and good equipment,
+but by the time you get that deep you’ll have both. Just see to it that you
+don’t die along the way.</p>
+<p>The one and most important thing you need to get in your head is that you can’t
+possibly kill every monster on every level. Think of the game as forays into
+the dungeon from which you want to return with cool stuff; think of the
+shallower levels as obstacles you need to overcome on your way deeper into the
+dungeon; or whatever you like. Just never-ever think of it as a killing spree.
+Until you find Sauron, your task is to survive and eventually get to level 99.</p>
+<p>The next point is that you don’t need to fight any particular monster (other
+than the big two). Yes, there might be a rather impressive hoard in that
+vault – but if the monsters guarding it are too many or too fierce, well, just
+give it a pass. Angband offers an endless supply of monsters and treasure and
+everything. There will always be another day – provided you live to see another
+day. Sometimes you just have to bug out and run for your life.</p>
+<p>So, let me recap, the vital points of Angband are:</p>
+<ul class="simple">
+<li><p>go down a lot of stairs</p></li>
+<li><p>kill Sauron (dl 99)</p></li>
+<li><p>kill Morgoth (dl 100)</p></li>
+<li><p>Quick start</p></li>
+</ul>
+<p>From this point, the guide assumes that you are playing a fighting class
+(warrior, ranger, rogue or paladin) and race (Dunedain, High-Elf, Dwarf,
+Half-Orc, Half-Troll.) First, use the ‘cost-based’ stats selection, and create
+a character with 3 or 4 blows (Don’t pick a class/race combinations, like Dwarf
+Ranger, that can only get 2 blows.)</p>
+<p>First, set your stats to get maximum blows. If you have a combination with good
+dexterity, select 18/10 dexterity, and then set your strength to 17 or 18. Set
+your spell-casting stat to something low but usable (~12), and spend the rest
+on constitution. For a beginning character, constitution is least important,
+because it doesn’t add significant HP until well above 18.</p>
+<p>Example character:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span> <span class="p">[</span><span class="n">Angband</span> <span class="mf">3.5.0</span> <span class="n">Character</span> <span class="n">Dump</span><span class="p">]</span>
+
+<span class="n">Name</span>   <span class="n">Anar</span>         <span class="n">Age</span>            <span class="mi">102</span>          <span class="n">Self</span>  <span class="n">RB</span>  <span class="n">CB</span>  <span class="n">EB</span>   <span class="n">Best</span>
+<span class="n">Sex</span>    <span class="n">Female</span>       <span class="n">Height</span>       <span class="mi">5</span><span class="s1">&#39;11&quot;   STR:     17  +1  +0  +0     18</span>
+<span class="n">Race</span>   <span class="n">High</span><span class="o">-</span><span class="n">Elf</span>     <span class="n">Weight</span>    <span class="mi">14</span><span class="n">st</span> <span class="mi">0</span><span class="n">lb</span>   <span class="n">INT</span><span class="p">:</span>     <span class="mi">10</span>  <span class="o">+</span><span class="mi">3</span>  <span class="o">+</span><span class="mi">2</span>  <span class="o">+</span><span class="mi">0</span>     <span class="mi">15</span>
+<span class="n">Class</span>  <span class="n">Ranger</span>       <span class="n">Turns</span> <span class="n">used</span><span class="p">:</span>          <span class="n">WIS</span><span class="p">:</span>     <span class="mi">10</span>  <span class="o">-</span><span class="mi">1</span>  <span class="o">-</span><span class="mi">2</span>  <span class="o">+</span><span class="mi">0</span>      <span class="mi">7</span>
+<span class="n">Title</span>  <span class="n">Runner</span>       <span class="n">Game</span>             <span class="mi">1</span>   <span class="n">DEX</span><span class="p">:</span>     <span class="mi">18</span>  <span class="o">+</span><span class="mi">3</span>  <span class="o">+</span><span class="mi">1</span>  <span class="o">+</span><span class="mi">0</span>  <span class="mi">18</span><span class="o">/</span><span class="mi">40</span>
+<span class="n">HP</span>     <span class="mi">14</span><span class="o">/</span><span class="mi">14</span>        <span class="n">Standard</span>         <span class="mi">0</span>   <span class="n">CON</span><span class="p">:</span>     <span class="mi">10</span>  <span class="o">+</span><span class="mi">1</span>  <span class="o">-</span><span class="mi">1</span>  <span class="o">+</span><span class="mi">0</span>     <span class="mi">10</span>
+<span class="n">SP</span>     <span class="mi">0</span><span class="o">/</span><span class="mi">0</span>          <span class="n">Resting</span>          <span class="mi">0</span>
+
+<span class="n">Level</span>                  <span class="mi">1</span>    <span class="n">Armor</span>        <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="o">+</span><span class="mi">2</span><span class="p">]</span>    <span class="n">Saving</span> <span class="n">Throw</span>     <span class="mi">49</span><span class="o">%</span>
+<span class="n">Cur</span> <span class="n">Exp</span>                <span class="mi">0</span>                           <span class="n">Stealth</span>         <span class="n">Good</span>
+<span class="n">Max</span> <span class="n">Exp</span>                <span class="mi">0</span>    <span class="n">Melee</span>        <span class="mi">1</span><span class="n">d4</span><span class="p">,</span><span class="o">+</span><span class="mi">2</span>    <span class="n">Disarming</span>        <span class="mi">36</span><span class="o">%</span>
+<span class="n">Adv</span> <span class="n">Exp</span>               <span class="mi">23</span>    <span class="n">To</span><span class="o">-</span><span class="n">hit</span>        <span class="mi">23</span><span class="p">,</span><span class="o">+</span><span class="mi">4</span>    <span class="n">Magic</span> <span class="n">Devices</span>     <span class="mi">55</span>
+                            <span class="n">Blows</span>      <span class="mf">2.0</span><span class="o">/</span><span class="n">turn</span>    <span class="n">Perception</span>   <span class="mi">1</span> <span class="ow">in</span> <span class="mi">20</span>
+<span class="n">Gold</span>                 <span class="mi">139</span>                           <span class="n">Searching</span>        <span class="mi">27</span><span class="o">%</span>
+<span class="n">Burden</span>          <span class="mf">18.5</span> <span class="n">lbs</span>    <span class="n">Shoot</span> <span class="n">to</span><span class="o">-</span><span class="n">dam</span>     <span class="o">+</span><span class="mi">0</span>    <span class="n">Infravision</span>    <span class="mi">40</span> <span class="n">ft</span>
+<span class="n">Speed</span>             <span class="n">Normal</span>    <span class="n">To</span><span class="o">-</span><span class="n">hit</span>        <span class="mi">33</span><span class="p">,</span><span class="o">+</span><span class="mi">4</span>
+<span class="n">Max</span> <span class="n">Depth</span>           <span class="n">Town</span>    <span class="n">Shots</span>        <span class="mi">1</span><span class="o">/</span><span class="n">turn</span>
+</pre></div>
+</div>
+<section id="a-fighting-chance">
+<h3>A Fighting Chance<a class="headerlink" href="guide.html#a-fighting-chance" title="Permalink to this heading">¶</a></h3>
+<p>For a melee character, the most important measure of power is how much damage
+they can do in a single turn. Consider the above cl 1 character with 3 blows
+from a Rapier (+7,+9), in a fight vs an out-of-depth Bullroarer, with no
+escapes, no ranged weapons, and no armor. On the face, she has no chance.
+However, if she can get in the first blow, she in fact has a 71% chance of
+killing Bullroarer in a single turn, and a 95% chance of frightening him.</p>
+<p>Further, with full buffing (!Hero, ?Blessing ?Berserk Strength), the character
+has an 81% chance of killing him in a single turn. As well as improving the
+to-hit probability from 91% to 95%, this corresponds to a 50% reduction in the
+chance of failure in a dangerous situation. Finally, assuming ‘Anar’ does win
+this battle, she gets 450 experience, and immediately goes jumps to cl 8.</p>
+</section>
+<section id="missile-damage">
+<h3>Missile Damage<a class="headerlink" href="guide.html#missile-damage" title="Permalink to this heading">¶</a></h3>
+<p>With proper preparation even a weak character has an almost guaranteed chance
+of killing Bullroarer, if you meet him at a distance (across a lighted room).
+An unenchanted longbow does 7.5 damage/shot with ordinary (unenchanted) arrows.
+However, flasks of oil do 7HP nominal damage when thrown, and do triple damage
+(21HP) vs fire-vulnerable monsters. Bullroarer has 60 HP, so even a small stack
+of oil will finish him off.</p>
+</section>
+<section id="summary">
+<h3>Summary<a class="headerlink" href="guide.html#summary" title="Permalink to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Character power is more closely associated with damage output rather than
+HP or character level.</p></li>
+<li><p>If you preserve your supplies, you can fight well above your weight. Early
+in the game, this means using flasks of oil against worthwhile targets;
+later in the game this means using branded or slaying “ego” ammunition.
+Good ammunition is too valuable to waste on less valuable targets (like red
+jellies, or groups of orcs.)</p></li>
+<li><p>Buffing, generally with !Heroism, can be very helpful to get starting
+characters out of sticky situations.</p></li>
+<li><p>Going deeper in the dungeon is often a more conservative (safer) strategy
+than staying at a shallow (cl &lt; dl) depth. (cl: character level; dl: dungeon
+level)  HP and character level are easy to come by.</p></li>
+<li><p>Starting Equipment</p></li>
+</ul>
+</section>
+</section>
+<section id="fighting-power">
+<h2>Fighting Power<a class="headerlink" href="guide.html#fighting-power" title="Permalink to this heading">¶</a></h2>
+<p>Buy a light weapon that gives you the maximum possible blows, with the highest
+dice available. This is generally a Rapier, Main Gauche, or Dagger. If these
+are not available, you may be better off quitting and restarting.</p>
+</section>
+<section id="plan-to-be-deep">
+<h2>Plan to be deep<a class="headerlink" href="guide.html#plan-to-be-deep" title="Permalink to this heading">¶</a></h2>
+<p>Always make sure to have a scroll of recall, even on your first trip into the
+dungeon. Monsters and items at dl 5 (250’) and deeper are much (~100x) more
+valuable than items at dl 1. (The example above may be contrived, but it is
+representative.)</p>
+<p>To survive deep(er) you will want:</p>
+<ol class="loweralpha simple">
+<li><p>Escapes:</p></li>
+</ol>
+<blockquote>
+<div><ul class="simple">
+<li><p>3+ ?Phase Door</p></li>
+<li><p>1 ?Recall</p></li>
+</ul>
+</div></blockquote>
+<ol class="loweralpha simple" start="2">
+<li><p>Protection from secondary effects (confusion, blindness, poison)</p></li>
+</ol>
+<blockquote>
+<div><ul class="simple">
+<li><p>1 !CLW (for identification and blindness)</p></li>
+<li><p>1+ !CSW (for identification and confusion)</p></li>
+</ul>
+</div></blockquote>
+<ol class="loweralpha simple" start="3">
+<li><p>Buffing</p></li>
+</ol>
+<blockquote>
+<div><ul class="simple">
+<li><p>1 !Hero (for protection from fear.)</p></li>
+</ul>
+</div></blockquote>
+<ol class="loweralpha simple" start="4">
+<li><p>Ranged attack to soften up a (single) unique</p></li>
+</ol>
+<blockquote>
+<div><ul class="simple">
+<li><p>~5 Flasks of Oil to kill dangerous and/or valuable monsters (throw oil
+for damage with the <code class="docutils literal notranslate"><span class="pre">v</span></code> throw command)</p></li>
+<li><p>~10-20 Iron shots (or arrows for Rangers) to throw at non-dangerous
+monsters with annoying side effects. (Stat drainers and acid damagers
+that are between you and the stairs down.) extra arrows for a ranger
+(shoot arrows with the <code class="docutils literal notranslate"><span class="pre">f</span></code> fire command.) Shots can be reused; oil can’t.</p></li>
+</ul>
+</div></blockquote>
+<ol class="loweralpha simple" start="5">
+<li><p>Armor</p></li>
+</ol>
+<p>Don’t bother buying armor - it’s very expensive in comparison to AC. You will
+find it in the dungeon soon enough.</p>
+<p>Your starting equipment will include more than enough food and illumination for
+the first trip down.</p>
+<section id="the-first-trip">
+<h3>The first trip<a class="headerlink" href="guide.html#the-first-trip" title="Permalink to this heading">¶</a></h3>
+<p>It’s quite possible to get to 500’ (dl 10) or deeper in the first trip into the
+dungeon. Plan to return when you run out of either escapes (?Phase door),
+protection from side-effects (curing potions), or damage (arrows if you are a
+ranger, flasks of oil if you are otherwise weak.)</p>
+<p>Since you don’t have much, don’t spend it on less valuable monsters.</p>
+</section>
+<section id="what-to-kill">
+<h3>What to kill<a class="headerlink" href="guide.html#what-to-kill" title="Permalink to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Any mobs of monsters that you can defeat (kill or frighten) in a single turn
+and either give good experience (a pack of wolves) or good drops (weaker
+orcs, novice humans.) If you are deep enough, this is likely to increase your
+character by several levels in a single battle.</p></li>
+<li><p>Uniques with good drops (Bullroarer, Brodda, Wormtongue)</p></li>
+<li><p>Easy kills that are likely to drop something worthwhile.</p></li>
+</ul>
+</section>
+<section id="what-to-ignore">
+<h3>What to ignore<a class="headerlink" href="guide.html#what-to-ignore" title="Permalink to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Monsters that will damage or destroy gear. (jellies, water hounds, etc)</p></li>
+<li><p>Non-valuable monsters that are likely to use up consumables (baby gold
+dragons, groups of spell-casters in line-of-sight, etc)</p></li>
+<li><p>Mobs that you can’t dominate.</p></li>
+<li><p>Uniques with escorts you can’t dominate</p></li>
+<li><p>Monsters at shallow depth. Drops for any given monster get better the deeper
+you go. Killing a novice mage at dl 1 generally gives nothing; at dl 20 he’s
+likely to drop something worth hundreds of gold. Wormtongue has, on average, a
+noticeably better drop at dl 20 than dl 10.</p></li>
+<li><p>Things that waste effort. (Run-away breeders, low-EXP monsters with no drop.
+Just close the door and move on.)</p></li>
+</ul>
+</section>
+<section id="what-to-avoid">
+<h3>What to avoid<a class="headerlink" href="guide.html#what-to-avoid" title="Permalink to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Anything that can kill you in a single turn.</p></li>
+</ul>
+</section>
+</section>
+<section id="on-bad-luck">
+<h2>On Bad Luck<a class="headerlink" href="guide.html#on-bad-luck" title="Permalink to this heading">¶</a></h2>
+<p>This is rule number one of Angband: don’t take unnecessary risks. If you take
+enough low-probability chances of death, you’ll never survive to fight Sauron.
+Such deaths are generally called ‘stupid’, but that’s not always accurate.
+Sometimes it’s just bad luck. But given enough chances, you are guaranteed to
+receive it. It’s the trick to extremely fast dives: the fewer moves you make,
+the less chance any one of them will be fatal, even if on average, your
+individual moves are riskier than in slower play. But the strategy applies more
+generally: unless you are exceedingly careful in play, messing around long
+enough at any one depth guarantees that something bad will eventually happen.</p>
+</section>
+<section id="face-palm-tips">
+<h2>Face-palm Tips<a class="headerlink" href="guide.html#face-palm-tips" title="Permalink to this heading">¶</a></h2>
+<p>The preceding is good advice; however, it does not offer much more than
+generalizations, albeit valid, for the “intermediate” (?) player. The
+following is intended to state what many perceive to be blatantly obvious,
+hence “you did WHAT!” face-palm deaths. This really should be cleaned up and
+refactored, but placing here for now.</p>
+<p>WARNING. I have yet to defeat Angband. This is a compilation of some of the
+better tips I’ve learned while trying to explore the depths… (to Level ~35).
+Additional advice would be greatly appreciated!</p>
+<section id="start-simple">
+<h3>Start simple<a class="headerlink" href="guide.html#start-simple" title="Permalink to this heading">¶</a></h3>
+<p>Begin your Angband career as a warrior. Warriors are relatively simple to
+begin with, and are less likely to be eaten by a pack of jackals.</p>
+</section>
+<section id="focus">
+<h3>Focus!<a class="headerlink" href="guide.html#focus" title="Permalink to this heading">¶</a></h3>
+<p>Angband is a very harsh game, in that the character you’ve been playing for
+months could be killed by a single careless action. Playing when tired or
+drunk is probably a good way to leave yourself with nothing but a sad tale to
+share on the forums. If you have the ability to sense monsters or traps then
+use it. This is particularly important when you begin to encounter monsters
+that, without the appropriate gear, will kill your character in a single move.</p>
+</section>
+<section id="use-that-stuff">
+<h3>Use that stuff<a class="headerlink" href="guide.html#use-that-stuff" title="Permalink to this heading">¶</a></h3>
+<p>Angband has potions, spell books, wands, staffs, rods, activate-able items,
+melee weapons, ranged weapons, and whatnot. They’re meant to be used, for
+crying out loud! It can take a while to get used to using all the different
+types of items, but they work best when used in concert. For those able to use
+magic devices, rods wands and staves can be very useful when your mana is
+running low, and allow you access to spells that may not normally be available
+to your class. They are also very useful for dealing with monsters that</p>
+</section>
+<section id="rangers-have-a-bow">
+<h3>Rangers have a bow<a class="headerlink" href="guide.html#rangers-have-a-bow" title="Permalink to this heading">¶</a></h3>
+<p>Really a subset of the previous point, but it happens so often… Don’t try to
+play a ranger like a warrior – rely on the bow! Similarly for mages, don’t do
+a Gandalf. He may be able to draw a sword and rush headlong in to a pack or
+orcs, but mages in Angband are considerably more fragile. Priests are better
+equipped to engage in melee combat - with their healing abilities compensating
+for their somewhat fragile nature.</p>
+</section>
+<section id="stockpile">
+<h3>Stockpile!<a class="headerlink" href="guide.html#stockpile" title="Permalink to this heading">¶</a></h3>
+<p>Players may not be inclined to carry multiples of an item, or do so in a
+limited quantity, perhaps due to weight encumbrance concerns. Don’t be afraid
+to carry a LOT of an item, particularly the basics – food, light,
+projectiles, cure potions, “run away” scrolls, etc. Don’t be afraid to MAX OUT
+important items! Some monsters will steal or destroy your items, so it’s worth
+carrying additional quantities of key items - such as Scrolls of Recall or
+important spell/prayer books. This becomes very important when you reach
+dungeon levels in which monsters develop fire and acid-based attacks. Mages
+and priests tend to start out with low strength, and so are very limited in
+how much stuff they can carry, so consider carrying additional copies of the
+spellbooks that you know you can’t afford to lose during a fight.</p>
+</section>
+<section id="an-item-you-don-t-use-is-useless">
+<h3>An item you don’t use is useless<a class="headerlink" href="guide.html#an-item-you-don-t-use-is-useless" title="Permalink to this heading">¶</a></h3>
+<p>Common fallacy: you find an incredibly powerful Staff of Mighty BOOM! (3
+charges), or a single Potion of become Chuck Norris, and then you keep
+carrying it around and never actually use it. It could be a life insurance,
+but you might still reconsider your strategy: maybe you’ve become too careful
+lately (Angband rewards deliberate risk-taking, after all).</p>
+</section>
+<section id="identifying-your-items">
+<h3>Identifying your items<a class="headerlink" href="guide.html#identifying-your-items" title="Permalink to this heading">¶</a></h3>
+<p>Many items found, especially early in the game, will be unidentified or
+partially identified. Weapons and armour can be identified by being worn and
+used in combat, and can be removed if found to be of poor quality. Some
+characters learn to cast spells to identify the runes on wearable items that
+define their properties.</p>
+<p>Staves, rods and wands can often be identified by being used against monsters,
+but be aware that some of these magical items can have negative effects. Only
+use this approach when facing easily defeated monsters. Consuming unidentified
+potions and mushrooms can be risky, so the risk-averse player may prefer to
+sell them in the town. Ammunition can normally be identified by being thrown
+or fired at a monster, and typically the worst thing that can happen is that
+the attack does little damage to the monster. As with staves, wands and rods,
+do this when facing a monster than can be easily defeated.</p>
+<p>Scrolls can normally be identified by being read, but some scrolls have
+negative effects. Your character may have a very short life if they read a
+scroll that summons a horde of undead monsters. If using this approach, it’s a
+good idea to position your character on top of some stairs so you can quickly
+escape if a mysterious scroll leaves your character surrounded by monsters.</p>
+<p>With weapons and armour, your character will in time learn their inscribed
+runes.</p>
+</section>
+<section id="the-dungeon-is-dark">
+<h3>The dungeon is dark<a class="headerlink" href="guide.html#the-dungeon-is-dark" title="Permalink to this heading">¶</a></h3>
+<p>Players will readily note that corridors are unlit; however, what may not be
+blatantly obvious is that the dungeon gets darker with depth, until it’s pitch
+black. ALWAYS carry a light source. DON’T drop a light source for more loot!</p>
+</section>
+<section id="you-can-run-away">
+<h3>You can RUN AWAY<a class="headerlink" href="guide.html#you-can-run-away" title="Permalink to this heading">¶</a></h3>
+<p>There is NO RULE that you have to clean out a dungeon – AT ALL. See something
+you can’t handle? Don’t be afraid to leave – NOW. Sure you could try to avoid
+it, but then again, it could be a hummerhorn. Half way through the level? You
+can still LEAVE NOW. Nearly finished with the level? You can still leave NOW.
+Think of it as a tactical strike, not a genocide mission.</p>
+</section>
+<section id="get-away-now">
+<h3>Get away NOW!<a class="headerlink" href="guide.html#get-away-now" title="Permalink to this heading">¶</a></h3>
+<p>Sure, you should pay more attention and not get yourself in a next turn =
+death situation, but this is not always avoidable and no one (presumably) is
+so meticulously patient. ALWAYS carry get away items – Phase Door, Teleport,
+Recall, Teleport Level, etc. When you can, stockpile those that work NOW. If a
+unique starts chasing you, you don’t want to be waiting for Recall to kick in.</p>
+<p>You should seriously consider a quick escape if dealing with a situation in
+which monsters are breeding explosively. Some classes, such as mages, are more
+easily able to handle these though the use of spells that affect multiple
+monsters simultaneously, but even they should consider leaving if it becomes
+apparent that the monsters are breeding more quickly than the player can kill
+them.</p>
+</section>
+<section id="level-1-is-still-there">
+<h3>Level 1 is still there<a class="headerlink" href="guide.html#level-1-is-still-there" title="Permalink to this heading">¶</a></h3>
+<p>Don’t forget that you can always replay, and re-re-play the early levels for
+ANY reason whatsoever. Recalled from a depth too deep? Dive from level 1 and
+reset the depth. Want to fill your armor slots? Need a few more gold? Even if
+you’re on a streak diving through the dungeon, step back and reassess whether
+you want to return to an earlier level – you never know what could be lurking
+around the corner.</p>
+</section>
+<section id="black-market-deals">
+<h3>Black Market Deals<a class="headerlink" href="guide.html#black-market-deals" title="Permalink to this heading">¶</a></h3>
+<p>Don’t be afraid to buy from the “blackmarket”. Sure the prices are more
+expensive than the other stores, but it tends to offer a good selection of
+items and it can be worth the gold versus not having it in the dungeon. You
+can always get more gold, but the RNG is random. It’s just another store –
+don’t worry about the name. The blackmarket is often a good source of potions
+to increase your stats, so it’s worth checking it each time you visit the town
+- and try to have enough gold to purchase potions for the most important stats
+for your character.</p>
+</section>
+<section id="try-a-different-strategy">
+<h3>Try a Different Strategy<a class="headerlink" href="guide.html#try-a-different-strategy" title="Permalink to this heading">¶</a></h3>
+<p>Sure, what you’re doing kinda works, but your characters keep dying off.
+Playing conservatively? Try playing a character as though the “iron-man”
+stairs setting is in effect. You’ll probably want some ranged weapons for
+this, but you may be surprised how fast you can level if you DIVE! Granted,
+the lower levels are harder, but the deeper you go, the more experience per
+kill you get. Still fight conservatively, but dive aggressively. Once your
+character has gotten a decent complement of items and spells … (what next?).
+Don’t be afraid to throw away characters – DIVE aggressively until you get a
+good feel for your character and you’ve leveled up.</p>
+</section>
+<section id="on-depth-and-item-value">
+<h3>On Depth and Item Value<a class="headerlink" href="guide.html#on-depth-and-item-value" title="Permalink to this heading">¶</a></h3>
+<p>Whenever you kill a monster that may drop an item, a lot of randomness is
+played out. No need to go into detail just here (if you really want to know,
+you can look it up in the spoilers), suffice it to say that depth is the
+single most important factor. You may, of course, find rather valuable and/or
+useful stuff even on the very first level, but the chances are rather small.</p>
+<p>In short: if you want to find better things, you need to go deeper.</p>
+</section>
+<section id="the-monster-barely-matters">
+<h3>The monster barely matters<a class="headerlink" href="guide.html#the-monster-barely-matters" title="Permalink to this heading">¶</a></h3>
+<p>If a monster drops an item, it can be anything. Really. You may find rare
+spellbooks on illiterate Trolls, and jellies may drop artifact weapons. Some
+rare monsters, like powerful dragons, will carry good or even exceptional
+objects – but still, the dungeon level is the most important factor. What was
+“exceptional” on dl8 will probably be rather uninteresting on level 30.</p>
+</section>
+<section id="regarding-artifacts">
+<h3>Regarding Artifacts<a class="headerlink" href="guide.html#regarding-artifacts" title="Permalink to this heading">¶</a></h3>
+<p>For every single wearable item, there is a small chance that it will be an
+artifact. This might seem slim, but considering the number of monsters you
+will slay, it soon adds up. If you work through a large room full of orcs,
+there’s about a one-in-ten chance that you’ll discover at least one artifact
+among the carnage. Artifacts typically have impressive statistics and an
+ability that can be activated.</p>
+</section>
+</section>
+<section id="surviving-to-clvl-31-dlvl-36">
+<h2>Surviving to clvl 31 / dlvl 36<a class="headerlink" href="guide.html#surviving-to-clvl-31-dlvl-36" title="Permalink to this heading">¶</a></h2>
+<p>Additional tips learned from various failed attempts. Still have not beat
+angband, but making considerable progress of late, particularly with my (now)
+current character.</p>
+<section id="run-away">
+<h3>RUN AWAY!<a class="headerlink" href="guide.html#run-away" title="Permalink to this heading">¶</a></h3>
+<p>Very first tip is a basic tenet repeated throughout the guide; however, it is
+far too easy to become engrossed in your achievements (eg an awesome artifact,
+maximizing stats, a slightly better item, gaining a second blow, getting a
+speed bonus, etc) and lose it all due to something very avoidable had you been
+paying diligent attention.</p>
+<p>While playing, always make sure to check for the basics – particularly
+monsters, stairs, and traps. Don’t lose a character, asserting that you can
+kill a “C” easily only to discover that a “wild dog” is a far cry from a
+“hellhound”.</p>
+<p>Similarly, if you just got some nice artifacts / other equipment or achieved a
+significant accomplishment – save your game and take a break. You don’t have
+to continue to play to enjoy your past success, and when you return you will
+likely be more able to play diligently.</p>
+<p>See a few uniques or other monsters that might possibly give you some trouble
+– maybe? Perhaps with only slight difficulty? See a vault with some cool
+treasure, but a few troublesome monsters / uniques? If you’re not highly
+confident (perhaps even 100%) that you can easily survive the level, you can
+leave on the spot. Just enter the level, immediately do your detection routine
+(monsters, stairs / traps, etc) assess the immediate threat, and use the
+stairs immediately if you want to. You can go up as readily as you came down,
+and you can go down as readily as you came up. Further, artifacts can be
+regenerated (unless you disabled that option) and as you dive, even better
+items will be available. So, if you skip out on levels just because you want
+to play it very conservatively, you will still find great items and better
+yet, you have a higher chance of survival.</p>
+</section>
+<section id="information-awareness">
+<h3>Information Awareness<a class="headerlink" href="guide.html#information-awareness" title="Permalink to this heading">¶</a></h3>
+<p>Angband offers a LOT of information on a LOT of different screens. If you
+haven’t already, try enabling multiple consoles – ALL of them – and then try
+out different options / combinations. Being able to view a lot of information
+simultaneously at a glance is a considerable benefit over having to be
+diligent enough to manually check each relevant screen each time.</p>
+<p>Also, change the text size. Sure you may be accustomed to your terminal font
+and size for reading; however, you can read and make sense from context a lot
+easier than you can reliably identify the glyph, color, and relative position
+of every character on the screen. Angband may be a text-based game, but you
+don’t have to play with a tiny (or even normal size font). Using a slightly
+larger font makes identifying things a LOT easier. The SDL interface is
+perhaps the easiest for using multiple terminals and changing fonts.</p>
+<p>This alone has greatly contributed to my survivability!</p>
+</section>
+<section id="start-from-the-beginning">
+<h3>Start from the Beginning<a class="headerlink" href="guide.html#start-from-the-beginning" title="Permalink to this heading">¶</a></h3>
+<p>Trying to mature your character through the clvl / dlvl 20s can be challenging
+until you can survive even lower depths. One tip here is to use Recall
+exclusively to return from the dungeon and use the stairs to return back down
+to the level you left.</p>
+<p>Yes, this is more work, and as your clvl increases, the early levels become
+exceptionally easy; however, it guarantees that you will always enter a level
+on stairs, facilitating running away.</p>
+</section>
+<section id="item-collecting">
+<h3>Item Collecting<a class="headerlink" href="guide.html#item-collecting" title="Permalink to this heading">¶</a></h3>
+<p>Its easy to stockpile, but you’ll run out of space VERY quickly. Further, what
+was useful may not be useful now and what’s useful now may not be useful
+later. It can be easy to try to grab everything in sight and then return to
+town when your inventory is full; however, when you reach this point, try
+continuing to dive, even with a full inventory.</p>
+<p>As your character progresses and you continue to dive you will find better
+classes of items. Don’t be afraid to toss the less valuable stuff to make room,
+so you can continue diving.</p>
+<p>This is particularly important while diving. If you let a full inventory be a
+limiting factor, you won’t be able to get nearly as deep as if you are willing
+to discard items along the way.</p>
+</section>
+<section id="take-a-break">
+<h3>Take a Break<a class="headerlink" href="guide.html#take-a-break" title="Permalink to this heading">¶</a></h3>
+<p>Again, this is another basic tip repeated thorough out the guide; however,
+learn to stop playing. You can always save your game and resume later when you
+would be in your prime and optimally ready to play as opposed to trying to
+continue to play as drowsiness sets in.</p>
+<p>This may be difficult at first, but it can help you avoid running decent
+characters into the ground for avoidable mistakes…</p>
+</section>
+<section id="don-t-forget-your-ranged-attacks">
+<h3>Don’t forget your Ranged Attacks!<a class="headerlink" href="guide.html#don-t-forget-your-ranged-attacks" title="Permalink to this heading">¶</a></h3>
+<p>Granted, as your character develops, you become more powerful at melee;
+however, this does not preclude you from using ranged attacks! It is far to
+easy to start playing a ranger like a warrior mage if you get a good melee
+weapon, but don’t forget your ranged skill! You may be “Superb” at Fighting,
+but ranger’s are even better at Shooting – perhaps even “Legendary” or
+better.</p>
+<p>This can be a hard one to do diligently, especially if your melee weapon is
+powerful, but try to play diligently and use ranged attacks. Try earlier
+levels where survivability is much higher and try to play without melee
+attacks for awhile to get used to using the bow again.</p>
+<p>Even as your character matures, try to keep in mind your race / class core
+strengths.</p>
+</section>
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="guide.html#">A Players’ Guide to Angband</a><ul>
+<li><a class="reference internal" href="guide.html#the-basics">The basics</a><ul>
+<li><a class="reference internal" href="guide.html#a-fighting-chance">A Fighting Chance</a></li>
+<li><a class="reference internal" href="guide.html#missile-damage">Missile Damage</a></li>
+<li><a class="reference internal" href="guide.html#summary">Summary</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="guide.html#fighting-power">Fighting Power</a></li>
+<li><a class="reference internal" href="guide.html#plan-to-be-deep">Plan to be deep</a><ul>
+<li><a class="reference internal" href="guide.html#the-first-trip">The first trip</a></li>
+<li><a class="reference internal" href="guide.html#what-to-kill">What to kill</a></li>
+<li><a class="reference internal" href="guide.html#what-to-ignore">What to ignore</a></li>
+<li><a class="reference internal" href="guide.html#what-to-avoid">What to avoid</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="guide.html#on-bad-luck">On Bad Luck</a></li>
+<li><a class="reference internal" href="guide.html#face-palm-tips">Face-palm Tips</a><ul>
+<li><a class="reference internal" href="guide.html#start-simple">Start simple</a></li>
+<li><a class="reference internal" href="guide.html#focus">Focus!</a></li>
+<li><a class="reference internal" href="guide.html#use-that-stuff">Use that stuff</a></li>
+<li><a class="reference internal" href="guide.html#rangers-have-a-bow">Rangers have a bow</a></li>
+<li><a class="reference internal" href="guide.html#stockpile">Stockpile!</a></li>
+<li><a class="reference internal" href="guide.html#an-item-you-don-t-use-is-useless">An item you don’t use is useless</a></li>
+<li><a class="reference internal" href="guide.html#identifying-your-items">Identifying your items</a></li>
+<li><a class="reference internal" href="guide.html#the-dungeon-is-dark">The dungeon is dark</a></li>
+<li><a class="reference internal" href="guide.html#you-can-run-away">You can RUN AWAY</a></li>
+<li><a class="reference internal" href="guide.html#get-away-now">Get away NOW!</a></li>
+<li><a class="reference internal" href="guide.html#level-1-is-still-there">Level 1 is still there</a></li>
+<li><a class="reference internal" href="guide.html#black-market-deals">Black Market Deals</a></li>
+<li><a class="reference internal" href="guide.html#try-a-different-strategy">Try a Different Strategy</a></li>
+<li><a class="reference internal" href="guide.html#on-depth-and-item-value">On Depth and Item Value</a></li>
+<li><a class="reference internal" href="guide.html#the-monster-barely-matters">The monster barely matters</a></li>
+<li><a class="reference internal" href="guide.html#regarding-artifacts">Regarding Artifacts</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="guide.html#surviving-to-clvl-31-dlvl-36">Surviving to clvl 31 / dlvl 36</a><ul>
+<li><a class="reference internal" href="guide.html#run-away">RUN AWAY!</a></li>
+<li><a class="reference internal" href="guide.html#information-awareness">Information Awareness</a></li>
+<li><a class="reference internal" href="guide.html#start-from-the-beginning">Start from the Beginning</a></li>
+<li><a class="reference internal" href="guide.html#item-collecting">Item Collecting</a></li>
+<li><a class="reference internal" href="guide.html#take-a-break">Take a Break</a></li>
+<li><a class="reference internal" href="guide.html#don-t-forget-your-ranged-attacks">Don’t forget your Ranged Attacks!</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  </div>
+<form class="search" action="search.html" method="get">
+  <input type="text" name="q"
+   placeholder="type to search" />
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+  <div class="related bottom">
+  <nav id="rellinks">
+    <ul>
+        <li>
+          &larr;
+          <a href="a-quick-demo.html" title="Previous document">A quick demonstration</a>
+        </li>
+        <li>
+          <a href="faq.html" title="Next document">Frequently Asked Questions</a>
+          &rarr;
+        </li>
+    </ul>
+  </nav>
+  <nav id="breadcrumbs">
+    <ul>
+      <li><a href="index.html">Home</a></li> 
+    </ul>
+  </nav>
+  </div>
+  <footer id="pagefooter">&copy; 2019, Angband developers past and present.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a>
+      5.3.0
+        with the <a href="http://github.com/irskep/sphinx-better-theme">
+          better</a> theme.
+
+  </footer>
+
+  
+  </body>
+</html>

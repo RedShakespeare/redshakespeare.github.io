@@ -1,0 +1,784 @@
+<html>
+<head>
+<title>Improved ADOM Guidebook - Religion</title>
+<link rel="stylesheet" type="text/css" href="adomgb-body.css">
+</head>
+<body>
+<h1>Improved ADOM Guidebook</h1>
+<hr>
+<a href="adomgb-0-1.html">Previous</a> - <a href="toc.html">TOC</a> - <a href="adomgb-0-3.html">Next</a>
+<hr>
+<a href="#021">Alignment</a> - <a href="#022">Piety</a> - <a href="#023">Altars</a> - <a href="#0233">Sacrificing</a> - <a href="#0234">Conversion</a> - <a href="#024">Praying</a> -
+<a href="#025">Crowning</a> - <a href="#02522">Gifts</a> - <a href="#026">Tracts</a>
+<hr>
+
+<h3 id="02">Religion</h3>
+Religion in ADOM means the PC has an alignment score which determines their current deity, and three piety scores. Furthermore, altars and tracts are randomly generated, and commands
+for sacrificing &ndash; <tt>O</tt>, praying &ndash; <tt>_</tt>, and displaying your current <tt>:g</tt>od (deity) exist.<p>
+
+<h4 id="021">0.2.1 Alignment</h4>
+Alignment reflects the moral nature of the PC. For example, PCs with lawful alignment generally do not slaughter innocents or steal from shops. Chaotic PCs will do these
+things and a lot worse besides. Neutral PCs choose from both options, doing nasty things when necessary to further their cause, but also performing good acts to maintain their
+balanced alignment. The Law skill gives a chance to identify the nature of such actions (lawful or chaotic).<p>
+
+A general and quite complete description of alignment can be found in the <a href="adomman-F.html">ADOM Manual</a>. It is assumed that the reader is familiar with that description.
+The effects alignment have on gameplay are discussed here. The effects are mostly evident to the player in terms of the quests and rewards that are available.<p>
+
+White unicorns and Yrruir are generated neutral towards neutral and lawful PCs (unless summoned or generated in vaults and tension rooms), and generated hostile towards chaotic PCs.
+Blink dogs, ki-rins, farmers and dwarves are generated neutral towards lawful PCs (unless summoned or generated in vaults and tension rooms). Many demons are generated neutral towards
+chaotics.<p>
+
+<table id="0211" border=1><caption>0.2.1.1 Quests and alignment restrictions</caption>
+<tr><th>Quest source<th>Alignment restrictions
+<tr><td>Terinyo <td>quests are available to all PCs regardless of alignment, however Guth'Alak
+will not reward chaotics with a potion of cure corruption for delivering a chaos creature's corpse
+<tr><td>Jharod <td>will not teach the Healing skill to chaotics, regardless of how Yrrigs is dealt with
+<tr><td>Hotzenplotz <td>quests are available regardless of alignment
+<tr><td>Yergius <td>will not teach the Pick Pockets skill, or anything else, to lawfuls
+<tr><td>Old Barbarian <td>will not give the Courage quest to chaotics
+<tr><td>Unicorn quest <td>Yrruir will likely be hostile to chaotics; she need to be calmed down for chaotic PC's to receive her quest
+<tr><td>Thrundarr <td>all quests are available regardless of alignment
+<tr><td>Dwarven Mystic <td>rewards are dependent on alignment; chaotics will receive nothing from him
+<tr><td>Kherab <td>quests are available regardless of alignment
+<tr><td>Demented Ratling <td>assigns quests only to chaotics
+<tr><td>Hawkslayer <td>will not become companion to chaotics
+<tr><td>Gaab'Baay <td>assigns her first quest to chaotics only
+<tr><td>Malicious Doctor <td>will not sell his golem to lawfuls
+<tr><td>Assassin Prince <td>Filk quest is available regardless of alignment
+<tr><td>Sharad-Waador <td>quest to kill Srraxxarrakex is available regardless of alignment
+<tr><td>Mad Minstrel <td>reveals the location of the Scintillating Cave regardless of alignment
+<tr><td>Khelavaster <td>will not summon the Trident of the Red Rooster for chaotics
+<tfoot>
+<tr><td>Ice Queen <td>will not assign her quests to chaotics
+<tr><td>Chaos Diplomat <td>quest to kill the Ice Queen is available regardless of alignment
+</tfoot><tfoot class="new">
+<tr><td>Rolf <td>will not assign his quest to chaotic or neutral Trolls, Orcs, and Dark Elves
+</tfoot></table><p>
+
+<h4 id="0212">0.2.1.2 Alignment range</h4>
+Alignment can range from -10000 to +6000 as follows:<p>
+<ul>
+<li>C-: -10000 to -5000
+<li>C : -4999 to -1251
+<li>CN: -1250 to -1000
+<li>NC: -999 to -750
+<li>N-: -749 to -126
+<li>N=: -125 to +125
+<li>N+: +126 to +749
+<li>NL: +750 to +999
+<li>LN: +1000 to +1250
+<li>L : +1251 to +4999
+<li>L+: +5000 to +6000
+</ul><p>
+
+<h4 id="0213">0.2.1.3 Chaotic acts</h4>
+Changing alignment can be done in several ways. It is easy to change from a lawful flavor of alignment to a chaotic one. The PC need only commit chaotic acts, which include the
+following:<p>
+
+<b>Repeatable chaotic acts</b><p>
+<ul>
+<li>permanently pissing off a town
+<li>killing a white unicorn: -2000
+<li>destroying lawful altars: -1500
+<li>attacking non-hostile monsters, especially innocent ones (children, the Cute Dog): -500 or more
+<li>causing an explosion that injures/kills friendly/tame creatures: -500 or -750
+<li>killing beggars: -500
+<li>creating undead slaves: -300
+<li>robbing shops: -250
+<li>destroying neutral altars: -200
+<li>digging graves: -100
+<li>chopping trees in Terinyo: -100
+<li>killing lawful or peaceful monsters, such as blink dogs, white unicorns or eternal guardians, even when hostile: -4*xp
+<li>eating undead corpses: (varies)
+<li>sacrificing friendly monsters: (varies)
+<li>pickpocketing: -50 if N- or higher
+<li>giving poisoned items to monsters: -20
+<li>attacking with the Scythe of Corruption: -Damage Dealt
+<li>sacrificing at chaotic altar: -10*value
+<li>giving meat to animals: -10
+<li>using Ventriloquism on lawfuls: -10
+<li>using Necromancer's lvl 25 Shadow Touch: -Damage dealt (sometimes)
+<li>stealing item from a shop: -4*value
+<li>attacking monsters with a weapon of vampirism: -1 every time HP is drained
+<li>reading tract of chaos: -turns spent reading/10
+<li>wearing armor with of chaos suffix: -1 every 4 turns
+<li>wearing an amulet of chaos, available from Hotzenplotz: -1 every 4 turns
+<li><span class="newi">hiring chaotic mercenaries</span>
+</ul><p>
+
+<b>One time chaotic acts</b><p>
+<ul>
+<li>kill Yrruir: -4000
+<li>complete kill Yrruir quest: -2000
+<li>sacrifice Jharod: -2000
+<li>complete last Gaab'Bay's quest: -1000
+<li>tell Blup you killed his mom: -1000
+<li>use Ventriloquism on Thrundarr: -1000
+<li>tell the Tiny Girl you killed her dog: -600
+<li>kill Arena Master then chat with Ratling Rebel: -500
+<li>kill Tywat Pare: -500
+<li>digg Griff's grave: -250
+<li>kill Jharod: -200
+<li>learn Pick Pockets skill: -100
+<li><big>complete kill the Ice Queen quest: -1000</big>
+</ul><p>
+
+<b>Acts of balance</b><p>
+<ul>
+<li>complete kill Keethrax quest when neutral: 400 to N=
+<li>kill Keethrax when neutral: 250 to N=
+<li>complete kill Kranach quest when not lawful: 250 to N=
+<li>sacrificing on neutral altar: 10*value to N=
+<li>reading tract of balance: tunrs spent reading/10 to N=
+<li>drinking potion of balance &ndash; chance: 10*(SumOfAttributes) to N=
+<li>wearing armor with of balance suffix: 1 to N= every 4 turns
+</ul><p>
+
+<h4 id="0214">0.2.1.4 Lawful acts</h4>
+Changing from chaotic towards neutrality and law is more difficult. The following actions move the PC towards lawful:<p>
+
+<b>Repeatable lawful acts</b><p>
+<ul>
+<li>self-flagellatting to death, resurrecting: +2000
+<li>destroying chaotic altar: +1000
+<li>eating ratling guardian corspe: +250
+<li>healing the PC's pet (only when actually injured): +200
+<li>giving healing potions to Jharod: +150
+<li>killing a black unicorn: +100
+<li>letting monster flee in wilderness: +100 (lawful only)
+<li>casting Scare Monster spell on monster: +100 (lawful only)
+<li>giving healing potions or stethoscope to village elder: +50-250
+<li>offering peace: +50-200
+<li>giving food or gold to beggars: +1 for every 20 gp, max +50 (1000 gp)
+<li>self-flagellation, using a whip in the tool slot: +dmg
+<li>giving outlaw type of corpses to Tywat Pare: +reward/2
+<li>killing certain chaotic monsters, notably most dragons, demons, grues, some giants, steel golems and most chaos monsters: +xp
+<li>giving gold to monsters: +1-50
+<li>sacrificing on lawful altar: +10*value
+<li>spending time with lonely NPC: +20
+<li>chatting with non-friendly lawful monster: +20
+<li>giving gold to Ruun: +gp/20 (only if alignment is lower than Ruun's, who is either N= or L)
+<li>giving candy to children or Blup: +2 or +10
+<li>giving flails or seeds to farmers, or trading tools for rations with them: +1-10
+<li>sacrificing *EoCC, +Curs, +Doom, or *Curs items: +5*value
+<li>blessing monsters: +5
+<li>successfully using Gardening to plant a herb seed: +5
+<li>curing rabid dogs: +3
+<li>hearing the chants of the holy chorus in Dwarftown: +1
+<li>giving bones to dogs, meat to animals, fish to black hurthlings: +1
+<li>reading tract of order: +turns spent rerading/10
+<li>wearing armor of order: +1 every 4 turns
+<li>wearing an amulet of order, available from Tywat Pare: +1 every 4 turns
+</ul><p>
+
+<b>One time lawful acts</b><p>
+<ul>
+<li>save Khelavaster: +5000
+<li>tell Blup where mom is: +1000
+<li>save Yrrigs: +1000
+<li>kill Riurry: +1000
+<li>bring live Cute Dog to Terinyo: +800
+<li>tell the Tiny Girl her dog died: +600
+<li>complete save Yrrigs quest: +500
+<li>complete kill Keethrax quest: +400 if lawful (move towards neutral if neutral)
+<li>complete kill Hotzenplotz quest: +350
+<li>kill Kranf Niest: +270
+<li>kill Keethrax: +250 if lawful (move towards neutral if neutral)
+<li>complete kill Kranach quest: +250 if lawful (move towards neutral otherwise)
+<li>kill Hotzenplotz: +250
+<li>complete slay random monster quest: +250
+<li>complete Ogre Cave quest: +250
+<li>complete greater daemon quest: +250
+<li>kill Kranach: +200
+<li>kill Yrrigs: +50
+<li><big>kill Haggar: +400</big>
+</ul><p>
+
+<h4 id="0215">0.2.1.5 Miscellaneous changes</h4>
+Upon each alignment change, the following is applied:<p>
+<ul>
+<li>* (51 - PCLevel) * 0.02 if change is positive: so lvl 1 PC's get the full change, lvl 50 PC's only get 2% 
+<li>* 1.2 <big>0.8</big> if negative and Unicorn <big>and lawful</big>
+<li>* 0.9 if Tree
+<li>* 0.9 if negative and Book or Wand
+<li>/ 2/4/8 if wearing a C/U/B amulet of balance and neutral
+<li><big>* 0.1 if positive and Chaos Knight</big>
+</ul><p>
+
+All of the above changing alignment are gradual methods which take some time to accomplish an alignment change. Without question, the fastest and easiest way to change 
+alignment is by making sacrifices on an altar. See the section below about altars for more alignment change strategy.<p>
+
+<h4 id="022">0.2.2 Piety</h4>
+Piety level determines your status towards a deity. Three piety levels for three deities (lawful, neutral, chaotic) are always maintained. They can change arbitrarily, wrapping around
+integer boundaries. At the start of the game, piety will be positive with the deity of the PC's alignment, and 0 with the other deities. Druids and Priests start with 1500 piety,
+Paladins start with 1200 piety, and other classes start with 200 piety.<p>
+
+<table id="0221" border=1><caption>0.2.2.1 Miscellaneous piety changes</caption>
+<tr><th>Action                 <th>Piety cost
+<tr><td>Attempt to turn undead <td>-200
+<tr><td>Destroy altar          <td>-10000 (and alignment shift)
+<tr><td>Kick altar             <td>-100
+<tr><td>Destroy others altar   <td>+1000 if opposite alignment, +100 if it was neutral
+<tr><td>Use of holy symbol     <td>+0.5 (yes, a half point!)
+<tr><td>Convert using altar    <td>piety set to -850 for new deity
+<tr><td>Gain a level           <td>+10*level in piety for aligned deity
+<tr><td>220 actions            <td>-1%
+<tr><td>Convert altar          <td>-2000 for former owner, +1000 for new owner
+<tr><td>Change deity (alignment)<td>-10000 for old deity
+<tfoot class="new">
+<tr><td>Eat mushroom of meditation<td>+1000/+200/-500 B/U/C
+</tfoot>
+</table><p>
+
+For the usual ways of altering piety (see later sections <a href="#024">0.2.4</a> Praying and <a href="#0233">0.2.3.3</a> Sacrificing) the two rival deities gain or lose 1/30th the
+amount of piety (rounded down) that the aligned deity loses or gains. So pissing off one deity makes the others happy. That doesn't apply to crownings or to any of the miscellaneous
+changes above.<p>
+
+<h4 id="0222">0.2.2.2 Piety loss</h4>
+As referred to in the <a href="adomman-F.html">ADOM Manual</a>, piety level is positively affected by the sacrifices made to the PC's deity, and negatively affected by prayers.
+Remember that the value of sacrifices is dependent on race. Piety level constantly decreases with time, so sacrifices made in the early game will have little effect after many game
+turns have passed. In practice, this means that a PC who wants to keep her deity happy should sacrifice items throughout the game. If a PC wants to be (pre- post- or normally)
+crowned, she should have a very large cache of valuable material to sacrifice. This can include live sacrifices, of course, which are always valuable. As stated in the table above,
+the PC loses 1% of piety every 220 actions.<p>
+
+<h4 id="023">0.2.3 Altars <tt>_</tt></h4>
+Altars have an alignment score much like the PC, one crucial difference is that the caps are much higher &ndash; 1 million stones in either direction. Initial value appears to be random
+from -2000 to 2000, making N altars twice as common as the other types. Altars are generally used for status identification, water manipulation, sacrificing, or converting the altar
+or the PC to a different alignment.<p>
+
+<h4 id="0231">0.2.3.1 Status identification</h4>
+An altar of a co-aligned deity will reveal the status of any item that is dropped on the altar, i.e. whether they are blessed, uncursed, or cursed. This happens regardless of piety.
+Dropping items on a non-co-aligned altar will result in an annoyed deity and rats being summoned, item destruction or curse might also occur.<p>
+
+<h4 id="0232">0.2.3.2 Water manipulation <tt>!</tt></h4>
+If your deity is very pleased (see later sacrificing) with you, they will bless any potion of water that is dropped on the altar, resulting in extremely useful and valuable holy water.
+Dropping water on non-aligned altar will result in unholy water, which could be used to curse items, should you ever want this.<p>
+
+<h4 id="0233">0.2.3.3 Sacrificing <tt>O</tt></h4>
+The main thing you do on altars is sacrificing (or <tt>O</tt>ffering). Things that can be sacrificed include items, food, monsters and gold. When sacrificing items, you stand on top of
+the altar and <tt>O</tt>ffer the item, which will then be accepted or rejected by the deity. When sacrificing monsters, you stand away from the altar, wait for the monster to step onto the
+altar, and then <tt>O</tt>ffer it. Note that most humanoid monsters have the ability to speak. This means they can sacrifice the PC. Most, but not all, humanoids are chaotic. So idly
+standing around on an altar, especially a chaotic one, near humanoid enemies is a very unwise thing to do.<p>
+
+Priests recieve +50% to all sacrifice values; Paladins +20%. At high levels, sacrifice values are reduced.<p>
+
+<h4 id="02331">0.2.3.3.1 Sacrificing items</h4>
+When sacrificing items, one might want to keep in mind the fact that some races' deities specially favor some item types. These can be found in the
+<a href="adomman-F.html#F1">ADOM Manual</a> and are listed here for reference. The modifier quantitates a percentage bonus in terms of piety.<p>
+
+<table id="023311" border=1><caption>Deities specialties</caption>
+<tr><th>Race<th>Preferred sacrifices<th>Modifier
+<tr><td><b>Human</b><td>tools of all kind<td>1.5
+<tr><td><b>Troll</b><td>rocks, the larger the better<td>3
+<tr><td><b>Hurthling</b><td>cooked meals<td>1.5
+<tr><td><b>Gnome</b><td>gems<td>3
+<tr><td><b>Dwarf</b><td>gold<td>1.5
+<tr><td><b>High Elf</b><td>magical rings<td>2.5
+<tr><td><b>Gray Elf</b><td>magical rings<td>2.5
+<tr><td><b>Dark Elf</b><td>magical wands and books<td>2
+<tr><td><b>Orc</b><td>melee weapons<td>1.5
+<tr><td><b>Drakeling</b><td>musical instruments<td>4
+<tfoot>
+<tr><td><b>Mist Elf</b><td>magical wands and books<td>2?
+<tr><td><b>Ratling</b><td>artifacts<td>?
+<tfoot></table><p>
+
+Other observations:<p>
+<ul>
+<li>Artifacts can be sacrificed and are valuable.
+<li>Sacrificing an item or artifact which grants +Curs, +Doom, *Curs, or *EoCC, gains alignment; +5 stones per gp of the item's base value. Beware of this if the PC is close
+to (pre)crowning.
+<li>Chaos Orbs cannot be sacrificed. Attempting to do so will cause them to reappear on the altar.
+<li>Sacrificing a god gift on the altar of the deity who gave it causes -Fate -Luck +Curs +Doom, and the PC loses piety equal to twice what she would have gained.
+</ul><p>
+
+<h4 id="02332">0.2.3.3.2 Sacrificing food <tt>%</tt></h4>
+Food is quite profitable for any race based on its nutrition value, making blessed stomafillia herbs especially preffered, since they are plentiful resource once
+a living herb pattern is created &ndash; refer to section <a href="adomgb-0-13.html#0d6">0.13.6</a>.<p>
+
+Sacrificing food uses a different set of rules from eating it. Start with the base satiation value, then:<p>
+<ul>
+<li>blessed: +25%
+<li>cursed: -50%
+<li>cooked: +100%
+<li>Wolf birthsign: +10% <big>+25%</big>
+<li>savegame cheating: -95%
+</ul><p>
+
+Stomafilia herb gives 300/240/120 piety depending on B/U/C status. Other herbs score is negligible: only 6/4.8/2.4 per herb, rounded down. Stomacemptia herbs score the least,
+a mere 0.32 piety per herb, regardless of status. Sacrificing ratling food (you will not be prompted for an amount) will destroy the entire stack and give -200 piety.
+Corpses have a fixed value equivalent to 370 gold &ndash; same as a large ration.<p>
+
+<small>In R+, the PC can only offer up to a certain amount (around 10) of herbs before the deity protests "*NO MORE VEGETABLES!*"</small><p>
+
+<h4 id="02333">0.2.3.3.3 Sacrificing monsters</h4>
+Sacrificing monsters can be very bountiful, especially on levels with a high monster generation rate. Live sacrifices score 3 times as
+the value of corresponding corpse. There are a few things to be remembered, though:<p>
+<ul>
+<li>Lawful and neutral deities don't like it when you sac "their beings", i.e. neutral beings to a neutral deity or lawfuls to a lawful deity. 
+Chaotics don't care. This makes the situation simplest for chaotic PCs. They can sacrifice anything on chaotic altars with no fear of 
+alignment change. This also means the situation is at a dead end: chaotic PC + chaotic altar means no alignment change is possible.
+<li>Sacrifices of pets, and sacrifices of Druid's animals are always treated as chaotic.
+<li>Bred, summoned, undead, unlife beings and animated trees can not be sacrificed.
+<li>Dwarves (other than small dwarf and dwarven chaos knight) cannot be sacrificed in Dwarftown, regardless of the altar's alignment.
+<li>Priest (Ruun) cannot be sacrificed on any altar anywhere. Merely attempting will make him hostile.
+<li>No monster can be sacrificed on an elemental temple altars which is still chaotic. Orb guardians cannot be sacrificed on elemental temple altars even after conversion.
+<li>Sacrificing a monster puts it on the kill list and has all the normal effects of killing it. The experience gain from doing this is just 1/20. This will unfortunately affect 
+the accuracy of the "One kill on the average seems to be worth..." estimation in the monster memory.
+<li>Sacrificed monsters drop all carried items, but no fixed drops.
+</ul><p>
+
+<h4 id="02334">0.2.3.3.4 Sacrificing gold <tt>$</tt></h4>
+Sacrificing gold is most straightforward and safest. Gold coin gives about 0.32 piety per gold coin, except for Dwarves who get about 0.48 piety
+(because their deities likes cash especially). Or roughly triple (double) the amount of piety needed and there's your gold cost.<p>
+
+<h4 id="02335">0.2.3.3.5 Messages generated when sacrificing on altars</h4>
+When any offering has been accepted, you'll notice your standing with your deity. The effects are:<p>
+
+<table border=1><caption>Sacrificing messages</caption>
+<tr><th>Piety<th>Message<th>Effect
+<tr><td>-20000-<td>MORTAL, YE HAVE PESTERED ME FOR TOO LONG!<td>summons solars/holy slayers/greater daemons; spectres if fallen champion
+<tr><td>-15000-<td>Mortal, ye art a pest.<td>"A bolt of -damage type- hits you!" (67-79 points of damage)
+<tr><td rowspan=2>-8000-<td>*I* hereby punish thee, puny mortal. <td>equipment turned to dust
+<tr><td>You feel bad... very bad.<td>same piety level as above, Dooming results if no equipment
+<tr><td>-3000-<td>Take this for ye impudence!<td>inventory cursed
+<tr><td rowspan=2>-1000-<td>Mortal, ye art a nuisance!<td>nothing
+<tr><td>You hear -deity- grumbling in anger.<td>nothing
+<tr><td>-50-<td>For some seconds the ground rumbles.<td>nothing
+<tr><td>-50..50<td>-deity- seems to be unconcerned.<td>nothing
+<tr><td>50+<td>-deity- seems to be pleased.<td>nothing
+<tr><td>1000+<td>-deity- seems to be very pleased with you.<td>deity will bless water dropped on altar
+<tr><td rowspan=3>3000+<td>You feel inner strength lifting you spirits.<td>same piety level as inner peace, deity grants the Lucky intrinsic
+<tr><td>You feel inner peace.<td>see above message about inner strength
+<tr><td>You burn with the anticipation of power.<td>chaotic equivalent of inner peace
+<tr><td rowspan=2>8000+<td>You feel spiritually elated!<td>PC gained the Lucky intrinsic by skipping the previous level
+<tr><td>You feel spiritually invincible.<td>you can safely read religious tract of your alignment
+<tr><td rowspan=3>15000+<td>-deity- seems to be very close to you.<td>grants Fate smiles intrinsic
+<tr><td>You feel that a sinister curse is lifted from you.<td>deity removes Cursed intrinsic
+<tr><td>You feel a terrible gloom being lifted from you.<td>deity removes both Cursed/Doomed intrinsics if present
+<tfoot class="normal">
+<tr><td rowspan=2>30000+<td>-deity- seems to be absolutely close to you.<td>PC is eligible for crowning: extreme alignment and the highest level of piety
+<tr><td>-deity- seems to be extremely close to you.<td>PC is eligible for pre/post crowning: non-extreme alignment and the highest level of piety
+</tfoot>
+<tfoot>
+<tr><td>20000+<td>-deity- favors you.        <td>added as a progress indicator
+<tr><td>25000+<td>-deity- favors you greatly.<td>added as another progress indicator
+</tfoot>
+</table><p>
+
+<table id="02336" border=1><caption>0.2.3.3.6 Other possible sacrificing messages</caption>
+<tr><th>Message<th>Meaning
+<tr><td>*MORTAL, I AM NOT BUILDING A BLOODY GARDEN UP HERE! NO MORE TREES!*<td>sacrificing an animated tree
+<tr><td>A voice in your mind lectures you. *WHAT A MEDIOCRE SIGN OF DEVOTION. IMPROVE!*<td>sacrificing of a summoned creature
+<tr><td>A voice in your mind lectures you. *THOU SHALT TAKE PAINS TO PROVE THY DEVOTION!*<td>sacrificing a spawned creature
+<tr><td>You hear a booming voice in your mind... *BE WARNED! SACRIFICING MY OWN CREATURES IS NOT SOMETHING I WELCOME WITH JOY!*<td>sacrificing a creature coaligned with the altar
+<tr><td>-deity- booms: *YOU DARE TO SACRIFICE MY GIFTS AT MY HOLY PLACE?!?* *FOOL!* The -foo- is consumed by a -bar- light and disappears.<td>sacrificing a divine gift
+<tr><td>Suddenly -deity- speaks to you. *YOU DARE TO OFFER THE CRAP SOLD BY RATLING TRADERS?* *FORGET IT!* The -ratling fodder- disappears.<td>sacrificing ratling wares
+<tr><td>*FoOl*, ThOsE sErVaNtS aRe MoRe UsEfUl ThAn YoU. wHy NoT sAcRiFiCe YoUrSeLf?<td>sacrificing an orb guardian
+<tr><td>You will need this to save your world, mortal. Keep it.<td>sacrificing Chaos Orb
+<tfoot>
+<tr><td>*NO MORE VEGETABLES!!!*<td>sacrificing too many herbs
+</tfoot>
+</table><p>
+
+<table id="02337" border=1><caption>0.2.3.3.7 Messages when sacrificing in the dark</caption>
+<tr><th>Message<th>Meaning
+<tr><td>You feel a warm aura.<td>lawful altar
+<tr><td>The air is suddenly very moist.<td>neutral altar
+<tr><td>You suddenly feel a chilling cold.<td>chaotic altar
+</table><p>
+
+These messages are generated regardless of piety. The piety messages follow these. Note that monsters cannot be sacrificed in the dark.<p>
+
+<h4 id="0234">0.2.3.4 Converting an altar or PC</h4>
+Altars are not simply converted, they experience alignment motion just like the PC. Exception: an altar cannot swing from L to C in a single move, or vice versa, if this
+would happen the altar is set to plus or minus 749 (extreme N+/N-) instead.<p>
+
+Sacrificing items, food, gold or monsters on an altar can change the alignment of the PC or the alignment of the altar. In general, small sacrifices move the
+alignment of the PC towards the alignment of the altar. Note, however, that sacrificing at a lawful altar will not move a PCs alignment all the way to L+.
+Likewise, sacrificing at a chaotic altar will not move a PCs alignment all the way to C-. To achieve these alignments, the PC has to commit other lawful or
+chaotic acts, respectively (or wear an amulet corresponding to the desired alignment, preferably blessed). Large sacrifices move the alignment of the
+altar towards that of the PC. Live sacrifices can fall into either category depending on the experience level of the PC and the level of the monster being
+sacrificed. Converting the alignment of a PC or an altar with live sacrifices is a somewhat tricky and complicated business and can have dire consequences if
+the sacrificing is done incorrectly. Using gold is much more straightforward. To move alignment towards that of an altar, sacrifice small amounts of
+gold, 10 or 20 pieces, repeatedly. This will eventually result in a message: "*WELCOME BELIEVER*" when alignment changes to that of the altar.
+An additional message, "You feel your morals changing." occurs when changing from lawful to neutral on a chaotic altar or from chaotic to neutral on a
+lawful altar. The exception to this easy alignment conversion is the case of highly experienced chaotic PCs. More about that special case is found in
+section <a href="adomgb-4.html">4</a>, Ultra endings. To change the alignment of an altar to match the PC's, sacrifice at least 3000 gold at one time.
+The 3000 figure is a minimum; more may be required depending on experience level.<p>
+
+<h4 id="02341">0.2.3.4.1 Observations</h4>
+Some observations about sacrificing on nonaligned altars and changing the alignment of altars with live sacrifices:<p>
+<ul>
+<li>Druids should be very careful to avoid sacrificing animals at any time. Sacrificing pets or, for a non-chaotic Druid, animals, is an extremely chaotic act;
+-100 alignment for every xp the monster would ordinarily have given on death. Sacrificing an animal as a non-chaotic Druid will set piety to -2000 if it was positive,
+or subtract 2000 otherwise.
+<li>If sacrificing on an elemental temple altar and not crowned, all alignment changes to the altar are forced to be in the C direction.
+<li>Any time a PC sacrifices at a nonaligned altar, <i>two</i> deities are involved: the PC's deity, who may accept a large enough sacrifice and fight the nonaligned deity
+for control of the altar, and the nonaligned deity, who may accept small sacrifices from the PC and move alignment towards that of the altar.
+This also means there are two deities who may object to live sacrifices. It is always unwise to sacrifice creatures of your alignment or the altar's
+alignment. The exception is chaotic PCs sacrificing at chaotic altars as described above.
+<li>The fact that two deities are involved when sacrificing on a nonaligned altar means a puzzling phenomenon may occur when sacrificing your race's deity's
+preferred items on a nonaligned altar. The PC's deity may be able to accept the sacrifice and "deeply appreciate" it while simutaneously the nonaligned
+deity is angered by the fact that a nonaligned PC used the altar. Depending on piety relationship with the nonaligned deity (you always have a
+piety relationship with all three deities of your race), this may result in a "deeply appreciates" message as well as a negative effect such as inventory cursing
+or destruction.
+<li>A live sacrifice at a nonaligned altar behaves similarly to non-live sacrifices in that small sacrifices move the PC toward the alignment of the altar while
+large ones move the altar to your alignment, but it is much more difficult to predict exactly what will happen. There are many factors involved: the
+experience level, crowned vs uncrowned status, piety relationship with both the PC's deity and the nonaligned deity as well as the experience level of the monster
+being sacrificed. A goblin is considered a large sacrifice for a level one PC but small for a level ten PC. It is very difficult to predict exactly what will
+happen in borderline cases. After reaching experience level five or so, it becomes very risky to attempt an altar conversion using a low level live sacrifice
+such as an orc or goblin. The deity's standards are higher than that by this point.
+<li>If the PC angers a deity by sacrificing one of her creatures, several negative consequences may result. For example, if a PC sacrifices a creature of her own
+alignment her deity responds with: "*BE WARNED! SACRIFICING MY OWN CREATURES IS NOT SOMETHING I WELCOME WITH JOY!*" Repeating this act results in: "*YOU DARE TO
+SACRIFICE ONE OF MY CREATURES?* *DEFILER*" This may be followed by: "-deity- luckily seems unconcerned." depending on piety level. Repeating again
+results in the same two messages followed by conversion of a neutral altar to chaotic. This example was done with a neutral PC, exp lvl 5, sacrificing neutrals
+on a neutral altar which became chaotic. The PC did not gain the Cursed or Doomed intrinsics, nor did her alignment change.
+<li>A second example: a chaotic PC sacrificing neutral creatures on a neutral altar: First: "*YOU DARE TO SACRIFICE ONE OF MY CREATURES?* *DEFILER* You suddenly hear
+a thundering voice. *I* hereby punish thee, puny mortal. Your equipment turns to dust." Next: "*I* hereby punish thee, puny mortal! You barely notice some
+thoughts: I can't believe it!" The second message here is because the PC was wearing artifacts and artifacts only. The PC did not gain the Cursed or Doomed
+intrinsics. If the PC had been wearing any non-artifact equipment, it would have been destroyed. If the PC wore nothing, she gained the Doomed, and not the Cursed
+intrinsic.
+<li>The implication of the above paragraph should be obvious: Wear <i>artifacts and artifacts only</i> when attempting to convert an altar. Wield a si if necessary.
+This completely avoids the equipment destruction and Dooming penalties.
+</ul><p>
+
+<h4 id="02342">0.2.3.4.2 Possibilities</h4>
+The chart below shows all of the possible combinations for PCs sacrificing live monsters on aligned and nonaligned altars. The "altar moves to" field
+<i>assumes the sacrifice is successful</i>. A dash means there is no change in the altar; these are the "proper" sacrifices a PC makes in order to gain piety
+and move towards the extreme of her alignment. The "god irritated" field is as follows: "Yes" means the PC's deity is irritated &ndash; a lawful PC tried to
+sacrifice a lawful creature or a neutral PC tried to sacrifice a neutral creature. "No" means the sacrifice was proper, the deity accepted the sacrifice,
+the PC gains piety and moves closer to the extreme of her alignment. "Fight" means, it is possible the original deity who owned the altar fights, and loses
+every time, to the deity taking possession of it. Whether the fight actually occurs depends on the value of the sacrifice.<p>
+
+How alignment or piety level changes when converting altars is not proven for all cases. Note the case of a neutral sacrificing neutrals on a
+neutral altar. It is correct as written. The altar moves to chaotic with no (or a very, very small) alignment change or other negative consequences to the
+PC. Also note the remarkable case of neutral PCs sacrificing neutral monsters on a chaotic altar. This converts the altar to neutral with no noticeable
+alignment change. Lawfuls sacrificing lawfuls on a lawful altar may convert the altar to neutral, but not always. The PC always receives a noticeable
+alignment drop.<p>
+
+<table id="023421" border=1><caption>Conversion possibilities</caption>
+<tr><th>PC<th>Altar<th>Sacrifice<th>Altar moves to<th>PC moves to<th>God irritated
+<tr><td>L<td>L<td>L <td>N <td>N <td>yes
+<tr><td>L<td>L<td>N <td>- <td>L+<td>no
+<tr><td>L<td>L<td>C <td>- <td>L+<td>no
+<tr><td>L<td>N<td>L <td>L <td>N <td>yes
+<tr><td>L<td>N<td>N <td>C <td>N <td>fight
+<tr><td>L<td>N<td>C <td>C <td>N <td>fight
+<tr><td>L<td>C<td>L <td>N <td>N <td>yes
+<tr><td>L<td>C<td>N <td>N <td>N <td>fight
+<tr><td>L<td>C<td>C <td>N <td>N <td>fight
+
+<tr><td>N<td>L<td>L <td>N <td>- <td>fight
+<tr><td>N<td>L<td>N <td>N <td>L <td>yes
+<tr><td>N<td>L<td>C <td>N <td>L <td>fight
+<tr><td>N<td>N<td>L <td>- <td>N=<td>no
+<tr><td>N<td>N<td>N <td>C <td>- <td>yes
+<tr><td>N<td>N<td>C <td>- <td>N=<td>no
+<tr><td>N<td>C<td>L <td>N <td>C <td>fight
+<tr><td>N<td>C<td>N <td>N <td>C <td>yes
+<tr><td>N<td>C<td>C <td>N <td>C <td>fight
+
+<tr><td>C<td>L<td>L <td>N <td>N <td>fight
+<tr><td>C<td>L<td>N <td>N <td>N <td>fight
+<tr><td>C<td>L<td>C <td>N <td>N <td>fight
+<tr><td>C<td>N<td>L <td>C <td>N <td>fight
+<tr><td>C<td>N<td>N <td>C <td>N <td>fight
+<tr><td>C<td>N<td>C <td>C <td>N <td>fight
+<tr><td>C<td>C<td>L <td>- <td>C-<td>no
+<tr><td>C<td>C<td>N <td>- <td>C-<td>no
+<tr><td>C<td>C<td>C <td>- <td>C-<td>no
+</table><p>
+
+Note that only champions of Balance or Order can convert the altars in the elemental temples.<p>
+
+If all of this has confused more than it has helped, here are some rules of thumb:<p>
+<ol>
+<li><i>Do not</i> sacrifice a creature whose alignment is the same as yours or the altar's. If you need to take advantage of live sacrifices to increase
+piety, only sacrifice nonaligned monsters on an aligned altar.
+<li>If you must convert an altar, do it with gold. It is much, much safer.
+</ol><p>
+
+<h4 id="02343">0.2.3.4.3 Conversion summary</h4>
+If the alignment of the sacrifice is different from the alignment of the altar, conversions may occur. First, the altar is drawn towards the alignment of the
+sacrifice by an amount proportional to the value of the sacrifice. This effect is three times larger for forced chaotic sacrifices. Next, if the altar is now
+still not of your alignment, alignment will be shifted; generally 500 alignment points in the direction of the altar's old alignment; it could be larger
+if a huge sacrifice was made and somehow failed to convert the altar.<p>
+
+If the sacrifice alignment is the same as the altar alignment, PC gains piety. The altar's alignment is proportionally drawn towards neutrality or the extremes.
+If the altar is neutral, alignment will be proportionally drawn towards neutrality, otherwise no effect on alignment. If the altar does not match alignment
+(this is only possible for forced chaotic sacrifices), alignment will be pulled slightly towards the altar.<p>
+
+Effects are applied for piety with the altar's deity. If piety with the current deity is negative, there is a check preventing more than one of the same punishment in a row.<p>
+
+<h4 id="02344">0.2.3.4.4 Recovering from errors</h4>
+Precautions:<br>
+When converting an altar, remove all gear except for artifacts. Also, remember that the bigger your sacrifice, the more likely it is that the
+altar converts &ndash; but remember, this sacrifice probably has minimal effect on piety, so don't make it ridiculously huge.<p>
+
+Dropping items on a nonaligned altar will make the deity that owns the altar angry. This causes some warning messages along the lines of "GET
+YOUR JUNK OFF MY ALTAR." Ordinarily this should be enough warning. If an extended drop command is used, however, there seems to be a bug present
+that allows the dropping to continue until the angry deity curses the inventory of the PC. Watch out for this.<p>
+
+If things go wrong:<p>
+<ol>
+<li>Inventory cursed<br>
+By the time you have enough valuable stuff to sacrifice, you should be able to uncurse a cursed inventory with little trouble. Get to an aligned altar
+immediately. Bless your potions of water by dropping them on the altar if you are in sufficient standing with your deity. If not, sacrifice gold
+until you are. Dip a scroll of uncursing into your new holy water, read it, and voila, all of your stuff is back to uncursed status. Obviously,
+previously blessed status of inventory items has been lost.
+<li>Equipment turned to dust<br>
+This is why it's always recommended to remove non-artifacts before converting altars &ndash; you don't want to lose those seven league boots or
+that nifty sword of sharpness, do you? However, the equipment turned to dust penalty can be useful as a last resort for getting rid of a stubborn item.
+Repeatedly praying will anger a deity to this point.
+<li>Doomed<br>
+If the PC had no equipment, Dooming rather than equipment turned to dust will occur. This is why the PC should have <i>some</i> equipment worn, even a si. It
+will be necessary to sacrifice enough to get your piety all the way up to very close, at which time the Dooming will be removed. It is handy to know how
+to remove Dooming and Cursing in any case, since these intrinsics can be caused by things other than mistakes with altars &ndash; robbing shops with lawfuls, attacking
+karmics in melee and pools spring to mind.
+<li>Energy bolt<br>
+Ordinarily it never occurs when mistakes with altars are made. It takes Dooming then repeated additional prayers for a deity to get this mad. However,
+there are two situations where this will happen <i>immediately</i> &ndash; falling from champion status and sacrificing a gift from your deity. The deity casts an
+energy bolt at the PC, which cannot be resisted.
+<li>Summoning<br>
+If further annoyed, the deity summons monsters dependent on alignment &ndash; lawful: solars, neutral: holy slayers, chaotic: greater daemons.
+If the PC becomes a fallen champion, their deity will summon spectres. Another case which causes summoning is to get as far as possible from a particular
+deity then sacrifice on that deity's altar. For instance, if an initially chaotic PC sacrifices repeatedly on a neutral altar to achieve very good standing with the
+neutral deity then sacrifices on a lawful altar, creatures may be summoned.
+</ol><p>
+
+<h4 id="024">0.2.4 Praying <tt>_</tt></h4>
+<span class="credit">Credit David Byron.</span>
+Unlike sacrificing, you don't need an altar when conducting prayers. Praying uses up your piety for an immediate reward, which you however cannot choose, but
+depends on your status and order of precedence &ndash; see later. It's quite possible to have a prayer answered and the cost pulls you down to low enough to 
+recieve a warning, or penalty, but there are some safeguards against this happening and it's unlikely unless you have been doing a lot of praying. Here's a funny example:
+<pre>
+You pray to Istaria. Your cursed broadsword (+1, 1d7+3) glows in a silvery light.
+You suddenly hear a thundering voice. "*I* hereby punish thee, puny mortal!"
+Your equipment turns to dust.
+</pre><p>
+
+The main safeguard is that you cannot drop more than 3 levels of piety in answering a prayer if you start off at least "Inner peace". Instead
+you will be at the bottom of the level three below where you started from. For example if you start at 3000 piety and your prayer costs
+15000 piety you will end up at -50 piety. That applies to unanswered prayers too &ndash; which also cost piety.<p>
+
+A second safeguard is that if your prayer is NOT answered and you had at least "Unconcerned" then, if you drop to one of the low levels, you
+will <i>not</i> receive a penalty due to low piety (or a warning message) until the next time you pray.<p>
+
+<h4 id="0241">0.2.4.1 Prices for praying</h4>
+In general the cost of a prayer or unanswered prayer is the base cost multiplied by a factor that increases incredibly fast according to how
+many <i>of that kind of prayer</i> (or how many unanswered prayers) you have had with that character. The count increases even if you switch
+deities. The multiplier is "triangular n" or n(n+1)/2.<p>
+
+For example the first unanswered prayer costs 20 piety. The second will cost 60, then 120, 200, 300, 420 and so on. The formula for the
+total piety cost of n prayers of the same kind is n(n+1)(2n+1)/6 multiplied by the base cost.<p>
+
+In the table below, if not mentioned otherwise, at least 50 piety is required in addition to the requirement mentioned. In elemental temples, this requirement
+is 2 levels higher (3000 piety for standard rewards).<p>
+
+<table id="02411" border=1><caption>Praying costs</caption>
+<tr><th>Reward            <th>Requirement                <th>Cost
+<tr><td>Pre/post-crowning <td>piety at least 30000       <td>50000
+<tr><td>Removal of doom   <td>doomed                     <td>10000
+<tr><td>Removal of curse  <td>cursed                     <td>3000
+<tr><td>Prevent breeding  <td>at least 40 breeders on level<td>2500
+<tr><td>Granting of pickaxe<td>elemental temples, at least 15000 piety<td>2000
+<tr><td>Uncurse 1 equipped item<td>cursed item equipped  <td>1000
+<tr><td>Food              <td>at least Hungry            <td>500 [1]
+<tr><td>Remove mute       <td>Mute                       <td>350
+<tr><td>Cure sickness     <td>Sick, at least 3000 piety  <td>250
+<tr><td>Cure blindness    <td>Blind                      <td>150
+<tr><td>Full heal         <td>less than 75% health       <td>150
+<tr><td>Remove darkness   <td>being at dark              <td>120
+<tr><td>Remove slowed     <td>Slowed                     <td>100
+<tr><td>Cure poison       <td>Poisoned                   <td>100
+<tr><td>Full mana         <td>not at full PP             <td>80
+<tr><td>Remove deaf       <td>Deaf                       <td>60
+<tr><td>Remove confused   <td>Confused                   <td>50
+<tr><td>Remove stun       <td>Stunned                    <td>25
+<tr><td>Nothing happens   <td>nothing of the above, or piety below 50<td>20
+</table><p>
+
+[1] The <i>base</i> cost is between 450 and about 520 depending upon how starved you are. The cost of 450 is if you have just become hungry, the cost of 500 is for when you
+are just about to start reducing ability levels. Remember to multiply by the triangular n penalty.<p>
+
+Praying cost is further modified (these do <i>not</i> apply to the cost of (pre/post) crownings):<p>
+<ul>
+<li>Pious, Very Pious, and Saint talents: *0.95 each <big>*0.8 / *0.7 / *0.6</big>
+<li>in a room with altar: /2
+<li>Paladin: *2/3 
+<li>lvl32+ Priest and good standing: /2
+<li>crowned champion: /2
+<li>Candle birthsign: *2/3
+<li>benevolent room: *3/4
+<li>malevolent room: *2
+</ul><p>
+
+<h4 id="0242">0.2.4.2 Order of precedence</h4>
+<p><ol>
+<li>urgent heal (health &lt; 25%)
+<li>remove sickness
+<li>urgent food (satiation &lt; 100 ("Hungry!"))
+<li>remove Cursed / Doomed
+<li>cure blindness
+<li>heal (health &lt; 75%)
+<li>remove Confused
+<li>remove Slowed
+<li>cure poison
+<li>remove Mute
+<li>remove Stunned
+<li>food (satiation &lt; 200 ("Hungry"))
+<li>gain mana (even if just 1 PP below max)
+<li>remove darkness (diameter 9)
+<li>uncurse an equipped item
+</ol><p>
+
+Note that heal and food have two levels of precedence which cost the same and count as the same prayer. Also you cannot to get Cursed
+or Doomed removed using prayer if you had both of them at the same time (by prayer that is &ndash; you can do it by sacrificing), so effectively
+they have the same precedence. Didn't attempt to find the precedence of preventing breeding or granting of pickaxe on a level by prayer. 
+Crowning seems to have the highest precedence, but then it also seems to heal you.<p>
+
+<h4 id="025">0.2.5 Crowning, precrowning and postcrowning</h4>
+Crowning, precrowning or postcrownig is achieved via praying, provided your piety level is sufficient (section <a href=#02335>0.2.3.3.5</a>).<p>
+
+<h4 id="0251">0.2.5.1 Requirements</h4>
+Crowning itself requires "extremely close" (30000 piety) and costs 40000 piety but does not reduce you to below 20000 piety. So
+effectively the cost is 10000. Very odd behavior. In practice then the crowning costs only 10000. Pre or post crownings cost the same.
+Although I have listed their base cost as 50000 (meaning that the first one costs 50000, 2nd costs 150000, then 300000 etc) there are a couple
+of oddities. Sometimes (usually) there is a special pre/post crowning that costs only 10000 piety. The rest use the formula above but all
+cost an extra 10000 more than the formula would suggest. However it looks like you may need to have 20000 piety more than the cost of the
+pre/post crowning to get it.<p>
+
+<table id="02511" border=1><caption>(Post)crowning requirements</caption>
+<tr><th>Min piety <th>Cost   <th>Crowning
+<tr><td>30000     <td>10000  <td>crowning
+<tr><td>30000     <td>10000  <td>1st post-crowning (usually)
+<tr><td>80000     <td>60000  <td>2nd post-crowning
+<tr><td>180000    <td>160000 <td>3rd post-crowning
+<tr><td>330000    <td>310000 <td>4th post-crowning
+<tr><td>530000    <td>510000 <td>5th post-crowning
+<tr><td>780000    <td>760000 <td>6th post-crowning
+<tr><td>1080000   <td>1060000<td>7th post-crowning
+</table><p>
+
+Pre- and postcrowning gives the PC a random artifact, which will be one of the non-guaranteed artifacts. The requirements for pre- and postcrowning are:<p>
+<ul>
+<li>precrowning occurs only if the PC is not of extreme alignment (not L+, N= or C-)
+<li>extremely close
+<li>character level &gt;= 8 + 3 * artifacts generated
+</ul><p>
+
+Crowning can occur at any experience level. Postcrowning doesn't include the non-extreme alignment restriction.<p>
+
+Note that PCs who achieve precrowning or crowning may never again see the "extremely close" status message. In this case, determining whether the PC has sufficient piety for further
+precrownings, crowning or postcrowning is a matter of trial and error. This is not as bad as it might seem, since praying uses up very little piety if prayers "remain unheard"
+&ndash; that is, the deity does nothing.<p>
+
+For crowning, the PC must be at extreme alignment and extremely close (or have enough piety at very close). The PC must not be intrinsically Cursed or Doomed for any type of crowning.
+Ordinarily, this will never be a problem, since achieving very close status removes these intrinsics. However, if the PC is wearing or wielding an item that causes Cursing or Dooming
+(the Crown of Science, Executor, etc.), crowning will not occur.<p>
+
+Getting pre- or post-crowned increases the piety required for further pre- or post-crownings.<p>
+
+As an example to show how this works quantitatively, Malte Helmert did <A href="adomgb-0-2-crowning.html">research</a> using gold as the sole sacrificial item.<p>
+
+<h4 id="0252">0.2.5.2 Rewards</h4>
+Upon crowning, the PC receives an immunity, an artifact crowning gift which is preselected from a list of appropriate items
+for the race and class (see section below), a blessed amulet matching alignment, a permanent blessing, the ability to convert elemental altars for champions of
+Balance and Order, to wear artifacts and other food consumption adding items with half burden on metabolism, +1 To, +2 Ch, +1 Ma, and half praying cost. 
+Chaotic champions also receive corruptions.<p>
+
+<h4 id="02521">0.2.5.2.1 Immunity</h4>
+Note that the immunity received will not be one the PC already has, except when they have all four of them somehow (eg. by wearing the Ring of Immunity), whether through eating 
+appropriate corpses or worn items. The Ancient Mummy Wrapping can be worn or the Scorched Spear wielded at crowning time to ensure the PC does not receive the rather undesirable 
+immunity to cold.<p>
+
+The immunity the PC receives can be figured out by the message that it gives:<p>
+
+<table id="025211" border=1><caption>Immunity messages</caption>
+<tr><th>Immunity <th>Message
+<tr><td>Acid     <td>You look forward to be digested by Chaos Lords / Lords of Order themselves.
+<tr><td>Cold     <td>You feel prepared for the most chilling tasks.
+<tr><td>Fire     <td>You no longer fear the heat of all hells combined.
+<tr><td>Shock    <td>You feel that neither thunder nor lightning will be able to prevent the success of your mission.
+</table><p>
+
+<table id="02522" border=1><caption>0.2.5.2.2 Possible crowning gifts for each class</caption>
+<tr><th>Class<th>Gift 1<th>Gift 2<th>Gift 3<th>Gift 4<th>Gift 5<th>Gift 6
+<tr><td><b>Archer</b><td>Boots of the Divine Messenger<td>Far Slayer<td>Sun's Messenger<td>Thunderstroke<td>True Aim<td>Whirlwind
+<tr><td><b>Assassin</b><td>Cloak of Oman<td>Death's Blade <span class="newi">Silence of the Dead</span><td>Serpent's Bite<td>Executor<td>Far Slayer<td>Kinslayer
+<tr><td><b>Barbarian</b><td>Death's Blade<td>Grod<td>Skullcrusher<td>Skullcrusher<td>Vanquisher<td>Vanquisher
+<tr><td><b>Bard</b><td>Boots of the Divine Messenger<td>Cat's Claw<td>Cloak of Oman<td>Staff of the Wanderer<td>Trusted One<td>Whirlwind
+<tr><td><b>Beastfighter</b><td>Boots of the Divine Messenger<td>Bracers of War<td>Cloak of Oman<td>Nature's Companion<td>Nature's Companion<td>Preserver
+<tr><td><b>Druid</b><td>Black Thumb<td>Nature's Companion<td>Nature's Friend<td>Purifier<td>Staff of the Wanderer<td>Whirlwind <span class="newi">Eagle's Claw</span>
+<tr><td><b>Elementalist</b><td>Brannalbin's Cloak of Defense<td>Iron Crown of Havlor<td>Nature's Friend<td>Ring of Immunity<td>Staff of the Archmagi<td>Staff of the Wanderer
+<tr><td><b>Farmer</b><td>Hammer of the Gods<td>Long Sting<td>Nature's Friend<td>Shirt of the Saints<td>Skullcrusher<td>Whirlwind
+<tr><td><b>Fighter</b><td>Bracers of War<td>Death's Blade<td>Grod<td>Long Sting<td>Protector<td>Vanquisher
+<tr><td><b>Healer</b><td>Brannalbin's Cloak of Defense<td>Preserver<td>Robes of Resistance<td>Shezestriakis<td>Shirt of the Saints<td>Staff of the Wanderer
+<tr><td><b>Merchant</b><td>Boots of the Divine Messenger<td>Crown of Leadership<td>Iron Crown of Havlor<td>Shezestriakis<td>Staff of the Wanderer<td>Trusted One
+<tr><td><b>Mindcrafter</b><td>Brannalbin's Cloak of Defense<td>Iron Crown of Havlor<td>Ring of Immunity<td>Robes of Resistance<td>Robes of Resistance <span class="newi">Circlet of the Pure Mind</span><td>Staff of The Wanderer
+<tr><td><b>Monk</b><td>Boots of the Divine Messenger<td>Iron Crown of Havlor <span class="newi">Robe of the Master Monk</span><td>Ring of Immunity<td>Robes of Resistance<td>Shezestriakis<td>Shirt of the Saints
+<tr><td><b>Necromancer</b><td>Kinslayer<td>Preserver<td>Ring of Immunity<td>Robes of Resistance<td>Staff of the Archmagi<td>Vanquisher
+<tr><td><b>Paladin</b><td>Aylas Holy Scarf<td>Hammer of the Gods<td>Justifier<td>Justifier <span class="newi">The Wall</span><td>Perion's Mithril Plate Mail<td>Trusted One
+<tr><td><b>Priest</b><td>Aylas Holy Scarf<td>Hammer of the Gods<td>Justifier <big>Purifier</big><td>Shirt of the Saints<td>Shirt of the Saints<td>Skullcrusher <span class="newi">Circlet of the Pure Mind</span>
+<tr><td><b>Ranger</b><td>Boots of the Divine Messenger<td>Bugbiter<td>Nature's Companion<td>Nature's Friend<td>Sun's Messenger<td>True Aim
+<tr><td><b>Thief</b><td>Cat's Claw<td>Cloak of Oman<td>Silver Key<td>True Aim<td>Whirlwind<td>Whirlwind
+<tr><td><b>border="1"mith</b><td>Bracers of War<td>Hammer of the Gods<td>Perion's Mithril Plate Mail<td>Protector<td>Ring of Immunity<td>Skullcrusher
+<tr><td><b>Wizard</b><td>Brannalbin's Cloak of Defense<td>Ring of Immunity<td>Robes of Resistance<td>Staff of the Archmagi<td>Staff of the Archmagi <span class="newi">Ring of the Archmages</span><td>Staff of the Wanderer
+<tfoot>
+<tr><td><b>Chaos&nbsp;Knight</b><td>Crowned Spiked Helmet of Chaos Lordship<td>Death's Blade<td>Foeslammer<td>Grod<td>Moloch's Thorns<td>Spiked Armor of Chaos and Terror
+<tr><td><b>Duelist</b><td>Executor<td>Fencing Gloves of St. Montojja<td>Ironfist<td>Kinslayer<td>Rapier of the Needle<td>Trusted One
+</tfoot></table><p>
+
+<small>Mist Elves can be crowned with the Staff of Creation instead of the usual crowning gifts for their class.</small><p>
+
+Dwarves of most classes can receive Hammerhead as a crowning gift (except Dwarven Beastfighters and Monks). Likewise, High Elves and Gray Elves can receive Sun's Messenger as a
+crowning gift (except Beastfighters). If appropriate, chance for receiving race-based gift is 12.5%. In general, there are six possible gifts. There are exceptions: see Barbarian,
+Beastfighter, Thief. The order the artifacts are listed in is alphabetical and has no significance.<p>
+
+<h4 id="0253">0.2.5.3 Fallen champions</h4>
+If the PC changes their alignment after becoming a champion, they will become a <i>fallen champion</i> 
+and be treated with fury by the deity that crowned them. Punishments for fallen champions include:<p>
+<ul>
+<li>Removal of permanent blessing, reduced prayer cost, ability to convert elemental altars and decreased food consumption per equipped artifact (the elemental immunity and items
+granted by the deity will not be taken away).
+<li>Removal of any further (post)crowning possibility, not even by a different deity.
+<li>Cursing and Dooming.
+<li>Being hit by a bolt of black energy, which the PC is sometimes immune to.
+<li>Summoning of spectres to avenge the deity (either this or the bolt, not both).
+<li>Losing the possibility of a special ending if the player is not in the ChAoS Plane &ndash; fallen champions will not survive passage through the Chaos Gate.
+</ul><p>
+
+<h4 id="026">0.2.6 Tracts <tt>"</tt></h4>
+<span class="credit">Credit Sorear's Wiki &ndash; <a href="http://www.it-is-law.com/adom/index.php?title=Books#Tracts">Tracts</a>.</span>
+Tracts are religious books related to particular alignment, weighing somewhat more than regular spellbooks. Reading them have the following effects:<p>
+<ul>
+<li>move alignment to the tract alignment
+<li>increase piety for the deity of tract, and decrease piety for other two deities (except tract of balance)
+<li>tracts of order remove corruption, tracts of chaos grant corruption
+</ul><p>
+
+Tracts have finite uses, measured in turns of reading. This is initially set to 1d1000 for a brand new tract. Each time you attempt to read a tract, you will spend 20d10 turns
+reading it, or the remaining time, whichever is smaller. While you are reading a tract, your body armor cannot be damaged, and teleportitis is disabled, in addition to the
+normal effects of a long action. If you are interrupted, no further effect will occur.<p>
+
+In the formulae below, T is the number of turns spent on reading. Piety effects from reading tracts are "raw" piety changes; they do not result in the typical -1/30 other deity effect.
+If your piety with some deity is reduced to or below -500 by a tract, you will suffer negative piety effects (inventory cursing, etc.), unless your deity deflects them. Your deity will never
+deflect their own penalties, and will deflect the penalties of other deities if and only if your piety with your current deity is greater than 1/8 of the absolute value of the
+punishing deity. Deflection does not cost piety.<p>
+
+<table id="0261" border=1><caption>Tract effects</caption>
+<tr><th>Tract of       <th>Corruption <th>Lawful piety<th>Neutral piety<th>Chaotic piety<th>Alignment       <th>Tile                                        <th>Weight
+<tr><td><b>Order</b>   <td>-T CPs     <td>+T/2        <td>-T/2         <td>-T/2         <td>+T/10           <td><img src="tiles/item682.png" alt="order">   <td>250s
+<tr><td><b>Balance</b> <td>no effect  <td>no change   <td>+T           <td>no change    <td>T/10 towards N= <td><img src="tiles/item681.png" alt="balance"> <td>200s
+<tr><td><b>Chaos</b>   <td>+T CPs     <td>-T*2        <td>-T*2         <td>+T*2         <td>-T/10           <td><img src="tiles/item680.png" alt="chaos">   <td>150s
+</table><p>
+
+Note there is a typo: "You feel the anger of Order brewing." should sometimes read "You feel the anger of Balance brewing." <big>Fixed in R+.</big><p>
+
+The B/U/C status of the tract does not seem to have any effect.<p>
+
+<hr>
+Updated October 18th, 2016
+</body>
+</html>

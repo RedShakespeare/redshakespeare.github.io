@@ -1,0 +1,651 @@
+<!DOCTYPE HTML PUBLIC '-//W3C//DTD HTML 4.01 Transitional//EN'>
+
+<html>
+<head>
+  <meta http-equiv='content-type' content='text/html; charset=UTF-8'>
+
+  <!--
+      Author:  Janis Papanagnou
+      Date:    2007-03-09, 2007-03-13, 2007-03-24, 2016-07-30
+
+      Copyright &copy; 2007-2016 Janis Papanagnou
+      Content licensed under the
+      <A href="http://www.opencontent.org/opl.shtml">
+        OpenContent License
+      </A>.
+      Source code is licensed under
+      <A href="http://www.gnu.org/copyleft/gpl.html">
+        GNU General Public License
+      </A>.
+  -->
+
+<title> Nethack随机角色选择器 </title>
+
+<style type='text/css'>
+<!--
+  select, body, td, a, p, .h { font-family: arial; font-size: 12pt; }
+  input, th { font-family: arial; font-size: 11pt; text-align: left; }
+-->
+</style>
+
+<script language='javascript' type='text/javascript'>
+<!--
+
+
+role_set = [ "arc", "bar", "cav", "hea", "kni", "mon", "pri",
+             "ran", "rog", "sam", "tou", "val", "wiz", 0 ]
+
+race_set = [ "hum", "dwa", "elf", "gno", "orc", 0 ]
+
+align_set = [ "law", "neu", "cha" ,0 ]
+
+gender_set = [ "mal", "fem", 0 ]
+
+all_set = [
+    "arc-dwa-law-fem", "arc-dwa-law-mal", "arc-gno-neu-fem", "arc-gno-neu-mal",
+    "arc-hum-law-fem", "arc-hum-law-mal", "arc-hum-neu-fem", "arc-hum-neu-mal",
+    "bar-hum-cha-fem", "bar-hum-cha-mal", "bar-hum-neu-fem", "bar-hum-neu-mal",
+    "bar-orc-cha-fem", "bar-orc-cha-mal", "cav-dwa-law-fem", "cav-dwa-law-mal",
+    "cav-gno-neu-fem", "cav-gno-neu-mal", "cav-hum-law-fem", "cav-hum-law-mal",
+    "cav-hum-neu-fem", "cav-hum-neu-mal", "hea-gno-neu-fem", "hea-gno-neu-mal",
+    "hea-hum-neu-fem", "hea-hum-neu-mal", "kni-hum-law-fem", "kni-hum-law-mal",
+    "mon-hum-cha-fem", "mon-hum-cha-mal", "mon-hum-law-fem", "mon-hum-law-mal",
+    "mon-hum-neu-fem", "mon-hum-neu-mal", "pri-elf-cha-fem", "pri-elf-cha-mal",
+    "pri-hum-cha-fem", "pri-hum-cha-mal", "pri-hum-law-fem", "pri-hum-law-mal",
+    "pri-hum-neu-fem", "pri-hum-neu-mal", "ran-elf-cha-fem", "ran-elf-cha-mal",
+    "ran-gno-neu-fem", "ran-gno-neu-mal", "ran-hum-cha-fem", "ran-hum-cha-mal",
+    "ran-hum-neu-fem", "ran-hum-neu-mal", "ran-orc-cha-fem", "ran-orc-cha-mal",
+    "rog-hum-cha-fem", "rog-hum-cha-mal", "rog-orc-cha-fem", "rog-orc-cha-mal",
+    "sam-hum-law-fem", "sam-hum-law-mal", "tou-hum-neu-fem", "tou-hum-neu-mal",
+    "val-dwa-law-fem", "val-hum-law-fem", "val-hum-neu-fem", "wiz-elf-cha-fem",
+    "wiz-elf-cha-mal", "wiz-gno-neu-fem", "wiz-gno-neu-mal", "wiz-hum-cha-fem",
+    "wiz-hum-cha-mal", "wiz-hum-neu-fem", "wiz-hum-neu-mal", "wiz-orc-cha-fem",
+    "wiz-orc-cha-mal", 0
+]
+
+var possible_set = new Object();
+
+function init_possible_set()
+{
+    var i;
+    for (i=0; all_set[i]; i++)
+        possible_set[all_set[i]] = 1;
+}
+
+init_possible_set();
+
+
+var sel_list;
+
+function selection ()
+{
+    sel_list = new Array();
+
+    for (role_i=0; a_role=role_set[role_i]; role_i++)
+    {
+        if (! document.getElementById(a_role).checked)
+            continue;
+                
+        for (race_i=0; a_race=race_set[race_i]; race_i++)
+        {
+            if (! document.getElementById(a_race).checked)
+                continue;
+
+            for (align_i=0; a_align=align_set[align_i]; align_i++)
+            {
+                if (! document.getElementById(a_align).checked)
+                    continue;
+
+                for (gender_i=0; a_gender=gender_set[gender_i]; gender_i++)
+                {
+                    if (! document.getElementById(a_gender).checked)
+                        continue;
+
+                    a_character = a_role + "-" + a_race + "-" + a_align + "-" + a_gender;
+                    if (possible_set[a_character])
+                        sel_list.push (a_character);
+                }
+            }
+        }
+    }
+
+}
+
+
+function toggle_sel_role()
+{
+    var checked = 0;
+    for (role_i=0; a_role=role_set[role_i]; role_i++)
+    {
+        if (document.getElementById(a_role).checked)
+            checked++;
+    }
+    var state = ! checked;
+    for (role_i=0; a_role=role_set[role_i]; role_i++)
+        document.getElementById(a_role).checked = state;
+}
+
+function toggle_sel_race()
+{
+    var checked = 0;
+    for (race_i=0; a_race=race_set[race_i]; race_i++)
+    {
+        if (document.getElementById(a_race).checked)
+            checked++;
+    }
+    var state = ! checked;
+    for (race_i=0; a_race=race_set[race_i]; race_i++)
+        document.getElementById(a_race).checked = state;
+}
+
+function toggle_sel_align()
+{
+    var checked = 0;
+    for (align_i=0; a_align=align_set[align_i]; align_i++)
+    {
+        if (document.getElementById(a_align).checked)
+            checked++;
+    }
+    var state = ! checked;
+    for (align_i=0; a_align=align_set[align_i]; align_i++)
+        document.getElementById(a_align).checked = state;
+}
+
+function toggle_sel_gender()
+{
+    var checked = 0;
+    for (gender_i=0; a_gender=gender_set[gender_i]; gender_i++)
+    {
+        if (document.getElementById(a_gender).checked)
+            checked++;
+    }
+    var state = ! checked;
+    for (gender_i=0; a_gender=gender_set[gender_i]; gender_i++)
+        document.getElementById(a_gender).checked = state;
+}
+
+
+function list_all()
+{
+    selection();
+
+    remove_table_rows ();
+    for (i = 0; i < sel_list.length; i++)
+        add_table_node (sel_list[i]);
+}
+
+
+function select_one()
+{
+    selection();
+
+    var random_index;
+
+    if (document.getElementById("eq_dist").checked)
+    /* equally distributed across the roles in the selection set */
+    {
+        var role_list = new Array();
+        var prev_role = ""
+        var j = 0;
+        var i;
+
+        /* We cannot just iterate through the checkboxes because there may be
+         * roles selected that are not part of the selection set because of the
+         * other choosen properties; e.g. if /male/ is selected then there will
+         * not be any valkyries in the set. So we iterate through the effective
+         * result set...
+         */
+        for (i = 0; i < sel_list.length; i++)
+        {
+            var a_role = sel_list[i].substring(0, 3);
+            if (a_role != prev_role)
+            {
+                role_list.push (a_role);
+                prev_role = a_role;
+            }
+        }
+
+        var role_index = Math.floor(role_list.length * Math.random());
+        var random_role = role_list[role_index];
+
+        if (sel_list.length)
+        {
+            do { 
+                random_index = Math.floor(sel_list.length * Math.random());
+            } while (sel_list[random_index].substring(0, 3) != random_role);
+        }
+    }
+    else  /* equally distributed across the whole selection set */
+    {
+        random_index = Math.floor(sel_list.length * Math.random());
+    }
+
+    document.getElementById ("random_character").value = sel_list[random_index];
+}
+
+
+function remove_table_rows ()
+{
+    while (document.getElementById ("Table").hasChildNodes()  &&
+           document.getElementById ("Table").lastChild.nodeName == "TR")
+    {
+        var row = document.getElementById ("Table").lastChild
+        document.getElementById ("Table").removeChild (row)
+    }
+}
+
+function add_table_node (data)
+{
+    var row = document.createElement ("tr")
+    td_obj = document.createElement ("td")
+    td_obj.setAttribute ("width", "157")
+    td_obj.setAttribute ("style", "font-size:11pt")
+    td_obj.setAttribute ("style", "text-align:center")
+    td_obj.setAttribute ("style", "font-family:courier")
+    td_obj.appendChild (document.createTextNode (data))
+    row.appendChild (td_obj)
+    document.getElementById ("Table").appendChild (row)
+}
+
+
+/* Change the protocol version identifier whenever the cookie
+   data structure is changed to prevent parsing inconsistencies. */
+var cookie_protocol_version = "A"
+
+
+function save_selection()
+{
+    var i;
+    var id;
+    var cookie = cookie_protocol_version;
+
+    cookie += document.getElementById("eq_dist").checked ? "@" : "*";
+
+    for (i=0; id=role_set[i]; i++)
+        cookie += document.getElementById(id).checked ? "+" : "-";
+
+    for (i=0; id=race_set[i]; i++)
+        cookie += document.getElementById(id).checked ? "+" : "-";
+
+    for (i=0; id=align_set[i]; i++)
+        cookie += document.getElementById(id).checked ? "+" : "-";
+
+    for (i=0; id=gender_set[i]; i++)
+        cookie += document.getElementById(id).checked ? "+" : "-";
+
+    var today = new Date();
+    var days90 = today.getTime() + (90 * 24 * 60 * 60 * 1000);
+    var expiry = new Date(days90);  /* exprires after 90 days */
+    var selection = "selection=" + cookie;
+    var expires = "expires=" + expiry.toGMTString()
+    document.cookie =  selection + "; " + expires
+
+    document.cookie = cookie;
+}
+
+function restore_selection()
+{
+    var cookie = document.cookie;
+    var sel = -1;
+
+    if (cookie && (sel = cookie.indexOf("selection=")) != -1)
+    {
+        cookie = cookie.substring(sel);
+        var alpha = cookie.indexOf("=") + 1;
+        var omega = cookie.indexOf(";");
+        if (omega == -1)
+            omega = cookie.length;
+
+        var cookie = cookie.substring (alpha, omega);
+        var ci = 0;
+        var id;
+        var c;
+        var i;
+
+        /* document.getElementById("random_character").value = cookie; */
+
+        c = cookie.substring(ci,ci+1); ci++;
+        if (c != cookie_protocol_version)
+            return;   /* incompatible cookies, do not restore settings */
+
+        c = cookie.substring(ci,ci+1); ci++;
+        document.getElementById("eq_dist").checked = (c == "@");
+
+        for (i=0; id=role_set[i]; i++)
+        {
+            c = cookie.substring(ci,ci+1); ci++;
+            document.getElementById(id).checked = (c == "+");
+        }
+        for (i=0; id=race_set[i]; i++)
+        {
+            c = cookie.substring(ci,ci+1); ci++;
+            document.getElementById(id).checked = (c == "+");
+        }
+        for (i=0; id=align_set[i]; i++)
+        {
+            c = cookie.substring(ci,ci+1); ci++;
+            document.getElementById(id).checked = (c == "+");
+        }
+        for (i=0; id=gender_set[i]; i++)
+        {
+            c = cookie.substring(ci,ci+1); ci++;
+            document.getElementById(id).checked = (c == "+");
+        }
+
+    }
+}
+
+
+
+-->
+</script>
+
+
+</head>
+
+<!-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -->
+
+<body onload="restore_selection()">
+
+  <h1> Nethack随机角色选择器</h1>
+
+
+  <noscript>
+    <br>
+    <table style='border-width: 4px; border-style: solid; padding: 8px'>
+      <tr>
+        <td>
+          <b> The calculation needs JavaScript to be enabled in your browser! </b>
+        </td>
+      </tr>
+    </table>
+    <br>
+    <br>
+  </noscript>
+
+
+  <form name='form1' style='display: block;' action='nhrcs.html'>
+
+    <table style='margin-left: 20' cellpadding='0' cellspacing='0'>
+      <colgroup>
+        <col width='180'>
+        <col width='540'>
+      </colgroup>
+
+      <tbody>
+        <tr>
+
+          <td valign='top' align="left">
+            <table style='margin-left: 0' cellpadding='0' cellspacing='0'>
+              <tbody>
+
+              <!--
+                <tr>
+                  <td>
+                    <input type="button" name="Toggle" value="*"
+                           style="text-align:center" onclick="toggle()">
+                  </td>
+                </tr>
+              -->
+
+                <tr>
+                  <td>
+                    <br>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <b onclick='toggle_sel_role()'> 职业 </b>
+                    &nbsp; &nbsp; &nbsp;
+                    <input type='checkbox' checked='checked' id='eq_dist'
+                           title='职业概率均匀分布'> 均匀分布
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <hr>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <input type='checkbox' checked='checked' id='arc'> 考古学家
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <input type='checkbox' checked='checked' id='bar'> 野蛮人
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <input type='checkbox' checked='checked' id='cav'> 穴居人
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <input type='checkbox' checked='checked' id='hea'> 医生
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <input type='checkbox' checked='checked' id='kni'> 骑士
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <input type='checkbox' checked='checked' id='mon'> 僧侣
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <input type='checkbox' checked='checked' id='pri'> 牧师
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <input type='checkbox' checked='checked' id='ran'> 游侠
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <input type='checkbox' checked='checked' id='rog'> 盗贼
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <input type='checkbox' checked='checked' id='sam'> 武士
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <input type='checkbox' checked='checked' id='tou'> 游客
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <input type='checkbox' checked='checked' id='val'> 女武神
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <input type='checkbox' checked='checked' id='wiz'> 巫师
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <br>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <b onclick='toggle_sel_race()'> 种族 </b>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <hr>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <input type='checkbox' checked='checked' id='hum'> 人类
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <input type='checkbox' checked='checked' id='dwa'> 矮人
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <input type='checkbox' checked='checked' id='elf'> 精灵
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <input type='checkbox' checked='checked' id='gno'> 侏儒
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <input type='checkbox' checked='checked' id='orc'> 兽人
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <br>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <b onclick='toggle_sel_align()'> 阵营 </b>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <hr>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <input type='checkbox' checked='checked' id='law'> 秩序
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <input type='checkbox' checked='checked' id='neu'> 中立
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <input type='checkbox' checked='checked' id='cha'> 混沌
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <br>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <b onclick='toggle_sel_gender()'> 性别 </b>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <hr>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <input type='checkbox' checked='checked' id='mal'> 男性
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <input type='checkbox' checked='checked' id='fem'> 女性
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <br>
+                  </td>
+                </tr>
+
+              </tbody>
+            </table>
+          </td>
+
+          <td valign='top' align="center">
+            <table style='margin-top: 20' cellpadding='3' cellspacing='0'>
+              <colgroup>
+                <col width='120'>
+                <col width='200'>
+              </colgroup>
+
+              <tbody>
+                <tr>
+                  <td>
+                    <b>
+                      <input type="button" name="Select" value="选择一个"
+                             style="text-align:center"
+                             onclick="select_one(); save_selection()">
+                    </b>
+                  </td>
+                  <td>
+                    <b>
+                      <input type="text" id="random_character" size="18" value=""
+                             style="font-family:courier; font-size:14pt; text-align:center">
+                    </b>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                  </td>
+                  <td>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td valign='top'>
+                    <input type="button" name="List" value="     列举全部     "
+                           style="text-align:center"
+                           onclick="list_all(); save_selection()">
+                  </td>
+                  <td>
+                    <table id="Table" cellpadding="2" cellspacing="0" border="solid"
+                           style="text-align:center">
+
+                      <!-- dynamic table data -->
+
+                    </table>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </td>
+
+
+        </tr>
+      </tbody>
+    </table>
+
+
+  </form>
+
+
+</body>
+</html>
+
+
+<!--
+  vim: sw=2 ts=2 expandtab ai
+-->

@@ -1,0 +1,4382 @@
+<!DOCTYPE HTML PUBLIC '-//W3C//DTD HTML 4.01 Transitional//EN'>
+
+<html>
+<head>
+  <meta http-equiv='content-type' content='text/html; charset=UTF-8'>
+
+<title> Nethack Character Role Weapon Classes </title>
+
+<style type='text/css'>
+<!--
+  select, body, td, a, p, .h { font-family: arial; font-size: 9pt; }
+  input, th { font-family: arial; font-size: 8pt; }
+-->
+</style>
+
+<script language='javascript' type='text/javascript'>
+<!--
+
+weap_class_table = new Array()
+
+weap_class_table.push('Dagger')
+weap_class_table.push('Knife')
+weap_class_table.push('Axe')
+weap_class_table.push('Pick_axe')
+weap_class_table.push('Short_sword')
+weap_class_table.push('Broadsword')
+weap_class_table.push('Long_sword')
+weap_class_table.push('Two_handed_sword')
+weap_class_table.push('Scimitar')
+weap_class_table.push('Saber')
+weap_class_table.push('Club')
+weap_class_table.push('Mace')
+weap_class_table.push('Morning_star')
+weap_class_table.push('Flail')
+weap_class_table.push('Hammer')
+weap_class_table.push('Quarterstaff')
+weap_class_table.push('Polearm')
+weap_class_table.push('Spear')
+weap_class_table.push('Javelin')
+weap_class_table.push('Trident')
+weap_class_table.push('Lance')
+weap_class_table.push('Bow')
+weap_class_table.push('Sling')
+weap_class_table.push('Crossbow')
+weap_class_table.push('Dart')
+weap_class_table.push('Shuriken')
+weap_class_table.push('Boomerang')
+weap_class_table.push('Whip')
+weap_class_table.push('Unicorn_horn')
+weap_class_table.push('Two_weapon_combat')
+weap_class_table.push('Riding')
+weap_class_table.push('Bare_handed_combat')
+weap_class_table.push('Martial_arts')
+
+
+skill = [ '-', 'b', 's', 'E', 'M', 'G' ]
+
+skill_hit_twow = [ '-9', '-7', '-5', '-3' ]
+skill_hit_ride = [ '-2', '-1',  '0',  '0' ]
+skill_hit_weap = [ '-4',  '0', '+2', '+3' ]
+
+skill_dam_twow = [ '-3', '-1',  '0', '+1' ]
+skill_dam_ride = [  '0',  '0', '+1', '+2' ]
+skill_dam_bare = [  '0', '+1', '+1', '+2', '+2', '+3' ]
+skill_dam_mart = [ '+1', '+3', '+4', '+6', '+7', '+9' ]
+skill_dam_weap = [ '-2',  '0', '+1', '+2' ]
+
+
+function hit_modifier (wp, sk)
+{
+	if (wp == 'Two_weapon_combat')
+     return  skill_hit_twow[sk]
+
+	else if (wp == 'Riding')
+     return  skill_hit_ride[sk]
+
+	else if (wp == 'Bare_handed_combat')
+		return '0'
+
+	else if (wp == 'Martial_arts')
+		return '0'
+
+	else  // weapon to hit
+     return  skill_hit_weap[sk]
+
+}
+
+function dam_modifier (wp, sk)
+{
+	if (wp == 'Two_weapon_combat')
+     return  skill_dam_twow[sk]
+
+	else if (wp == 'Riding')
+     return  skill_dam_ride[sk]
+
+	else if (wp == 'Bare_handed_combat')
+     return  skill_dam_bare[sk]
+
+	else if (wp == 'Martial_arts')
+     return  skill_dam_mart[sk]
+
+	else  // weapon damage
+     return  skill_dam_weap[sk]
+
+}
+
+function skill_str (c)
+{
+    switch (c)
+    {
+    case '-': return ' Restricted '
+    case 'b': return ' Basic '
+    case 's': return ' Skilled '
+    case 'E': return ' Expert '
+    case 'M': return ' Master '
+    case 'G': return ' Grand M. '
+    default:  return ' ??? '
+    }
+}
+
+function adjust_skills ()
+{
+    prof = document.form1.profession.value
+    for (i = 0; i < weap_class_table.length; i++)
+    {
+        weap = weap_class_table[i]
+        skills = document.getElementById('role_skills_'+weap).value
+        skill_char = skills.substr (prof, 1)
+        role_weap_skill = skill_str (skill_char)
+        document.getElementById('max_skill_'+weap).value = role_weap_skill
+
+        cur_skill_value = document.getElementById('cur_skill_'+weap).value
+
+        hit_modif = hit_modifier (weap, cur_skill_value)
+        dam_modif = dam_modifier (weap, cur_skill_value)
+        if (cur_skill_value > '-bsEMG'.indexOf(skill_char))
+        {
+            hit_modif = "!" + hit_modif + "!"
+            dam_modif = "!" + dam_modif + "!"
+        }
+        document.getElementById('hdm_h0_'+weap).value = hit_modif
+        document.getElementById('hdm_d1_'+weap).value = dam_modif
+        document.getElementById('hdm_d2_'+weap).value = dam_modif
+        document.getElementById('hdm_d3_'+weap).value = dam_modif
+        document.getElementById('hdm_d4_'+weap).value = dam_modif
+
+    }
+}
+
+function bare_handed_filter ()
+{
+    prof = document.form1.profession.value
+    if (prof == '5' /* Monk */ || prof == '9' /* Samurai */)
+    {
+        hiderow('wc_Bare_handed_combat')
+        showrow('wc_Martial_arts')
+    }
+    else
+    {
+        showrow('wc_Bare_handed_combat')
+        hiderow('wc_Martial_arts')
+    }
+}
+
+function profession_change ()
+{
+        adjust_skills()
+        bare_handed_filter()
+}
+
+
+function toggle (id)
+{
+    w_id = 'w_' + id
+    hd_id = 'hd_' + id
+    cur_id = 'cur_skill_' + id
+    max_id = 'max_skill_' + id
+    if (document.getElementById(id).checked)
+    {
+        showrow(w_id)
+        showrow(hd_id)
+        showrow(cur_id)
+        hiderow(max_id)
+    }
+    else
+    {
+        hiderow(w_id)
+        hiderow(hd_id)
+        hiderow(cur_id)
+        showrow(max_id)
+    }
+
+    for (i = 0; i < weap_class_table.length; i++)
+    {
+        if (document.getElementById(weap_class_table[i]).checked)
+        {
+            document.getElementById('weapon_stat_header').style.visibility = 'visible'
+            return
+        }
+    }
+    document.getElementById('weapon_stat_header').style.visibility = 'hidden'
+}
+
+
+filter_set = '-bsEMG'
+
+function configure_filter ()
+{
+    document.getElementById('filter_values').style.visibility = 'visible'
+    document.getElementById('filter_button').value = '    Apply    '
+
+    filter_set = ''
+    if (document.form1.filterchoice_Restricted.checked)
+        filter_set += '-'
+    if (document.form1.filterchoice_Basic.checked)
+        filter_set += 'b'
+    if (document.form1.filterchoice_Skilled.checked)
+        filter_set += 's'
+    if (document.form1.filterchoice_Expert.checked)
+        filter_set += 'EMG'
+
+    filter_weapon_classes()
+}
+
+
+function filter_set_contains (w_skill)
+{
+    return (filter_set.indexOf(w_skill) != -1)
+}
+
+function filter_weapon_classes ()
+{
+    prof = document.form1.profession.value
+    for (i = 0; i < weap_class_table.length; i++)
+    {
+        weap = weap_class_table[i]
+        skills = document.getElementById('role_skills_'+weap).value
+        if (filter_set_contains (skills.substr (prof, 1)))
+            showrow('wc_'+weap)
+        else
+            hiderow('wc_'+weap)
+    }
+}
+
+
+function hiderow(id)
+{
+	if (document.getElementById) { // DOM3 = IE5, NS6
+		document.getElementById(id).style.display = 'none';
+	}
+	else {
+		if (document.layers) { // Netscape 4
+			document.id.display = 'none';
+		}
+		else { // IE 4
+			document.all.id.style.display = 'none';
+		}
+	}
+}
+
+function showrow(id)
+{
+	if (document.getElementById) { // DOM3 = IE5, NS6
+		document.getElementById(id).style.display = '';
+	}
+	else {
+		if (document.layers) { // Netscape 4
+			document.id.display = '';
+		}
+		else { // IE 4
+			document.all.id.style.display = '';
+		}
+	}
+}
+
+
+-->
+</script>
+
+
+</head>
+
+<!-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -->
+
+<body onload='profession_change()'>
+  <h1> Role specific Weapons (NH 3.4.3) </h1>
+
+
+
+  <noscript>
+    <br>
+    <table style='border-width: 4px; border-style: solid; padding: 8px'>
+      <tr>
+        <td>
+          <b> The calculation needs JavaScript to be enabled in your browser! </b>
+        </td>
+      </tr>
+    </table>
+    <br>
+    <br>
+  </noscript>
+
+
+  <form name='form1' style='display: block;' action='weapons343.html'>
+
+    <table style='margin-left: 5' cellpadding='0' cellspacing='0'>
+      <colgroup>
+        <col width='180'>
+        <col width='100'>
+        <col width='300'>
+      </colgroup>
+
+      <tbody>
+
+        <tr>
+          <td>
+            <select name='profession'
+                    onclick='profession_change()' onchange='profession_change()'>
+              <option value='0'>  Archeologist </option>
+              <option value='1'>  Barbarian    </option>
+              <option value='2'>  Caveman      </option>
+              <option value='3'>  Healer       </option>
+              <option value='4'>  Knight       </option>
+              <option value='5'>  Monk         </option>
+              <option value='6'>  Priest       </option>
+              <option value='7'>  Ranger       </option>
+              <option value='8'>  Rogue        </option>
+              <option value='9'>  Samurai      </option>
+              <option value='10'> Tourist      </option>
+              <option value='11'> Valkyrie     </option>
+              <option value='12'> Wizard       </option>
+            </select>
+          </td>
+          <td>
+            <input type='button' id='filter_button' style='font-size: 0.9em'
+                   value='    Filter    ' onclick='configure_filter()'>
+          </td>
+          <td id='filter_values' style='visibility:hidden'>
+            &nbsp;&nbsp;
+            <input type='checkbox' checked='checked' name='filterchoice_Restricted'> R
+            &nbsp;&nbsp;
+            <input type='checkbox' checked='checked' name='filterchoice_Basic'> B
+            &nbsp;&nbsp;
+            <input type='checkbox' checked='checked' name='filterchoice_Skilled'> S
+            &nbsp;&nbsp;
+            <input type='checkbox' checked='checked' name='filterchoice_Expert'> E+
+          </td>
+        </tr>
+
+      </tbody>
+    </table>
+
+  </form>
+
+
+  <form name='form2' style='display: block;' action='weapons343.html'>
+
+    <table style='margin-left: 5' cellpadding='0' cellspacing='0'>
+
+      <tbody>
+        <tr id='weapon_stat_header' style='visibility: hidden;'>
+          <td colspan='3'>
+            <table cellpadding='0' cellspacing='0'>
+              <colgroup>
+                <col width='180'>
+                <col width='100'>
+                <col width='300'>
+              </colgroup>
+
+              <tbody>
+                <tr>
+                  <td> &nbsp; </td>
+                  <td> &nbsp; </td>
+                  <td>
+                    <table cellpadding='0' cellspacing='0'>
+                      <colgroup>
+                        <col width='50'>
+                        <col width='50'>
+                        <col width='50'>
+                        <col width='50'>
+                        <col width='50'>
+                      </colgroup>
+
+                      <tr>
+                        <th> +Hit </th>
+                        <th> S-dmg </th>
+                        <th> S-avg </th>
+                        <th> L-dmg </th>
+                        <th> L-avg </th>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </td>
+        </tr>
+
+        <tr id='wc_Dagger'>
+          <td colspan='3'>
+            <table cellpadding='0' cellspacing='0'>
+              <colgroup>
+                <col width='180'>
+                <col width='100'>
+                <col width='300'>
+              </colgroup>
+
+              <tbody>
+                <tr>
+                  <td>
+                    <input type='checkbox' id='Dagger' onclick='toggle("Dagger")'>
+                    <b>&nbsp;&nbsp;Dagger</b>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type='hidden' id='role_skills_Dagger' value='bbbsb--EEbEEE'>
+                  </td>
+                  <td>
+                    <input type='text' id='max_skill_Dagger' size='9' readonly='readonly'>
+                    <select  id='cur_skill_Dagger' style='display: none; font-size: 8pt;' onclick='' onchange='adjust_skills()'>
+                      <option value='0'> Unskilled </option>
+                      <option value='1'> Basic </option>
+                      <option value='2'> Skilled </option>
+                      <option value='3'> Expert </option>
+                    </select>
+                  </td>
+                  <td>
+                    <table cellpadding='0' cellspacing='0'>
+                      <colgroup>
+                        <col width='50'>
+                        <col width='50'>
+                        <col width='50'>
+                        <col width='50'>
+                        <col width='50'>
+                      </colgroup>
+
+                      <tr id='hd_Dagger' style='display: none;'>
+                        <td align='center'>
+                          <input id='hdm_h0_Dagger' type='text' size='2' style='text-align: center' readonly='readonly' value='+H'>
+                        </td>
+                        <td align='center'>
+                          <input id='hdm_d1_Dagger' type='text' size='2' style='text-align: center' readonly='readonly' value='+D'>
+                        </td>
+                        <td align='center'>
+                          <input id='hdm_d2_Dagger' type='text' size='2' style='text-align: center' readonly='readonly' value='+D'>
+                        </td>
+                        <td align='center'>
+                          <input id='hdm_d3_Dagger' type='text' size='2' style='text-align: center' readonly='readonly' value='+D'>
+                        </td>
+                        <td align='center'>
+                          <input id='hdm_d4_Dagger' type='text' size='2' style='text-align: center' readonly='readonly' value='+D'>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+
+                <tr id='w_Dagger' style='display: none;'>
+                  <td colspan='3'>
+                    <table id='t_Dagger' width='100%' cellpadding='0' cellspacing='0'>
+                      <colgroup>
+                        <col width='180'>
+                        <col width='100'>
+                        <col width='300'>
+                      </colgroup>
+
+                      <tbody>
+                        <tr>
+                          <td colspan='2'>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;orcish&nbsp;dagger
+                          </td>
+                          <td>
+                            <table cellpadding='0' cellspacing='0'>
+                              <colgroup span='5' width='50'>
+                              </colgroup>
+
+                                <tr>
+                                  <td align='center'> +2 </td>
+                                  <td align='center'> d3 </td>
+                                  <td align='center'> 2.0 </td>
+                                  <td align='center'> d3 </td>
+                                  <td align='center'> 2.0 </td>
+                                </tr>
+                            </table>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td colspan='2'>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dagger
+                          </td>
+                          <td>
+                            <table cellpadding='0' cellspacing='0'>
+                              <colgroup span='5' width='50'>
+                              </colgroup>
+
+                                <tr>
+                                  <td align='center'> +2 </td>
+                                  <td align='center'> d4 </td>
+                                  <td align='center'> 2.5 </td>
+                                  <td align='center'> d3 </td>
+                                  <td align='center'> 2.0 </td>
+                                </tr>
+                            </table>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td colspan='2'>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;silver&nbsp;dagger
+                          </td>
+                          <td>
+                            <table cellpadding='0' cellspacing='0'>
+                              <colgroup span='5' width='50'>
+                              </colgroup>
+
+                                <tr>
+                                  <td align='center'> +2 </td>
+                                  <td align='center'> d4 </td>
+                                  <td align='center'> 2.5 </td>
+                                  <td align='center'> d3 </td>
+                                  <td align='center'> 2.0 </td>
+                                </tr>
+                            </table>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td colspan='2'>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;athame
+                          </td>
+                          <td>
+                            <table cellpadding='0' cellspacing='0'>
+                              <colgroup span='5' width='50'>
+                              </colgroup>
+
+                                <tr>
+                                  <td align='center'> +2 </td>
+                                  <td align='center'> d4 </td>
+                                  <td align='center'> 2.5 </td>
+                                  <td align='center'> d3 </td>
+                                  <td align='center'> 2.0 </td>
+                                </tr>
+                            </table>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td colspan='2'>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;elven&nbsp;dagger
+                          </td>
+                          <td>
+                            <table cellpadding='0' cellspacing='0'>
+                              <colgroup span='5' width='50'>
+                              </colgroup>
+
+                                <tr>
+                                  <td align='center'> +2 </td>
+                                  <td align='center'> d5 </td>
+                                  <td align='center'> 3.0 </td>
+                                  <td align='center'> d3 </td>
+                                  <td align='center'> 2.0 </td>
+                                </tr>
+                            </table>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </td>
+        </tr>
+
+        <tr id='wc_Knife'>
+          <td colspan='3'>
+            <table cellpadding='0' cellspacing='0'>
+              <colgroup>
+                <col width='180'>
+                <col width='100'>
+                <col width='300'>
+              </colgroup>
+
+              <tbody>
+                <tr>
+                  <td>
+                    <input type='checkbox' id='Knife' onclick='toggle("Knife")'>
+                    <b>&nbsp;&nbsp;Knife</b>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type='hidden' id='role_skills_Knife' value='b-sEb--sEss-s'>
+                  </td>
+                  <td>
+                    <input type='text' id='max_skill_Knife' size='9' readonly='readonly'>
+                    <select  id='cur_skill_Knife' style='display: none; font-size: 8pt;' onclick='' onchange='adjust_skills()'>
+                      <option value='0'> Unskilled </option>
+                      <option value='1'> Basic </option>
+                      <option value='2'> Skilled </option>
+                      <option value='3'> Expert </option>
+                    </select>
+                  </td>
+                  <td>
+                    <table cellpadding='0' cellspacing='0'>
+                      <colgroup>
+                        <col width='50'>
+                        <col width='50'>
+                        <col width='50'>
+                        <col width='50'>
+                        <col width='50'>
+                      </colgroup>
+
+                      <tr id='hd_Knife' style='display: none;'>
+                        <td align='center'>
+                          <input id='hdm_h0_Knife' type='text' size='2' style='text-align: center' readonly='readonly' value='+H'>
+                        </td>
+                        <td align='center'>
+                          <input id='hdm_d1_Knife' type='text' size='2' style='text-align: center' readonly='readonly' value='+D'>
+                        </td>
+                        <td align='center'>
+                          <input id='hdm_d2_Knife' type='text' size='2' style='text-align: center' readonly='readonly' value='+D'>
+                        </td>
+                        <td align='center'>
+                          <input id='hdm_d3_Knife' type='text' size='2' style='text-align: center' readonly='readonly' value='+D'>
+                        </td>
+                        <td align='center'>
+                          <input id='hdm_d4_Knife' type='text' size='2' style='text-align: center' readonly='readonly' value='+D'>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+
+                <tr id='w_Knife' style='display: none;'>
+                  <td colspan='3'>
+                    <table id='t_Knife' width='100%' cellpadding='0' cellspacing='0'>
+                      <colgroup>
+                        <col width='180'>
+                        <col width='100'>
+                        <col width='300'>
+                      </colgroup>
+
+                      <tbody>
+                        <tr>
+                          <td colspan='2'>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;worm&nbsp;tooth
+                          </td>
+                          <td>
+                            <table cellpadding='0' cellspacing='0'>
+                              <colgroup span='5' width='50'>
+                              </colgroup>
+
+                                <tr>
+                                  <td align='center'> 0 </td>
+                                  <td align='center'> d2 </td>
+                                  <td align='center'> 1.5 </td>
+                                  <td align='center'> d2 </td>
+                                  <td align='center'> 1.5 </td>
+                                </tr>
+                            </table>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td colspan='2'>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;knife&nbsp;(shito)
+                          </td>
+                          <td>
+                            <table cellpadding='0' cellspacing='0'>
+                              <colgroup span='5' width='50'>
+                              </colgroup>
+
+                                <tr>
+                                  <td align='center'> 0 </td>
+                                  <td align='center'> d3 </td>
+                                  <td align='center'> 2.0 </td>
+                                  <td align='center'> d2 </td>
+                                  <td align='center'> 1.5 </td>
+                                </tr>
+                            </table>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td colspan='2'>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;stiletto
+                          </td>
+                          <td>
+                            <table cellpadding='0' cellspacing='0'>
+                              <colgroup span='5' width='50'>
+                              </colgroup>
+
+                                <tr>
+                                  <td align='center'> 0 </td>
+                                  <td align='center'> d3 </td>
+                                  <td align='center'> 2.0 </td>
+                                  <td align='center'> d2 </td>
+                                  <td align='center'> 1.5 </td>
+                                </tr>
+                            </table>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td colspan='2'>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;scalpel
+                          </td>
+                          <td>
+                            <table cellpadding='0' cellspacing='0'>
+                              <colgroup span='5' width='50'>
+                              </colgroup>
+
+                                <tr>
+                                  <td align='center'> +2 </td>
+                                  <td align='center'> d3 </td>
+                                  <td align='center'> 2.0 </td>
+                                  <td align='center'> d3 </td>
+                                  <td align='center'> 2.0 </td>
+                                </tr>
+                            </table>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td colspan='2'>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;crysknife
+                          </td>
+                          <td>
+                            <table cellpadding='0' cellspacing='0'>
+                              <colgroup span='5' width='50'>
+                              </colgroup>
+
+                                <tr>
+                                  <td align='center'> +3 </td>
+                                  <td align='center'> d10 </td>
+                                  <td align='center'> 5.5 </td>
+                                  <td align='center'> d10 </td>
+                                  <td align='center'> 5.5 </td>
+                                </tr>
+                            </table>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </td>
+        </tr>
+
+        <tr id='wc_Axe'>
+          <td colspan='3'>
+            <table cellpadding='0' cellspacing='0'>
+              <colgroup>
+                <col width='180'>
+                <col width='100'>
+                <col width='300'>
+              </colgroup>
+
+              <tbody>
+                <tr>
+                  <td>
+                    <input type='checkbox' id='Axe' onclick='toggle("Axe")'>
+                    <b>&nbsp;&nbsp;Axe</b>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type='hidden' id='role_skills_Axe' value='-Es-s--s--bEs'>
+                  </td>
+                  <td>
+                    <input type='text' id='max_skill_Axe' size='9' readonly='readonly'>
+                    <select  id='cur_skill_Axe' style='display: none; font-size: 8pt;' onclick='' onchange='adjust_skills()'>
+                      <option value='0'> Unskilled </option>
+                      <option value='1'> Basic </option>
+                      <option value='2'> Skilled </option>
+                      <option value='3'> Expert </option>
+                    </select>
+                  </td>
+                  <td>
+                    <table cellpadding='0' cellspacing='0'>
+                      <colgroup>
+                        <col width='50'>
+                        <col width='50'>
+                        <col width='50'>
+                        <col width='50'>
+                        <col width='50'>
+                      </colgroup>
+
+                      <tr id='hd_Axe' style='display: none;'>
+                        <td align='center'>
+                          <input id='hdm_h0_Axe' type='text' size='2' style='text-align: center' readonly='readonly' value='+H'>
+                        </td>
+                        <td align='center'>
+                          <input id='hdm_d1_Axe' type='text' size='2' style='text-align: center' readonly='readonly' value='+D'>
+                        </td>
+                        <td align='center'>
+                          <input id='hdm_d2_Axe' type='text' size='2' style='text-align: center' readonly='readonly' value='+D'>
+                        </td>
+                        <td align='center'>
+                          <input id='hdm_d3_Axe' type='text' size='2' style='text-align: center' readonly='readonly' value='+D'>
+                        </td>
+                        <td align='center'>
+                          <input id='hdm_d4_Axe' type='text' size='2' style='text-align: center' readonly='readonly' value='+D'>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+
+                <tr id='w_Axe' style='display: none;'>
+                  <td colspan='3'>
+                    <table id='t_Axe' width='100%' cellpadding='0' cellspacing='0'>
+                      <colgroup>
+                        <col width='180'>
+                        <col width='100'>
+                        <col width='300'>
+                      </colgroup>
+
+                      <tbody>
+                        <tr>
+                          <td colspan='2'>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;axe
+                          </td>
+                          <td>
+                            <table cellpadding='0' cellspacing='0'>
+                              <colgroup span='5' width='50'>
+                              </colgroup>
+
+                                <tr>
+                                  <td align='center'> 0 </td>
+                                  <td align='center'> d6 </td>
+                                  <td align='center'> 3.5 </td>
+                                  <td align='center'> d4 </td>
+                                  <td align='center'> 2.5 </td>
+                                </tr>
+                            </table>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td colspan='2'>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;battle&#8209;axe
+                          </td>
+                          <td>
+                            <table cellpadding='0' cellspacing='0'>
+                              <colgroup span='5' width='50'>
+                              </colgroup>
+
+                                <tr>
+                                  <td align='center'> 0 </td>
+                                  <td align='center'> d8+d4 </td>
+                                  <td align='center'> 7.0 </td>
+                                  <td align='center'> d6+2d4 </td>
+                                  <td align='center'> 8.5 </td>
+                                </tr>
+                            </table>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </td>
+        </tr>
+
+        <tr id='wc_Pick_axe'>
+          <td colspan='3'>
+            <table cellpadding='0' cellspacing='0'>
+              <colgroup>
+                <col width='180'>
+                <col width='100'>
+                <col width='300'>
+              </colgroup>
+
+              <tbody>
+                <tr>
+                  <td>
+                    <input type='checkbox' id='Pick_axe' onclick='toggle("Pick_axe")'>
+                    <b>&nbsp;&nbsp;Pick&#8209;axe</b>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type='hidden' id='role_skills_Pick_axe' value='Esb-b--b--bs-'>
+                  </td>
+                  <td>
+                    <input type='text' id='max_skill_Pick_axe' size='9' readonly='readonly'>
+                    <select  id='cur_skill_Pick_axe' style='display: none; font-size: 8pt;' onclick='' onchange='adjust_skills()'>
+                      <option value='0'> Unskilled </option>
+                      <option value='1'> Basic </option>
+                      <option value='2'> Skilled </option>
+                      <option value='3'> Expert </option>
+                    </select>
+                  </td>
+                  <td>
+                    <table cellpadding='0' cellspacing='0'>
+                      <colgroup>
+                        <col width='50'>
+                        <col width='50'>
+                        <col width='50'>
+                        <col width='50'>
+                        <col width='50'>
+                      </colgroup>
+
+                      <tr id='hd_Pick_axe' style='display: none;'>
+                        <td align='center'>
+                          <input id='hdm_h0_Pick_axe' type='text' size='2' style='text-align: center' readonly='readonly' value='+H'>
+                        </td>
+                        <td align='center'>
+                          <input id='hdm_d1_Pick_axe' type='text' size='2' style='text-align: center' readonly='readonly' value='+D'>
+                        </td>
+                        <td align='center'>
+                          <input id='hdm_d2_Pick_axe' type='text' size='2' style='text-align: center' readonly='readonly' value='+D'>
+                        </td>
+                        <td align='center'>
+                          <input id='hdm_d3_Pick_axe' type='text' size='2' style='text-align: center' readonly='readonly' value='+D'>
+                        </td>
+                        <td align='center'>
+                          <input id='hdm_d4_Pick_axe' type='text' size='2' style='text-align: center' readonly='readonly' value='+D'>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+
+                <tr id='w_Pick_axe' style='display: none;'>
+                  <td colspan='3'>
+                    <table id='t_Pick_axe' width='100%' cellpadding='0' cellspacing='0'>
+                      <colgroup>
+                        <col width='180'>
+                        <col width='100'>
+                        <col width='300'>
+                      </colgroup>
+
+                      <tbody>
+                        <tr>
+                          <td colspan='2'>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pick&#8209;axe
+                          </td>
+                          <td>
+                            <table cellpadding='0' cellspacing='0'>
+                              <colgroup span='5' width='50'>
+                              </colgroup>
+
+                                <tr>
+                                  <td align='center'> 0 </td>
+                                  <td align='center'> d6 </td>
+                                  <td align='center'> 3.5 </td>
+                                  <td align='center'> d3 </td>
+                                  <td align='center'> 2.0 </td>
+                                </tr>
+                            </table>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td colspan='2'>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dwarvish&nbsp;mattock
+                          </td>
+                          <td>
+                            <table cellpadding='0' cellspacing='0'>
+                              <colgroup span='5' width='50'>
+                              </colgroup>
+
+                                <tr>
+                                  <td align='center'> -1 </td>
+                                  <td align='center'> d12 </td>
+                                  <td align='center'> 6.5 </td>
+                                  <td align='center'> d8+2d6 </td>
+                                  <td align='center'> 11.5 </td>
+                                </tr>
+                            </table>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </td>
+        </tr>
+
+        <tr id='wc_Short_sword'>
+          <td colspan='3'>
+            <table cellpadding='0' cellspacing='0'>
+              <colgroup>
+                <col width='180'>
+                <col width='100'>
+                <col width='300'>
+              </colgroup>
+
+              <tbody>
+                <tr>
+                  <td>
+                    <input type='checkbox' id='Short_sword' onclick='toggle("Short_sword")'>
+                    <b>&nbsp;&nbsp;Short sword</b>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type='hidden' id='role_skills_Short_sword' value='bE-ss--bEEEsb'>
+                  </td>
+                  <td>
+                    <input type='text' id='max_skill_Short_sword' size='9' readonly='readonly'>
+                    <select  id='cur_skill_Short_sword' style='display: none; font-size: 8pt;' onclick='' onchange='adjust_skills()'>
+                      <option value='0'> Unskilled </option>
+                      <option value='1'> Basic </option>
+                      <option value='2'> Skilled </option>
+                      <option value='3'> Expert </option>
+                    </select>
+                  </td>
+                  <td>
+                    <table cellpadding='0' cellspacing='0'>
+                      <colgroup>
+                        <col width='50'>
+                        <col width='50'>
+                        <col width='50'>
+                        <col width='50'>
+                        <col width='50'>
+                      </colgroup>
+
+                      <tr id='hd_Short_sword' style='display: none;'>
+                        <td align='center'>
+                          <input id='hdm_h0_Short_sword' type='text' size='2' style='text-align: center' readonly='readonly' value='+H'>
+                        </td>
+                        <td align='center'>
+                          <input id='hdm_d1_Short_sword' type='text' size='2' style='text-align: center' readonly='readonly' value='+D'>
+                        </td>
+                        <td align='center'>
+                          <input id='hdm_d2_Short_sword' type='text' size='2' style='text-align: center' readonly='readonly' value='+D'>
+                        </td>
+                        <td align='center'>
+                          <input id='hdm_d3_Short_sword' type='text' size='2' style='text-align: center' readonly='readonly' value='+D'>
+                        </td>
+                        <td align='center'>
+                          <input id='hdm_d4_Short_sword' type='text' size='2' style='text-align: center' readonly='readonly' value='+D'>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+
+                <tr id='w_Short_sword' style='display: none;'>
+                  <td colspan='3'>
+                    <table id='t_Short_sword' width='100%' cellpadding='0' cellspacing='0'>
+                      <colgroup>
+                        <col width='180'>
+                        <col width='100'>
+                        <col width='300'>
+                      </colgroup>
+
+                      <tbody>
+                        <tr>
+                          <td colspan='2'>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;orcish&nbsp;short&nbsp;sword
+                          </td>
+                          <td>
+                            <table cellpadding='0' cellspacing='0'>
+                              <colgroup span='5' width='50'>
+                              </colgroup>
+
+                                <tr>
+                                  <td align='center'> 0 </td>
+                                  <td align='center'> d5 </td>
+                                  <td align='center'> 3.0 </td>
+                                  <td align='center'> d8 </td>
+                                  <td align='center'> 4.5 </td>
+                                </tr>
+                            </table>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td colspan='2'>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;short&nbsp;sword&nbsp;(wakizashi)
+                          </td>
+                          <td>
+                            <table cellpadding='0' cellspacing='0'>
+                              <colgroup span='5' width='50'>
+                              </colgroup>
+
+                                <tr>
+                                  <td align='center'> 0 </td>
+                                  <td align='center'> d6 </td>
+                                  <td align='center'> 3.5 </td>
+                                  <td align='center'> d8 </td>
+                                  <td align='center'> 4.5 </td>
+                                </tr>
+                            </table>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td colspan='2'>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dwarvish&nbsp;short&nbsp;sword
+                          </td>
+                          <td>
+                            <table cellpadding='0' cellspacing='0'>
+                              <colgroup span='5' width='50'>
+                              </colgroup>
+
+                                <tr>
+                                  <td align='center'> 0 </td>
+                                  <td align='center'> d7 </td>
+                                  <td align='center'> 4.0 </td>
+                                  <td align='center'> d8 </td>
+                                  <td align='center'> 4.5 </td>
+                                </tr>
+                            </table>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td colspan='2'>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;elven&nbsp;short&nbsp;sword
+                          </td>
+                          <td>
+                            <table cellpadding='0' cellspacing='0'>
+                              <colgroup span='5' width='50'>
+                              </colgroup>
+
+                                <tr>
+                                  <td align='center'> 0 </td>
+                                  <td align='center'> d8 </td>
+                                  <td align='center'> 4.5 </td>
+                                  <td align='center'> d8 </td>
+                                  <td align='center'> 4.5 </td>
+                                </tr>
+                            </table>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </td>
+        </tr>
+
+        <tr id='wc_Broadsword'>
+          <td colspan='3'>
+            <table cellpadding='0' cellspacing='0'>
+              <colgroup>
+                <col width='180'>
+                <col width='100'>
+                <col width='300'>
+              </colgroup>
+
+              <tbody>
+                <tr>
+                  <td>
+                    <input type='checkbox' id='Broadsword' onclick='toggle("Broadsword")'>
+                    <b>&nbsp;&nbsp;Broadsword</b>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type='hidden' id='role_skills_Broadsword' value='-s--s---ssbs-'>
+                  </td>
+                  <td>
+                    <input type='text' id='max_skill_Broadsword' size='9' readonly='readonly'>
+                    <select  id='cur_skill_Broadsword' style='display: none; font-size: 8pt;' onclick='' onchange='adjust_skills()'>
+                      <option value='0'> Unskilled </option>
+                      <option value='1'> Basic </option>
+                      <option value='2'> Skilled </option>
+                      <option value='3'> Expert </option>
+                    </select>
+                  </td>
+                  <td>
+                    <table cellpadding='0' cellspacing='0'>
+                      <colgroup>
+                        <col width='50'>
+                        <col width='50'>
+                        <col width='50'>
+                        <col width='50'>
+                        <col width='50'>
+                      </colgroup>
+
+                      <tr id='hd_Broadsword' style='display: none;'>
+                        <td align='center'>
+                          <input id='hdm_h0_Broadsword' type='text' size='2' style='text-align: center' readonly='readonly' value='+H'>
+                        </td>
+                        <td align='center'>
+                          <input id='hdm_d1_Broadsword' type='text' size='2' style='text-align: center' readonly='readonly' value='+D'>
+                        </td>
+                        <td align='center'>
+                          <input id='hdm_d2_Broadsword' type='text' size='2' style='text-align: center' readonly='readonly' value='+D'>
+                        </td>
+                        <td align='center'>
+                          <input id='hdm_d3_Broadsword' type='text' size='2' style='text-align: center' readonly='readonly' value='+D'>
+                        </td>
+                        <td align='center'>
+                          <input id='hdm_d4_Broadsword' type='text' size='2' style='text-align: center' readonly='readonly' value='+D'>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+
+                <tr id='w_Broadsword' style='display: none;'>
+                  <td colspan='3'>
+                    <table id='t_Broadsword' width='100%' cellpadding='0' cellspacing='0'>
+                      <colgroup>
+                        <col width='180'>
+                        <col width='100'>
+                        <col width='300'>
+                      </colgroup>
+
+                      <tbody>
+                        <tr>
+                          <td colspan='2'>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;broadsword&nbsp;(ninja&#8209;to)
+                          </td>
+                          <td>
+                            <table cellpadding='0' cellspacing='0'>
+                              <colgroup span='5' width='50'>
+                              </colgroup>
+
+                                <tr>
+                                  <td align='center'> 0 </td>
+                                  <td align='center'> 2d4 </td>
+                                  <td align='center'> 5.0 </td>
+                                  <td align='center'> d6+1 </td>
+                                  <td align='center'> 4.5 </td>
+                                </tr>
+                            </table>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td colspan='2'>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;runesword
+                          </td>
+                          <td>
+                            <table cellpadding='0' cellspacing='0'>
+                              <colgroup span='5' width='50'>
+                              </colgroup>
+
+                                <tr>
+                                  <td align='center'> 0 </td>
+                                  <td align='center'> 2d4 </td>
+                                  <td align='center'> 5.0 </td>
+                                  <td align='center'> d6+1 </td>
+                                  <td align='center'> 4.5 </td>
+                                </tr>
+                            </table>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td colspan='2'>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;elven&nbsp;broadsword
+                          </td>
+                          <td>
+                            <table cellpadding='0' cellspacing='0'>
+                              <colgroup span='5' width='50'>
+                              </colgroup>
+
+                                <tr>
+                                  <td align='center'> 0 </td>
+                                  <td align='center'> d6+d4 </td>
+                                  <td align='center'> 6.0 </td>
+                                  <td align='center'> d6+1 </td>
+                                  <td align='center'> 4.5 </td>
+                                </tr>
+                            </table>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </td>
+        </tr>
+
+        <tr id='wc_Long_sword'>
+          <td colspan='3'>
+            <table cellpadding='0' cellspacing='0'>
+              <colgroup>
+                <col width='180'>
+                <col width='100'>
+                <col width='300'>
+              </colgroup>
+
+              <tbody>
+                <tr>
+                  <td>
+                    <input type='checkbox' id='Long_sword' onclick='toggle("Long_sword")'>
+                    <b>&nbsp;&nbsp;Long sword</b>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type='hidden' id='role_skills_Long_sword' value='-s--E---sEbE-'>
+                  </td>
+                  <td>
+                    <input type='text' id='max_skill_Long_sword' size='9' readonly='readonly'>
+                    <select  id='cur_skill_Long_sword' style='display: none; font-size: 8pt;' onclick='' onchange='adjust_skills()'>
+                      <option value='0'> Unskilled </option>
+                      <option value='1'> Basic </option>
+                      <option value='2'> Skilled </option>
+                      <option value='3'> Expert </option>
+                    </select>
+                  </td>
+                  <td>
+                    <table cellpadding='0' cellspacing='0'>
+                      <colgroup>
+                        <col width='50'>
+                        <col width='50'>
+                        <col width='50'>
+                        <col width='50'>
+                        <col width='50'>
+                      </colgroup>
+
+                      <tr id='hd_Long_sword' style='display: none;'>
+                        <td align='center'>
+                          <input id='hdm_h0_Long_sword' type='text' size='2' style='text-align: center' readonly='readonly' value='+H'>
+                        </td>
+                        <td align='center'>
+                          <input id='hdm_d1_Long_sword' type='text' size='2' style='text-align: center' readonly='readonly' value='+D'>
+                        </td>
+                        <td align='center'>
+                          <input id='hdm_d2_Long_sword' type='text' size='2' style='text-align: center' readonly='readonly' value='+D'>
+                        </td>
+                        <td align='center'>
+                          <input id='hdm_d3_Long_sword' type='text' size='2' style='text-align: center' readonly='readonly' value='+D'>
+                        </td>
+                        <td align='center'>
+                          <input id='hdm_d4_Long_sword' type='text' size='2' style='text-align: center' readonly='readonly' value='+D'>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+
+                <tr id='w_Long_sword' style='display: none;'>
+                  <td colspan='3'>
+                    <table id='t_Long_sword' width='100%' cellpadding='0' cellspacing='0'>
+                      <colgroup>
+                        <col width='180'>
+                        <col width='100'>
+                        <col width='300'>
+                      </colgroup>
+
+                      <tbody>
+                        <tr>
+                          <td colspan='2'>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;long&nbsp;sword
+                          </td>
+                          <td>
+                            <table cellpadding='0' cellspacing='0'>
+                              <colgroup span='5' width='50'>
+                              </colgroup>
+
+                                <tr>
+                                  <td align='center'> 0 </td>
+                                  <td align='center'> d8 </td>
+                                  <td align='center'> 4.5 </td>
+                                  <td align='center'> d12 </td>
+                                  <td align='center'> 6.5 </td>
+                                </tr>
+                            </table>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td colspan='2'>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;katana
+                          </td>
+                          <td>
+                            <table cellpadding='0' cellspacing='0'>
+                              <colgroup span='5' width='50'>
+                              </colgroup>
+
+                                <tr>
+                                  <td align='center'> +1 </td>
+                                  <td align='center'> d10 </td>
+                                  <td align='center'> 5.5 </td>
+                                  <td align='center'> d12 </td>
+                                  <td align='center'> 6.5 </td>
+                                </tr>
+                            </table>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </td>
+        </tr>
+
+        <tr id='wc_Two_handed_sword'>
+          <td colspan='3'>
+            <table cellpadding='0' cellspacing='0'>
+              <colgroup>
+                <col width='180'>
+                <col width='100'>
+                <col width='300'>
+              </colgroup>
+
+              <tbody>
+                <tr>
+                  <td>
+                    <input type='checkbox' id='Two_handed_sword' onclick='toggle("Two_handed_sword")'>
+                    <b>&nbsp;&nbsp;Two&#8209;handed sword</b>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type='hidden' id='role_skills_Two_handed_sword' value='-E--s---bEbE-'>
+                  </td>
+                  <td>
+                    <input type='text' id='max_skill_Two_handed_sword' size='9' readonly='readonly'>
+                    <select  id='cur_skill_Two_handed_sword' style='display: none; font-size: 8pt;' onclick='' onchange='adjust_skills()'>
+                      <option value='0'> Unskilled </option>
+                      <option value='1'> Basic </option>
+                      <option value='2'> Skilled </option>
+                      <option value='3'> Expert </option>
+                    </select>
+                  </td>
+                  <td>
+                    <table cellpadding='0' cellspacing='0'>
+                      <colgroup>
+                        <col width='50'>
+                        <col width='50'>
+                        <col width='50'>
+                        <col width='50'>
+                        <col width='50'>
+                      </colgroup>
+
+                      <tr id='hd_Two_handed_sword' style='display: none;'>
+                        <td align='center'>
+                          <input id='hdm_h0_Two_handed_sword' type='text' size='2' style='text-align: center' readonly='readonly' value='+H'>
+                        </td>
+                        <td align='center'>
+                          <input id='hdm_d1_Two_handed_sword' type='text' size='2' style='text-align: center' readonly='readonly' value='+D'>
+                        </td>
+                        <td align='center'>
+                          <input id='hdm_d2_Two_handed_sword' type='text' size='2' style='text-align: center' readonly='readonly' value='+D'>
+                        </td>
+                        <td align='center'>
+                          <input id='hdm_d3_Two_handed_sword' type='text' size='2' style='text-align: center' readonly='readonly' value='+D'>
+                        </td>
+                        <td align='center'>
+                          <input id='hdm_d4_Two_handed_sword' type='text' size='2' style='text-align: center' readonly='readonly' value='+D'>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+
+                <tr id='w_Two_handed_sword' style='display: none;'>
+                  <td colspan='3'>
+                    <table id='t_Two_handed_sword' width='100%' cellpadding='0' cellspacing='0'>
+                      <colgroup>
+                        <col width='180'>
+                        <col width='100'>
+                        <col width='300'>
+                      </colgroup>
+
+                      <tbody>
+                        <tr>
+                          <td colspan='2'>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;two&#8209;handed&nbsp;sword
+                          </td>
+                          <td>
+                            <table cellpadding='0' cellspacing='0'>
+                              <colgroup span='5' width='50'>
+                              </colgroup>
+
+                                <tr>
+                                  <td align='center'> 0 </td>
+                                  <td align='center'> d12 </td>
+                                  <td align='center'> 6.5 </td>
+                                  <td align='center'> 3d6 </td>
+                                  <td align='center'> 10.5 </td>
+                                </tr>
+                            </table>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td colspan='2'>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;tsurugi
+                          </td>
+                          <td>
+                            <table cellpadding='0' cellspacing='0'>
+                              <colgroup span='5' width='50'>
+                              </colgroup>
+
+                                <tr>
+                                  <td align='center'> +2 </td>
+                                  <td align='center'> d16 </td>
+                                  <td align='center'> 8.5 </td>
+                                  <td align='center'> d8+2d6 </td>
+                                  <td align='center'> 11.5 </td>
+                                </tr>
+                            </table>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </td>
+        </tr>
+
+        <tr id='wc_Scimitar'>
+          <td colspan='3'>
+            <table cellpadding='0' cellspacing='0'>
+              <colgroup>
+                <col width='180'>
+                <col width='100'>
+                <col width='300'>
+              </colgroup>
+
+              <tbody>
+                <tr>
+                  <td>
+                    <input type='checkbox' id='Scimitar' onclick='toggle("Scimitar")'>
+                    <b>&nbsp;&nbsp;Scimitar</b>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type='hidden' id='role_skills_Scimitar' value='ss-bb---sbsb-'>
+                  </td>
+                  <td>
+                    <input type='text' id='max_skill_Scimitar' size='9' readonly='readonly'>
+                    <select  id='cur_skill_Scimitar' style='display: none; font-size: 8pt;' onclick='' onchange='adjust_skills()'>
+                      <option value='0'> Unskilled </option>
+                      <option value='1'> Basic </option>
+                      <option value='2'> Skilled </option>
+                      <option value='3'> Expert </option>
+                    </select>
+                  </td>
+                  <td>
+                    <table cellpadding='0' cellspacing='0'>
+                      <colgroup>
+                        <col width='50'>
+                        <col width='50'>
+                        <col width='50'>
+                        <col width='50'>
+                        <col width='50'>
+                      </colgroup>
+
+                      <tr id='hd_Scimitar' style='display: none;'>
+                        <td align='center'>
+                          <input id='hdm_h0_Scimitar' type='text' size='2' style='text-align: center' readonly='readonly' value='+H'>
+                        </td>
+                        <td align='center'>
+                          <input id='hdm_d1_Scimitar' type='text' size='2' style='text-align: center' readonly='readonly' value='+D'>
+                        </td>
+                        <td align='center'>
+                          <input id='hdm_d2_Scimitar' type='text' size='2' style='text-align: center' readonly='readonly' value='+D'>
+                        </td>
+                        <td align='center'>
+                          <input id='hdm_d3_Scimitar' type='text' size='2' style='text-align: center' readonly='readonly' value='+D'>
+                        </td>
+                        <td align='center'>
+                          <input id='hdm_d4_Scimitar' type='text' size='2' style='text-align: center' readonly='readonly' value='+D'>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+
+                <tr id='w_Scimitar' style='display: none;'>
+                  <td colspan='3'>
+                    <table id='t_Scimitar' width='100%' cellpadding='0' cellspacing='0'>
+                      <colgroup>
+                        <col width='180'>
+                        <col width='100'>
+                        <col width='300'>
+                      </colgroup>
+
+                      <tbody>
+                        <tr>
+                          <td colspan='2'>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;scimitar
+                          </td>
+                          <td>
+                            <table cellpadding='0' cellspacing='0'>
+                              <colgroup span='5' width='50'>
+                              </colgroup>
+
+                                <tr>
+                                  <td align='center'> 0 </td>
+                                  <td align='center'> d8 </td>
+                                  <td align='center'> 4.5 </td>
+                                  <td align='center'> d8 </td>
+                                  <td align='center'> 4.5 </td>
+                                </tr>
+                            </table>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </td>
+        </tr>
+
+        <tr id='wc_Saber'>
+          <td colspan='3'>
+            <table cellpadding='0' cellspacing='0'>
+              <colgroup>
+                <col width='180'>
+                <col width='100'>
+                <col width='300'>
+              </colgroup>
+
+              <tbody>
+                <tr>
+                  <td>
+                    <input type='checkbox' id='Saber' onclick='toggle("Saber")'>
+                    <b>&nbsp;&nbsp;Saber</b>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type='hidden' id='role_skills_Saber' value='Eb-bs---sbsb-'>
+                  </td>
+                  <td>
+                    <input type='text' id='max_skill_Saber' size='9' readonly='readonly'>
+                    <select  id='cur_skill_Saber' style='display: none; font-size: 8pt;' onclick='' onchange='adjust_skills()'>
+                      <option value='0'> Unskilled </option>
+                      <option value='1'> Basic </option>
+                      <option value='2'> Skilled </option>
+                      <option value='3'> Expert </option>
+                    </select>
+                  </td>
+                  <td>
+                    <table cellpadding='0' cellspacing='0'>
+                      <colgroup>
+                        <col width='50'>
+                        <col width='50'>
+                        <col width='50'>
+                        <col width='50'>
+                        <col width='50'>
+                      </colgroup>
+
+                      <tr id='hd_Saber' style='display: none;'>
+                        <td align='center'>
+                          <input id='hdm_h0_Saber' type='text' size='2' style='text-align: center' readonly='readonly' value='+H'>
+                        </td>
+                        <td align='center'>
+                          <input id='hdm_d1_Saber' type='text' size='2' style='text-align: center' readonly='readonly' value='+D'>
+                        </td>
+                        <td align='center'>
+                          <input id='hdm_d2_Saber' type='text' size='2' style='text-align: center' readonly='readonly' value='+D'>
+                        </td>
+                        <td align='center'>
+                          <input id='hdm_d3_Saber' type='text' size='2' style='text-align: center' readonly='readonly' value='+D'>
+                        </td>
+                        <td align='center'>
+                          <input id='hdm_d4_Saber' type='text' size='2' style='text-align: center' readonly='readonly' value='+D'>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+
+                <tr id='w_Saber' style='display: none;'>
+                  <td colspan='3'>
+                    <table id='t_Saber' width='100%' cellpadding='0' cellspacing='0'>
+                      <colgroup>
+                        <col width='180'>
+                        <col width='100'>
+                        <col width='300'>
+                      </colgroup>
+
+                      <tbody>
+                        <tr>
+                          <td colspan='2'>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;silver&nbsp;saber
+                          </td>
+                          <td>
+                            <table cellpadding='0' cellspacing='0'>
+                              <colgroup span='5' width='50'>
+                              </colgroup>
+
+                                <tr>
+                                  <td align='center'> 0 </td>
+                                  <td align='center'> d8 </td>
+                                  <td align='center'> 4.5 </td>
+                                  <td align='center'> d8 </td>
+                                  <td align='center'> 4.5 </td>
+                                </tr>
+                            </table>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </td>
+        </tr>
+
+        <tr id='wc_Club'>
+          <td colspan='3'>
+            <table cellpadding='0' cellspacing='0'>
+              <colgroup>
+                <col width='180'>
+                <col width='100'>
+                <col width='300'>
+              </colgroup>
+
+              <tbody>
+                <tr>
+                  <td>
+                    <input type='checkbox' id='Club' onclick='toggle("Club")'>
+                    <b>&nbsp;&nbsp;Club</b>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type='hidden' id='role_skills_Club' value='ssEsb-E-s---s'>
+                  </td>
+                  <td>
+                    <input type='text' id='max_skill_Club' size='9' readonly='readonly'>
+                    <select  id='cur_skill_Club' style='display: none; font-size: 8pt;' onclick='' onchange='adjust_skills()'>
+                      <option value='0'> Unskilled </option>
+                      <option value='1'> Basic </option>
+                      <option value='2'> Skilled </option>
+                      <option value='3'> Expert </option>
+                    </select>
+                  </td>
+                  <td>
+                    <table cellpadding='0' cellspacing='0'>
+                      <colgroup>
+                        <col width='50'>
+                        <col width='50'>
+                        <col width='50'>
+                        <col width='50'>
+                        <col width='50'>
+                      </colgroup>
+
+                      <tr id='hd_Club' style='display: none;'>
+                        <td align='center'>
+                          <input id='hdm_h0_Club' type='text' size='2' style='text-align: center' readonly='readonly' value='+H'>
+                        </td>
+                        <td align='center'>
+                          <input id='hdm_d1_Club' type='text' size='2' style='text-align: center' readonly='readonly' value='+D'>
+                        </td>
+                        <td align='center'>
+                          <input id='hdm_d2_Club' type='text' size='2' style='text-align: center' readonly='readonly' value='+D'>
+                        </td>
+                        <td align='center'>
+                          <input id='hdm_d3_Club' type='text' size='2' style='text-align: center' readonly='readonly' value='+D'>
+                        </td>
+                        <td align='center'>
+                          <input id='hdm_d4_Club' type='text' size='2' style='text-align: center' readonly='readonly' value='+D'>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+
+                <tr id='w_Club' style='display: none;'>
+                  <td colspan='3'>
+                    <table id='t_Club' width='100%' cellpadding='0' cellspacing='0'>
+                      <colgroup>
+                        <col width='180'>
+                        <col width='100'>
+                        <col width='300'>
+                      </colgroup>
+
+                      <tbody>
+                        <tr>
+                          <td colspan='2'>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;club
+                          </td>
+                          <td>
+                            <table cellpadding='0' cellspacing='0'>
+                              <colgroup span='5' width='50'>
+                              </colgroup>
+
+                                <tr>
+                                  <td align='center'> 0 </td>
+                                  <td align='center'> d6 </td>
+                                  <td align='center'> 3.5 </td>
+                                  <td align='center'> d3 </td>
+                                  <td align='center'> 2.0 </td>
+                                </tr>
+                            </table>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td colspan='2'>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;aklys
+                          </td>
+                          <td>
+                            <table cellpadding='0' cellspacing='0'>
+                              <colgroup span='5' width='50'>
+                              </colgroup>
+
+                                <tr>
+                                  <td align='center'> 0 </td>
+                                  <td align='center'> d6 </td>
+                                  <td align='center'> 3.5 </td>
+                                  <td align='center'> d3 </td>
+                                  <td align='center'> 2.0 </td>
+                                </tr>
+                            </table>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </td>
+        </tr>
+
+        <tr id='wc_Mace'>
+          <td colspan='3'>
+            <table cellpadding='0' cellspacing='0'>
+              <colgroup>
+                <col width='180'>
+                <col width='100'>
+                <col width='300'>
+              </colgroup>
+
+              <tbody>
+                <tr>
+                  <td>
+                    <input type='checkbox' id='Mace' onclick='toggle("Mace")'>
+                    <b>&nbsp;&nbsp;Mace</b>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type='hidden' id='role_skills_Mace' value='-sEbs-E-s-b-b'>
+                  </td>
+                  <td>
+                    <input type='text' id='max_skill_Mace' size='9' readonly='readonly'>
+                    <select  id='cur_skill_Mace' style='display: none; font-size: 8pt;' onclick='' onchange='adjust_skills()'>
+                      <option value='0'> Unskilled </option>
+                      <option value='1'> Basic </option>
+                      <option value='2'> Skilled </option>
+                      <option value='3'> Expert </option>
+                    </select>
+                  </td>
+                  <td>
+                    <table cellpadding='0' cellspacing='0'>
+                      <colgroup>
+                        <col width='50'>
+                        <col width='50'>
+                        <col width='50'>
+                        <col width='50'>
+                        <col width='50'>
+                      </colgroup>
+
+                      <tr id='hd_Mace' style='display: none;'>
+                        <td align='center'>
+                          <input id='hdm_h0_Mace' type='text' size='2' style='text-align: center' readonly='readonly' value='+H'>
+                        </td>
+                        <td align='center'>
+                          <input id='hdm_d1_Mace' type='text' size='2' style='text-align: center' readonly='readonly' value='+D'>
+                        </td>
+                        <td align='center'>
+                          <input id='hdm_d2_Mace' type='text' size='2' style='text-align: center' readonly='readonly' value='+D'>
+                        </td>
+                        <td align='center'>
+                          <input id='hdm_d3_Mace' type='text' size='2' style='text-align: center' readonly='readonly' value='+D'>
+                        </td>
+                        <td align='center'>
+                          <input id='hdm_d4_Mace' type='text' size='2' style='text-align: center' readonly='readonly' value='+D'>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+
+                <tr id='w_Mace' style='display: none;'>
+                  <td colspan='3'>
+                    <table id='t_Mace' width='100%' cellpadding='0' cellspacing='0'>
+                      <colgroup>
+                        <col width='180'>
+                        <col width='100'>
+                        <col width='300'>
+                      </colgroup>
+
+                      <tbody>
+                        <tr>
+                          <td colspan='2'>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mace
+                          </td>
+                          <td>
+                            <table cellpadding='0' cellspacing='0'>
+                              <colgroup span='5' width='50'>
+                              </colgroup>
+
+                                <tr>
+                                  <td align='center'> 0 </td>
+                                  <td align='center'> d6+1 </td>
+                                  <td align='center'> 4.5 </td>
+                                  <td align='center'> d6 </td>
+                                  <td align='center'> 3.5 </td>
+                                </tr>
+                            </table>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </td>
+        </tr>
+
+        <tr id='wc_Morning_star'>
+          <td colspan='3'>
+            <table cellpadding='0' cellspacing='0'>
+              <colgroup>
+                <col width='180'>
+                <col width='100'>
+                <col width='300'>
+              </colgroup>
+
+              <tbody>
+                <tr>
+                  <td>
+                    <input type='checkbox' id='Morning_star' onclick='toggle("Morning_star")'>
+                    <b>&nbsp;&nbsp;Morning star</b>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type='hidden' id='role_skills_Morning_star' value='-sb-s-Ebb-b--'>
+                  </td>
+                  <td>
+                    <input type='text' id='max_skill_Morning_star' size='9' readonly='readonly'>
+                    <select  id='cur_skill_Morning_star' style='display: none; font-size: 8pt;' onclick='' onchange='adjust_skills()'>
+                      <option value='0'> Unskilled </option>
+                      <option value='1'> Basic </option>
+                      <option value='2'> Skilled </option>
+                      <option value='3'> Expert </option>
+                    </select>
+                  </td>
+                  <td>
+                    <table cellpadding='0' cellspacing='0'>
+                      <colgroup>
+                        <col width='50'>
+                        <col width='50'>
+                        <col width='50'>
+                        <col width='50'>
+                        <col width='50'>
+                      </colgroup>
+
+                      <tr id='hd_Morning_star' style='display: none;'>
+                        <td align='center'>
+                          <input id='hdm_h0_Morning_star' type='text' size='2' style='text-align: center' readonly='readonly' value='+H'>
+                        </td>
+                        <td align='center'>
+                          <input id='hdm_d1_Morning_star' type='text' size='2' style='text-align: center' readonly='readonly' value='+D'>
+                        </td>
+                        <td align='center'>
+                          <input id='hdm_d2_Morning_star' type='text' size='2' style='text-align: center' readonly='readonly' value='+D'>
+                        </td>
+                        <td align='center'>
+                          <input id='hdm_d3_Morning_star' type='text' size='2' style='text-align: center' readonly='readonly' value='+D'>
+                        </td>
+                        <td align='center'>
+                          <input id='hdm_d4_Morning_star' type='text' size='2' style='text-align: center' readonly='readonly' value='+D'>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+
+                <tr id='w_Morning_star' style='display: none;'>
+                  <td colspan='3'>
+                    <table id='t_Morning_star' width='100%' cellpadding='0' cellspacing='0'>
+                      <colgroup>
+                        <col width='180'>
+                        <col width='100'>
+                        <col width='300'>
+                      </colgroup>
+
+                      <tbody>
+                        <tr>
+                          <td colspan='2'>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;morning&nbsp;star
+                          </td>
+                          <td>
+                            <table cellpadding='0' cellspacing='0'>
+                              <colgroup span='5' width='50'>
+                              </colgroup>
+
+                                <tr>
+                                  <td align='center'> 0 </td>
+                                  <td align='center'> 2d4 </td>
+                                  <td align='center'> 5.0 </td>
+                                  <td align='center'> d6+1 </td>
+                                  <td align='center'> 4.5 </td>
+                                </tr>
+                            </table>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </td>
+        </tr>
+
+        <tr id='wc_Flail'>
+          <td colspan='3'>
+            <table cellpadding='0' cellspacing='0'>
+              <colgroup>
+                <col width='180'>
+                <col width='100'>
+                <col width='300'>
+              </colgroup>
+
+              <tbody>
+                <tr>
+                  <td>
+                    <input type='checkbox' id='Flail' onclick='toggle("Flail")'>
+                    <b>&nbsp;&nbsp;Flail</b>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type='hidden' id='role_skills_Flail' value='-bs-b-Esbsb--'>
+                  </td>
+                  <td>
+                    <input type='text' id='max_skill_Flail' size='9' readonly='readonly'>
+                    <select  id='cur_skill_Flail' style='display: none; font-size: 8pt;' onclick='' onchange='adjust_skills()'>
+                      <option value='0'> Unskilled </option>
+                      <option value='1'> Basic </option>
+                      <option value='2'> Skilled </option>
+                      <option value='3'> Expert </option>
+                    </select>
+                  </td>
+                  <td>
+                    <table cellpadding='0' cellspacing='0'>
+                      <colgroup>
+                        <col width='50'>
+                        <col width='50'>
+                        <col width='50'>
+                        <col width='50'>
+                        <col width='50'>
+                      </colgroup>
+
+                      <tr id='hd_Flail' style='display: none;'>
+                        <td align='center'>
+                          <input id='hdm_h0_Flail' type='text' size='2' style='text-align: center' readonly='readonly' value='+H'>
+                        </td>
+                        <td align='center'>
+                          <input id='hdm_d1_Flail' type='text' size='2' style='text-align: center' readonly='readonly' value='+D'>
+                        </td>
+                        <td align='center'>
+                          <input id='hdm_d2_Flail' type='text' size='2' style='text-align: center' readonly='readonly' value='+D'>
+                        </td>
+                        <td align='center'>
+                          <input id='hdm_d3_Flail' type='text' size='2' style='text-align: center' readonly='readonly' value='+D'>
+                        </td>
+                        <td align='center'>
+                          <input id='hdm_d4_Flail' type='text' size='2' style='text-align: center' readonly='readonly' value='+D'>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+
+                <tr id='w_Flail' style='display: none;'>
+                  <td colspan='3'>
+                    <table id='t_Flail' width='100%' cellpadding='0' cellspacing='0'>
+                      <colgroup>
+                        <col width='180'>
+                        <col width='100'>
+                        <col width='300'>
+                      </colgroup>
+
+                      <tbody>
+                        <tr>
+                          <td colspan='2'>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;flail&nbsp;(nunchaku)
+                          </td>
+                          <td>
+                            <table cellpadding='0' cellspacing='0'>
+                              <colgroup span='5' width='50'>
+                              </colgroup>
+
+                                <tr>
+                                  <td align='center'> 0 </td>
+                                  <td align='center'> d6+1 </td>
+                                  <td align='center'> 4.5 </td>
+                                  <td align='center'> 2d4 </td>
+                                  <td align='center'> 5.0 </td>
+                                </tr>
+                            </table>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td colspan='2'>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;grappling&nbsp;hook
+                          </td>
+                          <td>
+                            <table cellpadding='0' cellspacing='0'>
+                              <colgroup span='5' width='50'>
+                              </colgroup>
+
+                                <tr>
+                                  <td align='center'> 0 </td>
+                                  <td align='center'> d2 </td>
+                                  <td align='center'> 1.5 </td>
+                                  <td align='center'> d6 </td>
+                                  <td align='center'> 3.5 </td>
+                                </tr>
+                            </table>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </td>
+        </tr>
+
+        <tr id='wc_Hammer'>
+          <td colspan='3'>
+            <table cellpadding='0' cellspacing='0'>
+              <colgroup>
+                <col width='180'>
+                <col width='100'>
+                <col width='300'>
+              </colgroup>
+
+              <tbody>
+                <tr>
+                  <td>
+                    <input type='checkbox' id='Hammer' onclick='toggle("Hammer")'>
+                    <b>&nbsp;&nbsp;Hammer</b>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type='hidden' id='role_skills_Hammer' value='-Es-b-Ebb-bE-'>
+                  </td>
+                  <td>
+                    <input type='text' id='max_skill_Hammer' size='9' readonly='readonly'>
+                    <select  id='cur_skill_Hammer' style='display: none; font-size: 8pt;' onclick='' onchange='adjust_skills()'>
+                      <option value='0'> Unskilled </option>
+                      <option value='1'> Basic </option>
+                      <option value='2'> Skilled </option>
+                      <option value='3'> Expert </option>
+                    </select>
+                  </td>
+                  <td>
+                    <table cellpadding='0' cellspacing='0'>
+                      <colgroup>
+                        <col width='50'>
+                        <col width='50'>
+                        <col width='50'>
+                        <col width='50'>
+                        <col width='50'>
+                      </colgroup>
+
+                      <tr id='hd_Hammer' style='display: none;'>
+                        <td align='center'>
+                          <input id='hdm_h0_Hammer' type='text' size='2' style='text-align: center' readonly='readonly' value='+H'>
+                        </td>
+                        <td align='center'>
+                          <input id='hdm_d1_Hammer' type='text' size='2' style='text-align: center' readonly='readonly' value='+D'>
+                        </td>
+                        <td align='center'>
+                          <input id='hdm_d2_Hammer' type='text' size='2' style='text-align: center' readonly='readonly' value='+D'>
+                        </td>
+                        <td align='center'>
+                          <input id='hdm_d3_Hammer' type='text' size='2' style='text-align: center' readonly='readonly' value='+D'>
+                        </td>
+                        <td align='center'>
+                          <input id='hdm_d4_Hammer' type='text' size='2' style='text-align: center' readonly='readonly' value='+D'>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+
+                <tr id='w_Hammer' style='display: none;'>
+                  <td colspan='3'>
+                    <table id='t_Hammer' width='100%' cellpadding='0' cellspacing='0'>
+                      <colgroup>
+                        <col width='180'>
+                        <col width='100'>
+                        <col width='300'>
+                      </colgroup>
+
+                      <tbody>
+                        <tr>
+                          <td colspan='2'>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;war&nbsp;hammer
+                          </td>
+                          <td>
+                            <table cellpadding='0' cellspacing='0'>
+                              <colgroup span='5' width='50'>
+                              </colgroup>
+
+                                <tr>
+                                  <td align='center'> 0 </td>
+                                  <td align='center'> d4+1 </td>
+                                  <td align='center'> 3.5 </td>
+                                  <td align='center'> d4 </td>
+                                  <td align='center'> 2.5 </td>
+                                </tr>
+                            </table>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </td>
+        </tr>
+
+        <tr id='wc_Quarterstaff'>
+          <td colspan='3'>
+            <table cellpadding='0' cellspacing='0'>
+              <colgroup>
+                <col width='180'>
+                <col width='100'>
+                <col width='300'>
+              </colgroup>
+
+              <tbody>
+                <tr>
+                  <td>
+                    <input type='checkbox' id='Quarterstaff' onclick='toggle("Quarterstaff")'>
+                    <b>&nbsp;&nbsp;Quarterstaff</b>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type='hidden' id='role_skills_Quarterstaff' value='sbEE-bEb-bbbE'>
+                  </td>
+                  <td>
+                    <input type='text' id='max_skill_Quarterstaff' size='9' readonly='readonly'>
+                    <select  id='cur_skill_Quarterstaff' style='display: none; font-size: 8pt;' onclick='' onchange='adjust_skills()'>
+                      <option value='0'> Unskilled </option>
+                      <option value='1'> Basic </option>
+                      <option value='2'> Skilled </option>
+                      <option value='3'> Expert </option>
+                    </select>
+                  </td>
+                  <td>
+                    <table cellpadding='0' cellspacing='0'>
+                      <colgroup>
+                        <col width='50'>
+                        <col width='50'>
+                        <col width='50'>
+                        <col width='50'>
+                        <col width='50'>
+                      </colgroup>
+
+                      <tr id='hd_Quarterstaff' style='display: none;'>
+                        <td align='center'>
+                          <input id='hdm_h0_Quarterstaff' type='text' size='2' style='text-align: center' readonly='readonly' value='+H'>
+                        </td>
+                        <td align='center'>
+                          <input id='hdm_d1_Quarterstaff' type='text' size='2' style='text-align: center' readonly='readonly' value='+D'>
+                        </td>
+                        <td align='center'>
+                          <input id='hdm_d2_Quarterstaff' type='text' size='2' style='text-align: center' readonly='readonly' value='+D'>
+                        </td>
+                        <td align='center'>
+                          <input id='hdm_d3_Quarterstaff' type='text' size='2' style='text-align: center' readonly='readonly' value='+D'>
+                        </td>
+                        <td align='center'>
+                          <input id='hdm_d4_Quarterstaff' type='text' size='2' style='text-align: center' readonly='readonly' value='+D'>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+
+                <tr id='w_Quarterstaff' style='display: none;'>
+                  <td colspan='3'>
+                    <table id='t_Quarterstaff' width='100%' cellpadding='0' cellspacing='0'>
+                      <colgroup>
+                        <col width='180'>
+                        <col width='100'>
+                        <col width='300'>
+                      </colgroup>
+
+                      <tbody>
+                        <tr>
+                          <td colspan='2'>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;quarterstaff
+                          </td>
+                          <td>
+                            <table cellpadding='0' cellspacing='0'>
+                              <colgroup span='5' width='50'>
+                              </colgroup>
+
+                                <tr>
+                                  <td align='center'> 0 </td>
+                                  <td align='center'> d6 </td>
+                                  <td align='center'> 3.5 </td>
+                                  <td align='center'> d6 </td>
+                                  <td align='center'> 3.5 </td>
+                                </tr>
+                            </table>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </td>
+        </tr>
+
+        <tr id='wc_Polearm'>
+          <td colspan='3'>
+            <table cellpadding='0' cellspacing='0'>
+              <colgroup>
+                <col width='180'>
+                <col width='100'>
+                <col width='300'>
+              </colgroup>
+
+              <tbody>
+                <tr>
+                  <td>
+                    <input type='checkbox' id='Polearm' onclick='toggle("Polearm")'>
+                    <b>&nbsp;&nbsp;Polearm</b>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type='hidden' id='role_skills_Polearm' value='--sbs-ssbsbss'>
+                  </td>
+                  <td>
+                    <input type='text' id='max_skill_Polearm' size='9' readonly='readonly'>
+                    <select  id='cur_skill_Polearm' style='display: none; font-size: 8pt;' onclick='' onchange='adjust_skills()'>
+                      <option value='0'> Unskilled </option>
+                      <option value='1'> Basic </option>
+                      <option value='2'> Skilled </option>
+                      <option value='3'> Expert </option>
+                    </select>
+                  </td>
+                  <td>
+                    <table cellpadding='0' cellspacing='0'>
+                      <colgroup>
+                        <col width='50'>
+                        <col width='50'>
+                        <col width='50'>
+                        <col width='50'>
+                        <col width='50'>
+                      </colgroup>
+
+                      <tr id='hd_Polearm' style='display: none;'>
+                        <td align='center'>
+                          <input id='hdm_h0_Polearm' type='text' size='2' style='text-align: center' readonly='readonly' value='+H'>
+                        </td>
+                        <td align='center'>
+                          <input id='hdm_d1_Polearm' type='text' size='2' style='text-align: center' readonly='readonly' value='+D'>
+                        </td>
+                        <td align='center'>
+                          <input id='hdm_d2_Polearm' type='text' size='2' style='text-align: center' readonly='readonly' value='+D'>
+                        </td>
+                        <td align='center'>
+                          <input id='hdm_d3_Polearm' type='text' size='2' style='text-align: center' readonly='readonly' value='+D'>
+                        </td>
+                        <td align='center'>
+                          <input id='hdm_d4_Polearm' type='text' size='2' style='text-align: center' readonly='readonly' value='+D'>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+
+                <tr id='w_Polearm' style='display: none;'>
+                  <td colspan='3'>
+                    <table id='t_Polearm' width='100%' cellpadding='0' cellspacing='0'>
+                      <colgroup>
+                        <col width='180'>
+                        <col width='100'>
+                        <col width='300'>
+                      </colgroup>
+
+                      <tbody>
+                        <tr>
+                          <td colspan='2'>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;partisan
+                          </td>
+                          <td>
+                            <table cellpadding='0' cellspacing='0'>
+                              <colgroup span='5' width='50'>
+                              </colgroup>
+
+                                <tr>
+                                  <td align='center'> 0 </td>
+                                  <td align='center'> d6 </td>
+                                  <td align='center'> 3.5 </td>
+                                  <td align='center'> d6+1 </td>
+                                  <td align='center'> 4.5 </td>
+                                </tr>
+                            </table>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td colspan='2'>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fauchard
+                          </td>
+                          <td>
+                            <table cellpadding='0' cellspacing='0'>
+                              <colgroup span='5' width='50'>
+                              </colgroup>
+
+                                <tr>
+                                  <td align='center'> 0 </td>
+                                  <td align='center'> d6 </td>
+                                  <td align='center'> 3.5 </td>
+                                  <td align='center'> d8 </td>
+                                  <td align='center'> 4.5 </td>
+                                </tr>
+                            </table>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td colspan='2'>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;glaive&nbsp;(naginata)
+                          </td>
+                          <td>
+                            <table cellpadding='0' cellspacing='0'>
+                              <colgroup span='5' width='50'>
+                              </colgroup>
+
+                                <tr>
+                                  <td align='center'> 0 </td>
+                                  <td align='center'> d6 </td>
+                                  <td align='center'> 3.5 </td>
+                                  <td align='center'> d10 </td>
+                                  <td align='center'> 5.5 </td>
+                                </tr>
+                            </table>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td colspan='2'>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;bec&#8209;de&#8209;corbin
+                          </td>
+                          <td>
+                            <table cellpadding='0' cellspacing='0'>
+                              <colgroup span='5' width='50'>
+                              </colgroup>
+
+                                <tr>
+                                  <td align='center'> 0 </td>
+                                  <td align='center'> d8 </td>
+                                  <td align='center'> 4.5 </td>
+                                  <td align='center'> d6 </td>
+                                  <td align='center'> 3.5 </td>
+                                </tr>
+                            </table>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td colspan='2'>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;spetum
+                          </td>
+                          <td>
+                            <table cellpadding='0' cellspacing='0'>
+                              <colgroup span='5' width='50'>
+                              </colgroup>
+
+                                <tr>
+                                  <td align='center'> 0 </td>
+                                  <td align='center'> d6+1 </td>
+                                  <td align='center'> 4.5 </td>
+                                  <td align='center'> 2d6 </td>
+                                  <td align='center'> 7.0 </td>
+                                </tr>
+                            </table>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td colspan='2'>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lucern&nbsp;hammer
+                          </td>
+                          <td>
+                            <table cellpadding='0' cellspacing='0'>
+                              <colgroup span='5' width='50'>
+                              </colgroup>
+
+                                <tr>
+                                  <td align='center'> 0 </td>
+                                  <td align='center'> 2d4 </td>
+                                  <td align='center'> 5.0 </td>
+                                  <td align='center'> d6 </td>
+                                  <td align='center'> 3.5 </td>
+                                </tr>
+                            </table>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td colspan='2'>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;guisarme
+                          </td>
+                          <td>
+                            <table cellpadding='0' cellspacing='0'>
+                              <colgroup span='5' width='50'>
+                              </colgroup>
+
+                                <tr>
+                                  <td align='center'> 0 </td>
+                                  <td align='center'> 2d4 </td>
+                                  <td align='center'> 5.0 </td>
+                                  <td align='center'> d8 </td>
+                                  <td align='center'> 4.5 </td>
+                                </tr>
+                            </table>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td colspan='2'>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ranseur
+                          </td>
+                          <td>
+                            <table cellpadding='0' cellspacing='0'>
+                              <colgroup span='5' width='50'>
+                              </colgroup>
+
+                                <tr>
+                                  <td align='center'> 0 </td>
+                                  <td align='center'> 2d4 </td>
+                                  <td align='center'> 5.0 </td>
+                                  <td align='center'> 2d4 </td>
+                                  <td align='center'> 5.0 </td>
+                                </tr>
+                            </table>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td colspan='2'>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;voulge
+                          </td>
+                          <td>
+                            <table cellpadding='0' cellspacing='0'>
+                              <colgroup span='5' width='50'>
+                              </colgroup>
+
+                                <tr>
+                                  <td align='center'> 0 </td>
+                                  <td align='center'> 2d4 </td>
+                                  <td align='center'> 5.0 </td>
+                                  <td align='center'> 2d4 </td>
+                                  <td align='center'> 5.0 </td>
+                                </tr>
+                            </table>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td colspan='2'>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;bill&#8209;guisarme
+                          </td>
+                          <td>
+                            <table cellpadding='0' cellspacing='0'>
+                              <colgroup span='5' width='50'>
+                              </colgroup>
+
+                                <tr>
+                                  <td align='center'> 0 </td>
+                                  <td align='center'> 2d4 </td>
+                                  <td align='center'> 5.0 </td>
+                                  <td align='center'> d10 </td>
+                                  <td align='center'> 5.5 </td>
+                                </tr>
+                            </table>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td colspan='2'>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;bardiche
+                          </td>
+                          <td>
+                            <table cellpadding='0' cellspacing='0'>
+                              <colgroup span='5' width='50'>
+                              </colgroup>
+
+                                <tr>
+                                  <td align='center'> 0 </td>
+                                  <td align='center'> 2d4 </td>
+                                  <td align='center'> 5.0 </td>
+                                  <td align='center'> 3d4 </td>
+                                  <td align='center'> 7.5 </td>
+                                </tr>
+                            </table>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td colspan='2'>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;halberd
+                          </td>
+                          <td>
+                            <table cellpadding='0' cellspacing='0'>
+                              <colgroup span='5' width='50'>
+                              </colgroup>
+
+                                <tr>
+                                  <td align='center'> 0 </td>
+                                  <td align='center'> d10 </td>
+                                  <td align='center'> 5.5 </td>
+                                  <td align='center'> 2d6 </td>
+                                  <td align='center'> 7.0 </td>
+                                </tr>
+                            </table>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </td>
+        </tr>
+
+        <tr id='wc_Spear'>
+          <td colspan='3'>
+            <table cellpadding='0' cellspacing='0'>
+              <colgroup>
+                <col width='180'>
+                <col width='100'>
+                <col width='300'>
+              </colgroup>
+
+              <tbody>
+                <tr>
+                  <td>
+                    <input type='checkbox' id='Spear' onclick='toggle("Spear")'>
+                    <b>&nbsp;&nbsp;Spear</b>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type='hidden' id='role_skills_Spear' value='-sEbsbssbbbsb'>
+                  </td>
+                  <td>
+                    <input type='text' id='max_skill_Spear' size='9' readonly='readonly'>
+                    <select  id='cur_skill_Spear' style='display: none; font-size: 8pt;' onclick='' onchange='adjust_skills()'>
+                      <option value='0'> Unskilled </option>
+                      <option value='1'> Basic </option>
+                      <option value='2'> Skilled </option>
+                      <option value='3'> Expert </option>
+                    </select>
+                  </td>
+                  <td>
+                    <table cellpadding='0' cellspacing='0'>
+                      <colgroup>
+                        <col width='50'>
+                        <col width='50'>
+                        <col width='50'>
+                        <col width='50'>
+                        <col width='50'>
+                      </colgroup>
+
+                      <tr id='hd_Spear' style='display: none;'>
+                        <td align='center'>
+                          <input id='hdm_h0_Spear' type='text' size='2' style='text-align: center' readonly='readonly' value='+H'>
+                        </td>
+                        <td align='center'>
+                          <input id='hdm_d1_Spear' type='text' size='2' style='text-align: center' readonly='readonly' value='+D'>
+                        </td>
+                        <td align='center'>
+                          <input id='hdm_d2_Spear' type='text' size='2' style='text-align: center' readonly='readonly' value='+D'>
+                        </td>
+                        <td align='center'>
+                          <input id='hdm_d3_Spear' type='text' size='2' style='text-align: center' readonly='readonly' value='+D'>
+                        </td>
+                        <td align='center'>
+                          <input id='hdm_d4_Spear' type='text' size='2' style='text-align: center' readonly='readonly' value='+D'>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+
+                <tr id='w_Spear' style='display: none;'>
+                  <td colspan='3'>
+                    <table id='t_Spear' width='100%' cellpadding='0' cellspacing='0'>
+                      <colgroup>
+                        <col width='180'>
+                        <col width='100'>
+                        <col width='300'>
+                      </colgroup>
+
+                      <tbody>
+                        <tr>
+                          <td colspan='2'>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;orcish&nbsp;spear
+                          </td>
+                          <td>
+                            <table cellpadding='0' cellspacing='0'>
+                              <colgroup span='5' width='50'>
+                              </colgroup>
+
+                                <tr>
+                                  <td align='center'> 0 </td>
+                                  <td align='center'> d5 </td>
+                                  <td align='center'> 3.0 </td>
+                                  <td align='center'> d8 </td>
+                                  <td align='center'> 4.5 </td>
+                                </tr>
+                            </table>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td colspan='2'>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;spear
+                          </td>
+                          <td>
+                            <table cellpadding='0' cellspacing='0'>
+                              <colgroup span='5' width='50'>
+                              </colgroup>
+
+                                <tr>
+                                  <td align='center'> 0 </td>
+                                  <td align='center'> d6 </td>
+                                  <td align='center'> 3.5 </td>
+                                  <td align='center'> d8 </td>
+                                  <td align='center'> 4.5 </td>
+                                </tr>
+                            </table>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td colspan='2'>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;silver&nbsp;spear
+                          </td>
+                          <td>
+                            <table cellpadding='0' cellspacing='0'>
+                              <colgroup span='5' width='50'>
+                              </colgroup>
+
+                                <tr>
+                                  <td align='center'> 0 </td>
+                                  <td align='center'> d6 </td>
+                                  <td align='center'> 3.5 </td>
+                                  <td align='center'> d8 </td>
+                                  <td align='center'> 4.5 </td>
+                                </tr>
+                            </table>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td colspan='2'>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;elven&nbsp;spear
+                          </td>
+                          <td>
+                            <table cellpadding='0' cellspacing='0'>
+                              <colgroup span='5' width='50'>
+                              </colgroup>
+
+                                <tr>
+                                  <td align='center'> 0 </td>
+                                  <td align='center'> d7 </td>
+                                  <td align='center'> 4.0 </td>
+                                  <td align='center'> d8 </td>
+                                  <td align='center'> 4.5 </td>
+                                </tr>
+                            </table>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td colspan='2'>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dwarvish&nbsp;spear
+                          </td>
+                          <td>
+                            <table cellpadding='0' cellspacing='0'>
+                              <colgroup span='5' width='50'>
+                              </colgroup>
+
+                                <tr>
+                                  <td align='center'> 0 </td>
+                                  <td align='center'> d8 </td>
+                                  <td align='center'> 4.5 </td>
+                                  <td align='center'> d8 </td>
+                                  <td align='center'> 4.5 </td>
+                                </tr>
+                            </table>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </td>
+        </tr>
+
+        <tr id='wc_Javelin'>
+          <td colspan='3'>
+            <table cellpadding='0' cellspacing='0'>
+              <colgroup>
+                <col width='180'>
+                <col width='100'>
+                <col width='300'>
+              </colgroup>
+
+              <tbody>
+                <tr>
+                  <td>
+                    <input type='checkbox' id='Javelin' onclick='toggle("Javelin")'>
+                    <b>&nbsp;&nbsp;Javelin</b>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type='hidden' id='role_skills_Javelin' value='--sbsbsE-bbbb'>
+                  </td>
+                  <td>
+                    <input type='text' id='max_skill_Javelin' size='9' readonly='readonly'>
+                    <select  id='cur_skill_Javelin' style='display: none; font-size: 8pt;' onclick='' onchange='adjust_skills()'>
+                      <option value='0'> Unskilled </option>
+                      <option value='1'> Basic </option>
+                      <option value='2'> Skilled </option>
+                      <option value='3'> Expert </option>
+                    </select>
+                  </td>
+                  <td>
+                    <table cellpadding='0' cellspacing='0'>
+                      <colgroup>
+                        <col width='50'>
+                        <col width='50'>
+                        <col width='50'>
+                        <col width='50'>
+                        <col width='50'>
+                      </colgroup>
+
+                      <tr id='hd_Javelin' style='display: none;'>
+                        <td align='center'>
+                          <input id='hdm_h0_Javelin' type='text' size='2' style='text-align: center' readonly='readonly' value='+H'>
+                        </td>
+                        <td align='center'>
+                          <input id='hdm_d1_Javelin' type='text' size='2' style='text-align: center' readonly='readonly' value='+D'>
+                        </td>
+                        <td align='center'>
+                          <input id='hdm_d2_Javelin' type='text' size='2' style='text-align: center' readonly='readonly' value='+D'>
+                        </td>
+                        <td align='center'>
+                          <input id='hdm_d3_Javelin' type='text' size='2' style='text-align: center' readonly='readonly' value='+D'>
+                        </td>
+                        <td align='center'>
+                          <input id='hdm_d4_Javelin' type='text' size='2' style='text-align: center' readonly='readonly' value='+D'>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+
+                <tr id='w_Javelin' style='display: none;'>
+                  <td colspan='3'>
+                    <table id='t_Javelin' width='100%' cellpadding='0' cellspacing='0'>
+                      <colgroup>
+                        <col width='180'>
+                        <col width='100'>
+                        <col width='300'>
+                      </colgroup>
+
+                      <tbody>
+                        <tr>
+                          <td colspan='2'>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;javelin
+                          </td>
+                          <td>
+                            <table cellpadding='0' cellspacing='0'>
+                              <colgroup span='5' width='50'>
+                              </colgroup>
+
+                                <tr>
+                                  <td align='center'> 0 </td>
+                                  <td align='center'> d6 </td>
+                                  <td align='center'> 3.5 </td>
+                                  <td align='center'> d6 </td>
+                                  <td align='center'> 3.5 </td>
+                                </tr>
+                            </table>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </td>
+        </tr>
+
+        <tr id='wc_Trident'>
+          <td colspan='3'>
+            <table cellpadding='0' cellspacing='0'>
+              <colgroup>
+                <col width='180'>
+                <col width='100'>
+                <col width='300'>
+              </colgroup>
+
+              <tbody>
+                <tr>
+                  <td>
+                    <input type='checkbox' id='Trident' onclick='toggle("Trident")'>
+                    <b>&nbsp;&nbsp;Trident</b>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type='hidden' id='role_skills_Trident' value='-ssbb-sb--bbb'>
+                  </td>
+                  <td>
+                    <input type='text' id='max_skill_Trident' size='9' readonly='readonly'>
+                    <select  id='cur_skill_Trident' style='display: none; font-size: 8pt;' onclick='' onchange='adjust_skills()'>
+                      <option value='0'> Unskilled </option>
+                      <option value='1'> Basic </option>
+                      <option value='2'> Skilled </option>
+                      <option value='3'> Expert </option>
+                    </select>
+                  </td>
+                  <td>
+                    <table cellpadding='0' cellspacing='0'>
+                      <colgroup>
+                        <col width='50'>
+                        <col width='50'>
+                        <col width='50'>
+                        <col width='50'>
+                        <col width='50'>
+                      </colgroup>
+
+                      <tr id='hd_Trident' style='display: none;'>
+                        <td align='center'>
+                          <input id='hdm_h0_Trident' type='text' size='2' style='text-align: center' readonly='readonly' value='+H'>
+                        </td>
+                        <td align='center'>
+                          <input id='hdm_d1_Trident' type='text' size='2' style='text-align: center' readonly='readonly' value='+D'>
+                        </td>
+                        <td align='center'>
+                          <input id='hdm_d2_Trident' type='text' size='2' style='text-align: center' readonly='readonly' value='+D'>
+                        </td>
+                        <td align='center'>
+                          <input id='hdm_d3_Trident' type='text' size='2' style='text-align: center' readonly='readonly' value='+D'>
+                        </td>
+                        <td align='center'>
+                          <input id='hdm_d4_Trident' type='text' size='2' style='text-align: center' readonly='readonly' value='+D'>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+
+                <tr id='w_Trident' style='display: none;'>
+                  <td colspan='3'>
+                    <table id='t_Trident' width='100%' cellpadding='0' cellspacing='0'>
+                      <colgroup>
+                        <col width='180'>
+                        <col width='100'>
+                        <col width='300'>
+                      </colgroup>
+
+                      <tbody>
+                        <tr>
+                          <td colspan='2'>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;trident
+                          </td>
+                          <td>
+                            <table cellpadding='0' cellspacing='0'>
+                              <colgroup span='5' width='50'>
+                              </colgroup>
+
+                                <tr>
+                                  <td align='center'> 0 </td>
+                                  <td align='center'> d6+1 </td>
+                                  <td align='center'> 4.5 </td>
+                                  <td align='center'> 3d4 </td>
+                                  <td align='center'> 7.5 </td>
+                                </tr>
+                            </table>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </td>
+        </tr>
+
+        <tr id='wc_Lance'>
+          <td colspan='3'>
+            <table cellpadding='0' cellspacing='0'>
+              <colgroup>
+                <col width='180'>
+                <col width='100'>
+                <col width='300'>
+              </colgroup>
+
+              <tbody>
+                <tr>
+                  <td>
+                    <input type='checkbox' id='Lance' onclick='toggle("Lance")'>
+                    <b>&nbsp;&nbsp;Lance</b>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type='hidden' id='role_skills_Lance' value='----E-b--sbs-'>
+                  </td>
+                  <td>
+                    <input type='text' id='max_skill_Lance' size='9' readonly='readonly'>
+                    <select  id='cur_skill_Lance' style='display: none; font-size: 8pt;' onclick='' onchange='adjust_skills()'>
+                      <option value='0'> Unskilled </option>
+                      <option value='1'> Basic </option>
+                      <option value='2'> Skilled </option>
+                      <option value='3'> Expert </option>
+                    </select>
+                  </td>
+                  <td>
+                    <table cellpadding='0' cellspacing='0'>
+                      <colgroup>
+                        <col width='50'>
+                        <col width='50'>
+                        <col width='50'>
+                        <col width='50'>
+                        <col width='50'>
+                      </colgroup>
+
+                      <tr id='hd_Lance' style='display: none;'>
+                        <td align='center'>
+                          <input id='hdm_h0_Lance' type='text' size='2' style='text-align: center' readonly='readonly' value='+H'>
+                        </td>
+                        <td align='center'>
+                          <input id='hdm_d1_Lance' type='text' size='2' style='text-align: center' readonly='readonly' value='+D'>
+                        </td>
+                        <td align='center'>
+                          <input id='hdm_d2_Lance' type='text' size='2' style='text-align: center' readonly='readonly' value='+D'>
+                        </td>
+                        <td align='center'>
+                          <input id='hdm_d3_Lance' type='text' size='2' style='text-align: center' readonly='readonly' value='+D'>
+                        </td>
+                        <td align='center'>
+                          <input id='hdm_d4_Lance' type='text' size='2' style='text-align: center' readonly='readonly' value='+D'>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+
+                <tr id='w_Lance' style='display: none;'>
+                  <td colspan='3'>
+                    <table id='t_Lance' width='100%' cellpadding='0' cellspacing='0'>
+                      <colgroup>
+                        <col width='180'>
+                        <col width='100'>
+                        <col width='300'>
+                      </colgroup>
+
+                      <tbody>
+                        <tr>
+                          <td colspan='2'>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lance
+                          </td>
+                          <td>
+                            <table cellpadding='0' cellspacing='0'>
+                              <colgroup span='5' width='50'>
+                              </colgroup>
+
+                                <tr>
+                                  <td align='center'> 0 </td>
+                                  <td align='center'> d6 </td>
+                                  <td align='center'> 3.5 </td>
+                                  <td align='center'> d8 </td>
+                                  <td align='center'> 4.5 </td>
+                                </tr>
+                            </table>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </td>
+        </tr>
+
+        <tr id='wc_Bow'>
+          <td colspan='3'>
+            <table cellpadding='0' cellspacing='0'>
+              <colgroup>
+                <col width='180'>
+                <col width='100'>
+                <col width='300'>
+              </colgroup>
+
+              <tbody>
+                <tr>
+                  <td>
+                    <input type='checkbox' id='Bow' onclick='toggle("Bow")'>
+                    <b>&nbsp;&nbsp;Bow</b>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type='hidden' id='role_skills_Bow' value='-bs-b-bE-Eb--'>
+                  </td>
+                  <td>
+                    <input type='text' id='max_skill_Bow' size='9' readonly='readonly'>
+                    <select  id='cur_skill_Bow' style='display: none; font-size: 8pt;' onclick='' onchange='adjust_skills()'>
+                      <option value='0'> Unskilled </option>
+                      <option value='1'> Basic </option>
+                      <option value='2'> Skilled </option>
+                      <option value='3'> Expert </option>
+                    </select>
+                  </td>
+                  <td>
+                    <table cellpadding='0' cellspacing='0'>
+                      <colgroup>
+                        <col width='50'>
+                        <col width='50'>
+                        <col width='50'>
+                        <col width='50'>
+                        <col width='50'>
+                      </colgroup>
+
+                      <tr id='hd_Bow' style='display: none;'>
+                        <td align='center'>
+                          <input id='hdm_h0_Bow' type='text' size='2' style='text-align: center' readonly='readonly' value='+H'>
+                        </td>
+                        <td align='center'>
+                          <input id='hdm_d1_Bow' type='text' size='2' style='text-align: center' readonly='readonly' value='+D'>
+                        </td>
+                        <td align='center'>
+                          <input id='hdm_d2_Bow' type='text' size='2' style='text-align: center' readonly='readonly' value='+D'>
+                        </td>
+                        <td align='center'>
+                          <input id='hdm_d3_Bow' type='text' size='2' style='text-align: center' readonly='readonly' value='+D'>
+                        </td>
+                        <td align='center'>
+                          <input id='hdm_d4_Bow' type='text' size='2' style='text-align: center' readonly='readonly' value='+D'>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+
+                <tr id='w_Bow' style='display: none;'>
+                  <td colspan='3'>
+                    <table id='t_Bow' width='100%' cellpadding='0' cellspacing='0'>
+                      <colgroup>
+                        <col width='180'>
+                        <col width='100'>
+                        <col width='300'>
+                      </colgroup>
+
+                      <tbody>
+                        <tr>
+                          <td colspan='2'>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;orcish&nbsp;bow
+                          </td>
+                          <td>
+                            <table cellpadding='0' cellspacing='0'>
+                              <colgroup span='5' width='50'>
+                              </colgroup>
+
+                                <tr>
+                                  <td align='center'> 0 </td>
+                                  <td align='center'> d2 </td>
+                                  <td align='center'> 1.5 </td>
+                                  <td align='center'> d2 </td>
+                                  <td align='center'> 1.5 </td>
+                                </tr>
+                            </table>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td colspan='2'>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;bow
+                          </td>
+                          <td>
+                            <table cellpadding='0' cellspacing='0'>
+                              <colgroup span='5' width='50'>
+                              </colgroup>
+
+                                <tr>
+                                  <td align='center'> 0 </td>
+                                  <td align='center'> d2 </td>
+                                  <td align='center'> 1.5 </td>
+                                  <td align='center'> d2 </td>
+                                  <td align='center'> 1.5 </td>
+                                </tr>
+                            </table>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td colspan='2'>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;elven&nbsp;bow
+                          </td>
+                          <td>
+                            <table cellpadding='0' cellspacing='0'>
+                              <colgroup span='5' width='50'>
+                              </colgroup>
+
+                                <tr>
+                                  <td align='center'> 0 </td>
+                                  <td align='center'> d2 </td>
+                                  <td align='center'> 1.5 </td>
+                                  <td align='center'> d2 </td>
+                                  <td align='center'> 1.5 </td>
+                                </tr>
+                            </table>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td colspan='2'>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;yumi
+                          </td>
+                          <td>
+                            <table cellpadding='0' cellspacing='0'>
+                              <colgroup span='5' width='50'>
+                              </colgroup>
+
+                                <tr>
+                                  <td align='center'> 0 </td>
+                                  <td align='center'> d2 </td>
+                                  <td align='center'> 1.5 </td>
+                                  <td align='center'> d2 </td>
+                                  <td align='center'> 1.5 </td>
+                                </tr>
+                            </table>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td colspan='2'>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;orcish&nbsp;arrow
+                          </td>
+                          <td>
+                            <table cellpadding='0' cellspacing='0'>
+                              <colgroup span='5' width='50'>
+                              </colgroup>
+
+                                <tr>
+                                  <td align='center'> 0 </td>
+                                  <td align='center'> d5 </td>
+                                  <td align='center'> 3.0 </td>
+                                  <td align='center'> d6 </td>
+                                  <td align='center'> 3.5 </td>
+                                </tr>
+                            </table>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td colspan='2'>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;arrow
+                          </td>
+                          <td>
+                            <table cellpadding='0' cellspacing='0'>
+                              <colgroup span='5' width='50'>
+                              </colgroup>
+
+                                <tr>
+                                  <td align='center'> 0 </td>
+                                  <td align='center'> d6 </td>
+                                  <td align='center'> 3.5 </td>
+                                  <td align='center'> d6 </td>
+                                  <td align='center'> 3.5 </td>
+                                </tr>
+                            </table>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td colspan='2'>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;silver&nbsp;arrow
+                          </td>
+                          <td>
+                            <table cellpadding='0' cellspacing='0'>
+                              <colgroup span='5' width='50'>
+                              </colgroup>
+
+                                <tr>
+                                  <td align='center'> 0 </td>
+                                  <td align='center'> d6 </td>
+                                  <td align='center'> 3.5 </td>
+                                  <td align='center'> d6 </td>
+                                  <td align='center'> 3.5 </td>
+                                </tr>
+                            </table>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td colspan='2'>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;elven&nbsp;arrow
+                          </td>
+                          <td>
+                            <table cellpadding='0' cellspacing='0'>
+                              <colgroup span='5' width='50'>
+                              </colgroup>
+
+                                <tr>
+                                  <td align='center'> 0 </td>
+                                  <td align='center'> d7 </td>
+                                  <td align='center'> 4.0 </td>
+                                  <td align='center'> d6 </td>
+                                  <td align='center'> 3.5 </td>
+                                </tr>
+                            </table>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td colspan='2'>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ya
+                          </td>
+                          <td>
+                            <table cellpadding='0' cellspacing='0'>
+                              <colgroup span='5' width='50'>
+                              </colgroup>
+
+                                <tr>
+                                  <td align='center'> +1 </td>
+                                  <td align='center'> d7 </td>
+                                  <td align='center'> 4.0 </td>
+                                  <td align='center'> d7 </td>
+                                  <td align='center'> 4.0 </td>
+                                </tr>
+                            </table>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </td>
+        </tr>
+
+        <tr id='wc_Sling'>
+          <td colspan='3'>
+            <table cellpadding='0' cellspacing='0'>
+              <colgroup>
+                <col width='180'>
+                <col width='100'>
+                <col width='300'>
+              </colgroup>
+
+              <tbody>
+                <tr>
+                  <td>
+                    <input type='checkbox' id='Sling' onclick='toggle("Sling")'>
+                    <b>&nbsp;&nbsp;Sling</b>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type='hidden' id='role_skills_Sling' value='s-Es--bE--bbs'>
+                  </td>
+                  <td>
+                    <input type='text' id='max_skill_Sling' size='9' readonly='readonly'>
+                    <select  id='cur_skill_Sling' style='display: none; font-size: 8pt;' onclick='' onchange='adjust_skills()'>
+                      <option value='0'> Unskilled </option>
+                      <option value='1'> Basic </option>
+                      <option value='2'> Skilled </option>
+                      <option value='3'> Expert </option>
+                    </select>
+                  </td>
+                  <td>
+                    <table cellpadding='0' cellspacing='0'>
+                      <colgroup>
+                        <col width='50'>
+                        <col width='50'>
+                        <col width='50'>
+                        <col width='50'>
+                        <col width='50'>
+                      </colgroup>
+
+                      <tr id='hd_Sling' style='display: none;'>
+                        <td align='center'>
+                          <input id='hdm_h0_Sling' type='text' size='2' style='text-align: center' readonly='readonly' value='+H'>
+                        </td>
+                        <td align='center'>
+                          <input id='hdm_d1_Sling' type='text' size='2' style='text-align: center' readonly='readonly' value='+D'>
+                        </td>
+                        <td align='center'>
+                          <input id='hdm_d2_Sling' type='text' size='2' style='text-align: center' readonly='readonly' value='+D'>
+                        </td>
+                        <td align='center'>
+                          <input id='hdm_d3_Sling' type='text' size='2' style='text-align: center' readonly='readonly' value='+D'>
+                        </td>
+                        <td align='center'>
+                          <input id='hdm_d4_Sling' type='text' size='2' style='text-align: center' readonly='readonly' value='+D'>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+
+                <tr id='w_Sling' style='display: none;'>
+                  <td colspan='3'>
+                    <table id='t_Sling' width='100%' cellpadding='0' cellspacing='0'>
+                      <colgroup>
+                        <col width='180'>
+                        <col width='100'>
+                        <col width='300'>
+                      </colgroup>
+
+                      <tbody>
+                        <tr>
+                          <td colspan='2'>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sling
+                          </td>
+                          <td>
+                            <table cellpadding='0' cellspacing='0'>
+                              <colgroup span='5' width='50'>
+                              </colgroup>
+
+                                <tr>
+                                  <td align='center'> 0 </td>
+                                  <td align='center'> d2 </td>
+                                  <td align='center'> 1.5 </td>
+                                  <td align='center'> d2 </td>
+                                  <td align='center'> 1.5 </td>
+                                </tr>
+                            </table>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td colspan='2'>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;flintstone
+                          </td>
+                          <td>
+                            <table cellpadding='0' cellspacing='0'>
+                              <colgroup span='5' width='50'>
+                              </colgroup>
+
+                                <tr>
+                                  <td align='center'> 0 </td>
+                                  <td align='center'> d6 </td>
+                                  <td align='center'> 3.5 </td>
+                                  <td align='center'> d6 </td>
+                                  <td align='center'> 3.5 </td>
+                                </tr>
+                            </table>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td colspan='2'>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;other&nbsp;rocks/gems/glass
+                          </td>
+                          <td>
+                            <table cellpadding='0' cellspacing='0'>
+                              <colgroup span='5' width='50'>
+                              </colgroup>
+
+                                <tr>
+                                  <td align='center'> 0 </td>
+                                  <td align='center'> d3 </td>
+                                  <td align='center'> 2.0 </td>
+                                  <td align='center'> d3 </td>
+                                  <td align='center'> 2.0 </td>
+                                </tr>
+                            </table>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </td>
+        </tr>
+
+        <tr id='wc_Crossbow'>
+          <td colspan='3'>
+            <table cellpadding='0' cellspacing='0'>
+              <colgroup>
+                <col width='180'>
+                <col width='100'>
+                <col width='300'>
+              </colgroup>
+
+              <tbody>
+                <tr>
+                  <td>
+                    <input type='checkbox' id='Crossbow' onclick='toggle("Crossbow")'>
+                    <b>&nbsp;&nbsp;Crossbow</b>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type='hidden' id='role_skills_Crossbow' value='----sbbEE-b--'>
+                  </td>
+                  <td>
+                    <input type='text' id='max_skill_Crossbow' size='9' readonly='readonly'>
+                    <select  id='cur_skill_Crossbow' style='display: none; font-size: 8pt;' onclick='' onchange='adjust_skills()'>
+                      <option value='0'> Unskilled </option>
+                      <option value='1'> Basic </option>
+                      <option value='2'> Skilled </option>
+                      <option value='3'> Expert </option>
+                    </select>
+                  </td>
+                  <td>
+                    <table cellpadding='0' cellspacing='0'>
+                      <colgroup>
+                        <col width='50'>
+                        <col width='50'>
+                        <col width='50'>
+                        <col width='50'>
+                        <col width='50'>
+                      </colgroup>
+
+                      <tr id='hd_Crossbow' style='display: none;'>
+                        <td align='center'>
+                          <input id='hdm_h0_Crossbow' type='text' size='2' style='text-align: center' readonly='readonly' value='+H'>
+                        </td>
+                        <td align='center'>
+                          <input id='hdm_d1_Crossbow' type='text' size='2' style='text-align: center' readonly='readonly' value='+D'>
+                        </td>
+                        <td align='center'>
+                          <input id='hdm_d2_Crossbow' type='text' size='2' style='text-align: center' readonly='readonly' value='+D'>
+                        </td>
+                        <td align='center'>
+                          <input id='hdm_d3_Crossbow' type='text' size='2' style='text-align: center' readonly='readonly' value='+D'>
+                        </td>
+                        <td align='center'>
+                          <input id='hdm_d4_Crossbow' type='text' size='2' style='text-align: center' readonly='readonly' value='+D'>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+
+                <tr id='w_Crossbow' style='display: none;'>
+                  <td colspan='3'>
+                    <table id='t_Crossbow' width='100%' cellpadding='0' cellspacing='0'>
+                      <colgroup>
+                        <col width='180'>
+                        <col width='100'>
+                        <col width='300'>
+                      </colgroup>
+
+                      <tbody>
+                        <tr>
+                          <td colspan='2'>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;crossbow
+                          </td>
+                          <td>
+                            <table cellpadding='0' cellspacing='0'>
+                              <colgroup span='5' width='50'>
+                              </colgroup>
+
+                                <tr>
+                                  <td align='center'> 0 </td>
+                                  <td align='center'> d2 </td>
+                                  <td align='center'> 1.5 </td>
+                                  <td align='center'> d2 </td>
+                                  <td align='center'> 1.5 </td>
+                                </tr>
+                            </table>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td colspan='2'>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;crossbow&nbsp;bolt
+                          </td>
+                          <td>
+                            <table cellpadding='0' cellspacing='0'>
+                              <colgroup span='5' width='50'>
+                              </colgroup>
+
+                                <tr>
+                                  <td align='center'> 0 </td>
+                                  <td align='center'> d4+1 </td>
+                                  <td align='center'> 3.5 </td>
+                                  <td align='center'> d6+1 </td>
+                                  <td align='center'> 4.5 </td>
+                                </tr>
+                            </table>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </td>
+        </tr>
+
+        <tr id='wc_Dart'>
+          <td colspan='3'>
+            <table cellpadding='0' cellspacing='0'>
+              <colgroup>
+                <col width='180'>
+                <col width='100'>
+                <col width='300'>
+              </colgroup>
+
+              <tbody>
+                <tr>
+                  <td>
+                    <input type='checkbox' id='Dart' onclick='toggle("Dart")'>
+                    <b>&nbsp;&nbsp;Dart</b>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type='hidden' id='role_skills_Dart' value='b--E--bEE-E-E'>
+                  </td>
+                  <td>
+                    <input type='text' id='max_skill_Dart' size='9' readonly='readonly'>
+                    <select  id='cur_skill_Dart' style='display: none; font-size: 8pt;' onclick='' onchange='adjust_skills()'>
+                      <option value='0'> Unskilled </option>
+                      <option value='1'> Basic </option>
+                      <option value='2'> Skilled </option>
+                      <option value='3'> Expert </option>
+                    </select>
+                  </td>
+                  <td>
+                    <table cellpadding='0' cellspacing='0'>
+                      <colgroup>
+                        <col width='50'>
+                        <col width='50'>
+                        <col width='50'>
+                        <col width='50'>
+                        <col width='50'>
+                      </colgroup>
+
+                      <tr id='hd_Dart' style='display: none;'>
+                        <td align='center'>
+                          <input id='hdm_h0_Dart' type='text' size='2' style='text-align: center' readonly='readonly' value='+H'>
+                        </td>
+                        <td align='center'>
+                          <input id='hdm_d1_Dart' type='text' size='2' style='text-align: center' readonly='readonly' value='+D'>
+                        </td>
+                        <td align='center'>
+                          <input id='hdm_d2_Dart' type='text' size='2' style='text-align: center' readonly='readonly' value='+D'>
+                        </td>
+                        <td align='center'>
+                          <input id='hdm_d3_Dart' type='text' size='2' style='text-align: center' readonly='readonly' value='+D'>
+                        </td>
+                        <td align='center'>
+                          <input id='hdm_d4_Dart' type='text' size='2' style='text-align: center' readonly='readonly' value='+D'>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+
+                <tr id='w_Dart' style='display: none;'>
+                  <td colspan='3'>
+                    <table id='t_Dart' width='100%' cellpadding='0' cellspacing='0'>
+                      <colgroup>
+                        <col width='180'>
+                        <col width='100'>
+                        <col width='300'>
+                      </colgroup>
+
+                      <tbody>
+                        <tr>
+                          <td colspan='2'>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dart
+                          </td>
+                          <td>
+                            <table cellpadding='0' cellspacing='0'>
+                              <colgroup span='5' width='50'>
+                              </colgroup>
+
+                                <tr>
+                                  <td align='center'> 0 </td>
+                                  <td align='center'> d3 </td>
+                                  <td align='center'> 2.0 </td>
+                                  <td align='center'> d2 </td>
+                                  <td align='center'> 1.5 </td>
+                                </tr>
+                            </table>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </td>
+        </tr>
+
+        <tr id='wc_Shuriken'>
+          <td colspan='3'>
+            <table cellpadding='0' cellspacing='0'>
+              <colgroup>
+                <col width='180'>
+                <col width='100'>
+                <col width='300'>
+              </colgroup>
+
+              <tbody>
+                <tr>
+                  <td>
+                    <input type='checkbox' id='Shuriken' onclick='toggle("Shuriken")'>
+                    <b>&nbsp;&nbsp;Shuriken</b>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type='hidden' id='role_skills_Shuriken' value='---s-bbssEb-b'>
+                  </td>
+                  <td>
+                    <input type='text' id='max_skill_Shuriken' size='9' readonly='readonly'>
+                    <select  id='cur_skill_Shuriken' style='display: none; font-size: 8pt;' onclick='' onchange='adjust_skills()'>
+                      <option value='0'> Unskilled </option>
+                      <option value='1'> Basic </option>
+                      <option value='2'> Skilled </option>
+                      <option value='3'> Expert </option>
+                    </select>
+                  </td>
+                  <td>
+                    <table cellpadding='0' cellspacing='0'>
+                      <colgroup>
+                        <col width='50'>
+                        <col width='50'>
+                        <col width='50'>
+                        <col width='50'>
+                        <col width='50'>
+                      </colgroup>
+
+                      <tr id='hd_Shuriken' style='display: none;'>
+                        <td align='center'>
+                          <input id='hdm_h0_Shuriken' type='text' size='2' style='text-align: center' readonly='readonly' value='+H'>
+                        </td>
+                        <td align='center'>
+                          <input id='hdm_d1_Shuriken' type='text' size='2' style='text-align: center' readonly='readonly' value='+D'>
+                        </td>
+                        <td align='center'>
+                          <input id='hdm_d2_Shuriken' type='text' size='2' style='text-align: center' readonly='readonly' value='+D'>
+                        </td>
+                        <td align='center'>
+                          <input id='hdm_d3_Shuriken' type='text' size='2' style='text-align: center' readonly='readonly' value='+D'>
+                        </td>
+                        <td align='center'>
+                          <input id='hdm_d4_Shuriken' type='text' size='2' style='text-align: center' readonly='readonly' value='+D'>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+
+                <tr id='w_Shuriken' style='display: none;'>
+                  <td colspan='3'>
+                    <table id='t_Shuriken' width='100%' cellpadding='0' cellspacing='0'>
+                      <colgroup>
+                        <col width='180'>
+                        <col width='100'>
+                        <col width='300'>
+                      </colgroup>
+
+                      <tbody>
+                        <tr>
+                          <td colspan='2'>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;shuriken
+                          </td>
+                          <td>
+                            <table cellpadding='0' cellspacing='0'>
+                              <colgroup span='5' width='50'>
+                              </colgroup>
+
+                                <tr>
+                                  <td align='center'> +2 </td>
+                                  <td align='center'> d8 </td>
+                                  <td align='center'> 4.5 </td>
+                                  <td align='center'> d6 </td>
+                                  <td align='center'> 3.5 </td>
+                                </tr>
+                            </table>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </td>
+        </tr>
+
+        <tr id='wc_Boomerang'>
+          <td colspan='3'>
+            <table cellpadding='0' cellspacing='0'>
+              <colgroup>
+                <col width='180'>
+                <col width='100'>
+                <col width='300'>
+              </colgroup>
+
+              <tbody>
+                <tr>
+                  <td>
+                    <input type='checkbox' id='Boomerang' onclick='toggle("Boomerang")'>
+                    <b>&nbsp;&nbsp;Boomerang</b>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type='hidden' id='role_skills_Boomerang' value='E-E---bE--b--'>
+                  </td>
+                  <td>
+                    <input type='text' id='max_skill_Boomerang' size='9' readonly='readonly'>
+                    <select  id='cur_skill_Boomerang' style='display: none; font-size: 8pt;' onclick='' onchange='adjust_skills()'>
+                      <option value='0'> Unskilled </option>
+                      <option value='1'> Basic </option>
+                      <option value='2'> Skilled </option>
+                      <option value='3'> Expert </option>
+                    </select>
+                  </td>
+                  <td>
+                    <table cellpadding='0' cellspacing='0'>
+                      <colgroup>
+                        <col width='50'>
+                        <col width='50'>
+                        <col width='50'>
+                        <col width='50'>
+                        <col width='50'>
+                      </colgroup>
+
+                      <tr id='hd_Boomerang' style='display: none;'>
+                        <td align='center'>
+                          <input id='hdm_h0_Boomerang' type='text' size='2' style='text-align: center' readonly='readonly' value='+H'>
+                        </td>
+                        <td align='center'>
+                          <input id='hdm_d1_Boomerang' type='text' size='2' style='text-align: center' readonly='readonly' value='+D'>
+                        </td>
+                        <td align='center'>
+                          <input id='hdm_d2_Boomerang' type='text' size='2' style='text-align: center' readonly='readonly' value='+D'>
+                        </td>
+                        <td align='center'>
+                          <input id='hdm_d3_Boomerang' type='text' size='2' style='text-align: center' readonly='readonly' value='+D'>
+                        </td>
+                        <td align='center'>
+                          <input id='hdm_d4_Boomerang' type='text' size='2' style='text-align: center' readonly='readonly' value='+D'>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+
+                <tr id='w_Boomerang' style='display: none;'>
+                  <td colspan='3'>
+                    <table id='t_Boomerang' width='100%' cellpadding='0' cellspacing='0'>
+                      <colgroup>
+                        <col width='180'>
+                        <col width='100'>
+                        <col width='300'>
+                      </colgroup>
+
+                      <tbody>
+                        <tr>
+                          <td colspan='2'>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;boomerang
+                          </td>
+                          <td>
+                            <table cellpadding='0' cellspacing='0'>
+                              <colgroup span='5' width='50'>
+                              </colgroup>
+
+                                <tr>
+                                  <td align='center'> 0 </td>
+                                  <td align='center'> d9 </td>
+                                  <td align='center'> 5.0 </td>
+                                  <td align='center'> d9 </td>
+                                  <td align='center'> 5.0 </td>
+                                </tr>
+                            </table>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </td>
+        </tr>
+
+        <tr id='wc_Whip'>
+          <td colspan='3'>
+            <table cellpadding='0' cellspacing='0'>
+              <colgroup>
+                <col width='180'>
+                <col width='100'>
+                <col width='300'>
+              </colgroup>
+
+              <tbody>
+                <tr>
+                  <td>
+                    <input type='checkbox' id='Whip' onclick='toggle("Whip")'>
+                    <b>&nbsp;&nbsp;Whip</b>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type='hidden' id='role_skills_Whip' value='E------b--b--'>
+                  </td>
+                  <td>
+                    <input type='text' id='max_skill_Whip' size='9' readonly='readonly'>
+                    <select  id='cur_skill_Whip' style='display: none; font-size: 8pt;' onclick='' onchange='adjust_skills()'>
+                      <option value='0'> Unskilled </option>
+                      <option value='1'> Basic </option>
+                      <option value='2'> Skilled </option>
+                      <option value='3'> Expert </option>
+                    </select>
+                  </td>
+                  <td>
+                    <table cellpadding='0' cellspacing='0'>
+                      <colgroup>
+                        <col width='50'>
+                        <col width='50'>
+                        <col width='50'>
+                        <col width='50'>
+                        <col width='50'>
+                      </colgroup>
+
+                      <tr id='hd_Whip' style='display: none;'>
+                        <td align='center'>
+                          <input id='hdm_h0_Whip' type='text' size='2' style='text-align: center' readonly='readonly' value='+H'>
+                        </td>
+                        <td align='center'>
+                          <input id='hdm_d1_Whip' type='text' size='2' style='text-align: center' readonly='readonly' value='+D'>
+                        </td>
+                        <td align='center'>
+                          <input id='hdm_d2_Whip' type='text' size='2' style='text-align: center' readonly='readonly' value='+D'>
+                        </td>
+                        <td align='center'>
+                          <input id='hdm_d3_Whip' type='text' size='2' style='text-align: center' readonly='readonly' value='+D'>
+                        </td>
+                        <td align='center'>
+                          <input id='hdm_d4_Whip' type='text' size='2' style='text-align: center' readonly='readonly' value='+D'>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+
+                <tr id='w_Whip' style='display: none;'>
+                  <td colspan='3'>
+                    <table id='t_Whip' width='100%' cellpadding='0' cellspacing='0'>
+                      <colgroup>
+                        <col width='180'>
+                        <col width='100'>
+                        <col width='300'>
+                      </colgroup>
+
+                      <tbody>
+                        <tr>
+                          <td colspan='2'>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;bullwhip
+                          </td>
+                          <td>
+                            <table cellpadding='0' cellspacing='0'>
+                              <colgroup span='5' width='50'>
+                              </colgroup>
+
+                                <tr>
+                                  <td align='center'> 0 </td>
+                                  <td align='center'> d2 </td>
+                                  <td align='center'> 1.5 </td>
+                                  <td align='center'> 1 </td>
+                                  <td align='center'> 1.0 </td>
+                                </tr>
+                            </table>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td colspan='2'>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rubber&nbsp;hose
+                          </td>
+                          <td>
+                            <table cellpadding='0' cellspacing='0'>
+                              <colgroup span='5' width='50'>
+                              </colgroup>
+
+                                <tr>
+                                  <td align='center'> 0 </td>
+                                  <td align='center'> d4 </td>
+                                  <td align='center'> 2.5 </td>
+                                  <td align='center'> d3 </td>
+                                  <td align='center'> 2.0 </td>
+                                </tr>
+                            </table>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </td>
+        </tr>
+
+        <tr id='wc_Unicorn_horn'>
+          <td colspan='3'>
+            <table cellpadding='0' cellspacing='0'>
+              <colgroup>
+                <col width='180'>
+                <col width='100'>
+                <col width='300'>
+              </colgroup>
+
+              <tbody>
+                <tr>
+                  <td>
+                    <input type='checkbox' id='Unicorn_horn' onclick='toggle("Unicorn_horn")'>
+                    <b>&nbsp;&nbsp;Unicorn horn</b>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type='hidden' id='role_skills_Unicorn_horn' value='s-bE--s---s--'>
+                  </td>
+                  <td>
+                    <input type='text' id='max_skill_Unicorn_horn' size='9' readonly='readonly'>
+                    <select  id='cur_skill_Unicorn_horn' style='display: none; font-size: 8pt;' onclick='' onchange='adjust_skills()'>
+                      <option value='0'> Unskilled </option>
+                      <option value='1'> Basic </option>
+                      <option value='2'> Skilled </option>
+                      <option value='3'> Expert </option>
+                    </select>
+                  </td>
+                  <td>
+                    <table cellpadding='0' cellspacing='0'>
+                      <colgroup>
+                        <col width='50'>
+                        <col width='50'>
+                        <col width='50'>
+                        <col width='50'>
+                        <col width='50'>
+                      </colgroup>
+
+                      <tr id='hd_Unicorn_horn' style='display: none;'>
+                        <td align='center'>
+                          <input id='hdm_h0_Unicorn_horn' type='text' size='2' style='text-align: center' readonly='readonly' value='+H'>
+                        </td>
+                        <td align='center'>
+                          <input id='hdm_d1_Unicorn_horn' type='text' size='2' style='text-align: center' readonly='readonly' value='+D'>
+                        </td>
+                        <td align='center'>
+                          <input id='hdm_d2_Unicorn_horn' type='text' size='2' style='text-align: center' readonly='readonly' value='+D'>
+                        </td>
+                        <td align='center'>
+                          <input id='hdm_d3_Unicorn_horn' type='text' size='2' style='text-align: center' readonly='readonly' value='+D'>
+                        </td>
+                        <td align='center'>
+                          <input id='hdm_d4_Unicorn_horn' type='text' size='2' style='text-align: center' readonly='readonly' value='+D'>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+
+                <tr id='w_Unicorn_horn' style='display: none;'>
+                  <td colspan='3'>
+                    <table id='t_Unicorn_horn' width='100%' cellpadding='0' cellspacing='0'>
+                      <colgroup>
+                        <col width='180'>
+                        <col width='100'>
+                        <col width='300'>
+                      </colgroup>
+
+                      <tbody>
+                        <tr>
+                          <td colspan='2'>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;unicorn&nbsp;horn
+                          </td>
+                          <td>
+                            <table cellpadding='0' cellspacing='0'>
+                              <colgroup span='5' width='50'>
+                              </colgroup>
+
+                                <tr>
+                                  <td align='center'> +1 </td>
+                                  <td align='center'> d12 </td>
+                                  <td align='center'> 6.5 </td>
+                                  <td align='center'> d12 </td>
+                                  <td align='center'> 6.5 </td>
+                                </tr>
+                            </table>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </td>
+        </tr>
+
+        <tr id='wc_Two_weapon_combat'>
+          <td colspan='3'>
+            <table cellpadding='0' cellspacing='0'>
+              <colgroup>
+                <col width='180'>
+                <col width='100'>
+                <col width='300'>
+              </colgroup>
+
+              <tbody>
+                <tr>
+                  <td>
+                    <input type='checkbox' id='Two_weapon_combat' onclick='toggle("Two_weapon_combat")'>
+                    <b>&nbsp;&nbsp;Two weapon combat</b>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type='hidden' id='role_skills_Two_weapon_combat' value='bb--s---EEss-'>
+                  </td>
+                  <td>
+                    <input type='text' id='max_skill_Two_weapon_combat' size='9' readonly='readonly'>
+                    <select  id='cur_skill_Two_weapon_combat' style='display: none; font-size: 8pt;' onclick='' onchange='adjust_skills()'>
+                      <option value='0'> Unskilled </option>
+                      <option value='1'> Basic </option>
+                      <option value='2'> Skilled </option>
+                      <option value='3'> Expert </option>
+                    </select>
+                  </td>
+                  <td>
+                    <table cellpadding='0' cellspacing='0'>
+                      <colgroup>
+                        <col width='50'>
+                        <col width='50'>
+                        <col width='50'>
+                        <col width='50'>
+                        <col width='50'>
+                      </colgroup>
+
+                      <tr id='hd_Two_weapon_combat' style='display: none;'>
+                        <td align='center'>
+                          <input id='hdm_h0_Two_weapon_combat' type='text' size='2' style='text-align: center' readonly='readonly' value='+H'>
+                        </td>
+                        <td align='center'>
+                          <input id='hdm_d1_Two_weapon_combat' type='text' size='2' style='text-align: center' readonly='readonly' value='+D'>
+                        </td>
+                        <td align='center'>
+                          <input id='hdm_d2_Two_weapon_combat' type='text' size='2' style='text-align: center' readonly='readonly' value='+D'>
+                        </td>
+                        <td align='center'>
+                          <input id='hdm_d3_Two_weapon_combat' type='text' size='2' style='text-align: center' readonly='readonly' value='+D'>
+                        </td>
+                        <td align='center'>
+                          <input id='hdm_d4_Two_weapon_combat' type='text' size='2' style='text-align: center' readonly='readonly' value='+D'>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+
+                <tr id='w_Two_weapon_combat' style='display: none;'>
+                  <td colspan='3'>
+                    <table id='t_Two_weapon_combat' width='100%' cellpadding='0' cellspacing='0'>
+                      <colgroup>
+                        <col width='180'>
+                        <col width='100'>
+                        <col width='300'>
+                      </colgroup>
+
+                      <tbody>
+                        <tr><td></td></tr>
+                      </tbody>
+                    </table>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </td>
+        </tr>
+
+        <tr id='wc_Riding'>
+          <td colspan='3'>
+            <table cellpadding='0' cellspacing='0'>
+              <colgroup>
+                <col width='180'>
+                <col width='100'>
+                <col width='300'>
+              </colgroup>
+
+              <tbody>
+                <tr>
+                  <td>
+                    <input type='checkbox' id='Riding' onclick='toggle("Riding")'>
+                    <b>&nbsp;&nbsp;Riding</b>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type='hidden' id='role_skills_Riding' value='bb--E--bbsbsb'>
+                  </td>
+                  <td>
+                    <input type='text' id='max_skill_Riding' size='9' readonly='readonly'>
+                    <select  id='cur_skill_Riding' style='display: none; font-size: 8pt;' onclick='' onchange='adjust_skills()'>
+                      <option value='0'> Unskilled </option>
+                      <option value='1'> Basic </option>
+                      <option value='2'> Skilled </option>
+                      <option value='3'> Expert </option>
+                    </select>
+                  </td>
+                  <td>
+                    <table cellpadding='0' cellspacing='0'>
+                      <colgroup>
+                        <col width='50'>
+                        <col width='50'>
+                        <col width='50'>
+                        <col width='50'>
+                        <col width='50'>
+                      </colgroup>
+
+                      <tr id='hd_Riding' style='display: none;'>
+                        <td align='center'>
+                          <input id='hdm_h0_Riding' type='text' size='2' style='text-align: center' readonly='readonly' value='+H'>
+                        </td>
+                        <td align='center'>
+                          <input id='hdm_d1_Riding' type='text' size='2' style='text-align: center' readonly='readonly' value='+D'>
+                        </td>
+                        <td align='center'>
+                          <input id='hdm_d2_Riding' type='text' size='2' style='text-align: center' readonly='readonly' value='+D'>
+                        </td>
+                        <td align='center'>
+                          <input id='hdm_d3_Riding' type='text' size='2' style='text-align: center' readonly='readonly' value='+D'>
+                        </td>
+                        <td align='center'>
+                          <input id='hdm_d4_Riding' type='text' size='2' style='text-align: center' readonly='readonly' value='+D'>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+
+                <tr id='w_Riding' style='display: none;'>
+                  <td colspan='3'>
+                    <table id='t_Riding' width='100%' cellpadding='0' cellspacing='0'>
+                      <colgroup>
+                        <col width='180'>
+                        <col width='100'>
+                        <col width='300'>
+                      </colgroup>
+
+                      <tbody>
+                        <tr><td></td></tr>
+                      </tbody>
+                    </table>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </td>
+        </tr>
+
+        <tr id='wc_Bare_handed_combat'>
+          <td colspan='3'>
+            <table cellpadding='0' cellspacing='0'>
+              <colgroup>
+                <col width='180'>
+                <col width='100'>
+                <col width='300'>
+              </colgroup>
+
+              <tbody>
+                <tr>
+                  <td>
+                    <input type='checkbox' id='Bare_handed_combat' onclick='toggle("Bare_handed_combat")'>
+                    <b>&nbsp;&nbsp;Bare&#8209;handed combat</b>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type='hidden' id='role_skills_Bare_handed_combat' value='EMMbE-bbE-sEb'>
+                  </td>
+                  <td>
+                    <input type='text' id='max_skill_Bare_handed_combat' size='9' readonly='readonly'>
+                    <select  id='cur_skill_Bare_handed_combat' style='display: none; font-size: 8pt;' onclick='' onchange='adjust_skills()'>
+                      <option value='0'> Unskilled </option>
+                      <option value='1'> Basic </option>
+                      <option value='2'> Skilled </option>
+                      <option value='3'> Expert </option>
+                      <option value='4'> Master </option>
+                      <option value='5'> Grand M. </option>
+                    </select>
+                  </td>
+                  <td>
+                    <table cellpadding='0' cellspacing='0'>
+                      <colgroup>
+                        <col width='50'>
+                        <col width='50'>
+                        <col width='50'>
+                        <col width='50'>
+                        <col width='50'>
+                      </colgroup>
+
+                      <tr id='hd_Bare_handed_combat' style='display: none;'>
+                        <td align='center'>
+                          <input id='hdm_h0_Bare_handed_combat' type='text' size='2' style='text-align: center' readonly='readonly' value='+H'>
+                        </td>
+                        <td align='center'>
+                          <input id='hdm_d1_Bare_handed_combat' type='text' size='2' style='text-align: center' readonly='readonly' value='+D'>
+                        </td>
+                        <td align='center'>
+                          <input id='hdm_d2_Bare_handed_combat' type='text' size='2' style='text-align: center' readonly='readonly' value='+D'>
+                        </td>
+                        <td align='center'>
+                          <input id='hdm_d3_Bare_handed_combat' type='text' size='2' style='text-align: center' readonly='readonly' value='+D'>
+                        </td>
+                        <td align='center'>
+                          <input id='hdm_d4_Bare_handed_combat' type='text' size='2' style='text-align: center' readonly='readonly' value='+D'>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+
+                <tr id='w_Bare_handed_combat' style='display: none;'>
+                  <td colspan='3'>
+                    <table id='t_Bare_handed_combat' width='100%' cellpadding='0' cellspacing='0'>
+                      <colgroup>
+                        <col width='180'>
+                        <col width='100'>
+                        <col width='300'>
+                      </colgroup>
+
+                      <tbody>
+                        <tr>
+                          <td colspan='2'>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;martial&nbsp;arts
+                          </td>
+                          <td>
+                            <table cellpadding='0' cellspacing='0'>
+                              <colgroup span='5' width='50'>
+                              </colgroup>
+
+                                <tr>
+                                  <td align='center'> 0 </td>
+                                  <td align='center'> d2 </td>
+                                  <td align='center'> 1.5 </td>
+                                  <td align='center'> d2 </td>
+                                  <td align='center'> 1.5 </td>
+                                </tr>
+                            </table>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </td>
+        </tr>
+
+        <tr id='wc_Martial_arts'>
+          <td colspan='3'>
+            <table cellpadding='0' cellspacing='0'>
+              <colgroup>
+                <col width='180'>
+                <col width='100'>
+                <col width='300'>
+              </colgroup>
+
+              <tbody>
+                <tr>
+                  <td>
+                    <input type='checkbox' id='Martial_arts' onclick='toggle("Martial_arts")'>
+                    <b>&nbsp;&nbsp;Martial arts</b>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type='hidden' id='role_skills_Martial_arts' value='-----G---M---'>
+                  </td>
+                  <td>
+                    <input type='text' id='max_skill_Martial_arts' size='9' readonly='readonly'>
+                    <select  id='cur_skill_Martial_arts' style='display: none; font-size: 8pt;' onclick='' onchange='adjust_skills()'>
+                      <option value='0'> Unskilled </option>
+                      <option value='1'> Basic </option>
+                      <option value='2'> Skilled </option>
+                      <option value='3'> Expert </option>
+                      <option value='4'> Master </option>
+                      <option value='5'> Grand M. </option>
+                    </select>
+                  </td>
+                  <td>
+                    <table cellpadding='0' cellspacing='0'>
+                      <colgroup>
+                        <col width='50'>
+                        <col width='50'>
+                        <col width='50'>
+                        <col width='50'>
+                        <col width='50'>
+                      </colgroup>
+
+                      <tr id='hd_Martial_arts' style='display: none;'>
+                        <td align='center'>
+                          <input id='hdm_h0_Martial_arts' type='text' size='2' style='text-align: center' readonly='readonly' value='+H'>
+                        </td>
+                        <td align='center'>
+                          <input id='hdm_d1_Martial_arts' type='text' size='2' style='text-align: center' readonly='readonly' value='+D'>
+                        </td>
+                        <td align='center'>
+                          <input id='hdm_d2_Martial_arts' type='text' size='2' style='text-align: center' readonly='readonly' value='+D'>
+                        </td>
+                        <td align='center'>
+                          <input id='hdm_d3_Martial_arts' type='text' size='2' style='text-align: center' readonly='readonly' value='+D'>
+                        </td>
+                        <td align='center'>
+                          <input id='hdm_d4_Martial_arts' type='text' size='2' style='text-align: center' readonly='readonly' value='+D'>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+
+                <tr id='w_Martial_arts' style='display: none;'>
+                  <td colspan='3'>
+                    <table id='t_Martial_arts' width='100%' cellpadding='0' cellspacing='0'>
+                      <colgroup>
+                        <col width='180'>
+                        <col width='100'>
+                        <col width='300'>
+                      </colgroup>
+
+                      <tbody>
+                        <tr>
+                          <td colspan='2'>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;martial&nbsp;arts
+                          </td>
+                          <td>
+                            <table cellpadding='0' cellspacing='0'>
+                              <colgroup span='5' width='50'>
+                              </colgroup>
+
+                                <tr>
+                                  <td align='center'> 0 </td>
+                                  <td align='center'> d4 </td>
+                                  <td align='center'> 2.5 </td>
+                                  <td align='center'> d4 </td>
+                                  <td align='center'> 2.5 </td>
+                                </tr>
+                            </table>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </td>
+        </tr>
+
+      </tbody>
+    </table>
+
+  </form>
+
+</body>
+</html>

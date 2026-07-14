@@ -1,0 +1,66 @@
+00000000000000000000000000000000000000000000000000z00g00000000
+00000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000™000000000000000000000000000000000000
+000000000000000000000000000000000000000000ÁÊ000000000000000000
+000000000000000000000000000000000000000000000000Ð00000000000000
+000000000000000000—00000000000000000000000000000000000000000000
+00000000000000	0000000000000000000000000000000000000000000000
+00000000H00000000000000000000‰00000000000000000000000000000000
+
+*ZOC
+A unit may not move from one square^
+adjacent to an enemy unit to another^
+square also adjacent to an enemy unit.^
+Exception: Diplomats, Caravans, Naval and^
+Air units; entering and exiting a city.^
+See pg. 34 in the manual for more details.^
+
+*TRIREME
+Your trireme has been lost at sea.^
+A trireme may be lost if it does not^
+end its turn close to land.^
+
+*FUEL
+Your air unit has run out of fuel.^
+Fighter/Nuclear units must return^
+to a city or Carrier at the end of^
+each turn. Bomber units must return^
+at the end of their second turn.
+
+*AMPHIB
+Ground units must be put ashore before^
+they can engage in combat.^
+
+*FIGHTER
+Only FIGHTER units may attack AIR units.^
+
+*OCCUPY
+Only GROUND units may occupy an enemy city.^
+
+*PILLAGE
+City squares may not be pillaged.^
+Diplomat, Caravan, Fighter, and^
+Naval units may not pillage.^
+
+*SETTLERS
+This function may only be performed^
+by Settler units.^
+
+*NOWATER
+This square has no access to water.^
+An irrigated square must be adjacent^
+to a RIVER or OCEAN square or a pre-^
+viously irrigated non-city square.^
+
+*NOMINE
+This terrain type cannot be mined.^
+
+*NOIRR
+This terrain type cannot be irrigated.^
+
+*ADDCITY
+Settlers may not be added to cities^
+with a size of 10 or more.^
+
+*END
+

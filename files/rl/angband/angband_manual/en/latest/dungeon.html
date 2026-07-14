@@ -1,0 +1,901 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Exploring the Dungeon &#8212; &lt;img&gt; The Angband Manual</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/better.css" />
+    <link rel="stylesheet" type="text/css" href="../../_/static/css/badge_only.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
+    <script async="async" src="../../_/static/javascript/readthedocs-doc-embed.js"></script>
+    <link rel="canonical" href="dungeon.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Attacking monsters" href="attack.html" />
+    <link rel="prev" title="Creating a Character" href="birth.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+      <link rel="stylesheet" href="_static/style.css" type="text/css" />
+  
+<!-- RTD Extra Head -->
+
+<link rel="stylesheet" href="../../_/static/css/readthedocs-doc-embed.css" type="text/css" />
+
+<script type="application/json" id="READTHEDOCS_DATA">{"ad_free": false, "api_host": "https://readthedocs.org", "build_date": "2023-04-21T00:08:53Z", "builder": "sphinx", "canonical_url": null, "commit": "14f92695", "docroot": "/docs/", "features": {"docsearch_disabled": false}, "global_analytics_code": "UA-17997319-1", "language": "en", "page": "dungeon", "programming_language": "c", "project": "angband", "proxied_api_host": "/_", "source_suffix": ".rst", "subprojects": {}, "theme": "better", "user_analytics_code": "", "version": "latest"}</script>
+
+<!--
+Using this variable directly instead of using `JSON.parse` is deprecated.
+The READTHEDOCS_DATA global variable will be removed in the future.
+-->
+<script type="text/javascript">
+READTHEDOCS_DATA = JSON.parse(document.getElementById('READTHEDOCS_DATA').innerHTML);
+</script>
+
+<script type="text/javascript" src="../../_/static/javascript/readthedocs-analytics.js" async="async"></script>
+
+<!-- end RTD <extrahead> -->
+</head><body>
+<header id="pageheader">
+    <div style="display: flex; align-items: baseline;">
+        <h1>The Angband Manual</h1>
+        <span class="version">v4.2.4-264-g14f92695-dirty</span>
+    </div>
+    <img src="_static/att.svg" style="height: 4rem;">
+</header>
+
+  <div class="related top">
+  <nav id="rellinks">
+    <ul>
+        <li>
+          &larr;
+          <a href="birth.html" title="Previous document">Creating a Character</a>
+        </li>
+        <li>
+          <a href="attack.html" title="Next document">Attacking monsters</a>
+          &rarr;
+        </li>
+    </ul>
+  </nav>
+  <nav id="breadcrumbs">
+    <ul>
+      <li><a href="index.html">Home</a></li> 
+    </ul>
+  </nav>
+  </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="exploring-the-dungeon">
+<h1>Exploring the Dungeon<a class="headerlink" href="dungeon.html#exploring-the-dungeon" title="Permalink to this heading">¶</a></h1>
+<p>After you have created your character, you will begin your Angband
+adventure. Symbols appearing on your screen will represent the dungeon’s
+walls, floor, objects, features, and creatures lurking about. In order to
+direct your character through their adventure, you will enter single
+character commands (see ‘commands.txt’).</p>
+<section id="symbols-on-your-map">
+<h2>Symbols On Your Map<a class="headerlink" href="dungeon.html#symbols-on-your-map" title="Permalink to this heading">¶</a></h2>
+<p>Symbols on your map can be broken down into three categories: Features of
+the dungeon such as walls, floor, doors, and traps; Objects which can be
+picked up such as treasure, weapons, magical devices, etc; and creatures
+which may or may not move about the dungeon, but are mostly harmful to your
+character’s well being.</p>
+<p>Some symbols are used to represent more than one type of entity, and some
+symbols are used to represent entities in more than one category. The “&#64;”
+symbol (by default) is used to represent the character.</p>
+<p>It will not be necessary to remember all of the symbols and their meanings.
+The “slash” command (<code class="docutils literal notranslate"><span class="pre">/</span></code>) will identify any character appearing on your
+map (see ‘commands.txt’), and there is a comprehensive menu of terrain,
+objects, monsters and so on using the “tilde” (<code class="docutils literal notranslate"><span class="pre">~</span></code>) command.</p>
+<p>Note that you can use a “user pref file” to change any of these symbols to
+something you are more comfortable with.</p>
+<section id="features-that-do-not-block-line-of-sight">
+<h3>Features that do not block line of sight<a class="headerlink" href="dungeon.html#features-that-do-not-block-line-of-sight" title="Permalink to this heading">¶</a></h3>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 7%" />
+<col style="width: 36%" />
+<col style="width: 7%" />
+<col style="width: 49%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">.</span></code></p></td>
+<td><p>A floor space</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">1</span></code></p></td>
+<td><p>Entrance to General Store</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">.</span></code></p></td>
+<td><p>A trap (hidden)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">2</span></code></p></td>
+<td><p>Entrance to Armoury</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">^</span></code></p></td>
+<td><p>A trap (known)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">3</span></code></p></td>
+<td><p>Entrance to Weapon Smith</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">;</span></code></p></td>
+<td><p>A glyph of warding</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">4</span></code></p></td>
+<td><p>Entrance to Bookseller</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">'</span></code></p></td>
+<td><p>An open door</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">5</span></code></p></td>
+<td><p>Entrance to Alchemy Shop</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">'</span></code></p></td>
+<td><p>A broken door</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">6</span></code></p></td>
+<td><p>Entrance to Magic Shop</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">&lt;</span></code></p></td>
+<td><p>A staircase up</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">7</span></code></p></td>
+<td><p>Entrance to the Black Market</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">&gt;</span></code></p></td>
+<td><p>A staircase down</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">8</span></code></p></td>
+<td><p>Entrance to your Home</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">#</span></code></p></td>
+<td><p>A pool of lava</p></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="features-that-block-line-of-sight">
+<h3>Features that block line of sight<a class="headerlink" href="dungeon.html#features-that-block-line-of-sight" title="Permalink to this heading">¶</a></h3>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 7%" />
+<col style="width: 36%" />
+<col style="width: 7%" />
+<col style="width: 49%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">#</span></code></p></td>
+<td><p>A secret door</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">#</span></code></p></td>
+<td><p>A wall</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">+</span></code></p></td>
+<td><p>A closed door</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">%</span></code></p></td>
+<td><p>A mineral vein</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">+</span></code></p></td>
+<td><p>A locked door</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">*</span></code></p></td>
+<td><p>A mineral vein with treasure</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">:</span></code></p></td>
+<td><p>A pile of rubble</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">:</span></code></p></td>
+<td><p>A pile of passable rubble</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="objects">
+<h3>Objects<a class="headerlink" href="dungeon.html#objects" title="Permalink to this heading">¶</a></h3>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 7%" />
+<col style="width: 43%" />
+<col style="width: 7%" />
+<col style="width: 43%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">!</span></code></p></td>
+<td><p>A potion (or flask)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">/</span></code></p></td>
+<td><p>A pole-arm</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">?</span></code></p></td>
+<td><p>A scroll (or book)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">|</span></code></p></td>
+<td><p>An edged weapon</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">,</span></code></p></td>
+<td><p>A mushroom (or food)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">\</span></code></p></td>
+<td><p>A hafted weapon</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
+<td><p>A wand or rod</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">}</span></code></p></td>
+<td><p>A sling, bow, or x-bow</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">_</span></code></p></td>
+<td><p>A staff</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">{</span></code></p></td>
+<td><p>A shot, arrow, or bolt</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">=</span></code></p></td>
+<td><p>A ring</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">(</span></code></p></td>
+<td><p>Soft armour</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">&quot;</span></code></p></td>
+<td><p>An amulet</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">[</span></code></p></td>
+<td><p>Hard armour</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">$</span></code></p></td>
+<td><p>Gold or gems</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">]</span></code></p></td>
+<td><p>Misc. armour</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">~</span></code></p></td>
+<td><p>Lights, Tools, Chests, etc</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">)</span></code></p></td>
+<td><p>A shield</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">&amp;</span></code></p></td>
+<td><p>Multiple items</p></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="monsters">
+<h3>Monsters<a class="headerlink" href="dungeon.html#monsters" title="Permalink to this heading">¶</a></h3>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 8%" />
+<col style="width: 29%" />
+<col style="width: 8%" />
+<col style="width: 55%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">$</span></code></p></td>
+<td><p>Creeping Coins</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">,</span></code></p></td>
+<td><p>Mushroom Patch</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">a</span></code></p></td>
+<td><p>Giant Ant</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">A</span></code></p></td>
+<td><p>Ainu</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">b</span></code></p></td>
+<td><p>Giant Bat</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">B</span></code></p></td>
+<td><p>Bird</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">c</span></code></p></td>
+<td><p>Giant Centipede</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">C</span></code></p></td>
+<td><p>Canine (Dog)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">d</span></code></p></td>
+<td><p>Dragon</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">D</span></code></p></td>
+<td><p>Ancient Dragon</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">e</span></code></p></td>
+<td><p>Floating Eye</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">E</span></code></p></td>
+<td><p>Elemental</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">f</span></code></p></td>
+<td><p>Feline (Cat)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">F</span></code></p></td>
+<td><p>Dragon Fly</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">g</span></code></p></td>
+<td><p>Golem</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">G</span></code></p></td>
+<td><p>Ghost</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">h</span></code></p></td>
+<td><p>Humanoid</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">H</span></code></p></td>
+<td><p>Hybrid</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">i</span></code></p></td>
+<td><p>Icky-Thing</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">I</span></code></p></td>
+<td><p>Insect</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">j</span></code></p></td>
+<td><p>Jelly</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">J</span></code></p></td>
+<td><p>Snake</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">k</span></code></p></td>
+<td><p>Kobold</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">K</span></code></p></td>
+<td><p>Killer Beetle</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">l</span></code></p></td>
+<td><p>Tree/Ent</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">L</span></code></p></td>
+<td><p>Lich</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">m</span></code></p></td>
+<td><p>Mold</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">M</span></code></p></td>
+<td><p>Multi-Headed Hydra</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">n</span></code></p></td>
+<td><p>Naga</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">N</span></code></p></td>
+<td><p>(unused)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">o</span></code></p></td>
+<td><p>Orc</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">O</span></code></p></td>
+<td><p>Ogre</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">p</span></code></p></td>
+<td><p>Human “person”</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">P</span></code></p></td>
+<td><p>Giant “person”</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">q</span></code></p></td>
+<td><p>Quadruped</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Q</span></code></p></td>
+<td><p>Quylthulg (Pulsing Flesh Mound)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">r</span></code></p></td>
+<td><p>Rodent</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">R</span></code></p></td>
+<td><p>Reptile/Amphibian</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">s</span></code></p></td>
+<td><p>Skeleton</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">S</span></code></p></td>
+<td><p>Spider/Scorpion/Tick</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">t</span></code></p></td>
+<td><p>Townsperson</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">T</span></code></p></td>
+<td><p>Troll</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">u</span></code></p></td>
+<td><p>Minor Demon</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">U</span></code></p></td>
+<td><p>Major Demon</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">v</span></code></p></td>
+<td><p>Vortex</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">V</span></code></p></td>
+<td><p>Vampire</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">w</span></code></p></td>
+<td><p>Worm or Worm Mass</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">W</span></code></p></td>
+<td><p>Wight/Wraith</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">x</span></code></p></td>
+<td><p>(unused)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">X</span></code></p></td>
+<td><p>Xorn/Xaren</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">y</span></code></p></td>
+<td><p>Yeek</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Y</span></code></p></td>
+<td><p>Yeti</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">z</span></code></p></td>
+<td><p>Zombie/Mummy</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Z</span></code></p></td>
+<td><p>Zephyr Hound</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="the-town-level">
+<h2>The Town Level<a class="headerlink" href="dungeon.html#the-town-level" title="Permalink to this heading">¶</a></h2>
+<p>The town level is where you will begin your adventure. The town consists of
+eight buildings (each with an entrance), some townspeople, and a wall which
+surrounds the town and may contain streams of lava. The first time you are
+in town it will be daytime, but note that the sun rises and falls (rather
+instantly) as time passes.</p>
+</section>
+<section id="townspeople">
+<h2>Townspeople<a class="headerlink" href="dungeon.html#townspeople" title="Permalink to this heading">¶</a></h2>
+<p>The town contains many different kinds of people. There are the street
+urchins, young children who will mob an adventurer for money, and seem to
+come out of the woodwork when excited. Blubbering idiots are a constant
+annoyance, but not harmful. Public drunks wander about the town singing,
+and are of no threat to anyone. Sneaky rogues hang about watching for a
+likely victim to mug. And finally, no town would be complete without a swarm
+of half drunk warriors, who take offense or become annoyed just for the fun
+of it. (There are assumed to be other people in the town, but they are not
+represented on the screen as they do not interact with the player in any
+way.)</p>
+<p>Most of the townspeople should be avoided by the largest possible distance
+when you wander from store to store. Fights will break out, though, so be
+prepared. Since your character grew up in this world of intrigue, no
+experience is awarded for killing the town inhabitants, though you may
+acquire treasure.</p>
+</section>
+<section id="town-buildings">
+<h2>Town Buildings<a class="headerlink" href="dungeon.html#town-buildings" title="Permalink to this heading">¶</a></h2>
+<p>Your character will begin their adventure with some basic supplies, and some
+extra gold with which to purchase more supplies at the town stores.</p>
+<p>You may enter any open store to buy items of the appropriate type.
+The price the shopkeeper requests is dependent on the price of the item.
+By default stores will not buy items from the player.  If you choose to play
+with selling enabled, stores have a maximum value; they will not pay more
+than that for any item, regardless of how much it is actually worth.</p>
+<p>Once inside a store, you will see the name and race of the store owner, the
+name of the store, the maximum amount of cash that the store owner will pay
+for any one item, and the store inventory, listed along with the prices.</p>
+<p>You will also see an (incomplete) list of available commands. Note that
+many of the commands which work in the dungeon work in the stores as well,
+but some do not, especially those which involve “using” objects.</p>
+<p>Stores do not always have everything in stock. As the game progresses, they
+may get new items so check from time to time. Stores restock after 10000
+game turns have passed, but the inventory will never change while you are
+in town, even if you save the game and return. You must be in the dungeon
+for the store to restock. Also, if you sell them an item, it may get sold
+to a customer while you are adventuring, so don’t always expect to be able
+to get back everything you have sold. If you have a lot of spare gold, you
+can purchase every item in a store, which will induce the store owner to
+bring out new stock, and perhaps even retire.</p>
+<p>Store owners will not accept known harmful or useless items. If an object is
+unidentified, they will (if selling is enabled) pay you some base price for
+it.  Once they have bought it they will immediately identify the object.
+If it is a good object, they will add it to their inventory. If it was a bad
+bargain, they simply throw the item away. You can use this feature to learn
+item flavors.</p>
+<dl class="simple">
+<dt>The General Store (<code class="docutils literal notranslate"><span class="pre">1</span></code>)</dt><dd><p>The General Store sells foods, some clothing, torches, oil, shovels and
+picks. All of these items and some others can be sold back to the general
+store for money. The general store restocks like every store, but the
+inventory types never change.</p>
+</dd>
+<dt>The Armoury (<code class="docutils literal notranslate"><span class="pre">2</span></code>)</dt><dd><p>The Armoury is where the town’s armour is fashioned. All sorts of
+protective gear may be bought and sold here. The deeper into the dungeon
+you progress the more exotic the equipment you will find stocked in the
+armoury. However, some armour types will never appear here unless you
+sell them.</p>
+</dd>
+<dt>The Weaponsmith’s Shop (<code class="docutils literal notranslate"><span class="pre">3</span></code>)</dt><dd><p>The Weaponsmith’s Shop is where the town’s weapons are fashioned. Hand
+and missile weapons may be purchased and sold here, along with arrows,
+bolts, and shots. As with the armoury, not all weapon types will be
+stocked here, unless they are sold to the shop by the player first.</p>
+</dd>
+<dt>The Bookseller (<code class="docutils literal notranslate"><span class="pre">4</span></code>)</dt><dd><p>The Bookseller holds supplies of the simpler books needed by magic users,
+and will buy the more advanced books which can be found in the dungeon.</p>
+</dd>
+<dt>The Alchemy shop (<code class="docutils literal notranslate"><span class="pre">5</span></code>)</dt><dd><p>The Alchemy Shop deals in all types of potions and scrolls.</p>
+</dd>
+<dt>The Magic User’s Shop (<code class="docutils literal notranslate"><span class="pre">6</span></code>)</dt><dd><p>The Magic User’s Shop deals in all sorts of rings, wands, amulets, and
+staves.</p>
+</dd>
+<dt>The Black Market (<code class="docutils literal notranslate"><span class="pre">7</span></code>)</dt><dd><p>The Black Market will sell and buy anything at extortionate prices.
+However it occasionally has <strong>very</strong> good items in it. With the exception
+of artifacts, every item found in the dungeon may appear in the black
+market.</p>
+</dd>
+<dt>Your Home (<code class="docutils literal notranslate"><span class="pre">8</span></code>)</dt><dd><p>This is your house where you can store objects that you cannot carry on
+your travels, or will need at a later date.</p>
+</dd>
+</dl>
+</section>
+<section id="within-the-dungeon">
+<h2>Within The Dungeon<a class="headerlink" href="dungeon.html#within-the-dungeon" title="Permalink to this heading">¶</a></h2>
+<p>Once your character is adequately supplied with food, light, armor, and
+weapons, they are ready to enter the dungeon. Move on top of the <code class="docutils literal notranslate"><span class="pre">&gt;</span></code> symbol
+and use the “Down” command (<code class="docutils literal notranslate"><span class="pre">&gt;</span></code>).</p>
+<p>Your character will enter a maze of interconnecting staircases and finally
+arrive somewhere on the first level of the dungeon. Each level of the
+dungeon is fifty feet high (thus dungeon level “Lev 1” is often called “50
+ft”), and is divided into (large) rectangular regions (several times larger
+than the screen) by permanent rock. Once you leave a level by a staircase,
+you will never again find your way back to that region of that level, but
+there are an infinite number of other regions at that same “depth” that you
+can explore later. Monsters, of course, can use the stairs, and you may
+eventually encounter them again, but they will not chase you up or down
+stairs.</p>
+<p>In the dungeon, there are many things to find, but your character must
+survive many horrible and challenging encounters to find the treasure lying
+about.</p>
+<p>There are two sources for light once inside the dungeon. Permanent light
+which has been magically placed within rooms, and a light source carried by
+the player. If neither is present, the character will be unable to see.
+This will affect searching, picking locks, disarming traps, reading
+scrolls, casting spells, browsing books, etc. So be very careful not to run
+out of light!</p>
+<p>A character must wield a torch or lamp in order to supply his own light. A
+torch or lamp burns fuel as it is used, and once it is out of fuel, it
+stops supplying light. You will be warned as the light approaches this
+point. You may use the “Fuel” command (<code class="docutils literal notranslate"><span class="pre">F</span></code>) to refuel your lantern (with
+flasks of oil), and it is a good idea to carry extra torches or flasks of
+oil, as appropriate. There are rumours of objects of exceptional power
+which glow with their own never-ending light.</p>
+<p>These last two paragraphs apply to most classes, but not to necromancers.
+Necromancers dislike light, and shroud themselves in darkness.  They are
+usually better off not carrying a light, but also do not gain any of the
+bonuses that may come from magical light sources.</p>
+</section>
+<section id="objects-found-in-the-dungeon">
+<h2>Objects Found In The Dungeon<a class="headerlink" href="dungeon.html#objects-found-in-the-dungeon" title="Permalink to this heading">¶</a></h2>
+<p>The mines are full of objects just waiting to be picked up and used. How
+did they get there? Well, the main source for useful items are all the
+foolish adventurers that proceeded into the dungeon before you. They get
+killed, and the helpful creatures scatter the various treasure throughout
+the dungeon.</p>
+<p>Several objects may occupy a given floor location, which may or may not
+also contain one creature. However, doors, rubble, traps, and staircases
+cannot coexist with items.  As below, any item may actually be a “pile”
+of up to 40 identical items. With the right choice of “options”, you
+may be able to “stack” several items in the same grid.</p>
+<p>You pick up objects by moving on top of them. You can carry up to 23
+different items in your backpack while wearing and wielding up to 12
+others. Although you are limited to 23 different items, each item may
+actually be a “pile” of up to 40 similar items. If you <code class="docutils literal notranslate"><span class="pre">t</span></code>ake off an
+item, it will go into your backpack if there is room: if there is no room
+in your backpack, it will drop onto the floor, so be careful when swapping
+one wielded weapon or worn piece of armor for another when your pack is
+full.</p>
+<p>You are, however, limited in the total amount of weight that you can carry.
+If you exceed this value, you become slower, making it easier for monsters
+to chase you. Note that there is no upper bound on how much you can carry,
+if you do not mind being slow. Your weight “limit” is determined by your
+strength.</p>
+<p>Many objects found within the dungeon have special commands for their use.
+Wands must be Aimed, staves must be Used, scrolls must be Read, and potions
+must be Quaffed. You may, in general, not only use items in your pack, but
+also items on the ground, if you are standing on top of them. At the
+beginning of the game all items are assigned a random ‘flavor’. For example
+potions of ‘cure light wounds’ could be ‘red potions’. If you have never
+used, sold, or bought one of these potions, you will only see the flavor.
+You can learn what type of item it is by selling it to a store, or using it
+(although learning by use does not always apply to magic devices). Lastly,
+items in stores that you have not yet identified the flavor of will be labeled
+‘{unseen}’.</p>
+<p>Chests are complex objects, containing traps, locks, and possibly treasure
+or other objects inside them once they are opened. Many of the commands
+that apply to traps or doors also apply to chests and, like traps and
+doors, these commands do not work if you are carrying the chest.</p>
+<p>One item in particular will be discussed here. The scroll of “Word of
+Recall” can be found within the dungeon, or bought at the alchemist in town.
+All classes start with one of these scrolls in their inventory. It acts in
+two manners, depending upon your current location. If read within the
+dungeon, it will teleport you back to town. If read in town, it will
+teleport you back down to the deepest level of the dungeon which your
+character has previously been on. This makes the scroll very useful for
+getting back to the deeper levels of Angband. Once the scroll has been read
+it takes a while for the spell to act, so don’t expect it to save you in a
+crisis. During this time the word ‘recall’ will appear on the bottom of the
+screen below the dungeon. Reading a second scroll before the first takes
+effect will cancel the action.</p>
+<p>You may “inscribe” any object with a textual inscription of your choice.
+These inscriptions are not limited in length, though you may not be able to
+see the whole inscription on the item. The game applies special meaning to
+inscriptions containing any text of the form ‘&#64;#’ or ‘&#64;x#’ or ‘!x’ or
+‘!*’, see ‘customize.txt’.</p>
+<p>The game provides some “fake” inscriptions to help you keep track of your
+possessions. Weapons, armor and jewellery which have properties you don’t
+know about yet will get a ‘{??}’ label.  Wands, staves and rods can get a
+‘{tried}’ label after use, particularly if they have an effect on a monster
+and were tested in the absence of monsters.</p>
+<p>It is rumored that rings of power and extra rare spell books may be found
+deeper in the dungeon…</p>
+<p>And lastly, a final warning: not all objects are what they seem. The line
+between tasty food and a poisonous mushroom is a fine one, and sometimes a
+chest full of treasure will grow teeth in its lid and bite your hand off…</p>
+</section>
+<section id="cursed-objects">
+<h2>Cursed Objects<a class="headerlink" href="dungeon.html#cursed-objects" title="Permalink to this heading">¶</a></h2>
+<p>Some objects, often objects of great power, have been cursed. There are many
+curses in the game, and they can appear on any wearable object. Curses may
+have a negative (or sometimes positive) effect on an object’s properties, or
+cause bad things to happen to the player at random.</p>
+<p>You can choose to wear the object in spite of its curses, or attempt to
+uncurse it using magic.  A warning: failed uncursing leads to the object
+becoming fragile, and a fragile object may be destroyed on future curse removal
+attempts.  It is up to you to balance the risks and rewards in your use
+of cursed items.</p>
+</section>
+<section id="mining">
+<h2>Mining<a class="headerlink" href="dungeon.html#mining" title="Permalink to this heading">¶</a></h2>
+<p>Some treasure within the dungeon can be found only by mining it out of the
+walls. Many rich strikes exist within each level, but must be found and
+mined. Quartz veins are the richest, yielding the most metals and gems, but
+magma veins will have some hoards hidden within.</p>
+<p>Mining is rather difficult without a pick or shovel. Picks and shovels have
+an additional magical ability expressed as ‘(+#)’. The higher the number,
+the better the magical digging ability of the tool. A pick or shovel also
+has plusses to hit and damage, and can be used as a weapon, because, in
+fact, it is one.</p>
+<p>When a vein of quartz or magma is located, the character may wield his pick
+or shovel and begin digging out a section. When that section is removed, he
+can locate another section of the vein and begin the process again. Since
+granite rock is much harder to dig through, it is much faster to follow the
+vein exactly and dig around the granite. Eventually, it becomes easier to
+simply kill monsters and discover items in the dungeon to sell, than to
+walk around digging for treasure. But, early on, mineral veins can be a
+wonderful source of easy treasure.</p>
+<p>If the character has a scroll, staff, or spell of treasure location, they can
+immediately locate all strikes of treasure within a vein shown on the
+screen. This makes mining much easier and more profitable.</p>
+<p>Note that a character with high strength and/or a heavy weapon does not
+need a shovel/pick to dig, but even the strongest character will benefit
+from a pick if trying to dig through a granite wall.</p>
+<p>It is sometimes possible to get a character trapped within the dungeon by
+using various magical spells and items. So it can be a good idea to always
+carry some kind of digging tool, even when you are not planning on
+tunneling for treasure.</p>
+<p>There are rumors of certain incredibly profitable rooms buried deep in the
+dungeon and completely surrounded by permanent rock and granite walls,
+requiring a digging implement or magical means to enter. The same rumors
+imply that these rooms are guarded by incredibly powerful monsters, so
+beware!</p>
+</section>
+<section id="traps">
+<h2>Traps<a class="headerlink" href="dungeon.html#traps" title="Permalink to this heading">¶</a></h2>
+<p>There are many traps located in the dungeon of varying danger. These traps
+are hidden from sight and are triggered only when your character walks over
+them. If you have found a trap you can attempt to <code class="docutils literal notranslate"><span class="pre">D</span></code>isarm it, but
+failure may mean activating it.  Traps can be physical dangers such as pits,
+or magical runes or inscriptions which will cause an effect when triggered.
+Your character may be better at disarming one of these types of traps than
+the other.</p>
+<p>All characters have a chance to notice traps when they first come into view
+(dependent on searching skill). Some players will also get access to magical
+means of detecting all traps within a certain radius. If you cast one of these
+spells, there will be a ‘Dtrap’ green label on the bottom of the screen, below
+the dungeon map.</p>
+<p>Some monsters have the ability to create new traps on the level that may be
+hidden, even if the player is in a detected zone. The detection only finds
+the traps that exist at the time of detection, it does not inform you of
+new ones that have since been created.</p>
+</section>
+<section id="staircases-secret-doors-passages-and-rooms">
+<h2>Staircases, Secret Doors, Passages, and Rooms<a class="headerlink" href="dungeon.html#staircases-secret-doors-passages-and-rooms" title="Permalink to this heading">¶</a></h2>
+<p>Staircases are the manner in which you get deeper or climb out of the
+dungeon. The symbols for the up and down staircases are the same as the
+commands to use them. A <code class="docutils literal notranslate"><span class="pre">&lt;</span></code> represents an up staircase and a <code class="docutils literal notranslate"><span class="pre">&gt;</span></code>
+represents a down staircase. You must move your character over the
+staircase before you can use it.</p>
+<p>Most levels have at least one up staircase and at least two down staircases.
+You may have trouble finding some well hidden secret doors, or you may have
+to dig through obstructions to get to them, but you can always find the stairs
+if you look hard enough.  Stairs, like permanent rock, and shop entrances,
+cannot be destroyed by any means.</p>
+<p>Many secret doors are used within the dungeon to confuse and demoralize
+adventurers foolish enough to enter, although all secret doors can be
+discovered by stepping adjacent to them. Secret doors will sometimes
+hide rooms or corridors, or even entire sections of that level of the
+dungeon. Sometimes they simply hide small empty closets or even dead ends.
+Secret doors always look like granite walls, just like traps always look
+like normal floors.</p>
+<p>Creatures in the dungeon will generally know and use these secret doors,
+and can often be counted on to leave them open behind them when they pass
+through.</p>
+</section>
+<section id="level-and-object-feelings">
+<h2>Level and object feelings<a class="headerlink" href="dungeon.html#level-and-object-feelings" title="Permalink to this heading">¶</a></h2>
+<p>Unless you have disabled the option to get feelings you will get a message
+upon entering a dungeon giving you a general feel of how dangerous that
+level is.</p>
+<p>The possible messages are :</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 7%" />
+<col style="width: 93%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>“This seems a quiet, peaceful place”</p></td>
+</tr>
+<tr class="row-even"><td><p>2</p></td>
+<td><p>“This seems a tame, sheltered place”</p></td>
+</tr>
+<tr class="row-odd"><td><p>3</p></td>
+<td><p>“This place seems reasonably safe”</p></td>
+</tr>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>“This place does not seem too risky”</p></td>
+</tr>
+<tr class="row-odd"><td><p>5</p></td>
+<td><p>“You feel nervous about this place”</p></td>
+</tr>
+<tr class="row-even"><td><p>6</p></td>
+<td><p>“You feel anxious about this place”</p></td>
+</tr>
+<tr class="row-odd"><td><p>7</p></td>
+<td><p>“This place seems terribly dangerous”</p></td>
+</tr>
+<tr class="row-even"><td><p>8</p></td>
+<td><p>“This place seems murderous”</p></td>
+</tr>
+<tr class="row-odd"><td><p>9</p></td>
+<td><p>“Omens of death haunt this place”</p></td>
+</tr>
+</tbody>
+</table>
+<p>This feeling depends only on the monsters present in the dungeon when you
+first enter it. It will not get reduced to safer feeling as you kill
+monsters neither will it increase if new ones are summoned.
+This feeling also depends on your current dungeon depth. A dungeon you
+feel nervous about at 2000’ is way more dangerous than a murderous one
+at 50’.</p>
+<p>Once you have explored a certain amount of the dungeon you will also
+get a feeling about how good are the objects lying on the floor of the
+dungeon.</p>
+<p>The possible messages are :</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 7%" />
+<col style="width: 93%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>“there is naught but cobwebs here.”</p></td>
+</tr>
+<tr class="row-even"><td><p>2</p></td>
+<td><p>“there are only scraps of junk here.”</p></td>
+</tr>
+<tr class="row-odd"><td><p>3</p></td>
+<td><p>“there aren’t many treasures here.”</p></td>
+</tr>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>“there may not be much interesting here.”</p></td>
+</tr>
+<tr class="row-odd"><td><p>5</p></td>
+<td><p>“there may be something worthwhile here.”</p></td>
+</tr>
+<tr class="row-even"><td><p>6</p></td>
+<td><p>“there are good treasures here.”</p></td>
+</tr>
+<tr class="row-odd"><td><p>7</p></td>
+<td><p>“there are very good treasures here.”</p></td>
+</tr>
+<tr class="row-even"><td><p>8</p></td>
+<td><p>“there are excellent treasures here.”</p></td>
+</tr>
+<tr class="row-odd"><td><p>9</p></td>
+<td><p>“there are superb treasures here.”</p></td>
+</tr>
+<tr class="row-even"><td><p>$</p></td>
+<td><p>“you sense an item of wondrous power!”</p></td>
+</tr>
+</tbody>
+</table>
+<p>The last message indicates an artifact is present and is only possible
+if the option to lose artifacts is on (if that option is off, an
+artifact will guarantee a feeling of 5 or better).</p>
+<p>You may review your level feeling any time by using the ^f command.
+You may also consult it by checking the LF: indicator at the bottom
+left of the screen. The first number after it is the level feeling
+and the second one is the object feeling. The second one will be ?
+if you need to explore more before getting a feeling about the value
+of the treasures present in the dungeon.</p>
+</section>
+<section id="winning-the-game">
+<h2>Winning The Game<a class="headerlink" href="dungeon.html#winning-the-game" title="Permalink to this heading">¶</a></h2>
+<p>If your character has killed Sauron (a difficult task), who lives on level
+99 (4950’) in the dungeon, a magical staircase will appear that will allow
+you to finally reach level 100. Morgoth lurks on this level of his dungeon,
+and you will not be able to go below his level until you have killed him.
+Try to avoid wandering around on level 100 unless you are ready for him,
+since he has a habit of coming at you across the dungeon, the Mighty Hammer
+‘Grond’ in hand, to slay you for your impudence.</p>
+<p>If you should actually survive the attempt of killing Morgoth, you will
+receive the status of WINNER. You may continue to explore, and may even save
+the game and play more later, but since you have defeated the toughest
+creature alive, there is really not much point. Unless you wish to listen
+to the rumors of a powerful ring buried somewhere in the dungeon, or a suit
+of dragon scale mail that resists everything…</p>
+<p>When you are ready to retire, simply kill your character (using the <code class="docutils literal notranslate"><span class="pre">Q</span></code> key)
+to have your character entered into the high score list as a winner. Note
+that until you retire, you can still be killed, so you may want to retire
+before wandering into yet another horde of greater demons.</p>
+</section>
+<section id="upon-death-and-dying">
+<h2>Upon Death and Dying<a class="headerlink" href="dungeon.html#upon-death-and-dying" title="Permalink to this heading">¶</a></h2>
+<p>If your character falls below 0 hit points, they have died and cannot be
+restored. A tombstone showing information about your character will be
+displayed. You are also permitted to get a record of your character, and
+all your equipment (identified) either on the screen or in a file.</p>
+<p>Your character will leave behind a reduced save file, which contains only
+your option choices. It may be restored, in which case a new character is
+generated exactly as if the file was not there.</p>
+<p>There are a variety of ways to “cheat” death (including using a special
+“cheating option”) when it would otherwise occur. This will fully heal your
+character, returning him to the town, and marking him in various ways as a
+character which has cheated death. Cheating death, like using any of the
+“cheating options”, will prevent your character from appearing on the high
+score list.</p>
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="dungeon.html#">Exploring the Dungeon</a><ul>
+<li><a class="reference internal" href="dungeon.html#symbols-on-your-map">Symbols On Your Map</a><ul>
+<li><a class="reference internal" href="dungeon.html#features-that-do-not-block-line-of-sight">Features that do not block line of sight</a></li>
+<li><a class="reference internal" href="dungeon.html#features-that-block-line-of-sight">Features that block line of sight</a></li>
+<li><a class="reference internal" href="dungeon.html#objects">Objects</a></li>
+<li><a class="reference internal" href="dungeon.html#monsters">Monsters</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="dungeon.html#the-town-level">The Town Level</a></li>
+<li><a class="reference internal" href="dungeon.html#townspeople">Townspeople</a></li>
+<li><a class="reference internal" href="dungeon.html#town-buildings">Town Buildings</a></li>
+<li><a class="reference internal" href="dungeon.html#within-the-dungeon">Within The Dungeon</a></li>
+<li><a class="reference internal" href="dungeon.html#objects-found-in-the-dungeon">Objects Found In The Dungeon</a></li>
+<li><a class="reference internal" href="dungeon.html#cursed-objects">Cursed Objects</a></li>
+<li><a class="reference internal" href="dungeon.html#mining">Mining</a></li>
+<li><a class="reference internal" href="dungeon.html#traps">Traps</a></li>
+<li><a class="reference internal" href="dungeon.html#staircases-secret-doors-passages-and-rooms">Staircases, Secret Doors, Passages, and Rooms</a></li>
+<li><a class="reference internal" href="dungeon.html#level-and-object-feelings">Level and object feelings</a></li>
+<li><a class="reference internal" href="dungeon.html#winning-the-game">Winning The Game</a></li>
+<li><a class="reference internal" href="dungeon.html#upon-death-and-dying">Upon Death and Dying</a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+<form class="search" action="search.html" method="get">
+  <input type="text" name="q"
+   placeholder="type to search" />
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+  <div class="related bottom">
+  <nav id="rellinks">
+    <ul>
+        <li>
+          &larr;
+          <a href="birth.html" title="Previous document">Creating a Character</a>
+        </li>
+        <li>
+          <a href="attack.html" title="Next document">Attacking monsters</a>
+          &rarr;
+        </li>
+    </ul>
+  </nav>
+  <nav id="breadcrumbs">
+    <ul>
+      <li><a href="index.html">Home</a></li> 
+    </ul>
+  </nav>
+  </div>
+  <footer id="pagefooter">&copy; 2019, Angband developers past and present.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a>
+      5.3.0
+        with the <a href="http://github.com/irskep/sphinx-better-theme">
+          better</a> theme.
+
+  </footer>
+
+  
+  </body>
+</html>

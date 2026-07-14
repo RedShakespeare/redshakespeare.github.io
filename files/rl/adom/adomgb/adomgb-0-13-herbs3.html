@@ -1,0 +1,238 @@
+<html>
+<head>
+<title>Improved ADOM Guidebook - A really big herb farm</title>
+<link rel="stylesheet" type="text/css" href="adomgb-body.css">
+</head>
+<body>
+
+<h3>A really big herb farm</h3>
+The below is not thoroughly tested, nor do I have a saved game in a
+good place for testing it. It might be impractical because it requires
+a lot of pruning. But if it does work, it could make a lot of
+self-sustaining herb patches in the big room.
+
+<pre>
+Begin with a line of five herb bushes (for example, by adding two
+bushes to the end of the common line of three), in the next generation,
+they will grow to be a 3x3 block:
+
+
+ .."..     .....
+ .."..     .""".
+ .."..  -> .""".
+ .."..     .""".
+ .."..     .....
+
+Now prune two bushes to make a "pi" shape, and let it evolve for
+five generations.
+
+ .....                ..""...
+ .""".                .."."".
+ ...". -> -> -> -> -> ...."".
+ .""".                .."."".
+ .....                ..""...
+
+Now prune two more bushes, and let it evolve.
+
+ ..""...    ..""....
+ .."..".    ..".."..
+ ...."". -> ..."""".
+ .."..".    ..".."..
+ ..""...    ..""....
+
+And two more, then another evolution.
+
+ ..""....    ..""....
+ ..".."..    ..""""".
+ ....."". -> ....""".
+ ..".."..    ..""""".
+ ..""....    ..""....
+
+And here is where it gets tricky. Four bushes must be pruned before
+the next generation. If there's not enough time for hand-picking, fire
+magic might be able to help.
+
+ ..""....    ..""""...
+ ..".""".    .."."""..
+ ......". -> .......".
+ ..".""".    .."."""..
+ ..""....    ..""""...
+
+And now four more herbs must be pruned before the next generation,
+since they're all in a row, a fire bolt might be the best way here.
+Then let it grow another generation.
+
+..""."...    .."""""..
+.."..""..    .."""""..
+.......". -> .......".
+.."..""..    .."""""..
+..""."...    .."""""..
+
+Another four herbs (but again, all in a row) must now be pruned.
+
+.."".""..
+.."".""..
+.......".
+.."".""..
+.."".""..
+
+The left half of the pattern is a pair of blocks that will stably
+continue to blossom. The right half of the pattern is two generations
+after the "pi" pattern, and in three generations will be ready for the
+pruning sequence that led to its reproduction.
+</pre>
+In a pacified Big Room, this could be used to make a double row of
+blocks all the way across the room. Something will have to be done to
+kill the pattern when it hits the far wall. If the Big Room is mined
+out, and if sufficient holy water is available to start the reproducing
+pattern described above three times in the right places, there is room
+for six rows of blocks, comprising at least one of each kind of herb
+and two of many.<p>
+
+A modification of the method by Darren Grey:
+
+<pre>
+Also, it is possible to get the first five line-up from just a square of
+four and one newly created bush. Goes as follows:
+
+......    ......
+......    ."....
+.."".. -> ..""..
+..""..    .."...
+......    ......
+
+Create one bush to the top left, and remove one from the bottom right. Then
+leave for one generation and do the following:
+
+......    ......
+.."...    .."...
+.""".. -> .""...
+..""..    ..""..
+......    ......
+
+Now leave this alone for 8 generations and you'll get this:
+
+........
+...."...
+..."""..
+..".""..
+."".."".
+..""""..
+..."""..
+........
+
+Some swift cutting can reduce this down to a line of 5 on the right. This
+can be made a little easier by cutting down the step before this (the 7th
+generation) like such:
+
+.......    .......
+.."""..    ...""..
+."...".    .....".
+."..... -> .......
+.""."".    ...."".
+..."...    ..."...
+.......    .......
+
+On the 8th generation this will then become:
+
+.......
+...."..
+...."..
+...."".
+...."..
+...."..
+.......
+
+So, overall, with a four-square, 4 holy waters (on average), and a bit of
+patience, you can fill up the Big Room with herbs.
+</pre>
+
+Yet another modification by Przemyslaw Brojewski:
+
+<pre>
+Five generations is a long time gamewise, about 18 hours, or so.
+A T-shape of herbs is a better point to start, because it is fairly common
+to come by in the big room.
+
+......    ......                                  ......    ......
+.."...    ."""..                                  .."...    ."""..
+.""".. -> .""".. prune two herbs to form a cross: .""".. -> ."."..
+......    .."...                                  .."...    ."""..
+
+There. Two generations, three bushes to prune and you got your Pi
+shape.
+
+[snip]
+> And here is where it gets tricky. Four bushes must be pruned before
+> the next generation. If there's not enough time for hand-picking, fire
+> magic might be able to help.
+
+>  ..""....    ..""""...
+>  ..".""".    .."."""..
+>  ......". -> .......".
+>  ..".""".    .."."""..
+>  ..""....    ..""""...
+
+> And now four more herbs must be pruned before the next generation,
+> since they're all in a row, a fire bolt might be the best way here.
+> Then let it grow another generation.
+
+> ..""."...    .."""""..
+> .."..""..    .."""""..
+> .......". -> .......".
+> .."..""..    .."""""..
+> ..""."...    .."""""..
+
+This is indeed very tricky. Four herbs to prune between generations
+is a lot. I wouldn't dare it without Burning Hands, especially if
+my Herbalism skill was over 50. And the last pattern is very nasty,
+if you don't manage to remove extra bushes, you may lose the whole farm.
+
+I prefer this sequence:
+
+........    ..."....    ..."....                     ..."....
+.."""...    .."."...    .."""...                     .."""...
+.."."... -> ."...".. -> .""."".. remove two bushes:  ."...".. ->
+.."""...    .."."...    .."""...                     .."""...
+........    ..."....    ..."....                     ..."....
+
+.."""...                           .."."...    .."."...
+.."""...                           .."""...    ."".""..
+."...".. remove two bushes again:  ."...".. -> ."...".. remove one
+.."""...                           .."""...    .""."".. herb bush:
+.."""...                           .."."...    .."."...
+
+.."."...
+."".""..
+....."..
+."".""..
+.."."...
+
+And it evolves into this:
+
+> .."".""..
+> .."".""..
+> .......".
+> .."".""..
+> .."".""..
+
+From this pattern I remove four herb bushes, and it is the only
+point at which I have to remove more than three[1] between generations:
+
+.."".."...    ..""......
+.."".."...    ..""..""..
+.......".. -> ......""..
+.."".."...    ..""..""..
+.."".."...    ..""......
+
+And after one generation I get a block of six herb bushes from which
+I remove two to obtain (you guessed it) a T-shape.
+
+[1] A T-shape may be positioned on the desired row in the big room just
+    by removing extra herbs. It requires removal of three herb bushes
+    between generations. I's been described in the guidebook.
+</pre>
+
+<hr>
+</body>
+</html>

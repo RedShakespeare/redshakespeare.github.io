@@ -1,0 +1,649 @@
+     A Guide to Sid Meier's Civilization by Gus Smedstad, War/Strategy
+Section Leader.
+
+     This is a general guide to playing Sid Meier's Civilization, based
+upon my experiences with the game.  Keep in mind that while the strategies
+laid out here work, they are not the only possible approaches to the game.
+
+
+Food Under Despotism.....................................1
+Roads and Irrigation Under Despotism.....................1
+Building the First City..................................2
+What to Research?........................................2
+Advantages of Small and Large Cities.....................2
+Expansion Under Despotism................................3
+Early Warfare............................................4
+Talking to Other Civilizations...........................4
+Citizen Happiness........................................5
+Libraries, Marketplaces, Banks and Universities..........5
+Government Types.........................................6
+     Switching to Democracy..............................6
+     Keeping Order in a Democracy........................7
+Wonders of the World.....................................7
+     The Knowledge City..................................8
+Later Warfare............................................8
+Diplomats................................................9
+Converting Woods to Plains...............................9
+Loophole Strategies......................................10
+     The Parallelia Strategy.............................10
+     The Mongol Strategy.................................10
+
+
+
+                                                      Page 1
+
+
+     Food Under Despotism
+
+     At the start of the game your government is Despotism, and it's likely
+to stay that for some time.  It's actually a good government type, but it
+has one major limitation: food production.
+     Under Despotism, any square which produces three of an item (food,
+trade, or resources) produces one less item than normal.  This is a minor
+effect for trade and resources, but for food the results are far-reaching.
+     Every citizen in a city requires two food.  Any extra food beyond that
+is stored away.  If your city is to continue growing, you need at least one
+more food than you need to feed your citizens.
+     The basic source of extra food for any city is the city square, since
+you work that square for free.  It's also automatically irrigated when you
+found the city.
+     Until you get railroads or change to another government type, all
+squares produce at most two food, with the exception of an irrigated Oasis.
+This means that working a square is at most a break-even proposition for
+food, and you get at most two extra food from your city square.
+     Working a square that produces one food, such as ocean or woods, or
+unirrigated plains or hills costs you one of your extra food.  You can work
+at most two such squares, or one if you wish to continue growth.
+Supporting a settler also costs one food.
+     Irrigated plains squares therefore are very important, since they
+produce two food and a resource.  Grasslands and rivers with resources also
+produce two food and a resource.
+     Other government types aren't as hungry since irrigated river and
+grassland squares produce three food, adding one extra food.  They still
+must watch their food budget when few river or grassland squares are
+available.
+
+
+     Roads and Irrigation Under Despotism
+
+     It's likely that you will need to irrigate squares early in the game
+unless you start near a river or many grassland squares with the dimple
+that means resources.
+     Though it's not spelled out in the manual, you can only irrigate a
+square that has a source of water.  Initially, this means squares adjacent
+to an ocean or river square.  However, irrigated squares also count as a
+source of water, so you can steadily irrigate inland.  The "free"
+irrigation you get in a city square doesn't count for this purpose.
+     It is not necessary to maintain the chain of irrigated squares.  If,
+for example, you irrigate a hill, irrigate an adjacent plains square, and
+then change the hill into a mine, you will not lose the irrigation in the
+plains square.
+     Irrigation adds one to the food in a square.  However, under Despotism
+this has no effect on actual production in grassland and river squares.
+Under Despotism only plains benefit from irrigation, but it is very
+important to irrigate plains under any government.
+     While the movement benefits of roads are nice, the economic benefits
+are more important.  Roads add one trade to a grassland or plains square.
+Roads and rivers are the primary sources of trade for most cities.
+     The ideal square under Despotism produces two food, one resource, and
+one trade.  To achieve this, a dimpled grassland needs a road, and a plains
+square needs irrigation and a road.  Some river squares start this way, but
+you cannot improve those that do not.
+
+
+
+
+                                                      Page 2
+
+     Building the First City
+
+     The first pick for any new city is an unimproved plains square.  Since
+you get free road and irrigation improvements in the city square, building
+on a plains square saves you the effort of improving the square later.
+     Second choice is a dimpled grassland square.  Resources are important
+for a small city, and starting on a dimpled grassland or plains square
+guarantees that the city square will have a resource.
+     Final choice is a river square.  This is gambling, since there is no
+way to tell beforehand whether the square will have any resources.
+     Near a river is a good spot to found any city.  Many of the river
+squares will need no improvement at all, and the river will make it easy to
+irrigate plains squares.
+     If there is no river nearby, look for at least two dimpled grasslands.
+Plains squares are also nice, but you need to improve them before they will
+feed your city.  Ordinary grasslands produce food, but they're empty
+calories, since they don't produce any resources.
+     In any case, don't take overly long finding a spot.  Every turn you
+spend wandering in search of a location other civilizations are collecting
+taxes and building items.
+
+
+     What to Research?
+
+     Which path to take in research is a difficult question.  Almost all of
+the improvements are useful.  Early on, the only advances to avoid are
+probably Horseback Riding, Monarchy, and Feudalism.  None of these provide
+much in the way of benefits except being prerequisites for Chivalry, which
+gives you knights.  Knights are nice, but not very important, particularly
+since chariots are almost as good and much easier to research.
+     Early important advances are Bronze Working, which gives you
+phalanxes, and the Wheel, which gives you chariots.  Later you'll want
+Ceremonial Burial and Mysticism for temples.
+     The most important long term goal is Railroads.  Railroads are an
+overwhelming advantage.  First, they cut your defense costs enormously,
+because you can shuttle units anywhere along your rail net in one turn.
+Second, any square with a railroad gets a 50% bonus to all food, trade, and
+resource production.  Once you have railroads, you should build one in
+_every_ square you are using, just for this production bonus.
+
+
+     Advantages of Small and Large Cities
+
+     Though the player's notes claim that bigger cities are always better,
+they are mistaken.  Small cities have several advantages.
+     The most important one is the free use of the city square.  A size ten
+city can work eleven squares, including the city square.  Ten size one
+cities can work twenty squares, one for each citizen and one for each city
+square.
+     Small cities grow faster under Despotism.  Every new citizen costs ten
+stored food plus ten food for every existing citizen in the city, or half
+that if the city has a granary.  A size ten city spends 110 food to make a
+new citizen, or 55 if it has a granary.  A size one city spends 20 food to
+make a new citizen, or 10 food if it has a granary.  Under Despotism,
+larger cities don't have more surplus food.
+     Large cities require expensive improvements to keep the populace
+content.  Once a city grows past a certain size, every new citizen is
+unhappy instead of content.
+
+
+
+
+                                                      Page 3
+
+     If you have version 3.0 or later of Civilization, you will find that
+this last advantage no longer exists.  Once you build a certain number of
+cities, every new citizen in _any_ city, regardless of size, will be
+unhappy.
+
+     Larger cities do have definite advantages as well.  While smaller
+cities can work the land with fewer citizens, larger cities can get more
+from that work.  City improvements can double the effective trade and
+resource production of the land.  These improvements are impractical for
+small cities, since they cost more to maintain than they produce unless the
+city is large.
+     Larger cities can also absorb more unhappy citizens without going into
+civil disorder.  This is crucial to waging war in a Democracy or a
+Republic.
+
+
+     Expansion under Despotism
+
+     Early in the game, cities should be small, to get the maximum benefit
+from small population and to keep costs down.  However, when founding new
+cities, you must keep in mind that eventually your expansion will stop.
+Sooner or later you will run into another civilization, or fill up your
+starting continent.  With that in mind, you should found cities roughly 3
+or 4 squares apart so that they won't overlap when they reach their maximum
+growth.
+     Initially, set taxes to 0% and science to 100%.  You don't have any
+expenses so you don't need to collect taxes, and your people are content
+without luxuries.
+     Build a militia to explore the countryside.  They're cheap and
+expendable, and you need to know where to build your next city.
+     Next, build another unit to defend your city, a militia or a phalanx
+if you have bronze working.  Now you can start building settlers to found
+new cities.
+     Each time you build a new city, you should immediately assign or build
+a militia or phalanx to defend it.  Even relatively friendly civilizations
+will take an undefended city, and even warlike civilizations will talk
+before attacking a defended city.
+     Once you have cities in all the suitable locations near your home
+city, you can begin improving your home city.  Your home city should build
+one more settler to build roads and irrigation and then shift to things
+like a granary or a temple.
+     Every city should follow the same pattern.  Once it is no longer on
+the frontier, it should build a single settler and then shift to city
+improvements.
+
+
+     Early Warfare
+
+     The most important early military units are chariots, catapults, and
+phalanxes.  Other units such as militia, cavalry, and legions are generally
+bad buys.
+     Most early units have a very low defense strength (one), so often the
+side that attacks first will win.  Chariots and cavalry move two spaces
+each turn, so they can advance and attack.  Other units must move adjacent
+to the enemy first, which means the enemy can attack first and likely win.
+Chariots are better than cavalry because they're stronger and cost the same
+to maintain.
+
+
+
+
+                                                      Page 4
+     Sometimes, though, the defender has the advantage.  Hills double
+defense strength, and mountains triple it.  A fortified phalanx on a hill
+has a defense strength of 6, which is enough to defeat a chariot's attack 3
+times out of 5.  Even in grassland, a fortified phalanx is fairly strong.
+Catapults do better than chariots attacking positions like this, though
+they both cost the same.
+     It's important to note that units stacked together only defend as well
+as the best defensive unit in the stack.  If a stack is attacked and loses,
+the entire stack will be destroyed unless the units are in a city.
+     Sometimes it's worthwhile to stack a defensive unit such as a phalanx
+with an offensive unit such as a catapult or a chariot, but it's usually a
+bad idea to stack more units than that.
+
+
+     Talking to Other Civilizations
+
+     Unless you are a Democracy or a Republic, it's almost always
+worthwhile to talk to an ambassador from another civilization.  Republics
+and Democracies must be more selective about whom they receive, since the
+senate will accept any peace offer.
+     Early on, almost all civilizations are willing to make peace, even if
+they make threats first.  It costs nothing to accept peace if you are not a
+Republic or Democracy, since you can always break the treaty at will.
+     On the other hand, demands for tribute almost never get any response
+if you've already accepted a peace treaty.  If you really wish to demand
+tribute, and don't mind being at war, refuse the offer of peace.  If the
+other civilization is truly afraid of you they will offer money,
+civilization advances, or both in exchange for peace.
+     Normally, Democracies can't start wars.  However, you _can_ use the
+"revolution" option, which turns you into an anarchy, and then attack.
+When the government menu pops up, you can choose democracy again.
+     The problem is that even if you have the Pyramids, this costs you a
+lot of food and cash, because anarchy produces far less of these items,
+just like Despotism.  The reduced food income may starve some cities.
+Further, you get massive corruption, which costs you even more cash.  Since
+most democracies rely on some of that heavy cash flow to pacify citizens
+with luxuries, you also get civil disorder, which halts production.
+     Democracies and Republics can, however, still use a diplomat to incite
+a revolt in an enemy city.  This will provoke a war immediately, without
+the expense of revolution.
+     Another tactic is to take several squares away from an enemy city by
+first placing a diplomat or caravan in the square and then moving another
+unit into the square.  This usually provokes a war fairly quickly.
+
+
+     Citizen Happiness
+
+     Depending on the difficulty level, the first few citizens of a city
+are automatically content.  At Chieftain this is 6, at Warlord 5, at Prince
+4, at King 3, and at Emperor 2.  After that every new citizen will be
+unhappy.
+     The short term solution to unhappy citizens is to remove some workers
+from the land and make them entertainers.  This solves the problem quickly,
+but it's very expensive.  The city may halt growth or even starve.
+     The cheapest way to pacify citizens for a Despotism is military force.
+Extra phalanxes don't cost much to build, and don't cost anything to
+maintain unless the city has already built several other military units.
+     For other governments, military force is expensive, since military
+units cost 1 resource/turn, and each unit only pacifies one citizen.
+
+
+
+
+                                                      Page 5
+Despotisms reach this limit too, once the city is supporting at least one
+military unit per citizen.
+     A temple is the next cheapest way to keep the city content.  A temple
+costs $1/turn, and pacifies two unhappy citizens, so it costs $0.5/citizen.
+A cathedral costs $0.75/citizen, and a colosseum $1.33/citizen.
+     Luxuries are more expensive.  The first luxuries make content citizens
+happy at $2/happy citizen.  Each happy citizen offsets one unhappy citizen,
+so the overall cost is $2/citizen.  Later luxuries first make an unhappy
+citizen content for $2, and then $2 more to make him happy, which is still
+$2/citizen.
+     $2/citizen is still a bit cheaper than 1 resource/citizen.  A "rush
+job" costs anywhere from $4/resource to $2/resource, depending on how much
+of the new item you purchase with cash.
+     Despotisms, Monarchies, or Communist governments generally don't spend
+money on luxuries, since these governments are often short on cash.
+Republics and Democracies generally _must_ spend money on luxuries, since
+it's the only way to offset citizens unhappy about military units.
+
+
+     Libraries, Marketplaces, Banks and Universities
+
+     Libraries and universities increase your research, marketplaces and
+banks increase your tax and luxuries.  All of them cost money to maintain,
+so you must balance the costs against the benefits.
+     If a city is producing at least 4 lightbulbs, consider a library, and
+if it has 8 or more, definitely build one.  Universities are slightly more
+complicated, since you must account for the 50% library bonus that's
+already there.  Generally, if it has 12 or more lightbulbs, consider a
+University, and if it has 24, definitely build one.
+     Libraries cost $1/turn, and Universities $3/turn.  Both add 50% to
+research.  To obtain any advantage, you need to gain an extra 2 lightbulbs
+from a library and 4 from a university.  2/50% = 4 lightbulbs.  4/50% = 8
+lightbulbs, but the library is already adding 50%, so that means 12
+lightbulbs.
+     Libraries and Universities cost resources to build, resources that you
+would use for something else to improve your civilization.  Once a city is
+past the break-even point, consider what else you'd rather build.
+Sometimes you just have spare resources, so the decision is easy.  Other
+times you'll be at war, so military units are more important, or you'll
+want another improvement such as a cathedral.
+     You can use these same criteria for marketplaces and banks if you
+substitute tax plus luxury for lightbulbs, or perhaps just tax.  This is a
+complicated question, since extra luxuries don't benefit you directly.  If
+all of your cities have extra luxuries, however, you can lower your luxury
+rate, which will give you more money for tax and research.  Extra luxuries
+in a city also means a Democracy or a Republic can afford more military
+units, since the extra happy people offset the ones unhappy about the
+military units.
+     As a general rule, only Republics and Democracies generate enough
+trade to get real advantages from Universities and Banks.
+
+
+     Government Types
+
+     Despotism and Democracy are the strongest government types in the
+game.  Despotism has an overwhelming production advantage early in the
+game, because a Despotism pays little or no maintenance costs for military
+units.
+
+
+
+
+                                                      Page 6
+     Monarchy and Communism produce more food than Despotism, but the extra
+food is not worth the resource production lost to maintenance costs.  On
+the other hand, Monarchy and Communism are more forgiving of mistakes than
+the other governments.  Despots must worry about food production, and
+Republics and Democracies must worry about citizens unhappy over military
+units.
+     Republic and Democracy nearly double the trade of Despotism and the
+other governments, which _is_ enough to offset the maintenance costs.
+These governments cannot use military force to pacify citizens, but this is
+not a serious problem, since luxuries are cheaper than military force under
+Monarchy or Communism.
+     In a Republic, military units generate fewer unhappy citizens than in
+a Democracy.  If your civilization is fairly widespread, though, the money
+you gain by eliminating corruption with Democracy will more than pay for
+the luxuries you must buy to offset those unhappy citizens.  It's also much
+easier to keep the outermost cities happy.
+
+
+     Switching to Democracy
+
+     Switching to Democracy can be a painful process, and sometimes it
+seems it's impossible to make everyone happy afterward.  Once you've
+actually made the switch, inspect every city to make sure that all units in
+the city actually belong to that city.  If any don't, select them and
+change their ownership with the Home command.  Next, dump _every_ military
+unit not in a city.  It's hard wasting units, but the unrest at home may
+otherwise be too hard to control.
+     Your income has just increased radically, so reduce your tax rate
+until your income is the same as your expenses, or perhaps a bit more.  Now
+increase your luxury rate to the maximum, and then reduce it one step at a
+time until a glance at the Attitude report shows a city with more unhappy
+citizens than happy ones.  Now raise it back a notch so that city won't go
+into civil disorder.
+
+
+     Keeping Order in a Democracy
+
+     Keeping the citizens happy under Democracy can be difficult, since you
+can't fall back on military force as you can under more repressive forms,
+and every military unit outside a city generates two unhappy citizens.
+     Generally you get 2 trade/citizen with Democracy.  A 30% luxury rate
+and a temple will keep your city happy to about 5 citizens (2 basic content
+citizens, 2 from the temple, 1 pacified with luxuries), at which point
+you're getting 10 trade.  If you add 30% taxes to that figure, you've got 6
+luxuries and taxes, and a marketplace looks attractive.  Certainly a
+cathedral or a colosseum would be overkill.
+     A temple, marketplace, and 30% will hold you to 7 citizens (14 trade x
+30% = 4 x 1.5 marketplace = 6 lux = 2 happy citizens, 1 content, 4 unhappy,
+which the temple makes 2 happy/3 content/2 unhappy).  Your choices are a
+bank, a colosseum, or a cathedral.  The colosseum is cheapest to build, but
+very expensive to maintain.  A cathedral costs more, and is cheaper to run.
+A bank is a bit more than the colosseum, and doesn't increase your limit as
+much, but is effectively very cheap to run since it increases taxes as
+well.
+     A marketplace/bank, temple, and 30% luxuries brings you to 10 citizens
+(20 trade x 30% x 2 market/bank, +2 temple = 4 happy/2 content/4 unhappy).
+At 7 citizens, the net cost is $3/turn - 14x50%x30% tax = $1/turn, and at
+10+ citizens it's $0/turn.
+
+
+
+
+                                                      Page 7
+     The next step is a cathedral.  It's more expensive to build than a
+colosseum, but operating costs are becoming a real concern - a size 10+
+city probably has a granary, an aqueduct, and a library as well, so the
+costs are $1+$1+$3+$1+$2+$1 = $10/turn.  Taxes are 20x30%x2 = $12/turn, so
+you're just breaking even.
+     Temple, marketplace, bank, cathedral, 30% luxury gives us 20 citizens
+(40x30%x2 +2 temple +4 cathedral = 7 happy/6 content/7 unhappy).  This is
+the absolute population limit - any more citizens MUST be specialists.  If
+need be, they can be Elvises, though that's strictly break-even.
+
+
+
+     Wonders of the World
+
+     The various Wonders of the World vary greatly in quality, though by
+the end of the game you'll want all of them under your control.
+     The best Wonder is without a doubt Women's Suffrage.  With Women's
+Suffrage, a Republic can wage war without any unhappiness, and a Democracy
+can wage war with severely reduced unhappiness.
+     Next in quality are the Colossus and Copernicus's Observatory (if used
+together), J.S. Bach's Cathedral, the Cure for Cancer, and the Hoover Dam.
+     Other good Wonders are the Pyramids, Isaac Newton's College,
+Magellan's Expedition, Michelangelo's Chapel, and the SETI program.
+     The Apollo Program is an oddball, since the benefit is nice but small,
+but it's required to reach Alpha Centauri.  If there are other advanced
+civilizations about, building the Apollo Program will result in a space
+race which the other civilizations may very well win.
+     The Great Wall and the United Nations aren't worth much, since other
+civilizations will often offer peace and then break the treaty within a
+turn or two.
+     Most of the early Wonders expire quite quickly, with the exception of
+the Colossus and the Pyramids, so they are rarely worth building.
+     The Great Library can sometimes be used to good effect, but in general
+it's just a way of playing catch-up, since you don't get an advance until
+at least two other civilizations have it.  This Wonder is worth more in
+games with many civilizations.
+
+     At the higher difficulty levels in can be difficult to build the
+Colossus or the Pyramids before another civilization does.  One strategy to
+counteract this is to follow the usual expansion strategy, except that once
+you have built a second city, one city should start work on the Wonder.
+The remaining city should continue to send out settlers to expand.  It
+should also periodically send a phalanx to the Wonder-building city, since
+the Wonder city is not building troops or temples to keep its citizens
+happy.
+
+
+     The Knowledge City
+
+     One very useful strategy is to place both the Colossus and
+Copernicus's Observatory Wonders of the World in the same city, creating a
+"knowledge city" which produces lightbulbs at a fantastic rate.  Many
+players overlook these two Wonders because they only affect one city.
+Taken together, though, their effects multiply, making them twice as
+effective as two separate cities each with just one of these Wonders.
+     The Knowledge city can shift the burden of research from many cities
+with libraries and possibly universities to a single city with the
+Colossus, Copernicus's Observatory, a library, and a university.  A
+library/university pair costs 240 resources.  The Colossus/Copernicus
+
+
+
+
+                                                      Page 8
+combination adds 500 resources to that cost, about as much as 2
+library/university pairs, but improves the city's research by a factor of
+4.  Further, they don't require upkeep, and you get additional tax/luxury
+income from the Colossus.
+     Even more important, you can place the Knowledge City to maximize
+trade, which is harder to do with several other cities.  Maximal food is
+important too, since you want a large population.  Generally this means
+picking a spot with lots of grasslands, plains, and rivers and putting
+roads in every plains and grassland square.
+     Gold would seem to be very nice for a Knowledge City, but Gold squares
+don't produce any food.  Under Despotism, this will halt your city growth
+entirely, and it can stunt it badly under any government until you have a
+large surplus from irrigated grassland and river squares.  So if you can
+pick a spot with plenty of grasslands near a gold square, do so, but hold
+off on using the gold until you have left Despotism and have at least 4-5
+extra food production.
+
+
+     Later Warfare
+
+     Warfare remains much the same through the rest of the game.
+Musketeers aren't much better than phalanxes, and cannons aren't much
+better than catapults.  Not until the introduction of battleships,
+riflemen, and tanks does technology make much difference.
+
+     Until the introduction of Bombers and Artillery late in the game, city
+walls can make a city very difficult to capture.  If the enemy civilization
+is not a Despotism, however, it must pay 1 resource/turn for every unit in
+the city.  If you cover every square in range of the city which can produce
+resources with one of your units, the target city will have only the city
+square's resources.  All but one of the defenders will vanish because the
+city can't pay for them.
+
+     Battleships are the best military unit in the game.  Not only do they
+have the highest attack and defense strength, they move very quickly,
+particularly if you have Magellan's Expedition.
+     Bombers are too expensive for what they do.  They do have the
+advantage of ignoring city walls, but fighters can shoot them down very
+easily, and they can only make one attack every other turn.  Artillery is
+superior in just about every way.
+     Nukes are something of an iffy proposition, since the massive
+pollution they create can ruin land all over the world by triggering global
+warming.  At sea, though, they're perfectly safe.  They're also good for
+taking an enemy capitol that you must take quickly in order to force the
+recall of a spaceship.
+     Building the Manhatten Project is a terrible idea if any of the other
+civilizations have or will have shortly the ability to build nukes.  Other
+civilizations are generally quite lax about the use of nukes.
+
+
+     Diplomats
+
+     Diplomats are actually very good units, though they're easily
+overlooked since they don't attack like other units.  Diplomats don't have
+any maintenance cost under any government, and they don't make republics or
+democracies unhappy.
+     The most important use of a diplomat is to establish an embassy.  This
+gives you a lot of information about the other civilization, and gives you
+
+
+
+
+                                                      Page 9
+constant reports on the other civilization's progress for the rest of the
+game.
+     Inciting a revolt is the next most important ability, particularly if
+the target city has city walls.  Alternately, a wave of diplomats can
+perform sabotage on the city until one destroys the walls.
+     Bribing single enemy units is usually too expensive, but it can be
+useful in an emergency.
+     Aside from their other abilities, diplomats can be useful just leading
+other units.  Normally, a unit cannot move from one square adjacent to an
+enemy unit directly to another square adjacent to an enemy unit.  Diplomats
+don't have this restriction.  Other units can also ignore this restriction
+if the destination square already has a friendly unit, even if that unit is
+just a diplomat.  Diplomats therefore can lead other units into squares
+they couldn't otherwise reach.
+
+
+     Converting Woods to Plains
+
+     When you've made all other improvements you can, including mining all
+the nearby hills, it's worthwhile to convert any woods squares to plains
+for a Republic or a Democracy.  Woods only produce 1 food, and your city
+size is limited by food production.  By converting to plains you make the
+square self-sufficient, so you can spend that extra food on utilizing
+another 1 food square, such as a mined hill or an ocean.  Woods produce 2
+resources; plains + hill produces 4 resources and 2 trade, and plains +
+ocean produces 1 resource and 5 trade.  Resources cost about $2 each in
+rush jobs, so even if production is your only concern plains + ocean is
+still better.
+
+     The Woods/Plains tradeoff becomes even more extreme once you have
+railroads.  Woods with RR produces 1 food and 3 resources.  Plains with RR
+produces 3 food, 1 resource, and 2 trade.  That extra food means you can
+now support 2 extra 1 food squares, or a specialist.
+     Specialists are generally a bad buy, since they produce only 2 trade,
+and practically any square produces that under Republic/Democracy.
+sometimes you have no choice, though, as when the city is unhappy or has
+more citizens than available squares.
+   Still, even an extra specialist and 2 trade (total 4 trade) is worth
+roughly 2 resources, which is what you lose by converting from woods.
+Money from trade is more flexible than resource production, and more
+important in the endgame.
+
+
+     Loophole Strategies
+
+     The Parallelia and Mongol strategies are game-beating strategies that
+exploit loopholes in versions 1.0 and 2.0 of Civilization.  Both of them
+are fairly sure wins at any difficulty level, but they remove much of the
+enjoyment of playing Civilization, since they avoid two important facets of
+play: city improvements and citizen happiness.
+     Both strategies start with the same early expansion outlined in
+"Expansion Under Despotism."
+
+
+     The Parallelia Strategy
+
+     The Parallelia strategy is exploits the free square of each city to
+the utmost.
+
+
+
+
+                                                     Page 10
+     Once you have run out of room to expand, plant a city in every plains,
+grassland, or river square.  Do not build any roads or irrigation, since
+these come automatically with a new city.
+     Eventually you will carpet almost your entire territory with size 1
+cities.  Any city that is not working a hill, mountain, or ocean square
+should support a Scientist instead.  Only outer cities need have an
+military units.
+     This strategy produces technology advances at an incredible rate under
+any government.  In effect, each square produces 3 trade under Despotism,
+or 4 under Republic or Democracy, since the Scientist is worth 2 trade, and
+there are no costs for city improvements.
+     With version 3.0 of Civilization, cities under 5 citizens cannot
+support scientists or taxmen, so the Parallelia strategy is unworkable.
+
+
+     The Mongol Strategy
+
+     The mongol strategy is relies upon the production advantages of
+Despotism and the efficiency of small cities.  The basic premise of the
+strategy is to concentrate all production on military units and overrun
+enemy civilizations with your hordes.
+     Once you run out of room to expand, plant more cities in the spaces
+between the original cities.  Continue to do this
+     Maximum city size under the mongol strategy is 3, because a size 3
+city requires no crowd control beyond the single unit you'd want for
+defense.  Once a city reaches size 3, you should switch citizens from 2-
+food squares to 1-food squares until you have no excess food production.  A
+normal mongol city works 2 irrigated plains squares or grasslands with
+resources, one of which is the city itself, and 2 woods or mined hills, for
+a total of 6 resources.
+     Tax is initially 100% science.  Your goals for research are the Wheel
+for chariots, Mathematics for catapults, and Navigation for sails.
+Absolute minimum is the Wheel and Map Making.  Once you reach those goals,
+you can either set tax to 100% for more units or keep doing research.
+     You should build no city improvements except for barracks, which cost
+no money to maintain.  You should not build Wonders of the World, though
+you may capture a few from your enemies.
+     Version 3.0 of Civilization has several changes designed specifically
+to thwart the mongol strategy.  The most important is that citizens become
+progressively more unhappy as you acquire more cities.  Eventually it is no
+longer worthwhile to build or capture more cities.
+     It is still possible to use the mongol strategy with version 3.0, but
+more difficult.  You must build temples to assist with the keeping the
+peace, which was not necessary before, and often deliberately destroy or
+starve captured cities.  Barracks are also prohibitively expensive to
+maintain, so you should not build them.

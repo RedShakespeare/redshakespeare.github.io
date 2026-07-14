@@ -1,0 +1,709 @@
+<html>
+<head>
+<title>Improved ADOM Guidebook - Skills</title>
+<link rel="stylesheet" type="text/css" href="adomgb-body.css">
+</head>
+<body>
+<h1>Improved ADOM Guidebook</h1>
+<hr>
+<a href="adomgb-0-3.html">Previous</a> - <a href="toc.html">TOC</a> - <a href="adomgb-0-5.html">Next</a>
+<hr>
+<a href="#041">Description</a> - <a href="#042">Acquiring skills</a> - <a href="#043">Non-guaranteed ways</a> - <a href="#044">Training skills</a> - <a href="#045">Class aptitudes</a> -
+<a href="#046">Skill mechanics</a>
+<hr>
+
+<h3 id="04">Skills</h3>
+Some skills can be <tt>a</tt>pplied, and one can also mark them for quick selection with the <tt>A</tt> command.<p>
+
+Skills are special abilities of the PC that either passively improve her capabilities or allows her to perform a specific action. All PCs start with a certain skillset,
+depending on their race and class, as well as minor factors (star sign and starting Learning). Skills are normally trained during the course of the game, which improves
+their effectiveness. It is also possible to acquire new skills besides the starting ones through several means.<p>
+
+<h4 id="041">0.4.1 Description and usefulness</h4>
+There is an excellent section in the <a href="adomman-G.html">ADOM Manual</a> on skills. Be sure to take advantage of it. Some additional tips
+are provided here. "In game?" indicates whether the skill can be obtained in-game without using wishes and potions/scrolls of education.<p>
+
+<table border="1"><caption>Skills</caption>
+<tr><th>Skill<th>Applyable? <th>In game?
+<th>Additional remarks
+
+<tr><td>Alchemy <td>Yes <td>No
+<td>One recipe is gained for each ten points in this skill. The last recipe gained at skill level 100 is always for potions of gain attributes.
+The first recipe is for potions of poison for Assassins. The command <tt>R</tt> brings up the recipe list. [4] When the skill level reaches 100,
+mostly blessed potions are created. [5] Mixing the wrong ingredients results in an explosion. [11]
+
+<tr><td>Alertness <td>No <td>No
+<td>Very helpful for evading bolt spells and undiscovered traps. Alertness / 600 chance to avoid traps. Small DV increase. [3]
+
+<tr><td>Appraising <td>No <td>No
+<td>Not very useful. As a general rule, mediocre/fair/good translates to cursed/uncursed/blessed. [8]
+
+<tr><td>Archery <td>No &ndash; <tt>t</tt>hrow items<td>No
+<td>Obvious benefits. Prerequisite for nice missile talents &ndash; Lightning Shot (60) and Eagle Eye (80). Archers get extra bonus from the skill.
+
+<tr><td>Athletics <td>No <td>No
+<td>Nice +8 bonus to speed at 100. Very powerful combination with Raven birthsign.
+
+<tr><td>Backstabbing <td>No <td>Yes
+<td>Very powerful when combined with invisibility, darkness, or Stealth. +25% chance to criticals. +4 to hit, Assassins lvl 12+ get also +Level to hit. If successful,
+damage dealt is doubled, or quadrupled for Assassins and Thieves lvl 12+. Doesn't work on undead.
+
+<tr><td>Bridge Building <td>No &ndash; use hatchet <td>Yes
+<td>If you must build a bridge it is obviously essential. Consider other options though. Gives 5d5 points on initial reading of the manual. Giving hatchet to saved carpenter
+gives Le*0.8+2d5 points.
+
+<tr><td>Climbing <td>Yes &ndash; only for pits <td>N/A
+<td>Manual omits the fact that this must be at 100 to enter the Rift. Training with Yergius makes this much easier to achieve.
+
+<tr><td>Concentration <td>No <td>No
+<td>Critical for Wizards and Necromancers. Get this to 100 ASAP &ndash; having 100 Concentration is 4 times better than having only 74. +Concentration / 50 bonus for missile to-hit.
+
+<tr><td>Cooking <td>Yes &ndash; using cooking set also works<td>No
+<td>Doubles the nutritious value of corpses and raw meat or fish meat, lowers their weight by 5%, and keeps them from rotting as fast (4x slower rotting). Useful for preserving the
+corpse of Orb guardians. Cooking takes 20/35/50 turns depending on the B/U/C status of the cooking set. Hurthlings enjoy the added benefit of preferred cooked corpses for sacrificing.
+
+<tr><td>Courage <td>No <td>Yes
+<td>Nice to have, some ignore it entirely when going for an Ultra ending.
+
+<tr><td>Detect Item Status <td>No <td>No
+<td>Nice but not necessary.
+
+<tr><td>Detect Traps <td>Yes &ndash; <tt>s</tt>earch is better option<td>Yes
+<td>Very important unless you can recharge wands of trap detection indefinitely. There are several heavily trapped areas in the game. Very useful for detecting
+trapped doors as well. DetectTraps/200 + DetectTraps percent chance to find traps per attempt.
+
+<tr><td>Disarm Traps <td>Yes <td>Yes
+<td>Nowhere near as important as Detect Traps. Once detected, traps are easily avoided. Gives a small amount of experience when applied successfully. This may be the only way to
+get experience without killing a monster. A skill level of 60 is reliable for door traps. Floor traps require higher skill level. A skill level of 80 is still risky.
+It can't be used on empty pits. The presence of thieves picks increases success by ~30% depending on B/U/C status. [9]
+
+<tr><td>Dodge <td>No <td>No
+<td>Very nice DV +10 at skill level 100. Factors into dodging bolt spells, though not as much as Alertness does. Dodge / 200 chance to avoid stone block door traps. Assassins
+lvl 32+ get double DV bonus, Fighters lvl 12+ get 1,5 DV bonus.
+
+<tr><td>Find Weakness <td>No <td>No
+<td>Very nice increase to critical hits. The skill stacks with weapons which have the Critical property (but not Slaying property, which always deliver criticals against vulnerable
+opponents). See <a href="adomgb-0-12.html#0c32">0.12.3.2</a>. It increases the chance to score critical hits with ordinary missiles such as rocks, coins and arrows. The chance is
++Find Weakness / 500 in melee, +Find Weakness / 1000 for missile attacks.
+
+<tr><td>First Aid <td>Yes <td>N/A
+<td>All PCs have this. Can restore (some) recently lost hit points, but perhaps more importantly, can be used every turn to fight sickness. This can be a
+life saver. First Aid also works for poisoning. Apply the skill every time the game generates the message about "poison coursing through your veins!" There is
+FirstAid/1.5 % or (To+1)% chance to stop bleeding. Lvl 18+ Healers can use this skill to heal monsters.
+
+<tr><td>Fletchery <td>No &ndash; use fletchery set <td>No
+<td>Wait until skill level is high, ideally 100, to use it. Logs produce much more missiles than sticks. Blessed wood gives double the number of missiles, cursed half.
+Arrows are about two times more abundantly produced than quarrels. There is a small chance of producing prefix and suffix missiles, this depends on experience level. Note
+that tiny quarrels never get prefix or suffix. Archers get bonus at level 18.
+
+<tr><td>Food Preservation <td>No <td>No
+<td>Important for all, essential for Necromancers. [1]
+
+<tr><td>Gardening <td>Yes <td>Yes
+<td>Requires herb seeds to train. Using the skill to plant herb seeds is the only way to convert a dungeon level that does not support herbs to one that does. Herb farming can
+increase a low level PCs attributes quickly and produce endless sacrificial fodder. See sections <a href="adomgb-0-6.html#0613">0.6.1.3<a> and <a href="adomgb-0-13.html#0d6">0.13.6</a>.
+Plant seeds do nothing at all &ndash; they don't even train the skill. Blessed seeds work better and cursed seeds work worse. 90 skill guarantees planting a blessed seed. Planting
+successfully gives +5 alignment. <big>Can be <tt>a</tt>pplied to harvest herb seeds from existing herb bushes.</big>
+
+<tr><td>Gemology <td>No <td>No
+<td>Gems are found and some identified solely depending on this skill. Without it, gems will not be found when mining. Exploitable. [2]
+
+<tr><td>Haggling <td>Yes <td>N/A
+<td>Somewhat useful for all, essential for Merchants. Make sure it is very high before using it and try to have good Charisma, or a price increase will be the most likely result.
+Can be used up to 11 times per level. Price multiplier cannot be lowered below 70%. Effectiveness is very nonlinear; the skill is useless below ~50, and increasing it further
+than ~65 is pointless.
+
+<tr><td>Healing <td>No <td>Yes
+<td>Very important for all PCs. Get it if you aren't born with it. The only possible exception is those born under Candle. Still nice to have at 100.
+
+<tr><td>Herbalism <td>Yes <td>Yes
+<td>Very useful for all PCs. Willpower, Toughness and Dexterity all go to ~25 with herbs. All herbs picked without this skill will be cursed. To use the skill, <tt>a</tt>pply it while
+standing on an herb tile. The game indicates the health of the plant. Herbs "full of blossoms" can be safely picked twice; "strong herbs" can be picked once. Picking from a "withered"
+plant will likely kill it. See also <a href="adomgb-0-13.html#0d62">0.13.6.2</a>.
+
+<tr><td>Law <td>No <td>Yes
+<td>Marginal. By the time this skill informs you of the criminal nature of some act, the PC has already committed it! Does inform of lawful acts.
+
+<tr><td>Listening <td>No <td>N/A
+<td>All PCs have this. High skill level may train Perception. Trains naturally, don't waste level advances on this.
+
+<tr><td>Literacy <td>No &ndash; <tt>r</tt>ead <td>Yes
+<td>Essential for spellcasters, most of whom are born with high levels anyway. In 1.1.1 reading scrolls does not require high Literacy [10]. Getting the Weird Tome sets Literacy
+to 100. Note that you can also check your <tt>L</tt>iteracy.
+
+<tr><td>Metallurgy <td>Yes <td>No
+<td>Marginal, even for Weaponsmiths. You should know what metal are your items made of without ever needing this skill &ndash; by weight.
+
+<tr><td>Mining <td>No &ndash; use pick axe<td>No
+<td>Decreases the time you need to dig through stone with a pickaxe. Normally, such an action takes 1d3+5 turns &ndash; every twenty points of skill level reduce this number by 1
+(capped at 1d3 at skill level 100). High level in Mining prevents pick axes from breaking. [2]
+
+<tr><td>Music <td>No &ndash; use instrument <td>No
+<td>Essential for Bards, of course. Very high levels are needed for good effectivity. Only monsters flagged as Animals or Aquatic can be affected by music. B/U/C status of an
+instrument determines how far away creatures can be and still be affected: 4/3/2. <big>Arena opponents as well as Bug Temple inhabitants can't be tamed using Music.</big>
+
+<tr><td>Necromancy <td>Yes <td>No
+<td>Necromancers, of course. Get this to 100 as soon as convenient. Do not believe the manual about very slow regeneration of Mana. Using the skill trains the Mana attribute.
+All classes can make zombies with the Necromancy skill; Necromancers can make other things as their level progresses. On unsuccessful attempt, Necromancy is trained and the PC
+loses 3d3 PP. Successful Necromancy gives -300 alignment. Only HP and Speed are affected by the type of corpse you use &ndash; the Damage, Attacks, DV, and PV are only based on
+the type of slave you create and its level. Some corpses are not eligible for Necromancy. These include the Cat Lord, Yulgash, Nuurag-Vaarn and Filk, despite the fact that they
+are all humanoid. The game responds with "The -foo- corpse turns to dust." The Minotaur Emperor, however is eligible and makes a good slave. Corpses should not be blessed when
+used for Necromancy. This results in a slave which is critically damaged. See also <a href="adomgb-0-11.html#0b7">0.11.7</a>.
+
+<tr><td>Pick Locks <td>Yes &ndash; don't use thieves picks<td>Yes
+<td>Useful for Thieves. Must have thieves' picks. Both unlocking and locking doors is possible. Cannot bypass door traps. Cursed thieves picks may create a door trap. It is
+possible to close and lock a door in one turn by applying Pick Locks. Attempting to unlock a trapped door may set it off even on fail, chance (29-Ma) in 30. If trap is not
+sprung, Mana is trained.
+
+<tr><td>Pick Pockets <td>Yes <td>Yes
+<td>Useful for all. Only humanoids and most undead can be pickpocketed. 'Ignore walls' monsters (Andor Drakon, Ghost Librarian) cannot be pickpocketed. Items up to 10s weight
+can be pickpocketed; this includes some artifacts. Proving the PC a successful pickpocket (20 items pickpocketed) allows entrance to the Thieves Guild, a means to receive very
+useful training.
+
+<tr><td>Smithing <td>Yes <td>Yes
+<td>Useful for all PCs, the specialty of Weaponsmiths. See section <a href="adomgb-0-15.html#0f4">0.15.4</a>.
+
+<tr><td>Stealth <td>No <td>Yes
+<td>Useful for all PCs. If you're stealthy, monsters will have a harder time seeing you. Helps in avoiding wilderness encounters. Must be at 100 to get the Weird Tome in Library.
+Stealth factors into being able to ambush in the wilderness. ((Survival + Stealth) / 2) - 1 / 500 are the odds of being able to sneak up on the enemies.
+
+<tr><td>Survival <td>Yes <td>No
+<td>Useful for all PCs, especially Trolls and Rangers. All PCs born in the month of the Falcon receive this. Applying the skill while Bloated on a non-water tile
+causes plant seeds to be gathered, which have some nutritional value and can be given to farmers for a small lawful boost. Doing the same on a water tile causes
+fish to be gathered, which can be used to tame a variety of monsters (section <a href="adomgb-0-11.html#0b5">0.11.5</a>). For more quantitative info on Survival see
+section <a href="adomgb-1-1.html#113">1.1.3</a>.
+
+<tr><td>Swimming <td>No <td>Yes
+<td>Nearly essential for all PCs to cross rivers (at least those without other means of dealing with rivers). Being Burdened, Strained etc. makes it harder to swim.
+Drowning damage depends on MaxHP. Swimming has an energy cost of 1500 at skill 50+ or 1250 below (probably a bug <big>Fixed in R+.</big>). Wearing an amulet of free action
+(other sources of the intrinsic do not work) negates this effect.
+
+<tr><td>Tactics <td>No &ndash; use <tt>T</tt>actics command <td>Yes
+<td>Useful for all PCs, increases modifiers from the <tt>T</tt>actics settings.
+
+<tr><td>Two Weapon Combat <td>No <td>Yes
+<td>Useful for all PCs. Two words: Needle. Sting. Best for Rangers. Dual wielding is not recommended for early game PCs since it lowers DV (no shield) and doubles attack
+turn length. [6]
+
+<tr><td>Ventriloquism <td>Yes <td>No
+<td>It is a means of confusing monsters, who will then be hostile after recovering from the confusion. They do not, however, alert other monsters on the level. This makes
+the skill extremely useful against shopkeepers (including the Casino shopkeeper), farmers in Terinyo (for Gaab'Baay's quest) and Thrundarr, who will wander off his lever when
+confused. If the skill is not trained to 100, there is a chance the monster will simply become hostile, but again, it will not alert other monsters. [7]
+
+<tr><td>Woodcraft <td>No <td>No
+<td>Marginal. Shortens the time it takes to chop trees (230 turns without the skill). <big>Increases critical hit rate against plants.</big>
+</table><p>
+
+[1] Food Preservation increases chance of corpse generation:<p>
+<ul>
+<li>0-59: no change from base chance
+<li>60-89: double chance
+<li>90-100: triple chance
+</ul><p>
+
+[2] Chances of item generation when Mining:<p>
+<ul>
+<li>1/3 chance for rocks
+<li>1/300 for huge rock
+<li>1/10 for iron ore<p>
+<ul>
+<li>then 1/20 for mithril ore
+<li>then 1/30 for adamantium ore
+<li>then 1/40 for eternium ore
+</ul><p>
+<li>(1dGemology / ((100 - DL) * 5)) chance for gems
+<li>Gemology / 120 chance to ID unknown gems when they're created
+<li>1/20 chance of stone giant
+<li>1/40 chance for pickaxe to break if not rusty (1/6 if rusty) and you fail a Mining skill check
+</ul><p>
+
+[3] High Alertness provides DV bonuses:<p>
+<ul>
+<lI>0-74: no bonus
+<li>75-100 AND Alchemy: +4 DV
+<li>75-90 without Alchemy: +1 DV
+<li>91-100 without Alchemy: +2 DV
+</ul><p>
+
+[4] Ingredients can be potions and herbs. There are 4 levels of ingredients:<p>
+<ol>
+<li>potion of booze, potion of water, potion of carrot juice, burb root, pepper petal, demon daisy
+<li>potion of healing, potion of insight, potion of troll blood, potion of oil, stomafillia herb, curaria mancox herb
+<li>potion of extra healing, potion of invisibility, potion of balance, potion of cure poison, potion of wonder, potion of raw mana
+<li>potion of strength, potion of youth, potion of longevity, potion of ultra healing, potion of cure corruption, potion of boost speed
+</ol>
+The available recipes are always for: blindness (1+1), booze (1+1), deafness (1+1), poison (1+2), cure poison (1+3), insight (2+2), longevity (2+3), extra healing (3+3), youth (3+4),
+and gain attributes (4+4). The two ingredients are never chosen to be the same item type. A maximum of one herb per recipe is possible. The order is random except for gain attributes.<p>
+
+[5] Thanks to Krogg and Ascaron for the following observations: the level of Alchemy skill seems to have a definite effect on the B/U/C status
+of the potions produced. Alchemy at 100 when creating potions of blindness, for instance, resulted in seven uncursed and 25 blessed. Ascaron tested 100 times
+creating PoGAs. The results were 70/28/2 B/U/C using two uncursed potion ingredients and 72/26/2 using two blessed potion ingredients. Using two cursed
+potions gave 66/31/3 results. This is probably within the margin of error for a sample of this size. Therefore the B/U/C status of the potion ingredients
+matters little, if at all.<p>
+
+[6] Calculation of to-hit bonus: start with TwoWeaponCombat * 0.05. From that, subtract: ((RightWeaponWeight + LeftWeaponWeight) / 10 [20 if Ranger Level32+, 40 if Ranger Level50]) - 6;
+if this results in a negative number it's changed to 0. Then there's some benefit for all Rangers. Add +2 for Ambidextrous talent.<p>
+
+[7] Thanks to CheatMan for the following observations: Attempts to use Ventriloquism on any undead always fail. Attempts to use Ventriloquism against constructs may succeed, but they
+do not react to it. Ventriloquism, unlike Mindcraft, works against all insects. Ventriloquism works against all orb guardians and Keriax.<p>
+
+[8] DV, PV, to-hit, damage, +/-{Attribute}, and prefix/suffix, modify the appraised status compared to standard version of the item in question. Exception are wands, which are
+always at least mediocre and improve solely based on number of charges.<p>
+
+[9] There is one area in the game where this skill is actually useful &ndash; the Gremlin Cave (<a href="adomgb-2-10.html">2.10</a>).<p>
+
+<big>[10] In R+, reading scrolls does require high Literacy.</big><p>
+
+[11] The diameter is related to Willpower as usual. <big>The diameter is 1d3.</big> Damage is 12d12. This can be exploited. Run out of castings of Fire Ball? Wear your red dragon
+scale mail and apply some failed Alchemy.<p>
+
+<h4 id="042">0.4.2 Guaranteed ways of acquiring skills</h4>
+The following skills can be taught, or trained by Yrrigs and Yergius, providing alignment restrictions are met (section <a href="adomgb-0-2.html#0211">0.2.1.1</a>).<p>
+
+<table border=1><caption>Acquiring skills</caption>
+<tr><th>Skill<th>Source<th>How
+<tr><td>Backstabing <td>Bart<td>in exchange for Golden Gladius
+<tr><td>Bridge Building <td>Yrrigs<td>talking to him after saving him (or reading manual of Bridge Building)
+<tr><td>Climbing <td>Yergius<td>join thieves guild
+<tr><td>Courage <td>Old Barbarian<td>after completing his quest and non-chaotic
+<tr><td>Detect Traps <td>Yergius<td>join thieves guild
+<tr><td>Disarm Traps <td>Yergius<td>join thieves guild
+<tr><td>Gardening <td>Guth'Alak<td>choosing <tt>k</tt>nowledge as reward and you already know Herbalism
+<tr><td>Healing <td>Jharod<td>if Yrrigs is saved and non-chaotic; alternatively by showing an 'act of mercy'
+<tr><td>Healing <td>Kranf Niest<td>as reward for killing Jharod (needs save Yrrigs quest)
+<tr><td>Herbalism <td>Guth'Alak<td>choosing <tt>k</tt>nowledge as reward for killing black druid
+<tr><td>Law <td>Tywat Pare<td>if all his quests are completed
+<tr><td>Literacy <td>Thrundarr<td>getting Potion of Literacy through first dwarven quest
+<tr><td>Literacy <td>n/a<td>eating dark sage corpse
+<tr><td>Pick Locks <td>Yergius<td>join thieves guild
+<tr><td>Pick Pockets <td>Yergius<td>join thieves guild
+<tr><td>Smithing <td>Glod<td>5000 gold (depending on race and other factors)
+<tr><td>Stealth <td>Yergius<td>join thieves guild
+<tr><td>Swimming <td>Blup<td>giving potions of carrot juice (one if blessed or two together if uncursed)
+<tr><td>Tactics <td>Bart<td>in exchange for Golden Gladius
+<tr><td>Two Weapon Combat <td>Bart<td>in exchange for Golden Gladius
+</table><p>
+
+<h4 id="043">0.4.3 Non-guaranteed ways of acquiring skills</h4>
+Potions and scrolls of education grant knowledge towards a random skill. 11 tries are made to select a skill which is not already at 100. The chosen skill is then granted at or
+increased by 6d5/4d5/2d5, depending on B/U/C. Any skill can be learned this way. Through Alchemy and magical writing sets, you can create your own potions and scrolls. Skills
+can also be wished for; the exceptions are Alertness and Healing.<p>
+
+Potions of training increase the advancement rank of a random skill, by 2/1/-1 B/U/C. It is guaranteed that a skill not at 4d5 and not at 100 will be chosen if such a skill exists.<p>
+
+<h4 id="044">0.4.4 Training skills</h4>
+In the sense meant for the sake of the following table, "training" means actions that will cause a skill to spontaneously increase, <i>without</i> the player deciding to
+increase skill proficiency when gaining an experience level. This is different from Yergius' training, which can change the potential maximum for a skill (how high
+the PC can raise it) and the dice roll (how fast the PC can get it there). The value of Yergius' training can only be taken advantage of when gaining an experience
+level or after successfully applying the skill elsewhere in the game.<p>
+
+<table border=1><caption>Training skills</caption>
+<tr><th>Skill <th>Training method
+<tr><td>Alchemy <td>successfully applying
+<tr><td>Alertness <td>spontaneously discovering a trap (not using the Detect Traps skill) or evading a spellcaster's bolts
+<tr><td>Appraising <td>evaluating many items
+<tr><td>Archery <td>using missiles (apparently including scurgari and boomerangs but not other thrown missiles) and <i>only</i> when successfully firing a missile into the red zone
+<tr><td>Athletics <td>automatic
+<tr><td>Backstabbing <td>attacking unsuspecting monsters due to invisibility, Stealth or a nonhostile monster &ndash; always results in the message "You stab the -foo-..." or "You splatter the -foo-..."
+<tr><td>Bridge Building <td>successfully applying [1]; manual of Bridge Building needed
+<tr><td>Climbing <td>mountaineering, climbing out of pits
+<tr><td>Concentration <td>regenerating power points
+<tr><td>Cooking <td>successfully applying; cooking set needed
+<tr><td>Courage <td>fighting more than one opponent
+<tr><td>Detect Item Status <td>evaluating many items
+<tr><td>Detect Traps <td>successfully detecting traps, whether the skill is <tt>a</tt>pplied or with the <tt>s</tt>earch command
+<tr><td>Disarm Traps <td>successfully disarming traps
+<tr><td>Dodge <td>successfully dodging spells and missiles
+<tr><td>Find Weakness <td>when the PC scores a critical hit "...with full force" <i>unless</i> this is due to a slaying weapon
+<tr><td>First Aid <td>applying, even if unsuccessful
+<tr><td>Fletchery <td>successfully applying; fletchery set needed
+<tr><td>Food Preservation <td>carrying corpses or other food items susceptible to rotting, probably by killing monsters as well
+<tr><td>Gardening <td>successfully applying
+<tr><td>Gemology <td>whenever the PC or a monster destroys rock; the game checks whether a gem is generated
+<tr><td>Haggling <td>successfully applying
+<tr><td>Healing <td>automatic when wounded
+<tr><td>Herbalism <td>picking or successfully identifying an herb bush
+<tr><td>Law <td>whenever the PC receives the "You feel as if {behaving in proper form|transgressing some law}." messages
+<tr><td>Listening <td>automatic when sounds are present
+<tr><td>Literacy <td>reading spellbooks, gravestones, fortune cookies and (at least non-magical, if not all) scrolls
+<tr><td>Metallurgy <td>evaluating many items; may also be trained when the PC is on a level where digging is occuring (determining whether ore is present, and which type)
+<tr><td>Mining <td>mining, ie. only using pickaxes against stone
+<tr><td>Music <td>when a monster is successfully tamed or clamed using the skill
+<tr><td>Necromancy <td>successfully applying + level dependent for Necromancers
+<tr><td>Pick Locks <td>successfully applying
+<tr><td>Pick Pockets <td>successfully applying [3]
+<tr><td>Smithing <td>successfully applying + special considerations for Weaponsmiths [2]
+<tr><td>Stealth <td>moving around non-hostile monsters
+<tr><td>Survival <td>automatic when moving through the wilderness, avoiding encounters; successfully applying
+<tr><td>Swimming <td>moving through water: dungeon rivers, wilderness water tiles, Shyssiryxius' cave
+<tr><td>Tactics <td>Learning / 500 chance to gain training in Tactics, if your tactics are not set to normal, every time you make an attack
+<tr><td>Two Weapon Combat <td>successful hits when dual-wielding melee weapons
+<tr><td>Ventriloquism <td>successfully applying
+<tr><td>Woodcraft <td>automatic when traveling through forest tiles in the wilderness or Animated Forest; also by attacking trees in the Animated Forest
+</table><p>
+
+[1] Giving hatchets to the Carpenter gives a direct, immediate boost to the Bridge Building skill, or even grants the skill at 1dLe+1d10+8.<p>
+[2] Smithing is most easily trained by removing rust from items; you can rust items on purpose by hopping in a river or water trap, and removing rust doesn't use any ingots.<p>
+[3] The training for Pick Pockets goes up only when it's applied successfully (you steal something or get the "nothing of value" message). The training goes up 3 points if
+something is stolen, and 4 if the "nothing of value" message comes up instead.<p>
+
+<h4 id="045">0.4.5 Class aptitudes</h4>
+<span class="credit">Credit Sorear's Wiki &ndash; <a href="http://www.it-is-law.com/adom/index.php?title=Skills">Skills</a>.</span>
+
+Each class has different proficiencies at skills, reflected in the initial advancement scheme (section <a href="adomgb-0-1.html#01412">0.1.4.1</a>)
+and in the advancement rank. Take, for instance, a Fighter's Courage skill. This is in the 3d3 (rank 5) column, so, at 45 skill her Courage will be advancable by [+3d3] at a time.
+If it is less than 40, the advancement dice will be 3d4 (rank 6), if it is 50 or more, then advancement dice will be only 2d4 (rank 4). Advancement  dice moves one column for every
+multiple of 10 crossed. However, the advancement dice will never go below the rank-specific minimum, in this case 1d3 (rank 2).<p>
+
+Typefaces are used to indicate skill relevance. <b>Bold</b> skills are guaranteed to the class; <i>italic</i> ones are easily available, and plain ones can only be obtained in game.<p>
+
+<table id="0451" border=1><caption>Class aptitudes</caption>
+<tr><th>Rank <th>0 <th>1 <th>2 <th>3 <th>4 <th>5 <th>6 <th>7 <th>8 <th>9
+<tr><th>Class
+<th>[+0] always
+<th>[+1] at 45<br>[+1] minimum
+<th>[+1d3] at 45<br>[+1] minimum
+<th>[+1d5] at 45<br>[+1] minimum
+<th>[+2d4] at 45<br>[+1d3] minimum
+<th>[+3d3] at 45<br>[+1d3] minimum
+<th>[+3d4] at 45<br>[+1d5] minimum
+<th>[+3d5] at 45<br>[+1d5] minimum
+<th>[+4d4] at 45<br>[+2d4] minimum
+<th>[+4d5] at 45<br>[+2d4] minimum
+
+<tr><td>Archer
+<td>&nbsp;
+<td>Detect Item Status<br>Necromancy
+<td>Gardening<br>Gemology<br>Two Weapon Combat
+<td>Appraising<br>Cooking<br>Courage<br>Disarm Traps<br>Herbalism<br>Law<br><i>Literacy</i><br>Metallurgy<br>Mining<br>Music<br>Pick Locks<br><i>Pick Pockets</i><br><i>Smithing</i><br>Tactics
+<td>Alchemy<br><b>Alertness</b><br><i>Bridge Building</i><br><i>Swimming</i><br>Ventriloquism
+<td><i>Backstabbing</i><br><b>Listening</b><br>Woodcraft
+<td>Athletics<br><i>Detect Traps</i><br><b>Dodge</b><br>Find Weakness<br><b>First Aid</b><br><b>Haggling</b><br>Healing<br>Survival
+<td>Food Preservation<br><b>Stealth</b>
+<td><b>Climbing</b><br><b>Concentration</b>
+<td><b>Archery</b><br><b>Fletchery</b>
+
+<tr><td>Assassin
+<td>&nbsp;
+<td>Detect Item Status
+<td>Gardening
+<td><b>Alchemy</b><br>Cooking<br>Courage<br>Law<br>Music<br>Survival<br>Tactics<br>Woodcraft
+<td>Appraising<br><i>Bridge Building</i><br><b>First Aid</b><br>Fletchery<br>Gemology<br><b>Haggling</b><br>Healing<br>Metallurgy<br>Mining<br>Necromancy<br><i>Smithing</i><br><i>Swimming</i><br>Ventriloquism
+<td><b>Archery</b><br><i>Literacy</i>
+<td><b>Alertness</b><br>Athletics<br>Disarm Traps<br><b>Dodge</b><br>Food Preservation<br>Herbalism<br><i>Pick Pockets</i><br><b>Two Weapon Combat</b>
+<td>&nbsp;
+<td><b>Detect Traps</b><br><b>Find weakness</b><br><b>Listening</b><br><b>Stealth</b>
+<td><b>Backstabbing</b><br><b>Climbing</b><br>Concentration<br><b>Pick Locks</b>
+
+<tr><td>Barbarian
+<td>&nbsp;
+<td>Alchemy<br>Necromancy
+<td>Detect Item Status<br><i>Literacy</i><br>Ventriloquism
+<td>Appraising<br>Concentration<br>Gemology<br><b>Haggling</b><br>Law<br><i>Pick Pockets</i><br>Tactics
+<td><i>Bridge Building</i><br>Gardening<br>Mining<br>Music<br><i>Smithing</i>
+<td><i>Backstabbing</i><br>Courage<br><i>Detect Traps</i><br>Disarm Traps<br>Fletchery<br>Healing<br>Metallurgy<br>Pick Locks
+<td>Archery<br>Cooking<br>Find Weakness<br>Food Preservation<br><b>Stealth</b>
+<td><b>First Aid</b><br><b>Herbalism</b><br><b>Swimming</b><br><b>Two Weapon Combat</b><br><b>Woodcraft</b>
+<td><b>Athletics</b><br><b>Climbing</b><br><b>Dodge</b><br><b>Listening</b>
+<td>Alertness<br><b>Survival</b>
+
+<tr><td>Bard
+<td>&nbsp;
+<td>&nbsp;
+<td>&nbsp;
+<td>Courage<br>Law
+<td><i>Alertness</i><br>Tactics
+<td><i>Archery</i><br><i>Detect Item Status</i><br><i>Find Weakness</i><br><i>Fletchery</i><br><i>Mining</i><br>Necromancy<br><i>Stealth</i><br><i>Swimming</i><br><i>Two Weapon Combat</i>
+<td><i>Backstabbing</i><br><i>Bridge Building</i><br><i>Cooking</i><br><i>Dodge</i><br><i>Gardening</i><br><i>Gemology</i><br><i>Survival</i><br><i>Woodcraft</i>
+<td><i>Literacy</i>
+<td><i>Alchemy</i><br><i>Appraising</i><br><i>Athletics</i><br><b>Climbing</b><br><i>Concentration</i><br><i>Detect Traps</i><br><i>Disarm Traps</i><br><b>First Aid</b><br><i>Food Preservation</i><br><b>Haggling</b><br><i>Healing</i><br><i>Herbalism</i><br><b>Listening</b><br><i>Metallurgy</i><br><i>Pick Locks</i><br><i>Pick Pockets</i><br><i>Smithing</i><br><i>Ventriloquism</i>
+<td><b>Music</b>
+
+<tr><td>Beastfighter
+<td>&nbsp;
+<td>Detect Item Status<br>Necromancy<br><i>Smithing</i><br>Two Weapon Combat
+<td>Appraising<br>Fletchery<br>Gemology<br><b>Haggling</b><br><i>Literacy</i><br>Metallurgy<br>Mining<br>Pick Locks<br>Tactics
+<td>Alchemy<br>Archery<br>Gardening<br>Law<br>Music
+<td><i>Backstabbing</i><br><i>Bridge Building</i><br><i>Pick Pockets</i><br>Woodcraft
+<td>Concentration<br>Cooking<br>Courage<br>Ventriloquism
+<td><b>Survival</b>
+<td><i>Detect Traps</i><br>Disarm Traps<br>Find Weakness<br>Food Preservation
+<td><b>First Aid</b><br><b>Healing</b><br><b>Herbalism</b>
+<td>Alertness<br><b>Athletics</b><br><b>Climbing</b><br><b>Dodge</b><br><b>Listening</b><br><b>Stealth</b><br><b>Swimming</b>
+
+<tr><td>Druid
+<td>&nbsp;
+<td>Detect Item Status<br>Necromancy
+<td><i>Backstabbing</i><br><i>Detect Traps</i><br>Disarm Traps<br>Gemology<br><b>Haggling</b><br><i>Pick Pockets</i><br><i>Smithing</i><br>Tactics<br>Two Weapon Combat
+<td>Alchemy<br>Appraising<br>Archery<br>Cooking<br>Courage<br>Find Weakness<br>Fletchery<br>Law<br>Pick Locks<br>Ventriloquism
+<td><i>Bridge Building</i><br>Metallurgy
+<td>Alertness<br><b>Concentration</b><br>Dodge<br><b>First Aid</b><br>Mining<br><i>Stealth</i>
+<td>Athletics<br>Food Preservation<br><b>Gardening</b><br><b>Listening</b><br><b>Literacy</b><br>Music<br><b>Swimming</b><br><b>Woodcraft</b>
+<td><b>Climbing</b><br><b>Healing</b>
+<td><b>Survival</b>
+<td><b>Herbalism</b>
+
+<tr><td>Elementalist
+<td>&nbsp;
+<td>Detect Item Status
+<td><i>Backstabbing</i><br><i>Detect Traps</i><br>Disarm Traps<br>Dodge<br>Fletchery<br>Food Preservation<br>Music<br>Pick Locks<br><i>Pick Pockets</i><br><i>Smithing</i><br>Tactics<br>Two Weapon Combat
+<td>Archery<br>Cooking<br>Courage<br>Find Weakness<br>Law<br><b>Listening</b><br>Necromancy<br><i>Stealth</i><br>Survival<br>Ventriloquism<br>Woodcraft
+<td>Alertness<br>Appraising<br>Athletics<br><i>Bridge Building</i><br><b>First Aid</b><br>Gardening<br><b>Gemology</b><br><b>Haggling</b><br><b>Healing</b><br>Herbalism
+<td><b>Climbing</b>
+<td><b>Concentration</b><br><b>Metallurgy</b>
+<td>Alchemy<br><b>Literacy</b><br>Mining<br><b>Swimming</b>
+<td>&nbsp;
+<td>&nbsp;
+
+<tr><td>Farmer
+<td>&nbsp;
+<td>Alchemy<br>Detect Item Status<br>Gemology<br>Necromancy<br>Tactics
+<td>Alertness<br><i>Backstabbing</i><br><i>Detect Traps</i><br>Disarm Traps<br>Find Weakness<br>Healing<br>Two Weapon Combat<br>Ventriloquism
+<td>Appraising<br><b>Archery</b><br>Concentration<br>Courage<br><b>Fletchery</b><br>Law<br><i>Literacy</i><br>Metallurgy<br>Music<br>Pick Locks<br><i>Pick Pockets</i><br><b>Stealth</b>
+<td><b>Bridge Building</b><br>Dodge<br><b>Listening</b><br><b>Smithing</b>
+<td>Athletics<br><b>Climbing</b><br><b>First Aid</b><br><b>Haggling</b><br><b>Herbalism</b>
+<td>Mining<br><b>Survival</b><br><i>Swimming</i><br><b>Woodcraft</b>
+<td><b>Cooking</b>
+<td>&nbsp;
+<td><b>Food Preservation</b><br><b>Gardening</b>
+
+<tr><td>Fighter
+<td>&nbsp;
+<td>Detect Item Status<br>Gardening<br>Necromancy
+<td>Gemology<br>Music<br><i>Pick Pockets</i>
+<td>Alchemy<br>Appraising<br><i>Backstabbing</i><br>Concentration<br>Cooking<br>Law<br><i>Literacy</i><br>Pick Locks<br><b>Stealth</b><br>Ventriloquism
+<td><i>Bridge Building</i><br><i>Detect Traps</i><br>Disarm Traps<br>Food Preservation<br><b>Haggling</b><br>Herbalism<br><b>Listening</b><br><b>Metallurgy</b><br>Mining<br>Survival<br><b>Swimming</b><br>Tactics<br>Woodcraft
+<td>Alertness<br><b>Archery</b><br>Courage<br><b>Find weakness</b><br>Fletchery
+<td><b>Climbing</b><br><b>Dodge</b><br><b>First Aid</b><br>Healing<br><i>Smithing</i>
+<td><b>Two Weapon Combat</b>
+<td><b>Athletics</b>
+<td>&nbsp;
+
+<tr><td>Healer
+<td>&nbsp;
+<td>Detect Item Status<br>Fletchery
+<td><b>Alertness</b><br><i>Backstabbing</i><br>Gemology<br>Tactics<br>Woodcraft
+<td>Appraising<br>Archery<br>Courage<br>Dodge<br>Law<br>Mining<br>Music<br><i>Stealth</i><br>Survival<br>Two Weapon Combat
+<td><i>Bridge Building</i><br><b>Climbing</b><br><i>Detect Traps</i><br>Disarm Traps<br>Metallurgy<br>Necromancy<br>Pick Locks<br><i>Pick Pockets</i><br><i>Smithing</i><br><i>Swimming</i><br>Ventriloquism
+<td><b>Cooking</b><br>Gardening
+<td>Athletics<br><b>Find weakness</b><br><b>Literacy</b>
+<td>&nbsp;
+<td><b>Concentration</b><br>Food Preservation<br><b>Haggling</b><br><b>Listening</b>
+<td>Alchemy<br><b>First Aid</b><br><b>Healing</b><br><b>Herbalism</b>
+
+<tr><td>Merchant
+<td>&nbsp;
+<td>Necromancy
+<td><i>Backstabbing</i><br>Find Weakness<br>Music<br>Tactics<br>Two Weapon Combat
+<td>Alertness<br>Archery<br>Courage<br><b>Detect Item Status</b><br>Dodge<br>Gardening<br>Law
+<td>Athletics<br><i>Bridge Building</i><br>Concentration<br>Disarm Traps<br><b>First Aid</b><br>Fletchery<br>Healing<br>Pick Locks<br><i>Smithing</i><br><i>Stealth</i><br>Ventriloquism<br>Woodcraft
+<td>Survival<br><i>Swimming</i>
+<td><i>Alchemy</i><br><b>Climbing</b><br><i>Detect Traps</i><br>Food Preservation<br><b>Herbalism</b><br><b>Listening</b><br><b>Literacy</b>
+<td>Cooking<br><b>Metallurgy</b><br>Mining
+<td><b>Gemology</b><br><b>Pick Pockets</b>
+<td><b>Appraising</b><br><b>Haggling</b>
+
+<tr><td>Mindcrafter
+<td>&nbsp;
+<td>&nbsp;
+<td>Appraising<br>Archery<br>Athletics<br><i>Backstabbing</i><br><b>Climbing</b><br>Find Weakness<br>Fletchery<br>Food Preservation<br>Gardening<br>Pick Locks<br><i>Pick Pockets</i><br><i>Smithing</i><br>Tactics<br>Two Weapon Combat<br>Woodcraft
+<td>Alchemy<br>Cooking<br>Courage<br>Detect Item Status<br><i>Detect Traps</i><br>Disarm Traps<br>Dodge<br><b>First Aid</b><br>Healing<br><b>Herbalism</b><br>Law<br>Metallurgy<br>Mining<br><b>Music</b><br>Necromancy<br><b>Stealth</b><br>Survival
+<td><i>Bridge Building</i><br><i>Swimming</i><br>Ventriloquism
+<td>&nbsp;
+<td>&nbsp;
+<td><b>Gemology</b><br><b>Haggling</b><br><b>Listening</b>
+<td>Alertness<br><b>Literacy</b>
+<td><b>Concentration</b>
+
+<tr><td>Monk
+<td>&nbsp;
+<td>Appraising<br>Fletchery
+<td>Archery<br><i>Backstabbing</i><br>Detect Item Status<br>Gemology
+<td>Alchemy<br>Cooking<br>Courage<br>Disarm Traps<br>Law<br>Mining<br>Necromancy<br>Survival<br>Woodcraft
+<td><i>Bridge Building</i><br><b>Climbing</b><br>Gardening<br><b>Haggling</b><br>Metallurgy<br>Pick Locks<br><i>Pick Pockets</i><br><i>Smithing</i><br>Tactics<br>Ventriloquism
+<td><b>Find weakness</b><br>Music<br><i>Swimming</i>
+<td><i>Detect Traps</i><br><b>Dodge</b><br>Herbalism<br><b>Stealth</b>
+<td><b>Literacy</b><br>Two Weapon Combat
+<td><b>Alertness</b><br><b>Athletics</b><br><b>First Aid</b><br>Food Preservation<br><b>Healing</b><br><b>Listening</b>
+<td><b>Concentration</b>
+
+<tr><td>Necromancer
+<td>&nbsp;
+<td>Detect Item Status<br>Gemology<br><b>Haggling</b>
+<td><i>Detect Traps</i><br>Disarm Traps<br>Dodge<br><b>First Aid</b><br>Fletchery<br><b>Food Preservation</b><br>Gardening<br>Healing<br><b>Herbalism</b><br>Music<br>Pick Locks<br><i>Pick Pockets</i><br><i>Smithing</i><br><i>Swimming</i><br>Tactics<br>Two Weapon Combat<br>Woodcraft
+<td><b>Appraising</b><br>Archery<br>Athletics<br><b>Climbing</b><br>Cooking<br>Courage<br><b>Find weakness</b><br>Law<br><b>Listening</b><br>Metallurgy<br>Mining<br>Survival
+<td>Alertness<br><i>Bridge Building</i><br>Ventriloquism
+<td><b>Alchemy</b>
+<td>&nbsp;
+<td><i>Backstabbing</i><br><b>Concentration</b><br><b>Literacy</b><br><b>Stealth</b>
+<td>&nbsp;
+<td><b>Necromancy</b>
+
+<tr><td>Paladin
+<td>Necromancy
+<td><i>Backstabbing</i>
+<td>Detect Item Status<br>Gardening<br>Gemology<br><i>Pick Pockets</i>
+<td>Appraising<br>Cooking<br>Fletchery<br>Mining<br>Pick Locks<br><b>Stealth</b><br>Ventriloquism<br>Woodcraft
+<td>Alchemy<br><i>Bridge Building</i><br><i>Detect Traps</i><br>Disarm Traps<br>Food Preservation<br><b>Haggling</b><br><b>Listening</b><br>Music<br>Survival<br><b>Swimming</b>
+<td>Archery<br><b>Dodge</b><br>Find Weakness<br><b>Literacy</b><br>Tactics<br><b>Two Weapon Combat</b>
+<td><b>Climbing</b><br>Courage<br><b>First Aid</b><br><b>Healing</b><br>Herbalism<br><i>Law</i><br>Metallurgy<br><i>Smithing</i>
+<td>Alertness
+<td><b>Athletics</b><br><b>Concentration</b>
+<td>&nbsp;
+
+<tr><td>Priest
+<td>&nbsp;
+<td>&nbsp;
+<td>Archery<br>Fletchery<br>Mining<br><i>Stealth</i><br>Tactics<br>Two Weapon Combat
+<td>Alertness<br>Appraising<br><i>Backstabbing</i><br>Cooking<br>Courage<br>Dodge<br>Find Weakness<br>Gardening<br>Gemology<br>Law<br>Survival<br>Woodcraft
+<td>Athletics<br><i>Bridge Building</i><br><b>Climbing</b><br><i>Detect Traps</i><br>Disarm Traps<br><b>Listening</b><br>Metallurgy<br>Pick Locks<br><i>Pick Pockets</i><br><i>Smithing</i><br><i>Swimming</i><br>Ventriloquism
+<td>Necromancy
+<td>Alchemy<br><b>Music</b>
+<td>&nbsp;
+<td>Food Preservation<br><b>Haggling</b><br><b>Herbalism</b>
+<td><b>Concentration</b><br><b>Detect Item Status</b><br><b>First Aid</b><br><b>Healing</b><br><b>Literacy</b>
+
+<tr><td>Ranger
+<td>&nbsp;
+<td>Detect Item Status<br>Necromancy
+<td>Disarm Traps<br>Gemology<br><b>Haggling</b><br>Pick Locks<br><i>Pick Pockets</i>
+<td>Alchemy<br>Appraising<br>Courage<br>Law<br><i>Literacy</i><br>Tactics<br>Ventriloquism
+<td><i>Backstabbing</i><br><i>Bridge Building</i><br>Concentration<br>Gardening<br><i>Smithing</i><br><b>Swimming</b>
+<td><b>Archery</b><br>Cooking<br>Mining<br>Music
+<td>Find Weakness<br><b>First Aid</b><br><b>Healing</b><br>Metallurgy
+<td><b>Alertness</b><br><b>Dodge</b><br>Fletchery<br><i>Stealth</i>
+<td><b>Athletics</b><br><i>Detect Traps</i><br><b>Listening</b><br><b>Survival</b><br><b>Woodcraft</b>
+<td><b>Climbing</b><br><b>Food Preservation</b><br><b>Herbalism</b><br><b>Two Weapon Combat</b>
+
+<tr><td>Thief
+<td>&nbsp;
+<td>Detect Item Status
+<td>Cooking<br>Gardening
+<td>Archery<br>Courage<br>Fletchery<br>Law<br><i>Literacy</i><br>Music<br>Necromancy<br>Tactics<br>Woodcraft
+<td><i>Bridge Building</i><br>Find Weakness<br><b>First Aid</b><br>Healing<br>Herbalism<br>Metallurgy<br><i>Smithing</i><br>Survival<br><i>Swimming</i><br>Ventriloquism
+<td><b>Appraising</b><br>Mining
+<td><b>Alertness</b><br>Athletics<br>Concentration<br>Dodge<br>Food Preservation<br>Gemology<br>Two Weapon Combat
+<td>&nbsp;
+<td>Alchemy<br><b>Backstabbing</b><br><b>Haggling</b>
+<td><b>Climbing</b><br><b>Detect Traps</b><br><b>Disarm Traps</b><br><b>Listening</b><br><b>Pick Locks</b><br><b>Pick Pockets</b><br><b>Stealth</b>
+
+<tr><td>Weaponsmith
+<td>&nbsp;
+<td>Detect Item Status
+<td>Alertness<br>Archery<br>Gardening<br>Music<br>Necromancy<br><i>Pick Pockets</i><br>Tactics<br>Woodcraft
+<td><i>Backstabbing</i><br>Cooking<br>Courage<br>Food Preservation<br>Gemology<br>Law<br><b>Listening</b><br><i>Literacy</i><br><i>Stealth</i><br>Survival
+<td>Alchemy<br><i>Bridge Building</i><br><b>Climbing</b><br><b>Detect Traps</b><br>Dodge<br><b>Find weakness</b><br><b>First Aid</b><br>Healing<br>Herbalism<br>Mining<br>Pick Locks<br><i>Swimming</i><br>Two Weapon Combat<br>Ventriloquism
+<td>&nbsp;
+<td><b>Appraising</b><br>Disarm Traps
+<td>Fletchery
+<td><b>Concentration</b><br><b>Haggling</b>
+<td><b>Athletics</b><br><b>Metallurgy</b><br><b>Smithing</b>
+
+<tr><td>Wizard
+<td>&nbsp;
+<td>Detect Item Status
+<td>Archery<br>Fletchery<br>Mining<br>Tactics<br>Two Weapon Combat
+<td>Appraising<br><i>Backstabbing</i><br>Courage<br>Dodge<br>Law<br><i>Smithing</i><br>Survival<br><i>Swimming</i><br>Woodcraft
+<td><i>Bridge Building</i><br><b>Climbing</b><br>Cooking<br><i>Detect Traps</i><br>Disarm Traps<br>Find Weakness<br><b>First Aid</b><br>Gardening<br><b>Haggling</b><br><b>Healing</b><br>Music<br>Pick Locks<br><i>Pick Pockets</i><br><b>Stealth</b><br>Ventriloquism
+<td>Alertness<br>Athletics
+<td>Food Preservation<br>Gemology<br><b>Listening</b><br>Metallurgy<br>Necromancy
+<td>&nbsp;
+<td><b>Herbalism</b>
+<td><b>Alchemy</b><br><b>Concentration</b><br><b>Literacy</b>
+
+<tfoot>
+<tr><td>Chaos&nbsp;Knight
+<td>Cooking<br>Gardening<br>Law
+<td>Fletchery<br>Gemology<br>Detect Item Status<br><i>Detect Traps</i><br>Disarm Traps<br><b>Haggling</b><br>Herbalism<br>Music<br>Woodcraft
+<td>Archery<br>Appraising<br>Concentration<br>Food Preservation<br><i>Literacy</i><br><i>Healing</i><br><i>Pick Pockets</i><br>Pick Locks<br>Ventriloquism
+<td>Necromancy<br>Tactics
+<td>Alchemy<br><b>Backstabbing</b><br><i>Bridge Building</i><br><i>Courage</i><br><b>First Aid</b><br>Metallurgy<br><i>Stealth</i>
+<td><b>Dodge</b><br><b>Listening</b><br>Mining<br><i>Swimming</i><br>Survival
+<td>Alertness<br><b>Find Weakness</b><br>
+<td><b>Climbing</b><br><i>Smithing</i><br><b>Two Weapon Combat
+<td>&nbsp;
+<td><b>Athletics</b><br>
+
+<tr><td>Duelist
+<td>&nbsp;
+<td>Archery<br>Fletchery<br>Necromancy<br>Two Weapon Combat
+<td>Gardening<br>Herbalism<br>Mining<br><i>Smithing</i><br>Woodcraft
+<td>Alchemy<br><i>Backstabbing</i><br><b>Haggling</b><br>Pick Locks<br><i>Pick Pockets</i><br>Survival<br>Ventriloquism
+<td>Appraising<br><i>Bridge Building</i><br>Disarm Traps<br>Food Preservation<br>Gemology<br><i>Literacy</i><br><i>Swimming</i><br>Cooking
+<td><b>Climbing</b><br><i>Courage</i><br>Detect Item Status<br><i>Detect Traps</i><br><b>Listening</b><br>Metallurgy
+<td><b>Alertness</b><br><b>First Aid</b><br><b>Healing</b><br>Music<br><i>Stealth</i>
+<td><b>Athletics</b><br><b>Concentration</b><br>Tactics
+<td><b>Dodge</b><br><b>Law</b><br>
+<td><b>Find Weakness</b><br>
+
+</tfoot></table><p>
+
+<h4 id="046">0.4.6 Skill mechanics</h4>
+<span class="credit">Credit Sorear's Wiki &ndash; <a href="http://www.it-is-law.com/adom/index.php?title=Skills">Skills</a>.</span>
+<b>Skill checks</b><br>
+When your skill value controls your chances of success at something, it's called a skill check. Every skill check in ADOM has a difficulty class,
+typically on the order of 120. A die with the difficulty class sides is rolled. If it comes up maximum, there is automatic failure;
+otherwise, you succeed if your skill value is at least as high as the rolled number (so rolling 1 means automatic success).<p>
+
+For some skills, the die may be rolled multiple times &ndash; twice at 80+ skill, three times at 100. The lowest (best for you)
+result is taken. Note that this nearly eliminates the automatic failure chance.<p>
+
+The Stealthy and Mechanically Inclined talents reduce difficulty class by 10%. Eg. if you would be comparing Stealth or Disarm Traps against 1d400,
+compare it against 1d360 instead.<p>
+
+Successful skill checks give 1 + floor(Le/20) points of active training (see below). Note the discontinuity at Le values divisible by 20.<p>
+
+<b>Variables associated with skills</b><br>
+There are 3 semi-hidden variables associated with each skill:<p>
+<ol>
+<li>First is your skill advancement rank. This corresponds loosely to your increase dice, however, it extends in both directions.
+You could have an advancement rank of one rank beyond 4d5 (this is rank 10) &ndash; this would result in 4d5, but the next time your dice decreases,
+it would stay 4d5 (but now rank 9). Skill advancement automatically decreases by one rank each time your skill value crosses a multiple of 10.
+Yergius can increase the advancement rank for members of the Thieves Guild if he is paid sufficient amounts of money. Blessed and uncursed potions of
+training give the same effect when drunk.
+
+<li>Second and third are the training counters. The two training counters, taken together, determine the amount by which you can raise your
+skill; if both are zero or the sum is negative, you cannot increase a skill until it has been somehow trained. The counters, here
+called 'active training' and 'inactive training', are equivalent except that only active training can lead to increases over time.
+When a skill is increased, voluntarily at level up or over time, the training counters are decreased, taking first from active and then from inactive.
+</ol><p>
+
+<b>Training over time</b><br>
+This is what happens every turn when the game checks to see if skills get trained up:<p>
+<ol>
+<li>A SkillTrainCountdown value is decreased by 1. If it's then not 0, nothing happens.
+<li>If SkillTrainCountdown = 0, then (130 - Learning) * 5 + 1d100 = SkillTrainCountdown. (The higher your Learning is, the more often you have a chance
+to get a skill increase. At 25 Learning you'll be roughly 575 turns between checks; At 15, you'll be at about 625 turns.)
+<li>For each skill, If 1d(SkillPoints + 10) &gt; SkillPoints, proceed.
+<li>If Skill can advance (has material, has positive active training, not rank 0, not already at 100), add to skill based on
+advancement rank OR 1d(ActiveTraining), whichever is less (and it won't raise over 100 obviously).
+<li>Training is then reduced (active first, as always).
+</ol><p>
+
+<b>Increasing skills at level ups</b><br>
+Skill increases after level 50, henceforth known as fake levels, follow slightly different rules. Take the difference between your level 49 and
+your level 50 experience requirements. You can gain a fake level if and only if you have gained that much experience since your last levelup
+(real or fake), and you have at least one advancable skill. (This is why skill uses tend to precipitate fake levels.)<p>
+
+On real levels only, you have a chance to increase your skill advancement rank. The chance of it happening is
+(total training) in 1000 for each skill. Improvement cannot occur if you are already at 100, or already have 4d5 or better dice advancement,
+or are lacking skill increase materials if applicable. If it does occur, a message is only generated if the visible dice changes; increasing
+from one rank to another is hidden if both dice modifiers for the ranks are below or at the minimum.<p>
+
+After this, on real levels, some permanent training is awarded. Your advancement rank dice is rolled twice; the greater roll is divided by 2 and
+added as inactive training.<p>
+
+For the duration of a single levelup (real or fake), some temporary training is made available, equal to (for each skill) your advancement rank dice,
+rolled twice taking the larger, divided by 2, and adding a 1d4-1. This temporary training is lost after the level increase whether it is used or not;
+this can lead to your training going negative. The increase is always added to active training.<p>
+
+You can increase a number of skills starting at 3 and increasing by 1 for every 5 Le after 10. Bards receive two bonus increases. Level 6+ Bards receive
+an additional bonus increase. Characters born under the sign of the Book, or those under Cup if the (new) level is even, receive an additional increase.<p>
+
+After removing temporary training, training is decayed, reducing active training to 3/4 of its prior value and inactive training to 7/8. Note that training
+will never decay if you do not gain levels.<p>
+
+<hr>
+Updated July 22nd, 2017
+</body>
+</html>

@@ -1,0 +1,374 @@
+000000000000000000000000+000000000-Œ900:0000Ê4cBœJ0000cM00700
+0000000000r40000äG0000000000
+@0000000000Ç00000000{000000(E0000
+$000000000000a&¿-000000WJ0000000000000000000000000000a=00
+000000000000000000§00000000000000000éç008700@-00000000000000
+000000000000hH00000000B00000000™!0000000000ä00000000000000
+000000000000000000xE0000,O000000Ø!0000000000¾*¾?0000000000000000
+000000{000000¦2000000A00Ø900 '000000Ì00£G000000006M0000000000
+00000000Â00000000ş
+000000000000ß†$00=00Ç)000000000000ü0000ô2
+î2
+
+*PHALANX
+Bei der PHALANX, einer in Griechenland entwickelten und sp„ter in Mazedonien
+perfektionierten milit„rischen Formation, handelt es sich um groáe horizontal und vertikal
+gegliederte Marschbl”cke von 8 bis 32 mal 8 bis 12 Mann, die mit langen Lanzen bewaffnet waren.
+Die ersten fnf Reihen hielten ihre Lanzen nach vorn, und bildeten somit eine aus Speerspitzen
+bestehende Abwehr, w„hrend alle anderen ihre Lanzen hochhielten, um Geschosse
+abzulenken. Fr einen Feind war es schwer, an die so verschanzten Soldaten heranzukommen.
+Ging die Phalanx zum Angriff vor, was h„ufig im Laufschritt geschah, muáte der Feind
+meist zurckweichen, um hohe Verluste zu vermeiden.
+
+*PHALANX2
+Verliert ihren Wert, sobald MUSKETIERE zur Verfgung stehen.
+
+*RITTER
+Die RITTER des Mittelalters bildeten eine berschwere Kavallerie, aufgesessen
+auf schweren und mehr starken als schnellen Pferden, die, gepanzert und mit Zaumzeug versehen,
+mit donnerndem Gallopp vorgingen, und so den Knappen und anderen Fuátruppen Angst
+und Schrecken einjagten. Man k”nnte sie vielleicht als das mittelalterliche quivalent des
+Kampfpanzers M1 bezeichnen. Obwohl RITTER durch neue Taktiken und Verteidigungsformationen
+hie und da an Wirkung einbáten, beherrschten sie dennoch das Schlachtfeld, bis Feuerwaffen entwickelt
+waren. Sie blieben solange die wichtigste Angriffskraft, bis der Tag anbrach, an dem man sie aus der
+Entfernung aus dem Sattel schieáen konnte.
+
+*RITTER2
+Verlieren ihren Wert, wenn GEPANZERTE EINHEITEN zur Verfgung stehen.
+
+*DREIRUDERER
+Die Griechen fhrten den DREIRUDERER ein, das erste fr den Krieg bestimmte
+schwimmende Gef„hrt. Am Bug war er mit einem groáen bronzenen Spriet versehen,
+mit dem feindliche Schiffe gerammt und versenkt werden konnten. Der DREIRUDERER
+war auch schnell, und er wurde auf jeder Seite von je drei Ruderern bewegt, die entgegen
+landl„ufigem Glauben hochbezahlte Profi-Ruderer bzw. patriotische Brger waren. Durch seinen
+langen und schmalen Bootsk”rper war der DREIRUDERER jedoch, auáer in ganz ruhigen
+Gew„ssern, instabil, und so achtete die Besatzung darauf, nie ber l„ngere Zeit auáerhalb der Sichtweite
+zur Kste zu bleiben, um das Schiff bei aufkommendem Sturm vor dem sicheren Untergang
+bewahren zu k”nnen.
+
+*DREIRUDERER2
+DREIRUDERER auf See, die sich am Ende einer Spielrunde nicht in Landn„he
+befinden, k”nnen untergehen. Sie k”nnen bis zu zwei Einheiten transportieren
+und verlieren ihren Wert, wenn SEGELSCHIFFE verfgbar sind.
+
+*SEGELSCHIFF
+Obwohl DREIRUDERER und deren Abk”mmlinge viele Jahre lang die See beherrschten,
+wurden sie schlieálich doch durch die SEGELSCHIFFE abgel”st. Fortschritte im
+Schiffbau erm”glichten den Bau groáer und stabiler Schiffe, die mit nur
+kleiner Besatzung Menschen, Fracht und Kanonen transportieren konnten.
+SEGELSCHIFFE konnten auch viel gr”áere Entfernungen als DREIRUDERER
+ohne Furcht vor dem Untergang berwinden. Damit wurden Erforschung und
+Eroberung neuer Gebiete bedeutend einfacher.
+
+*SEGELSCHIFF2
+SEGELSCHIFFE k”nnen bis zu 3 Einheiten transportieren. Sie verlieren ihren Wert,
+wenn FREGATTEN zur Verfgung stehen.
+
+*FREGATTE
+FREGATTEN waren groáe und starke, milit„rischen Zwecken dienende Segelschiffe,
+die entwickelt wurden, um mehrere Rollen in der Kriegsmarine erfllen zu k”nnen.
+Sie wurden zur Aufkl„rung fr die Linienschiffe der Hauptflottenkr„fte und fr šberf„lle
+auf feindliche Schiffe eingesetzt. Die FREGATTE war stark genug, um die meisten ihrer
+potentiellen Gegner zu besiegen, und gleichzeitig war sie schnell genug, um Schiffen zu
+entkommen, die st„rkere Kanonen hatten. Aufgrund ihrer Schnelligkeit und St„rke wuden
+FREGATTEN auch h„ufig in Kriegszeiten zum Begleitschutz fr Schiffe der Handelsmarine
+eingesetzt, die Truppen und Ausrstungen bef”rderten. Die FREGATTE war das beherrschende
+Kriegsschiff, bis PANZERSCHIFFE zur Verfgung standen.
+
+*FREGATTE2
+Fregatten k”nnen bis zu 4 Einheiten transportieren. Sie verlieren ihren Wert,
+wenn TRANSPORTSCHIFFE zur Verfgung stehen.
+*PANZERSCHIFF
+PANZERSCHIFFE zeigten zum ersten Mal w„hrend des amerikanischen Brgerkrieges,
+daá sie den die Marinekr„fte der L„nder beherrschenden Holzschiffen berlegen waren.
+Mit den verfgbaren Waffen blieben die PANZERSCHIFFE weitgehend unverletzt, w„hrend
+groákalibrige Geschosse die Holzschiffe ohne Schwierigkeit durchschlugen und versenkten.
+So bildeten die PANZERSCHIFFE die erste Generation der kommenden gepanzerten
+Schiffe, die die See fr den gr”áten Teil der folgenden einhundert Jahre beherrschen sollten.
+
+*PANZERSCHIFF2
+Verliert seinen Wert, wenn KREUZER zur Verfgung stehen.
+
+*TRANSPORTSF.
+In Friedenszeiten zum Transport von Fracht oder Passagieren dienende Schiffe
+werden als Truppen-TRANSPORTSCHIFFE eingesetzt und sind das Hauptmittel,
+um groáe Mengen an Ausrstungen und viele milit„rische Einheiten zu ihrem
+Bestimmungsort zu transportieren. Sie bedrfen immer des Schutzes, sind dafr aber
+in der Lage, bedeutende Kr„fte an vom Feind gehaltene Gebiete bzw. Verst„rkungskr„fte
+fr in šbersee befindliche eigene Truppen bzw. St„dte heranzufhren.
+
+*TRANSPORTSF.2
+Transportschiffe k”nnen bis zu 8 Einheiten transportieren.
+
+*JAGDFLUGZEUG
+Die ersten Milit„rflugzeuge wurden in erster Linie zur Aufkl„rung eingesetzt,
+doch dauerte es nicht lange, bis die Flugzeuge Kanonen hatten und zum
+JAGDFLUGZEUG werden konnten. JAGDFLUGZEUGE sollten andere
+Flugzeuge abschieáen, insbesondere BOMBER und Aufkl„rer. Auáerdem war die Vernichtung
+feindlicher JAGD-Einheiten das beste Mittel, um den eigenen BOMBERN und Aufkl„rern
+den Weg zum Einsatzziel zu bahnen. Mit JADFLUGZEUGEN sollte Lutberlegenheit
+und Luftherrschaft erreicht werden.
+
+*JAGDFLUGZEUG2
+Jagdflugzeuge mssen am Ende jeder Runde zu einer Stadt oder einem TRGER zurckkehren.
+Das Jagdflugzeug ist die einzige Einheit, die andere Lufteinheiten angreifen kann.
+
+*BOMBER
+BOMBERwurden zwar schon im 1.Weltkrieg eingefhrt, erlangten jedoch erst im
+2. Weltkrieg ihre Bedeutung. Sie sollten Bomben in feindliches Territorium tragen,
+normalerweise ber die Reichweite der eigenen Artillerie hinaus, und milit„rische
+und Industrieziele vernichten. Sp„ter wurden BOMBER auf solche Spezialeins„tze
+zugeschnitten wie den Angriff gegen Seeziele, den Angriff gegen solche Erdziele wie
+Fahrzeuge und Eisenbahnlinien, den Pr„zisionsbombenwurf bei Tag und das Legen von
+Bombenteppichen. Nach dem 2. Weltkrieg gesammelte Erfahrungen zeigten, daá der Einsatz
+"intelligenter" Bomben effektiver ist als der massenhafte Abwurf von konventionellen Bomben.
+
+*BOMBER2
+BOMBER-Einheiten ignorieren den Effekt von Stadtmauern. Am Ende der jeweils zweiten
+Einsatzrunde mssen sie zu einer Stadt oder zu einem TRGER zurckkehren. BOMBER
+haben eine Sichtweite von 2 Kartenquadraten. Greift ein BOMBER an, ist die laufende Spielrunde
+fr ihn vorber.
+
+*FLUGZEUGTRG.
+Flugzeug-TRGER haben die Funktion eines schwimmenden Flugplatzes, auf dem
+JAGDFLUGZEUG- und BOMBER-Einheiten, die weit von der eigenen Kste entfernt stationiert
+sind, gegen feindliche Ziele eingesetzt werden k”nnen. Mit ihnen k”nnen milit„rische Kr„fte
+aus groáer Entfernung von eigenen St„dten gegen Land- und Seeziele eingesetzt werden,
+die ansonsten weit auáerhalb der Reichweite eigener Waffen liegen. Der TRGER kann auch
+KERN-Waffen tragen und starten, wodurch diese schrecklichen Waffen gegen entfernte Ziele
+wirksam werden k”nnen.
+
+*FLUGZEUGTRG.2
+Flugzeugtr„ger haben eine Reichweite von 2 Seemeilen und k”nnen bis zu 8
+Luft- und KERN-Einheiten transportieren.
+
+*U-BOOT
+Ein U-BOOT ist ein Unterwasser-Kriegsschiff, das andere Kriegsschiffe aus dieser Position
+heraus mit Torpedos angreifen soll. Das in der Verteidigung schwache U-BOOT ist eine
+gefrchtete Angriffswaffe, da es aus dem Verborgenen angreift. Ein Torpedo ist oft der erste
+Hinweis auf die N„he von U-BOOTEN. U-BOOTE k”nnen in der N„he von Schiffahrtslinien
+im Hinterhalt liegen, um vorbeikommende TRANSPORTSCHIFFE, TRGER und andere
+Schiffe anzugreifen.
+
+*U-BOOT2
+U-Boote haben eine Sichtweite von 2 Seequadraten.
+
+*KREUZER
+Der KREUZER ist das moderne quivalent der FREGATTE. Obwohl er viel st„rker als sein
+segelnder Vorg„nger ist, wird auch er haupts„chlich zu šberf„llen und fr den Begleitschutz eingesetzt.
+Wie das SCHLACHTSCHIFF kann er Landziele von See aus bombardieren, jedoch mit viel
+geringerer Schlagkraft. Im Vergleich zum SCHLACHTSCHIFF ist er viel billiger und auch schneller.
+KREUZER k”nnen im Seegefecht SCHLACHTSCHIFFEN nicht unbedingt standhalten,
+doch sind sie immer noch fr die Aufkl„rung und den Angriff auf
+TRANSPORTSCHIFFE ohne Begleitschutz gut.
+
+*KREUZER2
+KREUZER haben eine Sichtweite von 2 Seequadraten und k”nnen Einheiten
+in Kstenquadraten bombardieren.
+
+*SCHLACHTSF.
+SCHLACHTSCHIFFE, die st„rksten je gebauten šberwasserschiffe, waren die Beherrscher der
+See, bevor ihre t”dliche Bedrohung, der Flugzeug-TR„ger, auftauchte. Sie waren stark
+gepanzert, schwer zu zerst”ren und hatten massive Kanonen, die schwere Geschosse ber
+viele Meilen genau ins Ziel bringen konnten. Das SCHLACHTSCHIFF hatte zwei prim„re
+milit„rische Funktionen: Es sollte die See von feindlichen Schiffen reinigen und feindliche
+Kstenst„dte, insbesondere in Vorbereitung von Landeunternehmen,
+bombardieren.
+
+*SCHLACHTSF.2
+SCHLACHTSCHIFFE haben eine Sichtweite von 2 Seequadraten und
+k”nnen Einheiten in Kstenquadraten bombardieren.
+
+*KERNWAFFEN
+Die Atombombe hat alle bis dato geltenden Standards zur Bemessung milit„rischer St„rke
+ber den Haufen geworfen. Die gr”áten St„dte und die st„rksten Landstreitkr„fte
+konnten bereits durch Einsatz einer einzigen KERN-Bombe von der Karte getilgt werden.
+KERN-Waffen konnten jedes Ziel ausl”schen. Die einzige wirksame Verteidigung
+gegen die NUKLEARE Bedrohung bestand darin, sich zur Abschreckung selbst ein Arsenal
+an KERN-Waffen zuzulegen. Fr viele ist es eine Ironie der Geschichte, daá die Entwicklung
+der vernichtendsten Waffe, die die Welt gesehen hat, zumindest teilweise an
+der bisher l„ngsten Periode relativen Friedens auf der Erde Anteil hatte.
+
+*KERNWAFFEN2
+KERN-Waffen mssen (wenn sie nicht zum Angriff eingesetzt werden) am Ende jeder Runde
+in einer Stadt oder auf einem TRGER stationiert sein. KERN-Waffen k”nnen
+Kontrollzonen ignorieren und sind fr feindliche Spiele unsichtbar.
+
+*DIPLOMAT
+Der geschickte DIPLOMAT dient seinem Vaterland auf verschiedene Weise. Er stellt Kontakte
+zu anderen M„chten her und unterh„lt diese, er berichtet seinem Herrscher ber interessante
+Entwicklungen und ist, wenn erforderlich, auch zu weniger angesehenen Aktivit„ten bereit.
+Dazu k”nnen die Sabotage feindlicher Produktion, die Spionage (einschlieálich
+des Raubs neuer Technologien), sowie die Subversion und das Bestechen feindlicher
+St„dte und milit„rischer Einheiten geh”ren. Der DIPLOMAT, der ohne offensichtlichen
+milit„rischen Wert ist, erweist sich im Arsenal eines intelligenten Herrschers
+dennoch als starke Waffe.
+
+*DIPLOMAT2
+Auf die Bewegung von DIPLOMATEN hat die Pr„senz feindlicher Einheiten
+in den
+Nachbarquadraten keinen Einfluá.
+
+*KARAWANE
+W„hrend der gesamten Geschichte ist der Handel immer eine der Haupteinkommensquellen
+der verschiedenen Zivilisationen gewesen. KARAWANEN reisten in weit entfernte L„nder
+und tauschten dort die mitgefhrten Waren gegen Geld oder andere fr sie wertvolle
+Objekte ein, so daá beide Seiten profitieren konnten. Zus„tzlich brachten die H„ndler,
+die mit den Karawanen reisten, oft Kenntnisse ber erreichte Fortschritte mit. Ein Beispiel
+dafr ist Marco Polo, der mit Kaufleuten nach China reiste, sich viele Jahre dort aufhielt,
+und dann viele, fr den Okzident wertvolle Informationen mitbringen konnte.
+
+*KARAWANE2
+Auf die Bewegung von KARAWANEN hat die Pr„senz feindlicher Einheiten in den Nachbarquadraten keinen Einfluá.
+
+*PANZER
+Mit dem Niedergang der RITTER und dem Aufstieg der SCHšTZEN hatte die Verteidigung
+ber viele Jahre auf dem Gefechtsfeld berlegene M”glichkeiten. Erst als der PANZER im
+1. Weltkrieg auf der Szene erschien, hatte man eine Waffe gefunden, die eine Bresche in die
+feindlichen Kr„fte auf dem Feld schlagen konnte. Der PANZER bewegte sich schnell, hatte
+hohe Durchschlagskraft und konnte dazu auch zu Verteidigungszwecken
+eingesetzt werden. Somit war er gegen jede Heereseinheit eine starke Waffe.
+
+*PANZER2
+PANZER-Einheiten k”nnen in einer Runde bis zu dreimal angreifen.
+
+*ARTILLERIE
+Die moderne ARTILLERIE mit Eigenantrieb ist bedeutend st„rker und mobiler
+als die ersten Kanonen, die allesamt Vorderlader waren.
+Sie kann feindliche Kr„fte in starken Befestigungen angreifen und auch schnell in
+andere Feuerstellungen bewegt werden. Diese F„higkeit ist im dynamischen Gefechtsablauf
+wichtig, um dem Gegenfeuer feindlicher Batterien zu entgehen.
+
+*ARTILLERIE2
+Beim Angriff mit ARTILLERIE-Einheiten haben Stadtmauern keine Wirkung.
+
+*KANONE
+Die der Entdeckung des SCHWARZPULVERS folgende Entwicklung der KANONE
+revolutionierte den Belagerungskrieg. Wegen der KANONE muáten die meisten
+Befestigungsanlagen umkonstruiert werden, da die geraden, hohen Mauern , die die meisten
+St„dte umgaben, ganz einfach durch direktes Feuer zerschmettert werden konnten. So erging
+es den Stadtmauern von Konstantinopel, die ber tausend Jahre lang viele Belagerer in Schach
+gehalten hatten. Die KANONE spielte auf dem Schlachtfeld zwar eine wichtige Rolle, konnte aber
+mit der fortschreitenden Entwicklung von Feuerwaffen keine beherrschende Stellung einnehmen.
+
+*KANONE2
+Verliert ihren Wert, sobald ARTILLERIE zur Verfgung steht.
+
+*SCHLEUDER
+Die SCHLEUDER war die Urahnin der ARTILLERIE. Sie bestand aus einem groáen
+mechanischen Hebel, mit dem schwere Steinbrocken, Feuerb„lle oder andere Geschosse ber
+eine groáe Entfernung geschleudert werden konnten. Selbst st„rkste Tore und Mauern konnten
+mit ihr durchschlagen oder gar zerschmettert werden. Auf dem Schlachtfeld war die
+SCHLEUDER zwar schwerf„llig und so gut wie nutzlos, doch erwies sie sich als effektive
+Waffe bei der Belagerung und beim Angriff auf Feinde in befestigten Stellungen.
+
+*SCHLEUDER2
+Verliert ihren Wert, sobald die KANONE zur Verfgung steht.
+
+*KAVALLERIE
+Der Mensch hat seit Jahrtausenden Pferde gez„hmt und geritten, und St„mme der
+asiatischen Ebenen machten wahrscheinlich den Anfang. Schnell erkannte man den Wert
+von Pferden in der Schlacht, denn der aufgesessene und im Gallopp ankommende
+Krieger hatte eine furchteinfl”áende Wirkung auf die Gegner zu Fuá. Krieger zu Pferde,
+auch KAVALLERIE genannt, waren nicht nur in der Schlacht als Stoátruppe von Nutzen,
+sondern konnten auch den fliehenden Feind verfolgen und so den Sieg perfekt machen.
+Das Pferd gab der KAVALLERIE ihre Gr”áe und Schnelligkeit. Nathan Bedford Forrest, einem
+General der Konf”deration wird der Ausspruch zugeschrieben, daá gew”hnlich der
+den Sieg davontrug, der "am meisten nach Stall roch und die meisten St„lle hatte".
+Die KAVALLERIE machte bei Angriffen gew”hnlich den Anfang.
+
+*KAVALLERIE2
+Verliert ihren Wert, sobald SCHšTZEN zur Verfgung stehen.
+
+*STREITWAGEN
+Der STREITWAGEN war das erste echte Kampfgef„hrt. Die Heere des Altertums
+setzten sie ein, um Bogenschtzen und andere Truppen aufs Schlachtfeld zu bringen,
+wo sie absaáen, um ins Gefecht einzugreifen. Die Assyrer verwandelten den STREITWAGEN
+in eine gefrchtete Angriffswaffe, denn ihre Bogen- und Speerschtzen fhrten den
+Kampf vom SCHLACHTWAGEN aus. Nur wenige feindliche Heere konnten zun„chst
+dem Angriff assyrischer Streitwagen widerstehen, doch bernahmen viele Feinde
+der Assyrer bald selbst diese vernichtende Waffe und setzten sie effektiv gegen die
+Assyrer selbst ein.
+
+*STREITWAGEN2
+Verliert seinen Wert, sobald RITTER zur Verfgung stehen.
+
+*LEGION
+Die in den frhen Kriegen der R”mischen Republik geschaffene und in den drei groáen punischen
+Kriegen mit Karthago erprobte LEGION war die Streitmacht, die in fnf Jahrhunderten ein Reich
+eroberte und verteidigte. Die im Angriff nahezu unaufhaltsame LEGION war in der Verteidigung,
+und dabei wiederum inbesondere in durchschnittenem Gel„nde, relativ schwach. Die Aufgabe
+der Legion als milit„rische Formation wurde beschleunigt, als gotische RITTER
+im 4. Jahrhundert das Heer des Kaisers Valentian vernichteten.
+
+*LEGION2
+Verliert ihren Wert, sobald SCHšTZEN zur Verfgung stehen.
+
+*MECH. INF.
+Die Einfhrung GEPANZERTER FAHRZEUGE bedeutete, daá es nunmehr ein Mittel gab,
+mit dem man feindliche Stellungen durchbrechen und auf dem Gefechtsfeld schnell im Angriff
+vorankommen konnte. Man brauchte Kr„fte, die schnell in feindliches Gebiet hinein entfaltbar
+waren, und die den eingenommenen Raum dann verteidigen konnten. Die zuerst im
+2. Weltkrieg eingesetzte MECH. INFANTERIE erwies sich als so effektiv, daá zu Kriegsende
+alle gr”áeren Heere umfassende Formationen dieser Art aufgestellt hatten.
+Die Infanterie saá auf eigenen gepanzerten Fahrzeugen wie Halbkettenfahrzeugen
+und MTW (Mannschaftstransportwagen) auf und konnte so schnell und sicher
+sicher transportiert werden.
+
+*MECH. INF.2
+MECH. INFANTERIE kann in einer Runde bis zu dreimal angreifen.
+
+*MILIZ
+Die ersten milit„rischen Einheiten bestanden aus Brgern, die sich mit Werkzeugen
+und allem, was sich als Waffe verwenden lieá, ausrsteten. Obwohl MILIZ-Einheiten
+ohne viel Aufwand zu organisieren und zu unterhalten waren, waren sie gegen
+ausgebildete Heere uneffektiv. Da man MILIZEN aber sehr schnell aufstellen konnte,
+gab es sie ber lange Zeit. Mit ihnen konnte der Feind aufgehalten werden, w„hrend
+man st„rkere Einheiten heranfuehrte, um diese dann zum Einsatz zu bringen.
+Und besser als gar keine Verteidigung waren sie allemal.
+
+*MILIZ2
+Verliert ihren Wert, wenn MUSKETIERE verfgbar sind.
+
+*MUSKETIERE
+Die Entwicklung des Schwarzpulvers revolutionierte das Kriegswesen, denn relativ
+billig auszurstende und und auszubildende MUSKETIERE erwiesen sich den RITTERN,
+die bis dato das Schlachtfeld beherrscht hatten, als weit berlegen. Der berittene
+Krieger muáte sich das Schlachtfeld mit MUSKETIEREN und KANONEN teilen, denn
+diese drei Komponenten erg„nzten sich nun gegenseitig. Meist errang der Feldherr
+den Sieg, der ihren Einsatz am besten dirigierte. Eine groáe Zahl an
+MUSKETIEREN in Festungen oder geschtzt hinter Stadtmauern konnte
+einem angreifenden Heer fast unberwindlichen Widerstand leisten.
+
+*MUSKETIERE2
+Verlieren ihren Wert, wenn SCHšTZEN verfgbar sind.
+
+*SCHUTZEN
+SCHšTZEN waren st„rker als MUSKETIERE, denn ihre Gewehre waren der Muskete in
+Treffgenauigkeit u. Reichweite mehrfach berlegen. Mit dem Aufkommen stehender Heere
+und der allgemeinen Wehrpflicht bereitete das Gewehr dem Angreifer noch mehr Schwierigkeiten.
+W„hrend des amerikanischen Brgerkrieges wurden Gewehre zum ersten Mal in groáer Zahl
+eingesetzt und erm”glichten eine berlegene Verteidigung. Ein SCHšTZE konnte auf vorstrmende
+Angreifer mehrere Schsse abgeben, und das reichte normalerweise aus, um jede Stellung zu halten.
+Dieser Vorzug des Einsatzes von Schtzen galt mehr oder weniger bis zum Aufkommen
+von gepanzerten Fahrzeugen.
+
+*SCHUTZEN2
+SCHšTZEN behalten ihren Wert.
+
+*SIEDLER
+Im Altertum wuchsen St„dte unausweichlich bis zu einer Gr”áe, bei der die
+verfgbaren Ressourcen nicht mehr ausreichten, um einen annehmbaren
+Lebensstandard fr alle zu sichern. Dann wurde es fr die
+unternehmungsfreudigeren Brger Zeit, nach anderen Orten fr die
+Grndung von St„dten Ausschau zu halten. Die neuen St„dte bewahrten
+normalerweise Bindung und Loyalt„t zu ihren Mutterst„dten, und
+schlieálich sandten auch sie SIEDLER aus.
+
+*SIEDLER2
+SIEDLER sind die einzigen Einheiten, die Straáen, Eisenbahnen,
+Bew„sserungsanlagen, Bergwerke und Festungen bauen bzw. errrichten k”nnen.
+Sie k”nnen auch St„dte grnden und Umweltverschmutzung beseitigen.
+
+*END

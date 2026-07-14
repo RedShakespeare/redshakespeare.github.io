@@ -1,0 +1,559 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Modifying Angband &#8212; &lt;img&gt; The Angband Manual</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/better.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_/static/css/badge_only.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
+    <script async="async" src="../../../_/static/javascript/readthedocs-doc-embed.js"></script>
+    <link rel="canonical" href="modifying.html" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Compiling Instructions" href="compiling.html" />
+    <link rel="prev" title="Credits" href="../thanks.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+      <link rel="stylesheet" href="../_static/style.css" type="text/css" />
+  
+<!-- RTD Extra Head -->
+
+<link rel="stylesheet" href="../../../_/static/css/readthedocs-doc-embed.css" type="text/css" />
+
+<script type="application/json" id="READTHEDOCS_DATA">{"ad_free": false, "api_host": "https://readthedocs.org", "build_date": "2023-04-21T00:08:54Z", "builder": "sphinx", "canonical_url": null, "commit": "14f92695", "docroot": "/docs/", "features": {"docsearch_disabled": false}, "global_analytics_code": "UA-17997319-1", "language": "en", "page": "hacking/modifying", "programming_language": "c", "project": "angband", "proxied_api_host": "/_", "source_suffix": ".rst", "subprojects": {}, "theme": "better", "user_analytics_code": "", "version": "latest"}</script>
+
+<!--
+Using this variable directly instead of using `JSON.parse` is deprecated.
+The READTHEDOCS_DATA global variable will be removed in the future.
+-->
+<script type="text/javascript">
+READTHEDOCS_DATA = JSON.parse(document.getElementById('READTHEDOCS_DATA').innerHTML);
+</script>
+
+<script type="text/javascript" src="../../../_/static/javascript/readthedocs-analytics.js" async="async"></script>
+
+<!-- end RTD <extrahead> -->
+</head><body>
+<header id="pageheader">
+    <div style="display: flex; align-items: baseline;">
+        <h1>The Angband Manual</h1>
+        <span class="version">v4.2.4-264-g14f92695-dirty</span>
+    </div>
+    <img src="../_static/att.svg" style="height: 4rem;">
+</header>
+
+  <div class="related top">
+  <nav id="rellinks">
+    <ul>
+        <li>
+          &larr;
+          <a href="../thanks.html" title="Previous document">Credits</a>
+        </li>
+        <li>
+          <a href="compiling.html" title="Next document">Compiling Instructions</a>
+          &rarr;
+        </li>
+    </ul>
+  </nav>
+  <nav id="breadcrumbs">
+    <ul>
+      <li><a href="../index.html">Home</a></li> 
+    </ul>
+  </nav>
+  </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="modifying-angband">
+<h1>Modifying Angband<a class="headerlink" href="modifying.html#modifying-angband" title="Permalink to this heading">¶</a></h1>
+<p>Angband is not just a great game in its own right, it is really easy to modify.
+Much of the detail of the game is contained in text data files.  These can be
+changed using nothing more than a text editor for an immediate change to how
+the game works.</p>
+<p>These data files are in lib/gamedata.</p>
+<p>Each file has a header which describes the lines which make up entries of the
+file, and for the most part this will make it clear what needs to be done to
+make changes to the files.  Below is brief description of each of the files.</p>
+<p>Those who want to change the game more than is allowed just by varying the
+data files will need the source code.  Below the data file descriptions is a
+brief discussion of where to start on such an endeavour.</p>
+<section id="the-data-files">
+<h2>The data files<a class="headerlink" href="modifying.html#the-data-files" title="Permalink to this heading">¶</a></h2>
+<dl class="simple">
+<dt>constants.txt</dt><dd><p>This file contains game values such as carried item capacity, visual range
+and dungeon level and town dimensions.</p>
+</dd>
+<dt>object_base.txt</dt><dd><p>This file contains the names and common properties of the basic object
+classes - scroll, sword, ring, and so on.  All objects have an object base.
+Each object base is assigned a ‘tval’ - a numeric index.  The tvals are
+defined in src/list-tvals.h.  While adding new object bases is possible,
+it is unlikely to do much without deeper changes to the game.</p>
+</dd>
+<dt>object.txt</dt><dd><p>This file contains the names, properties and description of all the object
+types that appear in Angband.  New object kinds can easily be added to this
+file, or existing ones edited.  Each object defined by this file has an
+object base, and is also allocated another numeric index called an ‘sval’.
+A tval-sval pair completely identifies an object - since the tval and sval
+are saved to savefiles, removing or adding objects is likely to render
+existing save files unusable.</p>
+</dd>
+<dt>ego_item.txt</dt><dd><p>This file contains the names, properties and description of ego items, which
+are magically enhanced weapons and armour.  New ego items can be added or
+removed at will, although removing or changing one with an instance currently
+in the game might cause problems.</p>
+</dd>
+<dt>artifact.txt</dt><dd><p>This file contains the names, properties and description of artifacts, which
+are unique items - only one of each will ever be generated.  If you are
+considering major changes, new artifacts are one of the most visible signs of
+a change of theme.  Regardless, new artifacts are easy and fun to design.</p>
+</dd>
+<dt>names.txt</dt><dd><p>This file contains lists of words which are used to generate names for
+random character names, random artifacts and scrolls.  Again, in the case
+of a change of theme, this is a good way of displaying the new theme.</p>
+</dd>
+<dt>activation.txt</dt><dd><p>Activations are used for artifacts and some regular objects, and could be
+used for ego items (although none currently are).  Some standard artifacts
+from artifact.txt have activations, and random artifacts may have any
+activation from this file chosen for them.  Activations can be made up of
+any effects (see list-effects.h and effect-handler-<em>something</em>.c).</p>
+</dd>
+<dt>flavor.txt</dt><dd><p>Items such as potions and wands are assigned a flavor per object kind,
+different in each game.  There need to be at least as many flavors for each
+flavored object base as objects with that base.</p>
+</dd>
+<dt>monster_base.txt</dt><dd><p>Monster bases are the monster equivalent of object bases - classes of monster
+like orc, troll or vampire.  This file contains the properties common across
+all monsters in each of these classes.</p>
+</dd>
+<dt>monster.txt</dt><dd><p>This contains the detail of all monster races, each of which will have its
+monster base properties plus additional ones.  Some monsters are unique, and
+once killed will never reappear.</p>
+</dd>
+<dt>monster_spell.txt</dt><dd><p>All the spells that can be cast by monsters (and are referred to in the
+‘spells:’ lines in monster.txt) are defined in this file.  As with
+activations, monster spells are built up from effects.</p>
+</dd>
+<dt>pain.txt</dt><dd><p>This file contains the various messages that are given to describe how a
+monster responds to attack.</p>
+</dd>
+<dt>pit.txt</dt><dd><p>Dungeon levels can contain pits - rooms full of a particular selection of
+monsters.  This file defines these selections.  They can also be used, for
+example, to generate partial or complete dungeon levels with themed monsters.</p>
+</dd>
+<dt>class.txt</dt><dd><p>This file completely defines how player classes work, including all details
+of castable spells.  There are some class-specific properties hard-coded,
+which are referred to via the ‘flags:’ lines, and appear in
+list-player-flags.h.</p>
+</dd>
+<dt>p_race.txt</dt><dd><p>This file defines all player race characteristics.  Race-specific code is
+handled as for classes.</p>
+</dd>
+<dt>body.txt</dt><dd><p>Every player race has a body, which defines what equipment they can use.
+Currently there is only one body, which all races use, but this is easily
+changeable for significant effect.</p>
+</dd>
+<dt>history.txt</dt><dd><p>This file is for creating the player background found on the character
+screen.  If a new race is introduced, a selection of background information
+for it will need to be added.</p>
+</dd>
+<dt>hints.txt</dt><dd><p>This is simply a list of general pieces of advice that shopkeepers will give
+to their customers.</p>
+</dd>
+<dt>quest.txt</dt><dd><p>This file defines the quest monsters (Sauron and Morgoth) and where they
+appear.  This currently can’t easily be changed, as there are still
+hard-coded aspects of the quests.</p>
+</dd>
+<dt>terrain.txt</dt><dd><p>This file defines the kind of terrain which can appear in Angband, and its
+properties.  Current terrain can be changed (with possibly large effects),
+but removing it without code changes is likely to break the game.  Adding
+new terrain will have no effect by itself, because there is no mechanism
+for it to appear.</p>
+</dd>
+<dt>trap.txt</dt><dd><p>This defines all traps, door locks and runes.  Actual trap effects appear in
+list-effects.h and effect-handler-<em>something</em>.c.</p>
+</dd>
+<dt>room_template.txt</dt><dd><p>This is a list of templates for interesting-shaped rooms which appear in the
+dungeon.  These can easily be changed and new ones added.</p>
+</dd>
+<dt>vault.txt</dt><dd><p>Similar to room_template.txt, this handles vaults, which are very dangerous
+and lucrative rooms.</p>
+</dd>
+<dt>dungeon_profile.txt</dt><dd><p>This file contains fairly technical details about the different types of
+dungeon level which can be generated.  The actual generation routines are in
+gen-cave.c; the information here consists of parameters for generating
+individual levels, and for how often given level types appear.</p>
+</dd>
+<dt>store.txt</dt><dd><p>This details the shop owners and their relative generosity.</p>
+</dd>
+<dt>blow_effects.txt</dt><dd><p>This defines effects to the player caused by monster attacks.  The simplest
+monster attacks just deal damage, but others can affect the player’s status,
+stats or inventory.</p>
+</dd>
+<dt>blow_methods.txt</dt><dd><p>This details the different ways monsters can attack (hit, claw, etc.).  It
+affects the messages the player gets, and also whether the blow can stun
+or cut the player.</p>
+</dd>
+<dt>brand.txt</dt><dd><p>This details how weapon brands work.</p>
+</dd>
+<dt>slay.txt</dt><dd><p>This details how weapons can be more effective against certain monsters.</p>
+</dd>
+<dt>curse.txt</dt><dd><p>This file contains all the different curses that can be applied to objects.
+It includes what type of object they can be applied to, random effects they
+can cause, and how they change an object’s properties.</p>
+</dd>
+<dt>object_property.txt</dt><dd><p>This file gives details about what properties an object can have (apart from
+basic combat and armor class).  Every property has a code which is used
+in the game to refer to that property in some way. This means it is not
+possible to add new properties to this file and expect to have any effect,
+but it is possible to change how existing properties work.</p>
+</dd>
+<dt>player_timed.txt</dt><dd><p>This file defines some of the properties of timed effects (such as haste and
+confusion) that can apply to the player.  It chiefly contains the messages
+on changes in these effects, and player attributes which prevent the effects.
+To add new timed effects or change the way existing ones operate, you will
+have to alter src/list-player-timed.h and probably other files, and
+re-compile the game.</p>
+</dd>
+<dt>projection.txt</dt><dd><p>This file contains a lot of the defining information about projections -
+effects which can be produced at a distance by player or monsters, and
+affecting player, monsters, objects, and/or terrain.  In particular, this
+file defines details of the effects of elemental attacks (such as fire or
+shards) and the effectiveness of corresponding player resistance.  New
+projections have to be either included in src/list-elements.h (for elemental
+attacks) or included in src/list-projections.h (for all other projections),
+and the code to implement their effects put in other source files -
+src/project-obj.c for effects on objects, and other similarly-named files.</p>
+</dd>
+<dt>realm.txt</dt><dd><p>This contains a small amount of information about the two current magic
+realms.</p>
+</dd>
+<dt>summon.txt</dt><dd><p>This contains definitions for the types of monsters that can be summoned.
+Adding a new summon type is not yet possible, because the summon spells are
+hard-coded in src/list-mon-spells.h.</p>
+</dd>
+<dt>ui_entry.txt</dt><dd><p>Defines entries that will be displayed in the second part of the character
+sheet and in the knowledge menu’s equipable comparison.  You can modify
+properties in object_property.txt and project_property.txt to bind them to
+those entries.  The intent is to make it possible to add or remove a property
+without having to update ui-player.c or ui-equipcmp.c in addition to the
+changes necessary to have that property affect core gameplay.</p>
+</dd>
+<dt>ui_entry_base.txt</dt><dd><p>Provides templates for use by ui_entry.txt.</p>
+</dd>
+<dt>ui_entry_renderer.txt</dt><dd><p>Defines techniques, referenced in ui_entry.txt, for rendering a property in
+the character sheet or equipable comparison.  While it is possible to add
+something that simply uses different palettes of symbols or colors than
+one of the current renderers, the basic rendering techniques are hard-coded
+in list-ui-entry-renderers.h.</p>
+</dd>
+<dt>ui_knowledge.txt</dt><dd><p>Handles some configuration of the knowledge menus, namely the layout of
+the monster categories.</p>
+</dd>
+</dl>
+</section>
+<section id="making-graphical-tilesets">
+<h2>Making Graphical Tilesets<a class="headerlink" href="modifying.html#making-graphical-tilesets" title="Permalink to this heading">¶</a></h2>
+<p>You can make new graphical tilesets for Angband or customize existing ones. In
+this section we’ll dive into how tilesets are defined and describe how to set
+one up from scratch. First, we’ll enumerate the steps required and then we’ll
+break down each step in detail.</p>
+<ol class="arabic simple">
+<li><p>Create a directory to contain the tileset’s files: (ex. <code class="docutils literal notranslate"><span class="pre">lib/tiles/mytileset</span></code>)</p></li>
+<li><p>Register the tileset in <code class="docutils literal notranslate"><span class="pre">lib/tiles/list.txt</span></code></p></li>
+<li><p>Create an empty bitmap image large enough to hold your tileset</p></li>
+<li><p>Store the empty bitmap image in your tileset folder</p></li>
+<li><p>Author one or more <code class="docutils literal notranslate"><span class="pre">.prf</span></code> files to inform Angband how to use your tileset</p></li>
+<li><p>Create a Makefile in your tileset folder</p></li>
+</ol>
+<p>First you need to create a directory to contain your tileset’s files. Put the
+directory in lib/tiles and choose a name for the directory that is lower-case
+and generally matches the naming convention of the other tilesets you see
+there. Once the directory has been created, the next step is to decide how big
+the tiles will be in pixels and then create a blank PNG image large enough to
+hold all of the tiles (be sure to enable alpha transparency). As an example,
+Shockbolt’s tileset uses 64x64 pixel tiles. It also uses the special alpha
+blending flag so it can use double-height tiles (64x128) for large or tall
+monsters. Its dimensions are 8192x2048 but the tileset is not completely
+full. More tiles can be added without increasing the size of the image as new
+objects are added to future releases of Angband. This should be kept in mind as
+packing your tileset into the smallest possible image size may not be the most
+maintainable solution. Be sure to name the image file after the tile size, for
+example 64x64.png. Use the base size even if you are enabling double-height
+tiles.</p>
+<p>The only file you’ll need to edit outside of your tileset’s directory is
+lib/tiles/list.txt. list.txt contains a registry of which tilesets to load as
+well as some information about the size of the tiles and any special flags to
+set. The format of the file is documented in list.txt’s header. Specifically,
+you will be defining the name of the tileset, which directory contains the
+tileset’s files, how big the tiles are in pixels (i.e. 64x64), the name of the
+main preference file for the tileset and some additional flags which have to do
+with alpha blending. Not all tilesets need to set extra flags.</p>
+<p>Now that the basic setup is complete you need to tell Angband how to interpret
+your tileset image. You need to map each tile in your image to a specific
+element in the game so that Angband knows which tiles to show for which ASCII
+characters. This process can be done incrementally because Angband will
+continue to show the default character symbols in-game for objects that have
+not yet been mapped. This is especially helpful for verifying that your tileset
+has been setup correctly before beginning to map things out in earnest. It also
+means that if new objects are added to the game that you have not mapped into
+your tileset, the game will still be playable with your tileset, albeit the
+displayed ASCII character may appear incongruous with your styling. Mapping
+tiles to game elements is done in text files called preference files which have
+the extension ‘.prf’.</p>
+<p>The first thing to understand about mapping game elements in preference files
+is that everything that can be displayed in the game has a name, or in the case
+of flavors, an ID number. The names for each type of thing can be referenced
+from the data files as mentioned above. The table below is a quick reference
+for where to find names of things and how to form IDs correctly to reference
+them.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 35%" />
+<col style="width: 39%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Type</p></th>
+<th class="head"><p>Data File</p></th>
+<th class="head"><p>Example</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Terrain</p></td>
+<td><p>terrain.txt</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">feat:FLOOR</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Trap</p></td>
+<td><p>trap.txt</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">trap:pit</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Object</p></td>
+<td><p>object.txt</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">object:light</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Monster</p></td>
+<td><p>monster.txt</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">monster:Kobold</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Spell Effect</p></td>
+<td><p>monster_spell.txt</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">GF:METEOR</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Player</p></td>
+<td><p>&lt;see below&gt;</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">monster:&lt;player&gt;</span></code></p></td>
+</tr>
+</tbody>
+</table>
+<p>Player pictures are referenced differently than other types of objects. They
+use a special query syntax that checks to see what kind class the player is as
+well as the gender in order to determine which picture to show. The query to
+select which tile to show for a female elf ranger would be:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>?:[AND [EQU $CLASS Ranger] [EQU $RACE Elf]  [EQU $GENDER Female] ]
+</pre></div>
+</div>
+<p>Here, the query is checking to see if the player is a female Half-Elf and would
+use the assignment on the next line of the preference file only if this is
+true.</p>
+<p>Some types of objects such as terrain can use different tiles based on their
+state. In the case of terrain, the terrain can have different images for when
+it is lit by a torch, or dark. these are selected by appending another colon
+and a specifier to the name. For example, this would be the name of a torch-lit
+up staircase:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">feat</span><span class="p">:</span><span class="n">LESS</span><span class="p">:</span><span class="n">torch</span>
+</pre></div>
+</div>
+<p>It is possible to specify the same tile be used for all possible states of a
+terrain feature by using an asterisk. This example identifies any unknown
+terrain tile (a tile the player hasn’t lit or otherwise seen yet):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">feat</span><span class="p">:</span><span class="n">NONE</span><span class="p">:</span><span class="o">*</span>
+</pre></div>
+</div>
+<p>Given the full name of an object the last thing to do is to specify which tile
+from the tileset to use. Tile locations are given in a coordinate system using
+pairs of hexadecimal numbers. The coordinates start from 0x80:0x80 and
+increment from there. The pairs translate directly to the top and left most
+pixel of the corresponding tile from the graphics file, so the top left pixel
+of the first tile on the top left of the graphics file would be specified as
+0x80:0x80 (the pixel at x:0 y:0). The next tile immediately to the right of the
+that one would be 0x80:0x81. The tilesheet is sliced into rows and columns
+based on the tile size you specified in list.txt. So given a tile size of 64x64
+pixels, the tile at 0x80:0x81 would be located in the graphics file at pixel
+x:64 y:0. Remember, the coordinates in the preference files are in hexadecimal,
+so the next number after 0x89 would be 0x8A. The next number after 0x8F would
+be 0x90 and so on. To map an object to your tileset you will add one complete
+line to the file per object. This example maps the tile at 0x81:0x81 to the
+terrain feature ‘quartz vein’ when the quartz vein is lit by torch light:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">feat</span><span class="p">:</span><span class="n">QUARTZ</span><span class="p">:</span><span class="n">torch</span><span class="p">:</span><span class="mh">0x81</span><span class="p">:</span><span class="mh">0x81</span>
+</pre></div>
+</div>
+<p>Before going any further, it is advisable to map a single object in your
+preference file, then start the game up, select your tileset and make sure you
+see your mapped tile in game. If this worked, then you are ready to design and
+map the rest of your tiles. A quick example would be to map a tile for your
+home in the town to the first tile position in your graphics file:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">feat</span><span class="p">:</span><span class="n">HOME</span><span class="p">:</span><span class="o">*</span><span class="p">:</span><span class="mh">0x80</span><span class="p">:</span><span class="mh">0x80</span>
+</pre></div>
+</div>
+<p>It’s possible to have more than one preference file by using a sort of include
+syntax that causes other preference files referenced from your main preference
+file to also be read. It is also possible to place comments in your preference
+files to help you keep track of where different kinds of objects are
+mapped. Any text on a line after a <code class="docutils literal notranslate"><span class="pre">#</span></code> symbol is ignored. Shockbolt’s tiles
+make great use of this and define a well organized set of mappings using three
+files with comments for each logical section of objects to be mapped:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># This is a comment</span>
+<span class="o">%</span><span class="p">:</span><span class="n">other</span><span class="o">-</span><span class="n">stuff</span><span class="o">.</span><span class="n">prf</span>  <span class="c1"># Load another preference file</span>
+</pre></div>
+</div>
+<p>The last step to take is to make sure your tileset will be packaged with
+Angband when it is compiled for distribution and that it can be installed
+alongside the other tilesets. to do this you will need to add a file called
+‘Makefile’ to your tileset directory. Copy and paste an existing Makefile from
+one of the other tileset directories and update the DATA and PACKAGE lines to
+match the filenames you chose for your tileset.</p>
+<p>Once you have a working tileset and functional understanding of how tilesets
+are managed and organized, it would be a good idea to study Shockbolt’s tileset
+and follow the examples there in order to produce a high-quality tileset that
+you will be proud to share with others.</p>
+</section>
+<section id="larger-changes">
+<h2>Larger changes<a class="headerlink" href="modifying.html#larger-changes" title="Permalink to this heading">¶</a></h2>
+<p>If changing data files is not enough for you, you will need to change actual
+game code and recompile it.  The first place to look is in the compiled data
+files, some of which have already been mentioned:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 30%" />
+<col style="width: 35%" />
+<col style="width: 35%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>list-dun-profiles.h</p></td>
+<td><p>list-mon-temp-flags.h</p></td>
+<td><p>list-rooms.h</p></td>
+</tr>
+<tr class="row-even"><td><p>list-effects.h</p></td>
+<td><p>list-mon-timed.h</p></td>
+<td><p>list-room-flags.h</p></td>
+</tr>
+<tr class="row-odd"><td><p>list-elements.h</p></td>
+<td><p>list-object-flags.h</p></td>
+<td><p>list-square-flags.h</p></td>
+</tr>
+<tr class="row-even"><td><p>list-equip-slots.h</p></td>
+<td><p>list-object-modifiers.h</p></td>
+<td><p>list-stats.h</p></td>
+</tr>
+<tr class="row-odd"><td><p>list-history-types.h</p></td>
+<td><p>list-options.h</p></td>
+<td><p>list-terrain.h</p></td>
+</tr>
+<tr class="row-even"><td><p>list-ignore-types.h</p></td>
+<td><p>list-origins.h</p></td>
+<td><p>list-terrain-flags.h</p></td>
+</tr>
+<tr class="row-odd"><td><p>list-kind-flags.h</p></td>
+<td><p>list-parser-errors.h</p></td>
+<td><p>list-trap-flags.h</p></td>
+</tr>
+<tr class="row-even"><td><p>list-message.h</p></td>
+<td><p>list-player-flags.h</p></td>
+<td><p>list-tvals.h</p></td>
+</tr>
+<tr class="row-odd"><td><p>list-mon-message.h</p></td>
+<td><p>list-player-timed.h</p></td>
+<td><p>list-ui-entry-renderers.h</p></td>
+</tr>
+<tr class="row-even"><td><p>list-mon-race-flags.h</p></td>
+<td><p>list-projections.h</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>list-mon-spells.h</p></td>
+<td><p>list-randart-properties.h</p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>Beyond this, you will have to have some knowledge of the C programming
+language, and can start making changes to the way the game runs or appears.
+Many people have done this - there are over 100 variants of Angband:
+<a class="reference external" href="http://angbandplus.github.io/AngbandPlus/">http://angbandplus.github.io/AngbandPlus/</a>
+Should you get to this point, the best thing to do is to discuss your ideas on
+the Angband forums at <a class="reference external" href="http://angband.oook.cz">http://angband.oook.cz</a>.  The people there are typically
+keen to hear new ideas and ways to play.</p>
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="../index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="modifying.html#">Modifying Angband</a><ul>
+<li><a class="reference internal" href="modifying.html#the-data-files">The data files</a></li>
+<li><a class="reference internal" href="modifying.html#making-graphical-tilesets">Making Graphical Tilesets</a></li>
+<li><a class="reference internal" href="modifying.html#larger-changes">Larger changes</a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+<form class="search" action="../search.html" method="get">
+  <input type="text" name="q"
+   placeholder="type to search" />
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+  <div class="related bottom">
+  <nav id="rellinks">
+    <ul>
+        <li>
+          &larr;
+          <a href="../thanks.html" title="Previous document">Credits</a>
+        </li>
+        <li>
+          <a href="compiling.html" title="Next document">Compiling Instructions</a>
+          &rarr;
+        </li>
+    </ul>
+  </nav>
+  <nav id="breadcrumbs">
+    <ul>
+      <li><a href="../index.html">Home</a></li> 
+    </ul>
+  </nav>
+  </div>
+  <footer id="pagefooter">&copy; 2019, Angband developers past and present.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a>
+      5.3.0
+        with the <a href="http://github.com/irskep/sphinx-better-theme">
+          better</a> theme.
+
+  </footer>
+
+  
+  </body>
+</html>

@@ -1,0 +1,295 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Debug Command Descriptions &#8212; &lt;img&gt; The Angband Manual</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/better.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_/static/css/badge_only.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
+    <script async="async" src="../../../_/static/javascript/readthedocs-doc-embed.js"></script>
+    <link rel="canonical" href="debug.html" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="How It Works" href="how-it-works.html" />
+    <link rel="prev" title="Compiling Instructions" href="compiling.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+      <link rel="stylesheet" href="../_static/style.css" type="text/css" />
+  
+<!-- RTD Extra Head -->
+
+<link rel="stylesheet" href="../../../_/static/css/readthedocs-doc-embed.css" type="text/css" />
+
+<script type="application/json" id="READTHEDOCS_DATA">{"ad_free": false, "api_host": "https://readthedocs.org", "build_date": "2023-04-21T00:08:54Z", "builder": "sphinx", "canonical_url": null, "commit": "14f92695", "docroot": "/docs/", "features": {"docsearch_disabled": false}, "global_analytics_code": "UA-17997319-1", "language": "en", "page": "hacking/debug", "programming_language": "c", "project": "angband", "proxied_api_host": "/_", "source_suffix": ".rst", "subprojects": {}, "theme": "better", "user_analytics_code": "", "version": "latest"}</script>
+
+<!--
+Using this variable directly instead of using `JSON.parse` is deprecated.
+The READTHEDOCS_DATA global variable will be removed in the future.
+-->
+<script type="text/javascript">
+READTHEDOCS_DATA = JSON.parse(document.getElementById('READTHEDOCS_DATA').innerHTML);
+</script>
+
+<script type="text/javascript" src="../../../_/static/javascript/readthedocs-analytics.js" async="async"></script>
+
+<!-- end RTD <extrahead> -->
+</head><body>
+<header id="pageheader">
+    <div style="display: flex; align-items: baseline;">
+        <h1>The Angband Manual</h1>
+        <span class="version">v4.2.4-264-g14f92695-dirty</span>
+    </div>
+    <img src="../_static/att.svg" style="height: 4rem;">
+</header>
+
+  <div class="related top">
+  <nav id="rellinks">
+    <ul>
+        <li>
+          &larr;
+          <a href="compiling.html" title="Previous document">Compiling Instructions</a>
+        </li>
+        <li>
+          <a href="how-it-works.html" title="Next document">How It Works</a>
+          &rarr;
+        </li>
+    </ul>
+  </nav>
+  <nav id="breadcrumbs">
+    <ul>
+      <li><a href="../index.html">Home</a></li> 
+    </ul>
+  </nav>
+  </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="debug-command-descriptions">
+<h1>Debug Command Descriptions<a class="headerlink" href="debug.html#debug-command-descriptions" title="Permalink to this heading">¶</a></h1>
+<section id="item-creation">
+<h2>Item Creation<a class="headerlink" href="debug.html#item-creation" title="Permalink to this heading">¶</a></h2>
+<dl class="simple">
+<dt>Create an object <code class="docutils literal notranslate"><span class="pre">c</span></code></dt><dd><p>Provides a menu to let you create any object, and drops it on the floor.</p>
+</dd>
+<dt>Create an artifact <code class="docutils literal notranslate"><span class="pre">C</span></code></dt><dd><p>Provides a menu to let you create any artifact, and drops it on the floor.</p>
+</dd>
+<dt>Create a good object <code class="docutils literal notranslate"><span class="pre">g</span></code></dt><dd><p>Prompts for the number of objects to create and then creates that many
+good objects nearby.</p>
+</dd>
+<dt>Create a very good object <code class="docutils literal notranslate"><span class="pre">v</span></code></dt><dd><p>Prompts for the number of objects to create and then creates that many
+very good (“excellent”) objects nearby.</p>
+</dd>
+<dt>Play with an object <code class="docutils literal notranslate"><span class="pre">o</span></code></dt><dd><p>Lets you modify an object by randomly rerolling it as a normal, good, or
+excellent object or lets you edit its attributes, including quantity, ego
+type, presence or absence of curses, combat values, and modifiers.  There’s
+also a statistics option to evaluate how likely worse, better, or matching
+objects of the same kind would be generated.</p>
+</dd>
+<dt>Test kind <code class="docutils literal notranslate"><span class="pre">V</span></code></dt><dd><p>Will prompt for a tval, as an integer.  For that tval, creates one object
+of each sval and drops it nearby.  There is a similar option with the ‘c’
+command, but this one will generate any instant artifacts associated with
+a tval and selects the tval by number rather than name.</p>
+</dd>
+</dl>
+</section>
+<section id="detection-information">
+<h2>Detection / Information<a class="headerlink" href="debug.html#detection-information" title="Permalink to this heading">¶</a></h2>
+<dl class="simple">
+<dt>Detect all <code class="docutils literal notranslate"><span class="pre">d</span></code></dt><dd><p>Detects all traps, doors, stairs, treasure, and monsters nearby.</p>
+</dd>
+<dt>Magic Mapping <code class="docutils literal notranslate"><span class="pre">m</span></code></dt><dd><p>Maps the nearby dungeon.</p>
+</dd>
+<dt>Learn about objects <code class="docutils literal notranslate"><span class="pre">l</span></code></dt><dd><p>Makes you “aware” of all items with level less than or equal to 100.</p>
+</dd>
+<dt>Monster recall <code class="docutils literal notranslate"><span class="pre">r</span></code></dt><dd><p>Gives you full monster recall on all monsters or on a chosen monster.</p>
+</dd>
+<dt>Wipe recall <code class="docutils literal notranslate"><span class="pre">W</span></code></dt><dd><p>Resets monster recall on all monsters or on a chosen monster.</p>
+</dd>
+<dt>Unhide monsters <code class="docutils literal notranslate"><span class="pre">u</span></code></dt><dd><p>Reveals all monsters.</p>
+</dd>
+<dt>Wizard-light the level <code class="docutils literal notranslate"><span class="pre">w</span></code></dt><dd><p>Lights the entire level, as the Potion of Enlightenment.</p>
+</dd>
+<dt>Create spoilers <code class="docutils literal notranslate"><span class="pre">&quot;</span></code></dt><dd><p>Lets you create a spoiler file for objects or monsters.</p>
+</dd>
+</dl>
+</section>
+<section id="teleportation">
+<h2>Teleportation<a class="headerlink" href="debug.html#teleportation" title="Permalink to this heading">¶</a></h2>
+<dl class="simple">
+<dt>Teleport level <code class="docutils literal notranslate"><span class="pre">j</span></code></dt><dd><p>Allows you to teleport to any dungeon level instantly.</p>
+</dd>
+<dt>Phase Door <code class="docutils literal notranslate"><span class="pre">p</span></code></dt><dd><p>Teleports you up to 10 spaces away.</p>
+</dd>
+<dt>Teleport <code class="docutils literal notranslate"><span class="pre">t</span></code></dt><dd><p>Teleports you up to 100 spaces away.</p>
+</dd>
+<dt>Teleport to target <code class="docutils literal notranslate"><span class="pre">b</span></code></dt><dd><p>Teleports you to the targeted grid (or close to it, if it is occupied).</p>
+</dd>
+</dl>
+</section>
+<section id="character-improvement">
+<h2>Character Improvement<a class="headerlink" href="debug.html#character-improvement" title="Permalink to this heading">¶</a></h2>
+<dl class="simple">
+<dt>Cure all maladies <code class="docutils literal notranslate"><span class="pre">a</span></code></dt><dd><p>Removes all curses, restores all stats, xp, hp, and sp, cures all bad
+effects, and satisfies your hunger.</p>
+</dd>
+<dt>Advance the character <code class="docutils literal notranslate"><span class="pre">A</span></code></dt><dd><p>Advances your character to level 50, maxes all stats, and gives you a
+million gold.</p>
+</dd>
+<dt>Edit character <code class="docutils literal notranslate"><span class="pre">e</span></code></dt><dd><p>Lets you specify your base stats, xp, and gold.</p>
+</dd>
+<dt>Increase experience <code class="docutils literal notranslate"><span class="pre">x</span></code></dt><dd><p>Prompts for an amount, up to 9999, to add to your current experience.</p>
+</dd>
+<dt>Rerate hitpoints <code class="docutils literal notranslate"><span class="pre">h</span></code></dt><dd><p>Rerates your hitpoints.</p>
+</dd>
+</dl>
+</section>
+<section id="monsters">
+<h2>Monsters<a class="headerlink" href="debug.html#monsters" title="Permalink to this heading">¶</a></h2>
+<dl class="simple">
+<dt>Summon monster <code class="docutils literal notranslate"><span class="pre">n</span></code></dt><dd><p>Prompts you for the name or integer index of a monster, then summons that
+monster nearby.</p>
+</dd>
+<dt>Summon random monster <code class="docutils literal notranslate"><span class="pre">s</span></code></dt><dd><p>Prompts for a number and then summons that many random monsters near you.</p>
+</dd>
+<dt>Zap monsters <code class="docutils literal notranslate"><span class="pre">z</span></code></dt><dd><p>Prompts for a distance, up to the maximum sight range, and deletes all
+monsters within that distance.</p>
+</dd>
+<dt>Hit all in line of sight <code class="docutils literal notranslate"><span class="pre">H</span></code></dt><dd><p>Hits all monster in the line of sight for a large, 10000, amount of damage.</p>
+</dd>
+</dl>
+</section>
+<section id="dungeon">
+<span id="debugdungeon"></span><h2>Dungeon<a class="headerlink" href="debug.html#dungeon" title="Permalink to this heading">¶</a></h2>
+<dl class="simple">
+<dt>Create a trap <code class="docutils literal notranslate"><span class="pre">T</span></code></dt><dd><p>Prompts for the type of trap to create and places it on your square.</p>
+</dd>
+<dt>Perform an effect <code class="docutils literal notranslate"><span class="pre">E</span></code></dt><dd><p>Prompts for an effect type and its parameters.  Then executes that effect.</p>
+</dd>
+<dt>Quit without saving <code class="docutils literal notranslate"><span class="pre">X</span></code></dt><dd><p>Quits the game without saving (prompts first).</p>
+</dd>
+<dt>Query the dungeon <code class="docutils literal notranslate"><span class="pre">q</span></code></dt><dd><p>Light up all the grids with a given square flag
+(see src/list-square-flags.h).</p>
+</dd>
+<dt>Query terrain <code class="docutils literal notranslate"><span class="pre">F</span></code></dt><dd><p>Light up all the grids with a given terrain type
+(see lib/gamedata/terrain.txt).</p>
+</dd>
+<dt>Collect stats <code class="docutils literal notranslate"><span class="pre">f</span></code> or <code class="docutils literal notranslate"><span class="pre">S</span></code></dt><dd><p>Collects stats on monsters and objects present on level generation.
+Requests number of runs, and whether diving or clearing levels, and
+outputs the results into the file ‘stats.log’ in the user directory.
+The comments in that file will be helpful for interpreting the
+results; for more in-depth information, it’s best to check the
+implementation of stats_collect() in wiz-stats.c.</p>
+</dd>
+<dt>Collect disconnection stats <code class="docutils literal notranslate"><span class="pre">D</span></code></dt><dd><p>Generates several levels to collect statistics about how often all
+down staircases are inaccessible to the player, how often the player’s
+starting location isn’t valid,  and how often a level has non-vault
+areas that are inaccessible to the player.  The results are written
+to the message window, and maps of the levels that are disconnected or
+have invalid starting locations are written to ‘disconnect.html’ in
+the user directory.  Also collects general statistics about the
+layout of all the generated levels and writes them to
+‘disconnect_gstat.txt’ in the user directory.  For more in-depth
+details about what’s considered disconnected and what else is
+summarized about level generation, check the implementation for
+disconnect_stats() in wiz-stats.c.</p>
+</dd>
+<dt>Collect pit stats <code class="docutils literal notranslate"><span class="pre">P</span></code></dt><dd><p>Generates several pits of the room type you specify (pit, nest, or
+other) and computes a histogram of the types of monsters involved.
+The results are written to the message window.</p>
+</dd>
+<dt>Nick hack <code class="docutils literal notranslate"><span class="pre">_</span></code></dt><dd><p>Maps out the reachable grids (by the sound and scent algorithm) in
+successive distances from the player grid.</p>
+</dd>
+<dt>Push objects <code class="docutils literal notranslate"><span class="pre">&gt;</span></code></dt><dd><p>Pushes objects off the targeted grid as a way of exercising push_object().</p>
+</dd>
+<dt>Write a map of the current level <code class="docutils literal notranslate"><span class="pre">M</span></code></dt><dd><p>Writes out a map of the current level as an HTML file.</p>
+</dd>
+</dl>
+</section>
+<section id="miscellaneous">
+<h2>Miscellaneous<a class="headerlink" href="debug.html#miscellaneous" title="Permalink to this heading">¶</a></h2>
+<dl class="simple">
+<dt>Animations demo <code class="docutils literal notranslate"><span class="pre">G</span></code></dt><dd><p>Displays the graphics or characters used for animating projection effects.</p>
+</dd>
+<dt>Key log <code class="docutils literal notranslate"><span class="pre">L</span></code></dt><dd><p>Displays the recent keystrokes entered.</p>
+</dd>
+</dl>
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="../index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="debug.html#">Debug Command Descriptions</a><ul>
+<li><a class="reference internal" href="debug.html#item-creation">Item Creation</a></li>
+<li><a class="reference internal" href="debug.html#detection-information">Detection / Information</a></li>
+<li><a class="reference internal" href="debug.html#teleportation">Teleportation</a></li>
+<li><a class="reference internal" href="debug.html#character-improvement">Character Improvement</a></li>
+<li><a class="reference internal" href="debug.html#monsters">Monsters</a></li>
+<li><a class="reference internal" href="debug.html#dungeon">Dungeon</a></li>
+<li><a class="reference internal" href="debug.html#miscellaneous">Miscellaneous</a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+<form class="search" action="../search.html" method="get">
+  <input type="text" name="q"
+   placeholder="type to search" />
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+  <div class="related bottom">
+  <nav id="rellinks">
+    <ul>
+        <li>
+          &larr;
+          <a href="compiling.html" title="Previous document">Compiling Instructions</a>
+        </li>
+        <li>
+          <a href="how-it-works.html" title="Next document">How It Works</a>
+          &rarr;
+        </li>
+    </ul>
+  </nav>
+  <nav id="breadcrumbs">
+    <ul>
+      <li><a href="../index.html">Home</a></li> 
+    </ul>
+  </nav>
+  </div>
+  <footer id="pagefooter">&copy; 2019, Angband developers past and present.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a>
+      5.3.0
+        with the <a href="http://github.com/irskep/sphinx-better-theme">
+          better</a> theme.
+
+  </footer>
+
+  
+  </body>
+</html>

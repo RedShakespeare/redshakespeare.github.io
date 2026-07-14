@@ -1,0 +1,4256 @@
+-------------------------------------------------------------------------------
+
+  Civilization
+  For Super NES
+
+  Walkthrough
+
+  By Jungon
+  joaobuaes@gmail.com
+
+  2015/12/30
+
+  Version 0.90
+
+
+-------------------------------------------------------------------------------
+  Contents:
+-------------------------------------------------------------------------------
+
+  Section . . . . . . . . . . Ctrl+F code
+
+  I- Intro. . . . . . . . . . . . [00001]
+  II- Story . . . . . . . . . . . [00002]
+  III- Starting . . . . . . . . . [00003]
+  IV- Terrains. . . . . . . . . . [00004]
+  V- Cities . . . . . . . . . . . [00005]
+  VI- Settlers. . . . . . . . . . [00006]
+  VII- Governments. . . . . . . . [00007]
+  VIII- Money . . . . . . . . . . [00008]
+  IX- The War . . . . . . . . . . [00009]
+  X- Diplomats. . . . . . . . . . [00010]
+  XI- Science . . . . . . . . . . [00011]
+  XII- The Spaceship. . . . . . . [00012]
+  XIII- The Paths . . . . . . . . [00013]
+  XIV- Spoiler-free Ending. . . . [00014]
+  XV- Different Versions. . . . . [00015]
+  XVI- FAQ. . . . . . . . . . . . [00016]
+  XVII- Copyright . . . . . . . . [00017]
+  XVIII- Credits. . . . . . . . . [00018]
+
+
+-------------------------------------------------------------------------------
+  I- Intro                                                            [00001]
+-------------------------------------------------------------------------------
+
+There are no FAQs or walkthroughs for this version anywhere, and it has its own
+pecculiarities, with less bugs comparing to PC version, but some tricky odds. I
+decided that since no one did it it's because they get frustrated with so much
+things to write again when there is a ton of walkthroughs for PC version
+anyway. And I decided this is my kind of thing, to write what others gave up
+and threw the towel.
+
+I ran into this game when the times where like "SNES is just RPGs and some
+lousy Street Fighter clone fighting games.", and at first I was thinking it was
+a weird copy of Simcity, and then I continued playing until easy addiction. No
+point discussing this.
+
+I'm Brazilian, so I hope my english is good enough for everyone to understand.
+
+Last, it's a puzzle/strategy game and they are just so amazing.
+
+
+-------------------------------------------------------------------------------
+  II- Story                                                           [00002]
+-------------------------------------------------------------------------------
+
+The story isn't too complicated, since you'll get the role of a leader who will
+have to spread his civilization through the world and preferably be more
+successful than these others civilizations around, that will try to talk to you
+in many ways saying that your civilization is a joke, and they would go easily
+to war against you, and you're a vermin to them and other degrading stuff that
+will lead to you getting mad at them and tearing up peace treaties.
+Particularly the romans and the indians will be very disturbing when hating you
+in their speach. Gandhi was never this evil in any other game.
+
+Also, you have to protect your civilization from occasional barbarians, famine,
+volcanoes, riots, pirates, flooding, sneak attacks, and the worst: time,
+because if you get behind your rivals in science, they will be more mean to you
+and enter war more often.
+
+When you start a game, this goddess woman will give you the "weapons" to be an
+amateur leader, which are the irrigation, which give you food, the roads, which
+give you knowledge and trade, and the mines, which help you build everything
+faster.
+
+After you get used to the game, just be advised that you'll be playing it from
+4.000 BC to 2.100 AD, which looks like a really long time, and ... it is.
+
+
+-------------------------------------------------------------------------------
+  III- Starting                                                       [00003]
+-------------------------------------------------------------------------------
+
+When you start a game, you'll first be shown three options.
+
+
+------------------------------------
+Game start? Customize world? Earth??
+------------------------------------
+
+This is your first configuration screen for the game, and the three option will
+get you different types of worlds. Game Start will generate a random world, but
+Customize World will give you new options:
+
+-Land Mass: Large means you'll have bigger continents, bigger islands, and
+smaller oceans. Small means smaller land and more ocean. Large is better for a
+spaceship quest, since you'll have more places to add cities, and smaller is
+better for destroying enemies as early as possible, because there will be less
+places to search for them.
+
+-Temperature: Warm means more deserts, and no tundra outside poles. It's
+better for everything to find more oasis too, and it's harder to play on tundra
+or near the poles, so it's about more expansion (warm), or more challenge
+(cool).
+
+-Climate: Arid will get you more deserts too, and more ground areas, but less
+oasis in general. And of course Wet gets you more rivers. Arid is better for
+destroying enemies early because they'll be weaker than normal when you find
+them, and Wet is better for a spaceship quest since you'll get bigger cities
+and they mean more score.
+
+-Age: 3million get you a world with more mountains, and 5million will make you
+meet a world with more hills. Mountains are harder to deal with, just this.
+
+Pressing B on the config screen will open the option for customize end. 'Yes'
+and on to the next options..
+
+Oh, if you choose Earth, you'll play a game with our real planet as the world
+map, a Civ version of it, of course. If you studied a little history, you'll
+know where you start after choosing your civilization, and you know where to
+search for your enemies too. At least for the start that's true. I'll explain
+it later on.
+
+
+--------------------------
+Which level of difficulty:
+--------------------------
+
+Chieftain- the easiest one, you start with 300 in money, often two advances and
+two settlers, barbarians are weakened to 20% of their unit forces, and you have
+free advice all the time, unless you turn it off on options. It's easiest to
+learn new advances and keep cities happy. Change of government is almost
+imediate. Barracks have less costs and famine lowers the cities less.
+
+Warlord- things are still easy, you don't start with money, but get one advance
+and often two settlers, barbarians are weakened to 40%, and will always lose to
+a phalanx yet. It's still easy to maintain happiness and learn advances, but
+cities riot at level 7. Change of government takes around 2 turns.
+
+Prince- the medium difficulty, start with 0 money, have one advance and two
+settlers sometimes, barbarians have 60% of their power, which can be
+troublesome for phalanxes over time. Learning advances will take longer, and
+maintaining happiness will start to be trouble too because the first riot
+usually happen at cities level 6. Change of government takes about 3 turns, and
+just rarely enemies will get a random wonder on a city.
+
+King- now it's getting hard, you start with no money, have one advance yet but
+more often only one settler, barbarians have 80% of their power, so you have to
+change your defenses on every city with new advances, which come slowly, and at
+cities level 5 you'll already be seeing riots. Change of government usually
+takes 4 turns, and it's not uncommon for enemy civilizations to get some of the
+wonders before you, probably while you were building it.
+
+Emperor- this is really hard, you start with 0 money, one settler and 1 or 0
+advance, having to learn them in a very slow curve, while enemies seems to be
+playing on Chieftain and learning it all easily, making you get behind in
+science often, and having to protect yourself from barbarians with full power.
+Change of government usually takes long 5 turns, your cities will start rioting
+at level 4, and you'll barely have a chance to build a wonder, since all
+enemies will start getting them randomly and quickly. Barracks cost 4$ in
+maintenance, and famine reduces a city in about 30%, often. If you win at this,
+you can mark yourself as "conquered it" (at your GameFAQs account).
+
+
+----------------------------
+The number of civilizations:
+----------------------------
+
+Options are 3 to 7, if you play with more civilizations, they'll bump into each
+other more often, advance less, and more often you'll get messages like "japan
+destroyed aztec", or "russia destroyed mongol", the civilizations will be very
+random before you actually meet them yourself. I find 7 a better number to
+start a despotic conquest, and to build up the spaceship too. 3 is a harder
+game since enemies left alone will most of the times advance in science and be
+harder to deal with, war or diplomatic. Starters should go with 7, I suppose.
+
+
+---------------------------------
+Which civilization should I pick:
+---------------------------------
+
+Pick your favourite. But if you get to see the advantages of each, let's see...
+in this version you only get a random start, with one or two knowledges, and 1
+or 2 settlers. Some say russians start with 2 settlers, but even this is random
+in this verion.
+
+But russians are the best choice to start if you look at the enemy picture..
+russians as enemies have the worst AI possible, they are extremely aggressive,
+they expand, they often destroy other civilizations, they conquer their
+continent, don't take long to figure out navigation and they don't like peace
+treaties, prefering to demand tributes. Prefer to start near them so you can
+deal with the guys when they're still weak.
+
+When you're playing a World Map game, on the other hand, you get to start on
+the same spots the actual civilizations started in the past, which can make
+you think of choosing a good starting point. I'd say aztecs and egyptians are
+best choices, because you'll have one entire continent to yourself, given you
+take good care of the 'corridor', let's say it like this.
+
+Starting knowledges I got by trying out:
+Alphabet, Bronze Wrk, Burial, Masonry, Pottery, Riding, The Wheel.
+
+Color: Roman/russian will be cyan, babylonian/japanese will be white,
+german/french will be purple, egypcian/aztec will be brown, american/chinese
+will be pink, greek/english will be green, indian/mongol will be yellow. It's
+impossible to meet two civilizations the same color on the same game, but if
+you kill one, the other of the same color will appear, given it's early enough
+in the game, which is before year 1.000 AD, I'm guessing. They can appear from
+nothing, far away, or near you, after some year they only appear on distant
+lands, and on World Map games they don't appear in logical places, I've had to
+deal with some greeks on America and found some aztecs on the Great Britain
+area once.
+
+
+-------------------------------------------------
+How does time works, 20 years passed in one turn?
+-------------------------------------------------
+
+Passage of time changes during the game, you'll be playing in different year
+paces, like this:
+
+4.000 BC - 20 BC: 20 years per turn
+20 BC - 1 AD: 21 years
+1 AD - 20 AD: 19 years
+20 AD - 1.000 AD: 20 years
+1.000 AD - 1.500 AD: 10 years
+1.500 AD - 1.755 AD: 5 years
+1.755 AD - 1.851 AD: 2 years
+1.851 AD and later: 1 year
+
+So, the game goes on for about 570~650 turns, which is a quest of days, maybe
+weeks playing, you should take a rest in the pauses and in between. Only play
+one entire game of Civ if you're taking the world, since this way, your turns
+will be faster and your enemies will perish sooner, if you end it quickly, it
+can go to about 2 hours, ... but a spaceship game going for max score can get
+to 100 hours of playing, most people say it's really boring, but I like it
+anyway =P
+
+The years you're playing make difference in where new enemies spawn too, see,
+even if you play with 7 civilizations, to defeat them all, there are 12 enemy
+civilizations. When you defeat the first one, the other with the same color
+will appear somewhere. Most of the times in a corner or other continent, but I
+had them appear in front of me sometimes, and killed their settler, or a city
+size 1 with no defenders. And sometimes you get the message right after you
+destroy the greeks, that english was destroyed by someone else.
+
+
+-----------------------------
+What can I do after starting:
+-----------------------------
+
+Ok, your settler is there, blinking, and there is a 3x3 square of non darkness.
+Now you can access the menus clicking anywhere else with A button.
+
+- Distribute: I recommend this is the first thing you should do. You start with
+0.5.5 ... the first number is lux, the second is tax, and the third is science.
+I prefer to change it to 0.0.10, but that's just me. If you prefer to raise
+money from taxes, go for it. I'd go with lux only after changing to republic,
+too.
+
+- Advice: Here you can keep an eye on many of the things happening in your
+little world:
+
+--- City Status: all your cities are here, how many food, build and trade
+points they are getting, and if you put it to the right, what are they
+building shows up too.
+
+--- Military: all your units are shown here. Pressing B, the next screen will
+show up with all units you already lost in this game. Oh, and the typo
+'Miritary' is here too =P I think it's from japanese..
+
+--- Intelligence: here you can see all your data, the game marks you as
+friendly, civilized, aggressive, militaristic, etc, shows your amount of cash
+and war units, plus your name, capital, and type of government.
+
+--- Attitude: you get an attitude survey, which shows a bar of happy, normal
+and unhappy people by percentage, kind of, and a list of cities and if they
+have marketplaces, banks, cathedrals, temples, and colosseums.
+
+--- Trade: this screen shows how many turns you have until the next advance,
+how much do you get from taxes, how much you spend on your buildings, and a
+list from what you get in food, build and trade from every city. Clicking
+'cost' you can see how many of each building you have, with the cost for one of
+these on the left.
+
+--- Science: all expertises you have show up here in a list. Plus the one that
+is being learn at the moment shows up above, and how much you need in science
+to advance. Use it from time to time, the science advtsor, oops, I mean,
+advisor. Game typo.
+
+- Revolution: This is the button you press when you want to change your
+government. A revolution will take place, some turns will pass and then you can
+decide the new government. Don't bother doing this before learning an actual
+government from the expertises, though. Or getting the Pyramids.
+
+- Information: More information.
+
+--- Top Five Cities: The top 5 for cities in the current game. It's calculated
+1st on how many wonders it has, 2nd on how many happy citizen are living
+there, and 3rd how many citizens are living there.
+
+--- Score: you can keep track of your score, but only for a spaceship game.
+You'll only know your conqueror score when you kill the last one of enemy
+civilizations. Things that matter to the final score for a spaceship game are
+1st how many wonder are in your cities, 2nd how much of the spaceship you
+build, 3rd how many future techs you learned, and 4th how many turns are you at
+peace with your enemies... sum all this to all levels of city size summed up,
+and there it is, your score. Dividing by 10 you get your percentage.
+
+--- Demographics: there is a lot here... it shows up in positions, so you know
+who is the 1st one in many aspects, but if you're not the 1st, you'll only know
+who he/she is if you established an embassy with them.
+
+----- Approval rating: this looks random to me, but it shows how much of the
+citizens approve the way you lead them.
+
+----- Population: your total population, of course.
+
+----- GNP: Not sure what this means..
+
+----- Mfg goods: Not sure too..
+
+----- LandArea: your domains of the world.
+
+----- Literacy: how many citizens are cult.
+
+----- Disease: how many citizens have been to the hospital recently, I'm
+guessing.
+
+----- Pollution: how much tons of pollution your cities generate.
+
+----- LifeExpecta.: how many years your usual citizen lives.
+
+----- FamilySize: how many children your usual citizens have.
+
+----- Milt.Service: how many years your citizens are soldiers in their lives,
+I'm guessing.
+
+----- AnnualIncome: your gain in taxes.
+
+----- Productivity: this looks random to me too, but.. how much you are
+producing with your cities (and settlers too, probably).
+
+--- Seven Wonders: There are 21 seven wonders in the game, so I prefer to call
+them just wonders. If you forgot where one was, it will show here which city
+it was, and if you don't know where it is, there is the 'Jump' menu.
+
+--- Space Ship: If you are building a spaceship, it will show up here, and if
+you feel like it's complete enough, launch it. 
+
+- Jump: lost a city? Find it in this list by its name. Forgot the name? ...
+well, the list is here, go testing! =P
+
+- World Map: Want to see the entire world on one screen. You almost got it,
+there is a little more to the right or left here.
+
+- Option: You can set some things.
+
+--- Instant advice: That's the tutorial messages that come ON on chieftain
+mode, you can turn it on for any difficulty, or off, of course.
+
+--- End of turn: The button stops showing up every end of turn if you put it
+OFF, which means you can't do final adjustments before letting the enemies
+move. I prefer it ON.
+
+--- Animation: You already know what the advances bring you, is getting tired
+of seeing all buildings appear in the city? Turn it OFF here.
+
+--- Music: Tired of the musics? Turn them OFF here.
+
+--- Enemy moves: If you turn this OFF, you can see the enemy moves more quickly
+and 'teleporting', but still one move per time, not that faster if you ask me,
+so I leave it ON too.
+
+- Save: Prefer to save your game every turn, before ending it.
+
+- Retire: You can always quit, and your score can be published, if you have
+done enough for the top 5.
+
+Above this menu you always get your name chosen before starting, your current
+year, your amount of cash, your lightbulb (the brighter, fewer turns to learn
+an expertise), your civilization (if you chose russia it will show up), your
+distrbution of trade, and finally your population. When you surpass 100.000,
+200.000, 300.000 etc, and then 1.000.000, 2.000.000, and then 10.000.000, I
+think you get the point, it will happen all the time anyway.
+
+Press A on your settler to see his command next, if you have more than one, it
+will show right below the above menu, on the right. Every time you have more
+than one unit on the exact same place, other will show up there and you can
+choose them directly pressing A too.
+
+
+------------------
+Tutorial messages:
+------------------
+
+*Game start: The first thing you must do is search out suitable locations for
+cities, and build the first of them, your capital. Suitable sites are rivers,
+plains and coastlines, or at some point near where a particular natural
+resource can be exploited.
+
+-Gee, what does that mean? It means what it means. By the way, you can press B
+on any spot for its description, but the next section 'Terrains' will give you
+even more of this information.
+
+
+*You found the spot: This site is suitable for the construction of a city. To
+build a city, select 'City' from the 'order menu,.
+
+-Comma and period together? I know, a lot of translation issues on the game,
+but it also means the game is telling you to build a city right away, where you
+are, as it will be a great city in the future. These places are often near
+horses, golden bars or forest deers.
+
+
+*After creating a city: A city serves as a focal point for trade and
+information. 'Sages' and 'scientists', people who gather information and are
+thus vital to your civilization, create new technologies and culture. Choose an
+appropriate field of research from the next menu to be displayed.
+
+-Gee, ...-- Well, these sages and scientist guys will be always researching
+ways of doing things easier and valuing resources, and making things that help
+out the life, or just give people comfort with better houses, anyway, what
+matters here is that you'll be upgrading your units eventually. Personally I
+don't think you should be picky on the first advance, since you need them all
+to have a good civilization. For my personal style of play, you should pick
+'The Wheel', or 'Bronze Wrk'.. or maybe 'Alphabet'. (I'm giving three options
+because as I said before level Chieftain often gives you two expertises, so
+maybe two of them will already be mastered from game start, then you get the
+other).
+
+
+*Settler in a ground spot near city: At this point 'irrigation' is appropriate.
+With irrigation your production of foodstuffs increases, as does the rate of
+increase of population of cities.
+
+-All ground spots near water should be irrigated if you have the time to use
+the settler for that, but if you're in a hurry to expand and overtake enemies,
+you should get going and find a new place for a city. If you irrigate it now,
+the tutorial will give you the next message when the settler is done..
+
+
+*Settler in a grass spot near city: At this point you would probably be best to
+build roads. When you build roads, your units will be able to move faster, and
+the volume of trade between cities will rise.
+
+-Irrigation is only good on the start if there will be immediate gain on the
+numbers, ground irrigated boosts the food points to double, while grass don't.
+But grass is already giving you that double, so making it better is building a
+road, really.
+
+
+*Settler climbing a hill near city: At this point you are able to expand your
+production of natural resources. The creation of 'mines' increases your
+production of natural resources.
+
+-Is he being redundant? Yes. But mining is a good way to improve your building
+speed and construct things faster, it's a good way to go for building wonders
+early up in the game, too. Colossus comes to mind.
+
+
+*Your first militia: You have just acquired your first military unit. Try to
+move the unit and to give it particular orders. Military units can be used to
+'explore', 'expand territory', 'attack', 'defend', and to perform other tasks.
+
+-I think he means you should defend your first city, because if there is no one
+to do it, and an enemy unit finds your city, he will take it and there will be
+no audience with the king, they all take opportunities, and only talk to you if
+they find one of your units.
+
+
+*Usually after the second city: Cities can be protected from bandits and enemy
+attacks by defense units of high defensive capability stationed in cities in
+the 'defense mode'. Just as 'SETTLERS' can be used to construct roads,
+irrigated regions and mines, they can also build new cities. To attack an
+enemy, use units with a high attack capability like MILITIA, ARMOR, or
+CATAPULT.
+
+-Come again? No, he does not mean militia, or armors that will be given to you
+after a long list of learnable expertises, actually he meant chariots, all the
+way chariots.
+
+
+*Basic Strategy: 1
+Cities should be defended by at least one (preferably two) military units of
+high defense capability. A balance should be kept between the speed with new
+cities are built and old ones developed. Beware of territorial expansion
+without adequate defense capability. Enemy military units or bandits will
+attack without warning.
+
+-Gee, is that true? Yes, I'm afraid so, sneak attacks are common, and you will
+never be able to negociate with bandits, but he's blabbbering a little, if you
+have a peace treaty with another civilization, they'll hesitate a lot before
+attacking, so if one of your cities is being surrounded, build up a chariot to
+sneak attack first. Or maybe a catapult, since the best defense is a good
+offense.
+
+
+*Basic Strategy: 2
+Be at peace with stronger powers, and subjulgate weaker ones as soon as they
+achieve independence. Consider changing the system of government to 'monarchy'
+once the number of cities passes six or perhaps seven. When a civilization
+reaches a certain level, send 'SPY' and build embassies so as to be swiftly in
+possession of information on that nation. Also use 'CARAVAN' to develop trade.
+
+-Well? He is partially right, but if your strategy is to conquer the world as
+quick as you can, don't bother other governments or caravans, only trade
+chariot and catapult strikes for blood. If you're sending a diplomat, be
+careful with his positioning, enemies love to sneak attack him.
+
+
+*Monarchy: You have now acquired the expertise for 'monarchy'. When you change
+your government to monarchy, the rate of production of your urban population
+rises, but so does the cost of maintaining each military unit. To change
+government, a 'revolution' must first take place. 'Revolution' is on the Game
+Menu.
+
+-Well? I personally think monarchy is a waste of time and trade, don't change
+to it, prefer republic, it gives much more to you.
+
+
+-------------------------------------------------------------------------------
+  IV- Terrains                                                        [00004]
+-------------------------------------------------------------------------------
+
+When you start actually playing the game, you won't see much, because in the
+start, you don't know what's out there. There are all these black clouds to
+keep you from seeing the world, and your mission is to unveil it. Start moving
+your first unit, the settler, and you'll see more, which means less of the
+darkness is there. Diagonal moves are often better when unveiling your world.
+
+Ok, you'll preferably build a city in the first turn, but if you don't, there
+is a chance you might find a better spot for your capital. Don't worry about
+"capital" itself, you can change your capital by building a palace where you
+want the capital to be. When you do it, the former palace will cease to exist.
+Be sure to move your first unit around a little, to unveil all city spots as
+soon as possible, then make it defend. You might get to find a village this way
+too.
+
+So, terrains. Terrains are all those spaces where your units are able to move
+at. These are all the possibilities: grass, river, ground, desert, forest,
+jungle, swamp, hills, mountains, tundra, arctic and ocean. And now, how to use
+each one.
+
+
+------
+Grass:
+------
+
+Food gain: 2 on despotism/anarchy, 3 on other governments (after irrigating)
+Build gain: none, but shield spots are worth 1
+Trade gain: none, but with roads, it's 2 on republic/democracy, and 1 on other
+governments
+Move cost: 1
+Defense: +0%
+
+Usually your most common terrain. It's good for your cities to have some of
+these around, because in the very beggining, they will provide you food points
+that will make your city grow without the need of irrigation.
+
+Can I turn it into something else? Yes, grass has some settler possibilities:
+- Forest: whether it's worth it, it will be up to you. Forest is more build,
+grass is more food. Costs 15 turns to do this.
+- Irrigation: later on in the game, you'll earn more than 2 food points, these
+grass spots are worth 4 food points, actually. But in the beginning, prefer to
+irrigate ground spots. Cost in time is 5 turns.
+- Road: building a road makes you move your units 3 times faster, and it
+accelerates science, which is a must, in all stages of a game. It's fast to do,
+costs only 2 turns.
+- Railroad: After building a road, it's even better to build railroads, it
+costs 4 turns to build it, but it multiplies your gain by 1.5. If you were
+gaining 2 food points, now it's 3. If it was 3, it will be 4. Only integer
+numbers..
+
+Maximum usage: An ideal grass spot will give you 4 food, 1 build and 2 trade
+points.
+
+
+------
+River:
+------
+
+Food gain: 2 on despotism/anarchy, 3 on other governments (after irrigating)
+Build gain: none, but curve spots are worth 1
+Trade gain: only 1, but with roads, it's 2 on republic/democracy, and 1 on
+other governments
+Move cost: 1
+Defense: +50%
+
+These too are good spots to have around, especially in the beginning, where you
+don't have to irrigate it to be gaining 2 food points. The only bad about them
+is you need the expertise of bridging before you start to build roads over
+them. And they're good for war too, since the protection is +50%. A good hint:
+You can't build roads over rivers from the start, but you can build cities,
+they can be your roads.
+
+Can I turn it into something else? Not really, but you can improve it:
+- Irrigation: later on in the game, you'll earn more than 2 food points, these
+river spots are worth 4 food points, actually. But in the beginning, prefer to
+irrigate ground spots. Cost in time is 5 turns.
+- Road: building a road makes you move your units 3 times faster, and it
+accelerates trade, which is a must, in all stages of a game. It's fast to do,
+costs only 2 turns, but for rivers you'll need to know bridging.
+- Railroad: After building a road, it's even better to build railroads, it
+costs 4 turns to build it, but it multiplies your gain by 1.5. If you were
+gaining 2 food points, now it's 3. If it was 3, it will be 4. Only integer
+numbers..
+
+Maximum usage: An ideal river spot will give you 4 food, 1 build and 2 trade
+points.
+
+
+-------
+Ground:
+-------
+
+Food gain: 1, raises to 2 with irrigation
+Build gain: 1, and on horses, 3
+Trade gain: none, but with roads, it's 2 on republic/democracy, and 1 on other
+governments
+Move cost: 1
+Defense: +0%
+
+Ground is not as good as grass when it comes to "later in the game", but at the
+start, it's good because it's easy to irrigate it so the food gain is the same,
+and you can actually build things faster using ground spots.
+
+Can I turn it into something else? Yes, ground can be modified by settler
+units:
+- Forest: whether it's worth it, it will be up to you. Forest is more build,
+ground is more food. Costs 15 turns to do this.
+- Irrigation: later on in the game, you'll earn more than 2 food points, the
+grass spots are worth 4 food points, actually. But in the beginning, prefer to
+irrigate ground spots. Cost in time is 5 turns.
+- Road: building a road makes you move your units 3 times faster, and it
+accelerates science, which is a must, in all stages of a game. It's fast to do,
+costs only 2 turns.
+- Railroad: After building a road, it's even better to build railroads, it
+costs 4 turns to build it, but it multiplies your gain by 1.5. If you were
+gaining 2 food points, now it's 3. If it was 3, it will be 4. Only integer
+numbers..
+
+Maximum usage: An ideal ground spot will give you 3 food, 4 build and 2 trade
+points.
+
+
+-------
+Desert:
+-------
+
+Food gain: 0,... 1 if you irrigate it. Oasis is worth 2 food points from the
+start, 3 with irrigation and make it 4 with railroad, and still raises to 6
+when you get to change government, which makes it the best spot for city
+growing.
+Build gain: 1, 2 if ou mine it, 3 suming up a railroad.
+Trade gain: none, but with roads, it's 2 on republic/democracy, and 1 on other
+governments
+Move cost: 1
+Defense: +0%
+
+These spots are not friendly at the beginning, and they won't get much better
+later. Most people prefer to mine these, but for me, especially when it comes
+to big continents, irrigate them all the way, so you can get water to all the
+hard-to-reach places, without 
+
+Can I turn it into something else? Not really, but you can improve it:
+- Irrigation: prefer to go with irrigation at start, because if there is a
+ground or grass spots nearby, it will be easier to reach it for irrigation too.
+Costs 5 turns.
+- Mining: makes it a better building spot, adding 1. It adds 2 if you get it to
+a railroad. 5 turns to happen too. Not hard to be changing them all the time.
+- Road: building a road makes you move your units 3 times faster, and it
+accelerates science, which is a must, in all stages of a game. It's fast to do,
+costs only 2 turns.
+- Railroad: After building a road, it's even better to build railroads, it
+costs 4 turns to build it, but it multiplies your gain by 1.5. If you were
+gaining 2 food points, now it's 3. If it was 3, it will be 4. Only integer
+numbers..
+
+Maximum usage: An ideal desert spot will give you 6 food, 1 build and 2 trade
+points. There is an alternative of mining which will change this to 3 food, 3
+build and 2 trade points.
+
+
+-------
+Forest:
+-------
+
+Food gain: 1, but deer spots are worth 2 on despotism/anarchy, 3 on other
+governments, and get to 4 with these and railroad
+Build gain: 2 (3 with railroad)
+Trade gain: 0
+Move cost: 2
+Defense: +50%
+
+Your main build spots at any game start, if you're not lucky enough to find
+the oil drops on swamps. They certainly hinder your city raising, but
+sometimes you'll need faster building of units, and it's good to prevent
+quick grow when you're avoiding riots.
+
+Can I turn it into something else? Yes, forest can be modified:
+Ground: costs only 5 turns to turn these into better trade spots, but for
+better food gain you'll need more 5 turns to irrigate it..
+Road: not much gain, roads alone don't change any values.. costs 4 turns.
+Railroad: makes forest spots evolve from 2 to 3 build points. Costs 8 turns,
+but it's worth the time, I swear to you.
+
+Maximum usage: An ideal forest spot is worth 4 food and 3 build points.
+
+
+-------
+Jungle:
+-------
+
+Food gain: 1
+Build gain: 0
+Trade gain: usually none, but pearl spots are worth 3 or 4 points, 5 with
+democracy/republic and a road. Make it a railroad, and it's 7 points
+Move cost: 2
+Defense: +50%
+
+These are bad to have a lot around especially at the beginning.. they don't
+provide enough of anything except the pearl with its trade points. Actually,
+you can accelerate the first 3 or 4 expertises to incredibly fast with a
+pearl. Don't be afraid to turn the common jungle spots to grass in the
+future.
+
+Can I turn it into something else? Yes, jungle can be modified:
+Grass: 15 turns. And after that irrigation on the same spot is 10 turns. Long
+time waiting for that, but you can get a level 28 city with 2 or 3 of these
+procedures, so consider doing it later on.
+Road: costs 4 turns to put roads in jungles.. prefer to do this just for
+pearls.
+Railroad: 8 more turns waiting for the railroad, again, it's only worth for
+pearls.
+
+Maximum usage: At best, you'll get 1 food and 7 trade points of these.
+
+
+------
+Swamp:
+------
+
+Food gain: 1
+Build gain: 0, but oil drops are worth 4 points, 6 with railroad.
+Trade gain: 0
+Move cost: 2
+Defense: +50%
+
+Can I turn it into something else? Yes, swamp can be modified:
+Grass: 15 turns. And after that irrigation on the same spot is 10 turns. Long
+time waiting for that, but you can get a level 28 city with 2 or 3 of these
+procedures, so consider doing it early.
+Road: costs 4 turns to pass roads in swamps.. prefer to do this just for oil
+drops.
+Railroad: 8 more turns waiting for the railroad, it's only worth for oil drops.
+Really.
+
+Maximum usage: An ideal swamp spot will give you 1 food and 6 build points.
+
+
+------
+Hills:
+------
+
+Food gain: usually 1, but 2 with irrigation, 3 with this and railroad
+Build gain: 0, 2 on coal spots, +2 or 3 for mining it, and railroad make it a
+really strong building spot.
+Trade gain: 0
+Move cost: 2
+Defense: +100%
+
+These are not really good spots at the beginning, but they provide good gain
+later, and coal spots can be used exactly like forests, but with better build
+gain. I prefer to mine only the coal and irrigate all the others.
+
+Can I turn it into something else? Not really, but you can improve it:
+Mine: takes 10 turns to build, sincerely I prefer to do it only for spots near
+cities that build things too slow.
+Irrigation: takes 10 turns too, the spot gives 3 food at best, but no trade.
+Road: 4 turns to do it. They don't get you trade points, but they get much
+easier to move around.
+Railroad: 8 turns. Again, no trade and even easier to move.
+
+Maximum usage: Hills spots are worth 1 food, and 7 build points. An
+alternative to these is change them to irrigation and they'll provide 3 food
+points, and 3 build points.
+
+
+----------
+Mountains:
+----------
+
+Food gain: 0
+Build gain: 1, 2 with mining and 3 suming up a railroad.
+Trade gain: usually 0, but a gold bar is worth 5 6 or 7 of these, and make it 7
+9 or 10 with a railroad, very useful for learning expertises.
+Move cost: 3 (avoid it with lcavs and chariots if possible)
+Defense: +200% (put a phalanx there and he is nearly invincible early on)
+
+Avoid mountains at all costs before 1.000 BC, and before you have the time to
+mine it properly, wait for the railroads. Use only the gold bars, like the
+jungle pearls, these are worth a good boost on science, just a little worse on
+the food gain for the city..
+
+Can I turn it into something else? Not really, but you can improve it:
+Mine: 10 turns to do it, I'd only bother for gold bars, really.
+Road: 6 turns. Prefer to do it only for gold bars too, since it takes too long.
+But, if you get a place with a lot of these combined, consider going through
+it.
+Railroad: 12 turns. Build it after roads, only for gold bars, like above.
+
+Maximum usage: Ideal mountains give you 3 build and 10 trade points.
+
+
+-------
+Tundra:
+-------
+
+Food gain: 1, 2 or 3 on a reindeer and 4 with railroad and ideal government.
+Build gain: 0
+Trade gain: 0
+Move cost: 1
+Defense: +0%
+
+Tundra is bad. If you want it to not exist since the beginning, choose to play
+warm maps. But if you happen to find these near the poles, and there are good
+spots near it, I don't see why it couldn't be a decent city.
+
+Can I turn it into something else? No.
+Road: 4 turns. Only worth for reindeers.
+Railroad: 8 turns. Again, reindeers only.
+
+Maximum usage: Only the 4 reindeer food points.
+
+
+-------
+Arctic:
+-------
+
+Food gain: 0, 2 if there is a sealion.
+Build gain: 0
+Trade gain: 0
+Move cost: 2
+Defense: +0%
+
+You only see these on the deepest of poles, so there isn't much to talk here.
+Don't go near them, and don't walk on them.
+
+Can I turn it into something else? No.
+Road: 4 turns. Actually, don't do it, you'll only find these on north and south
+pole anyway.
+Railroad: 8 turns. Not worth it.
+
+Maximum usage: Only the 3 seal food points.
+
+
+------
+Ocean:
+------
+
+Food gain: 1, 2 on fishes, and 3 on fishes and republic/democracy
+Build points: 0
+Trade points: 2, and become 3 on republic/democracy
+Move cost: 1, but only water units can move in it.
+Defense: +0%
+
+Later in the game, you'll see ocean spots as very good for trade gain. At the
+beginning, they just happen to hinder war progress, so start building your
+beach cities after you get good navigation units only.
+
+Can I turn it into something else? No.
+
+Maximum usage? Don't stay on despotism/anarchy...
+
+
+--------------------------------
+Cities built in different spots:
+--------------------------------
+Well, the spot you build a city in will make different cities:
+- Grass and river: Will start growing ok but producing slowly
+- Ground: Growing ok and producing a little faster than grass
+- Desert: Will have serious trouble with food and growing
+- Forest: Will grow slowly and produce faster
+- Mountains: Worst growth but good production
+- Jungle, swamp, hills, tundra, arctic: Slow growth and production
+- Ocean...? Not possible
+
+But:
+- Grass with shield: Good growing and decent production
+- River with curve: Same as above
+- Ground with horse: Good growing and great production
+- Desert with oasis: Great growing and decent production
+- Forest with deer: Great growing and production
+- Jungle with pearl: Grow slowly and give science quicker
+- Swamp with oil drop: Grow slowly and producing very fast
+- Hills with coal: Grow ok without the production
+- Mountain with gold: Worst growth and great production of trade and science
+- Reindeer, seal? Ok growth and no production
+
+
+---------
+Villages:
+---------
+
+In the map, you'll sometimes find a gray house, which is a village. These are
+all the possibilities when your unit walks into this spot:
+
+- Accepting our rule: You create a new town from it. It's my favorite outcome,
+since you don't need a settler, and you gain a new base for new strategies. It
+is even better if this happens on an island, which means the place is all yours
+now. Cities will be explained in the next section.
+
+- Scrolls containing wisdom: You get a new advance. It will be always one you
+can learn, it's my second favorite outcome, but it can get you the same one you
+where learning, and this kind of makes you lose these turns without learning.
+
+- Skilled mercenaries: You get an extra unit, it can be a lcav or a legion.
+These are good for exploration of the map, and are NONE, which means they don't
+belong to any city, so they won't abandon you because of a weak moment from any
+city.
+
+- They give precious metals: You get 50$ in money, it's not bad, just it feels
+like they were a little cheap, since you'll probably have much more than this.
+Still, it's acceptable.
+
+- The clan were bandits: You get surrounded by barbarian units. This is the
+worst outcome, but there is always something good from this, as if you win the
+battle, your unit will most certainly be a veteran afterwards.
+
+
+-------------------------------------------------------------------------------
+  V- Cities                                                           [00005]
+-------------------------------------------------------------------------------
+
+That's something you'll most probably already have on the first turn. Cities
+are your bases for everything, they have your people, your war units, your
+non-war units, your gain on the terrains, and your building, of course. About
+the terrain, all cities will have 21 spots on its area, which are the 20 around
+it, and the center.
+
+Cities have levels, they start at 1, they need 20 food points to grow to level
+2, 30 to level 3, 40 to level 4, and so on. Prefer to build your cities on good
+spots, like deers, oasis and horses. When you start a city, you'll lose the
+settler unit that did it, it's as in 'they settled'.
+
+But the danger lies in letting cities grow too fast. At beginning you should
+let them grow only until they riot for the first time. Keep in mind the level
+it rioted, and keep all other cities from growing to this level, all of them
+should be one level below it. Depends on the difficulty level. Don't worry
+about the enemy too much, any city can build units, as long as you have the
+right advances and enough build spots around, which can be substituted by
+money. And remember to have a city connected to the ocean or else you can't
+produce ocean units or go to other continents.
+
+When you first build any city, you have to decide what the citizen of the city
+will work for building, which should be:
+- First, the defense, your best defensive unit, will be the militia at the
+start, so learn "Bronze Wrk" to get the phalanxes soon.
+- Second, a barrack, for making veteran units, barracks have no cost at the
+start, and you can sell them for 40$ anytime.
+- Third, a chariot, if you already have 'The Wheel'. You have to explore the
+land the most you can, find out the size of your continent, find the enemy
+civilizations, and depending on their strength, you can overtake some new
+cities from them, or destroy them, depends on the strategy.
+- and Fourth, a settler, the city being at level 3, spread, spread like a
+virus, be expansive, count 3 or 4 spaces and make a new city, repeating the
+process until you don't know where are some of the cities anymore.
+
+The strategy doesn't vary much for the start, as you have to make good use of
+scientists and put all the trade points on them, so the more cities you have,
+more quickly new expertises will come, and the advance will be faster. And the
+more you spread, more villages you find, more good things will happen to your
+units, like getting skilled mercenaries, scrolls with new expertises and even
+new cities can be born from the villages.
+
+
+-----------------
+Menus for cities:
+-----------------
+
+You get these options when clicking at the city menu:
+
+- City: This shows which spots of terrain are being used by the city, you can
+change it whenever you want, and it shows when a city will level up, how much
+you get from trade points, and a granary is shown on the left if you have one.
+You have to click the spot being used to stop using it, and click then on one
+you want to use. Test it a lot. Down there you get the results in food, build
+and trade points. In this menu, if there are people to spare, you can put them
+to do other jobs, like entertainer (Elvis), tax collector, and scientist.
+
+- Production: This shows what's being produced on the city, it can be a unit,
+a building, or a wonder, all cities are always producing something, and don't
+let this phrase be false, watch out for cities that have a barrack and are
+producing a barrack, maybe they are stuck, sell the item to make it produce
+again. This menu also shows an 'advice' button, you can use it to build what
+people from this city wants, but remember that you are their leader and you
+know what's best for them more than them :)
+
+- Armed forces: Here, all units inside this city will be shown. All defensive
+units, all sentry units, and all waiting-to-move units. Here the difference in
+defense and sentry will show up if you build a transport or sail, if the ocean
+unit can carry other units, and they are in sentry mode, they'll all tag along
+and hop in together on the same boat. 
+
+- View: This shows the animation of your city. Some houses, buildings, all the
+city has constructed, the citizes for the city level (entertainer really look
+like an Elvis here), and ... really, not much to be seen that you could not see
+on the 'City' and 'Production' menus.. you can even turn off the animations on
+options.
+
+- Happy: This will show the impact of some buildings over your citizens from
+this city. With this feature, you can know how much a cathedral, colosseum or
+temple are giving happiness to the citizens, how some wonders affect the city,
+and of course, how lux points affect them too.
+
+- Rename: You can rename any city that is yours, the best in this is that you
+can rename them so that you'll remember better where the city is.
+
+
+---------------
+Civil disorder:
+---------------
+
+What? The music changed to dispair! That means your city is currently under
+civil disorder, you have to go to the 'City' menu to make someone an Elvis to
+entertain the sad citizen. If a city keeps entering civil disorder, corruption
+can take it over and it will become an enemy city, depending on how well the
+enemies are, it will most probably be your worst enemy anyway. The main idea
+here is to balance the happiness, anyway. A city with more unhappy than happy
+will enter civil disorder. It's up to you avoiding it.
+
+Sometimes you'll notice that ugly face that shows up in a civil disorder over
+your city,.. it shows up on enemy cities as well, if the face shows up when
+you're destroying the defenses of this city, the enemy most probably is under
+despotism. If it shows up when you gather troops around but is not attacking,
+it's most probable that they are under monarchy. That's not completely tested
+yet, but makes sense, since on despotism, a city with no defenders can get an
+unhappy person at low levels.
+
+
+----------------------
+Thanksgiving festival:
+----------------------
+
+And now what? The music changed to a happy fanfare! Oh, that means a
+thanksgiving festival is taking place. It only shows up if at least half of the
+citizens are happy and none are unhappy. They'll be explained here in this
+section, as they are the key to extreme city growing.
+
+When you are on Democracy/Republic, and a city gets a thanksgiving festival,
+what will happen is that this city will start levelling up its size on every
+turn of the game. It only stops when the city doesn't have food points to stock
+food, or if less than half citizens are happy, of course. But really, if a city
+is using 57 or more food points, the festival never stops! If famine or
+flooding hits this city, it will all grow back in a few turns. Cities can grow
+this way to level 28, which is the max level as you know.
+
+Getting half of the citizens happy is not that easy, but it's not that hard
+either. What you need is a good amount of trade points, and lux of at least
+30%. But if you raise up your lux to 100% (distribution 10.0.0) for a few
+turns, nearly all cities join the Thanksgiving Festival, and they grow fast
+enough to sometimes surpass numbers, like showing 'America has 10.000.000
+people', and in the next turn show up 'America has 30.000.000 people'.. this
+trick is called President Day Sale on most FAQs, but I really think this name
+isn't fitting in the passage of years, days are irrelevant if 5 years pass in
+seconds.
+
+
+---------------
+City disasters:
+---------------
+
+After a turn ends, there are some disasters, natural random disasters that can
+hinder your progress just a little, or maybe a lot, depending on what happens:
+
+- Under attack by pirates: If a city gets this, it loses all food and build
+points, so, the construction will have to be restarted, and the city grow will
+take much more time, especially if you were using a granary to go faster. You
+can completely prevent this disaster by having a barrack built in the city.
+
+- Volcano: Can happen to any city that doesn't have a temple, and it destroys
+another building, if it gets your cathedral, for example, it's a possible riot.
+You can rebuild it spending money or making the city rebuild it the slow way,
+if you believe there is time for it. Volcanoes never happen if a city has no
+building.
+
+- Earthquake: This cannot be avoided, but it's rare too, the same effect of a
+volcano, destroy one building, and after that, you can rebuild it. It never
+happens on no building cities too.
+
+- Massive fire: Fire can destroy buildings too, but it will never happen on a
+city with aqueduct. Or again, cities without buildings never get massive fire.
+
+- Plague: This disaster takes down some of the city population, as it usually
+happens with cities less than level size 10, it often means no problem. An
+aqueduct is needed to prevent it.
+
+- Flooding: If a city gets this, it loses population, or I could say, it's a
+level decrease. It can be avoided by having city walls, but really, cities
+grow fast and flooding is rare.
+- Famine: This makes a city lose more population than a flooding, and it can
+be avoided by having a granary. On emperor difficulty level, famine reduces
+1/3 of a city population.
+
+
+
+- / - / - / - / - / - / - / - / - / - / - / - / - / - / - / - / - / - / - / -
+
+Here are all the improvements you can build at a city. Units will be treated in
+another section, later, called The War.
+
+-------
+Palace:
+-------
+
+Cost to build: 200 resources
+Maintenance: 0 resources
+Sell it for: 200$
+Since: Masonry
+Text: The administrative center of your civilization. Distant cities are prone
+to corruption.
+
+This is your main control center. A city with a palace has 0 corruption, and
+will always be your capital. You can change capital by building a palace, or by
+selling your palace and simply starting another city. But really, most of my
+games have the same capital all the time, so it's not necessary to change your
+capital.
+
+
+--------
+Barrack:
+--------
+
+Cost to build: 40 resources
+Maintenance: 0 at start, 1 after getting Gunpowder, 2 after Combustion
+Sell it for: 40$
+Since: game start
+Text: All units in cities become veterans. Maintenance costs rise with new
+technology and military units.
+
+This is a construction that will let you build units that are veterans. What is
+a veteran unit? It's a unit with 50% more attack and defense, so it's good. But
+later in the game you won't need much fighting if you are the most advanced,
+and the other players of Civ will tell you too that barracks are more worth
+selling them all the time to raise your money. It's even better than caravans
+and city exchanges..
+
+
+--------
+Granary:
+--------
+
+Cost to build: 60 resources
+Maintenance: 1 resource
+Sell it for: 60$
+Since: Pottery
+Text: 50% of stored food can be used after a population increase. Also protects
+population from starving.
+
+Remember when I told you cities need 20 food points to level up to 2, 30 to 3,
+40 to 4 and so on? With a granary built, you'll only need half of these food
+points. Good for the beginning, if you have enough money to maintain them (1$
+per turn), which is easy to obtain by selling barracks. But after the advent of
+"Thanksgiving festival", these become more and more useless. They protect
+against famine, which is just a random thing that doesn't really bother you.
+
+
+-------
+Temple:
+-------
+
+Cost to build: 40 resources
+Maintenance: 1 resource
+Sell it for: 40$
+Since: Burial
+Text: 1 unhappy person becomes satisfied. Also protects against the disaster
+'volcano'.
+
+A temple means a happier citizen, which means a happier city. You can raise up
+the standards for city size at the beginning in all cities with this. Later on
+you'll have better buildings for this task, but build it anyway, less unhappy
+citizens means more score, always.
+
+
+---------
+Marktplc:
+---------
+
+Cost to build: 80 resources
+Maintenance: 1 resource
+Sell it for: 80$
+Since: Currency
+Text: Tax income and luxury goods production increase by 50%.
+
+This is the marketplace, the way to happiness for consumers on your city. It
+will often make citizen happy (blue), without the need of an Elvis, and it's
+one of the key buildings to a high level city produce more lux and more tax.
+
+
+--------
+Library:
+--------
+
+Cost to build: 80 resources
+Maintenance: 1 resource
+Sell it for: 80$
+Since: Writing
+Text: Intellectual production increases by 50%.
+
+Libraries are good to have on cities with good trade flow. More than 4?
+Build one, the maintenance is low and the science will move faster.
+
+
+-----------
+Courthouse:
+-----------
+
+Cost to build: 80 resources
+Maintenance: 1 resource
+Sell it for: 80$
+Since: Laws
+Text: Corruption in the cities falls by 50%.
+
+Your cities farther from the capital are rioting in lower levels than you
+expected? Build a courthouse, and they will get normal again, sometimes
+even happy. Personally I think in the end of a spaceship game, all cities
+should have a courthouse, it's more happiness, which is more score.
+
+
+----------
+City Wall:
+----------
+
+Cost to build: 120 resources
+Maintenance: 2 resources
+Sell it for: 120$
+Since: Masonry
+Text: Defense factor increased by 3 times. Also protection against 'flood'.
+
+Enemies attack your cities and their level go down? They won't go down in a
+city with walls. Actually, I don't mind having no city walls in my cities,
+since the cost of maintenance can get you poor, so use them only at cities
+near a war.
+
+
+-----
+Bank:
+-----
+
+Cost to build: 120 resources
+Maintenance: 3 resources
+Sell it for: 120$
+Since: Banking
+Text: Tax income and luxury goods production increase by 50%.
+
+This is available to build only if you build first a marketplace. And don't
+sell the marketplace either, these are other 50%, which means about 225% of
+trade being used for lux and tax. Of course it's wanted on cities you want
+well developed. And their maintenance cost is easily paid since the taxes
+will give you more money.
+
+
+-----------
+University:
+-----------
+
+Cost to build: 160 resources
+Maintenance: 3 resources
+Sell it for: 160$
+Since: University
+Text: Intellectual production increases by 50%.
+
+This is available to build only if you build first a Library. And don't
+you sell these libraries, the boost is much better with both, which is
+around 225% of better advancing with science.
+
+
+---------
+Aqueduct:
+---------
+
+Cost to build: 120 resources
+Maintenance: 2 resources
+Sell it for: 120$
+Since: Construct
+Text: Cities without aqueducts cannot expand beyond 10 in population.
+Protection from 'fire' & 'epidemic'.
+
+I'll tell you this in an experience way. One time, I decided to build
+aqueducts only after cities started getting to level 10. This was a terrible
+idea, more and more cities started giving messages "Aqueducts are needed for
+this city to increase." to avoid this problem, build aqueducts around level
+6 or 7, or at least start their constructions earlier. I mean, you want your
+cities to be bigger and happier, right? This is a really important building.
+And don't sell them after level 10, they are needed for all level ups, 11,
+12, 13, and so on until 28.
+
+
+----------
+Cathedral:
+----------
+
+Cost to build: 160 resources
+Maintenance: 3 resources
+Sell it for: 160$
+Since: Religion
+Text: 4 unhappy people become happy. This helps protect large cities against
+riots.
+
+The hardest difficulty you choose, the more importance cathedrals have on
+your game. If a city starts rioting on level 5, and you build a cathedral for
+it, now this city can grow to level 9. Depending on the lux you choose, they
+can go much bigger with no problem. So, cathedrals are a must have.
+
+
+-----------
+Mass Trans:
+-----------
+
+Cost to build: 160 resources
+Maintenance: 4 resources
+Sell it for: 160$
+Since: Mass prod
+Text: The population is unaffected by pollution.
+
+Only build this for cities after level 20 or so. Or if they produce too much
+pollution. In my games I build them after all other improvements to avoid all
+pollution, but cities near the ocean won't need it, most of the times. This
+reduces about 16 tons of pollution, in general, if a city gets more, a
+'Recycle c.' will have to take place.
+
+
+----------
+Colosseum:
+----------
+
+Cost to build: 100 resources
+Maintenance: 4 resources
+Sell it for: 100$
+Since: Construct
+Text: 3 unhappy people become happy. This helps protect large cities against
+riots.
+
+This is an alternative for cathedrals, if you get both, you can grow your city
+by 7 levels with no problem. It's the only solution for Emperor games, even. A
+city has to have a colosseum eventually. I would get the cathedrals first
+because they have bigger effect and less maintenance cost. But put these on
+your cities too.
+
+
+--------
+Factory:
+--------
+
+Cost to build: 200 resources
+Maintenance: 4 resources
+Sell it for: 200$
+Since: Industrial
+Text: Cities' production increases 50%. 'Industrial plant' will nullify it, and
+operations cease.
+
+I would only mind building a factory for extreme purposes, like building later
+wonders and spaceship parts. But after that, the 'Manufac. P' will always mean
+better build gain. And a factory produces more pollution.
+
+
+-----------
+Manufac. P:
+-----------
+
+Cost to build: 320 resources
+Maintenance: 6 resources
+Sell it for: 320$
+Since: Robotics
+Text: Cities' production increases 100%.
+
+With these, I build my spaceships in games. Double production, in the better
+cities (3 better, usually), get you the hardest longest parts in 6 or 7 turns.
+And they make better selling buildings in the end, much better than barracks,
+since you'll acctually see the years pass even in long settler moving turns.
+After a city has all improvements you need, let them build and sell this one.
+
+
+----------
+SDI Dfnse:
+----------
+
+Cost to build: 200 resources
+Maintenance: 4 resources
+Sell it for: 200$
+Since: Supr Cndct
+Text: Cities are protected from nuclear missile units; attack with these
+weapons have no effect.
+
+I don't think you'll ever need one of this. It's an alternative for 'Your
+selling item for money", though. If you engage in a nuclear war, consider
+putting one of these on your capital.
+
+
+-----------
+Recycle C.:
+-----------
+
+Cost to build: 200 resources
+Maintenance: 2 resources
+Sell it for: 200$
+Since: Solar
+Text: The probability of pollution drops by 2/3.
+
+Build this only if the mass trans didn't reduce all of the pollution. It's
+more powerful for pollution control, and the maintenance is easy to pay. It's
+rare that a city will really need it, anyway.
+
+
+----------
+Pwr Plant:
+----------
+
+Cost to build: 160 resources
+Maintenance: 4 resources
+Sell it for: 160$
+Since: Refining
+Text: Production from factories and industrial plants increases 50%; pollution
+decreases.
+
+This is available to build only if you build first a Factory. Well, here is
+your 225% for build points. A city with both will produce incredibly fast, you
+get barracks every turn, and mech infs too. Personally, I won't need it when I
+finally get to this point of the game, and if a city builds things every turn,
+the game will start to get really slower. And don't build this on the continent
+you put your Hoover dam, it's redundant.
+
+
+----------
+Hydro Pwr:
+----------
+
+Cost to build: 240 resources
+Maintenance: 4 resources
+Sell it for: 240$
+Since: Television
+Text: Production from factories and industrial plants increases 100%; pollution
+decreases.
+
+This is an alternative for factories, and it's as good as a 'Manufac P'. If I'm
+not mistaken, you can only put these on near-river-or-ocean cities.
+
+
+---------
+Nuke Pwr:
+---------
+
+Cost to build: 160 resources
+Maintenance: 2 resources
+Sell it for: 160$
+Since: Nuclear
+Text: 50% production increase from factories / industrial plants. Less
+pollution. Riots may cause meltdown.
+
+Only have one of this after learning 'Fusion'. Although I never got a
+meltdown before, it's probably not a good thing for pollution and city
+level.
+
+
+- / - / - / - / - / - / - / - / - / - / - / - / - / - / - / - / - / - / - / -
+
+And now, the wonders:
+
+--------
+Pyramid:
+--------
+
+Cost to build: 300 resources
+Since: Masonry
+Text: Type of government changes without passing through 'anarchy'. 'Communism'
+cancels effect.
+
+This is a good wonder because you can change to any government with it,
+including the ones not mastered yet, so you don't need to learn communism, you
+can change to it with the pyramids. The best use of it is to change to
+democracy/republic and some turns after this, learn communism =P if you're
+going to republic, you'll only need the change once, believe me.
+
+
+----------
+B. Garden:
+----------
+
+Cost to build: 300 resources
+Since: Pottery
+Text: Happiness increases by 1 in each city. 'Invention' cancels effect.
+
+I happen to believe this is a very short time for a wonder, since 'Invention'
+is something I pursue from the start, wanting my railoads as soon as possible.
+But if you can wait, build this early, and some happiness will happen on your
+cities.
+
+
+---------
+Colossus:
+---------
+
+Cost to build: 200 resources
+Since: Bronze Wrk
+Text: Trade in cities increases by 1. 'Electrical Science' cancels effect.
+
+The best one to start, the increased trade will accelerate the advances and if
+you happen to change strategy with distribution, this will give more lux and
+more tax too, but I prefer to use it for expertise boosting.
+
+
+-----------
+Lighthouse:
+-----------
+
+Cost to build: 200 resources
+Since: Map Making
+Text: All ship movement increased by 1 square. 'Magnetism' cancels effect.
+
+'Magnetism' means 'Compass', silly translation. Well, compass is an early
+enough advance to make this a very short span wonder, and the Expedition is so
+close and so ... limitless. Only bother doing this for scoring and too-early
+trireme exploration.
+
+
+----------
+Great Lib:
+----------
+
+Cost to build: 300 resources
+Since: Literacy
+Text: You gain any expertise developed by 2 other civilizations. 'University'
+cancels effect.
+
+I'll be honest here, I never gained these expertises from 2 other
+civilizations.. maybe it's broken. Maybe I'm advancing too fast, I don't know
+how to use this wonder. It sounds good, though. In a 3 civilization game, this
+would give ou evertything they learn until someone learn 'University'... which
+is soon enough to blew things up.
+
+
+-------
+Oracle:
+-------
+
+Cost to build: 300 resources
+Since: Mysticism
+Text: 'Mysticism' increases the effect of 'temples.' 'Religion' cancels effect.
+
+Religion comes so quick in the expertise menu that I never had a chance to use
+the Oracle.. but as I only build temples after changing government, and I only
+change government after getting 'Industrial' and 'Mass Prod', which are often
+much later than 'Religion',... I just don't see the point of a wonder that
+expires so soon.
+
+
+-----------
+Great Wall:
+-----------
+
+Cost to build: 300 resources
+Since: Masonry
+Text: Interchange with other civilizations always brings offer of peace.
+'Gunpowder' cancels effect.
+
+This is a good thing to have if you happen to fall behind in science, and if
+you are an evil treaty tearer too. Gunpowder can be hindered as much as it's
+your only option to learn it, and if the enemies get it first, you don't have
+that much trouble learning it from them, it's only a problem if you really fall
+behind in science..
+
+
+-----------
+Expedition:
+-----------
+
+Cost to build: 400 resources
+Since: Navigation
+Text: All ships movement increases by 1 square.
+
+You have to have this, not just because there isn't a glitch to move
+infinitely, but because if your enemies get it, they become annoying and the
+end of turn transition becomes much slower.. just build it in a far away city
+on your main continent, good hills around, and not that far from the capital.
+
+
+----------
+M. Chapel:
+----------
+
+Cost to build: 300 resources
+Since: Religion
+Text: Increases the effect of 'churches' until the development of communism.
+
+If you plan to use the churches early on, this is a good wonder to have
+in early times, and since you're probably holding to learn communism because of
+the Pyramids too, it can come in handy.
+
+
+----------
+C. Observ:
+----------
+
+Cost to build: 300 resources
+Since: Astronomy
+Text: Coordination of 'library', 'university', and 'scientists' doubles
+intellectual production.
+
+It doubles intellectual production, I mean, you have to advance faster than
+your enemies, that's the kind of thing that will help out a lot, and it never
+expires, so, save a good producing city to learn this around 500-1.000 AD =P
+
+
+-----------
+S. Theater:
+-----------
+
+Cost to build: 400 resources
+Since: Medicine
+Text: Unhappy people in cities become content. However, hinders the development
+of 'Electrical Science.'
+
+Another of the good wonders to have, but it expires soon enough, and will be
+joined by the Colossus, they both expire on the same turn, not that you won't
+have some other ways to compensate at this point. Remember, even if wonders
+expire, they already opened the way to more advancing.
+
+
+-----------
+N. College:
+-----------
+
+Cost to build: 400 resources
+Since: Gravity
+Text: Intellectual production in all 'libraries' and 'universities' increases.
+
+This is one of the first non-cancelling wonders you can get. Getting it early
+will most probably make it advance much quicker than any other civilization you
+could be possibly fighting, so, it's a great thing, given you build some
+libraries on your best trade cities to actually activate the gain.
+
+
+-----------
+JSB Cthdrl:
+-----------
+
+Cost to build: 400 resources
+Since: Religion
+Text: The unhappy people in all cities of the continent decrease by 2.
+
+You have to have this, especially on the Emperor difficulty level. Actually, if
+you don't buy this, your cities will hardly grow to size 10. 
+
+
+----------
+D. Voyage:
+----------
+
+Cost to build: 300 resources
+Since: Railroad
+Text: With 'Darwin's voyage,' your civilization gains the next two expertises
+you choose.
+
+Prefer to build this later, the expertise curve is exponential, which means the
+more you learn, the longer will take to learn the next one. But do it before
+the FutrTechs anyway, I'd say around 'Plastics' is too late too, around 'Solar'
+or 'Union' should be good.
+
+
+-----------
+Hoover dam:
+-----------
+
+Cost to build: 600 resources
+Since: Television
+Text: Electrification of cities on continent increases production by 50% as
+pollution decreases.
+
+This is very good to have on your biggest continent, of course. This and a
+Manufac. P will give the best results for production, it can get to building a
+SS Module in 4 or 5 turns at better cities.
+
+
+---------
+Suffrage:
+---------
+
+Cost to build: 600 resources
+Since: Industrial
+Text: 'Republicanism'/'Democracy' reduce unhappiness due to units outside home
+city, with 'Women's Sufferage.'
+
+Some people might start to think Suffrage is not that important, but they just
+think that way because they never saw what happens when you change your
+government to republic before building one. Without a suffrage, you can't have
+a boat out of the city, it generates unhappiness in the city. If you defend
+cities with knights like me so you can capture barbarian leaders, you need one
+of this.
+Note: Settlers, diplomats and caravans don't add unhappy people to their
+cities.
+
+
+-----------
+Manhttn Pr:
+-----------
+
+Cost to build: 600 resources
+Since: Fission
+Text: 'Manhattan Project' completion starts nuclear weapon production in cities
+with technology.
+
+Actually, what it means is that you can build nuclear weapons after building
+this. If you're going to nuke them all, global warm and stuff, of course you'll
+need this. If you're not... just the score please.
+
+
+------
+U. N.:
+------
+
+Cost to build: 600 resources
+Since: Communism
+Text: Negociations with other civilizations will always bring offers of peace.
+
+This is the same of a Great Wall, but without the gunpowder cancel. It's a good
+thing to have if you don't want to fight, if you're behind, or if you want to
+sneak attack more often.
+
+
+----------
+Apollo P.:
+----------
+
+Cost to build: 600 resources
+Since: Flight3
+Text: Civilizations with technology to produce spaceship components may produce
+spacecraft.
+
+Flight3 is a late expertise, usually on last 5 before futrtechs, so as if this
+is mandatory to build a spaceship, if you're going to build it, search for your
+better production cities, put a factory or manufac there and after it's done,
+you'll need at least two other cities to build all the 'spacecraft' you need.
+For maximizing score, you need all of them, described in a later section called
+'The Spaceship'. As late expertise, you'll probably already be using good
+productions spots and know well where they are, so it won't be a big problem,
+especially if you have a lot of cities, probably between 50~60.
+
+And the game doesn't say this, but it lets you see all enemy cities on map,
+even in the middle of darkness, undiscovered terrains.
+
+
+-----------
+SETI Prgrm:
+-----------
+
+Cost to build: 600 resources
+Since: Computers
+Text: Knowledge produced by your cities increases 50%.
+
+Increasing of more 50% of knowledge? Yes please. The faster you get futrtechs,
+the better. I say this because Computers is one of the 10 last expertises you
+can get.
+
+
+-----------
+CureCancer:
+-----------
+
+Cost to build: 600 resources
+Since: Genetics
+Text: All cities in your civilization increase happiness by 1.
+
+Remember to build this early when you change your government to republic or
+democracy, it's just a good help and makes easier for thanksgiving festivals to
+happen.
+
+
+-------------------------------------------------------------------------------
+  VI- Settlers                                                        [00006]
+-------------------------------------------------------------------------------
+
+About settlers, the first thing you should know if you're a beginner, is that
+you'll have a lot of settlers, if you want your terrain to be best, at least
+two from each city, but only after you get railroads, before that, one is the
+most you can. There is not such a thing as "You have settlers enough", you
+never have. But there is a thing that is "You can't make a settler any more".
+With this limitation, you should have one settler for each city, and if you
+started with two of them, keep the settler NONE, it's really good to have a
+settler that don't cost food or build points to any city.
+
+Ok, on with some things you can do with terrains.
+
+
+-----
+Move:
+-----
+
+You move your settler once per turn, from one spot to another, unless there is
+a road, then settler moves 3 spots, or a railroad, which if you build enough,
+will make you cross the entire continent.
+
+
+----------
+Replenish:
+----------
+
+This is a way to discard a settler that will help the city you do it on, it can
+only be done on cities under level 10, and watch out if you're not going to
+starve them in the future. If you find out the settler's home city will have a
+shortage of food, and you're near any tiny growing city, replenish and you
+solve two problems.
+
+
+-------
+Sentry:
+-------
+
+There is hardly a reason to make a settler sentry, unless you plan to take it
+on a sea trip and you're still building up the boat. A settler NONE, after you
+built everything you need, can be sentried to become aware of barbarians, so it
+can run away, or if an enemy settler plunder your irrigations, you can do it
+again.
+
+Be careful, if you sentry a settler, you can only unsentry it in the next turn.
+
+
+--------
+Defense:
+--------
+
+Settlers have 1 defense point, which means if they're working and a barbarian
+or enemy in general attack it, there is a chance the settler will win and the
+enemy will be destroyed. But why bother letting your settler have this fight
+when there are much better defensive units?
+
+Avoid doing this for settlers, let the phalanxes take care of it. And it loses
+the settler's turn if you do it, you can only stop defending in the next turn.
+
+
+----------
+Home City:
+----------
+
+You can change the home city of a settler by walking on a different city and
+using this command. If the settler is costing too much food resources for your
+current city, and another city is growing too fast and you can't hold it for
+long, change it to the growing city and it will grow less fast, while the
+former home city will grow faster again. This works better on despotism and
+anarchy, sadly.
+
+Oh, and if you click this with your settler NONE, it will cease to be a settler
+NONE, starting to depend on a city. Never to this. Never.
+
+This command doesn't end the turn, so do it without fear when you can.
+
+
+-----------
+Irrigation:
+-----------
+
+This can only be done in spots of grass, river, ground or desert that are near
+the ocean, rivers, and other irrigated spots. You can spread your irrigation
+through the inside continent this way. And if you tell the settler to ground or
+grass (when in jungles, swamps or forests), the game consider it as irrigating,
+since it puts an 'I' for its command.
+
+The time a settler takes to irrigate a spot and become available again varies a
+little on the type of terrain: 5 turns for any flat spot, and 10 turns for
+hills.
+
+
+-----
+Road:
+-----
+
+Roads are trade, and movement three times faster. Build up roads, connect
+cities, make the work of war units and caravans easier with roads, I prefer to
+build roads only near cities, but again, I build cities whenever the settler is
+away from a city area by 1 or 2 spots.
+
+Roads take 2 turns to be done, but if you're building them on forests, swamps,
+hills, jungles, tundra or arctic, it will take 4 turns, and on mountains it's 6
+turns.
+
+
+---------
+Railroad:
+---------
+
+With railroads, your game gets easier, since their movement cost is 0, any unit
+can cross the continent in one turn. Settlers are no exception, you can be
+working with a settler on one side, and then, need it on the other side, move
+it there. Railroads are 50% more of everything you irrigated (or mined) too.
+
+Railroads take double the time of roads to be built, so, 4 turns for flat
+terrains, 8 turns for defensive and ice, and 12 turns for mountains.
+
+
+-----
+Mine:
+-----
+
+Remember you can't have irrigation and mine on the same spot. A mine is a good
+way to use hills and mountains to give you more build points (the shields, the
+shields!) and since you're interested in building things faster than the
+enemies (especially wonders).. try to mine every gold bar you can.
+
+All mines will make the settler build it for 10 turns.
+
+
+--------
+Plunder:
+--------
+
+Not worth it. Plunder actually destroys irrigation, mines,.. it's like going
+back. You don't wish it even for your enemies.
+
+It costs only 1 turn to do it, though.
+
+
+---------
+Fortress:
+---------
+
+Fortress can be good for defense, but to move a settler to war ahead of other
+troops? Unthinkable. Prefer to build fortress over hills and mountains if the
+enemies are coming..
+
+It's 5 turns waiting for a fortress to be done. But if you do it on hills,
+forests, swamps, jungles.. it will take 6 turns, .. and on mountains, 7 turns.
+
+
+-----
+Wait:
+-----
+
+If a settler is doing something, you can stop its work, wait, and on the same
+turn, continue, or change to another, so, if you told your settler to grass a
+jungle, there is an alternative in case you change your mind. But the command
+wait is more because you can be moving more settlers around, and you might need
+to wait for another one to move before the one you told to wait.
+
+
+---------
+No Order:
+---------
+
+It is rare, but sometimes your settler will have to wait for one or two turns
+to be able to move, maybe because an enemy is getting near it, or a barbarian.
+Don't let your settler be threatened like this, run away to a city, and wait
+there with 'no order' until there is room for working again.
+
+
+--------
+Disband:
+--------
+
+If all your cities passed level 9 to 10, you can't replenish anymore, so if you
+need to undo the settler, there is this final option. But prefer to replenish
+or create a new city, always leave your options open. If the home city of the
+settler is happy enough and the settler is disbanded or replenished, there will
+be a thanksgiving festival for one turn, given the city was not growing before.
+
+
+--------------------------------
+How many settlers should I have?
+--------------------------------
+
+The more the merrier, I'd say. In the start, have only 1 settler for each city,
+or you'll hinder their growing, unless in the exception of a irrigated oasis,
+you can hold two. After the advent of railroads, you can have as much as you
+want, given the city has food points to spare. I've had a city build 8 settlers
+and another have 6 of them once, it started to use up too much the build points
+so I stopped producing them. But it was enough, and some turns near the end, I
+made the remaining of them become 5 cities in the same turn, all around the
+only enemy city left, all of them took festivals and grew around level 10~14
+with a little diplomatic help stepping on the enemy spots, and a cruiser to
+steal their fish =)
+
+
+-----------------
+The Settler NONE:
+-----------------
+
+A settler is an eating machine that costs 1 or 2 food point from its city all
+the time, like a parasit. But you don't need a settler to belong to any city,
+because there is the settler NONE option! How to do it is simple:
+
+- Make a new city, prefer it to be in forest or an oil drop, or have both near
+it.
+- Put the production to be a settler right away.
+- If you don't pick a very good spot for build points, it will cost out of
+your pockets, since the settler must be done when the city is still level 1.
+- You'll get the common message for 'At City they build a settler' and then it
+will show the map with the city, that became a settler, owned by NONE.
+- If it didn't happen, that's because the SNES version has this glitch where
+it does not always recognize a city will disappear after making a settler NONE,
+so there are some ways to force it to happen.
+1. Buy another settler, and disband it, or replenish another city.
+2. Sell all buildings you could possibly have added to the city before.
+3. Make the city have the most build points it can.
+
+You should keep this settler for irrigations, roads and mines only, never make
+a city with him, use settler owned by cities to do the steps above, you can
+make an army of these if you want =P
+
+Just if you keep failing at doing this process, remember that it's impossible
+to build a settler NONE on Chieftain difficulty, the game prevents it to
+happen, because this way you would lose a city.
+
+
+-------------------------------------------------------------------------------
+  VII- Governments                                                    [00007]
+-------------------------------------------------------------------------------
+
+You start a game with a government, since all civilizations with a leader have
+one, which is usually despotism or anarchy.
+
+At some point, you look at that revolution option on the menu, and ask yourself
+"Gee, what does this do?". And then you rebel and citizens all over the nation
+will be demanding for a new government. Luckily, when you do this, you already
+have some government learned as expertise. But if you were following the FAQ,
+be sure to know when you're ready to change government.
+
+
+-------------------
+Despotism/Dictator:
+-------------------
+
+You start at it. You get no food bonus for irrigating grass and river spots,
+a citizen can become unhappy if you have no protection for his/her city, people
+demand more war units, you can cancel (tear up) all peace treaties whenever you
+want, and demand tributes on enemy civilizaions. It's easier to keep people
+happy, despite the corruption being the highest possible. You get no bonus
+trade too. Units with this city as home cost 1 shield to maintain, IF there is
+more than the city level. And settlers cost 1 food point to the city too.
+
+
+--------
+Anarchy:
+--------
+
+This is the government you get for pressing revolution, just until you can
+choose the government again. You get nearly all the same attributes from
+despotism, the big difference is that corruption is a little lower for some
+reason.
+
+
+---------
+Monarchy:
+---------
+
+With monarchy, you start getting normal food points for irrigating all flats
+terrains, so grass and river count as 1 more, which will make cities grow
+faster and to higher levels. Happiness start getting a little harder to keep,
+and maintenance of units is 1 shield, plus 2 food points if it's a settler.
+Corruption is lowered, but the farther from the capital, the more you have. And
+the trade points are still the same, it only raises 1 on gold bars.
+
+
+--------------------
+Communism/Socialism:
+--------------------
+
+This socialism is a translation error, probably, but when you change government
+it will show up. It's not that different from Monarchy, as you get the same
+points from any terrain, but the government puts your corruption rate to lower
+levels since all cities start being treated like they're 10 squares from the
+palace. 
+
+
+---------
+Republic:
+---------
+
+With republic, you get a big boost of trade since all roads you did before and
+where giving you 1 trade point, now give 2 trade points, and ocean raises from
+2 to 3. This way, even on low level new cities, you might be getting happy
+citizens with a distribution that gives 2 or 3 for lux. Actually, it's almost
+mandatory to raise your lux at this point, because citizens are much harder to
+please. It's very usual for some cities to riot when you first enter republic,
+but you can fix it with few Elvis, and some cities will pass from festivals to
+rioting in few turns, if you can't control the city growth. Corruption still
+exists, so building courthouses here and there is useful.
+
+
+----------
+Democracy:
+----------
+
+They say democracy is the best government. Personally, I never got to like it,
+prefering republic. You get all the same trade bonuses, food gains and shields,
+but the biggest problem on democracy is that if a city riots for more than 1 or
+2 turns, your government is thrown all the way back to anarchy. And if two
+cities riot, it's immediate. Maybe I should test it with bigger lux percentages
+in the future, 5 or 6 should prevent the anarchy. Also, you get the lowest
+corruption possible.
+
+
+-------------------------------------------------------------------------------
+  VIII- Money                                                         [00008]
+-------------------------------------------------------------------------------
+
+I'm holding a money section, because some people have trouble raising it, or
+maybe spending it. So, as there is not much to add from other sections, I'll
+treat this as a FAQ instead of a walkthrough.
+
+-------------------
+How to raise money:
+-------------------
+
+There are some ways to raise money in Civilization:
+- Set the taxes higher: with this, all of your cities will be giving you extra
+money every turn.
+- Set the citizens as tax collectors: in pair with setting taxes higher, you
+have the extra option to decrease the food gain to make a citizen one tax
+collector, you get 2 more $, 3 if the city has marketplace, and 4 if it has a
+bank too.
+- Sell buildings: you can sell buildings, and the money worth is calculated
+exactly like the resources used to build it. 40 for barracks, 60 for granary,
+320 for a manufac p.... the idea is to sell what you're not using.
+- Capture barbarian leaders: 100$ each. They are a little rare most times, so
+don't count on them for a 'salary'.
+- Find a village that gives you precious metals: again, this is a little rare,
+and more random. 50$ each, in the beginning it sounds good but later on it
+sounds even cheap.
+- Capture enemy cities: you get enemy money to yourself. Depends on how well he
+is doing. And you get a new city if you didn't destroy it.
+- Move caravans to distant cities: the more distant the city, the more money
+you get. I never had it raise 40$ in one trip, anyway, so it's hard to count on
+this for the money, it's more for the trade points.
+- Demand tributes: when you have an audience with an enemy, you will have this
+option (unless you changed government to democracy or republic)... most enemies
+pay if they are weaker than you. Lincoln especially is very friendly when it
+comes to recognizing a stronger civilization and he's good at raising money too
+so you can get 50$ from him a lot.
+
+*hint* Sell all of your barracks one turn before learning 'Combustion' or
+'Gunpowder'. When they get obsolete, they aren't sold, they get destroyed.
+
+*hint2* If you're moving your palace, sell the old one 1 turn before, it has to
+be 1 turn before because of corruption issues. Or maybe you can sell it, and
+start your new capital from a settler. If you don't have a palace, the next
+city you start will have it.
+
+
+--------------------
+Ways to spend money:
+--------------------
+
+Now you can spend your money:
+- Buying your buildings: it costs their resources times 4, if I'm not mistaken.
+With this you can stop those constant messages of 'you need aqueducts here and
+there'. If people are unhappy and starting a riot, buy them a cathedral or
+colosseum.
+- Buying your units: it costs their resources times 6 (not sure), and
+sometimes you'll need to protect a city quicker because of unwanted guests that
+decided to sniff their nose around (your brand new city, perhaps?).
+- Buying your wonders: you can do this if you have a great amount of money, I
+mean a rich amount, most wonders cost 3200$, so you don't need to wait 58 turns
+for your Suffrage to be done.
+- Paying tributes: if your enemy demands tributes, you can pay it, they will
+always leave you alone after this, and most times they charge you 50$ or 100$,
+which is easy to get again. This way they always sign a peace treaty.
+- Requesting reinforcements: if you ask your enemies to help you on war against
+another enemy, they will ask for extra war funds (or bribing, I suppose), so
+they can believe you.
+- Go go diplomat: a diplomat can buy you new troops (given there is only one on
+the spot, which is most usual), and incite revolution on enemy cities so that
+they become yours WITH all the units inside for your usage. This is the best
+way to spend your money in my opinion. If a barbarian group took a city from
+you, buy it back, they build phalanxes and the cost will be very cheap, because
+barbarians are much more corrupt.
+
+*hint* A building costs less than half the initial price if you buy it on the
+second turn, given your city have at least one shield. This is a less costly
+way to build up cities that have less than 6 shields to use on construction.
+
+*hint2* If Stallin is charging you 1000$ on tributes, and Hamurabi is asking
+you for only 400$ to go to war against the russians,... go with the second
+option. Babylonians always lose the war against russians in my games, but they
+serve as shield =P
+
+*hint3* Buildings cost less than units, so if you need to buy a chariot with
+urgency, buy a temple, and then change it to a chariot. It works for all units
+with resource cost lower or equal than the building.
+
+
+-------------------------------------
+What happens if you run out of money:
+-------------------------------------
+
+The game has this way of telling you you're getting short on finances, so you
+can never bankrupt completely. First he will warn you your funds are rapidly
+decreasing, even if they were slowly decreasing, and then he will get your most
+expensive building and sell it for you. This way the cost will be shortened for
+the next turn. Of course he only sells it if there was no other way of keeping
+you from having a negative number for cash. With no money, you can't buy
+things, can't incite revolts, bribe units, in fact, it's dangerous to have 0 in
+cash. So, don't be afraid to raise taxes a little, or even go with a
+distribution of 0.10.0 for extreme cases.
+
+
+-------------------------------------------------------------------------------
+  IX- The War                                                         [00009]
+-------------------------------------------------------------------------------
+
+When it comes to the war, first you need to know your units, and how are the
+basics for a fight. All units have an attack number, a defense number, and a
+movement number. Remember those move costs on the terrains section? That's the
+use. It's very simple actually, the attack being bigger than the defense, the
+unit is good for attack, so, when you start a game, a good expertise to start
+with is 'The Wheel', because chariots have 4 for attack number. And 2 for
+movement, which makes them move around much faster.
+
+Well, these are all units you can build, when they are available, and when they
+are not available because they get obsolete too. And ADM stands for 'A'ttack
+'D'efense 'M'ovement, by the way.
+
+--------
+Settler:
+--------
+
+ADM: 0 : 1 : 1
+Cost to build: 40 resources
+Since: Game start
+Obsoletes: never
+Text: Adventurous citizens with the important tasks of building cities and
+developing nearby areas.
+
+Detailed in the Settlers section, before. And.... never attack anything with
+them, even barbarian leaders win.
+
+--------
+Militia:
+--------
+
+ADM: 1 : 1 : 1
+Cost to build: 10 resources
+Since: Game start
+Obsoletes: after getting Gunpowder
+Text: A military unit that can be formed in the first stages of a new
+civilization.
+
+Militias are not good enough to defend cities, since the enemies will be soon
+approaching you with chariots and catapults, (4 and 6 of attack, respectively).
+That's why your first expertises should focus on better units. Also, never use
+a militia for attack, unless in the rarest case, a barbarian leader passes by
+and stop just near him.
+
+
+--------
+Phalanx:
+--------
+
+ADM: 1 : 2 : 1
+Cost to build: 20 resources
+Since: Bronze Wrk
+Obsoletes: after getting Gunpowder
+Text: Infantry armed with spears. They possess good defensive power and provide
+superior defense for cities.
+
+Yeah, superior defense for cities for the first 4.000 years, ok, but they will
+be obsoleted. Phalanxes are great when it comes to defending against barbarians
+and sneak attacks, and they get almost invincible when they're on a mountain.
+But again, for the first 4.000 years only, eventually better defensive units
+will be available. And again, don't attack with a phalanx, unless the enemy is
+a barbarian leader next to him.
+
+
+-------
+Legion:
+-------
+
+ADM: 3 : 1 : 1
+Cost to build: 20 resources
+Since: Iron Work
+Obsoletes: after getting Conscript
+Text: Infantry with shields, short swords and lances. Cheap and effective
+attack unit.
+
+I wouldn't spend time on building one of these, but if you get them from a
+village, might as well use it. Their attack is a little inferior to a
+chariot, but they can be good for exploring and for taking enemy cities
+sometimes.
+
+
+----------
+Musket'rs:
+----------
+
+ADM: 2 : 3 : 1
+Cost to build: 30 resources
+Since: Gunpowder
+Obsoletes: after getting Conscript
+Text: Infantry with muskets. Superior defensive units, useful with heavy
+infantry, which needs protection.
+
+These guys will be your main defense when you get to gunpowder, they cost
+just a little more to produce, but it's worth it. Conscript is not far
+away if you play like me, avoiding gunpowder until the last moment, but
+1 or 2 cities will probably build these in the meanwhile.
+
+
+-----
+Lcav:
+-----
+
+ADM: 2 : 1 : 2 
+Cost to build: 20 resources
+Since: Riding
+Obsoletes: after getting Conscript
+Text: Cavalry. Quick and useful for reconnaissance and surprise attacks.
+
+Lcavs are good for exploring yor first continent and taking villages and non
+protected cities. I wouldn't build one, but as mercenaries, they're the best.
+
+
+-------
+Rifles:
+-------
+
+ADM: 3 : 5 : 1
+Cost to build: 30 resources
+Since: Conscript
+Obsoletes: never
+Text: Infantry with rifles. Great defense and can be used in place of heavy
+infantry and musketeers.
+
+Have these protect your cities. Get conscript as soon as you can, and mark a
+good centered city to produce them all for the continent. They win against
+all initial units, and the enemy loves to attack with these all the time.
+They're your final protection, in the end.
+
+
+--------
+Chariot:
+--------
+
+ADM: 4 : 1 : 2
+Cost to build: 40 resources
+Since: The Wheel
+Obsoletes: after getting Chivalry
+Text: Soldiers and commanders riding light vehicles. Best when used in mobile
+attacks but weak defensive units.
+
+Your main unit for exploration when the game starts, mostly the best advance
+you can get for starting is 'The Wheel'. Chariots are all you need for attack
+on a despotic conquest, they go fast and take cities from any enemy. You never
+have too many chariots, and you never stop expanding. Load your ships with
+them and go to other continents, always taking everything you can yo yourself.
+Chariots are the favorite units of every one that is conquering the world.
+
+
+--------
+Knights:
+--------
+
+ADM: 4 : 2 : 2
+Cost to build: 40 resources
+Since: Chivalry
+Obsoletes: after getting Automobile
+Text: Armored knights on large, powerful horses. Combines effective attacks
+with defense and mobility.
+
+I wouldn't change chariots for these, but sometimes a village gives you the
+opportunity for using knights. When you get to these, they can be used for
+attack and to protect cities, so don't mourn over your losses, knights can
+be cool too. But if you can, chivalry is an expertise you can get last,
+after rocketry, nuclear, and fusion, even.
+
+
+---------
+Catapult:
+---------
+
+ADM: 6 : 1 : 1
+Cost to build: 40 resources
+Since: Math
+Obsoletes: after getting Metallurgy
+Text: Catapults, attack weapon that hurl large rocks with force. Useful in
+attacking cities, weak when alone.
+
+The text is pretty much accurate for catapults, they're good for attacking
+cities, and they're too vulnerable when alone. Personally, I only get catapults
+by bribing enemy units, and near roads. And I disband all of them when changing
+government.
+
+
+-------
+Cannon:
+-------
+
+ADM: 8 : 1 : 1
+Cost to build: 40 resources
+Since: Metallurgy
+Obsoletes: after getting Robotics
+Text: Fixed, immobile, unrifled field cannons. Great attack units, and very
+useful with rifle infantry.
+
+Cannons are pretty much the evolution to catapults in Civ. The attack is bigger
+so you can take any city defended by phalanxes, but at this point, you'll most
+probably be fighting musketeers, and there is nothing like 100% chance of
+winning in battles. It's too rare for me to build a cannon in a game.
+
+
+------
+Armor:
+------
+
+ADM: 10 : 5 : 3
+Cost to build: 80 resources
+Since: Automobile
+Obsoletes: never
+Text: Armored cars. Superior in attack and mobility; one of the best land
+units.
+
+If you still go to war after getting to 'Automobile', use these to attack, the
+armors. They simply destroy anything in their way, attack three times if next
+to the enemy city, and their defense is good too, you could even use them for
+defending your cities. 
+
+
+---------
+Mech Inf:
+---------
+
+ADM: 6 : 6 : 3
+Cost to build: 50 resources
+Since: Union
+Obsoletes: never
+Text: Modern infantry in armored cars. Most effective land defensive units,
+useful in protecting valuable areas.
+
+These are my favorite units for defending cities, they have your best defense
+value, 9 when veteran, and their mobility lets you have only them for
+protection, they can even capture barbarian leaders and go back to the city on
+the same turn, most of the times.
+
+
+----------
+Artillery:
+----------
+
+ADM: 12 : 2 : 2
+Cost to build: 60 resources
+Since: Robotics
+Obsoletes: never
+Text: Squad of large-bore self-propelled guns. Attack by self-propelled guns
+negates the effect of walls.
+
+Artillery is only good for hi-tech war, robotics is a very late expertise, so
+when you get it, you might be aiming for the spaceship, but they can take
+nearly any enemy city in few attacks, and they're not hard to get close to a
+city, like cannons or catapults.
+
+
+--------
+Fighter:
+--------
+
+ADM: 4 : 2 : 10 (air)
+Cost to build: 60 resources
+Since: Flight1
+Obsoletes: never
+Text: Only fighter squadrons can attack bombers; they will crash if not in home
+city or carrier by end of turn.
+
+Fighters are hard maintenance for a game, they make lower turns as you use a
+lot of time moving them and calculating if they'll be safe by the end of all
+turns. Their attack is only good for fighting low level units, so it's hard to
+actually put them to good use.
+
+
+-------
+Bomber:
+-------
+
+ADM: 12 : 1 : 8 (air)
+Cost to build: 120 resources
+Since: Flight2
+Obsoletes: never
+Text: Bombers can remain in air through 1 turn but must return to home city or
+carrier by next turn.
+
+Bombers are different than fighters. With them, you can let them be in air for
+1 turn. So, if you have two of them and an army of enemies is getting close,
+ground enemies, let's say, you can leave a bomber out there and it will really
+hinder their progress and movement. Most enemies run away when they can move
+adjacent. So, bombers are good for defensive strategies, except when the enemy
+can build fighters.
+
+
+--------
+Trireme:
+--------
+
+ADM: 1 : 0 : 3 (ocean)
+Cost to build: 40 resources
+Since: Map Making
+Obsoletes: after getting Navigation
+Text: Ocean-going galleys can transport 2 units. They may be lost if not next
+to land at end of turn.
+
+It's a flawed ocean unit, but you can build it after getting only 2 expertises.
+Not a bad idea to invade other continents real early with this transporting a
+settler and a chariot, but if you need to deal with enemies in your continent
+first, prefer to wait for the 'Sail' unit.
+
+
+-----
+Sail:
+-----
+
+ADM: 1 : 1 : 3 (ocean)
+Cost to build: 40 resources
+Since: Navigation
+Obsoletes: after getting Compass
+Text: Small, lightly armed ship. Useful in performing initial sea search, they
+can transport 3 units.
+
+This is your main ocean unit. When you get to build these, ppreferably have the
+wonder Lighthouse, and delay learning 'Compass' as much as you can, while
+building the Expedition, somewhere else. As they can take 3 units inside them,
+chariot, diplomat, and settler comes to mind. A good combo for new continent
+exploration.
+
+
+--------
+Frigate:
+--------
+
+ADM: 2 : 2 : 3 (ocean)
+Cost to build: 40 resources
+Since: Compass
+Obsoletes: after getting Industrial
+Text: Heavily armed, high-speed ship. Can transport up to 4 units.
+
+Ok, in the event you learned compass too early because of a village or a trade,
+you get to use frigates instead of sails. They can transport 4 units, which
+gives more options for new continent and island discovering. They can even
+attack triremes and sails from other civilizations and barbarians.
+
+
+---------
+Ironclad:
+---------
+
+ADM: 4 : 4 : 4 (ocean)
+Cost to build: 60 resources
+Since: Steam eng
+Obsoletes: after getting Combustion
+Text: Steel-plated, high-speed steamship. Cannot transport but can attack enemy
+ships. Cannot attack shore.
+
+I hardly never have a sea war, so ironclads are useless to me. But if you get
+to see too many enemy triremes and sails around your ocean cities, build one of
+these and don't have any mercy, if you destroy a sail or trireme, you often get
+the message for destroying more than 1 unit.
+
+
+--------
+Cruiser:
+--------
+
+ADM: 6 : 6 : 6 (ocean)
+Cost to build: 80 resources
+Since: Combustion
+Obsoletes: never
+Text: High-speed, well-armed cruiser. Cannot transport but can bombard shore. 2
+square view range.
+
+By the time I get to combustion, I usually prefer to focus on ground defending,
+but most of the times, I build two of these to map the poles and see if I
+forgot to conquer some island that was still undiscovered. Cruisers have good
+attack and good defense, they move great distances especially with wonder
+Expedition, and enemies never bother attacking them, at least I neve saw it
+happen.
+
+
+-----------
+Battle Shp:
+-----------
+
+ADM: 18 : 12 : 4 (ocean)
+Cost to build: 160 resources
+Since: Steel
+Obsoletes: never
+Text: Heavily armed and armored. Cannot transport but can bombard shore. 2
+square viewing range.
+
+Their attack and defense are incredibly good, but as I said before, ocean war
+is too rare in my games, so I never saw any use for them. Maybe for protecting
+shore cities, onyl those that produce fast enough so you don't spend too much
+time building one.
+
+
+----
+Sub:
+----
+
+ADM: 8 : 2 : 3 (ocean)
+Cost to build: 50 resources
+Since: Mass Prod
+Obsoletes: never
+Text: Submarine. 2 square viewing range. Cannot be detected if it does not
+touch enemy.
+
+Subs are a good option to spy on enemies from other continents, they hardly get
+even noticed. Their view makes them good for exploration too, you might forget
+an island near poles, so unveil everything near them too. I prefer to do this
+with Cruisers, anyway.
+
+
+--------
+Carrier:
+--------
+
+ADM: 1 : 12 : 5 (ocean)
+Cost to build: 160 resources
+Since: Flight2
+Obsoletes: never
+Text: Aircraft carrier. Functions as base for fighters, bombers and nuclear
+missiles--up to 8 units.
+
+If you're going to use air units, or go to a hi-tech war, these are very useful
+for carrying your planes, otherwise, I wouldn't bother having one.
+
+
+----------
+Transport:
+----------
+
+ADM: 0 : 3 : 4 (ocean)
+Cost to build: 50 resources
+Since: Industrial
+Obsoletes: never
+Text: Large, modern transport. Carries up to 8 units; useful for invasions.
+
+They move 8 units. You can go with 8 settlers to a new island and populate it
+with 2 or 3 good size cities in a few turns with these. Plus this is the way to
+a 'Diploblitz' (which will be explained in a later section).. these are your
+best ocean transport units. Industrial is early for most science paths, so it
+can be a very useful unit for war and bringing chariots to the war on other
+continents too.
+
+
+------
+Nukes:
+------
+
+ADM: 99 : 0 : 16
+Cost to build: 160 resources
+Since: Rocketry
+Obsoletes: never
+Text: Nuclear missiles. Cannot be activated until 'Manhattan Project' takes
+place. Note the effect they have.
+
+I wouldn't bother building one of these as they can lower your score, with
+global warming or even making people in cities unhappy, but if an enemy piss
+you off enough to ask for this, nuke them out, it destroys their land, their
+units, prevents cities from growing healthy, and can taking out anything in a
+range of 16 squares from the city launching them.
+
+
+---------
+Diplomat:
+---------
+
+ADM: 0 : 0 : 2
+Cost to build: 30 resources
+Since: Writing
+Obsoletes: never
+Text: Diplomatic envoys for negociations with other nations, but can also spy,
+subvert, and other tasks.
+
+See the next section for more information on these little devils =)
+
+
+--------
+Caravan:
+--------
+
+ADM: 0 : 1 : 1
+Cost to build: 50 resources
+Since: Trade
+Obsoletes: never
+Text: Trade goods and material transport. Can help to complete 'wonders' once
+routes are established.
+
+I'll tell you all you need to know about caravans. They build wonders. And they
+get you trade routes established, which raises trade too. The proceeds in cash
+will be very low, but the outcome in about 30~40 turns is really great. Don't
+forget to have railroads connecting your cities so you can maximize caravan
+usage.
+
+
+----------
+War hints:
+----------
+
+- Make sure you avoid to just run in the direction of the enemy carelessly,
+their troops show up and sometimes you'll lose units to a stealth-like chariot,
+so go with different paths, they can be a little longer, but the enemy isn't
+waiting for them, most of the times.
+
+- Use their roads! If you took an enemy city down and you find a road, it's
+probably connected to another city, after something like this, even the most
+war lover Alexander that considered you an insignificant evil tribe will be
+begging you to spare him, and paying at least 50$ in tributes!
+
+- On your turn, when near the enemy city, move first your backup units coming
+as reinforcements, and then the front line, this way, you can take out an enemy
+that was keeping you from moving 'adjacent', and then reach the city with 2 or
+3 chariots, and attack it like crazy, or even bring some diplomat to incite a
+revolt.
+
+- When you take an enemy city, sell out all the improvements. Even if you were
+going to use them, sell them to get money, and then build them when the war is
+far from this city. It's more cash-smart this way.
+
+
+-------------------------------------------------------------------------------
+  X- Diplomats                                                        [00010]
+-------------------------------------------------------------------------------
+
+You bring up two diplomats, and you can't incite revolt because this is the
+enemy's capital, what to do?
+
+Ok, ok, first let me introduce the diplomat unit. Diplomats are little devils
+that make use of your money funds to buy out enemy units and even cities with
+all improvements and defenders it has. Diplomats spy, steal knowledge, destroy
+entire buildings, and change the owner of a city. They can see the City menu
+screen for an enemy city too, just they can't move anything this way.
+
+Oh, these commands you get when a diplomat meets an enemy city make the
+diplomat be disbanded after.
+
+
+---------------------
+Establish an embassy:
+---------------------
+
+Remember that screen on Advice -> Intelligence I told you about? This screen
+only showed your status as the game sees, but if you get a diplomat near a city
+and use this command, you get some info on your enemy too, well, English and
+French are usually civilized, Russia and Mongol are aggressive, Roman is
+perfectionist, Gandhi is friendly (even calling us a joke all the time), and so
+on. This can vary a lot, I even got an agressive expansionist Ganhdi once as
+enemy.
+
+
+------------------
+Search for cities:
+------------------
+
+Now you can see the City Menu for the enemy city, you can even press the side
+arrows and see the production and the armed forces. If you can see the spots in
+use, you can mark them somehow, and go there with some lcavs and chariots, step
+these spots a lot, and the city will starve some levels down.
+
+
+-----------------
+Steal technology:
+-----------------
+
+Well, well, Stallin is (again) avoiding a peace offer by calling you
+insignificant and demanding 1000$ in tribute, just to keep you from trading
+expertises with him that you know they have? If he learned something before
+you, steal from him with a diplomat.
+
+
+------------------
+Cause destruction:
+------------------
+
+If you get to the enemy city with a group of diplomats, and you find out you
+can't buy it with a little revolting, there is the option of causing the
+building to be destroyed. If the building destroyed is the enemy palace, voila,
+you can not just buy the city, you get it for about 30% of the price! They sell
+cheap, and all the other cities this civilization have will be completely
+corrupted, so you can buy all them at cheap prices given you have enough
+diplomats already on the line. Or if the building was the city walls, chariots
+can complete the job taking over the city much easier, too.
+
+
+------------------
+Incite revolution:
+------------------
+
+Want to keep everything your enemy have in this city? Even all the defense?
+Nearly every enemy city can be bought with this command. Their price will be
+calculated on the improvements and units, their corruption and the distance
+from their palace. Most of the times I get prices around 600$, and when I start
+to attack with diplomats, I usually have around 3000$ already. Reverting the
+city to your command is like taking the city by force, you get an amount of
+cash, an expertise, and any treaty is over, until their leader decides to talk
+to you,.. sometimes they get cheap shots with this, but it's very rare.
+
+If you don't get enough money for the transaction or say no, you don't lose the
+diplomat, but you lose his turn.
+
+
+------------------------
+Have audience with king:
+------------------------
+
+This command is an exception, your diplomat won't vanish after using it, but
+his turn will be used. With this "attack", you can sneak attack one or two of
+the enemy's forces that were bothering you, and then if your diplomat is near
+the city, you get to redo the peace treaty in no time! You can approach two
+cities with diplomats, and revert one to yourself, if you ran out of money to
+buy the other one, just keep the peace until you get the money again.
+
+
+--------
+Bribing:
+--------
+
+* Oh help, a chariot is coming to kill my diplomat, what do I do?
+- Well, go with the diplomat moving in the enemy's direction, and see how much
+he accepts for changing uniforms and starting fighting for you. They use higher
+prices when too near to the capital, but I usually get around 200$ for each. If
+you do this, the enemy unit will belong to your nearest city, not sure how this
+is calculated, but they never get NONE..
+
+
+-------------------------------------------------------------------------------
+  XI- Science                                                         [00011]
+-------------------------------------------------------------------------------
+
+About science, what do you need to know? Let me see, what you want in science
+depends on your strategy, and there are 2 main approaches on this: the war,
+and the spaceship. If you're thinking about war, go with the nastier names on
+the list, always starting with "The Wheel", and following with "Bronze Wrk",
+"Iron Work", "Math", and then "Burial". Wait, why "Math", why "Burial"? Because
+it leads to "Mysticism", which leads to "Astronomy", and finally to
+"Navigation", and you need it to travel overseas. But if you choose the
+building up the science to go for the spaceship kind of game, you should start
+with a slightly different approach, but I really think your first priority on
+both strategies is to expand very fast, and dominate all other civilizations
+quickly, so, cornering one of them after killing all others is the best way to
+start the spaceship game. It's not the only way, it's my strategy.
+
+Here are all the knowledges of SNES Civilization:
+
+---------
+Alphabet:
+---------
+
+Learnable from start, sometimes already known.
+
+What can you build with it:
+Nothing..
+
+What can you learn by knowing it:
+Laws
+Map Making
+Math (after getting Masonry)
+Writing
+
+
+----------
+Astronomy:
+----------
+
+Must have: Math, Mysticism
+
+What can you build with it:
+C. Observ (wonder)
+
+What can you learn by knowing it:
+Navigation (after getting Map Making)
+Gravity (after getting University)
+
+
+-------
+Atomic:
+-------
+
+Must have: Gravity, Physics
+
+What can you build with it:
+Nothing new..
+
+What can you learn by knowing it:
+Fission (after getting Mass Prod)
+
+
+-----------
+Automobile:
+-----------
+
+Must have: Combustion, Steel
+
+What can you build with it:
+Armor (unit)
+
+What can you learn by knowing it:
+Mass Prod (after getting Corporat'n)
+
+
+--------
+Banking:
+--------
+
+Must have: Republic, Trade
+
+What can you build with it:
+Bank (building)
+
+What can you learn by knowing it:
+Industrial (after getting Railroad)
+Corporat'n (after getting Industrial)
+
+
+---------
+Bridging:
+---------
+
+Must have: Construct, Iron Work
+
+What can you build with it:
+Nothing, but your settlers become able to build roads on river spots.
+
+What can you learn by knowing it:
+Railroad (after getting Steam Eng)
+
+
+-----------
+Bronze Wrk:
+-----------
+
+Learnable from start, sometimes already known. Wrk = game typo.
+
+What can you build with it:
+Phalanx (unit)
+Colossus (wonder)
+
+What can you learn by knowing it:
+Currency
+Iron Work
+
+
+-------
+Burial:
+-------
+
+Learnable from start, sometimes already known.
+
+What can you build with it:
+Temple (building)
+
+What can you learn by knowing it:
+Monarchy (after getting Laws)
+Mysticism
+
+
+----------
+Chemistry:
+----------
+
+Must have: Medicine, University
+
+What can you build with it:
+Nothing new..
+
+What can you learn by knowing it:
+Refining (after getting Corporat'n)
+Explosives (after getting Gunpowder)
+
+
+---------
+Chivalry:
+---------
+
+Must have: Riding, Stirrup
+
+What can you build with it:
+Knights (unit)
+
+What can you learn by knowing it:
+Nothing new..
+
+
+-----------
+Combustion:
+-----------
+
+Must have: Explosives, Refining
+
+What can you build with it:
+Cruiser (unit, ocean only)
+Also, your barracks will all be obsoleted..
+
+What can you learn by knowing it:
+Flight1 (after getting Physics)
+Automobile (after getting Steel)
+
+
+----------
+Communism:
+----------
+
+Must have: Industrial, Philosophy
+
+What can you build with it:
+U. N. (wonder)
+
+What can you learn by knowing it:
+Union (after getting Mass Prod)
+
+
+--------
+Compass:
+--------
+
+Must have: Navigation, Physics
+
+What can you build with it:
+Frigate (unit, ocean only)
+
+What can you learn by knowing it:
+Electric (after getting Metallurgy)
+
+
+----------
+Computers:
+----------
+
+Must have: Math, Television
+
+What can you build with it:
+SETI Prgrm (wonder)
+
+What can you learn by knowing it:
+Flight3 (after getting Rocketry)
+Robotics (after getting Plastics)
+
+
+----------
+Conscript:
+----------
+
+Must have: Explosives, Republic
+
+What can you build with it:
+Rifles (unit)
+
+What can you learn by knowing it:
+Nothing new..
+
+
+----------
+Construct:
+----------
+
+Must have: Currency, Masonry
+
+What can you build with it:
+Aqueduct (building)
+Colosseum (building)
+
+What can you learn by knowing it:
+Engin'rng (after getting The Wheel)
+Bridging (after getting Iron Work)
+
+
+-----------
+Corporat'n:
+-----------
+
+Must have: Banking, Industrial
+
+What can you build with it:
+Noyhing new..
+
+What can you learn by knowing it:
+Mass Prod (after getting Automobile)
+Refining (after getting Chemistry)
+Genetics (after getting Medicine)
+
+
+---------
+Currency:
+---------
+
+Must have: Bronze Wrk
+
+What can you build with it:
+Marktplc (building)
+
+What can you learn by knowing it:
+Trade (after getting Laws)
+Construct (after getting Masonry)
+
+
+----------
+Democracy:
+----------
+
+Must have: Literacy, Philosophy
+
+What can you build with it:
+Nothing but the government
+
+What can you learn by knowing it:
+Solar (after getting Mass Prod)
+
+
+---------
+Electric:
+---------
+
+Must have: Compass, Metallurgy
+
+What can you build with it:
+Nothing new..
+
+What can you learn by knowing it:
+Television (after getting Engin'rng)
+Flight2 (after getting Flight1)
+
+
+----------
+Engin'rng:
+----------
+
+Must have: Construct, The Wheel
+
+What can you build with it:
+Nothing new..
+
+What can you learn by knowing it:
+Television (after getting Electric)
+Invention (after getting Literacy)
+
+
+-----------
+Explosives:
+-----------
+
+Must have: Chemistry, Gunpowder
+
+What can you build with it:
+Nothing new..
+
+What can you learn by knowing it:
+Combustion (after getting Refining)
+Conscript (after getting Republic)
+
+
+--------
+Fission:
+--------
+
+Must have: Atomic, Mass Prod
+
+What can you build with it:
+Manhttn Pr (wonder)
+
+What can you learn by knowing it:
+Nuclear (after getting Television)
+
+
+--------
+Flight1:
+--------
+
+Must have: Combustion, Physics
+
+What can you build with it:
+Fighter (unit, air)
+
+What can you learn by knowing it:
+Flight2 (after getting Electric)
+
+
+--------
+Flight2:
+--------
+
+Must have: Electric, Flight1
+
+What can you build with it:
+Bomber (unit, air)
+Carrier (unit, ocean only)
+
+What can you learn by knowing it:
+Rocketry (after getting Television)
+
+
+--------
+Flight3:
+--------
+
+Must have: Computers, Rocketry
+
+What can you build with it:
+SS Struct (spaceship)
+Apollo P. (wonder)
+
+What can you learn by knowing it:
+Plastics (after getting Refining)
+
+
+-------
+Fusion:
+-------
+
+Must have: Nuclear, Supr Cndct
+
+What can you build with it:
+None..
+
+What can you learn by knowing it:
+None.. this is most commonly the last advance you get
+before FutrTechs
+
+
+---------
+Genetics:
+---------
+
+Must have: Corporat'n, Medicine
+
+What can you build with it:
+CureCancer (wonder)
+
+What can you learn by knowing it:
+Nothing new..
+
+
+--------
+Gravity:
+--------
+
+Must have: Astronomy, University
+
+What can you build with it:
+N. College (wonder)
+
+What can you learn by knowing it:
+Atomic (after getting Physics)
+
+
+----------
+Gunpowder:
+----------
+
+Must have: Invention, Iron Work
+
+What can you build with it:
+Musket'rs
+Also, your barracks will all be obsoleted..
+
+What can you learn by knowing it:
+Metallurgy (after getting University)
+Explosives (after getting Chemistry)
+
+
+-----------
+Industrial:
+-----------
+
+Must have: Banking, Railroad
+
+What can you build with it:
+Transport (unit)
+Factory (building)
+Suffrage (wonder)
+
+What can you learn by knowing it:
+Communism (after getting Philosophy)
+Corporat'n (after getting Banking)
+Steel (after getting Metallurgy)
+
+
+----------
+Invention:
+----------
+
+Must have: Engin'rng, Literacy
+
+What can you build with it:
+Nothing new..
+
+What can you learn by knowing it:
+Steam Eng (after getting Physics)
+Gunpowder (after getting Iron Work)
+
+
+----------
+Iron Work:
+----------
+
+Must have: Bronze Wrk
+
+What can you build with it:
+Legion (unit)
+
+What can you learn by knowing it:
+Bridging (after getting Construct)
+Gunpowder (after getting Invention)
+
+
+-----
+Laws:
+-----
+
+Must have: Alphabet
+
+What can you build with it:
+Courthouse (building)
+
+What can you learn by knowing it:
+Monarchy (after getting Burial)
+Trade (after getting Currency)
+Literacy (after getting Writing)
+Republic (after getting Literacy)
+
+
+---------
+Literacy:
+---------
+
+Must have: Laws, Writing
+
+What can you build with it:
+Great Lib (wonder)
+
+What can you learn by knowing it:
+Democracy (after getting Philosophy)
+Invention (after getting Engin'rng)
+Philosophy (after getting Mysticism)
+Republic (after getting Laws)
+
+
+-----------
+Map Making:
+-----------
+
+Must have: Alphabet
+
+What can you build with it:
+Trireme (unit, ocean only)
+Lighthouse (wonder)
+
+What can you learn by knowing it:
+Navigation (after getting Astronomy)
+
+
+--------
+Masonry:
+--------
+
+Learnable from start, sometimes already known.
+
+What can you build with it:
+Palace (building)
+City Wall (building)
+Pyramid  (wonder)
+Great Wall (wonder)
+
+What can you learn by knowing it:
+Math (after getting Alphabet)
+Stirrup (after getting Monarchy)
+Construct (after getting Currency)
+
+
+----------
+Mass Prod:
+----------
+
+Must have: Automobile, Corporat'n
+
+What can you build with it:
+Sub (unit, ocean only)
+Mass Trans (building)
+
+What can you learn by knowing it:
+Fission (after getting Atomic)
+Supr Cndct (after getting Plastics)
+Solar (after getting Democracy)
+Union (after getting Communism)
+
+
+-----
+Math:
+-----
+
+Must have: Alphabet, Masonry
+
+What can you build with it:
+Catapult (unit)
+
+What can you learn by knowing it:
+Astronomy (after getting Mysticism)
+Physics (after getting Navigation)
+University (after getting Philosophy)
+Computers (after getting Television)
+
+
+---------
+Medicine:
+---------
+
+Must have: Philosophy, Trade
+
+What can you build with it:
+S. Theater (wonder)
+
+What can you learn by knowing it:
+Chemistry (after getting University)
+Genetics (after getting Corporat'n)
+
+
+-----------
+Metallurgy:
+-----------
+
+Must have: Gunpowder, University
+
+What can you build with it:
+Cannon (unit)
+
+What can you learn by knowing it:
+Steel (after getting Industrial)
+Electric (after getting Compass)
+
+
+---------
+Monarchy:
+---------
+
+Must have: Burial, Laws
+
+What can you build with it:
+Nothing but the government
+
+What can you learn by knowing it:
+Stirrup (after getting Masonry)
+
+
+----------
+Mysticism:
+----------
+
+Must have: Burial
+
+What can you build with it:
+Oracle (wonder)
+
+What can you learn by knowing it:
+Astronomy (after getting Math)
+Philosophy (after getting Literacy)
+
+
+-----------
+Navigation:
+-----------
+
+Must have: Astronomy, Map Making
+
+What can you build with it:
+Sail (unit)
+Expedition (wonder)
+
+What can you learn by knowing it:
+Physics (after getting Math)
+Compass (after getting Physics)
+
+
+--------
+Nuclear:
+--------
+
+Must have: Fission, Television
+
+What can you build with it:
+Nuke Pwr (building)
+
+What can you learn by knowing it:
+Fusion (after getting Supr Cndct)
+
+
+-----------
+Philosophy:
+-----------
+
+Must have: Literacy, Mysticism
+
+What can you build with it:
+Nothing new..
+
+What can you learn by knowing it:
+Democracy (after getting Literacy)
+Medicine (after getting Trade)
+University (after getting Math)
+Religion (after getting Writing)
+Communism (after getting Industrial)
+
+
+--------
+Physics:
+--------
+
+Must have: Math, Navigation
+
+What can you build with it:
+Nothing new..
+
+What can you learn by knowing it:
+Atomic (after getting Gravity)
+Compass (after getting Navigation)
+Steam Eng (after getting Invention)
+Flight1 (after getting Combustion)
+
+
+---------
+Plastics:
+---------
+
+Must have: Flight3, Refining
+
+What can you build with it:
+SS Comp (spaceship)
+
+What can you learn by knowing it:
+Supr Cndct (after getting Mass Prod)
+Robotics (after getting Computers)
+
+
+--------
+Pottery:
+--------
+
+Learnable from start, sometimes already known.
+
+What can you build with it:
+Granary (building)
+B. Garden (wonder)
+
+What can you learn by knowing it:
+Nothing else..
+
+
+---------
+Railroad:
+---------
+
+Must have: Bridging, Steam Eng
+
+What can you build with it:
+D. Voyage (wonder)
+
+What can you learn by knowing it:
+Industrial (after getting Banking)
+
+
+---------
+Refining:
+---------
+
+Must have: Chemistry, Corporat'n
+
+What can you build with it:
+Pwr Plant (building)
+
+What can you learn by knowing it:
+Combustion (after getting Explosives)
+Plastics (after getting Flight3)
+
+
+---------
+Religion:
+---------
+
+Must have: Philosophy, Writing
+
+What can you build with it:
+Cathedral (building)
+M. Chapel (wonder)
+JSB Cthdrl (wonder)
+
+What can you learn by knowing it:
+Nothing else..
+
+
+---------
+Republic:
+---------
+
+Must have: Laws, Literacy
+
+What can you build with it:
+Nothing but the government
+
+What can you learn by knowing it:
+Banking (after getting Trade)
+Conscript (after getting Explosives)
+
+
+-------
+Riding:
+-------
+
+Learnable from start, sometimes already known.
+
+What can you build with it:
+Lcav (unit)
+
+What can you learn by knowing it:
+Chivalry (after getting Stirrup)
+
+
+---------
+Robotics:
+---------
+
+Must have: Computers, Plastics
+
+What can you build with it:
+Artillery (unit)
+Manufac. P (building)
+SS Module (spaceship)
+
+What can you learn by knowing it:
+None..
+
+
+---------
+Rocketry:
+---------
+
+Must have: Flight2, Television
+
+What can you build with it:
+Nukes (unit)
+
+What can you learn by knowing it:
+Flight3 (after getting Computers)
+
+
+------
+Solar:
+------
+
+Must have: Democracy, Mass Prod
+
+What can you build with it:
+Recycle C. (building)
+
+What can you learn by knowing it:
+Nothing new..
+
+
+----------
+Steam Eng:
+----------
+
+Must have: Invention, Physics
+
+What can you build with it:
+Ironclad (unit, ocean only)
+
+What can you learn by knowing it:
+Railroad (after getting Bridging)
+
+
+------
+Steel:
+------
+
+Must have: Industrial, Metallurgy
+
+What can you build with it:
+Battle Shp (unit)
+
+What can you learn by knowing it:
+Automobile (after getting Combustion)
+
+
+--------
+Stirrup:
+--------
+
+Must have: Masonry, Monarchy
+
+What can you build with it:
+Nothing new..
+
+What can you learn by knowing it:
+Chivalry (after getting Riding)
+
+
+-----------
+Supr Cndct:
+-----------
+
+Must have: Mass Prod, Plastics
+
+What can you build with it:
+SDI Dfnse (building)
+
+What can you learn by knowing it:
+Fusion (after getting Nuclear)
+
+
+-----------
+Television:
+-----------
+
+Must have: Electric, Engin'rng
+
+What can you build with it:
+Hydro Pwr (building)
+Hoover Dam (wonder)
+
+What can you learn by knowing it:
+Computers (after getting Math)
+Rocketry (after getting Flight2)
+Nuclear (after getting Fission)
+
+
+----------
+The Wheel:
+----------
+
+Learnable from start, sometimes already known.
+
+What can you build with it:
+Chariot (unit)
+
+What can you learn by knowing it:
+Engin'rng (after getting Construct)
+
+
+------
+Trade:
+------
+
+Must have: Currency, Laws
+
+What can you build with it:
+Caravan (unit)
+
+What can you learn by knowing it:
+Medicine (after getting Philosophy)
+Banking (after getting Republic)
+
+
+------
+Union:
+------
+
+Must have: Communism, Mass Prod
+
+What can you build with it:
+Mech Inf (unit)
+
+What can you learn by knowing it:
+Nothing new..
+
+
+-----------
+University:
+-----------
+
+Must have: Math, Philosophy
+
+What can you build with it:
+University (building)
+
+What can you learn by knowing it:
+Chemistry (after getting Medicine)
+Metallurgy (after getting Gunpowder)
+Gravity (after getting Astronomy)
+
+
+--------
+Writing:
+--------
+
+Must have: Alphabet
+
+What can you build with it:
+Diplomat (unit)
+Library (building)
+
+What can you learn by knowing it:
+Religion (after getting Philosophy)
+Literacy (after getting Laws)
+
+
+---------------------
+What about FutrTechs?
+---------------------
+
+Must have: All other 67 advances
+
+What can you build with it:
+More score, 5 per learning
+
+What can you learn by knowing it:
+Only more FutrTechs, until you reach 32, which is the SNES limit.. so, the
+score will go up in the end by 160, if you manage to learn them all, which is
+not that hard.
+
+
+------------------
+Curve of learning:
+------------------
+
+If you keep science in 100% (0.0.10), you will get always the same numbers for
+science advances, their curves vary from the start, but they all get very
+straight. I shouldn't call them curves, since they are straight lines, they are
+arithmetic progressive.
+
+- Chieftain: 10, 18, 24, 28, 30, 36, 42, 48, 54, 60, 66, 72, add 6 and so on.
+- Warlord: 10, 18, 24, 32, 40, 48, 56, 64, 72, 80... add 8
+- Prince: 10, 20, 30, 40, 50, 60, 70, .. always add 10
+- King: 12, 24, 36, 48, 60, 72... always add 12
+- Emperor: 14, 28, 42, ..add 14
+
+This also shows you get to take more than double the time to get new expertises
+on Emperor, if you stayed too much time on Chieftain, that is. These numbers
+also are multiplied by higher numbers if you put science to lower percentages.
+Let's take Prince for example. Your fifth advance will need 50 science points
+if you have science at 100%, if you change it to 10%, it will take 500 points.
+A formula will take place here:
+
+Science advance need = NS * LV * SD
+
+NS is the number of expertises you have.
+LV is the difficulty level:
+Cheftain = 6, Warlord = 8, Prince = 10, King = 12, Emperor = 14
+SD is the science distribution number.
+
+
+-------------------------------------------------------------------------------
+  XII- The Spaceship                                                  [00012]
+-------------------------------------------------------------------------------
+
+What do you need to know about the spaceship? Well, not that much, it launchs
+and it makes an ending happen, given you launch it inside the game time and the
+landing is marked to a year inside the game time too, you get score for this,
+which is 200, but sometimes you won't have time for the complete spaceship, so
+I'm writing here the minor spaceship needs so you can launch it before the
+aztecs or whoever is building one in your game.
+
+All you need to launch for the ship to have a good rate of success is:
+- 1 habitation module;
+- 1 life Support module;
+- 1 solor panel;
+- 1 propulsion comp;
+- 1 fuel comp;
+- 19 structs to put things together enough.
+
+One side will be disconneted, but it will take 16 years and the rate of
+success will be 99%, which gives you always the correct landing.
+
+
+----------
+SS Struct:
+----------
+
+Cost to build: 80 resources
+Since: Flight3
+Complete spaceship: 34
+Minor spaceship: 19 at least
+Text: Allows the construction of spaceship modules and components.
+
+
+--------
+SS Comp:
+--------
+
+Cost to build: 160 resources
+Since: Plastics
+Complete spaceship: 16
+Minor spaceship: 2, one of each
+Text: Allows the construction of spaceship propulsion units and fuel. One of
+each is required.
+
+
+----------
+SS Module:
+----------
+
+Cost to build: 320 resources
+Since: Robotics
+Complete spaceship: 12
+Minor spaceship: 3, one of each
+Text: Allows the construction of spaceship life-support, solar panels, and
+living quarters. All are required.
+
+
+----------------------
+Launched it too early?
+----------------------
+
+It is said about the PC version that if you play too fast to build a spaceship,
+and you launch it when years are passing more than two at a time, your
+spaceship can land between years and be lost forever in time.... in SNES
+version, this doesn't happen, I've tested it and seems that the ending catch up
+in the next years it can, when I tested it, I could play such a quick game on
+Chieftain that made it possible to buy a lot of parts and finish the ship to
+launch at 680 AD. So, no spaceship glitch, you can play a quick spaceship game
+if you want.
+
+Also, spaceship parts cost double amount in cash, so you should buy another
+building and then change it to the part you want. For structs, buy a
+marketplace. For comps, buy a mass trans. For modules, buy a manufac. If you're
+going to speed up this much, of course.
+
+
+-------------------
+Too low percentage?
+-------------------
+
+I have not tested building a spaceship and launching it with lowest percentages
+of success, and ... maybe next version will have this information.
+
+
+
+-------------------------------------------------------------------------------
+  XIII- The Paths                                                     [00013]
+-------------------------------------------------------------------------------
+
+Well, I'll tell you, there are a few number of endings in a game, but there
+certainly are hundreds, thousands of ways to do it differently. The main two
+paths for a Civ game are the despotic conqueror and the democratic ostrich, but
+the variations are still near infinity.
+
+
+-----------------------
+The Despotic Conqueror:
+-----------------------
+
+What you need: roughly, enemies to kill, as fast as you can. First, you put
+your science to 10, and get some basic advances: Bronze and Iron work,
+The Wheel, Math, Writing, Burial-Mysticism-Astronomy-Navigation, and then you
+get to 0.10.0, only focusing on killing. That's all the science you need for
+attacking.
+
+Build chariots, catapults, phalanxes, settlers, diplomats, sails, and go to
+wherever there is uncovered terrain, with roads and new cities. Any enemy you
+find, destroy it at once. Take their cities and use them for more war units
+production, if they want to speak to you, accept, and make a peace treaty so
+you can tear it up again and kill them. If they don't want the peace, even
+better, attack and attack more. If you lose units, don't worry too, there is
+much more in production.
+
+After all enemies are dead, roughly 12 civilizations, you win, usually in BC
+years. My record is still 1.400 BC, and better yet, this game is quick enough
+so you can play this way anytime you want. Just see how early you can conquer
+the world.
+
+
+-----------------------
+The Democratic Ostrich:
+-----------------------
+
+What you need: roughly, all the terrain you can get. Build cities 4 squares
+apart, max out science, when you get good production cities, you build JSB
+Cathedral, Suffrage, and then change your government to Democracy, keeping a
+good amount of luxury (lux). The points where the game will get easier are:
+
+1- When you get railroads. Cities will grow up faster and use their resources
+more widely.
+2- After you build marketplaces and banks, taxes will help you more.
+3- After the SETI Program, you'll see science accelerate a lot and get
+expertise around 2 or 3 turns each.
+
+Get all futrtechs, keep the peace, build up the spaceship in the end, build all
+the wonders, if an enemy got them first, go there diplomaticly and buy it. Max
+out score making everyone in cities happy, build aqueducts, cathedrals,
+colosseums, temples, mass trans, libraries universities, and courthouses. In
+the last 5 turns before the spaceship arrive, distribution should change to
+10.0.0, which you should use sometimes in the middle too, when you have too
+much money, and the need of city growing. After a city gets all buildings it
+need, keep selling SDI defense or Manufacs and you should get even richer.
+
+This game is long, but you'll get a really big score in the end, usually more
+than 300% if done right =)
+
+Oh, some people use a Monarchy stage in the middle, I prefer to skip it, it's
+a waste of trade. And trade is everything in a democratic ostrich game.
+
+And... for cities above 20 in size, you won't get extra score, so build a
+smaller city near it and use their food to get two cities at size 20.
+
+You can play democratic ostrich with less than 10 cities if you want, but
+cornering the enemy and populating all the world with cities is part of the fun
+to me, so I prefer to build as many cities as possible. It's more score too =)
+
+
+-------------------------
+The Republic Alternative:
+-------------------------
+
+That's my favorite path. Instead of using Democracy, go with Republic. This
+way, no rioting can throw your government away. And after you have around 60
+cities, it's almost impossible to keep track of all happiness and fast growing.
+The odds are you'll have a city stuck at level 3 with a lot of resources to use
+around and not using them. Have a time in around 50 turns to see all cities and
+what they're doing.
+
+
+----------------
+The Hi-tech War:
+----------------
+
+You were a democratic ostrich, but forgot to corner the enemy, or found out
+later there were others, and now they're stepping all your irrigation and even
+plundering? You can always change back to a war game if you want. Go against
+them and destroy them later. What can an enemy do with chariots and legions if
+you send some armors at them? How can a sail get near your shores if there is a
+cruiser or battleship waiting there? You can even nuke them enemies away, why
+not? The score will be lower, but the fun won't =P
+
+
+-----------------------
+The Ninja Civilization:
+-----------------------
+
+You got behind in science, and there are two enemies competing against each
+other? Okay, here's a good path for you: hide away and wait for them as they go
+often to war against each other. Send some diplomats with ocean units to move
+them, so they will not try and track you, and get some technologies. You can
+even buy their good cities if you get enough money. They will get it back soon,
+but their war units will vanish, or even become yours.
+
+
+---------------------
+The Archipelago Game:
+---------------------
+
+It's rare, but sometimes you start in an island, and all your sails finds are
+more and more islands. If you have to play like this, you can still go ostrich,
+and build your cities in different continents, the harder part will be the
+Hoover dam, which should be built on the bigger continent you can.
+
+
+--------------------
+Score and the paths:
+--------------------
+
+A game you conquer all enemies will have as score your number of years before a
+certain specific year that is the outline.
+
+But a game you conquer the space will have usually bigger scores, based on the
+number of happy citizens doubled, the number of citizens, the number of years
+with peace (counting barbarians), +20 for each wonder of the world you got,
++200 for the spaceship (complete), and +5 for each futrtech.
+
+Example:
+So, 200, 420, 160, 100, and the limit 125*20 = 2500, doubling about 50% of the
+citizens would be 1250, 3750+420+160+200+100= ... would be 4630, roughly, you
+won't get this without a very good starvation managing of bigger cities and
+good choice of city places, so you won't waste any good spot. The enemy should
+be in a corner and one or two of your cities should eat up his resources, with
+are already locked on all 8 sides by diplomats anyway. With luck, only 2 or 3
+diplomats will be needed. My best score so far was 454%, which was 4546 on the
+information->score screen. With the number of cities above 60, it starts to get
+hard to have them protected, but after some years, barbarians cease, and you
+won't need any protection, only use all the resources for the building of
+happiness increasing improvements and a little pollution control, since global
+warming means less score too.
+
+
+-------------------------------------------------------------------------------
+  XIV- Spoiler-free Ending                                            [00014]
+-------------------------------------------------------------------------------
+
+There are actually 4 ways of ending a game. One of them is defeat, of course.
+
+Ending 1: You destroy everyone. What happens is you win, and your score is
+determined on how early it is in the game.
+
+Ending 2: You launch yourself into space. If you reach this, your scoring will
+be based on happy citizens, wonders, peace, spaceship parts built, and the year
+won't matter.
+
+Ending 3: Time over. You can continue playing, but with no score. Meeting one
+of the conditions for the other ending will just lead you directly to the title
+screen.
+
+Ending 4: When you lose your last city and don't have any more mercenary units,
+it's time to see this ending, many years pass, and some people discover traces
+of a long lost civilization from the past, which was yours.
+
+
+-------------------------------------------------------------------------------
+  XV- Different Versions                                              [00015]
+-------------------------------------------------------------------------------
+
+Main differences between this and PC version:
+1- There is a limit to city size, it only goes to 28.
+2- There is a limit too on how much units you can have, it's 63 of each and 127
+total.
+3- FutureTechs are FutrTechs and only go until it reaches 32, then you keep
+learning 32 over and over again.
+4- There is no replay feature.
+5- There is no palace improvements, it's just one palace.
+6- No encyclopedia.
+7- Any civilization can start with 2 settlers.
+8- There is the japan instead of zulu, and the colors are changed.
+9- You can't use the build over water glitch, nor the sentry glitch.
+10- Not completely tested yet,  but you can't build a city on North/South Pole.
+I'll test this with a little global warming in the future.
+11- After you grow a city to a size there would be an 11th Elvis, a tax
+collector will take place instead. He'll count as 2 3 or 4 gold points income.
+It is said that in the PC version they don't count.
+12- When you bribe a unit in PC version, they're owned by NONE. In this
+version, they're owned by your nearest city.
+13- You can launch a spaceship much earlier than 1.755 AD, the game catch up
+in the next year it can and start to run the ending.
+14- Cities have slightly different names, as I'll put in the next part.
+
+
+------------
+Cities list:
+------------
+
+We find some differences in city names too. Here's the list of all suggestion
+name cities you can get. Names repeated will be marked with an asterisk.
+
+American: Washington, New York, Boston, Philly, Atlanta, Chicago, Buffalo,
+St. Louis, Detroit, New Orlns, Baltimore, Denver, Cincinatti, Dallas, Los
+Angls, Las Vegas.
+
+Aztec: Tenochttln, Chiauhtia, Chapultpc, Coatepec, Ayotzinco, Itzapalapa,
+Iztapam, Mitxcoac, Tacubaya, Tecamac, Tepezinco, Ticoman, Tlaxcala, Xaltocan,
+Xicalango, Zumpanco.
+
+Babylonian: Babylon, Sumer, Uruk, Nineveh, Ashur, Ellipi, Akkad, Eribu, Kish,
+Nippur, Shuruppak, Zariqum, Izibia, Nimrud, Arbera, Zamua.
+
+Chinese: Peking, Shanghai, Canton, Nanking, Tsingtao, Hangchow*, Tientsin,
+Tatung, Macao, Anyang, Chantung, Chinan, Kaifeng, Ningpo, Paoting, Hangchow*.
+
+Egyptian: Thebes, Memphis, Oryx, Heliopos, Gaza, Alexandria, Byblos, Cairo,
+Coptos, Edfu, Pithom, Busiris, Atheibis, Mendes, Tunis, Abydos.
+
+English: London, Coventry, Birmingham, Dover, Nottingham, York, Liverpool,
+Brighton, Oxford, Reading, Exeter, Cambridge, Hastings, Canterbury, Banbury,
+Newcastle.
+
+French: Paris, Orleans, Lyons, Tours, Chartres, Bordeaux, Rouen, Avignon,
+Marseilles, Grenoble, Dijon, Amiens, Cherbourg, Poitiers, Toulouse, Bayonne.
+
+German: Berlin, Leipzig, Hamburg*, Bremen, Frankfurt, Bonn, Nuremberg, Cologne,
+Hannover, Munich, Stuttgart, Heidelberg, Salzburg*, Koenigsbrg, Dortmund,
+Brandenbrg.
+
+Greek: Athens, Sparta, Corinth, Delphi, Eretria, Pharsalos, Argos, Micenae,
+Herakleia, Antioch*, Ephesos, Rhodes, Knossos, Troy, Pergamon, Miletos.
+
+Indian: Delhi, Bombay, Madras, Bangalore, Calcutta, Lahore, Karachi, Kolhapur,
+Jaipur, Hyderabad, Bengal, Chittagong, Punjab, Dacca, Indus, Ganges.
+
+Japanese: Tokyo, Kyoto, Osaka, Nagoya, Yokohama, Kobe, Fukuoka, Sendai,
+Kanazawa, Sapporo, Matsuyama, Akita, Hiroshima, Nagasaki, Nara, Kamakura.
+
+Mongol: Samarkand, Bokhara, Nishapur, Karakorum, Kashgar, Tabriz, Aleppo,
+Kabul, Ormuz, Basra, Khanbaryk, Khorasan, Shangtu, Kazan, Qyinsay, Kerman.
+
+Roman: Rome, Caesarea, Carthage, Nicopolis, Byzantium, Brundisum, Syracuse,
+Antioch*, Palmyra, Cyrene, Gordion, Tyrus, Jerusalem, Seleucia, Ravenna,
+Artaxata.
+
+Russian: Moscow, Leningrad, Kiev, Minsk, Smolensk, Odessa, Sevastopol, Tblisi,
+Sverdlovsk, Yakutsk, Vladivostk, Novograd, Krasnoyrsk, Riga, Rostov, Astrakhan.
+
+Additional cities: Mecca, Naples, Tyre, Tarsus, Issus, Cunaxa, Cremona, Cannae,
+Capua, Turin, Genoa, Utica, Crete, Damascus, Verona, Salamis, Lisbon, Hamburg*,
+Prague, Salzburg, Bergen, Venice, Milan, Ghent, Pisa, Cordoba, Seville, Dublin,
+Toronto, Melbourne, Sydney.
+
+After Sydney, you get to write the name of new cities your way. You can do it
+with imagination, with lists, with numbers, with random character press, with
+whatever you want. I've did the test of building cities until the game said
+'You can't build a city any more' too, the maximum number of cities it can
+handle is 125, although I thought it would be 127...
+
+
+-------------------------------------------------------------------------------
+  XVI- FAQ                                                            [00016]
+-------------------------------------------------------------------------------
+
+Q- The enemies keep outsmarting me! What do I do?
+A- Well, you can look at The Paths section and try different approaches. It's
+not hard to change your game style to try and revert the situation, and don't
+rush into next turns when you're losing, think what you can do to keep enemies
+away and try to raise your money so you can steal their technology with some
+diplomats.
+
+Q- Whichi percent those names I get with my percent score really are?
+A- Well, I've played the game on Cheiftain difficulty some times to get all the
+list, since it gives out only 7 names each complete game, but the percentages
+are not 100% accurate.
+1. Solomon the Wise - 150% ?
+2. Emperor Augustus - 132% ?
+3. King Charlemagne
+4. Thomas Jefferson - 103% ?
+5. Shogun Tokugawa - 87% ?
+6. Franklin Roosevelt
+7. Sulayman the Magnificent
+8. Winston Churchill
+9. Cleopatra
+10. Charles de Gaulle
+11. Vladimir Lenin - 36% ?
+12. Simon Bolivar
+13. Otto von Bismarck
+14. Eric the Red
+15. Kaiser Wilhelm
+16. Louis the XIII - 12% ?
+17. Neville Chamberlain
+18. Ferdinand Marcos
+19. Emperor Nero
+20. Dan Quayle - 1%
+
+
+-------------------------------------------------------------------------------
+  XVII- Copyright                                                     [00017]
+-------------------------------------------------------------------------------
+
+This document should not be used in any way to earn money. It's for personal
+use only. If you wish to use this document on your site, ask me first, and tell
+me where it's going to be.
+
+
+-------------------------------------------------------------------------------
+  XVIII- Credits                                                      [00018]
+-------------------------------------------------------------------------------
+
+Well, the game designers, gameFAQs for hosting it, and my parents =P
+Oh, and Sid Meier too =P
+
+
+Copyright 2015 by Jungon
+
+-------------------------------------------------------------------------------

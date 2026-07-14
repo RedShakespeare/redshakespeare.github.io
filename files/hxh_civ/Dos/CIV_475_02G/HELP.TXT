@@ -1,0 +1,165 @@
+00000000à0000000000000000Ğ0000000000000000000000000000Ï0000
+0000000000000000000000000000000000000000000000000000000000000000
+0000	0000000000000000000000000000000000000000000000000000000000
+00000000N000000000000000000000000000000000000000000000000000000
+0000000000000000000000000000000000000000000000000000000000Èñ00
+00000000000000000000000000000000…000000000000000000000000000000
+000000Ë00M	0000c
+000000000000000000000000000000á00~00000000
+0000000000000000000000“00000000ß0000000000000000000000000000è
+
+
+*FIRSTMOVE
+Ihre erste Aufgabe - geeigneten^
+Standort fr Hauptstadt finden.^
+Am besten an einem Fluá, in^
+Weideland, an der Kste oder ^
+wo es spezielle Ressourcen gibt.^
+
+*BUILDCITY
+Diese Stelle scheint sich fr eine Stadt zu^
+eignen. W„hlen Sie 'Found New City' im^
+ORDERS Men, oder benutzen Sie die^
+'b' Taste, um hier eine Stadt zu grnden.^
+
+*FIRSTPRODUCT
+Jede Ihrer St„dte kann weitere Siedler- und^
+Milit„reinheiten od. Ausbauten aufstellen,^
+um das Gedeihen Ihrer Zivilisation weiter^
+zu f”rdern. Davon ist eine Maánahme pro^
+Stadt m”glich. Die Befehle dazu k”nnen Sie^
+aber jederzeit „ndern. Maánahme durch^
+Anklicken des 'CHANGE' Knopfs auf der^
+folgenden Stadtinformationsseite w„hlen.^
+
+*FIRSTCIV
+St„dte sind auch Zentren von Handel^
+und Information. Ihre Wissenschaftler^
+k”nnen Informationen sammeln, um^
+sie in neue F„higkeiten und Fertigkeiten^
+fr Ihre Zivilisation umzusetzen. Mit ^
+folgendem Men ihre Studien lenken:^
+
+*FIRSTUNIT1
+Sie haben Ihre erste mil. Einheit aufge-^
+stellt. Mit den Richtungspfeilen wird sie^
+bewegt und erh„lt spezielle Befehle^
+vom ORDERS Men. Mil. Einheiten^
+erm”glichen Erforschung, Expansion,^
+Angriff und Verteidigung. 
+
+*FIRSTUNIT2
+Einheiten - Stellungsausbau in St„dten^
+zu Verteidg. gegen Barbaren/feindl. Heere.^
+Siedler k”nnen St„dte grnden, Straáen,^
+Bew„ss.-anlagen u. Bergwerke schaffen.^
+Greifen Sie Ihre Feinde mit Legionen,^
+Streitwagen u. Schleudern an.
+
+*MINING
+Diese Region k”nnte mehr Ressourcen.^
+erbringen. Bergbau ('m') in Hgelland^
+erh”ht Produktionskapazi„t in $US.^
+
+*IRRIGATE
+Diese Region ist fr Bew„sserung ('i')^
+geeignet. Mit mehr Nahrungsmitteln^
+w„chst die Stadt $US schneller.^
+
+*ROAD
+Hier k”nnte eine Straáen gebaut^
+werden. Ihre Einheiten werden^
+schneller, und der Handel in der^
+Stadt $US steigt.^
+
+*MONARCHY
+Sie haben eben die MONARCHIE kennengelernt.^
+In der MONARCHIE ist die Bev”lkerung^
+produktiver, aber mil. Einheiten kosten^
+mehr. Um zur Staatsform MONARCHIE^
+berzugehen, mssen Sie erst eine^
+Revolution stattfinden lassen!^
+(Revolution: siehe GAME Men).^
+
+*LAND
+LAND MASS:^
+^
+- Ein Planet mit normaler Oberfl„che besteht aus einer Mischung von Inseln u. Kontinenten.^
+- Ein Planet mit kleiner Oberfl„che hat meist mehr Inseln, wodurch die Herausbildung
+isolierter, ungest”rter Zivilis. begnstigt wird.^
+- Ein Planet mit groáer Oberfl„che hat meist mehr Kontinente, u. so entsteht mehr
+Handel u. Krieg zwischen Zivilisationen.^
+
+*TEMPERATURE
+TEMPERATURE:^
+^
+- Planeten mit GEMSSIGTEN Temperaturen haben alle Landschaftsarten.^
+- Planeten mit KšHLEN Temperaturen haben mehr arktische Regionen
+ u. Tundra, dafr weniger Wste.^
+- Planeten mit WARMEN Temperaturen haben mehr Wstengebiete,
+dafr weniger Tundra und Arktik.^
+
+*CLIMATE
+CLIMATE:^
+^
+- Planeten mit NORMALem Klima haben alle Landschaftsarten.^
+- Planeten mit trockenem Klima haben mehr Wsten und Ebenen.^
+- Planeten mit feuchteM Klima haben mehr Dschungel, Sumpfland u. Flsse.^
+
+*AGE
+AGE:
+^
+- Junge Planeten haben groáe Gebiete gleicher Art (W„lder, Berge, usw.).
+- ltere Planeten haben eher kleine, unregelm„áig verteilte Regionen.
+
+*HELP1
+ALLGEM. PRINZIPIEN: (1)^
+^
+Verteidigung der St„dte mit einer^
+(m”glichst zwei) guten Einheiten.^
+^
+Halten des Gleichgewichts zwischen^
+dem Ausbau alter und der Grndung^
+neuer St„dte.^
+^
+Expandieren Sie nur so, wie Sie sich ver-^
+teidigen k”nnen. Barbaren u. feindl. Heere^
+k”nnen ohne Vorwarnung auftauchen.^
+
+*HELP2
+ALLGEM. PRINZIPIEN: (2)^
+^
+Mit st„rkeren Nachbarn Frieden schlieáen.^
+Schw„chere Nachbarn isolieren u. erobern.^
+^
+Denken Sie an den šbergang zur ^
+Monarchie, wenn die Gr”áe Ihrer ^
+St„dte sechs oder sieben betr„gt.^
+^
+Je gr”áer Ihre Zivilisation wird, desto^
+mehr mssen Ihre Diplomaten ber^
+die Gegner erfahren. Karawanen ein-^
+setzen, um Handelswege aufzubauen^
+u. Ihre Wirtschaft zu st„rken.^
+
+*DISORDER
+In St„dten brechen Unruhen aus, wenn^
+es mehr unzufriedene als glckliche^
+Brger gibt. Es gibt dann kein^
+Wachstum u. keine Produktion.^
+Unruhen k”nnen beendet werden^
+durch: mehr Entertainer, Verlegen von^
+mil. Einheiten in die Stadt. Tempel-,^
+Kirchen- oder Kolosseumsbau, mehr^
+Luxuswaren durch Handel. Einzel-^
+heiten dazu finden Sie im Handbuch^
+auf S. 66.^
+
+*SCHISM
+Die $THEM sind eine groáe, m„chtige^
+Zivilisation. Doch drohen Rebellen^ 
+mit dem Brgerkrieg. K”nnen Sie die^
+Hauptstadt einnehmen, wird dieser^
+Schock das Land in zwei Teile spalten!^
+
+*END

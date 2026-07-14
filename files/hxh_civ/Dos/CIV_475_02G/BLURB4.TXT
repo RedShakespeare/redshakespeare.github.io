@@ -1,0 +1,321 @@
+00Ã70000000000,0000000000Ë0000X&000000A00å0000000000000000
+00000000400000000000000000000200000000000000000000000000000000
+000000000000ˆ5–şC0000Í/000000000000–800000000000000000000000000
+00000000‡00000000000000000000000000000000000000t:000000000000’
+ñG00000000£>00×00Ş,0000000000+00ÏD000000000000Ô000000000000
+000000000000`)0000000000000000~*00]'000000000000ë#00í­Aç0000
+0000000000000000000000¿;00000000r"000000000000000000000000ö0000
+0000000000000000m0000á000000n
+00ş=000000000000000000000000100
+glichkeiten zwischen St„dten.
+Das war sowohl fr den Handel als auch fr milit„rische Zwecke von Bedeutung.
+Gute Straáen waren unter fast allen Wetterbedingungen passierbar, und man konnte auf
+ihnen mit Radfahrzeugen viel schneller vorankommen als auf nichtausgebauten
+Wegen. Somit konnten berittene Herolde, Wagen mit Handelswaren und milit„rische
+Einheiten relativ schnell auf dem Straáennetz vorankommen. Die berhmtesten
+Straáen des Altertums waren die persische K”nigsstraáe und die in ganz Sdeuropa
+gebauten R”merstraáen.
+
+*STRABEN2
+Werden nur von Siedlern gebaut. Drcken Sie die Straáentaste (R-Taste),
+oder w„hlen Sie die Option Build Road auf dem Befehlsmen. Um Straáen
+ber Flsse bauen zu k”nnen, mssen Sie erst den Fortschritt des Brckenbaus
+erworben haben. Einheiten brauchen, gleich in welcher Landschaft, fr die
+Bewegung von einem Straáenquadrat in das n„chste 1/3 Bewegungspunkt.
+Straáen erh”hen den in Weideland, Ebenen und Wste erzeugten Handel.
+
+*EISENBAHN
+Die EISENBAHN revolutionierte das Transportwesen, denn mit ihr konnten Menschen,
+Rohstoffe, Fertigwaren und milit„rische Einheiten relativ billig und schnell transportiert werden.
+Die EISENBAHN war fr das Voranschreiten der industriellen Revolution entscheidend.
+Durch die drastische Reduzierung der Transportkosten untersttzte und ermutigte sie nicht
+nur das Wachstum der Industrie sondern auch Forschungen auf dem Gebiet des Eisenbahnbaus selbst.
+Fortschritte der Technologie und des Baus von Lokomotiven wirkten sich auf andere Industriezweige
+und Anwendungsbereiche aus. Um die Eisenbahn bildeten sich die ersten Groáunternehmen.
+
+*EISENBAHN2
+Werden nur von Siedlern in Quadraten gebaut, in denen es bereits eine
+Straáe gibt. Eisenbahntaste (R-Taste) drcken. Einheiten, die sich von einem
+Eisenbahnquadrat in ein anderes bewegen, brauchen, gleich in welcher
+Landschaft, keine Bewegungspunkte. Die Eisenbahn erh”ht die Erzeugung von
+Nahrungsmitteln und Ressourcen pro Quadrat um (abgerundet) die H„lfte.
+Um dieselbe Gr”áenordnung erh”ht sie auch den Handel bevor der Effekt der
+Republik bzw. Demokratie wirksam wird.
+
+*BEWASSERUNG
+Als sich die ersten Ackerbauer, aus den Bergen kommend, im Tal des Nils, des Tigris und
+des Euphrat ansiedelten, muáten sie die Technologie des Baus von Bew„sserungsanlagen
+entwickeln. Die Frischwasser fhrenden Flsse verliefen durch Trockengebiete,
+in denen es keine Niederschl„ge gab. Mit Hilfe der Bew„sserung konnte das Land l„ngs
+dieser Flsse zum Blhen gebracht werden. Seither hat man auch andere Wstengebiete
+durch Bew„sserung fruchtbar gemacht. Ein modernes Beispiel ist die beraus produktive Wste
+von Kalifornien.
+
+*BEWASSERUNG2
+Durch Bew„ssern wird der Nahrungsmittelwert von Quadraten mit Fluá, Weideland,
+Ebene, Wste und Hgelland erh”ht. Dabei k”nnen nur die Quadrate bew„ssert werden,
+die sich vertikal oder horizontal neben Meeres- oder Fluáquadraten oder neben bereits
+bew„sserten Quadraten befinden.
+
+*BERGBAU
+In der Frhzeit des Menschen konnte man noch viele Metalle in fast reiner Form direkt auf
+der Erdoberfl„che finden, meist Gold, Silber und Kupfer. Mit der Zeit waren diese Vorkommen
+verbraucht, und so begann der Mensch, die Erde aufzugraben, um mehr Bodensch„tze
+zu finden. Bergbau ist heute wichtiger denn je, nur daá man nach viel mehr Mineralien sucht
+als im Altertum. Die Entdeckung neuer Metalle und Ressourcen, oder auch neuer
+Extraktionsverfahren, hat aus vorher als unbedeutend betrachteten Gebieten Zentren der
+Gewinnung von ™l, Uran, Platin usw. gemacht.
+
+*BERGBAU2
+Durch Bergbau wird der Produktionswert von Quadraten mit Wste (+1),
+Hgelland (+3) und Gebirge (+1) erh”ht.
+
+*STELLUNG AUSBAUEN
+Auf einem Feldzug befindliche r”mische Legionen unterbrachen ihren Marsch frh genug am
+Abend, um ein vollst„ndig befestigtes Feldlager fr die Nacht auszubauen. Wie wichtig das ist,
+hatten sie aus n„chtlichen šberf„llen gelernt. Das wurde fr alle Heere zum Standard, die irgendwie
+Angriffe erwarteten. Die Verteidigung aus ausgebauten Stellungen war um ein Vielfaches
+st„rker, so daá es fr die Angreifer viel schwerer wurde, die Verteidiger zu vertreiben.
+
+*STELLUNG AUSBAUEN2
+Der Verteidigungswert von Einheiten in ausgebauten Stellungen erh”ht sich um 50%.
+
+*FESTUNG
+Zur Bewachung so wichtiger Stellungen wie Bergp„sse, oder Furten
+k”nnen sie FESTUNGEN errichten. Eine Festung kann, wenn sie richtig verteidigt wird,
+dem anrckenden Feind den Weg verlegen. Festungen k”nnen von Siedlern gebaut werden,
+sobald Sie den Fortschritt des Baugewerbes erreicht haben.
+Wird eine Stadt in einem Quadrat mit Festung gegrndet, so zerst”rt sie
+die Festung dadurch. Die Festung verdoppelt die St„rke aller verteidigenden Einheiten, nachdem
+Landschaft und Erfahrenen-Status in Rechnung gestellt sind. Die Einheiten in einer Festung verteidigen
+diese eine nach der anderen. Im Gegensatz zur Schlacht in normalem Terrain werden alle anderen
+Verteidiger einer Festigung nicht mit zerst”rt, wenn eine Einheit im Festungsquadrat vernichtet wird.
+
+*FESTUNG2
+Kann nur von Siedlern gebaut werden. Festungstaste (F-Taste) drcken, oder Festungsoption
+im Befehlsmen w„hlen.
+Verdoppelt die St„rke der Verteidiger.
+Verteidigung durch jeweils nur eine Einheit.
+Kann nicht in Stadtquadraten gebaut werden bzw. bestehen.
+
+*BRANDSCHATZEN
+Sie k”nnen Bew„sserungsanlagen und Bergwerke von Feinden zerst”ren, indem Sie Einheiten
+in die Quadrate mit diesen Ausbauten bewegen und ihnen das Brandschatzen befehlen.
+Dadurch wird auch die Produktion der nahegelegenen Stadt verringert und der Feind gezwungen,
+diese Investitionen nochmals vorzunehmen. Planen Sie aber, die nahe Stadt einzunehmen, sollten Sie
+die Anlagen nicht brandschatzen, denn Stadt und Produktion z„hlen dann bald zu Ihrem Haben.
+
+*BRANDSCHATZEN2
+Jedes Quadrat mit Bew„sserungsanlage oder Bergwerk kann durch Drcken der Brandschatztaste
+(Shift + P-Taste) oder durch Wahl der Brandschatzoption im Befehlsmen gebrandschatzt
+werden. Die brandschatzende Einheit muá noch ber Bewegungspunkte verfgen.
+
+*AUFLOSEN
+Manchmal werden Sie eigene Einheiten aufl”sen wollen, weil sie veraltet sind, zuviele
+Ressourcen kosten, die Sie anderweitig besser einsetzen k”nnten, oder weil sie in der Republik
+oder der Demokratie Unzufriedenheit in ihren Heimatst„dten bewirken. Um eine unerwnschte
+Einheit aufzul”sen, mssen Sie deren Aufl”sung befehlen. Die Einheit verschwindet
+dann von der Karte und der jeweiligen Stadtdarstellung.
+
+*AUFLOSEN2
+Um eine auf Befehle wartende Einheit aufzul”sen, drcken Sie die
+Aufl”setaste (Shift + D-Taste) oder w„hlen die Aufl”seoption vom
+Befehlsmen.
+
+*KAMPFERFAHREN
+W„hrend des amerikanischen Brgerkrieges wurde zu neuen Einheiten ohne jede
+Kampferfahrung nach ihrer Feuertaufe gasagt, daá sie "den Elefanten gesehen" h„tten.
+Sie hatten erste Kampferfahrungen gesammelt, etwas, das niemals vollst„ndig an Unerfahrene
+vermittelt werden kann. Die Geschichte beweist, daá ausgebildete und erfahrene
+Soldaten im Vergleich mit unerfahrenen Truppen eine viel gr”áere
+šberlebenschance hatten und ihre Gefechtsaufgabe besser erfllen konnten.
+Im 2. Weltkrieg waren fr neue amerikanische Einheiten die ersten zwei
+Wochen am gef„hrlichsten. Dann hatten sie Erfahrung gesammelt und
+wuáten, wie man auf dem Gefechtsfeld berleben kann.
+
+*KAMPFERFAHREN2
+Der Angriffs- und Verteidigungswert von erfahrenen Einheiten steigt um
+50%. Einheiten erwerben den Erfahrenen-Status durch den Sieg in einem
+Gefecht, oder wenn sie in einer Stadt mit Kasernen aufgestellt werden.
+
+*ANARCHIE
+Anarchie bedeutet Zusammenbruch des Staats u. fhrt zum Fehlen jeglicher politischen Autorit„t
+u. auch jedes gemeinsam verfolgbaren Ziels. Staat u. Regierung, Verwaltung u. Leistungen
+”ffentl. Einrichtungen funktionieren nicht mehr. Die Anarchie ist zwar ernsthaft als alternative
+Reg.-form vorgeschlagen worden, konnte aber nur bei Randgruppen Beifall finden. Anarchie ist
+zu versch. Zeiten in der Geschichte im Gefolge groáer, durch Revolutionen hervorgerufener,
+sozialer Unruhen, von Kriegen, Naturkatastr. und Epidemien aufgetreten. Meist fhrte sie zu Panik,
+zur Unterbrechung von Kommunikationen, sich h„ufenden Abf„llen u. zur Zerst.von Einrichtungen.
+
+*ANARCHIE2
+Quadrate mit Warenproduktion von 3 oder mehr verlieren einen Punkt.
+Beispielsweise erzeugt ein Quadrat, das normalerweise 3 Nahrungsmittel
+produziert, in der Anarchie nur 2.
+Einheiten bis zur Stadtgr”áe brauchen keine Unterhaltung.
+Milit„rische Einheiten verringern die Unzufriedenheit in der Stadt.
+Es gibt keine Steuereinnahmen und keinen Wissenszuwachs.
+
+*DESPOTISMUS
+Despotismus, eine primitive Staatsform, ist in den Anf„ngen der Zivilisation
+durchaus ntzlich. Einheiten verursachen nur minimale Aufwendungen zur Unterhaltung , und
+so k”nnen im Verh„ltnis zur Bev”lkerung relativ groáe Heere aufgestellt und erste Ausbauten schnell
+realisiert werden. Doch verz”gert sp„ter der Despotismus das weitere Wachstum der St„dte,
+weshalb Sie, wenn die St„dte wirklich bedeutend werden sollen, eine neue Staasform brauchen,
+in der die Produktion von Nahrungsmitteln und Ressourcen erh”ht werden kann. Der Despotismus
+ist am sinnvollsten zur Expansion und in Kriegszeiten.
+
+*DESPOTISMUS2
+Quadraten mit 3 oder mehr Produktionspunkten wird 1 Punkt abgezogen (3
+Lebensmittel->2). Heimatstadteinheiten weniger oder gleich der Stadtgr”áe
+brauchen keine Unterhaltung. Milit„rische Einheiten in St„dten verringern
+die Unzufriedenheit.
+
+*MONARCHIE
+Die Monarchie ist die Staatsform, die meist den Despotismus abl”st. Unter der Monarchie
+kann die Produktion von Nahrungsmitteln und Ressourcen durch Bergwerke und
+Bew„sserung stark erh”ht werden, wenn Ihre St„dte eine gesunde Gr”áe erreicht haben.
+Obwohl das Fhren von Kriegen etwas schwerer sein kann als im Depotismus und sich die
+Produktion neuer Waren verlangsamen kann, k”nnen Ihre St„dte schlieálich doch viel
+m„chtiger werden und die anf„nglichen Nachteile dieser Staatsform berwinden.
+
+*MONARCHIE2
+Normale wirtschaftliche Effekte.
+Einheiten brauchen 1 Ressource pro Runde zur Unterhaltung.
+Milit„rische Einheiten in St„dten erh”hen die Unzufriedenheit.
+
+*KOMMUNISMUS
+Der Kommunismus ist in der Wirkung der Monarchie gleich, aber mit einer wichtigen
+Ausnahme. Im kommunistischen Staat ist die Korruptionsebene in allen St„dten gleich.
+Dadurch wird diese Staatsform fr Reiche attraktiv, die sich ber groáe Gebiete
+erstrecken. Normalerweise w„re die Korruption in den Randgebieten erschreckend,
+aber im Kommunismus l„át sie sich in Grenzen halten. Kommunismus und Monarchie
+haben gegenber dem Despotismus die gleiche F„higkeit zu h”herer Produktion.
+
+*KOMMUNISMUS2
+Normale wirtschaftliche Effekte.
+Einheiten brauchen 1 Ressource pro Runde zur Unterhaltung.
+Milit„rische Einheiten in St„dten erh”hen die Unzufriedenheit.
+Korruption ist in allen St„dten gleich.
+
+*REPUBLIK
+Die "republikanische" Staatsform erm”glicht gr”áere wirtschaftliche Freiheit und fhrt
+zu einer drastischen Erh”hung des Handels. Mehr Handel bedeutet mehr Luxuswaren,
+Steuereinnahmen und mehr wissenschaftliche Forschung. Ein Krieg ist allerdings in der
+Republik viel schwerer zu fhren, da jede nicht in ihrer Heimatstadt befindliche
+milit„rische Einheit einen Brger unzufrieden macht. Die meisten St„dte k”nnen sich daher
+nur wenige ausw„rtige Einheiten leisten, wenn sie nicht das Risiko von Unruhen eingehen
+wollen. Die Republik ist besonders sinnvoll, wenn Ihre St„dte relativ groá geworden sind,
+denn die mit ihr verbundene Steigerung des Handels sichert die Versorgung mit Luxuswaren
+und den technologischen Fortschritt.
+
+*REPUBLIK2
++1 Handelspunkt pro Quadrat mit Handel.
+Alle Friedensangebote mssen angenommen werden.
+Milit„rische Einheiten in St„dten verringern die Unzufriedenheit nicht. Es gibt kein Kriegsrecht.
+Milit„rische Einheiten auáerhalb der Stadt erh”hen die Unzufriedenheit.
+Einheiten brauchen 1 Ressource pro Runde zur Unterhaltung.
+
+*DEMOKRATIE
+In der Demokratie erh”ht sich der Handel wie in der Republik drastisch, doch kommt ein
+weiterer Vorteil hinzu. In der Demokratie gibt es keine Korruption in den St„dten, weshalb sie
+sich fr groáe Reiche sehr eignet. Doch gibt es auch zwei nur fr sie typische Probleme. Nicht
+in ihrer Heimatstadt befindliche milit„rische Einheiten machen zwei Brger unzufrieden,
+nicht einen, wie in der Republik. Somit ist es ausgesprochen schwierig, einen Krieg zu fhren.
+Brechen in einer demokratisch beherrschten Stadt Unruhen aus, wird die Demokratie sofort
+gestrzt, und ber mehrere Runden herrscht dann Anarchie. Die Demokratie hat also
+gewaltige wirtschaftliche Vorzge, ist jedoch zerbrechlich und erfordert daher Wachsamkeit.
+
+*DEMOKRATIE2
++1 Handelspunkt pro Quadrat mit Handel.
+Alle Friedensangebote mssen angenommen werden.
+Milit„rische Einheiten in St„dten verringern die Unzufriedenheit nicht. Es gibt kein Kriegsrecht.
+Milit„rische Einheiten auáerhalb der Stadt erh”hen die Unzufriedenheit.
+Einheiten brauchen 1 Ressource pro Runde zur Unterhaltung.
+Keine Korruption. Unruhen fhren zu Anarchie.
+
+*VERSCHMUTZUNG
+Verschmutzung kann durch hohe Ressourcenproduktion in St„dten, groáe
+Stadtbev”lkerungen, Kernwaffen oder das Schmelzen des Reaktorkerns eines
+Kernkraftwerks verursacht werden. Hat eine Stadt ein potentielles
+Verschmutzungsproblem, zeigen Schornsteine im Informationsfenster der
+Stadtdarstellung an, daá ein nahegelegenes Kartenquadrat wahrscheinlich verschmutzt wird.
+
+*VERSCHMUTZUNG2
+Die Verschmutzung in einem Kartenquadrat kann durch einen Siedler beseitigt
+werden. Bewegen Sie den Siedler in das Quadrat, und drcken Sie die
+Verschmutzungstaste (P-Taste), oder w„hlen Sie die Verschmutzungsoption im
+Befehlsmen. Das Beseitigen der Verschmutzung dauert vier Spielrunden.
+Ger„t die Verschmutzung auáer Kontrolle, kann der Treibhauseffekt einsetzen.
+
+*WACHDIENST
+Zum Wachdienst eingeteilte Einheiten werden in der Spieldarstellung blaá angezeigt
+und blinken nicht bei jeder neuen Runde, um Befehle zu erhalten. Diese Funktion ist von Nutzen,
+wenn Sie eine Einheit in einem bestimmten Quadrat belassen wollen, jedoch nicht wollen, daá
+die Einheit befestigte Stellungen ausbaut, oder wenn Sie nicht dazu in der Lage sind. Einheiten im
+Wachdienst werden automatisch auf vorhandene Schiffe verladen, die die Stadt verlassen.
+
+*WACHDIENST2
+Durch Drcken der Wachdiensttaste (S-Taste) oder Wahl der Wachdienstoption
+im Befehlsmen k”nnen Sie Einheiten zum Wachdienst einteilen. Die Reaktivierung
+dieser Einheiten erfolgt durch Klicken mit der linken Maustaste auf der Einheit,
+oder durch die Bewegung einer feindlichen Einheit in einem Nachbarquadrat.
+
+*LUXUSWAREN
+Die Versorgung der Bev”lkerung Ihrer St„dte mit Luxuswaren wird durch strahlende
+Diamenten im Ressourcenfenster der jeweiligen Stadtdarstellung symbolisiert. Jeweils
+zwei Luxuswaren machen einen zufriedenen Brger glcklich bzw. einen
+unzufriedenen Brger zufrieden. Der Umfang an Luxuswaren, den eine Stadt produziert,
+wird haupts„chlich von der Luxusrate Ihrer Zivilisation und dem Prozensatz der aus
+dem Handel stammenden Luxusgter bestimmt. Diese Rate k”nnen Sie modifizieren,
+indem Sie auf dem Spielmen Ihre Steuer- und Wissenschaftsrate „ndern.
+
+*LUXUSWAREN2
+Durch Bau von Marktpl„tzen und Banken,
+sowie durch Verwandeln einiger Brger in Entertainer
+k”nnen Sie ebenfalls die Zahl der Luxuswaren erh”hen.
+
+*STEUERN
+Die von einer Stadt eingenommenen Steuern werden durch Goldmnzen im
+Ressourcenfenster der Stadtkartendarstellung symbolisiert. Die Steuereinnahmen
+der Stadt werden zun„chst zur Bezahlung der Unterhaltung der Ausbauten der Stadt eingesetzt.
+Eventuelle šberschsse kommen in die Schatzkammer, und Minusbest„nde werden durch
+die Schatzkammer ausgeglichen. Das Steueraufkommen einer Stadt wird wird haupts„chlich
+von der Steuerrate der Zivilisation und dem Prozentsatz des aus Steuern stammenden
+Handels bestimmt. Diese Rate k”nnen Sie modifizieren, indem Sie auf dem Spielmen
+Ihre Steuerrate „ndern.
+
+*STEUERN2
+Durch Bau von Marktpl„tzen und Banken,
+sowie durch Verwandeln einiger Brger in Steuerbeamte
+k”nnen Sie ebenfalls die Steuereinnahmen erh”hen.
+
+*WISSENSCHAFT
+Die in einer Stadt geleistete wissenschaftliche Forschung wird durch Glhlampen
+im Ressourcenfenster der Stadtdarstellung angezeigt. Der Forschungsumfang wird jeweils
+solange zur vorherigen Forschung hinzugefgt, bis ein neuer
+Zivilisationsfortschritt erreicht ist. Der Umfang an wisssenschaftlichen Leistungen,
+den eine Stadt schafft, wird haupts„chlich von der Wissenschaftsrate Ihrer Zivilisation
+und dem Prozentsatz des Handels der Stadt bestimmt, der neue Kenntnisse einbringt.
+Diese Rate kann durch ndern Ihrer Wissenschaftsrate im Spielmen modifiziert werden.
+
+*WISSENSCHAFT2
+Sie k”nnen die wissenschaftliche Leistung auch erh”hen
+durch den Bau von Bibliotheken, Universit„ten, bestimmter Weltwunder,
+sowie durch Verwandeln eines Brgers in einen Wissenschaftler.
+
+*HANDELSSTRABEN
+Handelsstraáen werden errichtet, indem Sie eine Karawane entweder in eine eigene,
+mindestens 10 Kartenquadrate von der jetzigen entfernte, Stadt oder in die Stadt eines
+Rivalen bewegen. Trifft die Karawane ein, ergibt das eine sofortige Geldeinzahlung
+in Ihre Schatzkammer plus die Handelsstraáe selbst. Eine Handelsstraáe erh”ht den
+von der Heimatstadt der Karawane erzeugten Handel dann in jeder Spielrunde,
+es sei denn, die Stadt am Ende der Handelsstraáe wird irgendwie zerst”rt. Den h”chsten
+Wert haben Handelsstraáen mit St„dten von Rivalen auf anderen Kontinenten,
+und dieser Wert w„chst je nach der Gr”áe der so miteinander verbundenen St„dte und
+der Entfernung zwischen ihnen. Handelsstraáen sind fr eine starke Wirtschaft
+und groáe Zivilisationen lebenswichtig.
+
+*HANDELSSTRABEN2
+Werden durch Karawanen geschaffen.
+
+*END

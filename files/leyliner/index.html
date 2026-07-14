@@ -1,0 +1,301 @@
+<!doctype html>
+<html>
+<head>	
+	<meta charset="utf-8">
+	<title>LEYLINER</title>
+</head>
+<body>
+	<div id="canvas-container"></div>
+
+	<div id="sidebar">
+		<div id="sidebar-info">
+			<div id="sidebar-main">
+				<div id="sidebar-phase">
+					<span id="phase-play">PLAY</span>
+					<span id="phase-target">TARGET</span>
+					<span id="phase-mana">MANA</span>
+					<span id="phase-draw">DRAW</span>
+				</div>
+				<div id="sidebar-mana-pool"></div>
+				<div id="sidebar-phase-description" class="blink"></div>
+				<div id="sidebar-main-info">
+
+				</div>
+			</div>
+			<div id="sidebar-hover-info">
+
+			</div>
+		</div>
+		<div id="sidebar-buttons">
+			<div class="button disabled" id="end-turn-button" onclick="game.endTurn()">
+				<div class="shortcut">e</div>
+				<span class="button-inner">End turn</span>
+			</div>
+			<div class="button disabled" id="attune-button" onclick="cards.openShop()">
+				<div class="shortcut">o</div>
+				<span class="button-inner">Attune</span>
+			</div>
+			<div class="button" id="inventory-button" onclick="gear.openInventory()">
+				<div class="shortcut">i</div>
+				<span class="button-inner">Inventory</span>
+			</div>
+			<div class="button disabled" id="view-cards-button" onclick="cards.viewCardList('DRAW')">
+				<div class="shortcut">z</div>
+				<span class="button-inner">View card list</span>
+			</div>
+			<div class="button disabled" id="hide-show-button" onclick="cards.hideShow()">
+				<div class="shortcut">h</div>
+				<span class="button-inner">Hide cards</span>
+			</div>
+
+			<div id="sidebar-potions">
+			</div>
+		</div>
+	</div>
+
+	<div id="card-container">
+	</div>
+
+	
+
+	<!-- TODO: refactor as generic menu 
+
+		replace with close menu
+			onclick="cards.closeViewCards(event);"
+	-->
+	<div id="menu">
+		<div id="menu-inner">
+			<div id="menu-filter"></div>
+			<h1 id="menu-title">ZZZ</h1>
+			<div id="menu-content">
+				<div id="menu-content-inner"></div>
+			</div>
+		</div>
+	</div>
+
+	<div id="black-overlay" class="overlay"><div class="overlay-inner"></div></div>
+	<div id="game-over-screen" class="overlay"><div class="overlay-inner" onclick="game.showTitle()">
+		<h1>The Leyliner has perished...</h1>
+	</div></div>
+	<div id="win-screen" class="overlay"><div class="overlay-inner" onclick="game.showTitle()">
+		<div class="scrollable centered">
+			<h1>You win!</h1>
+			<div id="win-screen-inner"></div>
+		</div>
+	</div></div>
+	<div id="credits-screen" class="overlay"><div class="overlay-inner" onclick="game.showTitle()">
+		<h1>CREDITS</h1>
+		<div id="credits">
+			<p><strong>monster/item art by <a href="http://www.oryxdesignlab.com" target="_blank">Oryx</a></strong></p>
+			<p><strong>title art by <a href="https://twitter.com/zyalin_art" target="_blank">Zyalin</a></strong></p>
+			<p><strong>music by <a href="https://freemusicarchive.org/music/John_Bartmann" target="_blank">John Bartmann</a></strong></p>
+			<p><strong>sounds by <a href="http://www.kenney.nl" target="_blank">Kenney</a></strong></p>
+			<p><strong>special thanks</strong></p>
+			<span>Daniel Clark</span>
+			<span>Matthew Hall</span>
+			<span>Layne Vore</span>
+			<span>Daniel Williams</span>
+			<span>Jared Wolf</span>
+			<p><strong>thanks to the patreons at <a href="http://patreon.com/vulgat" target="_blank">patreon.com/vulgat</a>:</strong></p>
+			<span>Tone</span>
+			<span>Massack</span>
+			<span>Tom Loughlin</span>
+			<span>Kawa</span>
+			<span>zzxc</span>
+			<span>Zhon</span>
+			<span>Mateo Rodriguez</span>
+			<span>Christian Bay</span>
+			<span>Kornel Kisielewicz</span>
+			<span>Guigui Sur Linux</span>
+			<span>andrew goodman</span>
+		</div>
+	</div></div>
+	<div id="how-to-play-screen" class="overlay"><div class="overlay-inner" onclick="game.showTitle()">
+		<h1>HOW TO PLAY</h1>
+		<div>
+			<img src="img/how-end.png">
+			<div class="how-text">During your turn, move/attack with WASD and cast spells by clicking on cards.<br><br>
+			You get one FREE MOVE per turn (a chance to move or attack without retaliation), so use it!<br><br>
+			Click the "End turn" button to let monsters act and initiate mana placement.</div>
+		</div>
+		<div>
+			<img src="img/how-mana.png">
+			<div class="how-text">Mana is used to power spells. At turn end, you can click or drag to place one mana per unused card in your hand.
+				<br><br>
+			Mana tiles also have unique special effects.</div>
+		</div>
+		<div>
+			<img src="img/how-card.png">
+			<div class="how-text">Cast spells from your hand by standing next to an <em> adjacently-connected</em> group of mana. The size of the group must equal or exceed the card cost.</div>
+		</div>
+
+		<div class="how-text how-beat">Conquer 10 levels to win!</div>
+	</div></div>
+	<div id="loading" class="overlay"><div class="overlay-inner">loading...</div></div>
+	<div id="title-screen" class="overlay">
+		<div class="overlay-inner">
+			<div id="title-inner">
+				<h1>Leyliner</h1>
+				<div id="starter-decks">
+					<div class="starter-deck type-moon" onclick="game.selectDeck('MOON', event)">
+						<div class="card-mana-inner"></div>
+					</div>
+					<div class="starter-deck type-blood" onclick="game.selectDeck('BLOOD', event)">
+						<div class="card-mana-inner"></div>
+					</div>
+					<div class="starter-deck type-elec" onclick="game.selectDeck('ELEC', event)">
+						<div class="card-mana-inner"></div>
+					</div>
+					<div class="starter-deck type-fire" onclick="game.selectDeck('FIRE', event)">
+						<div class="card-mana-inner"></div>
+					</div>
+				</div> 
+				<div class="button" id="how-to-play-button" onclick="game.howToPlay()">how to play</div>
+				<div class="button button-greyed-out button-active" id="options-button" onclick="main.toggleOptions()">options</div>
+				<div class="button button-greyed-out options button-active" style="display: none" id="music-button" onclick="main.toggleMusic()">music on</div>
+				<div class="button button-greyed-out options button-active" style="display: none" id="sound-button" onclick="main.toggleSound()">sound on</div>
+				<div class="button button-greyed-out" id="credits-button" onclick="game.credits()">credits</div>
+
+				<div class="button" id="discord-button" onclick="game.openDiscord()">
+					<img src="img/icon_clyde_white_RGB.png" />
+					Discord
+				</div>
+				<div id="jere-josh">Jeremiah Reid & Joshua Martin</div>
+
+				<div><a href="https://jere.itch.io/leyliner/devlog/564011/v15-monster-mayhem"
+					id="version-number" target="_blank"></a></div>
+			</div>
+		</div>
+	</div>
+
+	<div id="turncount">
+		<div id="turncount-turn">Turn 3</div>
+		<div id="turncount-quake">3 turns left until quake...</div>
+	</div>
+
+	<div id="error-higlight">
+		ERROR!
+	</div>
+
+	<!-- <div id="chest-pickup-container">
+		<div id="chest-pickup-description" class="gear-description" onclick="gear.closeChestPickup(event);">
+			
+
+		</div>
+	</div> -->
+
+	<!-- production/minified: <script src="js/lib/pixi.min.js"></script> -->
+	<script>
+		startLoad = performance.now();
+
+		loadOneScript = function(){
+			if(scripts.length){
+				const s = scripts.shift();
+				loadResource("script", s);
+			}
+		}
+
+		scriptLoadHandler = function(){
+			loadOneScript();
+			loadHandler();
+		}
+
+		loadHandler = function(){
+			loadingCount--;
+			if(loadingCount == 0){
+				loadFinished();
+			}
+		}
+		
+		loadFinished = function(){
+			tileSize = 24;
+			mapSize = 11;
+			scale = 
+				Math.min(window.innerHeight, window.innerWidth - 500)
+				/
+				(tileSize * mapSize);
+			if(scale>2){
+				//scale = Math.floor(scale);
+			}
+
+			// good for twitter gifs
+			// scale = 2.2;
+
+	  		document.querySelector("#sidebar").style.width =
+	  			(window.innerWidth - (scale*tileSize*mapSize)) + "px";
+
+			shouldConsumeMana = true;
+
+			main.init();
+		};
+		let loadingCount = 0;
+		const scripts = [
+			"js/lib/pixi.js",
+			"js/lib/rot.min.js",
+			"js/lib/forge.min.js",
+			"js/lib/howler.min.js",
+			"js/abilities.js",
+			"js/util.js",
+			"js/colors.js",
+			"js/game.js",
+			"js/draw.js",
+			"js/drawable.js",
+			"js/item.js",
+			"js/status.js",
+			"js/monster.js",
+			"js/tile.js",
+			"js/input.js",
+			"js/map.js",
+			"js/mana.js",
+			"js/card.js",
+			"js/cards.js",
+			"js/effect.js",
+			"js/spells.js",
+			"js/spellEffects.js",
+			"js/gear.js",
+			"js/tooltips.js",
+			"js/main.js",
+			"js/menu.js",
+			"js/debug.js",
+		];
+
+		const css = [
+			"css/style.css",
+			"css/gear.css",
+			"css/menu.css",
+		];
+
+		BREAK_CACHE = true;
+
+		loadResource = function(type, src){
+			if(BREAK_CACHE){
+				src += "?v="+Math.random();
+			}
+
+			loadingCount++;
+			const el = document.createElement(type);
+			if(type == "link"){
+				el.setAttribute("rel", "stylesheet");
+				el.addEventListener("load", loadHandler);
+			}else{
+				el.addEventListener("load", scriptLoadHandler);
+			}
+			el.setAttribute(
+				type == "script" ? "src" : "href",
+				src
+			);
+			document.head.appendChild(el);
+		}
+
+		loadOneScript();
+
+		// scripts.forEach(src=>{
+		// 	loadResource("script", src);
+		// });
+
+		css.forEach(src=>{
+			loadResource("link", src);
+		});
+	</script>
+</body>
+</html>

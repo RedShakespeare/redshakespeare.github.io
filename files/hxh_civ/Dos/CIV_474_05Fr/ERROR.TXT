@@ -1,0 +1,66 @@
+00000000000000000000000000000000000000000000000000J0000000000
+0000000000ü0000000000000000000000000000000000000000000000000000
+00000000000000000000000000m000000000000000000000000000000000000
+000000000000000000000000000000000000000000~u000000000000000000
+000000000000000000000000000000000000000000000000¤00000000000000
+000000000000000000B00000000000000000000000000000000000000000000
+00000000000000Ý0000000000000000000000000000000000000000000000
+00000000 00000000000000000000m00000000000000000000000000000000
+
+*ZOC
+Une unit‚ ne peut aller d'un carr‚^
+proche d'une unit‚ ennemie … 1 autre^
+carr‚ proche d'une unit‚ ennemie.^
+Exception : diplomates, caravanes, unit‚s^
+navales & a‚r. ; entr. & sort. ville^
+Voir d‚tails p. 34 du manuel^
+
+*TRIREME
+Votre trirŠme s'est perdue en mer.^
+Une trirŠme peut se perdre si elle^
+ne finit tour prŠs terre^
+
+*FUEL
+Unit‚ a‚r. n'a plus de carb.^
+Unit‚s avions de chasse/nucl‚aires^
+doivent revenir … une ville ou au^
+porte-avions en fin de tour.^
+Bombard. doivent rev. fin tour 2^
+
+*AMPHIB
+Il faut d‚barquer les unit‚s au sol^
+avant le d‚but de combat.^
+
+*FIGHTER
+Seuls av. chasse peuvt attaq. unit. a‚r.^
+
+*OCCUPY
+Seules unit‚s sol peuvt occup. ville ennem.^
+
+*PILLAGE
+Imposs. piller carr‚s de ville.^
+Diplomates, carav., av. chasse^
+& unit. nav. ne peuvt pill.^
+
+*SETTLERS
+R“le r‚serv‚ aux^
+unit‚s de colons.^
+
+*NOWATER
+Ce carr‚ n'a pas accŠs … l'eau.^
+Un carr‚ irrigu‚ doit ˆtre prŠs^
+d'un carr‚ de riviŠre, d'oc‚an ou^
+carr‚ d‚j… irrigu‚ hors ville.^
+
+*NOMINE
+Type terrain impossible … miner.^
+
+*NOIRR
+Type de terrain impossible … irriguer.^
+
+*ADDCITY
+Imposs. d'ajouter colons^
+aux villes de 10 ou plus.^
+
+*END
+

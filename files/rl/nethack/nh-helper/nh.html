@@ -1,0 +1,412 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+
+<!--
+      Author:  Janis Papanagnou
+      Date:    2014-10-30, 2013-04-07, 2012-12-18, 2008-10-14, 2007-03-09,
+               2006-09-18, 2006-09-23, 2006-09-24, 2006-09-25, 2015-10-20,
+               2015-12-14, 2015-12-18, 2016-06-01, 2017-07-28, 2017-12-09,
+               2017-12-26
+
+      Copyright &copy; 2006-2017 Janis Papanagnou
+      Content licensed under the
+      <A href="http://www.opencontent.org/opl.shtml">OpenContent License</A>
+      Source code is licensed under
+      <A href="http://www.gnu.org/copyleft/gpl.html">GNU General Public License</A>.
+-->
+
+<title> Nethack助手 </title>
+
+
+<style type="text/css">
+select, input, body, td, a, p, .h { font-family: arial; font-size: 9pt; }
+.thumbs { vertical-align: top; width: 275px; }
+.caption { font-weight: bold; }
+</style>
+
+
+
+</head>
+
+<!-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -->
+
+<body>
+  <h1 title="Last updated: 2017-12-26"> Nethack助手</h1>
+
+  <p>
+  <b> 免责声明：（原址<a href="http://nethack.gridbug.de/nh.html">nethack.gridbug.de</a>） </b><br>
+  这实在不太像个网站。
+  (不要期待有什么好看的图形 :-)
+  <br>
+  这只是一个入口，用来访问我在游玩NetHack过程中经常使用的小工具。
+  <br>
+    注：这些工具只在Firefox上测试过，恕不负责，自担风险。
+  </p>
+  <br>
+  <br>
+
+  <hr>
+
+  <h2> 小工具 </h2>
+
+  <br>
+
+  <noscript>
+    <br>
+    <b>
+      Please note:
+    </b>
+    <table style="border-width: 4px; border-style: solid; padding: 8px">
+      <tr>
+        <td>
+          <b>
+            All applets referenced here require JavaScript to run.
+            <br>
+            If you like to use them enable JavaScript in your browser!
+          </b>
+        </td>
+      </tr>
+    </table>
+    <br>
+    <br>
+  </noscript>
+
+
+  <h3> 法术 </h3>
+
+  <table border="1" cellspacing="3" cellpadding="6">
+  <tr>
+    <td class="caption">
+      <a href="spells.html">
+        施法失败率计算器
+      </a>
+    </td>
+    <td class="caption">
+      <a href="learnspells.html">
+        法术学习成功率计算器
+      </a>
+    </td>
+    <td class="caption">
+      <a href="spellexp.html">
+        法术遗忘提示器
+      </a>
+    </td>
+  </tr>
+  <tr>
+    <td class="thumbs">
+      <a href="spells.html">
+        <img src="th_spells.png" alt="spells fig">
+      </a>
+    </td>
+    <td class="thumbs">
+      <a href="learnspells.html">
+        <img src="th_learnspells.png" alt="learnspells fig">
+      </a>
+    </td>
+    <td class="thumbs">
+      <a href="spellexp.html">
+        <img src="th_spellexp.png" alt="spellexp fig">
+      </a>
+    </td>
+  </tr>
+  </table>
+  <br>
+
+
+  <h3> 价格鉴定 </h3>
+
+  <table border="1" cellspacing="3" cellpadding="6">
+  <tr>
+    <td class="caption">
+      <a href="prices.html">
+        物品的价格鉴定
+      </a>
+    </td>
+    <!--
+    <td class="caption">
+      <a href="prices360.html">
+        Determine Object by Price (3.6.0)
+      </a>
+    </td>
+    <td class="caption">
+      <a href="prices343.html">
+        Determine Object by Price (3.4.3)
+      </a>
+    </td>
+    -->
+  </tr>
+  <tr>
+    <td class="thumbs">
+      <a href="prices.html">
+        <img src="th_xprices.png" alt="prices fig">
+      </a>
+    </td>
+    <!--
+    <td class="thumbs">
+      <a href="xprices.html">
+        <img src="th_xprices.png" alt="xprices fig">
+      </a>
+    </td>
+    <td class="thumbs">
+      <a href="prices.html">
+        <img src="th_prices.png" alt="prices fig">
+      </a>
+    </td>
+    -->
+  </tr>
+  </table>
+  <br>
+
+
+  <h3> （神器）武器</h3>
+
+  <table border="1" cellspacing="3" cellpadding="6">
+  <tr>
+    <td class="caption">
+      <a href="artifacts.html">
+        神器伤害计算器
+      </a>
+    </td>
+<!-- TODO: FIX BUG (see also below)
+    <td class="caption">
+      <a href="weapons.html">
+        Role Specific Weapons Damage List
+      </a>
+    </td>
+-->
+    <!--
+      Old versions kept until above bug in generic version is fixed.
+    -->
+    <td class="caption">
+      <a href="weapons360.html">
+        职业武器伤害表 (3.6.0)
+      </a>
+    </td>
+    <td class="caption">
+      <a href="weapons343.html">
+        职业武器伤害表 (3.4.3)(ENG)
+      </a>
+    </td>
+  </tr>
+  <tr>
+    <td class="thumbs">
+      <a href="artifacts.html">
+        <img src="th_artifacts.png" alt="artifacts fig">
+      </a>
+    </td>
+<!-- TODO: FIX BUG (see also above)
+    <td class="thumbs">
+      <a href="weapons.html">
+        <img src="th_weapons.png" alt="weapons fig">
+      </a>
+    </td>
+-->
+    <!--
+      Old versions kept until above bug in generic version is fixed.
+    -->
+    <td class="thumbs">
+      <a href="weapons360.html">
+        <img src="th_weapons.png" alt="weapons360 fig">
+      </a>
+    </td>
+    <td class="thumbs">
+      <a href="weapons343.html">
+        <img src="th_weapons.png" alt="weapons343 fig">
+      </a>
+    </td>
+  </tr>
+  </table>
+  <br>
+
+
+  <h3> 珠玑妙算（1A2B） </h3>
+
+  <table border="1" cellspacing="3" cellpadding="6">
+  <tr>
+    <td class="caption">
+      <a href="mm.html">
+        城堡吊桥口令破译器
+      </a>
+    </td>
+  </tr>
+  <tr>
+    <td class="thumbs">
+      <a href="mm.html">
+        <img src="th_mm.png" alt="mm fig">
+      </a>
+    </td>
+  </tr>
+  </table>
+  <br>
+
+
+  <h3> 角色选择 </h3>
+
+  <table border="1" cellspacing="3" cellpadding="6">
+  <tr>
+    <td class="caption">
+      <a href="nhrcs.html">
+        随机角色选择器
+      </a>
+    </td>
+  </tr>
+  <tr>
+    <td class="thumbs">
+      <a href="nhrcs.html">
+        <img src="th_nhrcs.png" alt="nhrcs fig">
+      </a>
+    </td>
+  </tr>
+  </table>
+  <br>
+
+
+  <br>
+  <br>
+
+  <hr>
+
+
+  <h2> 源码（实验性功能） </h2>
+
+  <table width="600px">
+  <tr>
+    <td align="justify">
+      <a href="orthpart.c">C语言源码</a>中的算法可以生成正交分割的随机地图，
+      这可以用来生成新的NetHack通用地图类型：<u><i>下水道</i>和<i>城镇</i></u>
+      （在现有的<i>房间/走廊</i>、<i>矿坑</i>和<i>迷宫</i>类型以外）。
+      算法的参数可以保证生成结果看上去非常自然，同时又保持足够的多样性。
+    </td>
+  </tr>
+  </table>
+
+  <h3> 城镇和下水道地图 </h3>
+
+  <table border="1" cellspacing="3" cellpadding="6">
+  <tr>
+    <td class="caption">
+      <a href="sewers_sample.txt">
+        下水道样图
+      </a>
+    </td>
+    <td class="caption">
+      <a href="town_sample.txt">
+        城镇样图
+      </a>
+    </td>
+  </tr>
+  <tr>
+    <td class="thumbs">
+      <a href="sewers_sample.txt">
+        <img src="th_sewers_sample.png" alt="sewers_sample fig">
+      </a>
+    </td>
+    <td class="thumbs">
+      <a href="town_sample.txt">
+        <img src="th_town_sample.png" alt="town_sample fig">
+      </a>
+    </td>
+  </tr>
+  </table>
+  <br>
+
+  <p>
+    使用本<a href="ts.html">样图生成器</a>
+    以实时生成下水道和城镇样图。
+  </p>
+
+  <br>
+  <br>
+
+  <hr>
+
+
+  <h2> 离线工具 </h2>
+
+  <h3> 随机角色选择器 </h3>
+    <p>
+      <a href="nhrcs.ksh" > Kornshell程序 </a>
+    </p>
+    <p>
+      <a href="nhrcs.txt" > 使用文档 </a>
+    </p>
+  <br>
+  <br>
+
+  <hr>
+
+
+  <h2> 剧透内容 </h2>
+    <p>
+      <a href="medu-343.des" > 利用巨石渡过美杜莎之海 </a>
+    </p>
+  <br>
+  <br>
+
+  <hr>
+
+  <p>
+  <h2> Nothing Personal（原作者的个人介绍） </h2>
+
+      <a href="SelfPortraitNr1.jpg" > 我</a>
+    和我的
+      <a href="MyPetBat.jpg" > 宠物蝙蝠</a>
+     的照片
+    ;-)
+  <br>
+  <br>
+    我第一次NetHack飞升的UseNet帖子, 原帖: <a href="FirstAscension_UsenetPost.txt">Ascension (long)</a>。
+  <br>
+  <br>
+    我个人的 <a href="rrall.html">NAO飞升数据统计</a> （职业+种族）。
+  <br>
+  <br>
+  <br>
+    关于<a href="stat/z10players.html">NAO得分前十玩家</a>的数据统计。
+  <br>
+  <br>
+  <br>
+    <a href="roledifficulty.html">NetHack职业难度</a>的统计结果。
+  <br>
+  <br>
+  <br>
+    NAO死亡数据排名<a href="naodeaths.html">Condensed Data</a>（基于<a href="http://alt.org/nethack/topdeaths.html">NAO topdeaths</a>) - 每周更新。
+  <br>
+  <br>
+  &nbsp;
+  <br>
+  &nbsp;
+
+  <hr>
+
+  <div>
+    <p style="font-size: 0.8em; font-style: italic"
+       title="Janis Papanagnou">
+      &nbsp;
+
+      &copy;
+      <a style="font-size: 1.0em; font-style: italic" href="ma.gif">JANIS</a> 2006&thinsp;-&thinsp;2017 &nbsp; - &nbsp;
+  
+      Content licensed under the
+      <A style="font-size: 1.0em; font-style: italic" href="http://www.opencontent.org/opl.shtml"> OpenContent License</A>.
+    
+      &nbsp;
+
+      Source code is licensed under
+      <A style="font-size: 1.0em; font-style: italic" href="http://www.gnu.org/copyleft/gpl.html"> GNU General Public License</A>.
+
+    </p>
+  </div>
+
+</body>
+
+</html>
+
+<!--
+        vim: ts=2 sw=2 expandtab ai nu
+-->

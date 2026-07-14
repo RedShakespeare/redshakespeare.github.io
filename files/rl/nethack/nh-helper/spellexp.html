@@ -1,0 +1,321 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+  <!--
+      Author:  Janis Papanagnou
+      Date:    2008-10-14, 2011-04-17, 2016-06-25
+
+      Copyright &copy; 2008-2016 Janis Papanagnou
+      Content licensed under the
+      <A href="http://www.opencontent.org/opl.shtml">
+        OpenContent License
+      </A>.
+      Source code is licensed under
+      <A href="http://www.gnu.org/copyleft/gpl.html">
+        GNU General Public License
+      </A>.
+  -->
+
+<title> Nethack法术遗忘 </title>
+
+<style type="text/css">
+<!--
+  h1, h2, h3, h4, li { font-family: times-roman; font-size: 12pt; }
+  p, textarea, input, body, td { font-family: courier; font-size: 8pt; }
+-->
+</style>
+
+
+<script language="javascript" type="text/javascript">
+<!--
+
+    var wl_1_default = 7500;
+    var wl_2_default = 2750;
+    var wl_3_default = 1000;
+
+    function save_warning_levels()
+    {
+        var i;
+        var id;
+        var cookie = "W";
+
+        cookie += ":" + document.getElementById("wl_1").value;
+        cookie += ":" + document.getElementById("wl_2").value;
+        cookie += ":" + document.getElementById("wl_3").value;
+
+        var today = new Date();
+        var days90 = today.getTime() + (90 * 24 * 60 * 60 * 1000);
+        var expiry = new Date(days90);  /* exprires after 90 days */
+        var warning_levels = "warning_levels=" + cookie;
+        var expires = "expires=" + expiry.toGMTString()
+        document.cookie = warning_levels + "; " + expires
+    }
+
+    function restore_warning_levels()
+    {
+        var cookie = document.cookie;
+        var sel = -1;
+
+        if (cookie && (sel = cookie.indexOf("warning_levels=")) != -1)
+        {
+            cookie = cookie.substring(sel);
+            var alpha = cookie.indexOf("=") + 1;
+            var omega = cookie.indexOf(";");
+            if (omega == -1)
+                omega = cookie.length;
+
+            var cookie = cookie.substring (alpha, omega);
+            var warning_levels = cookie.split(":");
+
+            document.getElementById("wl_1").value = warning_levels[1];
+            document.getElementById("wl_2").value = warning_levels[2];
+            document.getElementById("wl_3").value = warning_levels[3];
+        }
+        else
+        {
+            document.getElementById("wl_1").value = wl_1_default;
+            document.getElementById("wl_2").value = wl_2_default;
+            document.getElementById("wl_3").value = wl_3_default;
+        }
+
+        document.form1.time_now.focus();
+    }
+
+    var shiftState = false;
+    function keyEvent (ev) { shiftState = ev.shiftKey; }
+    document.addEventListener("keydown", keyEvent);
+    document.addEventListener("keyup", keyEvent);
+
+    function do_plus(delta)
+    {
+        if (shiftState)
+            delta = -delta;
+        var elem = document.getElementById("time_now");
+        elem.value = parseInt(elem.value) + delta;
+
+        do_sort();
+    }
+
+    function sortTime(a, b)
+    {
+        var TimePart = /T:(\d+)/;
+        var ta = TimePart.exec(a);
+        var tb = TimePart.exec(b);
+        if (!ta[1]) ta[1] = 0;
+        if (!tb[1]) tb[1] = 0;
+
+        return ta[1] - tb[1];
+    }
+
+    function pad(str, len, num)
+    {
+        var spaces = "                                ";
+        var len_str = (""+str).length;
+        var padding = spaces.substr(0, len-len_str);
+
+        return ((num) ? (padding + str) : (str + padding));
+    }
+
+    function format(spell_time, delta, type, spell_name)
+    {
+        return "T:" + pad(spell_time, 6) + " " + pad(delta, 5, 1) + " " + pad(type,3) + " " + spell_name;
+    }
+
+    function do_sort()
+    {
+        var current_time = document.getElementById("time_now").value;
+        if (!current_time) current_time = 0;
+        var baseline = current_time - 20000;
+        //if (baseline < 0) baseline = 0;
+
+        var spells = new Array();
+        spells = document.getElementById("spell_discoveries").value.split("\n");
+
+        spells.push("  魔法书之=================== （遗忘界限）被称为T:" + baseline + " ");
+        spells.push("  魔法书之=================== （当前回合）被称为T:" + current_time + " ");
+
+        var spell_pattern = /魔法书之(.*)被称为T:(\d+) .*/;
+        var i = 0;
+        while (i < spells.length)
+        {
+            // Remove non-matching array entries
+            if (!(res =  spell_pattern.exec(spells[i])))
+            {
+                spells.splice(i, 1);
+                continue;
+            }
+
+            var wl_1 = parseInt(document.getElementById("wl_1").value);
+            var wl_2 = parseInt(document.getElementById("wl_2").value);
+            var wl_3 = parseInt(document.getElementById("wl_3").value);
+
+            if (!(20000 > wl_1 && wl_1 > wl_2 && wl_2 > wl_3 && wl_3 > 0))
+            {
+              alert ("Warning levels must be strictly descending!");
+              wl_1 = document.getElementById("wl_1").value = wl_1_default;
+              wl_2 = document.getElementById("wl_2").value = wl_2_default;
+              wl_3 = document.getElementById("wl_3").value = wl_3_default;
+            }
+
+            var spell_time = RegExp.$2;
+            var delta = spell_time - baseline;
+            if (delta < 0) { type = "*" ; delta = -delta }
+            else if (delta == 0 || delta == 20000) type = "  <"
+            else if (delta <= wl_3) type = "!!!"
+            else if (delta <= wl_2) type = "!"
+            else if (delta <= wl_1) type = "??"
+            else type = " "
+            var spell_name = RegExp.$1;
+
+            spells[i++] = format(spell_time, delta, type, spell_name);
+        }
+
+        spells.sort(sortTime);
+        document.getElementById("sorted_spells").value = spells.join("\n");
+
+        document.getElementById("spell_discoveries").blur();
+        document.getElementById("time_now").focus();
+
+        save_warning_levels()
+    }
+
+    function do_reset_form()
+    {
+        document.getElementById("spell_discoveries").value = "";
+        document.getElementById("sorted_spells").value = "";
+        document.getElementById("time_now").value = "";
+
+        document.getElementById("time_now").focus();
+
+        save_warning_levels()
+    }
+
+    function toggle_howto()
+    {
+        if (document.getElementById("howto").style.visibility == "hidden")
+            document.getElementById("howto").style.visibility = "visible";
+        else
+            document.getElementById("howto").style.visibility = "hidden";
+    }
+
+
+-->
+</script>
+
+</head>
+
+<body onload="restore_warning_levels()">
+  <h1> 法术遗忘提示器 </h1>
+
+  <noscript>
+    <br>
+    <table style="border-width: 4px; border-style: solid; padding: 8px">
+      <tr>
+        <td>
+          <b> The calculation needs JavaScript to be enabled in your browser! </b>
+        </td>
+      </tr>
+    </table>
+    <br>
+    <br>
+  </noscript> 
+
+
+  <form id="the_form" name="form1" style="display: block;" onsubmit="do_sort(); return false;" action="spellexp.html">
+
+    <table>
+      <tr>
+        <td>
+          <p>
+            当前回合数为&nbsp;T:&nbsp;<input type="text" tabindex="1" name="time_now" id="time_now" size="6" style="text-align:right"> &nbsp;&nbsp;
+            <input type="button" tabindex="-1" name="plus10000" value="+10000" style="background-color:white; font-size:80%" onclick="do_plus(10000)">
+            <input type="button" tabindex="-1" name="plus1000" value="+1000" style="background-color:white; font-size:80%" onclick="do_plus(1000)">
+            <input type="button" tabindex="-1" name="plus100" value="+100" style="background-color:white; font-size:80%" onclick="do_plus(100)">
+            <input type="button" tabindex="-1" name="plus10" value="+10" style="background-color:white; font-size:80%" onclick="do_plus(10)">
+            <input type="button" tabindex="-1" name="plus1" value="+1" style="background-color:white; font-size:80%" onclick="do_plus(1)">
+          </p>
+          <p>
+            已发现法术： <br>
+            <textarea id="spell_discoveries" tabindex="2" cols="68" rows="40"></textarea>
+          </p>
+        </td>
+        <td>
+          <p>
+            <input type="button" tabindex="3" name="sort" value="按时间排序" onclick="do_sort()">
+          </p>
+          <p>
+            习得时间 &nbsp;剩余时间 &nbsp; 法术名<br>
+            <textarea id="sorted_spells" tabindex="-1" name="sorted_spells" cols="68" rows="40" readonly="readonly"></textarea>
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <br> <input type="button" tabindex="-1" name="reset_form" value="清空数据" onclick="do_reset_form()">
+        </td>
+        <td>
+          <br> 警告等级： &nbsp;
+          <input type="text" tabindex="-1" name="wl_max" id="wl_max" size="5" value="20000" style="text-align: right" disabled="disabled">
+          &gt;
+          <input type="text" tabindex="-1" name="wl_1" id="wl_1" size="5" value="7500" style="text-align: right">
+          &gt;
+          <input type="text" tabindex="-1" name="wl_2" id="wl_2" size="5" value="2750" style="text-align: right">
+          &gt;
+          <input type="text" tabindex="-1" name="wl_3" id="wl_3" size="5" value="1000" style="text-align: right">
+          &gt;
+          <input type="text" tabindex="-1" name="wl_min" id="wl_min" size="5" value="0" style="text-align: right" disabled="disabled">
+        </td>
+      </tr>
+      <tr>
+        <td align="left" title="打开帮助栏" onclick="toggle_howto">
+          <br>
+          <font size="+2"> <b> <a href="javascript:toggle_howto()"> 帮助 </a> </b> </font>
+        </td>
+      </tr>
+      <tr id="howto" style="visibility:hidden">
+        <td colspan="2" title="再次点击“帮助”收起窗口">
+
+          <textarea cols="120" rows="15" readonly="readonly">
+
+如何使用本工具：
+
+ 1. 记录法术习得的回合数
+ 在学会一种新法术后，记下当前的回合数以便在NetHack发现物列表中查看。
+ 使用'M-N'或'C'按键或'#name'指令对该魔法书命名（如T:12345）。
+
+ 2. 查看所有法术的习得回合
+ 当你想查看所有法术的习得回合时，查看NetHack的发现物列表。NetHack按键为'\'。
+
+ 3. 使用本工具进行排序
+ 3a. 将发现物列表复制到“已发现法术”栏；
+ 3b. 将当前回合书输入“T:”输入框；
+ 3c. 点击“按时间排序”按钮。
+
+ （注：或在“已发现法术”中输入格式为“魔法书之[法术名]被称为T:[回合数] ”的文本，每种法术占一行，行尾需有空格）
+          </textarea>
+
+          <!--
+          <iframe src="spell_expiry_howto.html" width="120%" name="Howto">
+            <p> Your browsr doesn't support frames, unfortunately. Sorry.
+            </p>
+          </iframe>
+          -->
+
+        </td>
+      </tr>
+    </table>
+
+  </form>
+
+
+</body>
+</html>
+
+
+<!--
+	vim: ts=2 sw=2 expandtab ai
+-->
+

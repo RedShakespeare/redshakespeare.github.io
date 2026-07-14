@@ -1,0 +1,163 @@
+00000000Ó000000000000000000Ï0000000000000000000000000000É0000
+00000000000000:000000000000000000000000000000000000000000000000
+0000+0000000000000000000000000000000000000000000000000000000000
+00000000J000000000000000000000000000000000000000000000000000000
+0000000000000000000000000000000000000000000000000000000000Ó 00
+00000000000000000000000000000000y000000000000000000000000000000
+000000Ù00v	0000–
+000000000000000000000000000000ð00j00000000
+0000000000000000000000¸00000000÷0000000000000000000000000000Ó
+
+*FIRSTMOVE
+Votre 1re tƒche est de trouver un bon^
+site et de fonder votre capitale.^
+Meilleurs sites : bords des riviŠres,^
+prairies, zones c“tiŠres ou zones^
+prŠs de ressources sp‚c.^
+
+*BUILDCITY
+Cet endroit semble un bon site pour une^
+ville. S‚lectionnez 'Found new city" au^
+menu ORDERS ou, avec le 'b', fondez-y^
+une ville.^
+
+*FIRSTPRODUCT
+Chacune de vos villes peut faire d'autres^
+colons, unit‚s militaires ou am‚liorations^
+pr renforcer la croissance de votre civilis.^
+Vous ne pouvez construire qu'un ‚l‚ment^
+par ville. Commandes production modifiables^
+… tout moment. Choisissez l'‚l‚ment …^
+construire, avec le bouton 'CHANGE' dans^
+l'‚cran city information qui suit.^
+
+*FIRSTCIV
+Villes : aussi centres de commerce et^
+de flux d'infos. Vos savants et sages^
+peuvent recueillir ces infos pour avoir^
+de nouvelles capacit‚s et comp‚tences^
+importantes pour votre civi. Dirigez^
+leurs ‚tudes … l'aide du menu suivant :^
+
+*FIRSTUNIT1
+Vous venez de construire votre 1re unit‚^
+militaire. D‚placez-la avec les flŠches ;^
+donnez avec menu Orders des instruc-^
+tions sp‚ciales. Avec cette unit‚^
+explorez, r‚pandez-vous, menez des^
+attaques et d‚fendez votre civilis. 
+
+*FIRSTUNIT2
+Fortifiez unit‚s dans villes pour les^
+d‚fendre contre ennemis/barbares. Les^
+unit‚s colons peuvent faire nouv. villes,^
+routes, canaux d'irrigation et mines.^
+Attaquez vos ennemis avec des l‚gions,^
+des chars et des catapultes.
+
+*MINING
+Cette zone donne plus de ressources.^
+Le minage ('m') de ces collines augmente^
+la capacit‚ de production de $US.^
+
+*IRRIGATE
+Cette zone convient … la construction de^
+canaux d'irrig. ('i'). Nourriture en plus^
+aide ville de $US … augmenter plus vite.^
+
+*ROAD
+Cet endroit convient … la construction^
+d'une route. Vos unit‚s se d‚placeront^
+plus vite et il y aura plus^
+de commerce dans la ville de $US.^
+
+*MONARCHY
+Vous venez de connaŒtre la MONARCHIE.^
+Sous une MONARCHIE : habitants plus^
+productifs mais frais d'entretien des^
+unit‚s militaires plus ‚lev‚s. Pour^
+changer votre gouvernement en MONARCHIE,^
+il faut d'abord une r‚volution !^
+(R‚volution : consultez le menu GAME).^
+
+*LAND
+MASSE^
+^
+- Les planŠtes … masse de terre normale se composent d'Œles et de continents.^
+- Les planŠtes … masse de terre r‚duite ont en g‚n‚ral plus d'Œles, ce qui
+favorise un d‚veloppement paisible de civilisation.^
+- PlanŠtes … gde masse de terre : en g‚n. plus de continents, d'o— plus
+de commerce et de guerres entre civilis.^
+
+*TEMPERATURE
+TEMPERATURE^
+^
+- PlanŠtes … temp. moyenne : plut“t un m‚lange de tous types de terrain.^
+- PlanŠtes … basse temp. : formation de la toundra et des terres arctiques favoris‚e au d‚triment du d‚sert.^
+- PlanŠtes … haute temp. : formation du d‚sert favoris‚e au d‚triment de la toundra et des terres arctiques.^
+
+*CLIMAT
+CLIMAT^
+^
+- PlanŠtes … climat normal : plut“t m‚lange de tous types de terrain.^
+- PlanŠtes … climat ARIDE : plus de d‚serts et de plaines.^
+- PlanŠtes … climat HUMIDE : plus de jungles, de marais et de riviŠres.^
+
+*AGE
+AGE
+^
+- PlanŠtes plus r‚centes : gdes zones terrain similaire (forˆts, montagnes,...)
+- PlanŠtes + anciennes : relief + faible et + morcel‚
+
+*HELP1
+PPES GENERAUX : (1)^
+^
+D‚fendez vos villes avec au moins 1^
+(de pr‚f. 2) bonne unit‚ de d‚fense.^
+^
+Etabl. ‚quilibre entre am‚liorer vos^
+villes existantes et essayer de faire des^
+villes.^
+^
+Ne vous r‚pandez pas + que vous ne pouvez^
+vs d‚fendre ; risque d'attaque surprise^
+barbare ou ennemie.^
+
+*HELP2
+PPES GENERAUX : (2)^
+^
+Paix avec vos voisins plus forts.^
+Isolez et envahissez les plus faibles.^
+^
+Pensez … transformer votre gouvernement en^
+monarchie dŠs que vos villes atteignent^
+six ou sept.^
+^
+A mesure que votre civilisation s'accroŒt,^
+apprenez grƒce aux diplomates^
+capacit‚s ennemies. Avec caravanes,^
+cr‚ez itin. commerciaux et renforcez^
+‚conomie.^
+
+*DISORDER
+Une ville connaŒt des troubles quand^
+le nbre d'habitants malheureux d‚passe^
+le nbre d'habitants heureux. Quand 1^
+ville = en proie … troubles, croiss.^
+et production s'arrˆtent. RemŠdes :^
+transformation des habitants en^
+artistes, envoi d'unit‚s mil. dans^
+ville, construction temple, cath‚drale^
+ou colis‚e, augmentation quantit‚ de^
+comm. consacr‚e aux produits luxe. Voir^
+manuel p. 66 pr + de d‚tails.^
+
+*SCHISM
+$THEM : civilisation grande et^
+puissante. Mais des factions rebelles^ 
+feront peut-ˆtre guerre civile. Si vos^
+arm‚es peuvent prendre leur capitale,^
+le choc risque de couper le pays en 2 !^
+
+*END
+

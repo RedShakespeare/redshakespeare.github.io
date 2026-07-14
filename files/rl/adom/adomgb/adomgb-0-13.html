@@ -1,0 +1,1217 @@
+<html>
+<head>
+<title>Improved ADOM Guidebook - Dungeon features</title>
+<link rel="stylesheet" type="text/css" href="adomgb-body.css">
+</head>
+<body>
+<h1>Improved ADOM Guidebook</h1>
+<hr>
+<a href="adomgb-0-12.html">Previous</a> - <a href="toc.html">TOC</a> - <a href="adomgb-0-14.html">Next</a>
+<hr>
+<a href="#0d1">Messages:</a> <a href="#0d11">Monsters or monster vaults</a> - <a href="#0d12">Special dungeon features</a> - <a href="#0d13">Traps</a> - <a href="#0d14">Unique levels</a> -
+<a href="#0d15">Special</a> - <a href="#0d2">Traps</a> - <a href="#0d3">Doors</a> - <a href="#0d4">Rooms</a> - <a href="#0d5">Room effects</a> - <a href="#0d6">Herbs</a> -
+<a href="#0d7">Shops</a> - <a href="#0d8">Rivers</a> - <a href="#0d9">Pools</a> - <a href="#0da">Forges</a> - <a href="#0db">Hives</a> - <a href="#0dc">Vaults</a> -
+<a href="#0dd">Royal treasuries</a> - <a href="#0de">Altars</a> - <a href="#0df">Graves</a> - <a href="#0dg">Cavernous levels</a> - <a href="#0dh">Webs</a> - <a href="#0di">Shifting levels</a> -
+<a href="#0dj">Statues</a> - <a href="#0dk">Legend statues</a> - <a href="#0dl">Magma</a>
+<hr>
+
+<h3 id="0d">Dungeon features</h3>
+Some or all of the following features may randomly be found in dungeons across the Drakalor Chain. The appearance of any of these is, in most cases, completely random,
+however there are some guaranteed features in certain dungeons.<p>
+
+<h4 id="0d1">0.13.1 Messages</h4>
+See also section <a href="adomgb-0-2.html#02335">0.2.3.3.5</a> for messages generated when sacrificing.<p>
+
+<table id="0d11" border=1><caption>0.13.1.1 Monsters or monster vaults messages</caption>
+<tr><th>Message<th>Meaning
+<tr><td>You feel excited.<td>vault
+<tr><td>You feel truly excited.<td>greater vault
+<tr><td>You sense a certain tension.<td>room full of monsters
+<tr><td>You sense the death of an innocent being.<td>Cute Dog has just been killed
+<tr><td>You feel a surge of power.<td>artifact, guarded by a named monster
+<tr><td>You hear a distant wind.<td>vortex
+<tr><td>You hear a distant "Hurumph!"<td>Dorn Beast
+<tr><td>*THUMB*<td>titan or greater moloch
+<tr><td>You hear a horrible unearthly wail in the distance!<td>Banshee
+<tr><td>You see a small hole in the ground.<td>hive
+<tr><td>Something is moving in the hole beneath your feet.<td>hive creature is trying to emerge while the PC is standing on the hive
+<tr><td>The whole dungeon level seems to be shaking.<td>hive creature tried to emerge from a hive and was not successful [1]
+<tr><td>You nearly fall into a small hole in the ground.<td>hive in the dark
+<tr><td>You see a crumpled hole in the ground.<td>empty hive
+<tr><td>The floor is very rough here.<td>empty hive in the dark
+<tr><td>You hear clicking sounds.<td>ants
+<tr><td>You hear buzzing sounds.<td>bees
+<tr><td>You hear an evil hissing and something large crawling about the ground.<td>giant ant queen
+<tr><td>You hear a vile buzzing sound! <td>giant bee queen
+<tr><td>You hear a slurping sound.<td>spider spun a web
+<tr><td>You hear a ripping sound.<td>web was torn apart
+<tr><td>You hear a burping/popping sound.<td>breeder just bred
+<tr><td>You hear a grinding sound.<td>something just dug through stone
+<tr><td>You sense imminent danger...<td>chance of out-of-depth danger generation
+<tr><td>... but the feeling passes.<td>but it didn't happen
+<tr><td>You sense a rupture in the spiritual aura of this place.<td>(greater) moloch smashed an altar
+<tr><td>You feel the presence of a friend.<td>companion was generated out of LOS &ndash; in a dark room, for example
+<tr><td>Someone shouts: "*Yippiyaiyay!*"<td>Tywat Pare has found a bandit
+<tfoot>
+<tr><td>You sense an imminent and blood-chilling threat...<td>boss monster
+<tr><td>You sense the forces of nether approaching!<td>vile spirit
+</tfoot></table><p>
+
+[1] It will be followed by messages that indicate the reason, for instance "The center of the earthquake seems to be directly beneath your feet!"
+which means the PC is standing on the hive. There are other messages that need to be compiled regarding other monsters standing on the hive, etc.<p>
+
+<table id="0d12" border=1><caption>0.13.1.2 Special dungeon feature messages</caption>
+<tr><th>Message<th>Meaning
+<tr><td>You hear the wind howling.<td>forge
+<tr><td>A lot of stuff seems to be standing around here.<td>PC is standing at a forge's location in the dark
+<tr><td>You sense a pious aura.<td>altar
+<tr><td>You stumble against some stone block.<td>PC is standing on an altar in the dark
+<tr><td>You hear someone counting money.<td rowspan=3>shop
+<tr><td>You hear someone cursing shoplifters.
+<tr><td>You hear the chime of a tiny bell.
+<tr><td>You hear arcane mumbling.<td>shop being restocked
+<tr><td>You hear a deep sigh.<td>follows preceding message if shopkeeper has run out of money
+<tr><td>You feel observed.<td>invisible PC has been detected by a shopkeeper who is out of LOS
+<tr><td>You hear splashing sounds.<td>pool (note similarity to acid trap below)
+<tr><td>Your feet suddenly feel wet.<td>pool in the dark or while blind
+<tr><td>You hear the sound of rushing water!<td>river (note similarity to water trap below)
+<tr><td>You hear the sound of falling coins.<td rowspan=2>royal treasury
+<tr><td>You hear the steps of the royal guard.
+<tr><td>You suddenly feel the urge to get very rich really soon!<td>royal treasury (while wearing an amulet of greed)
+<tr><td>Something shifts beneath your feet!<td>PC entered the top level of the Pyramid while blind or while the stairway is covered in darkness
+<tfoot>
+<tr><td>You sense something of historical significance.<td>statue
+<tr><td>You feel a surge of pulsing power!<td>disconnected room full of monsters containing an artifact, with out-of-depth named guardian  
+<tr><td>You hear a violent grating sound!<td rowspan=3>dungeon shifts 
+<tr><td>A whole section of the dungeon &lt;direction&gt; of you shifts to the &lt;direction&gt;!
+<tr><td>A whole section of dungeon shifts to the &lt;direction&gt;! Everything is shaking violently! 
+</tfoot><tfoot class="new">
+<tr><td>A solemn aura permeates this area.<td rowspan=2>legend statue
+<tr><td>You shiver in anticipation of something special that you feel is going to happen.
+</tfoot></table><p>
+
+<table id="0d13" border=1><caption>0.13.1.3 Trap messages</caption>
+<tr><th>Message<th>Meaning
+<tr><td>You hear a splashing sound.<td>acid trap was triggered
+<tr><td>You hear the sound of rushing water.<td>water trap was triggered
+<tr><td>You hear a strange "ZAP!"<td>light trap (also possibly a flash/stun door trap) was triggered
+<tr><td>You hear a pained -foo sound- in the distance.<td>spear or arrow trap was triggered
+<tr><td>You suddenly sense taint in your vicinity.<td rowspan=2>corruption trap was triggered
+<tr><td>You sense a soul in agony.
+<tr><td>You hear the sound of toppling stones.<td>stone block trap was triggered
+<tr><td>You hear a thundering explosion.<td>fireball trap was triggered
+<tr><td>You hear a squeaking sound.<td>alarm trap was triggered
+<tr><td>The -foo- seems to move very carefully.<td>monster (or companion) encountered a trap
+<tr><td>You shudder.<td>trap-filled room is somewhere on the level
+<tfoot class="new">
+<tr><td>You hear a strange rummaging sound in the distance!<td>trap was created by a monster
+</tfoot></table><p>
+
+<table id="0d14" border=1><caption>0.13.1.4 Unique level messages</caption>
+<tr><th>Message<th>Meaning
+<tr><td>You feel watched. You shiver. You shiver really bad!<td>Gremlin Cave
+<tr><td>The air of this level is filled with a strange smell.<td>si level
+<tr><td>You hear someone chuckling evilly.<td>underground level of the Dwarven Graveyard
+<tr><td>You smell the reek of sulphur, steel and oil.<td>Darkforge
+<tr><td>The air suddenly is filled with the stench of death. The stone is colored strange gray shades and everything seems to be decaying, rotting dying slowly.<td>CoC Graveyard
+<tr><td>This dungeon is very dusty.<td>second level of the Assassin's guild
+<tr><td>Water drips constantly from the ceiling...<td>Water Temple
+<tr><td>This whole level seems to be filled with emotions of terror, sorrow, pain and death...<td>Banshee level
+<tr><td>Stormy winds howl through these tunnels.<td>Air Temple
+<tr><td>This level is intensely hot! The rocks are glowing...<td>Fire Temple
+<tr><td>You sense an intense tension.<td>battle bunny level
+<tr><td>This level seems somehow removed from the rest of the world." <td>Cat Lord level
+<tr><td>The walls seem to be closing in...<td>Earth Temple
+<tr><td>This part of infinity seems to be special in a very eerie way. You wonder whether you would be able to find it ever again...<td>SIL (I:66)
+<tr><td>The walls and floor of this level are filled with the marks of huge reptiles... hundreds of such marks.<td>final level of the Blue Dragon Caves
+<tr><td>You feel touched by the forces of chaos...<td>lair of the Emperor Moloch
+<tr><td>Some strange energy fills the air causing your skin to itch.<td>Mana Temple
+<tr><td>This level is covered with a very slippery layer of ice.<td>D: 49
+<tr><td>This level is very strange... the walls are hard to see, everything seems to blur and you feel slightly dizzy.<td>D: 50
+<tfoot>
+<tr><td>You enter rather unremarkable cave complex. An easy wind is going and you feel that life is rife with new experiences to make!<td>Unremarkable Cave
+<tr><td>You sense death looming... your sixth sense tells you to leave quickly!<td>Antediluvian Dungeon
+</tfoot></table><p>
+
+<table id="0d15" border=1><caption>0.13.1.5 Special messages</caption>
+<tr><th>Message<th>Meaning
+<tr><td>You hear a sliding sound.<td>PC kicked an object on the floor in the dark
+<tr><td>Oh my, I'm so lonely and need some company.<td>random, any NPC can say this, small lawful boost if the PC agrees to spend time with the NPC
+<tr><td>You feel a great wave of relief rushing through these tunnels.<td>Jharod has healed Yrrigs while both are out of LOS
+<tr><td>Jharod, the healer, suddenly seems to touch someone in a soothing way. You feel a great wave of relief rushing towards you." <td> Jharod, in LOS, has healed Yrrigs, out of LOS
+<tr><td>You suddenly feel ancient magical energies manifest in your vicinity.<td>PC has just achieved experience level 13; the papyrus scroll has been generated, which is
+an invitation to enter the Pyramid (section <a href="adomgb-2-9.html">2.9</a>). Alternatively:
+<tr><td>You suddenly feel ancient magical energies manifest at your feet.<td>same as above, but the papyrus scroll was generated on the dungeon tile where the PC is standing
+<tr><td>Your equipment suddenly seems to weigh less.<td>item has disappeared from inventory, most likely a food item susceptible to rotting &ndash; this includes corpses, apples and pieces of raw meat
+<tr><td>Your -foo- starts to rot!<td>food item in the inventory has started to rot (which means it has changed from uncursed to cursed status)
+<tr><td>Your -foo- rots away!<td>cursed food item in the inventory has rotted away; the difference between this message and "Your equipment suddenly seems to weigh less." may be Perception dependent or may involve other factors
+<tr><td>You feel a change of mind in a being close to you.<td>pet has become hostile
+<tr><td>You feel like scum. OR You feel like a traitor.<td>PC sacrificed a pet
+<tr><td>Your mood darkens.<td>PC has lost blessed status
+<tr><td>For a moment you feel dizzy.<td>monster tried to teleport to the PC's location
+<tr><td>You hear a thudding sound.<td>thrown rock landed without being destroyed OR a wounded monster died after running out of LOS
+<tr><td>You feel responsible.<td>PC killed a ratling guardian
+<tr><td>You feel a horrible loss.<td>Cute Dog transformed into a writhing mass of primal chaos
+<tr><td>You smash the stones to pieces. Some stuff buried in the rock in uncovered!<td>PC dug through stone, uncovering an item dropped by a monster that was killed while in the wall
+<tr><td>The altar is smashed by the greater moloch! An energy bolt strikes down on the greater moloch! The greater moloch shruggs it off and laughs with malicious glee!<td>self-explanatory
+<tr><td>*SORRY, MISSED*<td>the above happens, but the PC is doomed; the god strikes at the PC by mistake
+<tr><td>You hit something and notice a thudding sound.<td>PC killed an invisible monster with a missile
+<tr><td>Drops of blood appear on the ground.<td>invisible monster is bleeding
+<tr><td>The stairway is very long...<td>generation of a dungeon level took a little bit longer; unnoticeable on faster machines
+</table><p>
+
+<h4 id="0d2">0.13.2 Traps <tt>^</tt></h4>
+Traps are exactly what the name implies. They are represented by carets <tt>^</tt> in the dungeon maps once they are discovered. They can be deliberately set off by standing
+on the trap and pressing <tt>Ctrl-t</tt>.<p>
+
+<h4 id="0d21">0.13.2.1 Trap types</h4>
+There are several varieties which do various nasty things to the PC or her worn or carried inventory:<p>
+
+<table id="0d21" border=1><caption>Traps</caption>
+<tr><th>Tile<th>Type <th>Caret <th>Effect
+<tr><td><img src="tiles/trap_ac.png" alt="acid"><td>Acid [1]<td>green <td>Damages the PC and damages or destroys non-artifact worn equipment.
+<tr><td><img src="tiles/trap_a.png" alt="alarm"><td>Alarm <td>orange <td>Warns every monster on the level of the PC's presence and causes them to become hostile; disarm with potion of oil.
+<tr><td><img src="tiles/trap_ar.png" alt="arrow"><td>Arrow [1]<td>white <td>Shoots an arrow at the PC; can be exploited to gain arrows; there is more than 5% chance to be hit, in which case the arrow does 1d10+2 - PV damage, 1/3 is chance for the arrow to not break, and 1/30 chance for the trap to vanish.
+<tr><td><img src="tiles/trap_ce.png" alt="ceiling"><td>Ceiling [2]<td>dark blue <td>Drops a portion of the ceiling on the PC; found on levels with forbidden teleportation replacing teleportation traps.
+<tr><td><img src="tiles/trap_c.png" alt="corr"><td>Corruption <td>purple <td>Corrupts the PC; a relatively small effect (~55 CP).
+<tr><td><img src="tiles/trap_f.png" alt="fball"><td>Fireball [1]<td>red <td>Generates a fireball at the location of the trap.
+<tr><td><img src="tiles/trap_l.png" alt="light"><td>Light <td>yellow <td>Blinds the PC.
+<tr><td><img src="tiles/trap_pc.png" alt="spit"><td>Simple Pit <td>brown or cyan [3]<td>PC falls into a hole; can be used to train Climbing and Dx; deals 3d6 damage; if discovered and Dx&gt;23, trap is always avoided and Dx is trained.
+<tr><td><img src="tiles/trap_pc.png" alt="pitwv"><td>Pit with vipers <td>brown or cyan [3]<td>(Ma/500)% chance is to avoid the trap entirely WITHOUT discovering, trains Ma. Dx/40 is chance to avoid falling in pit, vipers still come out. 2d6 vipers spawned.
+<tr><td><img src="tiles/trap_s.png" alt="spear"><td>Spear [1]<td>brown <td>Shoots a spear at the PC; can be exploited as a source of metal.
+<tr><td><img src="tiles/trap_st.png" alt="sblock"><td>Stone block [2]<td>gray <td>Drops a stone block on the PC; can kill low level PCs; (Ma/500)% chance to avoid entirely <i>without</i> discovering, this trains Ma. Damage is 4d10-PV, 50% chance to create rocks.
+<tr><td><img src="tiles/trap_t.png" alt="tele"><td>Teleportation <td>light green <td>Teleports the PC; sometimes handy for on-demand teleportation.
+<tr><td><img src="tiles/trap_w.png" alt="water"><td>Water <td>blue <td>Causes a gush of water; can destroy scrolls if the PC does not have a waterproof blanket to protect the backpack; rusts vulnerable armor and weapons; unavoidable besides Alertness &amp; Sixth Sense.
+</table><p>
+
+[1] Eventually runs out and dissappears.<p>
+[2] Dissappears once triggered.<p>
+[3] When unopened, this trap is cyan, when the pit has been revealed it becomes brown.<p>
+
+It should be noted that traps affect monsters as well as the PC: light traps will blind monsters, corruption traps will corrupt monsters, acid traps will damage monsters, etc.
+An interesting use for an alarm trap is to lure a monster across it. Other monsters will become hostile towards the monster which triggered the trap and attack it. This can be
+very handy for disposing of cats (see section <a href="adomgb-0-9.html#092">0.9.2</a>).<p>
+
+Note that it is not possible to use the <tt>w5</tt> (walk in place) command while standing on a trap.<p>
+
+<span class="newb">
+If a PC at non-critical health triggers a damaging trap that would have killed them, they are instead reduced to 1 HP, stunned and/or confused for a short time, and suffer
+an increased chance of item destruction from the trap. Doomed PCs do not receive this protection. This also applies to damaging door traps.</span><p>
+
+<b>Creating</b><br>
+Traps can be created using a wand of trap creation. A pit trap can be created by using a pick axe or casting Mystic Shovel spell and pressing <tt>5</tt> as direction.
+A pit can be covered using a blanket &ndash; this will transform the pit into a different type of trap depending on the trap pattern. <big>In R+, this disarms the trap.</big><p>
+
+<b>Discovering</b><br>
+Traps can be discovered with the Detect Traps skill. PCs with this skill automatically apply it when the <tt>s</tt>earch command is used. Adjacent trap is discovered if 
+Detect Traps skill (+20 if Dwarf) (+Level*2 if Thief) (+20 per searching item) + Pe*2 + Luck &gt; 1d(120+DL*1.5). The skill needs to be at least 1 to get any chance. 
+Wands of trap detection can be used for this, but they run out of charges. They can be recharged of course, but the skill never runs out and is unaffected by the mana battery corruption.
+In ordinary dungeons it is not worth using this technique, but in heavily trapped areas (the underground level of the Dwarven Graveyard, the Pyramid, the Gremlin Cave,
+the Assassin's Guild, the Minotaur Maze, the Mana Temple) it is definitely prudent to use this skill multiple times during every turn where the PC suspects a trap is present.<p>
+
+<b>Avoiding</b><br>
+Traps are much easier to avoid once they are discovered, probably by a factor of 100 or more. This is why the Detect Traps skill is so useful. Every PC should attempt to
+gain this skill. PCs with high Alertness, Mana, Dexterity, Perception attributes and the Sixth Sense talent will avoid undiscovered traps much more successfully than those
+without these abilities.<p>
+
+<b>Disarming</b><br>
+Obviously, the Disarm Traps skill can be used to disarm previously discovered traps, except pits. Be careful though &ndash; if you fail a check badly, you might spring the trap!
+The presence of thieves picks increases success by ~30% depending on B/U/C status. Disarming traps trains Dexterity, and grants small amount of xp. Apart from the skill, plain 
+blanket can be used to disarm pit traps, and potion of oil to disarm alarm trap.<p>
+
+<h4 id="0d22">0.13.2.2 Trap pattern</h4>
+<big>In R+, the trap pattern has been removed; traps occur randomly.</big><p>
+
+Traps occur in a known pattern. The order, left to right or top to bottom, is:<p>
+<ul>
+<li>Light
+<li>Corruption
+<li>Stone block
+<li>Alarm
+<li>Arrow
+<li>Acid
+<li>Pit with vipers
+<li>Spear
+<li>Teleportation/Ceiling
+<li>Water
+<li>Fireball
+<li>Simple Pit
+</ul><p>
+
+There are several places on fixed-layout levels where trap types and locations are shown in these documents. Note that trap types, in particular, are dependent upon the dungeon
+level where the fixed-layout level in question is generated. Examples include Dwarftown and (most of) the elemental temples. There is generally a warning in those sections
+concerning variations caused by differing dungeon level. There is also variability introduced if the player chooses to play with nonstandard resolution. There is no warning
+about this factor. Nevertheless, the above pattern applies; identifying a single trap allows the player to predict the type of trap generated elsewhere on the level.<p>
+
+<h4 id="0d3">0.13.3 Doors <tt>/</tt><tt>+</tt></h4>
+<img src="tiles/door_c.png" alt="closed door" align="left">
+There are doors on many of the dungeon room entrances. The majority of doors are not a problem, as you can  easily <tt>o</tt>pen and <tt>c</tt>lose them.
+However, they can be locked or locked and trapped. Doors are generated with the following probabilities: open door: 45%, closed door: 25%, doorway (no door): 20%, locked
+only door: 3%, locked and trapped door: 7%.<p>
+
+<h4 id="0d31">0.13.3.1 Locked doors</h4>
+Locked doors can be opened using several methods. Safe ways are:<p>
+<ul>
+<li>Unlocking with the proper blessed key &ndash; a message is generated: "You notice a clicking sound." meaning a trap was bypassed. Keys are randomly found in the dungeons.
+Skriek, the ratling in Lawenilothehl, also sells keys. You can unlock door with the unlock command &ndash; <tt>Ctrl-u</tt>, or you can just <tt>U</tt>se the correct key.
+<li>Zapping blessed or uncursed wand knocking.
+<li>Casting the Knock / Divine Key spell.
+<li>Using the Silver Key, which is an artifact tool that can open all doors.
+<li>Throwing an anvil or huge rock from some distance, unluckily this destroys the door (as opposed to simply opening it). And, in the case of the door being trapped, it also
+destroys the anvil/huge rock.
+<li>Bypassing via digging or teleportation.
+<li>Ordering a pet that can smash doors to walk through it.
+<li>Using the Mindcrafter power Telekinetic Blast, this always destroys untrapped doors but has no effect on trapped ones.
+</ul><p>
+
+Non-safe ways:<p>
+<ul>
+<li><tt>k</tt>icking it down &ndash; some players recommend trying to open doors multiple times before kicking it, so as to set off any traps, as you really do not want be blind
+stunned and surrounded by multiple opponents. An unsuccessful attempt to kick down a non-trapped door yields the message "You kick the door but it does not budge."
+An unsuccessful attempt to kick down a trapped door yields the message "You kick the door but it does not budge at all." In this case the PC was extremely lucky, since kicking
+a trapped door almost invariably sets off the trap.
+<li>Using uncursed and especially cursed keys &ndash; these might set off traps and break in process.
+<li>Using the Pick Locks skill &ndash; this always sets of a trap if one is present.
+</ul><p>
+
+Under some conditions player might want to lock doors to isolate part of the level or stop monsters from pursuing the character. Locked rooms are also recommended for storing items.
+General ways to lock (and sometimes also trap) a door are:<p>
+<ul>
+<li>Using a regular key of the correct type. Non blessed ones might break in the process.
+<li>Using the Silver Key.
+<li>Casting Magic Lock / Seal of the Spheres spell.
+<li>Cursed wand of knocking will lock door.
+<li>Applying the Pick Locks skill on unlocked door. This method has a chance to fail.
+<li>Wand of door creation sometimes creates locked doors, which usually are trapped. Very unreliable.
+<li>Wand of trap creation if <tt>z</tt>apped on "doorway" tile will create trapped and locked door instead of conventional trap. Additionally zapping trap creation wand on
+present door will close and trap it.
+</ul><p>
+
+<h4 id="0d32">0.13.3.2 Trapped doors <tt>\</tt></h4>
+<img src="tiles/door_t.png" alt="trapped door" align="left">
+There are different types of door traps:<p>
+
+<table id="0d321" border=1><caption>Door trap types</caption>
+<tr><th>Type<th>Description
+<tr><td>Trick door trap [1]<td>Drops door directly in front of doorway, damages the PC and worn equipment; first chance to evade: ((Pe+Luck)/30) %, second chance to evade:
+(Dodge/200) %; damage: Min(10,DL+3)d4 - (PV of head armor); if evaded, trains Pe and Dx.
+<tr><td>Stone block trap [1]<td>Similar to the collapsing door, drops stones directly in front of the door,	can kill low level PCs. (Dx+Luck)/30 chance to jump back (if there's
+space to do it, of course). Otherwise, 3d10-PV damage. No equipment destruction.
+<tr><td>Explosive rune<td>Arguably the worst door trap, destroys a variety of worn items and backpack items and damages the PC;  can injure companions, making them become
+hostile; possible deafening of the PC. Damage dealt is (Min(DL+1,16)d6)*x/2, where x is 1 if you "partially evade the explosion" (depends on Dx and Luck) or 2 otherwise.
+<tr><td>Booby trap <td>Similar to the explosive rune trap, generates a fireball, can injure companions, making them become hostile. Damage is Min((DL+3)d4,100).
+<tr><td>Stunning rune<td>If the PC has stun resistance, you only get "You receive a minor electric shock." Otherwise: If the PC can see the tile standing on, there is a
+(Dx+Luck)/30 chance to avoid being Stunned for (DLd4) turns. If the roll fails, in addition to being stunned another roll (Pe+Luck)/30 determines if the PC gets blinded.
+In addition to previous roll, there is a 1/30 chance to get heavily blinded for (DL*10d10) turns, otherwise it's just (DLd4)+DL turns. If passed, the corresponding attribute
+that influenced the roll is trained.
+<tr><td>Flash trap<td>X is 0 if both the door's tile and the tile at the PC's position are lit, 10 if only one is lit and 20 if both are unlit. If 1d30+X+1 &gt; (Pe+Luck),
+then the PC gets blinded for (DLd4)+DL turns and Pe is abused by (-1-1d4). Otherwise, Pe is trained.
+</table><p>
+
+[1] Can be avoided by not standing directly in front of door.<p>
+
+Players should get into the habit of never standing directly in front of a door when opening it whenever possible. This will completely eliminate deaths from Stone block
+door traps and damage from Trick doors. It also lessens the damage from an Explosive rune: "You partially evade the explosion." As with ordinary traps, PCs with high Dexterity
+are more successful at evading door traps: "Suddenly a huge rock drops directly in front of the door! You barely evade it by jumping backwards!"<p>
+
+If the PC has the Detect Traps skill, it is worth <tt>a</tt>pplying it a few times in the direction of closed doors, or simple <tt>s</tt>earching can be used as well.<p>
+
+Unlike regular traps, the type of a discovered trapped door cannot be recognized neither by a color &ndash; it is always red, nor by looking around using <tt>l</tt>ook
+command. But it can be discovered by <tt>a</tt>pplying the Detect Traps skill in the direction of a known trapped door.<p>
+
+<h4 id="0d33">0.13.3.3 Secret doors</h4>
+Some doors are hidden and must be <tt>s</tt>earched for. A ring of searching (or similar item) will do this automatically. Characters with high Perception tend to find secret
+doors more quickly.  Dark Elves (5), Thieves (6), Orcs (10) and Dwarves (20) get bonus to finding secret doors. You find a secret door on <tt>s</tt>earch if Pe*2+Bonus&gt;1d100.
+Stethoscope can be used to find secret doors: scan a wall block, and if it "sounds hollow", it's a secret door. Alternatively, secret doors may be discovered by <tt>k</tt>icking
+them. Kicking a normal dungeon wall results in the message "You hurt your foot kicking the wall!". Kicking a concealed secret door results in the message "You really hurt your
+foot kicking the wall!"<p>
+
+<h4 id="0d34">0.13.3.4 Special door features</h4>
+Closed doors can be kicked down for wooden sticks, which can then be used for Fletchery. However, a destroyed door (either original or created) will leave an invisible doorstep,
+which has the following properties:<p>
+<ul>
+<li>Herbs won't grow on a spot where once door had existed.
+<li>Wand of digging won't create a pit on such a tile. You get "Nothing happens" message.
+<li>You may dig a hole with a pick axe, and cover it with a blanket and create regular trap. And then you may disarm it &ndash; the doorstep is still there. It doesn't matter
+if you disarm the trap with spell or with respective skill.
+<li>Doorsteps aren't affected by wand of destruction. It doesn't make any difference if you destruct the door, or kick it down and <tt>z</tt>ap the wand of destruction afterwards.
+<li>Wand of trap creation will recreate a trapped door on such a tile, instead of regular trap.
+</ul><p>
+
+<h4 id="0d35">0.13.3.5 Door pattern</h4>
+<big>Door pattern has been removed.</big>
+As with traps, door locks and door traps occur in a known pattern. Notice that door keys and door traps have pattern of six, which leads to fact that all doors with same key
+on same level can have only one trap type.<p>
+
+The order, left to right or top to bottom, is:<p>
+<ul>
+<li>round lock &ndash; stunning rune
+<li>triangular lock &ndash; flash trap
+<li>hexagonal lock &ndash; collapsing door trap
+<li>small lock &ndash; booby trap
+<li>tiny lock &ndash; stone block trap
+<li>square lock &ndash; explosive rune
+</ul><p>
+
+The trap type holds for the entire Infinite Dungeon. For Caverns of Chaos, D: 1 round doors have collapsing door traps. D: 2 round doors have booby traps, D: 3 stone blocks etc.
+For other locations, door trap patterns have not been investigated.<p>
+
+<h4 id="0d36">0.13.3.6 Monsters who can smash doors</h4>
+The following is a list of monsters that can break doors:<br>
+dragons and wyrms of all colors and sizes, ogres, giants, minotaurs, golems, titans, slayers, turtles, balors and molochs of all types. Additionally: annihilator,
+(big) casino guard, bugbear, bulette, burly adventurer, cat lord, caveman, chaos warlord, dark orc, Dorn Beast, dwarven (elite) guardian, emperor lich, Eternal Guardian,
+giant boar, greater earth elemental, lich king, Old Barbarian, orc butcher, revenant, sheriff, Snake from Beyond, stone statue, stone snake, undead chaos dwarven berserker,
+writhing mass of primal chaos.<p>
+
+<h4 id="0d4">0.13.4 Rooms</h4>
+<h4 id="0d41">0.13.4.1 Dark rooms</h4>
+Dark rooms, and dark areas in general, are just that &ndash; dark. They are problematic since approaching enemies can't be seen. It is also possible to inadvertantly kill
+a creature in a dark room. The darkness can be permanently dispelled with the Light spell or a wand of light. A torch or an amulet of light provides a temporary light source.
+If a Doomed PC enters a dark room, there is a 1 in 1000 chance of being instakilled by a grue each turn. See section <a href="adomgb-0-15.html#0f5">0.15.5</a> for more
+detailed information about darkness.<p>
+
+<h4 id="0d42">0.13.4.2 Tension rooms</h4>
+Tension rooms have 1/5 chance to be generated.<p>
+
+Tension rooms are relatively small rooms filled with monsters. They always have doors (usualy locked and trapped) that cause the walls around them to crumble. This allows
+the monsters within to swarm the PC. They can be filled with monsters of one type, two separate types or a variety of different monsters. Mixed tension rooms in particular
+can contain out-of-depth monsters. Since the level message "You sense a certain tension." is always associated with these rooms, the PC is forewarned. It is prudent to find
+out what is in the tension room with a wand of monster detection, especially at deeper dungeon levels. It is quite possible to be faced with a ghost king and ancient karmic
+dragon simultaneously from such a room. PCs in the mid-game should be very careful to avoid tension rooms in the Dwarven Halls.<p>
+
+PCs that are blinded by a trap whilst breaking into a tension room can still try to identify what monsters they are facing from the message generated, as this tends to usually
+relate to a sound or feeling rather than a sight:<p>
+<ul>
+<li>a multitude of angry sounds: mixed tension room
+<li>many squeaking sounds: rats
+<li>yelping war cries: kobolds
+<li>hoots and wails: hobgoblins and goblins
+<li>orcish battle cries: orcs
+<li>high-pitched grunts: gnolls
+<li>many howling sounds: wolves
+<li>an enormous stench of decay: lesser undead
+<li>a flood of chilling terror: ghosts
+<li>mighty war cries: giants
+<li>this shop seems to be deserted: mimics
+</ul><p>
+
+<h4 id="0d43">0.13.4.3 Threatening rooms</h4>
+Threatening rooms have 1/8 chance to be generated if DL&gt;7.<p>
+
+The level message "You suddenly feel threatened." is generated on levels containing these rooms. Said message is not guaranteed to appear and depend on Perception
+(it must exceed 1d200 roll). These rooms are similar to tension rooms, but are always filled with a single type of monster. In addition, they do not have the crumbling
+walls feature of tension rooms.<p>
+
+<h4 id="0d44">0.13.4.4 Trap rooms</h4>
+Trap rooms have 1/50 chance to be generated, or 1/10 if Doomed.<p>
+
+If the message "You shudder." is created upon entering a new dungeon level, one of the rooms on that level will be filled with traps. Note that the message is not always
+generated when a trap room is on the current level; this depends on a check to Perception (it must exceed 1d30 roll). Care should be taken to identify this room as soon as
+possible. Monsters that don't fly or hover will activate the traps if they stumble in such a room. If a trap room is generated on the same level as a tension/threatening room,
+the two features will (almost) always occur in the same room. Watch the carnage.<p>
+
+<div class="resb">
+<h4 id="0d45">0.13.4.5 Pulsing power rooms</h4>
+These are very rare rooms that are isolated from the rest of the dungeon level, like royal treasuries. Such a room is full of monsters including a very powerful named monster,
+but also contains an artifact. The message "You feel a surge of pulsing power!" is generated when the PC enters a level containing one.<p>
+</div>
+
+<h4 id="0d5">0.13.5 Special rooms and their effects</h4>
+Special messages rooms are dungeon rooms with either a one-time effect on the PC or a permanent unique effect  that affects the PC (or other monsters) as long as they remain
+on one of the tiles of the room. However some messages have no effect whatsoever.<p>
+
+<table id="0d51" border=1><caption>0.13.5.1 Permanent effects</caption>
+<tr><th>Message<th>Effect
+<tr><td>Strange lights flicker in this room.
+<td>tiles adjacent to the PC will be lit and darkened, changing with every turn, methods of creating/removing darkness do not have their usual permanent effect in these rooms
+<tr><td>This seems to be a very dull room.
+<td>this room abuses the Learning attribute if stayed in too long AND almost no monsters or items are generated in this room (?)
+<tr><td>The floor of this room seems to be very sticky.
+<td>the energy points cost to move is increased by 30%
+<tr><td>There seems to be a shifting breeze in this room.
+<td>missile to-hit bonus is reduced by 2/3<p>
+<tr><td>The floor of this room is covered with puddles of ancient dried blood.
+<td>bleeding is increased
+<tr><td>You get the odd feeling that something is wrong with your perception of this room, but can't seem to tell what it is from just looking around.
+<td>the direction of game actions that use the 'Which direction' dialog is reversed
+<tr><td>This room seems to be filled with a deadly and chilling silence. All sounds are muffled.
+<td>damage is 10 times increased
+<tr><td>The air of this room is filled with the smell of carrots.
+<td>drink a potion of carrot juice for +5 Pe <span class="newi">(+5/+3/+1) Pe B/U/C</span>, then the smell will disappear
+<tr><td>This room seems to be magically charged.
+<td>PP regeneration is faster; bookcasting costs are lowered by 25%, which stacks with Silvernight
+<tr><td>The air of this room is filled with a very rich flavor.
+<td>satiation level does not go down (the PC doesn't get hungry)
+<tr><td>This room smells of herbs and antiseptics.
+<td>HP regenerate faster: +2 HP per increase
+<tr><td>The air of this room refreshes you and sharpens your spirits!
+<td>HP regenerate much faster: +4 HP per increase
+<tr><td>The walls of this room are made of many small stones of uniform height; they almost look like shelves of books.
+<td>faster when learning spells from books (half time)
+<tr><td>This room seems to vibrate with life. Insects are crawling everywhere, strange mushrooms cover the walls and moss is growing at the ceiling.
+<td>all damage is divided by 10
+<tr><td>The aura of this room seems to be devoid of all life!
+<td>HP regeneration rate is reduced to 0
+<tr><td>The air in this room is stale in a highly unnatural way.
+<td>increases spell PP cost by 3x
+<tr><td>The atmosphere of this room makes your skin tingle!
+<td>decreases spell PP cost by 20%
+<tr><td>The air in this room seems to be magically charged.
+<td> decreases the PP cost by 20%, but not visible in the spell list, and even beyond the 50% of base cost limit
+<tr><td>This room seems to be incredibly ancient.
+<td>the effect of aging attacks is doubled
+<tr><td>The skulls of many creatures are embedded in the walls. It's almost like being in the grave with them.
+<td>Necromancy skill does not consume Mana &ndash; instead, the best possible slave is summoned for free
+<tr><td>The walls and the ceiling of this room are sewn with cracks.
+<td>increased chance of equipment being damaged/destroyed? less turns to mine through walls?
+<tr><td>You sense the presence of some supernatural entity of benevolent nature.
+<td>reduces cost of actions that consume piety 4 times (using holy symbol to turn undead, praying, kicking altars)
+<tr><td>You sense the presence of some supernatural entity of malevolent disposition.
+<td>doubles cost of actions that consume piety
+<tr><td>The walls of this room seem to be made from pure obsidian.
+<td>more chaotic creatures generated? better rolls for chaotics?
+<tr><td>This room seems to be tainted by evil.
+<td>undead deal double damage
+<tr><td>The walls of this room are covered with leering visages of demons of all kind!
+<td>demons deal double damage?
+<tr><td>The walls of this room are covered with ancient runes.
+<td>doubles PP recovery rate? aging attacks doubles? may contain artifact?
+<tr><td>This room is very humid.
+<td>possible rust or water damage? OR possibly killed monsters drop water?
+<tr><td>Hundreds of tiny insects are crawling beneath your feet and the whole ground seems to be covered with tiny white eggs!
+<td>breeders breed faster
+<tr><td>You hear a crunching sound beneath your feet.<p>
+<td>same as above, but in darkness
+<tr><td>The walls of this room are scarred by the signs of many fights. Most parts of the room are heavily damaged.
+<td>triple chance for item destruction
+</table><p>
+
+<table id="0d52" border=1><caption>0.13.5.2 One time effects</caption>
+<tr><th>Message<th>Effect
+<tr><td>This room seems to be particularly unholy!
+<td>temporary blessing is removed &ndash; permanent blessing, by crowning, will not be removed
+<tr><td>Upon entering this room you feel a strange magical shock!
+<td>PP is reduced to 0
+<tr><td>Images of books and comfortable chairs line the walls. Suddenly the images fade away!<br>
+<td>-1 St, +1 Le
+<tr><td>The breeze accompanying you causes some ancient bones on the floor to transform into dust. You feel a sense of relief.
+<td>heals 1 HP
+<tr><td>This room looks like a spa with a mud bath. You are hit in the face by a glob of hot mud! Suddenly everything disappears!
+<td> blinds the PC, lowers Ap by 1. Wipe <tt>F</tt>ace, to raise Ap by 2 for a net gain of 1.
+<tr><td>You notice a pale fading ball of light upon entering this room. It quickly disappears.
+<td>no effect
+<tr><td>You hear an eerie wail for a few seconds...
+<td>no effect
+<tr><td>You hear a strange "*TCHUNK*" in your vicinity.
+<td>no effect
+<tr><td>A rat scurries between your feet and disappears in a small hole in the ground.
+<td>no effect
+<tr><td>For a few seconds you see a looming shade before you. It points its hand towards you in a threatening manner! Then it disappears.
+<td>no effect
+<tr><td>A mouth appears on the wall and says: "[random fortune]".
+<td>no effect
+<tr><td>For a moment a mouth appears on the wall and seems to say something!
+<td>no effect (PC is deaf)
+<tr><td>The walls have mirrors with many distortions of your image. &lt;message&gt; All the mirrors shatter!
+<td>if Ap &gt; 18 PC gets +1 Cha and message is "You look great in all of them.", else PC gets -1 Pe and "You can't stand the sight of warped self." message; PC also takes 1d4 damage from shattering mirrors
+</table><p>
+
+<h4 id="0d6">0.13.6 Herbs <tt>"</tt></h4>
+<img src="tiles/herb1.png" alt="h1" align="left"><img src="tiles/herb2.png" alt="h2" align="left"><img src="tiles/herb3.png" alt="h3" align="left">
+Herbs have 1/6 chance to be generated if DL>2, no altar, no forge.<p>
+
+Herb bushes can be a great boon to players, especially at lower levels. There are both beneficial and harmful herbs, which can feed you, starve you, train your attributes,
+or abuse them. It is strongly advised to not eat herbs you don't know the effect of. Herb bushes are always found in the Big Room (level 6 of the Caverns of Chaos).<p>
+
+<h4 id="0d61">0.13.6.1 Herbs growth</h4>
+Herbs grow according to Conway's Life rules. They are as follows:<p>
+<ul>
+<li>If the bush has 0 or 1 neighboring bush, it will die in the next generation.
+<li>If the bush has 2 or 3 neighboring bushes, it will survive through the next generation.
+<li>If the bush has 4 neighboring bushes, it will die in the next generation.
+<li>If an empty dungeon tile has 3 neighboring bushes, a new bush will grow during the next generation.
+<li>Births and deaths are simultaneous.
+</ul><p>
+
+ADOM adds to this: there are 1d1000 turns between generations. If a bush has two neighbors, it will remain the same during the next generation. If a bush has three neighbors,
+it will gain strength during the next generation. These additions are important, since there are many stable patterns, but very few that will continue to blossom over time.
+For instance the following patterns are stable:
+<pre>
+                                       *     *
+                                      * *   * *
+                                      * *    *
+                                       *
+</pre>
+but are quite useless as far as ADOM is concerned. Since none of the bushes has three neighbors, once they reach a withered state they will never recover. The best pattern
+to create for farming herbs in ADOM is a 2 x 2 square of herbs. This will remain alive indefinitely and generate more herb blossoms every generation. It is also worth preserving
+a 1 x 3 pattern. This is a pattern that oscillates between horizontal and vertical. Since two of the herb bushes are new each generation and therefore unpicked, they will
+constantly be renewed. The danger with this pattern is overharvesting. If one bush dies, they all die. The square 2 x 2 pattern does not have this liability. If one
+(and only one) bush dies, it will be filled in the next generation.<p>
+
+Herbs apparently require light to survive. A message "It's dark here! Some herb bushes full of blossoms are growing here. The vegetation beneath your feet shrivels and suddenly
+is gone." has been observed.<p>
+
+Be sure to take advantage of the information below about creating especially desirable herbs.<p>
+
+<a href="adomgb-0-13-herbs1.html">Short treatise on herbs</a> by the newsgroup poster known as Loves A Dustbin.<br>
+<a href="adomgb-0-13-herbs2.html">Generation of the R pentomino</a> &ndash; thanks to Malte Helmert for the method.<br>
+<a href="adomgb-0-13-herbs3.html">A really big herb farm</a> &ndash; contributed by shimmin@uiuc.edu.<p>
+
+<h4 id="0d62">0.13.6.2 Gardening</h4>
+Gardening allows the PC to plant herb seeds. Herbs can be generated (or improved strength) on any dungeon level by <tt>U</tt>sing a potion of holy water on a dungeon tile,
+even for PCs without the Gardening skill. The success rate is 33%. Note that while any dungeon level will work, only those levels which already had herbs will support herb
+growth. In other words, herbs will not undergo the normal growth cycle unless the dungeon level had indigenous herbs. Consequently, the PC should avoid creating herbs in this
+manner unless the dungeon level already has herbs, unless it is a matter of life or death. The exception is PCs that have the Gardening skill. <tt>a</tt>pplying the Gardening
+skill with herb seeds causes a dungeon level to transform to an herb-sustaining state.<p>
+
+<small><tt>a</tt>pplying the Gardening skill to a blossoming herb bush will produce 1d2 herb seeds if a Gardening check is passed (and otherwise destroy the bush), allowing
+for seeds to be generated quite easily with high values in this skill.</small><p>
+
+<h4 id="0d63">0.13.6.3 Picking herbs</h4>
+The strength of a particular herb bush can be determined by <tt>a</tt>pplying Herbalism skill. Three strengths are recognized: full of blossoms, strong, and withered.
+If is safe to pick up a herb full of blossoms or strong, but a withered herb may disappear after next pick up. There is Herbalism / 1d160 chance for the bush to not lower
+in status; so 3/8 of the time the bush will still go down at 100 Herbalism. The status of the herb picked is determined as follows: if Herbalism &gt; 1d110 = Uncursed,
+<i>then</i> (only if it passed the first check) if Herbalism &gt; 1d140 = Blessed. Level 18+ Farmers now have a 50% chance of anything cursed turning uncursed at this point,
+immediatelly followed by a 50% chance for uncursed to become blessed. Non-Farmers get about 65% blessed herbs, 26% uncursed, and 9% cursed at 100 Herbalism; level 18+ Farmers
+should get around 80.5% blessed, 15% uncursed, and 4.5% cursed. Without the Herbalism skill, any herbs the PC picks will be cursed, and picking herbs will always reduce the
+status of an herb bush.<p>
+
+<h4 id="0d64">0.13.6.4 Herbs properties</h4>
+Herbs have the following properties:<p>
+
+<table id="0d631" border=1><caption>Herbs</caption>
+<tr><th>Herb                    <th>Method of use<th>Cursed effect    <th>Uncursed effect  <th>Blessed effect        <th>Tile
+<tr><td><b>stomafillia</b>      <td>eat          <td>satiation +550   <td>satiation +2000  <td>satiation +6250       <td><img alt="stomafillia" src="tiles/item177.png">
+<tr><td><b>stomacemptia</b>     <td>eat          <td>near starvation  <td>makes Hungry!    <td>makes almost hungry   <td><img alt="stomacemptia" src="tiles/item180.png">
+<tr><td><b>curaria mancox</b>   <td>eat          <td>smaller effect   <td>fights sickness  <td>cures sickness        <td><img alt="curaria mancox" src="tiles/item179.png">
+<tr><td><b>devil's rose</b>     <td>eat          <td>severe sickness  <td>sickness         <td>mild sickness         <td><img alt="devil's rose" src="tiles/item181.png">
+<tr><td><b>alraunia antidote</b><td>eat          <td>smaller effect   <td>cures poisoning  <td>cures most poisoning  <td><img alt="alraunia antidote" src="tiles/item183.png">
+<tr><td><b>demon daisy</b>      <td>eat          <td>severely poisons <td>poisons          <td>mildly poisons        <td><img alt="demon daisy" src="tiles/item184.png">
+<tr><td><b>pepper petal</b>     <td>eat          <td>heals 3d4 HP     <td>heals 3d8 HP     <td>heals 6d10 HP         <td><img alt="pepper petal" src="tiles/item182.png">
+<tr><td><b>burb root</b>        <td>eat          <td>5d4+10 acid damage<td>3d6+3 acid damage<td>1d10+1 acid damage   <td><img alt="burb root" src="tiles/item178.png">
+<tr><td><b>morgia root</b>      <td>eat          <td colspan=3>trains To 5d100+200, trains Wi 50d10                  <td><img alt="morgia root" src="tiles/item194.png">
+<tr><td><b>spenseweed</b>       <td>use          <td>heals 1d6 HP     <td>heals 3d6+3 HP   <td>heals 5d4+20 HP       <td><img alt="spenseweed" src="tiles/item192.png">
+<tr><td><b>moss of mareilon</b> <td>use          <td>abuses Dx -10d100<td>trains Dx 10d100 <td>trains Dx 60d30+30    <td><img alt="moss of mareilon" src="tiles/item193.png">
+</table><p>
+<!--<big>Blessed spenseweed effect was reduced to about 40%, possibly 3d6+18.</big><p>-->
+
+See section <a href="adomgb-0-6.html#0613">0.6.1.3</a> for more on training attributes with herbs, and the end of section <a href="adomgb-0-3.html#032">0.3.2</a> for more 
+detailed information on stomacemptia herbs.<p>
+
+<h4 id="0d7">0.13.7 Shops</h4>
+Shops have 1/4 chance to be generated for Merchants, 1/6 chance for others.<p>
+
+Pickup items from shop freely (<tt>,</tt>, <tt>;</tt>, <tt>Ctrl-p</tt>), but don't forget to <tt>p</tt>ay for them.
+Use <tt>:p</tt> to pay for all items. Press <tt>P</tt> to see how much gold you currently owe. To sell, just <tt>d</tt>rop (or <tt>:d</tt>rop) your stuff to the shop floor.
+Check your purse with <tt>$</tt>. <span class="newi">There is only a single pay command in R++.</span><p>
+
+The <a href="adomman-P.html#P4">ADOM Manual</a> provides some basic information about shops. Shops are rooms in the dungeons inhabited by shopkeepers and stocked with their
+wares. Shops can be general stores selling a variety of items or specialty stores selling only one type of item. Shops should always be entered and explored, since viewing
+the items in a shop permanently identifies them.<p>
+
+Certain powerful items are less likely to be generated in shops. These include wand of wishing (8x), scroll of corruption removal (12x), ring of djinni summoning (5x), potion of cure
+corruption (6x), potion of gain attributes (40x), potion of attribute (30x), potion of potential attribute (20x), potion of water (2x).<p>
+
+Shopkeepers will restock their inventory if it is depleted or appears to be depleted. It is a good idea to pick up everything in a shop and drop the unwanted items on one tile.
+This gives the shopkeeper room to restock. Note that it is necessary for a certain amount of game time to pass in order for a shop to restock. PCs with sufficient Perception
+attribute and Listening skill level will hear a message "You hear arcane mumbling." which means a depleted shop has been restocked.<p>
+
+<div class="resb">
+Note that (as of R+) if the PC sells an artifact (excluding sis) to a shopkeeper, they will increase in experience level and thus become more of a threat to a PC that tries to steal
+the artifact(s) back for re-selling. Shopkeepers gain 4 + character level/2 levels (rounded down) for each artifact sold to them. Also, prices go up with each restock, except the PC is 
+Merchant.<p>
+</div>
+
+<h4 id="0d71">0.13.7.1 Guaranteed shops</h4>
+There are seven guaranteed shops in the game:<p>
+<ul>
+<li>Munxip's food store in Terinyo &ndash; <a href="adomgb-1-2.html#126">1.2.6</a>
+<li>Barnabas' general shop in Lawenilothehl &ndash; <a href="adomgb-1-3.html#132">1.3.2</a>
+<li>Waldenbrook's general shop in Dwarftown &ndash; <a href="adomgb-3-5.html#351">3.5.1</a>
+<li>Leggot's general shop in the High Mountain Village &ndash; <a href="adomgb-2-1.html#214">2.1.4</a>
+<li>Great Gift Shoppe in the Casino &ndash; <a href="adomgb-3-13.html">3.13</a>
+<li>Lu'uksort's Extensive Bough Saloon (potions) in the Borderland Settlement &ndash; <a href="adomgb-1-9.html#193">1.9.3</a>
+<li>Antediluvian Dungeon scroll shop
+</ul><p>
+
+Shopkeepers generally buy items as well as selling them. The exception is the Casino shop, which only sells. Specialty storekeepers are only interested in purchasing the items they
+specialize in. Sell Munxip those useless kobold corpses!<p>
+
+<h4 id="0d72">13.7.2 Random shops</h4>
+Other shops are found randomly in the dungeons. The following shop types may be randomly generated, listed with their chance out of 20:<p>
+
+<table id="0d72" border=1><caption>Shop types</caption>
+<tr><th>Shop type<th>Chance
+<tr><td>Scrolls  <td>5
+<tr><td>Potions  <td>4
+<tr><td>General  <td>3
+<tr><td>Rings    <td>3
+<tr><td>Wands    <td>2
+<tr><td>Books    <td>2
+<tr><td>Pets     <td>1
+</table><p>
+
+<h4 id="0d73">0.13.7.3 Shopkeepers' racial prejudices</h4>
+The following influences shop prices:<p>
+<ul>
+<li>race &ndash; most important factor
+<li>gender
+<li>Charisma or Appearance
+<li>Haggling
+<li>whether or not the PC is member/head of the Thieves Guild
+</ul><p>
+
+Shopkeepers have definite racial prejudices in addition to the special criteria Munxip (sections <a href="adomgb-1-2.html#122">1.2.2, 1.2.6</a>) and Barnabas
+(sections <a href="adomgb-1-3.html#131">1.3.1, 1.3.2</a>) use. Malte Helmert has done some testing regarding this and observed the following: the HMV and
+Lawenilothehl shops were generated 50 times each. The races of the shopkeepers were:<p>
+<ul>
+<li>Barnabas: 15x Human, 14x Orc, 13x Troll, 8x Gnome
+<li>Leggot: 18x Human, 14x Troll, 9x Gnome, 9x Dwarf
+</ul><p>
+
+Other races may be possible, with a very low probability. Quoting Malte's findings:<p>
+
+"The following chart lists the percentage of the "base value" offered by a shopkeeper of the race specified in the column to a PC of the race specified in the row. 100% is normal,
+110% is possible if the shopkeeper likes the PC's race very much (mostly if both are of the same race), and the value can become as low as 10% if the shopkeeper really hates
+the PC's race. Looking at the chart, you see that all non-Hurthling shopkeepers prefer PCs of the same race. Hurthlings are the only shopkeeper race that isn't prejudiced,
+and Hurthlings are also the best-liked PC race (there is no race that gives Hurthlings a really bad deal, and many give them excellent deals). Considering the fact that the most
+important shopkeeper in the game is a Dwarf (Waldenbrook), Orcish and especially Dark Elven PCs appear to have the worst time (this is not news, of course)."<p>
+
+<table id="0d731" border=1><caption>Shopkeepers' racial prejudices</caption>
+<tr><th>PC's race       <th>Human<th>Troll<th>H.Elf<th>G.Elf<th>D.Elf<th>Dwarf<th>Gnome<th>Hurth<th>Orc  <th>Drake
+<tr><td><b>Human</b>    <td>110% <td>100% <td>80%  <td>80%  <td>80%  <td>80%  <td>100% <td>100% <td>100% <td>80%
+<tr><td><b>Troll</b>    <td>100% <td>110% <td>50%  <td>20%  <td>80%  <td>60%  <td>80%  <td>100% <td>100% <td>80%
+<tr><td><b>High Elf</b> <td>100% <td>70%  <td>110% <td>105% <td>10%  <td>80%  <td>100% <td>100% <td>50%  <td>80%
+<tr><td><b>Gray Elf</b> <td>100% <td>50%  <td>105% <td>110% <td>10%  <td>80%  <td>100% <td>100% <td>50%  <td>80%
+<tr><td><b>Dark Elf</b> <td>60%  <td>85%  <td>10%  <td>10%  <td>110% <td>10%  <td>80%  <td>100% <td>110% <td>40%
+<tr><td><b>Dwarf</b>    <td>100% <td>70%  <td>50%  <td>50%  <td>50%  <td>110% <td>110% <td>100% <td>20%  <td>80%
+<tr><td><b>Gnome</b>    <td>100% <td>100% <td>100% <td>100% <td>80%  <td>110% <td>110% <td>100% <td>60%  <td>80%
+<tr><td><b>Hurthling</b><td>110% <td>100% <td>110% <td>110% <td>90%  <td>110% <td>110% <td>100% <td>80%  <td>80%
+<tr><td><b>Orc</b>      <td>80%  <td>100% <td>50%  <td>50%  <td>100% <td>20%  <td>50%  <td>100% <td>110% <td>50%
+<tr><td><b>Drakeling</b><td>90%  <td>100% <td>80%  <td>80%  <td>100% <td>80%  <td>100% <td>100% <td>80%  <td>110%
+</table><p>
+
+<h4 id="0d74">0.13.7.4 Robbing shops</h4>
+Shops can be robbed. This of course has effects on alignment, in addition to putting the PC's life at risk. These shopkeepers are maintaining a business in a highly dangerous
+environment and are well suited to dealing with those who choose to steal from them. In addition to their own very tough nature, they can summon hordes of thugs who attack the PC.<p>
+
+Some methods for robbing shops:<p>
+<ul>
+<li>Darkness.<br>
+Put an item in question near the shop exit then stand onto it, darken the area and carry the item from the shop. Given the availability of this type of spell this makes it probably
+the easiest way. <big>Shopkeepers see in darkness in R+.</big>
+<li>Invisibility.<br>
+Shopkeepers are able to detect invisible PCs. The message "&lt;shopkeeper&gt; stares at your position with great intensity." indicates they have detected and are looking at
+an invisible PC. However, this does not happen instantly. Therefore, invisibility can be used to rob shops without making the shopkeeper hostile. The PC can enter a shop while
+invisible and pick up items. Anything the invisible PC picks up <i>prior</i> to generation of the above message can be taken from the shop safely. Therefore, the usual technique
+is to enter the shop while visible, gather up everything in the shop and drop it all as close to the door as possible. The PC can then become invisible, pick up everything and
+leave the shop undetected as long as the above message is not generated.
+<li>Companions.<br>
+If a shop is entered and nothing is picked up, the shopkeeper does not block the door. The PC can order her pet or slave to stand in the doorway, pick up whatever is desired, then
+<tt>:s</tt>wap positions with the pet or slave. At that point, getting away with the loot is simply a matter of outrunning the shopkeeper and avoiding or killing any summoned thugs.
+<li>Teleportation.<br>
+Shopkeepers are teleportation resistant, so trying this with a wand is usually not successful and a waste of the wand's charges. This results in a hostile shopkeeper and summoned thugs, however.
+Since it is impossible to choose the destination of the shopkeeper, this is a dangerous technique unless the PC is experienced enough to deal with a hostile shopkeeper and the thugs
+he will summon.
+<li>Thieves.<br>
+Thieves get class ability at level 18, which allows them to steal an item instead of picking it for paying.
+</ul>
+
+<table id="0d741" border=1><caption>Robbing techniques and consequences</caption>
+<th>Technique<th>Alignment drop<th>Cursing<th>Shopkeeper hostile<th>Thugs summoned<th>Villagers hostile<th>Calm Monster works<th>Remarks
+<tr><td>Attack shopkeeper<td>yes<td>yes<td>yes<td>yes<td>yes<td>no<td>even in Darkness
+<tr><td>Pick Pockets against shopkeeper<td>yes<td>yes<td>yes<td>yes<td>no<td>no<td>even if pickpocketed in Darkness
+<tr><td>Teleport PC or shopkeeper<td>yes<td>yes<td>yes<td>yes<td>no<td>no<td>&nbsp;
+<tr><td>Stun Ray, Paralyzation, bolt spells, Mindcraft in LOS<td>yes<td>yes<td>yes<td>yes<td>towards shopkeeper<td>yes<td>even if shopkeeper is killed
+<tr><td>Stun Ray, Paralyzation, bolt spells, Mindcraft out of LOS or PC in Darkness<td>no<td>no<td>yes<td>no<td>towards shopkeeper<td>yes<td>even if shopkeeper is killed
+<tr><td>Ventriloquism<td>no<td>no<td>yes<td>no<td>towards shopkeeper<td>yes<td>&nbsp;
+<tr><td>Digging shop walls and kicking items out [1]<td>no<td>no<td>no<td>no<td>no<td>N/A<td>very abusable
+</table><p>
+
+<big>[1] No longer possible without consequences.</big><p>
+
+Note the following:<p>
+<ul>
+<li>the calmed shopkeeper returns to his shop where he continues to function normally
+<li>the Cursing penalty applies only to nonchaotic PCs
+<li>if the PC is already Cursed when the cursing penalty is to be applied, the PC is Doomed instead
+<li>no Cursing or Dooming occurs or thugs are summoned for repeated robbing (when the shopkeeper was calmed)
+<li>killing anyone who is in a state of panic will cause the entire town to become hostile
+<li>hostile shopkeeper can use his thrown coin attack only once
+</ul><p>
+
+<h4 id="0d8">0.13.8 Rivers <tt>=</tt></h4>
+<img src="tiles/water.png" alt="water" align="left">
+Rivers have 1/15 chance to be generated.<p style="clear:none">
+
+Rivers are bodies of water that completely cross a dungeon level from one side to the other, either from top-to-bottom or side-to-side. When there's a river on a level, the message
+"You hear the sound of rushing water!" will be generated at random intervals.<p>
+
+Rivers can be found in the High Kings cave, Puppy Cave, Druid Dungeon, CoC, ID, UD. Like any body of water, they can rust unprotected iron items, drench scrolls and spellbooks and
+drown the PC. Drowning damage seems be dependent on max HP, with high-HP PCs taking proportionally more damage. Precautions include waterproof blankets, a high Swimming skill,
+water breathing gear (section <a href="adomgb-0-12.html#0c17">0.12.1.7</a>), rustproofing iron items, casting Earthquake (ceiling rubble can create land bridges), freezing the water
+(see next section), teleportation, trap creation (for teleportation trap), Bridge Building (requires logs), <span class="newi">staff of parting water, Levitation.</span><p>
+
+Interestingly, it appears that tension rooms and shops take priority over rivers when generating a dungeon level. So if a tension room is placed and then a river attempts to go
+over top, you will be left with an easy path across &ndash; very helpful for non-swimmers. Tiles generated with herbs will not be flooded either, a phenomenon commonly referred
+to as "herb bridges".
+
+<h4 id="0d81">0.13.8.1 Freezing water</h4>
+<img src="tiles/ice.png" alt="ice" align="left">
+Pretty straightforward: use some cold source while standing next to a water tile and zap over it. Frost/Nether Bolt, Ice Ball/Freezing Fury, or a wand of cold qualify. Ice is fragile,
+of course, and there's a 2000 stone limit for your stuff's weight. Exploding ice vortices will freeze all water in the range of their blast. Likewise, monsters that cast Frost Bolt,
+ogre magi for instance, can freeze water. However, monsters that breathe ice, white dragons for example, do not freeze anything when their breath crosses water <big>(bug fixed)</big>.<p>
+
+<h4 id="0d9">0.13.9 Pools <tt>0</tt></h4>
+<img src="tiles/pool.png" alt="pool" align="left">
+Pools have 1/6 chance to be generated, if no altar, no forge, no herbs.<p style="clear:none">
+
+<tt>D</tt>rinking from pools can do various magical things to a PC: one can gain or lose any intrinsic (except water breathing, confusion and sickness resistance) or unnatural aging.
+It is very possible to become drunk, poisoned, sickened, corrupted, or aged by drinking from pools. Also, hostile snakes or water elemental can come out of pools. The most
+hunted-for ability of pools is the small chance of getting a wish. It has been rumored that pools with the color of the PC's eyes are the most beneficial.<p>
+
+Strictly speaking, when a PC drinks from a pool there is a roll for 54 possible effects. The first two effects listed ("pool dries up" and "writhing with snakes") are much more common
+than the rest of the effects and have a 8/54 and 5/54 chance, respectively. The other effects each have a 1/54 chance.<p>
+
+For the vast majority of the intrinsics are lost if a PC is having them and gained them if not (intrinsic toggle). This makes pools much nicer for characters without many intrinsics
+already. There is 1/108 chance to receive a wish (as long as PC is not Doomed).<p>
+
+There are at least 6 guaranteed pools in Darkforge. The pool inside the Stone Circle always corrupts by 10d100 CP's in addition to the normal effect.<p> 
+
+<span class="newb">Four pools are found on Rolf's Fortress level 1, one on level 3, and six more on level 4. One pool if found at Fungal Caves level 3 &ndash; it must be dried
+up in order to stop generating fungoids.</span><p>
+
+<table id="0d91" border=1><caption>Pool messages</caption>
+<tr><th>#
+<th>Message
+<th>Effect
+<tr><td>1-8
+<td>Nothing happens. The pool suddenly dries up.
+<td>Pool vanishes.
+<tr><td>9-13
+<td>The water is suddenly writhing with snakes!<br>You hear hissing sounds.
+<td>4d3 hostile water snakes spawned.
+<tr><td>14
+<td>You feel slightly strengthened.
+<td>Trains St 3d400.
+<tr><td>15
+<td>You feel exhausted.
+<td>Abuses St -10d1000.
+<tr><td>16
+<td>Suddenly you are gone.<br>You feel translucent.<br>You feel on air.
+<td>Temporary invisible for 10d10 turns.
+<tr><td>17
+<td>You suddenly are visible again.<br>You feel observed.<br>Your outfit suddenly looks much cleaner.
+<td>Lose +Invi, lose temporary invisibility.
+<tr><td>18
+<td>Suddenly your ears start to bleed!
+<td>Bleeding starts &ndash; 1d4 effects.
+<tr><td>19
+<td>Wow! Pure beer!
+<td>Drunk for +3d3 turns.
+<tr><td>20
+<td>Great! Pure dwarven ale!
+<td>Drunk for +3d5 turns.
+<tr><td>21
+<td>You slip and fall in!
+<td>Water damage.
+<tr><td>22
+<td>You feel corrupted!
+<td>Corrupts (DL)d30 CP's.
+<tr><td>23
+<td>Bah! This liquid is extremely filthy!
+<td>Sickens for 1d1000 turns.
+<tr><td>24
+<td>You age!
+<td>Unnatural aging for 4d6 years.
+<tr><td>25
+<td>You feel younger! <br>You suddenly remember your early youth.
+<td>Reverse unnatural aging by 4d6 years or no effect.
+<tr><td>26
+<td>Your wounds no longer bleed. <br>Your blood seems to cool down.
+<td>Bleeding stops or no effect.
+<tr><td>27
+<td>You feel very very bad. <br>What do you wish for?
+<td>No effect if doomed, else PC gets a wish (1/2 chance), or +Doom (1/2 chance).
+<tr><td>28
+<td>You feel much better. <br>Nothing happens.
+<td>Heal 6d8 HP or no effect.
+<tr><td>29
+<td>Urgh! Poison! <br>The water tastes bitter.
+<td>Poisons 1d6 damage, 2d10 frequency, no effect if poison resistant.
+<tr><td>30
+<td>Attribute decrease message, see <a href="adomgb-0-6.html">0.6</a>.
+<td>-1 attribute, 1/9 chance for each attribute.
+<tr><td>31
+<td>Attribute increase message.
+<td>+1 attribute, 1/9 chance for each attribute.
+<tr><td>32
+<td>Lots of vipers burst out of the pool.<br>
+You suddenly hear many hissing sounds!<br>
+While you drink small waves seem to ripple the otherwise calm surface of the pool.<br>
+Suddenly a water elemental rises from the pool!<br>
+You suddenly hear roaring waves!<br>
+The pool bubbles. (not enough room)
+<td>if DL&lt;9 3d4 vipers, else water elemental. Water damage in both cases.<br>No effect if not enough room.
+<tr><td>33
+<td>You feel cool. <br>You sweat.
+<td>-Fire toggle.
+<tr><td>34
+<td>Your digestion calms down. <br>Your stomach stings painfully.
+<td>-Pois toggle.
+<tr><td>35
+<td>You feel hot-headed. <br>You shiver.
+<td>-Cold toggle.
+<tr><td>36
+<td>You swallow hard. <br>You taste bitter bile in your mouth.
+<td>-Acid toggle.
+<tr><td>37
+<td>You feel totally awake. <br>You feel tired.
+<td>-Slee toggle.
+<tr><td>38
+<td>You feel flexible. <br>You feel gnarly.
+<td>-Petr toggle.
+<tr><td>39
+<td>You feel very controlled. <br>You feel shaken.
+<td>-Stun toggle.
+<tr><td>40
+<td>You feel bold at the thought of danger. <br>You feel like an endangered species.
+<td>-Deth toggle.
+<tr><td>41
+<td>You hear a voice calling you &quot;Iceberg&quot;. <br>You feel shocked.
+<td>-Elec toggle.
+<tr><td>42
+<td>You are moved by the sheer pleasure of this sip of fluid. <br>You feel inflexible.
+<td>Gain -Para or lose -Para AND -Petr if PC has one of these.
+<tr><td>43
+<td>You suddenly are gone.<br>You feel dizzy for some seconds.
+<br>You suddenly can see yourself.<br>No effect... as far as you notice.
+<td>+Invi toggle, second messages if the PC has +SeeI.
+<tr><td>44
+<td>Your eyes tingle for a second. <br>Your eyes sting for a second.
+<td>+SeeI toggle.
+<tr><td>45
+<td>You suddenly feel like jumping around. <br>You suddenly hate the thought of jumping around.
+<td>+TCtr toggle.
+<tr><td>46
+<td>You feel jumpy. <br>You feel steady.
+<td>+Tele toggle.
+<tr><td>47
+<td>You feel lucky. <br>You feel cheated.
+<td>+Luck toggle.
+<tr><td>48
+<td>You feel very lucky. <br>You feel very bad off.
+<td>+Fate toggle.
+<tr><td>49
+<td>You sense trouble. <br>You feel relieved.
+<td>+Curs toggle.
+<tr><td>50
+<td>You become depressive. <br>You feel elated.
+<td>+Doom toggle.
+<tr><td>51
+<td>You start a trip on the road to nowhere. <br>You continue the trip on the road to nowhere. <br>You finish a part of the trip on the road to nowhere.
+<td>Gain +Curs if not cursed, gain +Doom if cursed, no effect if Cursed and Doomed.
+<tr><td rowspan="5">52
+<td>A small frog pops up. The frog longingly watches you. (deaf female)
+<td>No effect.
+<tr><td>A small frog pops up. The frog explodes in a small fireball! (deaf male)
+<td>10d6 damage.
+<tr><td>A small frog pops up. Ye are the boring kind, aren't ye? (male)
+<td>No effect.
+<tr><td>A small frog pops up. &quot;Well met, beautiful princess.&quot; (female)
+<td>Receive a golden ball. (the Frog quest can be done without ever drinking from a pool)
+<tr><td>A gush of water hits you! (tile not visible)
+<td>Water damage.
+<tfoot class="new">
+<tr><td>53
+<td>You feel good about your &lt;attribute&gt; potential.
+<td>+1 attribute maximum, 1/9 chance for each attribute.
+<tr><td>54
+<td>You feel very bad about your &lt;attribute&gt; level.
+<td>-1 attribute maximum, 1/9 chance for each attribute.
+</tfoot></table><p>
+
+<h4 id="0da">0.13.10 Forges <tt>&</tt></h4>
+<img src="tiles/forge.png" alt="forge" align="left">
+Forges have 1/8 chance to be generated if DL>5.<p style="clear:none">
+
+Forges are the basic pre-requisite for Smithing &ndash; you also need an anvil, an item to improve, a hammer and an ingot of the appropriate metal.
+See <a href="adomgb-0-15.html#0f4">0.15.4</a> for more about Smithing.<p style="clear:none">
+
+A forge is near-guaranteed to be found in the UD, and guaranteed places to find some include Dwarftown, Darkforge, <big>and Ice Queen Domain.</big>
+If one is on a dungeon level, the message "You hear the wind howling." will occasionally be generated.<p>
+
+Note that forges often don't appear with an anvil when found in random dungeons. An anvil will have to be found and carried to the forge before it can be used.<p>
+
+<h4 id="0db">0.13.11 Hives <tt>*</tt><tt>0</tt></h4>
+Hives are holes in the floor of the dungeon containing hive creatures, either ants or bees. Their population is finite. There is a guaranteed ant hive on
+level two of the Puppy Cave, and a guaranteed bee hive before the Banshee level in CoC.<p>
+
+<h4 id="0db1">0.13.11.1 Ants <tt>a</tt></h4>
+<img src="tiles/hive_ant.png" alt="ant hive" align="left">
+Ant hives are filled with giant ant workers, giant ant warriors and a giant ant queen, who is always the last coming out of the hive. The player is alerted to an ant
+hive by hearing "clicking sounds". They are simply a source of monsters to be killed with no particular reward associated with clearing the hive. Bear in mind that ants dig.
+Leaving them alone and allowing them to dig can be exploited as a source of rocks and possibly gems. Ant corpses are sources of acid resistance.<p>
+
+Huge rocks can be used to keep ants from escaping anthills. When an ant attempts to leave an anthill covered by a huge rock, the message "The uncursed huge rock
+(-10, 10d6) seems to be shaking." is generated. Eventually the huge rock is destroyed ("Something from below destroys the uncursed huge rock (-10, 10d6)!")
+and ants can come out of the hole again. Sometimes this happens after only a few turns, sometimes it takes more than a hundred. Multiple huge rocks are destroyed
+one after another and thus last longer than a single one.<p>
+
+<h4 id="0db2">0.13.11.2 Bees <tt>b</tt></h4>
+<img src="tiles/hive_bee.png" alt="bee hive" align="left">
+Bee hives are filled with giant bee workers, giant bee warriors and a giant bee queen. The player is alerted by hearing "buzzing sounds". They are a source of beeswax,
+which can be <tt>u</tt>sed to plug the PCs ears. This deafens the PC and is one way to survive the Banshee level (<a href="adomgb-3-10.html">3.10</a>). A bee hive is
+guaranteed to be generated before the Banshee's level. They are also a potential source of gelee royal, which when eaten has a variety of beneficial effects: it is very nourishing,
+heals, increases Appearance and cures poisoning. All of these beneficial effects will not be experienced simultaneously, of course. Bees have a poisonous attack, which kills
+the attacking bee. Kicking the hive will cause the bees to become enraged and swarm the PC. Kicking the hive apparently increases the chance of gelee royal generation,
+although it is not guaranteed. Bees generated by <tt>k</tt>icking the hive are considered summoned and therefore cannot be sacrificed. Be careful of this if you are relying
+on an altar to get rid of bees.<p>
+
+<h4 id="0dc">0.13.12 Vaults</h4>
+Vaults are large rooms, larger than tension rooms. Depending on the variety, they can be nearly completely filled with monsters or only partially filled. They vary in
+danger from moderate (a lesser vault full of gnolls and hyenas), a challenge for PCs less than experience level ten, to absolutely deadly (a greater vault full of greater
+undead), a challenge for experience level 50 PCs who have already won the game.<p>
+
+<h4 id="0dc1">0.13.12.1 Lesser vaults</h4>
+<a href="adomgb-0-13-lvaults.html">Lesser vault layouts</a><p>
+
+Lesser vaults generally take up about 1/4 of the screen with an 80 x 25 display. They come in every imaginable flavor, from gnolls and hyenas to lesser undead to a variety
+of berserkers. Their danger level is relatively low, comparable to a mixed tension room on the same level. The level message "You feel excited." is always
+generated when the PC enters a dungeon level containing a lesser vault.<p>
+
+There is one guaranteed lesser vault, on level six of the Puppy Cave. <big>Another lesser vault is on level with Haggar in Frost Giant Jarl Caves.</big><p>
+
+<table id="0dc11" border=1><caption>Lesser Vaults</caption>
+<tr><th>Locations<th>Type<th>Many <th>Few <th>One
+<tr><td rowspan=2>D: 1-3<td>Kobolds<td>kobold, large kobold<td>kobold shaman <td>kobold chieftain
+<tr><td>Goblins<td>goblin, hobgoblin<td>hobgoblin leader <td>hobgoblin chief
+<tr><td rowspan=4>UD<br>PC:6<br>D: 4-10<td>Orcs<td>orc, orc scorcher<td>large orc<td>orc chieftain
+<tr><td>Gnolls<td>gnoll, hyena<td>large gnoll<td>gnoll chieftain
+<tr><td>Jellies<td>green slime, gray ooze<td>gelatinous cube<td>yellow ooze
+<tr><td>Lesser Undead<td>skeleton, zombie, ghul<td>shadow<td>slow shadow or ghost
+<tr><td rowspan=10>D: 11-25<td>Spiders<td>large spider, cave fisher <td>giant spider<td>tarantula
+<tr><td>Ratlings<td>ratling archer, ratling warrior<td>ratling duelist <td>ratling warlord
+<tr><td>Ogres<td>ogre, orc<td>ogre magus<td>ogre lord
+<tr><td>Demons<td>hell hound, least daemon<td>lesser daemon<td>greater daemon
+<tr><td>Dark Elves<td>dark elven archer, dark elven warrior<td>dark elven wizard, dark elven lord <td>dark elven priestess
+<tr><td>Greater Undead<td>ghost, spectre<td>vampire<td>ghost lord
+<tr><td>Berserkers<td>berserker, berserker lord<td>berserker prince <td>berserker king
+<tr><td>Common Golems<td>flesh golem, clay golem<td>stone golem <td>iron golem
+<tr><td>Frost Giants<td>frost salamander, frost giant <td>frost giant berserker <td>frost giant jarl
+<tr><td>Giants<td>hill giant, ettin <td>stone giant <td>fire giant
+<tr><td rowspan=5>D: 26-48<td>Rare Golems<td>stone golem <td>iron golem<td>eternium golem
+<tr><td>Red Dragons<td>red baby dragon, red dragon<td>ancient red dragon <td>great red wyrm
+<tr><td>White Dragons<td>white baby dragon, white dragon<td>ancient white dragon <td>great white wyrm
+<tr><td>Blue Dragons<td>blue baby dragon, blue dragon<td>ancient blue dragon<td>great blue wyrm
+<tr><td>Black Dragons<td>black baby dragon, black dragon<td>ancient black dragon<td>great black wyrm
+</table><p>
+
+<h4 id="0dc2">0.13.12.2 Greater vaults</h4>
+<a href="adomgb-0-13-gvaults.html">Greater vault layouts</a><p>
+
+Greater vaults are unmistakable. They appear in the CoC beyond the wall of flames. They take up  half of a standard dungeon level. The level message "You feel truly excited."
+is always generated when the PC enters a dungeon level containing a greater vault. It is wise to immediately <tt>z</tt>ap  a wand of monster detection to determine the type
+of vault. They come in a variety of types, including fire creatures, giants, undead, and karmics. Greater undead and karmic greater vaults are particularly challenging.
+Some players will simply ignore greater vaults of greater undead, even with experience level 50 PCs. This is despite the fact that the rewards for clearing a greater vault
+are considerable. They generally contain one or two artifacts along with substantial amounts of gold, usually well over 100,000 gold pieces. This is in addition to any equipment
+that the monsters might drop, which is considerable in the case of a greater vault full of dragons. The amount of experience points available from clearing a greater vault is
+also huge.<p>
+
+PCs using good effectivity Frost Bolt or Fire Bolt generally have a fairly easy time clearing fire- or cold-based creatures, respectively. However, these ranged spells also
+destroy some of the equipment dropped by the monsters. High level Mindcrafters also have a relatively easy time with greater vaults (as long as they are not undead!).
+Casting Confusion Wave followed by (Greater) Mental Wave will clear a vault quickly, no muss, no fuss and no equipment destruction. Clearing a greater vault with a pure fighter
+is much more tedious.<p>
+
+There are no guaranteed greater vaults in the game. <big>There is a guaranteed greater vault on D: 45 or D: 46, and on level 5 of FGJC.</big><p>
+
+<table id="0dc21" border=1><caption>Greater Vaults</caption>
+<tr><th>Type<th>Hordes <th>Many <th>Few
+<tr><td>Lesser Giants <td>ogre lord, hill giant, fomorian giant, ettin <td>frost giant, fire giant<td>fire giant king, frost giant jarl
+<tr><td>Greater Giants <td>fomorian giant, stone giant, ogre lord, stone giant lord <td>frost giant jarl, fire giant king<td>titan
+<tr><td>Fire creatures <td>fire lizard, fire drake, red baby dragon, red dragon <td>fire elemental, ancient red dragon <td>great red wyrm
+<tr><td>Undead<td>ghost, spectre, vampire, ghost lord <td>master lich, lich king <td>emperor lich
+<tr><td>Karmics<td>karmic lizard, karmic baby dragon, karmic dragon <td>ancient karmic dragon <td>great karmic wyrm
+</table><p>
+
+<big>Giants were buffed: hordes of ogre lords, hill giants, fomorian giants, stone giants; many stone giant lords, frost giant jarls, fire giant kings; few titans.</big><p>
+
+<h4 id="0dd">0.13.13 Royal treasuries <tt>$</tt><tt>$</tt><tt>$</tt></h4>
+<img src="tiles/items37.png" alt="gold" align="left"><img src="tiles/items37.png" alt="gold" align="left"><img src="tiles/items37.png" alt="gold" align="left">
+Royal treasuries are small hidden rooms generally found in the upper parts of the CoC. Their presence is indicated by the "You hear the steps of the royal guard." or
+"You hear the sound of falling coins." level messages. They are disconnected from the rest of the rooms on the level and thus can only be entered by digging or teleportation.
+Scroll or wand of gold detection can be used to identify the location of royal treasury. The named royal guardian within will not be hostile towards PCs that simply pick up
+the gold. Attacking the royal guardian is not really worthwhile. It does not curse or doom, but is a chaotic act. Furthermore, the guardian is usualy leveled and they have
+penetrating attacks. Note that eating the corpse of a royal guardian Curses the PC. Also note that chatting with the royal guardian after picking up some gold will make
+them hostile. <big>The royal guardian will turn hostile if the PC picks any gold, or tries to kick any gold out of the vault.</big><p>
+
+<h4 id="0de">0.13.14 Altars <tt>_</tt></h4>
+<img src="tiles/altar_c.png" alt="caltar" align="left"><img src="tiles/altar_n.png" alt="naltar" align="left"><img src="tiles/altar_l.png" alt="laltar" align="left">
+Altars have 1/9 chance to be generated.<p style="clear:none">
+
+There are three types of altars: chaotic, neutral, and lawful. They can be used to sacrifice items and monsters to the gods. There is a guaranteed altar in Dwarftown, which will
+be coaligned if the PC is lawful, and neutral otherwise. There are also guaranteed chaotic altars in each of the elemental temples. Refer to section <a href="adomgb-0-2.html#023">0.2.3</a>
+for a more complete discussion about altars.<p>
+
+<h4 id="0df">0.13.15 Graves <tt>+</tt></h4>
+<img src="tiles/grave.png" alt="grave" align="left">
+Graves are only found in three locations in the game: the Dwarven Graveyard (<a href="adomgb-2-7.html#271">2.7.1</a>), the CoC Graveyard (<a href="adomgb-3-8.html">3.8</a>),
+<span class="newi">and the Eerie Glade.</span><p style="clear:none">
+
+Most of the graves are not of much importance, but some of them will contain the inscription "Great treasures are buried here." These graves contain 1d10+5 items, other graves
+contain 1d6-4 (min 0) items. It is indeed possible to find an outstanding item, up to and including artifacts, but it is rare. Digging up graves is a chaotic act, which causes
+an alignment drop of 100, and will always summon some kind of guardian. The monsters that can spawn from a regular grave are chosen randomly from the following: vampire, skeleton,
+skeletal warrior, corpse fiend, mummy, greater mummy, lich, wraith, wight, ghul, zombie, spectre, shadow, and ghost. For "great treasures" grave, there is 5/6 chance for master
+lich, 5/36 chance for lich king, and 1/36 chance for the dreaded emperor lich.<p>
+
+Note that lich kings and emperor liches have stat-draining spells, and can summon powerful monsters. Emperor liches can also cast death ray, which will instantly kill the PC
+without the corresponding resistance. Finally, these monsters have a powerful confusion spell which may render the PC unable to flee or fight. Players are recommended to have
+means of on-demand teleportation in case a more powerful monster emerges from the grave and fighting it is not an option.<p>
+
+Graves have a pattern, similar to that of traps or doors. The pattern is:<p>
+<ul>
+<li>Great treasures are buried here.
+<li>R.I.P.
+<li>His steps were light, short his sight, great his pains, few his remains.
+<li>Nameless stranger.
+<li>R.I.P.
+<li>J.F.K.
+<li>R.I.P.
+<li>May thy soul rest in peace.
+<li>S.A.C.
+<li>Unknown.
+<li>He never was a valiant man, now he fits into a tiny can.
+<li>R.I.P.
+<li>Eternal pain be thine!
+<li>R.I.P.
+<li>V.D.
+<li>Pelegar, 1162--1447
+<li>R.I.P.
+</ul><p>
+
+The pattern shifts by three items to the left for next row, unlike traps/doors, which shift just 1 item. It could be used by characters with low Literacy to find great treasures
+graves. Reading graves probably trains Literacy a bit.<p>
+
+All of this regarding digging graves assumes the PC has a means of digging. The available methods are:<p>
+<ul>
+<li>pickaxe &ndash; there is a guaranteed pickaxe in the Pyramid for PCs at experience level 13-16 (section <a href="adomgb-2-9.html">2.9</a>)
+<li>wand of digging &ndash; direction <tt>5</tt>
+<li>Mystic Shovel / Divine Digger spell &ndash; direction <tt>5</tt>
+<li>failing to read a spellbook can sometimes dig grave &ndash; see  <a href="adomgb-0-5.html#0515">0.5.1.5</a>
+</ul><p>
+
+<h4 id="0dg">0.13.16 Cavernous levels</h4>
+Cavernous levels are a particular type of level that features large circular rooms occasionally interspersed with short connecting corridors. Cavernous levels tend to be
+considerably more dangerous than normal levels because monster generation rate is much faster, and it is easy to get surrounded. Most dungeon features cannot occur in cavernous
+levels, the exceptions being altars, hives, surges of power and threat rooms, ie. rooms that happen to lack the actual walls holding the monsters in. In this form
+they are much more dangerous than on normal levels: they feature a large (often 25-40) number of leveled creatures of the same type that will engage the PC once spotted, and,
+due to their large numbers, close proximity, and the open spaces, can be very difficult to handle, particularly if the denizens of the open threat rooms are summoners, vortices,
+or otherwise dangerous monsters such as diamond golems.<p>
+
+Although the design of cavernous levels is not fixed (from their appearance, they are probably modified regular levels), their locations generally are. The following is a list of all
+cavernous levels in ADOM:<p>
+<ul>
+<li>the fifth level of the Puppy Cave
+<li>levels 3-5 of the Tomb of the High Kings
+<li>two levels of the Caverns of Chaos, typically around D: 37 and D: 44
+<li>all levels of the Blue Dragon Caves
+<li>all levels of the Scintillating Cave except for the last level
+<li><big>levels in the randomly positioned Putrid Cave (at least one level is cavernous, but usually all three)</big> 
+<li><span class="newi">all levels of Fungal Caves, Stone Dragon Caves, Volcano Dungeon, and Ultimate Dungeon</span>
+<li>the Big Room shares the main features of cavernous levels &ndash; wide open spaces and high monster generation &ndash; but is not a proper cavernous level because of its fixed,
+clearly non-natural size and shape and the guaranteed presence of herbs (to the exclusion of other dungeon features)
+</ul><p>
+
+<h4 id="0dh">0.13.17 Webs <tt>|</tt></h4>
+<img src="tiles/web.jpg" alt="web" align="left">
+<span class="credit">Credit ADOM Wiki &ndash; <a href="http://ancardia.wikia.com/wiki/Web_(dungeon_feature)">Web</a>.</span>
+
+Webs are a semi-permanent dungeon feature that can trap either the PC or monsters imposing significant penalties on their actions. Webs are never randomly generated on levels
+&ndash; they can only be created either by the PC (the Web spell or a wand of webbing) or various spider-type monsters <tt>S</tt>. Each web occupies a single floor tile and will
+remain there indefinitely until it is destroyed. Webs can not be created on a tile already containing a herb plant or a trap &ndash; this can be used to create stable herb farms,
+and for trap detection. Webs likewise can not be created on non-dungeon floor tiles, staircases, doors, and over water.<p>
+
+The PC will always be caught in a web whenever she moves on a webbed floor tile either physically from neighboring tiles or by teleportation. While the PC is trapped in webs
+she can not perform the majority of standard actions &ndash; typically the only thing to do is to try to break from webs (by moving in any direction). The chances of the PC
+to break from a web are dependent on Strength attribute. Breaking from webs trains Strength, if it is lower than 15. When the PC gets caught in webs and each time she tries
+to break free and fails she may got bitten by a swarm of tiny spiders. This will poison the PC if she does not have poison resistance and will do nothing (except generate a
+corresponding message) otherwise. Dark Elven PCs are immune to this poison and will instead "welcome her spidery friends". After the PC breaks from webs on a floor tile they
+are destroyed.<p>
+
+Monsters that move on a webbed floor tile have a chance to get caught. Trapped monsters will attempt to break free each turn and will be unable to move/attack the PC or use
+their abilities. It should be noted that monsters breaking free from webs will move/attack on the same turn. Various monsters simply ignore webs and will never be caught while
+moving on a webbed tile. These mainly include spider-type creatures, all dark elves, most constructs and undead. Fire creatures and incredibly strong monsters (like molochs)
+will immediately destroy webs while moving on a webbed tile without losing a turn. The majority of monsters are, however, vulnerable to webs. It should be noted that due to
+the high chance to evade webbing shot from a wand or spell and the high chance to simply avoid being caught in the webs, using webs as a disabler requires preparations. The most
+efficient way to utilize webs is to fill a large area/long corridor completely, alert the monster to the PC's presence, teleport over the webbed tiles and resort to missile
+attacks while the monsters try to cover the "minefield". Due to the fact that monsters can break free from webs and move/attack the PC on the same turn using melee attacks is
+ a risky tactic.<p>
+
+Webs can be destroyed by fire/lightning/acid-based attacks performed by the PC and monsters, and likewise fire/lightning/acid vortices will immediately destroy any web that
+they move into. Webs will be destroyed on all levels of the Tower of Eternal Flames and in the Water Dragon's Cave.<p>
+
+<div class="resb">
+<h4 id="0di">0.13.18 Shifting levels</h4>
+Shifting dungeon levels have a horizontal or vertical strip of dungeon tiles which move one tile every few turns. Horizontal strips move either east or west, and vertical
+strips move either north or south. When dungeon tiles are pushed off screen, they appear on the opposite side of the screen. The message "You hear a violent grating sound!"
+is produced whenever the dungeon shifts out of line of sight. The message "A whole section of the dungeon &lt;cardinal direction&gt; of you shifts to the &lt;cardinal direction&gt;"
+is produced when the PC can see the dungeon shift. The message "A whole section of dungeon shifts to the &lt;cardinal direction&gt;! Everything is shaking violently!" is produced
+when the PC is shifted.<p>
+
+<h4 id="0dj">0.13.19 Statues <tt>&amp;</tt></h4>
+<img src="tiles/statue.png" alt="statue" align="left">
+If a statue is located on the current level, the following message will be displayed periodically: "You sense something of historical significance."
+Unlike normal statues <tt>]</tt>, found in the Bug Temple or created by Petrification (section <a href="adomgb-0-14.html#0e3">0.14.3</a>), these statues are not items but
+immovable objects that have chance to be generated on a generic dungeon level. Each statue features a unique description &ndash; which consists of appearance description and
+inscription (mostly) &ndash; which will be displayed as the PC moves onto its location, and (most) statues have a unique effect which can be triggered by one of the following
+actions:<p>
+<ul>
+<li>waiting <tt>5</tt> on the statue's tile (repeatedly)
+<li><tt>k</tt>icking the statue (repeatedly)
+<li>praying <tt>_</tt> while standing on the statue's tile
+<li>casting spell <tt>Z</tt> on the statue's tile
+<li><tt>z</tt>apping wand on the statue's tile
+<li><tt>r</tt>eading scroll or book on the statue's tile
+</ul><p>
+
+It is possible that a specific spell/wand/scroll/book must be used to activate the statue, or that various triggers lead to various results.<p>
+
+The list of statues is very long and not all triggers and effects are yet known. Consult ADOM Wiki &ndash; <a href="http://ancardia.wikia.com/wiki/Statue_(dungeon_feature)">Statue</a>
+for the list, which is frequently updated.<p>
+</div>
+
+<div class="newb">
+<h4 id="0dk">0.13.20 Legend statues <tt>&amp;</tt></h4>
+<img src="tiles/statue_hero.png" alt="hero statue" align="left">
+The legend statues are special dungeon features dedicated to the four most generous donors to the ADOM Resurrection Campaign. The message "A solemn aura permeates this area."
+is displayed the first time the PC enters a level containing one. The message "You shiver in anticipation of something special that you feel is going to happen." is
+displayed periodically while the PC is on a level containing one.<p style="clear:none">
+
+Praying <tt>_</tt> at a legend statue temporarily blesses the PC if they are non-chaotic. Kicking <tt>k</tt> a legend statue Curses the PC, or if the PC is already Cursed,
+Dooms the PC.<p>
+
+One legend statue is guaranteed to be generated in the Caverns of Chaos, and one is guaranteed to be generated in the Unremarkable Dungeon. The remaining two can be found in any
+of the following locations: Shadowy Dungeon, Gremlin Cave, Minotaur Maze, Quickling Tree.<p>
+
+The legend stautes feature the following description: "You discover a memorial statue dedicated to an ancient hero of Ancardian lore.<p>
+<ul>
+<li>You face the statue of Zzarck'alm-Choti Ib'seiw, a mist elven archmage. It is adorned with the rune of Elemental Water.
+<li>You face the statue of Jinxso, the many-faced, a &lt;random race&gt; &lt;random class&gt;. It is adorned with the rune of Elemental Fire.
+<li>You face the statue of Bappo Telenn, a gnomish master merchant. It is adorned with the rune of Elemental Air.
+<li>You face the statue of Roumar Yardin, a handsome gray elven beastfighter with a pet cave bear sitting at his legs. It is adorned with the rune of Elemental Earth.
+</ul>
+He is said to have been part of the adventuring party that six millennia ago defeated Chaos. At least that's your recollection from an old fairy tale..."<p>
+
+<h4 id="0dl">0.13.21 Magma <tt>=</tt></h4>
+<img src="tiles/magma.png" alt="magma" align="left">
+Magma is a special type of terrain that appears within the Volcano. It can be created elsewhere by using a staff of minor volcano summoning. In ASCII it appears as <tt>=</tt> that
+flickers between red, yellow, and brown. Magma causes a huge amount of fire damage (33d33+333) to PC and monsters while they stand on it. If the PC kicks magma or levitates over
+it they will also take fire damage. It is treated the same as water for the purposes of the PC drowning. If volcanoes are active in the Drakalor Chain, magma will gradually expand
+into adjacent tiles. Magma can only be removed by the falling rocks from earthquakes. Fire immune monsters will ignore magma, but all other monsters will avoid or attempt
+to leave it.<p>
+</div>
+
+<hr>
+Updated September 12th, 2019
+</body>
+</html>

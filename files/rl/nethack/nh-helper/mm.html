@@ -1,0 +1,681 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+  <!--
+      Author:  Janis Papanagnou
+      Date:    2006-12-19, 2006-12-22, 2007-11-30,
+               2013-03-24, 2013-04-19, 2013-04-21
+               2014-09-12, 2015-10-15
+
+      Copyright &copy; 2006-2015 Janis Papanagnou
+      Content licensed under the
+      <A href="http://www.opencontent.org/opl.shtml">
+        OpenContent License
+      </A>.
+      Source code is licensed under
+      <A href="http://www.gnu.org/copyleft/gpl.html">
+        GNU General Public License
+      </A>.
+  -->
+
+<title> Nethack口令 </title>
+
+
+<style type="text/css">
+<!--
+select, input, body, td, th, a, p, .h { font-family: arial; font-size: 10pt; }
+-->
+</style>
+
+
+
+<script language="javascript" type="text/javascript">
+<!--
+
+
+var N = 5;
+var Z = 7;
+
+var alpha = 0;
+var omega = 6;
+
+var size = Z*Z*Z*Z*Z;
+var candidate = new Array (size);
+var nof_candidates = 0;
+
+var round = 0;
+var choice = new Array (N);
+var secret = new Array (N);
+
+var guess_x = new Array (N);
+var secret_x = new Array (N);
+
+
+function mm ()
+{
+    var black = 0;
+    var white = 0;
+    var s, g;
+
+    for (s=0; s<N; s++)
+    {
+        var match = (choice[s] == secret[s]);
+        guess_x[s] = secret_x[s] = match;
+        black += match;
+    }
+
+    for (s=0; s<N; s++)
+    {
+        if (secret_x[s])
+            continue;
+
+        for (g=0; g<N; g++)
+        {
+            if (guess_x[g] || secret_x[s]) 
+                continue;
+
+            if (choice[g] == secret[s])
+            {
+                guess_x[g] = secret_x[s] = 1;
+                white++;
+            }
+        }
+    }
+
+    return  (black*10 + white);
+}
+
+
+function init_candidates ()
+{
+    var c = 0;
+    nof_candidates = 0;
+    for (c = 0; c < candidate.length; c++)
+    {
+        candidate[c] = 0;
+        nof_candidates++;
+    }
+}
+
+function show_candidates ()
+{
+    if (nof_candidates > 200)
+    {
+        alert ("至多仅能输出200个候选答案！");
+        return;
+    }
+
+    var c = 0;
+    var str = "候选答案（" + nof_candidates + "个）：";
+    var c1, c2, c3, c4, c5;
+    for (c1 = alpha; c1 <= omega; c1++)
+    for (c2 = alpha; c2 <= omega; c2++)
+    for (c3 = alpha; c3 <= omega; c3++)
+    for (c4 = alpha; c4 <= omega; c4++)
+    for (c5 = alpha; c5 <= omega; c5++)
+    {
+        if (candidate[c] == 0)
+        {
+            str += "  " +
+                    String.fromCharCode(c1+65) +
+                    String.fromCharCode(c2+65) +
+                    String.fromCharCode(c3+65) +
+                    String.fromCharCode(c4+65) +
+                    String.fromCharCode(c5+65);
+        }
+        c++;
+    }
+
+    alert (str);
+}
+
+function select_candidate ()
+{
+    var sel = new Array();
+    var n_bits_max = 0;
+    var c = 0;
+    var c1, c2, c3, c4, c5;
+    for (c1 = alpha; c1 <= omega; c1++)
+    for (c2 = alpha; c2 <= omega; c2++)
+    for (c3 = alpha; c3 <= omega; c3++)
+    for (c4 = alpha; c4 <= omega; c4++)
+    for (c5 = alpha; c5 <= omega; c5++)
+    {
+        if (candidate[c] == 0)
+        {
+            var bitset = (1<<c1)|(1<<c2)|(1<<c3)|(1<<c4)|(1<<c5);
+            var n_bits = 1;
+            while (bitset &= bitset-1)
+                n_bits++;
+
+            if (n_bits >= n_bits_max)
+            {
+                if (n_bits > n_bits_max)
+                {
+                    n_bits_max = n_bits;
+
+                    while (sel.length)
+                        sel.pop();
+                }
+                sel.push(c);
+            }
+        }
+        c++;
+    }
+
+    var any = sel[rnd(sel.length)];
+    var i;
+    for (i = 1; i <= N; i++)
+    {
+        choice[N-i] = any % Z;
+        any = Math.floor (any / Z);
+    }
+
+    while (sel.length)
+        sel.pop();
+}
+
+function  remove_candidates_round (r)
+{
+    var c = 0;
+    var c1, c2, c3, c4, c5;
+    for (c1 = alpha; c1 <= omega; c1++)
+    for (c2 = alpha; c2 <= omega; c2++)
+    for (c3 = alpha; c3 <= omega; c3++)
+    for (c4 = alpha; c4 <= omega; c4++)
+    for (c5 = alpha; c5 <= omega; c5++)
+    {
+        if (candidate[c] == r)
+        {
+            candidate[c] = 0;
+            nof_candidates++;
+        }
+        c++;
+    }
+}
+
+function  update_candidates (res)
+{
+    var c = 0;
+    var c1, c2, c3, c4, c5;
+    for (c1 = alpha; c1 <= omega; c1++)
+    for (c2 = alpha; c2 <= omega; c2++)
+    for (c3 = alpha; c3 <= omega; c3++)
+    for (c4 = alpha; c4 <= omega; c4++)
+    for (c5 = alpha; c5 <= omega; c5++)
+    {
+        if (candidate[c] == 0)
+        {
+            secret[0] = c1;
+            secret[1] = c2;
+            secret[2] = c3;
+            secret[3] = c4;
+            secret[4] = c5;
+            if (mm() != res)
+            {
+                candidate[c] = round;
+                nof_candidates--;
+            }
+        }
+        c++;
+    }
+}
+
+function rnd (n)
+{
+    return  Math.floor(n * Math.random());
+}
+
+function first_guess (q)
+{
+    var reserved, n1, n2, n3, p1, p2, p3, p4, p5;
+
+    reserved = 0;
+    if (q != 0)
+    {
+        var i;
+        for (i=0; i<N; i++)
+            reserved |= 1<<choice[i];
+    }
+    do  n1 = rnd (Z);
+    while (reserved & (1<<n1));
+    reserved |= 1<<n1;
+    do	n2 = rnd (Z);
+    while (reserved & (1<<n2));
+    reserved |= 1<<n2;
+    do	n3 = rnd (Z);
+    while (reserved & (1<<n3));
+
+    reserved = 0;
+    p1 = rnd (N);
+    reserved |= 1<<p1;
+    do	p2 = rnd (N);
+    while (reserved & (1<<p2));
+    reserved |= 1<<p2;
+    do	p3 = rnd (N);
+    while (reserved & (1<<p3));
+    reserved |= 1<<p3;
+    do	p4 = rnd (N);
+    while (reserved & (1<<p4));
+    reserved |= 1<<p4;
+    do	p5 = rnd (N);
+    while (reserved & (1<<p5));
+
+    choice[p1] = n1;
+    choice[p2] = n1;
+    choice[p3] = n2;
+    choice[p4] = n2;
+    choice[p5] = n3;
+}
+
+function to_string ()
+{
+    return  String.fromCharCode(choice[0]+65) +
+      "-" + String.fromCharCode(choice[1]+65) +
+      "-" + String.fromCharCode(choice[2]+65) +
+      "-" + String.fromCharCode(choice[3]+65) +
+      "-" + String.fromCharCode(choice[4]+65);
+}
+
+function evaluate_result ()
+{
+    var gears = -1;
+    var tumblers = -1;
+
+         if (form1.gears[0].checked) gears = 0;
+    else if (form1.gears[1].checked) gears = 1;
+    else if (form1.gears[2].checked) gears = 2;
+    else if (form1.gears[3].checked) gears = 3;
+    else if (form1.gears[4].checked) gears = 4;
+    else if (form1.gears[5].checked) gears = 5;
+
+         if (form1.tumblers[0].checked) tumblers = 0;
+    else if (form1.tumblers[1].checked) tumblers = 1;
+    else if (form1.tumblers[2].checked) tumblers = 2;
+    else if (form1.tumblers[3].checked) tumblers = 3;
+    else if (form1.tumblers[4].checked) tumblers = 4;
+    else if (form1.tumblers[5].checked) tumblers = 5;
+
+    if (gears < 0 || tumblers < 0)
+    {
+        if (gears < 0 && tumblers < 0)
+        {
+            alert ("必须选择NetHack提供的齿轮和转臂声！");
+            return  -1;
+        }
+        if (gears < 0)
+            gears = 0;
+        if (tumblers < 0)
+            tumblers = 0;
+    }
+
+    if (gears + tumblers > N)
+    {
+        alert ("无效选择：齿轮和转臂声之和应小于" + N);
+        return  -1;
+    }
+
+    if (gears == N-1 && tumblers == 1)
+    {
+        alert ("无效选择：齿轮声为" + (N-1) + "且转臂声为1不可能发生");
+        return  -1;
+    }
+
+    if (gears == N)
+    {
+        alert ("吊桥应当放下了。");
+        return  -1;
+    }
+
+    return  (gears * 10 + tumblers);
+}
+
+function make_guess ()
+{
+    if (form1.n_make_guess.value == "首次猜测")
+    {
+        init_candidates();
+        form1.n_make_guess.value = "下次猜测";
+
+        first_guess(0);
+    }
+    else // "Next Guess"
+    {
+        res = evaluate_result();
+        if (res == -1) return;
+        clone_row (round);
+        busy_on();
+        update_candidates (res);
+        busy_off();
+    
+        if (round == 1 && nof_candidates > 500)
+        {
+            first_guess(N); // another first guess
+        }
+        else
+        {
+            select_candidate();
+        }
+    }
+
+    round++;
+    form1.round.value = round + ".";
+    form1.choices.value = nof_candidates;
+    form1.guess.value = to_string();
+
+    if (nof_candidates == 0)
+    {
+        form1.guess.value = "";
+        alert ("No candidates left! (You must have entered wrong result values.)");
+        undo_round();
+    }
+
+    reset_result();
+}
+
+function reset_result ()
+{
+    form1.gears[0].checked = false;
+    form1.gears[1].checked = false;
+    form1.gears[2].checked = false;
+    form1.gears[3].checked = false;
+    form1.gears[4].checked = false;
+    form1.gears[5].checked = false;
+
+    form1.tumblers[0].checked = false;
+    form1.tumblers[1].checked = false;
+    form1.tumblers[2].checked = false;
+    form1.tumblers[3].checked = false;
+    form1.tumblers[4].checked = false;
+    form1.tumblers[5].checked = false;
+}
+
+function reset_form ()
+{
+    delete_rows (round);
+
+    init_candidates();
+    round = 0;
+    form1.round.value = "";
+    form1.choices.value = "";
+    form1.guess.value = "";
+
+    form1.n_make_guess.value = "首次猜测";
+
+    reset_result();
+}
+
+// defunc on some systems
+function busy_on ()
+{
+    form1.guess.value = "加载中……";
+}
+
+function busy_off ()
+{
+}
+
+function clone_row (round)
+{
+    active_row = document.getElementById ("Active_Row");
+    cloned_row = active_row.cloneNode (true);;
+
+    for (i=0; i<3+6*2; i++)
+    {
+        element_i = cloned_row.getElementsByTagName ('input')[i];
+        attr_disabled = document.createAttribute ("disabled");
+        attr_disabled.nodeValue = "disabled";
+        element_i.setAttributeNode (attr_disabled);
+        element_i.id = '';
+        element_i.removeAttribute ("name");
+    }
+
+    cloned_row.id = 'round_' + round;
+    active_row.parentNode.insertBefore (cloned_row, active_row);
+}
+
+function delete_active_row (r)
+{
+    parent = document.getElementById ("Active_Row").parentNode;
+    parent.removeChild (document.getElementById ("Active_Row"));
+    last_row = document.getElementById ("round_"+r);
+
+    var i;
+    for (i=0; i<3+6*2; i++)
+    {
+        element_i = last_row.getElementsByTagName ('input')[i];
+        element_i.disabled = '';
+        element_i.removeAttribute ("id");
+        switch (i)
+        {
+        case 0: e_name = "round";
+                break;
+        case 1: e_name = "choices";
+                break;
+        case 2: e_name = "guess";
+                break;
+        default:
+                e_name = (i%2) ? "gears" : "tumblers";
+                break;
+        }
+        element_i.name = e_name;
+    }
+    last_row.id = "Active_Row";
+    reset_result();
+}
+
+function delete_rows (round)
+{
+    parent = document.getElementById ("Active_Row").parentNode;
+
+    var r;
+    for (r=1; r<round; r++)
+        parent.removeChild (document.getElementById ("round_"+r));
+}
+
+function undo_round ()
+{
+    if (round > 1)
+    {
+        round--;
+        delete_active_row (round);
+        remove_candidates_round (round);
+        choice_from_string (form1.guess.value);
+    }
+}
+
+function choice_from_string (str)
+{
+    var i;
+    var j = 0;
+    for (i = 0; i < str.length; i += 2)
+    {
+        choice[j++] = str.charCodeAt(i)-65;
+    }
+}
+
+
+-->
+</script>
+
+</head>
+
+<!-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -->
+
+<body>
+  <h1 title="Play Mastermind to open the Castle's Drawbridge"> Nethack城堡吊桥口令破译器 </h1>
+
+
+  <form name="form0" style="display: none;" action="mm.html">
+    <input id="debug1" type="text" size="192" value="****" readonly>
+    <br>
+    <input id="debug2" type="text" size="192" maxlength="16808" value="****" readonly>
+    <br>
+    <input id="debug3" type="text" size="192" value="****" readonly>
+    <br>
+  </form>
+
+
+  <noscript>
+    <br>
+    <table style="border-width: 4px; border-style: solid; padding: 8px">
+      <tr>
+        <td>
+          <b> The calculation needs JavaScript to be enabled in your browser! </b>
+        </td>
+      </tr>
+    </table>
+    <br>
+    <br>
+  </noscript>
+
+  <br>
+
+  <div style="margin: 10">
+    <form name="form1" style="display: block;" action="mm.html">
+
+      <table id="Table" cellpadding="3" cellspacing="0" border="solid">
+        <tr>
+          <th align="center" title="猜测次数">
+            次数
+          </th>
+          <th align="center" title="可能的答案数量">
+            候选答案
+          </th>
+          <th align="center" title="推荐猜测">
+            猜测
+          </th>
+          <th colspan="6" align="center" title="推荐猜测的结果">
+            结果
+          </th>
+          <th>
+            吊桥声音
+          </th>
+        </tr>
+        <tr>
+          <td align="center">
+            <input type="button" name="n_undo" value="撤销" onclick="undo_round()" title="撤销上次猜测">
+          </td>
+          <td align="center">
+            <input type="button" name="n_candidates" value="显示候选答案" onclick="show_candidates()" title="显示剩余候选答案">
+          </td>
+          <td align="center" style="padding:10px">
+            <input type="button" name="n_make_guess" value="首次猜测" style="font-size:150%" onclick="make_guess()">
+          </td>
+          <th align="center"> 0 </th>
+          <th align="center"> 1 </th>
+          <th align="center"> 2 </th>
+          <th align="center"> 3 </th>
+          <th align="center"> 4 </th>
+          <th align="center"> 5 </th>
+          <td align="center">
+            <input type="button" name="n_reset_form" value="重置" onclick="reset_form()" title="清空表格">
+          </td>
+        </tr>
+
+
+        <tr id="Active_Row">
+          <td align="center">
+            <b>
+            <input type="text" name="round" size="3" style="text-align: center" readonly="readonly" value="">
+            </b>
+          </td>
+          <td align="center">
+            <input type="text" name="choices" size="6" style="text-align: center" readonly="readonly" value="">
+          </td>
+          <td align="center">
+            <b>
+            <input type="text" name="guess" size="12" style="text-align: center" readonly="readonly" value="">
+            </b>
+          </td>
+          <td>
+            <table border="0">
+              <tr>
+                <td> <input type="radio" name="gears" value="0"> </td>
+              </tr>
+              <tr>
+                <td> <input type="radio" name="tumblers" value="0"> </td>
+              </tr>
+            </table>
+          </td>
+          <td>
+            <table border="0">
+              <tr>
+                <td> <input type="radio" name="gears" value="1"> </td>
+              </tr>
+              <tr>
+                <td> <input type="radio" name="tumblers" value="1"> </td>
+              </tr>
+            </table>
+          </td>
+          <td>
+            <table border="0">
+              <tr>
+                <td> <input type="radio" name="gears" value="2"> </td>
+              </tr>
+              <tr>
+                <td> <input type="radio" name="tumblers" value="2"> </td>
+              </tr>
+            </table>
+          </td>
+          <td>
+            <table border="0">
+              <tr>
+                <td> <input type="radio" name="gears" value="3"> </td>
+              </tr>
+              <tr>
+                <td> <input type="radio" name="tumblers" value="3"> </td>
+              </tr>
+            </table>
+          </td>
+          <td>
+            <table border="0">
+              <tr>
+                <td> <input type="radio" name="gears" value="4"> </td>
+              </tr>
+              <tr>
+                <td> <input type="radio" name="tumblers" value="4"> </td>
+              </tr>
+            </table>
+          </td>
+          <td>
+            <table border="0">
+              <tr>
+                <td> <input type="radio" name="gears" value="5"> </td>
+              </tr>
+              <tr>
+                <td> <input type="radio" name="tumblers" value="5"> </td>
+              </tr>
+            </table>
+          </td>
+          <td>
+            <table border="0">
+              <tr>
+                <td> &nbsp;<b>齿轮</b>&nbsp; </td>
+              </tr>
+              <tr>
+                <td> &nbsp;<b>转臂</b>&nbsp; </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+
+      </table>
+
+      <br>
+      <br>
+
+    </form>
+  </div>
+
+
+
+</body>
+</html>
+
+<!--
+        vim: ts=2 sw=2 expandtab ai nu tw=0
+-->

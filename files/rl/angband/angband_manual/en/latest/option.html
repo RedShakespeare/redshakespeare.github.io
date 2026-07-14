@@ -1,0 +1,406 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Option Descriptions &#8212; &lt;img&gt; The Angband Manual</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/better.css" />
+    <link rel="stylesheet" type="text/css" href="../../_/static/css/badge_only.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
+    <script async="async" src="../../_/static/javascript/readthedocs-doc-embed.js"></script>
+    <link rel="canonical" href="option.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Customising the game" href="customize.html" />
+    <link rel="prev" title="Command Descriptions" href="command.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+      <link rel="stylesheet" href="_static/style.css" type="text/css" />
+  
+<!-- RTD Extra Head -->
+
+<link rel="stylesheet" href="../../_/static/css/readthedocs-doc-embed.css" type="text/css" />
+
+<script type="application/json" id="READTHEDOCS_DATA">{"ad_free": false, "api_host": "https://readthedocs.org", "build_date": "2023-04-21T00:08:54Z", "builder": "sphinx", "canonical_url": null, "commit": "14f92695", "docroot": "/docs/", "features": {"docsearch_disabled": false}, "global_analytics_code": "UA-17997319-1", "language": "en", "page": "option", "programming_language": "c", "project": "angband", "proxied_api_host": "/_", "source_suffix": ".rst", "subprojects": {}, "theme": "better", "user_analytics_code": "", "version": "latest"}</script>
+
+<!--
+Using this variable directly instead of using `JSON.parse` is deprecated.
+The READTHEDOCS_DATA global variable will be removed in the future.
+-->
+<script type="text/javascript">
+READTHEDOCS_DATA = JSON.parse(document.getElementById('READTHEDOCS_DATA').innerHTML);
+</script>
+
+<script type="text/javascript" src="../../_/static/javascript/readthedocs-analytics.js" async="async"></script>
+
+<!-- end RTD <extrahead> -->
+</head><body>
+<header id="pageheader">
+    <div style="display: flex; align-items: baseline;">
+        <h1>The Angband Manual</h1>
+        <span class="version">v4.2.4-264-g14f92695-dirty</span>
+    </div>
+    <img src="_static/att.svg" style="height: 4rem;">
+</header>
+
+  <div class="related top">
+  <nav id="rellinks">
+    <ul>
+        <li>
+          &larr;
+          <a href="command.html" title="Previous document">Command Descriptions</a>
+        </li>
+        <li>
+          <a href="customize.html" title="Next document">Customising the game</a>
+          &rarr;
+        </li>
+    </ul>
+  </nav>
+  <nav id="breadcrumbs">
+    <ul>
+      <li><a href="index.html">Home</a></li> 
+    </ul>
+  </nav>
+  </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="option-descriptions">
+<h1>Option Descriptions<a class="headerlink" href="option.html#option-descriptions" title="Permalink to this heading">¶</a></h1>
+<p>Options are accessible through the <code class="docutils literal notranslate"><span class="pre">=</span></code> command, which provides an
+interface to the various sets of options available to the player.</p>
+<p>In the descriptions below, each option is listed as the textual summary
+which is shown on the “options” screen, plus the internal name of the
+option in brackets, followed by a textual description of the option.</p>
+<p>Various concepts are mentioned in the descriptions below, including
+“disturb”, (cancel any running, resting, or repeated commands, which are in
+progress), “flush” (forget any keypresses waiting in the keypress queue),
+“fresh” (dump any pending output to the screen), and “sub-windows” (see
+below).</p>
+<div class="contents local topic" id="option-pages">
+<p class="topic-title">Option pages</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="option.html#user-interface-options" id="id1">User Interface Options</a></p></li>
+<li><p><a class="reference internal" href="option.html#birth-options" id="id2">Birth options</a></p></li>
+<li><p><a class="reference internal" href="option.html#cheating-options" id="id3">Cheating options</a></p></li>
+<li><p><a class="reference internal" href="option.html#window-flags" id="id4">Window flags</a></p></li>
+<li><p><a class="reference internal" href="option.html#left-over-information" id="id5">Left Over Information</a></p></li>
+</ul>
+</div>
+<section id="user-interface-options">
+<h2><a class="toc-backref" href="option.html#id1">User Interface Options</a><a class="headerlink" href="option.html#user-interface-options" title="Permalink to this heading">¶</a></h2>
+<p>When setting the user interface options, there are a handful of commands
+to make it easier to get to a well-known state for all of those options.
+They are:  ‘s’ to save the current selections so that they will be used
+as the starting point for future characters, ‘r’ to reset the current
+selections to the defaults for a new character, and ‘x’ to reset the
+current selections to the Angband maintainer’s defaults for the user
+interface options.</p>
+<dl class="simple">
+<dt>Rogue-like commands <code class="docutils literal notranslate"><span class="pre">rogue_like_commands</span></code></dt><dd><p>Selects the “roguelike” command set.  See <a class="reference internal" href="playing.html#playing-the-game"><span class="std std-ref">Playing the Game</span></a> for
+some description of the command sets.  The “roguelike” command set may
+work better for you if use a keyboard which doesn’t have a numeric
+keypad.</p>
+</dd>
+<dt>Use sound <code class="docutils literal notranslate"><span class="pre">use_sound</span></code></dt><dd><p>Turns on sound effects, if your system supports them.</p>
+</dd>
+<dt>Show damage player deals to monsters <code class="docutils literal notranslate"><span class="pre">show_damage</span></code></dt><dd><p>Shows the damage that the player deals to monsters for melee and ranged
+combat in the messages.</p>
+</dd>
+<dt>Use old target by default <code class="docutils literal notranslate"><span class="pre">use_old_target</span></code></dt><dd><p>Forces all commands which normally ask for a “direction” to use the
+current “target” if there is one. Use of this option can be dangerous if
+you target locations on the ground, unless you clear them when done.</p>
+</dd>
+<dt>Always pickup items <code class="docutils literal notranslate"><span class="pre">pickup_always</span></code></dt><dd><p>Automatically picks up items when you walk upon them, provided it is safe
+to do so.</p>
+</dd>
+<dt>Always pickup items matching inventory <code class="docutils literal notranslate"><span class="pre">pickup_inven</span></code></dt><dd><p>Like <code class="docutils literal notranslate"><span class="pre">pickup_always</span></code>, but picks up an item only if it is a copy of an
+item that you already have in your inventory.</p>
+</dd>
+<dt>Show flavors in object descriptions <code class="docutils literal notranslate"><span class="pre">show_flavors</span></code></dt><dd><p>Display “flavors” (color or variety) in object descriptions, even for
+objects whose type is known. This does not affect objects in stores.</p>
+</dd>
+<dt>Highlight target with cursor <code class="docutils literal notranslate"><span class="pre">show_target</span></code></dt><dd><p>Highlights the current targeted monster with a cursor.  Useful when
+combined with “use old target by default”.</p>
+</dd>
+<dt>Highlight player with cursor between turns <code class="docutils literal notranslate"><span class="pre">highlight_player</span></code></dt><dd><p>Highlights the player with a cursor.  Useful if you have trouble finding
+the player.</p>
+</dd>
+<dt>Disturb whenever viewable monster moves <code class="docutils literal notranslate"><span class="pre">disturb_near</span></code></dt><dd><p>Disturb the player when any viewable monster moves, whenever any monster
+becomes viewable for the first time, and also whenever any viewable
+monster becomes no longer viewable. This option ignores the existence of
+“telepathy” for the purpose of determining whether a monster is
+“viewable”.</p>
+</dd>
+<dt>Show walls as solid blocks <code class="docutils literal notranslate"><span class="pre">solid_walls</span></code></dt><dd><p>Walls are solid blocks instead of # for granite and % for veins.  Veins
+are coloured darker than granite for differentiation purposes.</p>
+</dd>
+<dt>Show walls with shaded backgrounds <code class="docutils literal notranslate"><span class="pre">hybrid_walls</span></code></dt><dd><p>Walls appear as # and % symbols overlaid on a gray background block.
+This overrides <code class="docutils literal notranslate"><span class="pre">solid_walls</span></code>.</p>
+</dd>
+<dt>Color: Illuminate torchlight in yellow <code class="docutils literal notranslate"><span class="pre">view_yellow_light</span></code></dt><dd><p>This option causes special colors to be used for “torch-lit” grids.
+Turning this option off will slightly improve game speed.</p>
+</dd>
+<dt>Color: Shimmer multi-colored things <code class="docutils literal notranslate"><span class="pre">animate_flicker</span></code></dt><dd><p>Certain powerful monsters and items will shimmer in real time, i.e.
+between keypresses.</p>
+</dd>
+<dt>Center map continuously <code class="docutils literal notranslate"><span class="pre">center_player</span></code></dt><dd><p>The map always centres on the player with this option on. With it off, it
+is divided into 25 sections, with coordinates (0,0) to (4,4), and will
+show one section at a time - the display will “flip” to the next section
+when the player nears the edge.</p>
+</dd>
+<dt>Color: Show unique monsters in purple <code class="docutils literal notranslate"><span class="pre">purple_uniques</span></code></dt><dd><p>All “unique” monsters will be shown in a light purple colour, which is
+not used for any “normal” monsters - so you can tell at a glance that
+they are unique. If you like the idea but don’t like the colour, you can
+edit it via the “interact with colors” option.</p>
+</dd>
+<dt>Automatically clear -more- prompts <code class="docutils literal notranslate"><span class="pre">auto_more</span></code></dt><dd><p>The game does not wait for a keypress when it comes to a ‘-more-’
+prompt, but carries on going.</p>
+</dd>
+<dt>Color: Player color indicates low hit points <code class="docutils literal notranslate"><span class="pre">hp_changes_color</span></code></dt><dd><p>This option makes the player <code class="docutils literal notranslate"><span class="pre">&#64;</span></code> turn various shades of colour from
+white to red, depending on percentage of HP remaining.</p>
+</dd>
+<dt>Allow mouse clicks to move the player  <code class="docutils literal notranslate"><span class="pre">mouse_movement</span></code></dt><dd><p>Clicking on the main window will be interpreted as a move command to that
+spot.</p>
+</dd>
+<dt>Notify on object recharge <code class="docutils literal notranslate"><span class="pre">notify_recharge</span></code></dt><dd><p>This causes the game to print a message when any rechargeable object
+(i.e. a rod or activatable weapon or armour item) finishes recharging. It
+is the equivalent of inscribing ‘{!!}’ on all such items.</p>
+</dd>
+<dt>Show effective speed as multiplier <code class="docutils literal notranslate"><span class="pre">effective_speed</span></code></dt><dd><p>Instead of showing absolute speed modifier (e.g. ‘Slow (-2)’ or ‘Fast (+38)’),
+show the effective rate at which the character is moving (e.g. ‘Slow (x0.8)’
+or ‘Fast (x4.1)’).</p>
+</dd>
+</dl>
+</section>
+<section id="birth-options">
+<h2><a class="toc-backref" href="option.html#id2">Birth options</a><a class="headerlink" href="option.html#birth-options" title="Permalink to this heading">¶</a></h2>
+<p>The birth options may only be changed when creating a character or using
+the quick restart option for a dead character.  When setting the birth
+options, there are a handful of commands to make it easier to get to a
+well-known state for all of the birth options.  They are:  ‘s’ to save the
+current selections so that they will be used as the starting point for
+future characters, ‘r’ to reset the current selections to the defaults
+for a new character, and ‘x’ to reset the current selections to the
+Angband maintainer’s defaults for the birth options.</p>
+<dl>
+<dt>Generate a new, random artifact set <code class="docutils literal notranslate"><span class="pre">birth_randarts</span></code></dt><dd><p>A different set of artifacts will be created, in place of the standard
+ones. This is intended primarily for people who have played enough to
+know what most of the standard artifacts do and want some variety. The
+number, findability and power of random artifacts will all match the
+standard set - approximately.</p>
+</dd>
+<dt>Generate connected stairs <code class="docutils literal notranslate"><span class="pre">birth_connect_stairs</span></code></dt><dd><p>With this option turned on, if you go down stairs, you start the new level
+on an up staircase, and vice versa (if you go up stairs, you start the
+next level on a down staircase).</p>
+<p>With this option off, you will never start on a staircase - but other
+staircases up and down elsewhere on the level will still be generated.</p>
+</dd>
+<dt>Force player descent (never make up stairs) <code class="docutils literal notranslate"><span class="pre">birth_force_descend</span></code></dt><dd><p>Upwards staircases do not work.  All downward staircases, including the
+one in town, transport the character one level below the previous maximum
+depth.  Recalling from the dungeon works and brings the character to the
+town.  However, recalling from town brings the character one level
+below the previous maximum depth.  The character cannot recall from quest
+levels until the quest is complete, however you will be warned before
+descending into a quest level.  Any status effects that sometimes
+teleports the character up and sometimes teleports them down will always
+choose down.  When combined with the option for word of recall scrolls
+to have no effect, this recreates the previous “ironman” option.</p>
+</dd>
+<dt>Word of Recall has no effect <code class="docutils literal notranslate"><span class="pre">birth_no_recall</span></code></dt><dd><p>Word of Recall scrolls have no effect.  When combined with the option
+to force player descent, this recreates the previous “ironman” option.</p>
+</dd>
+<dt>Restrict creation of artifacts <code class="docutils literal notranslate"><span class="pre">birth_no_artifacts</span></code></dt><dd><p>No artifacts will be created. Ever. Just <em>how</em> masochistic are you?</p>
+</dd>
+<dt>Stack objects on the floor <code class="docutils literal notranslate"><span class="pre">birth_stacking</span></code></dt><dd><p>With this option turned on, multiple items can occupy one grid.</p>
+<p>With this option off, items dropped on the floor will spread out instead
+of stacking. Normal items will disappear if there is no empty grid
+within a radius of three squares.</p>
+</dd>
+<dt>Lose artifacts when leaving level <code class="docutils literal notranslate"><span class="pre">birth_lose_arts</span></code></dt><dd><p>Normally if you leave a level with an unidentified artifact on it you may
+still find it later. With this option on, if you leave a level with an
+artifact on it’s gone for the rest of the game whether you knew it was
+there or not. Note that this option has no effect on artifacts which you
+have already identified (i.e. picked up) - these will always be
+permanently lost if you leave a level without taking them with you.</p>
+</dd>
+<dt>Show level feelings <code class="docutils literal notranslate"><span class="pre">birth_feelings</span></code></dt><dd><p>With this option turned on, the game will give you hints about what a new
+level has on it.</p>
+<p>With this option off, these hints will not be shown.</p>
+</dd>
+<dt>Increase gold drops but disable selling <code class="docutils literal notranslate"><span class="pre">birth_no_selling</span></code></dt><dd><p>Shopkeepers will never pay you for items you sell, though they will still
+identify unknown items for you, and will still sell you their wares. To
+balance out income in the game, gold found in the dungeon will be
+increased if this option is on.</p>
+</dd>
+<dt>Start with a kit of useful gear <code class="docutils literal notranslate"><span class="pre">birth_start_kit</span></code></dt><dd><p>Start with items, a useful option for new players, or ones that wish
+to descend immediately into the dungeon.  If turned off, the character
+will start with additional gold with which to purchase starting gear.</p>
+</dd>
+<dt>Monsters learn from their mistakes <code class="docutils literal notranslate"><span class="pre">birth_ai_learn</span></code></dt><dd><p>Allow monsters to learn what spell attacks you are resistant to, and to
+use this information to choose the best attacks.  This option makes the
+game very difficult and is not recommended.</p>
+</dd>
+<dt>Know all runes on birth <code class="docutils literal notranslate"><span class="pre">birth_know_runes</span></code></dt><dd><p>For players who don’t enjoy the “identify by use” process for wearable
+items.  This option means all object properties are known at the outset, so
+artifacts and ego items will be identified on walking over them.</p>
+</dd>
+<dt>Know all flavors on birth <code class="docutils literal notranslate"><span class="pre">birth_know_flavors</span></code></dt><dd><p>For players who don’t enjoy the “identify by use” process for consumable
+items.  This option means all object flavors are known at the outset.</p>
+</dd>
+<dt>Persistent levels (experimental) <code class="docutils literal notranslate"><span class="pre">birth_levels_persist</span></code></dt><dd><p>Each level is generated for the first time when the player enters it, and
+from then on when the player returns the level is as they last saw it,
+including monsters, items and traps.</p>
+</dd>
+<dt>To-damage is a percentage of dice (experimental) <code class="docutils literal notranslate"><span class="pre">birth_percent_damage</span></code></dt><dd><p>Instead of bonuses to damage being just added on to damage dealt, each +1
+adds 5% to the value of the damage dice. This option is currently not
+very balanced.</p>
+</dd>
+</dl>
+</section>
+<section id="cheating-options">
+<h2><a class="toc-backref" href="option.html#id3">Cheating options</a><a class="headerlink" href="option.html#cheating-options" title="Permalink to this heading">¶</a></h2>
+<dl class="simple">
+<dt>Peek into monster creation <code class="docutils literal notranslate"><span class="pre">cheat_hear</span></code></dt><dd><p>Cheaters never win. But they can peek at monster creation.</p>
+</dd>
+<dt>Peek into dungeon creation <code class="docutils literal notranslate"><span class="pre">cheat_room</span></code></dt><dd><p>Cheaters never win. But they can peek at room creation.</p>
+</dd>
+<dt>Peek into something else <code class="docutils literal notranslate"><span class="pre">cheat_xtra</span></code></dt><dd><p>Cheaters never win. But they can see debugging messages.</p>
+</dd>
+<dt>Allow player to avoid death <code class="docutils literal notranslate"><span class="pre">cheat_live</span></code></dt><dd><p>Cheaters never win. But they can cheat death.</p>
+</dd>
+</dl>
+</section>
+<section id="window-flags">
+<h2><a class="toc-backref" href="option.html#id4">Window flags</a><a class="headerlink" href="option.html#window-flags" title="Permalink to this heading">¶</a></h2>
+<p>Some platforms support “sub-windows”, which are windows which can be used
+to display useful information generally available through other means. The
+best thing about these windows is that they are updated automatically
+(usually) to reflect the current state of the world. The “window options”
+can be used to specify what should be displayed in each window. The
+possible choices should be pretty obvious.</p>
+<dl class="simple">
+<dt>Display inven/equip</dt><dd><p>Display the player inventory (and sometimes the equipment).</p>
+</dd>
+<dt>Display equip/inven</dt><dd><p>Display the player equipment (and sometimes the inventory).</p>
+</dd>
+<dt>Display player (basic)</dt><dd><p>Display a brief description of the character, including a breakdown of
+the current player “skills” (including attacks/shots per round).</p>
+</dd>
+<dt>Display player (extra)</dt><dd><p>Display a special description of the character, including some of the
+“flags” which pertain to a character, broken down by equipment item.</p>
+</dd>
+<dt>Display player (compact)</dt><dd><p>Display a brief description of the character, including a breakdown of
+the contributions of each equipment item to various resistances and
+stats.</p>
+</dd>
+<dt>Display map view</dt><dd><p>Display the area around the player or around the target while targeting.
+This allows using graphical tiles in their original size.</p>
+</dd>
+<dt>Display messages</dt><dd><p>Display the most recently generated “messages”.</p>
+</dd>
+<dt>Display overhead view</dt><dd><p>Display an overhead view of the entire dungeon level.</p>
+</dd>
+<dt>Display monster recall</dt><dd><p>Display a description of the monster which has been most recently
+attacked, targeted, or examined in some way.</p>
+</dd>
+<dt>Display object recall</dt><dd><p>Display a description of the most recently selected object. Currently
+this only affects spellbooks and prayerbooks. This window flag may be
+usefully combined with others, such as “monster recall”.</p>
+</dd>
+<dt>Display monster list</dt><dd><p>Display a list of monsters you know about and their distance from you.</p>
+</dd>
+<dt>Display status</dt><dd><p>Display the current status of the player, with permanent or temporary boosts,
+resistances and status ailments (also available on the main window).</p>
+</dd>
+<dt>Display item list</dt><dd><p>Display a list of items you know about and their distance from you.</p>
+</dd>
+</dl>
+</section>
+<section id="left-over-information">
+<h2><a class="toc-backref" href="option.html#id5">Left Over Information</a><a class="headerlink" href="option.html#left-over-information" title="Permalink to this heading">¶</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">hitpoint_warn</span></code> value, if non-zero, is the percentage of maximal
+hitpoints at which the player is warned that they may die. It is also used as
+the cut-off for using the color red to display both hitpoints and mana.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">delay_factor</span></code> value, if non-zero, will slow down the visual effects
+used for missile, bolt, beam, and ball attacks. The actual time delay is
+equal to <code class="docutils literal notranslate"><span class="pre">delay_factor</span></code> squared, in milliseconds.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">lazymove_delay</span></code> value, if non-zero, will allow the player to move
+diagonally by pressing the two appropriate arrow keys within the delay time.
+This may be useful particularly when using a keyboard with no numpad.</p>
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="option.html#">Option Descriptions</a><ul>
+<li><a class="reference internal" href="option.html#user-interface-options">User Interface Options</a></li>
+<li><a class="reference internal" href="option.html#birth-options">Birth options</a></li>
+<li><a class="reference internal" href="option.html#cheating-options">Cheating options</a></li>
+<li><a class="reference internal" href="option.html#window-flags">Window flags</a></li>
+<li><a class="reference internal" href="option.html#left-over-information">Left Over Information</a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+<form class="search" action="search.html" method="get">
+  <input type="text" name="q"
+   placeholder="type to search" />
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+  <div class="related bottom">
+  <nav id="rellinks">
+    <ul>
+        <li>
+          &larr;
+          <a href="command.html" title="Previous document">Command Descriptions</a>
+        </li>
+        <li>
+          <a href="customize.html" title="Next document">Customising the game</a>
+          &rarr;
+        </li>
+    </ul>
+  </nav>
+  <nav id="breadcrumbs">
+    <ul>
+      <li><a href="index.html">Home</a></li> 
+    </ul>
+  </nav>
+  </div>
+  <footer id="pagefooter">&copy; 2019, Angband developers past and present.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a>
+      5.3.0
+        with the <a href="http://github.com/irskep/sphinx-better-theme">
+          better</a> theme.
+
+  </footer>
+
+  
+  </body>
+</html>
