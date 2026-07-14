@@ -10,11 +10,18 @@
     "server": "hexo server",
     "test:hexo-sil-audio": "node --test test/hexo-sil-audio.test.js",
     "test:hexo-sil-archive": "node --test test/hexo-sil-archive.test.js",
+    "test:assets": "node --test test/assets.test.js",
     "test:hexo-sil-podcast-inside": "node --test test/hexo-sil-podcast-inside.test.js",
     "test:podcast-feed-verifier": "node --test test/verify-podcast-feed.test.js",
     "test:r2-assets": "node --test tools/sync-r2-assets.test.js",
     "test:hexo-sil-podcast": "node --test test/hexo-sil-podcast.test.js",
-    "verify:podcast": "node tools/verify-podcast-feed.js"
+    "verify:podcast": "node tools/verify-podcast-feed.js",
+    "assets:seed": "node tools/assets.js seed",
+    "assets:verify": "node tools/assets.js verify",
+    "assets:pull": "node tools/assets.js pull",
+    "assets:migrate": "node tools/assets.js migrate",
+    "assets:delete": "node tools/assets.js delete",
+    "publish": "node tools/assets.js publish"
   },
   "hexo": {
     "version": "6.3.0"

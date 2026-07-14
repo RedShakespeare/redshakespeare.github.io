@@ -18,6 +18,7 @@ const {
   resolveArchive,
   toArchiveConfig
 } = require('../scripts/hexo-sil-archive');
+const { serialiseManifest } = require('../tools/assets-manifest');
 
 const baseDir = path.resolve(__dirname, '..');
 
@@ -27,6 +28,7 @@ function mockHexo({ root = '/', archive, workingDir = baseDir } = {}) {
     base_dir: workingDir,
     config: {
       root,
+      assets: { manifest: 'source/_data/assets.json' },
       archive: archive === undefined ? { defaults: { source_dir: 'files' } } : archive
     },
     extend: {
@@ -42,14 +44,14 @@ test('archive configuration derives public paths and applies tag, collection, th
   const config = toArchiveConfig({
     archive: {
       defaults: {
-        source_dir: 'files',
+        prefix: 'files',
         title: '默认搜索',
         placeholder: '默认占位',
         hint: '默认提示'
       },
       collections: {
         'hxh-civ': {
-          source_dir: 'files/hxh_civ',
+          prefix: 'files/hxh_civ',
           title: '文明搜索'
         }
       }
@@ -70,7 +72,7 @@ test('archive configuration derives public paths and applies tag, collection, th
     placeholder: '默认占位',
     hint: '默认提示'
   });
-  assert.deepEqual(resolveArchive(config, parseArchiveTagArgs(['source_dir=files/rl'])), {
+  assert.deepEqual(resolveArchive(config, parseArchiveTagArgs(['prefix=files/rl'])), {
     sourceDir: 'files/rl',
     publicPath: 'files/rl',
     title: '默认搜索',
@@ -99,16 +101,16 @@ test('archive card serialises resolved data and can be rediscovered from rendere
 test('tree routes include configured and tag-defined collections with LFS sizes', async t => {
   const temporary = await fsp.mkdtemp(path.join(os.tmpdir(), 'hexo-sil-archive-'));
   t.after(() => fsp.rm(temporary, { recursive: true, force: true }));
-  const library = path.join(temporary, 'source', 'files', 'library');
-  await fsp.mkdir(path.join(library, 'nested'), { recursive: true });
-  await fsp.writeFile(path.join(library, 'nested', 'guide.txt'), 'guide');
-  await fsp.writeFile(path.join(library, 'large.bin'), ['version https://git-lfs.github.com/spec/v1', 'oid sha256:abc', 'size 987654', ''].join(String.fromCharCode(10)));
-  await fsp.writeFile(path.join(library, 'tree.json'), '{}');
-  await fsp.writeFile(path.join(library, '.DS_Store'), 'ignored');
+  const manifestDirectory = path.join(temporary, 'source', '_data');
+  await fsp.mkdir(manifestDirectory, { recursive: true });
+  await fsp.writeFile(path.join(manifestDirectory, 'assets.json'), serialiseManifest({
+    'files/library/nested/guide.txt': { size: 5, sha256: 'a'.repeat(64), type: 'text/plain; charset=utf-8' },
+    'files/library/large.bin': { size: 987654, sha256: 'b'.repeat(64), type: 'application/octet-stream' }
+  }));
 
-  const config = toArchiveConfig({ archive: { collections: { library: { source_dir: 'files/library' } } } });
+  const config = toArchiveConfig({ archive: { collections: { library: { prefix: 'files/library' } } } });
   const card = renderArchiveCard(resolveArchive(config, { collection: 'library' }));
-  const routes = buildArchiveRoutes({ pages: [{ content: card }], posts: [] }, config, { baseDir: temporary });
+  const routes = buildArchiveRoutes({ pages: [{ content: card }], posts: [] }, config, { baseDir: temporary, manifestPath: 'source/_data/assets.json' });
   assert.equal(routes.length, 1);
   assert.equal(routes[0].path, archiveTreePath('files/library'));
   const tree = JSON.parse(routes[0].data);
@@ -125,7 +127,7 @@ test('tree routes include configured and tag-defined collections with LFS sizes'
     hint: 'Hint'
   });
   assert.throws(
-    () => buildArchiveRoutes({ pages: [{ content: card + conflicting }], posts: [] }, config, { baseDir: temporary }),
+    () => buildArchiveRoutes({ pages: [{ content: card + conflicting }], posts: [] }, config, { baseDir: temporary, manifestPath: 'source/_data/assets.json' }),
     /maps to both/
   );
 
@@ -137,7 +139,7 @@ test('tree routes include configured and tag-defined collections with LFS sizes'
     hint: 'Hint'
   });
   assert.equal(
-    buildArchiveRoutes({ pages: [{ content: card + alternateUrl }], posts: [] }, config, { baseDir: temporary }).length,
+    buildArchiveRoutes({ pages: [{ content: card + alternateUrl }], posts: [] }, config, { baseDir: temporary, manifestPath: 'source/_data/assets.json' }).length,
     1
   );
 });
@@ -171,7 +173,7 @@ test('plugin registers generated skin, runtime, tag, and configurable overrides'
   assert.ok(hexo.calls.injectors[1].value.includes('href="/blog/css/archive-local.css"'));
   assert.equal(hexo.calls.tags[0].name, 'archive');
   assert.equal(hexo.calls.tags[0].options, undefined);
-  assert.ok(hexo.calls.tags[0].fn(['source_dir=files/library']).includes('data-sil-archive-source-dir="files/library"'));
+  assert.ok(hexo.calls.tags[0].fn(['prefix=files/library']).includes('data-sil-archive-prefix="files/library"'));
   const skinRoute = await hexo.calls.generators[0].fn();
   assert.equal(skinRoute.path, 'css/hexo-sil-archive.css');
   assert.match(skinRoute.data.toString(), /sil-archive-card/);

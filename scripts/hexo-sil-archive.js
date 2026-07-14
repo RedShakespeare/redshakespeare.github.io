@@ -1,10 +1,9 @@
 'use strict';
 
-const fs = require('node:fs');
 const fsp = require('node:fs/promises');
 const path = require('node:path');
 const { createHash } = require('node:crypto');
-const { generateTree } = require('../tools/archive-tree');
+const { loadAssetManifest, manifestFilePath, treeFromManifest } = require('../tools/assets-manifest');
 
 const BUILTIN_SKINS = Object.freeze({
   ephesus: Object.freeze({
@@ -268,8 +267,12 @@ function normaliseBuiltinSkin(value) {
 function normaliseLayer(value, label) {
   if (value == null) return { sourceDir: '', publicPath: '', title: '', placeholder: '', hint: '' };
   if (!isObject(value)) throw archiveError(label + ' must be a mapping.');
+  if (value.prefix != null && value.source_dir != null && String(value.prefix).trim() !== String(value.source_dir).trim()) {
+    throw archiveError(label + ' cannot define both prefix and source_dir with different values.');
+  }
   return {
-    sourceDir: normaliseRelativeDirectory(value.source_dir, label + '.source_dir'),
+    // source_dir remains a migration alias. It no longer points to a local directory.
+    sourceDir: normaliseRelativeDirectory(value.prefix == null ? value.source_dir : value.prefix, label + '.prefix'),
     publicPath: normaliseRelativeDirectory(value.public_path, label + '.public_path'),
     title: normaliseText(value.title, label + '.title'),
     placeholder: normaliseText(value.placeholder, label + '.placeholder'),
@@ -333,6 +336,7 @@ function resolveArchive(config, overrides = {}) {
 function parseArchiveTagArgs(args = []) {
   const allowed = new Map([
     ['collection', 'collection'],
+    ['prefix', 'sourceDir'],
     ['source_dir', 'sourceDir'],
     ['public_path', 'publicPath'],
     ['title', 'title'],
@@ -351,7 +355,7 @@ function parseArchiveTagArgs(args = []) {
   }
   return {
     collection: values.collection ? normaliseCollectionName(values.collection, 'Archive tag collection') : '',
-    sourceDir: normaliseRelativeDirectory(values.sourceDir, 'Archive tag source_dir'),
+    sourceDir: normaliseRelativeDirectory(values.sourceDir, 'Archive tag prefix'),
     publicPath: normaliseRelativeDirectory(values.publicPath, 'Archive tag public_path'),
     title: normaliseText(values.title, 'Archive tag title'),
     placeholder: normaliseText(values.placeholder, 'Archive tag placeholder'),
@@ -379,7 +383,7 @@ function renderArchiveCard(archive, runtime = {}) {
   const publicUrl = rootPublicPath(runtime.root || '/', archive.publicPath);
   const attr = (name, value) => name + '="' + escapeHtml(value) + '"';
   return [
-    '<section class="sil-archive-card" data-sil-archive ' + attr('data-sil-archive-source-dir', archive.sourceDir) + ' ' + attr('data-sil-archive-public-path', archive.publicPath) + ' ' + attr('data-sil-archive-tree', treeUrl) + ' ' + attr('data-sil-archive-public-url', publicUrl) + ' role="search" ' + attr('aria-label', archive.title) + ' aria-busy="true">',
+    '<section class="sil-archive-card" data-sil-archive ' + attr('data-sil-archive-prefix', archive.sourceDir) + ' ' + attr('data-sil-archive-public-path', archive.publicPath) + ' ' + attr('data-sil-archive-tree', treeUrl) + ' ' + attr('data-sil-archive-public-url', publicUrl) + ' role="search" ' + attr('aria-label', archive.title) + ' aria-busy="true">',
     '  <div class="sil-archive-card__header">',
     '    <span class="sil-archive-card__title">' + escapeHtml(archive.title) + '</span>',
     '    <p class="sil-archive-card__meta" aria-live="polite">正在加载目录…</p>',
@@ -413,7 +417,7 @@ function extractArchiveCards(locals = {}) {
       const content = String(item && item.content || '');
       const sections = content.match(/<section\b[^>]*\bdata-sil-archive(?:\s|=|>)[^>]*>/gi) || [];
       for (const section of sections) {
-        const sourceDir = readAttribute(section, 'data-sil-archive-source-dir');
+        const sourceDir = readAttribute(section, 'data-sil-archive-prefix') || readAttribute(section, 'data-sil-archive-source-dir');
         const publicPath = readAttribute(section, 'data-sil-archive-public-path');
         if (sourceDir && publicPath) entries.push({
           sourceDir: normaliseRelativeDirectory(sourceDir, 'rendered archive source_dir', true),
@@ -449,30 +453,27 @@ function configuredArchives(config) {
   return Object.keys(config.collections).map(collection => resolveArchive(config, { collection }));
 }
 
-function resolveSourcePath(baseDir, sourceDir) {
-  const sourceRoot = path.resolve(baseDir || process.cwd(), 'source');
-  const sourcePath = path.resolve(sourceRoot, sourceDir);
-  if (sourcePath !== sourceRoot && !sourcePath.startsWith(sourceRoot + path.sep)) throw archiveError('source_dir `' + sourceDir + '` must resolve beneath source/.');
-  return sourcePath;
-}
-
 function buildArchiveRoutes(locals, config, runtime = {}) {
   const archives = uniqueArchiveTrees(uniqueArchives([
     ...configuredArchives(config),
     ...extractArchiveCards(locals)
   ]));
+  const manifest = loadAssetManifest(manifestFilePath(runtime.baseDir, runtime.manifestPath));
   return archives.map(archive => {
-    const sourcePath = resolveSourcePath(runtime.baseDir, archive.sourceDir);
-    if (!fs.existsSync(sourcePath)) throw archiveError('source_dir `' + archive.sourceDir + '` does not exist.');
-    if (!fs.statSync(sourcePath).isDirectory()) throw archiveError('source_dir `' + archive.sourceDir + '` is not a directory.');
-    return { path: archiveTreePath(archive.sourceDir), data: JSON.stringify(generateTree(sourcePath), null, 2) };
+    const tree = treeFromManifest(manifest, archive.sourceDir);
+    if (!tree.children.length) throw archiveError('prefix `' + archive.sourceDir + '` has no matching objects in the asset manifest.');
+    return { path: archiveTreePath(archive.sourceDir), data: JSON.stringify(tree, null, 2) };
   });
 }
 
 function registerArchivePlugin(hexo) {
   const config = toArchiveConfig(hexo.config);
   if (!config.enabled) return;
-  const runtime = { baseDir: hexo.base_dir || process.cwd(), root: hexo.config.root || '/' };
+  const runtime = {
+    baseDir: hexo.base_dir || process.cwd(),
+    root: hexo.config.root || '/',
+    manifestPath: hexo.config.assets && hexo.config.assets.manifest || 'source/_data/assets.json'
+  };
   if (config.skin.builtin) {
     const skin = BUILTIN_SKINS[config.skin.builtin];
     hexo.extend.generator.register('hexo-sil-archive-skin', async () => ({ path: skin.outputPath, data: await fsp.readFile(skin.sourcePath) }));

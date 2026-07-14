@@ -146,10 +146,14 @@ feed:
   path: atom.xml
   limit: 25
   icon: favicon.png
+assets:
+  # The manifest's state switches the deployment from the legacy mirror to R2 after npm run assets:migrate -- --finalize.
+  manifest: source/_data/assets.json
 audio:
-  # hexo-sil-audio: local music files, built-in Ephesus skin, and optional site-local overrides.
+  # hexo-sil-audio reads local-file metadata from assets.manifest.
   media:
-    source_dir: source/files
+    manifest: source/_data/assets.json
+    object_prefix: files
     public_path: /files/
   skin:
     builtin: ephesus
@@ -162,13 +166,13 @@ archive:
     # override: /css/hexo-sil-archive.local.css
   # Tag arguments override collection settings, which override these defaults.
   defaults:
-    source_dir: files
+    prefix: files
     title: 搜索...
     placeholder: 输入文件名或目录名
     hint: 支持搜索文件名和目录名称
   collections:
     hxh-civ:
-      source_dir: files/hxh_civ
+      prefix: files/hxh_civ
 podcast:
   # hexo-sil-podcast: preview article players first. Set to false only when ready to publish podcast.xml.
   dry_run: true
@@ -187,10 +191,11 @@ podcast:
   category:
     text: Leisure
     subcategory: Games
-  # Local episode files in source/files are published by the R2 asset workflow.
+  # `file` metadata comes from assets.manifest; R2 is the binary source of truth.
   # The article player uses public_path; the podcast RSS enclosure uses url.
   media:
-    source_dir: source/files
+    manifest: source/_data/assets.json
+    object_prefix: files
     public_path: /files/
     url: https://dl.ephesus.top/files/
   explicit: false

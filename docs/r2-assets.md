@@ -1,17 +1,19 @@
 # R2 Asset Mirror
 
-`source/files/` remains the source of truth. The R2 bucket mirrors it at the
-`files/` prefix, so a source path such as `source/files/rl/game.zip` is served
-directly at `https://dl.ephesus.top/files/rl/game.zip`.
+R2 becomes the source of truth for binary assets once the versioned
+`source/_data/assets.json` manifest is finalized with `state: r2`. Objects retain
+their existing key paths, so `files/rl/game.zip` is served directly at
+`https://dl.ephesus.top/files/rl/game.zip`. After finalization, maintenance
+machines can retain an ignored `source/files/` working copy, but the versioned
+source of build metadata is the manifest.
 
-Incremental uploads are addressed relative to `source/files/`; this prevents
-the bucket's existing `files/` prefix from being duplicated as `files/files/`.
-Changes to `tools/sync-r2-assets.js` deliberately trigger one full mirror, so
-path-mapping fixes reconcile existing objects as well as future uploads.
+Use `npm run publish` to upload changes and commit the refreshed manifest in one
+interactive operation. See [assets.md](assets.md) for setup, partial restores,
+verification, and the one-time LFS migration procedure.
 
 Archive directory indexes are published by the `hexo-sil-archive` plugin below
-`/archive-data/`, independently of the mirrored file URLs. R2 synchronization
-therefore only mirrors the actual files beneath `source/files/`.
+`/archive-data/`, independently of the asset URLs. The plugin reads the
+versioned asset manifest, so Pages builds do not need R2 credentials or files.
 
 The HXH CIV browser itself is a regular Hexo page at `/hxh_civ/`, so it uses
 the installed Inside theme directly. `/files/hxh_civ/` remains a legacy entry
@@ -32,36 +34,33 @@ publishing `files/`.
 
 Create the R2 credentials with Object Read & Write access limited to the
 `ephesus-files` bucket. The Worker token should be separate from the R2 token
-and limited to the Worker, R2 binding, and route permissions it needs.
-
-The workflow configures rclone with `no_check_bucket = true`, which is required
-when these R2 credentials are scoped to a specific bucket.
-It also sets `no_head = true` because R2 can return HTTP 501 for rclone's HEAD
-check of an object that does not yet exist.
+and limited to the Worker, R2 binding, and route permissions it needs. The
+cross-platform Node publisher uses the S3 API directly; no rclone configuration
+is required.
 
 ## Initial Migration
 
-1. Add the R2 secrets and push this workflow while `R2_ASSETS_ENABLED` is not
-   set. Existing Pages files stay live.
-2. Run the `Build Hexo and Deploy to main` workflow manually with `sync_mode`
-   set to `full`. This downloads the LFS assets and mirrors all of
-   `source/files/` into R2.
-3. Verify a normal file, an LFS archive, and a H5 entry point from
+First push the migration implementation while the manifest is still `state: legacy`.
+That deployment continues to serve the Git/LFS copy; do not deploy the new Worker
+route yet.
+
+1. On a fully hydrated legacy checkout, run `npm run assets:migrate -- --finalize`.
+   It uploads or verifies every managed object, sets the manifest state to `r2`,
+   adds the required ignore rules, and removes binary assets from the Git index
+   without deleting the local files.
+2. Deploy the Worker route for `/img/df.zip`, then verify a normal file, an LFS
+   archive, and a H5 entry point from
    `https://dl.ephesus.top/files/...`.
-4. Run the `Deploy files proxy Worker` workflow manually. Verify the same
+3. Run the `Deploy files proxy Worker` workflow manually. Verify the same
    paths through `https://www.ephesus.top/files/...`, including a Range request
    for a large archive.
-5. Set the repository Actions variable `R2_ASSETS_ENABLED` to `true`, then run
-   the build workflow again. Future Pages deployments remove `public/files/`.
-
-With the variable enabled, every `src` push synchronizes changed files before
-the Pages build. Renames upload the new object and delete the old one; deletes
-are removed from R2 to keep the mirror strict. Deployments run serially so a
-full mirror is never cancelled halfway through.
+4. Run `npm run publish` to validate, commit, and deploy the finalized manifest.
+   The workflow reads its state directly: it skips LFS/rclone and removes
+   `public/files/` only for `state: r2`. No repository variable is required.
 
 ## Rollback
 
-Set `R2_ASSETS_ENABLED` to a value other than `true` and run the build
-workflow. It publishes `files/` from the repository again. The R2 mirror is
-left intact; disable the Worker route only after confirming the Pages copy is
-available.
+Restore a local asset directory from R2 with `npm run assets:pull`; do not
+re-enable Git LFS or add binary assets back to the repository. If R2 itself
+must be rolled back, restore objects from an external backup before changing
+Worker routing.

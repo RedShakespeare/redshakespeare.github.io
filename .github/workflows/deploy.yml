@@ -19,7 +19,7 @@ permissions:
 
 concurrency:
   group: hexo-deploy
-  # R2 mirror runs must finish; cancelling one can leave objects missing.
+  # Legacy R2 mirror runs must finish; cancelling one can leave objects missing.
   cancel-in-progress: false
 
 jobs:
@@ -42,11 +42,21 @@ jobs:
       - name: Install deps
         run: npm ci || npm i
 
+      - name: Determine asset pipeline mode
+        id: asset-pipeline
+        run: node tools/assets.js mode
+
       - name: Hydrate Pages LFS asset
+        if: steps.asset-pipeline.outputs.mode == 'legacy'
         run: git lfs pull --include="source/img/df.zip"
+
+      - name: Refresh legacy asset manifest
+        if: steps.asset-pipeline.outputs.mode == 'legacy'
+        run: npm run assets:seed
 
       - name: Run podcast preflight
         run: |
+          npm run test:assets
           npm run test:hexo-sil-audio
           npm run test:hexo-sil-archive
           npm run test:hexo-sil-podcast
@@ -71,8 +81,13 @@ jobs:
         with:
           node-version: 20
 
+      - name: Determine asset pipeline mode
+        id: asset-pipeline
+        run: node tools/assets.js mode
+
       - name: Detect R2 asset changes
         id: assets
+        if: steps.asset-pipeline.outputs.mode == 'legacy'
         run: node tools/sync-r2-assets.js --detect
         env:
           SYNC_MODE: ${{ inputs.sync_mode || 'incremental' }}
@@ -80,13 +95,13 @@ jobs:
           GITHUB_SHA: ${{ github.sha }}
 
       - name: Install R2 sync tools
-        if: steps.assets.outputs.mode != 'none'
+        if: steps.asset-pipeline.outputs.mode == 'legacy' && steps.assets.outputs.mode != 'none'
         run: |
           sudo apt-get update
           sudo apt-get install --yes git-lfs rclone
 
       - name: Sync assets to R2
-        if: steps.assets.outputs.mode != 'none'
+        if: steps.asset-pipeline.outputs.mode == 'legacy' && steps.assets.outputs.mode != 'none'
         run: node tools/sync-r2-assets.js --sync --mode "${{ steps.assets.outputs.mode }}"
         env:
           R2_REMOTE: r2:ephesus-files/files
@@ -123,34 +138,43 @@ jobs:
       - name: Install deps
         run: npm ci || npm i
 
+      - name: Determine asset pipeline mode
+        id: asset-pipeline
+        run: node tools/assets.js mode
+
       - name: Hydrate Pages LFS asset
+        if: steps.asset-pipeline.outputs.mode == 'legacy'
         run: |
           git lfs pull --include="source/img/df.zip"
+
+      - name: Refresh legacy asset manifest
+        if: steps.asset-pipeline.outputs.mode == 'legacy'
+        run: npm run assets:seed
 
       - name: Generate
         run: |
           npx hexo clean
           npx hexo generate --bail
-          if [ "${R2_ASSETS_ENABLED}" = "true" ]; then
+          if [ "${ASSET_PIPELINE_MODE}" = "r2" ]; then
             rm -rf public/files
           fi
           # 可选：避免 Jekyll 处理导致下划线目录被忽略
           touch public/.nojekyll
         env:
-          R2_ASSETS_ENABLED: ${{ vars.R2_ASSETS_ENABLED }}
+          ASSET_PIPELINE_MODE: ${{ steps.asset-pipeline.outputs.mode }}
 
       - name: Verify generated asset policy
         run: |
-          if [ "${R2_ASSETS_ENABLED}" = "true" ] && [ -e public/files ]; then
-            echo "public/files must be served by R2 once migration is enabled"
+          if [ "${ASSET_PIPELINE_MODE}" = "r2" ] && [ -e public/files ]; then
+            echo "public/files must be served by R2 after the manifest is finalized"
             exit 1
           fi
-          if [ "${R2_ASSETS_ENABLED}" = "true" ] && rg -l --glob '*' 'version https://git-lfs.github.com/spec/v1' public; then
+          if [ "${ASSET_PIPELINE_MODE}" = "r2" ] && rg -l --glob '*' 'version https://git-lfs.github.com/spec/v1' public; then
             echo "Generated site contains Git LFS pointer files"
             exit 1
           fi
         env:
-          R2_ASSETS_ENABLED: ${{ vars.R2_ASSETS_ENABLED }}
+          ASSET_PIPELINE_MODE: ${{ steps.asset-pipeline.outputs.mode }}
 
       - name: Deploy public/ to main root
         uses: JamesIves/github-pages-deploy-action@v4

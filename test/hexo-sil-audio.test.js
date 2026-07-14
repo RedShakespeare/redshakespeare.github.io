@@ -16,7 +16,7 @@ const {
 } = require('../scripts/hexo-sil-audio');
 
 const baseDir = path.resolve(__dirname, '..');
-const runtime = { baseDir, root: '/', media: { sourceDir: 'source/files', publicPath: 'files' } };
+const runtime = { baseDir, root: '/', media: { manifestPath: 'source/_data/assets.json', objectPrefix: 'files', publicPath: 'files' } };
 
 function post(overrides = {}) {
   return { source: 'source/_posts/music.md', path: '2026/music/', title: 'Article Title', ...overrides };
@@ -26,7 +26,7 @@ function mockHexo({ root = '/', audio = {} } = {}) {
   const calls = { filters: [], generators: [], injectors: [], tags: [] };
   return {
     base_dir: baseDir,
-    config: { root, audio: { media: { source_dir: 'source/files', public_path: '/files/' }, ...audio } },
+    config: { root, assets: { manifest: 'source/_data/assets.json' }, audio: { media: { manifest: 'source/_data/assets.json', object_prefix: 'files', public_path: '/files/' }, ...audio } },
     extend: {
       filter: { register: (name, fn) => calls.filters.push({ name, fn }) },
       generator: { register: (name, fn) => calls.generators.push({ name, fn }) },
@@ -37,11 +37,11 @@ function mockHexo({ root = '/', audio = {} } = {}) {
   };
 }
 
-test('audio configuration has independent local media defaults', () => {
-  assert.deepEqual(toAudioConfig({}).media, { sourceDir: 'source/files', publicPath: 'files' });
+test('audio configuration reads local-file metadata from the asset manifest', () => {
+  assert.deepEqual(toAudioConfig({}).media, { manifestPath: 'source/_data/assets.json', objectPrefix: 'files', publicPath: 'files' });
   assert.deepEqual(toAudioConfig({}).skin, { builtin: 'ephesus', override: '' });
-  assert.deepEqual(toAudioConfig({ audio: { media: { source_dir: 'source/audio', public_path: '/audio/' } } }).media, {
-    sourceDir: 'source/audio', publicPath: 'audio'
+  assert.deepEqual(toAudioConfig({ assets: { manifest: 'source/_data/custom-assets.json' }, audio: { media: { object_prefix: 'audio', public_path: '/audio/' } } }).media, {
+    manifestPath: 'source/_data/custom-assets.json', objectPrefix: 'audio', publicPath: 'audio'
   });
   assert.deepEqual(toAudioConfig({ audio: { skin: { builtin: false, override: '/css/player.css' } } }).skin, {
     builtin: false, override: '/css/player.css'

@@ -13,6 +13,10 @@
     {
       "pattern": "www.ephesus.top/files/*",
       "zone_name": "ephesus.top"
+    },
+    {
+      "pattern": "www.ephesus.top/img/df.zip",
+      "zone_name": "ephesus.top"
     }
   ]
 }

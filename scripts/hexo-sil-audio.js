@@ -2,6 +2,7 @@
 
 const fs = require('node:fs/promises');
 const path = require('node:path');
+const { getObject, loadAssetManifest, manifestFilePath, normaliseManifestPath } = require('../tools/assets-manifest');
 
 const PLAYER_START = '<!-- hexo-sil-audio:start -->';
 const PLAYER_END = '<!-- hexo-sil-audio:end -->';
@@ -11,9 +12,6 @@ const AUDIO_MIME_TYPES = new Map([
   ['.aac', 'audio/aac'], ['.ogg', 'audio/ogg'], ['.opus', 'audio/opus'], ['.wav', 'audio/wav'],
   ['.wave', 'audio/wav'], ['.flac', 'audio/flac'], ['.aif', 'audio/aiff'], ['.aiff', 'audio/aiff'], ['.webm', 'audio/webm']
 ]);
-
-let musicMetadata;
-const localMetadataCache = new Map();
 
 const BUILTIN_SKINS = Object.freeze({
   ephesus: Object.freeze({
@@ -95,6 +93,10 @@ function normaliseRelativeDirectory(value, fallback, field) {
   return directory;
 }
 
+function normaliseObjectPrefix(value, fallback, field) {
+  return normaliseRelativeDirectory(value, fallback, field);
+}
+
 function normaliseBuiltinSkin(value) {
   if (value == null || value === true) return 'ephesus';
   if (value === false) return false;
@@ -117,11 +119,13 @@ function normaliseSkinOverride(value) {
 function toAudioConfig(siteConfig = {}) {
   const raw = isObject(siteConfig.audio) ? siteConfig.audio : {};
   const media = isObject(raw.media) ? raw.media : {};
+  const assets = isObject(siteConfig.assets) ? siteConfig.assets : {};
   const skin = raw.skin === false ? { builtin: false } : raw.skin == null ? {} : raw.skin;
   if (!isObject(skin)) throw new Error('Audio configuration error: skin must be a mapping or false.');
   return {
     media: {
-      sourceDir: normaliseRelativeDirectory(media.source_dir, 'source/files', 'media.source_dir'),
+      manifestPath: normaliseManifestPath(media.manifest || assets.manifest || 'source/_data/assets.json', 'media.manifest'),
+      objectPrefix: normaliseObjectPrefix(media.object_prefix, 'files', 'media.object_prefix'),
       publicPath: normaliseRelativeDirectory(media.public_path, 'files', 'media.public_path')
     },
     skin: {
@@ -137,7 +141,8 @@ function audioRuntime(runtime = {}) {
     baseDir: runtime.baseDir || process.cwd(),
     root: runtime.root || '/',
     media: {
-      sourceDir: normaliseRelativeDirectory(media.sourceDir, 'source/files', 'media.source_dir'),
+      manifestPath: normaliseManifestPath(media.manifestPath, 'media.manifest'),
+      objectPrefix: normaliseObjectPrefix(media.objectPrefix, 'files', 'media.object_prefix'),
       publicPath: normaliseRelativeDirectory(media.publicPath, 'files', 'media.public_path')
     }
   };
@@ -148,7 +153,7 @@ function normaliseLocalFile(post, value) {
   if (!file) throw audioError(post, '`file` must be a non-empty relative path.');
   if (/[^\x21-\x7E]/.test(file)) throw audioError(post, '`file` must use an ASCII path.');
   if (file.includes('\\') || file.startsWith('/') || file.includes('?') || file.includes('#')) {
-    throw audioError(post, '`file` must be a plain relative path below audio.media.source_dir.');
+    throw audioError(post, '`file` must be a plain relative path below audio.media.object_prefix.');
   }
   const segments = file.split('/');
   if (segments.some(segment => !segment || segment === '.' || segment === '..')) {
@@ -170,55 +175,28 @@ function renderStylesheetLink(url) {
   return `<link rel="stylesheet" href="${escapeHtml(url)}">`;
 }
 
-function getMusicMetadata() {
-  if (!musicMetadata) musicMetadata = require('music-metadata');
-  return musicMetadata;
-}
-
-async function readLocalMetadata(post, localPath, stat) {
-  const key = `${localPath}:${stat.size}:${stat.mtimeMs}`;
-  let entry = localMetadataCache.get(key);
-  if (!entry) {
-    entry = Promise.resolve().then(() => getMusicMetadata().parseFile(localPath, { duration: true }));
-    localMetadataCache.set(key, entry);
-  }
-  try {
-    const metadata = await entry;
-    const duration = Number(metadata && metadata.format && metadata.format.duration);
-    if (!Number.isFinite(duration) || duration <= 0) throw new Error('could not determine a positive duration');
-    return { duration, title: String(metadata && metadata.common && metadata.common.title || '').trim() };
-  } catch (error) {
-    localMetadataCache.delete(key);
-    throw audioError(post, `could not read local audio metadata: ${error.message}`);
-  }
-}
-
 async function normaliseLocalAudio(post, fileValue, runtime) {
   const file = normaliseLocalFile(post, fileValue);
   const options = audioRuntime(runtime);
-  const sourceRoot = path.resolve(options.baseDir, options.media.sourceDir);
-  const localPath = path.resolve(sourceRoot, file);
-  if (!localPath.startsWith(`${sourceRoot}${path.sep}`)) throw audioError(post, '`file` must resolve below audio.media.source_dir.');
-
-  let stat;
-  try {
-    stat = await fs.lstat(localPath);
-  } catch (error) {
-    throw audioError(post, `local audio file does not exist: ${file} (${error.code || error.message}).`);
-  }
-  if (!stat.isFile()) throw audioError(post, `local audio path is not a regular file: ${file}.`);
-  if (!Number.isSafeInteger(stat.size) || stat.size <= 0) throw audioError(post, `local audio file must have a positive byte size: ${file}.`);
-
   const type = AUDIO_MIME_TYPES.get(path.extname(file).toLowerCase());
   if (!type) throw audioError(post, '`file` has an unsupported audio extension. Supported extensions: ' + Array.from(AUDIO_MIME_TYPES.keys()).join(', ') + '.');
-
-  const metadata = await readLocalMetadata(post, localPath, stat);
+  let manifest;
+  try {
+    manifest = loadAssetManifest(manifestFilePath(options.baseDir, options.media.manifestPath));
+  } catch (error) {
+    throw audioError(post, error.message.replace(/^Asset manifest error:\s*/, ''));
+  }
+  const key = `${options.media.objectPrefix}/${file}`;
+  const entry = getObject(manifest, key);
+  if (!entry) throw audioError(post, `asset manifest does not contain ${key}. Run npm run publish after adding the file.`);
+  if (entry.type !== type) throw audioError(post, `asset manifest MIME type for ${key} is ${entry.type}, expected ${type}.`);
+  if (!entry.duration) throw audioError(post, `asset manifest does not contain an audio duration for ${key}. Re-publish the hydrated audio file.`);
   return {
     file,
-    type,
-    length: stat.size,
-    duration: formatDuration(metadata.duration),
-    embeddedTitle: metadata.title,
+    type: entry.type,
+    length: entry.size,
+    duration: entry.duration,
+    embeddedTitle: entry.title || '',
     playerAudio: localPublicPath(options.root, options.media.publicPath, file)
   };
 }

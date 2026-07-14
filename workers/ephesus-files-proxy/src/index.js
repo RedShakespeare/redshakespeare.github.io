@@ -12,6 +12,7 @@ const FALLBACK_TYPES = {
 
 function objectKey(request) {
   const url = new URL(request.url);
+  if (url.pathname === '/img/df.zip') return 'img/df.zip';
   if (!url.pathname.startsWith('/files/')) return null;
 
   let key;

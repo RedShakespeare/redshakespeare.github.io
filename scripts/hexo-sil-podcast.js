@@ -15,6 +15,7 @@ const {
   normaliseLocalAudio,
   renderAudioPlayer
 } = require('./hexo-sil-audio');
+const { normaliseManifestPath } = require('../tools/assets-manifest');
 
 const EPISODE_TYPES = new Set(['full', 'trailer', 'bonus']);
 const DURATION_PATTERN = /^(?:\d{1,3}:)?[0-5]\d:[0-5]\d$/;
@@ -60,6 +61,7 @@ function toPodcastConfig(siteConfig = {}) {
   const raw = isObject(siteConfig.podcast) ? siteConfig.podcast : {};
   const category = isObject(raw.category) ? raw.category : {};
   const media = isObject(raw.media) ? raw.media : {};
+  const assets = isObject(siteConfig.assets) ? siteConfig.assets : {};
   const feedPath = String(raw.path || 'podcast.xml').replace(/^\/+/, '');
   if (!feedPath || feedPath.includes('..')) throw new Error('Podcast configuration error: path must be a site-relative file path.');
   return {
@@ -76,7 +78,8 @@ function toPodcastConfig(siteConfig = {}) {
     explicit: raw.explicit === true,
     limit: raw.limit == null ? 0 : Number(raw.limit),
     media: {
-      sourceDir: normaliseRelativeDirectory(media.source_dir, 'source/files', 'media.source_dir'),
+      manifestPath: normaliseManifestPath(media.manifest || assets.manifest || 'source/_data/assets.json', 'media.manifest'),
+      objectPrefix: normaliseRelativeDirectory(media.object_prefix, 'files', 'media.object_prefix'),
       publicPath: normaliseRelativeDirectory(media.public_path, 'files', 'media.public_path'),
       url: String(media.url || '')
     }
