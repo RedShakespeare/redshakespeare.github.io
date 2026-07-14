@@ -152,6 +152,10 @@ test('Ephesus skin mirrors the audio card frame and runtime supports SPA cards',
   assert.ok(css.includes('border-left-width:var(--sil-archive-accent-border-width)'));
   assert.match(css, /border-radius:8px/);
   assert.match(css, /data-sil-archive-theme=\"dark\"/);
+  assert.match(css, /sil-archive-card__control:focus-within \{ border-color:var\(--sil-archive-ink\) \}/);
+  assert.doesNotMatch(css, /sil-archive-card__control:focus-within \{[^}]*box-shadow/);
+  assert.match(css, /sil-archive-card__input:focus-visible \{ outline:none \}/);
+  assert.match(css, /sil-archive-card__clear:focus-visible \{ outline:2px solid var\(--sil-archive-focus\);outline-offset:2px \}/);
   assert.ok(ARCHIVE_SCRIPT.includes('const treeCache = new Map()'));
   assert.ok(ARCHIVE_SCRIPT.includes('new MutationObserver(observeMutations)'));
   assert.ok(ARCHIVE_SCRIPT.includes("document.addEventListener('inside:theme'"));
