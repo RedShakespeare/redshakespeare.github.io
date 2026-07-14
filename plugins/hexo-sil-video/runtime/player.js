@@ -1,0 +1,403 @@
+import JASSUB from 'jassub';
+import subsrt from 'subsrt';
+
+const selector = '.sil-video-player[data-sil-video-player]';
+const rates = [1, 1.25, 1.5, 1.75, 2, 0.5, 0.75];
+const instances = new Map();
+
+function formatTime(value) {
+  const seconds = Math.max(0, Math.floor(Number(value) || 0));
+  const hours = Math.floor(seconds / 3600);
+  const minutes = Math.floor((seconds % 3600) / 60);
+  const remaining = String(seconds % 60).padStart(2, '0');
+  return hours ? `${hours}:${String(minutes).padStart(2, '0')}:${remaining}` : `${minutes}:${remaining}`;
+}
+
+function luminance(value) {
+  const hex = String(value || '').trim().match(/^#([0-9a-f]{3}|[0-9a-f]{6})$/i);
+  const rgb = String(value || '').match(/rgba?\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)/i);
+  let channels;
+  if (hex) {
+    const source = hex[1].length === 3 ? hex[1].split('').map(part => part + part).join('') : hex[1];
+    channels = [0, 2, 4].map(offset => Number.parseInt(source.slice(offset, offset + 2), 16));
+  } else if (rgb) {
+    channels = [Number(rgb[1]), Number(rgb[2]), Number(rgb[3])];
+  }
+  return channels ? (channels[0] * 0.2126 + channels[1] * 0.7152 + channels[2] * 0.0722) / 255 : 1;
+}
+
+function isDarkTheme() {
+  const target = document.body || document.documentElement;
+  return luminance(getComputedStyle(target).backgroundColor) < 0.5;
+}
+
+function setRangeFill(input, value, maximum) {
+  const percent = maximum > 0 ? Math.max(0, Math.min(100, value / maximum * 100)) : 0;
+  input.style.setProperty('--sil-video-range-fill', `${percent}%`);
+}
+
+function parseModel(player) {
+  const source = player.dataset.silVideoModel;
+  if (!source) throw new Error('播放器配置缺失。');
+  const bytes = Uint8Array.from(atob(source), character => character.charCodeAt(0));
+  return JSON.parse(new TextDecoder('utf-8', { fatal: true }).decode(bytes));
+}
+
+function initialise(player) {
+  if (instances.has(player) || player.dataset.silVideoReady === 'true') return;
+  const video = player.querySelector('.sil-video-player__video');
+  const viewport = player.querySelector('[data-sil-video-viewport]');
+  const progress = player.querySelector('[data-sil-video-progress]');
+  const volume = player.querySelector('[data-sil-video-volume]');
+  const current = player.querySelector('[data-sil-video-current]');
+  const duration = player.querySelector('[data-sil-video-duration]');
+  const status = player.querySelector('[data-sil-video-status]');
+  const play = player.querySelector('[data-sil-video-action="play"]');
+  const mute = player.querySelector('[data-sil-video-action="mute"]');
+  const rate = player.querySelector('[data-sil-video-action="rate"]');
+  const repeat = player.querySelector('[data-sil-video-action="repeat"]');
+  const subtitles = player.querySelector('[data-sil-video-action="subtitles"]');
+  const subtitleMenu = player.querySelector('[data-sil-video-subtitle-menu]');
+  const fullscreen = player.querySelector('[data-sil-video-action="fullscreen"]');
+  const volumeControl = player.querySelector('.sil-video-player__volume-control');
+  if (!video || !viewport || !progress || !volume || !current || !duration || !status || !play || !mute || !rate || !repeat || !subtitles || !subtitleMenu || !fullscreen || !volumeControl) return;
+
+  let model;
+  try {
+    model = parseModel(player);
+  } catch (error) {
+    status.textContent = error.message;
+    player.dataset.silVideoError = 'true';
+    return;
+  }
+
+  const cleanups = [];
+  let subtitleRenderer = null;
+  let subtitleAbort = null;
+  let subtitleToken = 0;
+  let selectedSubtitle = -1;
+  let lastVolume = video.volume || 0.8;
+
+  function listen(target, event, handler, options) {
+    target.addEventListener(event, handler, options);
+    cleanups.push(() => target.removeEventListener(event, handler, options));
+  }
+
+  function setStatus(message = '', error = false) {
+    status.textContent = message;
+    if (error) player.dataset.silVideoError = 'true';
+    else delete player.dataset.silVideoError;
+  }
+
+  function syncPlaying() {
+    const playing = !video.paused && !video.ended;
+    player.dataset.silVideoPlaying = playing ? 'true' : 'false';
+    player.dataset.silVideoEnded = video.ended ? 'true' : 'false';
+    play.setAttribute('aria-label', video.ended ? '重播' : playing ? '暂停' : '播放');
+    play.setAttribute('aria-pressed', playing ? 'true' : 'false');
+  }
+
+  function syncTime() {
+    const maximum = Number.isFinite(video.duration) ? video.duration : Number(progress.max) || 0;
+    const position = Number.isFinite(video.currentTime) ? Math.min(video.currentTime, maximum || video.currentTime) : 0;
+    progress.max = String(maximum || 100);
+    progress.value = String(position);
+    current.textContent = formatTime(position);
+    progress.setAttribute('aria-valuetext', formatTime(position));
+    setRangeFill(progress, position, maximum);
+  }
+
+  function syncDuration() {
+    if (!Number.isFinite(video.duration) || video.duration <= 0) return;
+    progress.max = String(video.duration);
+    duration.textContent = formatTime(video.duration);
+    syncTime();
+  }
+
+  function syncVolume() {
+    const muted = video.muted || video.volume === 0;
+    player.dataset.silVideoMuted = muted ? 'true' : 'false';
+    mute.setAttribute('aria-label', muted ? '取消静音' : '静音');
+    mute.setAttribute('aria-pressed', muted ? 'true' : 'false');
+    volume.value = String(video.muted ? 0 : video.volume);
+    setRangeFill(volume, Number(volume.value), 1);
+  }
+
+  function syncRepeat() {
+    repeat.setAttribute('aria-pressed', video.loop ? 'true' : 'false');
+    repeat.setAttribute('aria-label', video.loop ? '循环播放' : '播放一次');
+    player.dataset.silVideoLoop = video.loop ? 'true' : 'false';
+  }
+
+  function syncFullscreen() {
+    const active = document.fullscreenElement === player;
+    player.dataset.silVideoFullscreen = active ? 'true' : 'false';
+    fullscreen.setAttribute('aria-label', active ? '退出全屏' : '进入全屏');
+  }
+
+  async function togglePlay() {
+    if (video.paused || video.ended) {
+      if (video.ended) video.currentTime = 0;
+      try {
+        await video.play();
+        setStatus();
+      } catch {
+        setStatus('视频播放失败，请使用下载链接。', true);
+      }
+    } else {
+      video.pause();
+    }
+  }
+
+  function toggleMute() {
+    if (video.muted || video.volume === 0) {
+      video.muted = false;
+      video.volume = Math.max(0.05, lastVolume || 0.8);
+    } else {
+      lastVolume = video.volume;
+      video.muted = true;
+    }
+  }
+
+  function adjustVolume(delta) {
+    if (delta > 0 && video.muted) video.muted = false;
+    video.volume = Math.max(0, Math.min(1, video.volume + delta));
+    if (video.volume > 0) lastVolume = video.volume;
+    video.muted = video.volume === 0;
+  }
+
+  function seek(delta) {
+    if (!Number.isFinite(video.duration)) return;
+    video.currentTime = Math.max(0, Math.min(video.duration, video.currentTime + delta));
+    syncTime();
+  }
+
+  function setVolumeOpen(open) {
+    player.dataset.silVideoVolumeOpen = open ? 'true' : 'false';
+  }
+
+  function setSubtitleMenuOpen(open) {
+    subtitleMenu.hidden = !open;
+    subtitles.setAttribute('aria-expanded', open ? 'true' : 'false');
+  }
+
+  function syncSubtitleButtons() {
+    subtitleMenu.querySelectorAll('[data-sil-video-track]').forEach(button => {
+      button.setAttribute('aria-checked', Number(button.dataset.silVideoTrack) === selectedSubtitle ? 'true' : 'false');
+    });
+    subtitles.setAttribute('aria-pressed', selectedSubtitle >= 0 ? 'true' : 'false');
+  }
+
+  async function subtitleText(track, signal) {
+    const response = await fetch(track.url, { signal, credentials: 'same-origin' });
+    if (!response.ok) throw new Error(`字幕请求返回 ${response.status}`);
+    const bytes = await response.arrayBuffer();
+    const source = new TextDecoder('utf-8', { fatal: true }).decode(bytes).replace(/^\uFEFF/, '');
+    return track.format === 'srt' ? subsrt.convert(source, { from: 'srt', to: 'ass' }) : source;
+  }
+
+  async function selectSubtitle(index) {
+    const token = ++subtitleToken;
+    subtitleAbort?.abort();
+    subtitleAbort = new AbortController();
+    setSubtitleMenuOpen(false);
+    if (index < 0) {
+      selectedSubtitle = -1;
+      syncSubtitleButtons();
+      if (subtitleRenderer) {
+        try {
+          await subtitleRenderer.ready;
+          await subtitleRenderer.renderer.freeTrack();
+        } catch {
+          // A failed renderer is already reported when it is created.
+        }
+      }
+      setStatus();
+      return;
+    }
+    const track = model.subtitles[index];
+    if (!track) return;
+    setStatus(`正在加载${track.label}字幕…`);
+    try {
+      const content = await subtitleText(track, subtitleAbort.signal);
+      if (token !== subtitleToken) return;
+      if (subtitleRenderer) {
+        await subtitleRenderer.ready;
+        await subtitleRenderer.renderer.setTrack(content);
+      } else {
+        const availableFonts = { 'liberation sans': model.runtime.defaultFont, ...(model.fonts || {}) };
+        subtitleRenderer = new JASSUB({
+          video,
+          subContent: content,
+          workerUrl: model.runtime.worker,
+          wasmUrl: model.runtime.wasm,
+          modernWasmUrl: model.runtime.modernWasm,
+          availableFonts,
+          defaultFont: model.fallbackFont || 'liberation sans',
+          queryFonts: false
+        });
+        await subtitleRenderer.ready;
+      }
+      if (token !== subtitleToken) return;
+      selectedSubtitle = index;
+      syncSubtitleButtons();
+      setStatus();
+    } catch (error) {
+      if (error.name === 'AbortError' || token !== subtitleToken) return;
+      selectedSubtitle = -1;
+      syncSubtitleButtons();
+      setStatus(`字幕加载失败：${error.message}`, true);
+    }
+  }
+
+  function buildSubtitleMenu() {
+    subtitleMenu.replaceChildren();
+    const tracks = Array.isArray(model.subtitles) ? model.subtitles : [];
+    const choices = [{ label: '关闭字幕', index: -1 }, ...tracks.map((track, index) => ({ label: track.label, index, lang: track.srclang }))];
+    for (const choice of choices) {
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.className = 'sil-video-player__subtitle-option';
+      button.dataset.silVideoTrack = String(choice.index);
+      button.setAttribute('role', 'menuitemradio');
+      button.setAttribute('aria-checked', choice.index === -1 ? 'true' : 'false');
+      if (choice.lang) button.lang = choice.lang;
+      button.textContent = choice.label;
+      listen(button, 'click', () => selectSubtitle(choice.index));
+      subtitleMenu.append(button);
+    }
+    subtitles.disabled = tracks.length === 0;
+    const defaultIndex = tracks.findIndex(track => track.default);
+    if (defaultIndex >= 0) selectSubtitle(defaultIndex);
+  }
+
+  listen(play, 'click', togglePlay);
+  listen(viewport, 'click', event => { if (event.target === video || event.target === viewport) togglePlay(); });
+  listen(mute, 'click', event => {
+    if (event.pointerType === 'touch') setVolumeOpen(player.dataset.silVideoVolumeOpen !== 'true');
+    toggleMute();
+  });
+  listen(volumeControl, 'pointerenter', () => setVolumeOpen(true));
+  listen(volumeControl, 'pointerleave', event => { if (!volumeControl.contains(document.activeElement) && event.pointerType !== 'touch') setVolumeOpen(false); });
+  listen(volumeControl, 'focusin', () => setVolumeOpen(true));
+  listen(volumeControl, 'focusout', event => { if (!volumeControl.contains(event.relatedTarget)) setVolumeOpen(false); });
+  listen(volume, 'input', () => {
+    video.muted = false;
+    video.volume = Number(volume.value);
+    if (video.volume > 0) lastVolume = video.volume;
+  });
+  listen(progress, 'input', () => {
+    if (Number.isFinite(video.duration)) video.currentTime = Math.max(0, Math.min(video.duration, Number(progress.value)));
+    syncTime();
+  });
+  listen(rate, 'click', () => {
+    const index = rates.findIndex(value => Math.abs(value - video.playbackRate) < 0.001);
+    video.playbackRate = rates[(index + 1) % rates.length];
+    rate.textContent = `${video.playbackRate}×`;
+    rate.setAttribute('aria-label', `播放速度 ${video.playbackRate} 倍`);
+  });
+  listen(repeat, 'click', () => { video.loop = !video.loop; syncRepeat(); });
+  listen(subtitles, 'click', () => setSubtitleMenuOpen(subtitleMenu.hidden));
+  listen(subtitleMenu, 'keydown', event => {
+    if (event.key !== 'Escape') return;
+    event.preventDefault();
+    setSubtitleMenuOpen(false);
+    subtitles.focus();
+  });
+  listen(fullscreen, 'click', async () => {
+    if (document.fullscreenElement === player) await document.exitFullscreen();
+    else await player.requestFullscreen();
+  });
+  listen(player, 'keydown', event => {
+    const shortcutTarget = event.target === player || event.target === video || event.target === viewport;
+    if (!shortcutTarget) return;
+    const key = event.key.toLowerCase();
+    if (event.key === ' ' || key === 'spacebar') {
+      event.preventDefault();
+      togglePlay();
+    } else if (event.key === 'Enter') {
+      event.preventDefault();
+      if (document.fullscreenElement !== player) player.requestFullscreen();
+    } else if (event.key === 'Escape') {
+      if (document.fullscreenElement === player) document.exitFullscreen();
+    } else if (event.key === 'ArrowUp') {
+      event.preventDefault();
+      adjustVolume(0.05);
+    } else if (event.key === 'ArrowDown') {
+      event.preventDefault();
+      adjustVolume(-0.05);
+    } else if (event.key === 'ArrowLeft') {
+      event.preventDefault();
+      seek(-5);
+    } else if (event.key === 'ArrowRight') {
+      event.preventDefault();
+      seek(5);
+    } else if (key === 'm') {
+      event.preventDefault();
+      toggleMute();
+    }
+  });
+  listen(video, 'loadstart', () => setStatus('正在加载视频…'));
+  listen(video, 'loadedmetadata', () => { syncDuration(); setStatus(); });
+  listen(video, 'durationchange', syncDuration);
+  listen(video, 'timeupdate', syncTime);
+  listen(video, 'play', syncPlaying);
+  listen(video, 'pause', syncPlaying);
+  listen(video, 'ended', syncPlaying);
+  listen(video, 'volumechange', syncVolume);
+  listen(video, 'error', () => setStatus('视频加载失败，请使用下载链接。', true));
+  listen(document, 'fullscreenchange', syncFullscreen);
+
+  video.controls = false;
+  player.dataset.silVideoReady = 'true';
+  player.dataset.silVideoEnhanced = 'true';
+  buildSubtitleMenu();
+  syncPlaying();
+  syncTime();
+  syncDuration();
+  syncVolume();
+  syncRepeat();
+  syncFullscreen();
+
+  instances.set(player, {
+    refreshTheme() { player.dataset.silVideoTheme = isDarkTheme() ? 'dark' : 'light'; },
+    async destroy() {
+      subtitleToken += 1;
+      subtitleAbort?.abort();
+      for (const cleanup of cleanups) cleanup();
+      if (subtitleRenderer) {
+        try { await subtitleRenderer.destroy(); } catch { /* The page is already being discarded. */ }
+      }
+      instances.delete(player);
+    }
+  });
+  instances.get(player).refreshTheme();
+}
+
+function refresh() {
+  document.querySelectorAll(selector).forEach(player => {
+    initialise(player);
+    instances.get(player)?.refreshTheme();
+  });
+}
+
+function destroyRemoved(node) {
+  if (!(node instanceof Element)) return;
+  const players = node.matches(selector) ? [node] : Array.from(node.querySelectorAll(selector));
+  for (const player of players) instances.get(player)?.destroy();
+}
+
+function observeMutations(records) {
+  let added = false;
+  for (const record of records) {
+    for (const node of record.removedNodes) destroyRemoved(node);
+    if (Array.from(record.addedNodes).some(node => node instanceof Element && (node.matches(selector) || node.querySelector(selector)))) added = true;
+  }
+  if (added) refresh();
+}
+
+window.addEventListener('resize', refresh);
+document.addEventListener('inside', refresh);
+document.addEventListener('inside:theme', refresh);
+new MutationObserver(observeMutations).observe(document.body, { childList: true, subtree: true });
+refresh();

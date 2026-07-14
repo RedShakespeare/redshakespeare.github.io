@@ -71,10 +71,12 @@ test('site asset configuration preserves every local mapping and publish boundar
     ['npm', 'run', 'test:assets'],
     ['npm', 'run', 'test:hexo-sil-audio'],
     ['npm', 'run', 'test:hexo-sil-archive'],
+    ['npm', 'run', 'test:hexo-sil-video'],
     ['npm', 'run', 'test:hexo-sil-podcast'],
     ['npm', 'run', 'test:hexo-sil-podcast-inside'],
     ['npm', 'run', 'test:podcast-feed-verifier'],
     ['npm', 'run', 'test:r2-assets'],
+    ['npm', 'run', 'test:r2-worker'],
     ['npx', 'hexo', 'generate', '--bail']
   ]);
 });

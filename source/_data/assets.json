@@ -8855,12 +8855,12 @@
     "files/leyliner/fonts/Frijole-Regular.ttf": {
       "size": 225988,
       "sha256": "a859da1fc0fe72414969e1ccea17c9d30fc58cf8dfce51e9ad83ba6e71b2c322",
-      "type": "application/octet-stream"
+      "type": "font/ttf"
     },
     "files/leyliner/fonts/RobotoMono-VariableFont_wght.ttf": {
       "size": 167920,
       "sha256": "b34fea97ba8eccf0aedd8de4d0af593ab4bb1357999a061ac42f866a2dfc7414",
-      "type": "application/octet-stream"
+      "type": "font/ttf"
     },
     "files/leyliner/img/how-card.png": {
       "size": 24743,
@@ -19318,12 +19318,12 @@
     "files/rl/emeraldwoods/web/4a25148476560bc951da.ttf": {
       "size": 83860,
       "sha256": "29a585a8d224fea9b1aa8653e1063fadeb5877e0782748a50b2eacd0d257da7d",
-      "type": "application/octet-stream"
+      "type": "font/ttf"
     },
     "files/rl/emeraldwoods/web/a0dbf5218baea7664079.ttf": {
       "size": 28276,
       "sha256": "174093d8b71aa808d7ffff70529c9087274515493add48134528c9136f621e92",
-      "type": "application/octet-stream"
+      "type": "font/ttf"
     },
     "files/rl/emeraldwoods/web/audio/mx/MX_Home_01.ogg": {
       "size": 1536489,
@@ -20597,7 +20597,7 @@
     "files/rl/emeraldwoods/web/lib/unicodetiles/DejaVuSansMono.ttf": {
       "size": 368660,
       "sha256": "ed6172e27a2e4178a9ec0ea76f999486e028a9005da63626b69ad4314fc29b17",
-      "type": "application/octet-stream"
+      "type": "font/ttf"
     },
     "files/rl/emeraldwoods/web/lib/unicodetiles/DejaVuSansMono.woff": {
       "size": 208460,
@@ -20892,7 +20892,7 @@
     "files/rl/larn/JSLarn12.5/img/dos437.ttf": {
       "size": 82676,
       "sha256": "7462d98421919395fb21f4915ed975b4b3d88dec51d3ad1f27b780fa4564ed7d",
-      "type": "application/octet-stream"
+      "type": "font/ttf"
     },
     "files/rl/larn/JSLarn12.5/img/favicon.png": {
       "size": 748,
@@ -21297,7 +21297,7 @@
     "files/rl/larn/JSLarn12.5/img/NotoSansMono-Regular.ttf": {
       "size": 353000,
       "sha256": "1b11c5e25a1c5ce7547cf3cea63af58b5fd456853fb0128e09008e6fbf85c625",
-      "type": "application/octet-stream"
+      "type": "font/ttf"
     },
     "files/rl/larn/JSLarn12.5/img/o0.png": {
       "size": 3391,
@@ -21817,12 +21817,12 @@
     "files/rl/larn/JSLarn12.5/img/TopazPlus_a1200_v1.0.ttf": {
       "size": 24676,
       "sha256": "82143d52d2a6ea4d61150d0aeb92e3a9a5ff278dc61b4ccbce4815a7c205511c",
-      "type": "application/octet-stream"
+      "type": "font/ttf"
     },
     "files/rl/larn/JSLarn12.5/img/TopazPlus_a500_v1.0.ttf": {
       "size": 23536,
       "sha256": "97fc4c20a884337899111efefeffc91bb213adff6b7b287372b76bbba602925a",
-      "type": "application/octet-stream"
+      "type": "font/ttf"
     },
     "files/rl/larn/JSLarn12.5/img/w0.png": {
       "size": 3377,
@@ -23569,7 +23569,7 @@
     "files/rl/rogue/broken-connections/e5c5b18d17c72722b8f3.ttf": {
       "size": 32156,
       "sha256": "f79ebf2f0bf038dcfcb4648be794603fac902af132d8730484650f7f88431a4f",
-      "type": "application/octet-stream"
+      "type": "font/ttf"
     },
     "files/rl/rogue/broken-connections/howler/howler.js": {
       "size": 34602,
@@ -23619,7 +23619,7 @@
     "files/rl/rogue/broken-connections/unicodetiles/fonts/DejaVuSansMono.ttf": {
       "size": 368660,
       "sha256": "ed6172e27a2e4178a9ec0ea76f999486e028a9005da63626b69ad4314fc29b17",
-      "type": "application/octet-stream"
+      "type": "font/ttf"
     },
     "files/rl/rogue/broken-connections/unicodetiles/fonts/DejaVuSansMono.woff": {
       "size": 208460,
@@ -24455,6 +24455,11 @@
       "size": 34949589,
       "sha256": "6aa6fb86a585b3f17d46f275767174787d9fedde8b230c72d05ab5522eaba56d",
       "type": "application/x-7z-compressed"
+    },
+    "files/videos/3.mp4": {
+      "size": 92262536,
+      "sha256": "bcd9367cbe017d8ab71ae63c4611b4c734f500798bab4d83063ac83d6e46a1f6",
+      "type": "video/mp4"
     },
     "img/df.zip": {
       "size": 924102,

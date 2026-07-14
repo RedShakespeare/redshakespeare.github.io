@@ -160,6 +160,23 @@ audio:
     builtin: ephesus
     # Loaded after the built-in skin. Set builtin to false for a fully custom skin.
     # override: /css/hexo-sil-audio.local.css
+video:
+  # hexo-sil-video: MP4/M4V/WebM players with ASS/SRT subtitles.
+  assets:
+    enabled: true
+  media:
+    prefix: files
+    # source_dir: files
+    # url: https://media.example.com/files/
+  preload: metadata
+  aspect_ratio: 16/9
+  subtitles:
+    fonts:
+      # Noto Sans CJK SC: video/fonts/NotoSansCJKsc-Regular.woff2
+    # fallback_font: Noto Sans CJK SC
+  skin:
+    builtin: ephesus
+    # override: /css/hexo-sil-video.local.css
 archive:
   # hexo-sil-archive: searchable file collections rendered with the {% archive %} tag.
   assets:

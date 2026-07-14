@@ -1,16 +1,23 @@
 const FALLBACK_TYPES = {
+  '.ass': 'text/x-ssa; charset=utf-8',
   '.css': 'text/css; charset=utf-8',
   '.html': 'text/html; charset=utf-8',
   '.htm': 'text/html; charset=utf-8',
   '.js': 'text/javascript; charset=utf-8',
   '.json': 'application/json; charset=utf-8',
   '.mjs': 'text/javascript; charset=utf-8',
+  '.m4v': 'video/mp4',
+  '.mp4': 'video/mp4',
+  '.otf': 'font/otf',
+  '.srt': 'application/x-subrip; charset=utf-8',
+  '.ttf': 'font/ttf',
   '.wasm': 'application/wasm',
   '.woff': 'font/woff',
   '.woff2': 'font/woff2',
+  '.webm': 'video/webm',
 };
 
-function objectKey(request) {
+export function objectKey(request) {
   const url = new URL(request.url);
   if (url.pathname === '/img/df.zip') return 'img/df.zip';
   if (!url.pathname.startsWith('/files/')) return null;
@@ -29,12 +36,12 @@ function objectKey(request) {
   return key;
 }
 
-function fallbackType(key) {
+export function fallbackType(key) {
   const extension = key.slice(key.lastIndexOf('.')).toLowerCase();
   return FALLBACK_TYPES[extension];
 }
 
-function hxhCivPageUrl(request) {
+export function hxhCivPageUrl(request) {
   const url = new URL(request.url);
   if (!['/files/hxh_civ', '/files/hxh_civ/', '/files/hxh_civ/index.html'].includes(url.pathname)) {
     return null;

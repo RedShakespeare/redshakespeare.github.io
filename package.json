@@ -10,11 +10,13 @@
     "server": "hexo server",
     "test:hexo-sil-audio": "node --test test/hexo-sil-audio.test.js",
     "test:hexo-sil-archive": "node --test test/hexo-sil-archive.test.js",
+    "test:hexo-sil-video": "node --test test/hexo-sil-video.test.js",
     "test:assets": "node --test test/assets.test.js",
     "test:hexo-sil-podcast-inside": "node --test test/hexo-sil-podcast-inside.test.js",
     "test:podcast-feed-verifier": "node --test test/verify-podcast-feed.test.js",
     "test:r2-assets": "node --test test/hexo-sil-assets-sync.test.js",
     "test:hexo-sil-podcast": "node --test test/hexo-sil-podcast.test.js",
+    "test:r2-worker": "node --test workers/ephesus-files-proxy/test/index.test.js",
     "verify:podcast": "hexo-sil-podcast-verify",
     "assets:mode": "hexo-sil-assets mode",
     "assets:seed": "hexo-sil-assets seed",
@@ -42,11 +44,16 @@
     "hexo-renderer-stylus": "^2.1.0",
     "hexo-server": "^3.0.0",
     "hexo-sil-archive": "^0.1.0",
-    "hexo-sil-assets": "^0.1.0",
-    "hexo-sil-audio": "^0.1.0",
+    "hexo-sil-assets": "^0.1.1",
+    "hexo-sil-audio": "^0.1.1",
     "hexo-sil-podcast": "^0.1.0",
     "hexo-sil-podcast-inside": "^0.1.0",
     "hexo-theme-inside": "2.7.0",
-    "hexo-theme-landscape": "^0.0.3"
+    "hexo-theme-landscape": "^0.0.3",
+    "jassub": "2.5.7",
+    "subsrt": "1.1.1"
+  },
+  "devDependencies": {
+    "esbuild": "0.25.12"
   }
 }
