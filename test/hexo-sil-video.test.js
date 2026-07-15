@@ -68,6 +68,14 @@ function wait(milliseconds) {
   return new Promise(resolve => setTimeout(resolve, milliseconds));
 }
 
+function bufferedRanges(ranges) {
+  return {
+    length: ranges.length,
+    start(index) { return ranges[index][0]; },
+    end(index) { return ranges[index][1]; }
+  };
+}
+
 function touchPointer(window, type, x, y, pointerId = 1) {
   const event = new window.MouseEvent(type, { bubbles: true, cancelable: true, clientX: x, clientY: y });
   Object.defineProperties(event, {
@@ -139,6 +147,7 @@ async function browserPlayer(options = {}) {
     paused: { value: true, writable: true },
     ended: { value: false, writable: true },
     duration: { value: 100, writable: true },
+    buffered: { value: bufferedRanges([[0, 25], [50, 75]]), writable: true },
     currentTime: {
       get() { return currentTimeValue; },
       set(value) { currentTimeSets += 1; currentTimeValue = value; }
@@ -385,8 +394,10 @@ test('Ephesus skin and runtime retain the specified palette and interaction cont
   const runtimeSource = await fs.readFile(path.join(__dirname, '..', 'plugins', 'hexo-sil-video', 'runtime', 'player.js'), 'utf8');
   assert.match(css, /--sil-video-surface:#fff/);
   assert.match(css, /--sil-video-ink:#8064a2/);
+  assert.match(css, /--sil-video-buffered:rgba\(128,100,162,\.8\)/);
   assert.match(css, /--sil-video-surface:#000/);
   assert.match(css, /--sil-video-ink:#673ab7/);
+  assert.match(css, /--sil-video-buffered:rgba\(103,58,183,\.8\)/);
   assert.match(css, /sil-video-player__volume-popover/);
   assert.match(css, /border-left-width:3px/);
   assert.match(css, /sil-video-player__video:focus-visible \{ outline:1px solid/);
@@ -403,6 +414,7 @@ test('Ephesus skin and runtime retain the specified palette and interaction cont
   assert.match(css, /data-sil-video-fullscreen="true"[^}]*sil-video-player__subtitle-control/);
   assert.doesNotMatch(css, /@media screen and \(max-width:430px\) \{\s*\.sil-video-player__toolbar/);
   assert.match(css, /data-sil-video-ui-hidden/);
+  assert.match(css, /--sil-video-range-buffered,var\(--sil-video-rail\)/);
   assert.doesNotMatch(css, /sil-video-player:fullscreen/);
   assert.match(runtimeSource, /const rates = \[1, 1\.25, 1\.5, 1\.75, 2, 0\.5, 0\.75\]/);
   assert.match(runtimeSource, /stage\.requestFullscreen\(\)/);
@@ -431,7 +443,32 @@ test('Ephesus skin and runtime retain the specified palette and interaction cont
   assert.match(runtimeSource, /seek\(5\)/);
   assert.match(runtimeSource, /key === 'm'/);
   assert.match(runtimeSource, /video\.loop = !video\.loop/);
+  assert.match(runtimeSource, /function setBufferedRanges\(input, media, maximum\)/);
+  assert.match(runtimeSource, /listen\(video, 'progress', syncBuffered\)/);
   assert.doesNotMatch(runtimeSource, /video\.pause\(\);\s*video\.currentTime = 0/);
+});
+
+test('browser runtime marks every buffered video range and clears stale loading state', async () => {
+  const fixture = await browserPlayer();
+  const { dom, window, video, progress } = fixture;
+  try {
+    video.dispatchEvent(new window.Event('progress'));
+    const buffered = progress.style.getPropertyValue('--sil-video-range-buffered');
+    assert.match(buffered, /--sil-video-buffered\) 0%/);
+    assert.match(buffered, /--sil-video-buffered\) 25%/);
+    assert.match(buffered, /--sil-video-buffered\) 50%/);
+    assert.match(buffered, /--sil-video-buffered\) 75%/);
+    assert.match(buffered, /--sil-video-rail\) 25%/);
+    assert.match(buffered, /--sil-video-rail\) 50%/);
+
+    video.dispatchEvent(new window.Event('emptied'));
+    assert.equal(progress.style.getPropertyValue('--sil-video-range-buffered'), '');
+    video.dispatchEvent(new window.Event('progress'));
+    video.dispatchEvent(new window.Event('loadstart'));
+    assert.equal(progress.style.getPropertyValue('--sil-video-range-buffered'), '');
+  } finally {
+    dom.window.close();
+  }
 });
 
 test('browser runtime keeps shortcuts focused through fullscreen entry and exit', async () => {

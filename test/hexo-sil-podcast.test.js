@@ -263,7 +263,9 @@ test('renderPlayer delegates legacy episodes to the shared audio component', asy
   assert.match(html, /class="sil-audio-player__range sil-audio-player__progress"/);
   assert.match(html, /sil-audio-player__header[\s\S]*sil-audio-player__status[\s\S]*sil-audio-player__meta/);
   assert.match(html, /class="sil-audio-player__footer"/);
-  assert.match(html, /sil-audio-player__footer[\s\S]*sil-audio-player__volume-button[\s\S]*sil-audio-player__play-button[\s\S]*sil-audio-player__download/);
+  assert.match(html, /sil-audio-player__footer[\s\S]*sil-audio-player__volume-button[\s\S]*sil-audio-player__play-button[\s\S]*sil-audio-player__repeat-button[\s\S]*sil-audio-player__download/);
+  assert.match(html, /data-sil-audio-action="repeat"/);
+  assert.match(html, /sil-audio-player__icon--replay/);
   assert.doesNotMatch(html, /sil-audio-player__volume-control/);
   assert.match(html, /Episode &amp; One/);
   assert.doesNotMatch(html, /第 1 集/);

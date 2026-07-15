@@ -52,6 +52,46 @@ function setRangeFill(input, value, maximum) {
   input.style.setProperty('--sil-video-range-fill', `${percent}%`);
 }
 
+function setBufferedRanges(input, media, maximum) {
+  if (!(maximum > 0) || !media.buffered || media.buffered.length === 0) {
+    input.style.removeProperty('--sil-video-range-buffered');
+    return;
+  }
+  const ranges = [];
+  try {
+    for (let index = 0; index < media.buffered.length; index += 1) {
+      const start = clamp(media.buffered.start(index) / maximum * 100, 0, 100);
+      const end = clamp(media.buffered.end(index) / maximum * 100, start, 100);
+      if (end <= start) continue;
+      const previous = ranges[ranges.length - 1];
+      if (previous && start <= previous[1] + 0.001) previous[1] = Math.max(previous[1], end);
+      else ranges.push([start, end]);
+    }
+  } catch {
+    input.style.removeProperty('--sil-video-range-buffered');
+    return;
+  }
+  if (ranges.length === 0) {
+    input.style.removeProperty('--sil-video-range-buffered');
+    return;
+  }
+  const stops = [];
+  let cursor = 0;
+  for (const range of ranges) {
+    const start = Number(range[0].toFixed(3));
+    const end = Number(range[1].toFixed(3));
+    stops.push(
+      `var(--sil-video-rail) ${cursor}%`,
+      `var(--sil-video-rail) ${start}%`,
+      `var(--sil-video-buffered) ${start}%`,
+      `var(--sil-video-buffered) ${end}%`
+    );
+    cursor = end;
+  }
+  stops.push(`var(--sil-video-rail) ${cursor}%`, 'var(--sil-video-rail) 100%');
+  input.style.setProperty('--sil-video-range-buffered', `linear-gradient(to right,${stops.join(',')})`);
+}
+
 function parseModel(player) {
   const source = player.dataset.silVideoModel;
   if (!source) throw new Error('播放器配置缺失。');
@@ -204,11 +244,17 @@ function initialise(player) {
     setRangeFill(progress, position, maximum);
   }
 
+  function syncBuffered() {
+    const maximum = Number.isFinite(video.duration) ? video.duration : Number(progress.max);
+    setBufferedRanges(progress, video, maximum);
+  }
+
   function syncDuration() {
     if (!Number.isFinite(video.duration) || video.duration <= 0) return;
     progress.max = String(video.duration);
     duration.textContent = formatTime(video.duration);
     syncTime();
+    syncBuffered();
   }
 
   function syncVolume() {
@@ -690,9 +736,17 @@ function initialise(player) {
       toggleMute();
     }
   });
-  listen(video, 'loadstart', () => setStatus('正在加载视频…'));
+  listen(video, 'loadstart', () => {
+    progress.style.removeProperty('--sil-video-range-buffered');
+    setStatus('正在加载视频…');
+  });
+  listen(video, 'emptied', () => progress.style.removeProperty('--sil-video-range-buffered'));
   listen(video, 'loadedmetadata', () => { syncDuration(); setStatus(); });
   listen(video, 'durationchange', syncDuration);
+  listen(video, 'progress', syncBuffered);
+  listen(video, 'canplay', syncBuffered);
+  listen(video, 'canplaythrough', syncBuffered);
+  listen(video, 'suspend', syncBuffered);
   listen(video, 'timeupdate', syncTime);
   listen(video, 'play', syncPlaying);
   listen(video, 'pause', syncPlaying);

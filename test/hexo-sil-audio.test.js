@@ -4,6 +4,7 @@ const assert = require('node:assert/strict');
 const fs = require('node:fs/promises');
 const path = require('node:path');
 const test = require('node:test');
+const { JSDOM } = require('jsdom');
 const {
   BUILTIN_SKINS,
   PLAYER_SCRIPT,
@@ -45,6 +46,54 @@ function mockHexo({ root = '/', audio = {} } = {}) {
     },
     calls
   };
+}
+
+function bufferedRanges(ranges) {
+  return {
+    length: ranges.length,
+    start(index) { return ranges[index][0]; },
+    end(index) { return ranges[index][1]; }
+  };
+}
+
+async function browserPlayer() {
+  const html = renderAudioPlayer({ playerAudio: '/files/music/example.mp3', type: 'audio/mpeg', duration: '01:40', title: 'Browser fixture' });
+  const dom = new JSDOM(`<!doctype html><body>${html}${PLAYER_SCRIPT}</body>`, {
+    runScripts: 'dangerously',
+    pretendToBeVisual: true,
+    url: 'https://example.test/'
+  });
+  const { window } = dom;
+  const { document } = window;
+  const player = document.querySelector('[data-sil-audio-player]');
+  const audio = document.querySelector('audio');
+  const play = document.querySelector('[data-sil-audio-action="play"]');
+  const repeat = document.querySelector('[data-sil-audio-action="repeat"]');
+  const progress = document.querySelector('.sil-audio-player__progress');
+  let currentTime = 20;
+  Object.defineProperties(audio, {
+    paused: { value: true, writable: true },
+    ended: { value: false, writable: true },
+    duration: { value: 100, writable: true },
+    currentTime: { get() { return currentTime; }, set(value) { currentTime = value; } },
+    volume: { value: 0.8, writable: true },
+    muted: { value: false, writable: true },
+    loop: { value: false, writable: true },
+    readyState: { value: 1, writable: true },
+    buffered: { value: bufferedRanges([[0, 25], [50, 75]]), writable: true }
+  });
+  audio.play = async () => {
+    audio.paused = false;
+    audio.ended = false;
+    audio.dispatchEvent(new window.Event('play'));
+  };
+  audio.pause = () => {
+    audio.paused = true;
+    audio.dispatchEvent(new window.Event('pause'));
+  };
+  await new Promise(resolve => window.requestAnimationFrame(resolve));
+  audio.dispatchEvent(new window.Event('loadedmetadata'));
+  return { dom, window, player, audio, play, repeat, progress };
 }
 
 test('audio configuration uses one prefix and optional legacy or external overrides', () => {
@@ -133,22 +182,28 @@ test('Ephesus skin owns the player appearance while the core retains interaction
   assert.match(css, /--sil-audio-surface:#fff/);
   assert.match(css, /--sil-audio-surface:#000/);
   assert.match(css, /--sil-audio-ink:#8064a2/);
+  assert.match(css, /--sil-audio-buffered:rgba\(128,100,162,\.8\)/);
+  assert.match(css, /--sil-audio-buffered:var\(--inside-accent-color-08,rgba\(103,58,183,\.8\)\)/);
   assert.match(css, /--sil-audio-stack-gap:1rem/);
   assert.match(css, /--sil-audio-coordinate-inset-left:calc\(var\(--sil-audio-stack-gap\) \+ var\(--sil-audio-accent-border-width\)\)/);
   assert.match(css, /--sil-audio-coordinate-inset-right:calc\(var\(--sil-audio-stack-gap\) \+ var\(--sil-audio-border-width\)\)/);
   assert.match(css, /sil-audio-player__header \{ display:flex;flex-wrap:nowrap/);
-  assert.match(css, /sil-audio-player__controls \{ display:none;min-height:2\.25rem;grid-template-columns:minmax\(0,1fr\) minmax\(0,8fr\) minmax\(0,1fr\);align-items:center;margin:var\(--sil-audio-stack-gap\) calc\(0px - var\(--sil-audio-coordinate-inset-right\)\) 0 calc\(0px - var\(--sil-audio-coordinate-inset-left\)\)/);
-  assert.match(css, /sil-audio-player__footer \{ display:grid;min-height:2\.25rem;grid-template-columns:repeat\(5,minmax\(0,1fr\)\);align-items:center;margin:0 calc\(0px - var\(--sil-audio-coordinate-inset-right\)\) 0 calc\(0px - var\(--sil-audio-coordinate-inset-left\)\);padding:var\(--sil-audio-stack-gap\) 0 0/);
+  assert.match(css, /sil-audio-player__controls \{ display:none;min-height:2\.25rem;grid-template-columns:minmax\(0,1fr\) minmax\(0,10fr\) minmax\(0,1fr\);align-items:center;margin:var\(--sil-audio-stack-gap\) calc\(0px - var\(--sil-audio-coordinate-inset-right\)\) 0 calc\(0px - var\(--sil-audio-coordinate-inset-left\)\)/);
+  assert.match(css, /sil-audio-player__footer \{ display:grid;min-height:2\.25rem;grid-template-columns:repeat\(6,minmax\(0,1fr\)\);align-items:center;margin:0 calc\(0px - var\(--sil-audio-coordinate-inset-right\)\) 0 calc\(0px - var\(--sil-audio-coordinate-inset-left\)\);padding:var\(--sil-audio-stack-gap\) 0 0/);
   assert.match(css, /sil-audio-player__progress \{ grid-column:2;width:100%;min-width:0/);
   assert.match(css, /sil-audio-player__range \{ box-sizing:border-box;width:100%;height:1\.75rem;margin:0;border:0;padding:0/);
   assert.match(css, /sil-audio-player__current \{ grid-column:1;justify-self:center;text-align:center/);
-  assert.match(css, /sil-audio-player__duration \{ grid-column:5;justify-self:center;text-align:center/);
+  assert.match(css, /sil-audio-player__repeat-button \{ grid-column:4;justify-self:center/);
+  assert.match(css, /sil-audio-player__duration \{ grid-column:6;justify-self:center;text-align:center/);
+  assert.match(css, /--sil-audio-range-buffered,var\(--sil-audio-rail\)/);
   assert.match(css, /@keyframes sil-audio-player-title-scroll/);
   assert.match(css, /@keyframes sil-audio-player-spin/);
   assert.doesNotMatch(css, /podcast-player/);
   assert.match(PLAYER_SCRIPT, /silAudioLoading/);
   assert.match(PLAYER_SCRIPT, /音频加载失败，请尝试下载音频。/);
   assert.match(PLAYER_SCRIPT, /silAudioTitleOverflow/);
+  assert.match(PLAYER_SCRIPT, /setBufferedRanges/);
+  assert.match(PLAYER_SCRIPT, /audio\.loop=!audio\.loop/);
   assert.doesNotMatch(PLAYER_SCRIPT, /sil-audio-player__volume/);
   assert.doesNotMatch(PLAYER_SCRIPT, /--inside-/);
   assert.match(PLAYER_SCRIPT, /document\.addEventListener\('inside:theme'/);
@@ -161,13 +216,49 @@ test('Ephesus skin owns the player appearance while the core retains interaction
   assert.match(PLAYER_SCRIPT, /new MutationObserver\(observeMutations\)/);
 });
 
-test('audio player has symmetric progress controls and a three-button footer', () => {
+test('audio player has symmetric progress controls and a four-button footer', () => {
   const player = renderAudioPlayer({ playerAudio: '/files/music/example.mp3', type: 'audio/mpeg', duration: '03:21', title: 'A very long audio title' });
   assert.match(player, /sil-audio-player__meta-text">A very long audio title/);
   assert.match(player, /sil-audio-player__controls[\s\S]*sil-audio-player__progress[\s\S]*sil-audio-player__footer/);
-  assert.match(player, /sil-audio-player__footer[\s\S]*sil-audio-player__current[\s\S]*sil-audio-player__volume-button[\s\S]*sil-audio-player__play-button[\s\S]*sil-audio-player__download[\s\S]*sil-audio-player__duration/);
+  assert.match(player, /sil-audio-player__footer[\s\S]*sil-audio-player__current[\s\S]*sil-audio-player__volume-button[\s\S]*sil-audio-player__play-button[\s\S]*sil-audio-player__repeat-button[\s\S]*sil-audio-player__download[\s\S]*sil-audio-player__duration/);
+  assert.match(player, /sil-audio-player__icon--replay/);
+  assert.match(player, /data-sil-audio-action="repeat"/);
   assert.match(player, /sil-audio-player__download[\s\S]*aria-label="下载音频"/);
   assert.doesNotMatch(player, /sil-audio-player__volume" type="range"/);
+});
+
+test('installed audio runtime marks buffered ranges and exposes repeat and replay states', async () => {
+  const fixture = await browserPlayer();
+  const { dom, window, player, audio, play, repeat, progress } = fixture;
+  try {
+    audio.dispatchEvent(new window.Event('progress'));
+    const buffered = progress.style.getPropertyValue('--sil-audio-range-buffered');
+    assert.match(buffered, /--sil-audio-buffered\) 0%/);
+    assert.match(buffered, /--sil-audio-buffered\) 25%/);
+    assert.match(buffered, /--sil-audio-buffered\) 50%/);
+    assert.match(buffered, /--sil-audio-buffered\) 75%/);
+
+    repeat.click();
+    assert.equal(audio.loop, true);
+    assert.equal(player.dataset.silAudioLoop, 'true');
+    assert.equal(repeat.getAttribute('aria-pressed'), 'true');
+
+    repeat.click();
+    audio.paused = true;
+    audio.ended = true;
+    audio.dispatchEvent(new window.Event('ended'));
+    assert.equal(player.dataset.silAudioEnded, 'true');
+    assert.equal(play.getAttribute('aria-label'), '重播');
+    play.click();
+    await Promise.resolve();
+    assert.equal(audio.currentTime, 0);
+    assert.equal(player.dataset.silAudioEnded, 'false');
+
+    audio.dispatchEvent(new window.Event('emptied'));
+    assert.equal(progress.style.getPropertyValue('--sil-audio-range-buffered'), '');
+  } finally {
+    dom.window.close();
+  }
 });
 
 test('music plugin injects shared assets once, renders tags inline, and avoids duplicate defaults', async () => {
