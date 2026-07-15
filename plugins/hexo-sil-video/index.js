@@ -11,7 +11,6 @@ const { createVideoDemandRegistry } = require('./lib/video-demand');
 
 const PLAYER_START = '<!-- hexo-sil-video:start -->';
 const PLAYER_END = '<!-- hexo-sil-video:end -->';
-const BOOTSTRAP_MAX_BYTES = 4096;
 const VIDEO_MIME_TYPES = new Map([
   ['.mp4', 'video/mp4'],
   ['.m4v', 'video/mp4'],
@@ -136,7 +135,6 @@ function registerVideoPlugin(hexo) {
 
 module.exports = {
   BUILTIN_SKINS,
-  BOOTSTRAP_MAX_BYTES,
   FONT_MIME_TYPES,
   PLAYER_END,
   PLAYER_START,

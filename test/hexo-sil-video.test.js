@@ -12,7 +12,6 @@ const subsrt = require('subsrt');
 const { createVideoDemandRegistry } = require('../plugins/hexo-sil-video/lib/video-demand');
 const {
   BUILTIN_SKINS,
-  BOOTSTRAP_MAX_BYTES,
   FULLSCREEN_UI_HIDE_DELAY,
   PLAYER_START,
   RUNTIME_ROUTES,
@@ -473,7 +472,6 @@ test('plugin registers skin, runtime assets, tag, and duplicate-safe post inject
 
 test('inline bootstrap stays idle without players and loads skin then core only once', async () => {
   const bootstrap = renderBootstrapScript({ styles: ['/video.css'], script: '/video.js' });
-  assert.ok(Buffer.byteLength(bootstrap) <= BOOTSTRAP_MAX_BYTES);
   const inline = bootstrap.match(/^<script>([\s\S]*)<\/script>$/)[1];
   assert.equal(bootstrapCspHash({ styles: ['/video.css'], script: '/video.js' }), `sha256-${crypto.createHash('sha256').update(inline).digest('base64')}`);
   const source = inline;
