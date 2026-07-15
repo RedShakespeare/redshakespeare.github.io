@@ -102,6 +102,31 @@ function createVideoConfig({ builtinSkins, fontMimeTypes, runtimeRoutes }) {
     }));
   }
 
+  function normaliseRuntimeFields({ media: rawMedia = {}, preload: rawPreload, aspectRatio: rawAspectRatio, subtitles: rawSubtitles, routes = runtimeRoutes }) {
+    const media = isObject(rawMedia) ? rawMedia : {};
+    const subtitles = rawSubtitles == null ? {} : rawSubtitles;
+    if (!isObject(subtitles)) throw new Error('Video configuration error: subtitles must be a mapping.');
+    const prefix = normaliseRelativeDirectory(media.prefix, 'files', 'media.prefix');
+    const fonts = normaliseFonts(subtitles.fonts);
+    const fallbackFont = String(subtitles.fallbackFont || '').trim();
+    if (fallbackFont && !Object.prototype.hasOwnProperty.call(fonts, fallbackFont)) {
+      throw new Error('Video configuration error: subtitles.fallbackFont must name an entry in subtitles.fonts.');
+    }
+    const preload = rawPreload == null ? 'metadata' : String(rawPreload).trim();
+    if (!['none', 'metadata', 'auto'].includes(preload)) throw new Error('Video configuration error: preload must be none, metadata, or auto.');
+    return {
+      media: {
+        prefix,
+        sourceDir: normaliseRelativeDirectory(media.sourceDir, prefix, 'media.source_dir'),
+        url: normaliseHttpsUrl(media.url, 'media.url', undefined, true)
+      },
+      preload,
+      aspectRatio: normaliseAspectRatio(rawAspectRatio),
+      subtitles: { fonts, fallbackFont },
+      routes: normaliseRoutes(routes)
+    };
+  }
+
   function toVideoConfig(siteConfig = {}) {
     if (Object.prototype.hasOwnProperty.call(siteConfig, 'video') && siteConfig.video != null && !isObject(siteConfig.video)) {
       throw new Error('Video configuration error: video must be a mapping.');
@@ -121,26 +146,20 @@ function createVideoConfig({ builtinSkins, fontMimeTypes, runtimeRoutes }) {
         throw new Error(`Video configuration error: media.${field} was replaced by ${replacement}.`);
       }
     }
-    const prefix = normaliseRelativeDirectory(media.prefix, 'files', 'media.prefix');
-    const fonts = normaliseFonts(subtitles.fonts);
-    const fallbackFont = String(subtitles.fallback_font || '').trim();
-    if (fallbackFont && !Object.prototype.hasOwnProperty.call(fonts, fallbackFont)) {
-      throw new Error('Video configuration error: subtitles.fallback_font must name an entry in subtitles.fonts.');
-    }
     const skin = raw.skin === false ? { builtin: false } : raw.skin == null ? {} : raw.skin;
     if (!isObject(skin)) throw new Error('Video configuration error: skin must be a mapping or false.');
-    const preload = raw.preload == null ? 'metadata' : String(raw.preload).trim();
-    if (!['none', 'metadata', 'auto'].includes(preload)) throw new Error('Video configuration error: preload must be none, metadata, or auto.');
+    const common = normaliseRuntimeFields({
+      media: { prefix: media.prefix, sourceDir: media.source_dir, url: media.url },
+      preload: raw.preload,
+      aspectRatio: raw.aspect_ratio,
+      subtitles: { fonts: subtitles.fonts, fallbackFont: subtitles.fallback_font }
+    });
     return {
       assets: { enabled: assets.enabled === true },
-      media: {
-        prefix,
-        sourceDir: normaliseRelativeDirectory(media.source_dir, prefix, 'media.source_dir'),
-        url: normaliseHttpsUrl(media.url, 'media.url', undefined, true)
-      },
-      preload,
-      aspectRatio: normaliseAspectRatio(raw.aspect_ratio),
-      subtitles: { fonts, fallbackFont },
+      media: common.media,
+      preload: common.preload,
+      aspectRatio: common.aspectRatio,
+      subtitles: common.subtitles,
       skin: { builtin: normaliseBuiltinSkin(skin.builtin), override: normaliseSkinOverride(skin.override) }
     };
   }
@@ -160,16 +179,13 @@ function createVideoConfig({ builtinSkins, fontMimeTypes, runtimeRoutes }) {
 
   function runtimeOptions(runtime = {}) {
     if (runtime.media != null && !isObject(runtime.media)) throw new Error('Video configuration error: runtime.media must be a mapping.');
-    const media = isObject(runtime.media) ? runtime.media : {};
-    const prefix = normaliseRelativeDirectory(media.prefix, 'files', 'media.prefix');
-    const preload = runtime.preload == null ? 'metadata' : String(runtime.preload).trim();
-    if (!['none', 'metadata', 'auto'].includes(preload)) throw new Error('Video configuration error: preload must be none, metadata, or auto.');
-    const aspectRatio = normaliseAspectRatio(runtime.aspectRatio);
-    const subtitles = runtime.subtitles == null ? { fonts: {}, fallbackFont: '' } : runtime.subtitles;
-    if (!isObject(subtitles)) throw new Error('Video configuration error: subtitles must be a mapping.');
-    const fonts = normaliseFonts(subtitles.fonts);
-    const fallbackFont = String(subtitles.fallbackFont || '').trim();
-    if (fallbackFont && !Object.prototype.hasOwnProperty.call(fonts, fallbackFont)) throw new Error('Video configuration error: subtitles.fallbackFont must name an entry in subtitles.fonts.');
+    const common = normaliseRuntimeFields({
+      media: runtime.media,
+      preload: runtime.preload,
+      aspectRatio: runtime.aspectRatio,
+      subtitles: runtime.subtitles,
+      routes: runtime.routes || runtimeRoutes
+    });
     return {
       baseDir: runtime.baseDir || process.cwd(),
       sourceRoot: path.resolve(runtime.sourceRoot || path.join(runtime.baseDir || process.cwd(), 'source')),
@@ -177,15 +193,12 @@ function createVideoConfig({ builtinSkins, fontMimeTypes, runtimeRoutes }) {
       assetsEnabled: runtime.assetsEnabled === true,
       assetCapability: runtime.assetCapability || (typeof runtime.getAssetCapability === 'function' ? runtime.getAssetCapability() : null),
       onMissingAssets: runtime.onMissingAssets,
-      media: {
-        prefix,
-        sourceDir: normaliseRelativeDirectory(media.sourceDir, prefix, 'media.source_dir'),
-        url: normaliseHttpsUrl(media.url, 'media.url', undefined, true)
-      },
-      preload,
-      aspectRatio,
-      subtitles: { fonts, fallbackFont },
-      routes: normaliseRoutes(runtime.routes || runtimeRoutes)
+      resourceCache: new Map(),
+      media: common.media,
+      preload: common.preload,
+      aspectRatio: common.aspectRatio,
+      subtitles: common.subtitles,
+      routes: common.routes
     };
   }
 

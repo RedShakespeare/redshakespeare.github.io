@@ -15,12 +15,36 @@ function createVideoModel({
   rootPublicPath,
   runtimeOptions
 }) {
+  const imageMimeTypes = new Map([
+    ['.avif', 'image/avif'],
+    ['.gif', 'image/gif'],
+    ['.jpg', 'image/jpeg'],
+    ['.jpeg', 'image/jpeg'],
+    ['.png', 'image/png'],
+    ['.webp', 'image/webp']
+  ]);
+
   function videoError(post, message) {
     const identifier = post && (post.source || post.path || post.title) || 'unknown post';
     return new Error(`Video metadata error in ${identifier}: ${message}`);
   }
 
   async function localEntry(post, file, options, expectation) {
+    const field = expectation.description;
+    const key = `${options.media.prefix}/${file}`;
+    const cached = options.resourceCache.get(key);
+    if (cached) return cached;
+    const pending = validateLocalEntry(post, file, options, expectation);
+    options.resourceCache.set(key, pending);
+    try {
+      return await pending;
+    } catch (error) {
+      options.resourceCache.delete(key);
+      throw error;
+    }
+  }
+
+  async function validateLocalEntry(post, file, options, expectation) {
     const field = expectation.description;
     const key = `${options.media.prefix}/${file}`;
     const capability = options.assetsEnabled ? options.assetCapability : null;
@@ -36,6 +60,15 @@ function createVideoModel({
       if (expectation.test && !expectation.test(entry.type)) throw videoError(post, `asset manifest MIME type for ${key} is ${entry.type}, expected ${field}.`);
       return entry;
     }
+    if (expectation.localType && expectation.type && expectation.localType !== expectation.type) {
+      throw videoError(post, `${field} extension does not match expected MIME type ${expectation.type}.`);
+    }
+    if (expectation.localType && expectation.types && !expectation.types.has(expectation.localType)) {
+      throw videoError(post, `${field} extension does not match an accepted MIME type.`);
+    }
+    if (expectation.localType && expectation.test && !expectation.test(expectation.localType)) {
+      throw videoError(post, `${field} extension does not match the expected type.`);
+    }
     const mediaRoot = path.resolve(options.sourceRoot, options.media.sourceDir);
     if (mediaRoot !== options.sourceRoot && !mediaRoot.startsWith(`${options.sourceRoot}${path.sep}`)) {
       throw videoError(post, '`media.source_dir` must resolve below the Hexo source directory.');
@@ -47,7 +80,7 @@ function createVideoModel({
       throw videoError(post, `local ${field} file does not exist: ${file} (${error.code || error.message}).`);
     }
     if (!stat.isFile() || stat.size <= 0) throw videoError(post, `local ${field} path must be a non-empty regular file: ${file}.`);
-    return { size: stat.size };
+    return { size: stat.size, type: expectation.localType || '' };
   }
 
   async function normaliseSubtitles(post, value, options) {
@@ -66,10 +99,14 @@ function createVideoModel({
       if (!/^[A-Za-z0-9]+(?:-[A-Za-z0-9]+)*$/.test(srclang)) throw videoError(post, `subtitle ${index + 1}.srclang must be a language tag.`);
       const isDefault = raw.default === true;
       if (isDefault) defaults += 1;
-      return { file, format: extension.slice(1), label, srclang, default: isDefault, url: mediaFileUrl(options.root, options.media, file), acceptedTypes };
+      return { file, format: extension.slice(1), label, srclang, default: isDefault, url: mediaFileUrl(options.root, options.media, file), acceptedTypes, localType: acceptedTypes.values().next().value };
     });
     if (defaults > 1) throw videoError(post, '`video.subtitles` may define only one default track.');
-    await Promise.all(tracks.map(track => localEntry(post, track.file, options, { types: track.acceptedTypes, description: 'subtitle' })));
+    await Promise.all(tracks.map(track => localEntry(post, track.file, options, {
+      types: track.acceptedTypes,
+      localType: track.localType,
+      description: 'subtitle'
+    })));
     return tracks.map(({ acceptedTypes, ...track }) => track);
   }
 
@@ -86,7 +123,7 @@ function createVideoModel({
       file = normaliseRelativeFile(data.file, '`file`', message => videoError(post, message));
       type = videoMimeTypes.get(path.extname(file).toLowerCase());
       if (!type) throw videoError(post, '`file` must use MP4, M4V, or WebM.');
-      await localEntry(post, file, options, { type, description: 'video' });
+      await localEntry(post, file, options, { type, localType: type, description: 'video' });
       source = mediaFileUrl(options.root, options.media, file);
     } else {
       source = normaliseHttpsUrl(data.url, '`url`', message => videoError(post, message));
@@ -96,12 +133,19 @@ function createVideoModel({
     if (data.poster != null && String(data.poster).trim()) {
       const posterFile = normaliseRelativeFile(data.poster, '`poster`', message => videoError(post, message));
       if (!posterExtensions.has(path.extname(posterFile).toLowerCase())) throw videoError(post, '`poster` must use AVIF, GIF, JPEG, PNG, or WebP.');
-      await localEntry(post, posterFile, options, { test: value => /^image\//.test(value), description: 'an image MIME type' });
+      await localEntry(post, posterFile, options, {
+        test: value => /^image\//.test(value),
+        localType: imageMimeTypes.get(path.extname(posterFile).toLowerCase()),
+        description: 'an image MIME type'
+      });
       poster = mediaFileUrl(options.root, options.media, posterFile);
     }
     const fontEntries = Object.entries(options.subtitles.fonts || {});
     const subtitlePromise = normaliseSubtitles(post, data.subtitles, options);
-    const fontsPromise = Promise.all(fontEntries.map(([, fontFile]) => localEntry(post, fontFile, options, { type: fontMimeTypes.get(path.extname(fontFile).toLowerCase()), description: 'font' })));
+    const fontsPromise = Promise.all(fontEntries.map(([, fontFile]) => {
+      const type = fontMimeTypes.get(path.extname(fontFile).toLowerCase());
+      return localEntry(post, fontFile, options, { type, localType: type, description: 'font' });
+    }));
     const [subtitles] = await Promise.all([subtitlePromise, fontsPromise]);
     const fonts = Object.fromEntries(fontEntries.map(([name, fontFile]) => [name, mediaFileUrl(options.root, options.media, fontFile)]));
     const title = String(data.title || post && post.title || (file && path.basename(file, path.extname(file))) || '视频').trim();
