@@ -1,3 +1,5 @@
+import { createCleanupError } from './shared.js';
+
 export function createSubtitleRendererManager({
   video,
   model,
@@ -136,7 +138,7 @@ export function createSubtitleRendererManager({
       }
       if (errors.length) {
         if (errors.length === 1) throw errors[0];
-        throw new AggregateError(errors, 'Subtitle renderer cleanup failed.');
+        throw createCleanupError('Subtitle renderer cleanup failed.', errors);
       }
     }
   };

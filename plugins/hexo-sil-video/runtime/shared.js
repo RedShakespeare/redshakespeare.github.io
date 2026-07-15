@@ -102,9 +102,16 @@ export function createListenerScope() {
       for (const cleanup of cleanups.splice(0)) {
         try { cleanup(); } catch (error) { errors.push(error); }
       }
-      if (errors.length) throw new AggregateError(errors, 'Listener scope cleanup failed.');
+      if (errors.length) throw createCleanupError('Listener scope cleanup failed.', errors);
     }
   };
+}
+
+export function createCleanupError(message, errors) {
+  const error = new Error(message);
+  error.name = 'CleanupError';
+  error.errors = errors;
+  return error;
 }
 
 export function focusWithoutScroll(target) {

@@ -1,6 +1,6 @@
 import { createKeyboardController } from './keyboard-controller.js';
 import { createPointerController } from './pointer-controller.js';
-import { createListenerScope } from './shared.js';
+import { createCleanupError, createListenerScope } from './shared.js';
 import { createVolumeOverlayController } from './volume-overlay-controller.js';
 
 export function createInteractionController(refs) {
@@ -24,7 +24,7 @@ export function createInteractionController(refs) {
       for (const controller of controllers.reverse()) {
         try { await controller.destroy(); } catch (error) { errors.push(error); }
       }
-      if (errors.length) throw new AggregateError(errors, 'Interaction controller cleanup failed.');
+      if (errors.length) throw createCleanupError('Interaction controller cleanup failed.', errors);
     }
   };
 }

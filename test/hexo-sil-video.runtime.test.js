@@ -99,6 +99,15 @@ test('runtime and CommonJS state coordinators share the same channel semantics',
   assert.equal(runtime.FULLSCREEN_UI_HIDE_DELAY, common.FULLSCREEN_UI_HIDE_DELAY);
 });
 
+test('cleanup errors preserve their causes without requiring AggregateError', async () => {
+  const runtime = await loadRuntime('shared.js');
+  const causes = [new Error('first'), new Error('second')];
+  const error = runtime.createCleanupError('cleanup failed', causes);
+  assert.equal(error.name, 'CleanupError');
+  assert.equal(error.message, 'cleanup failed');
+  assert.deepEqual(error.errors, causes);
+});
+
 test('subtitle module import failure is retryable and successful selection commits atomically', async () => {
   const { createSubtitleController } = await loadRuntime('subtitle-controller.js');
   const refs = subtitleDom();
@@ -347,7 +356,7 @@ test('subtitle destroy reports renderer cleanup failures through its aggregate r
     })
   });
   assert.equal(await controller.select(0), true);
-  await assert.rejects(controller.destroy(), error => error instanceof AggregateError && error.errors.some(item => item.message === 'destroy failed'));
+  await assert.rejects(controller.destroy(), error => error.name === 'CleanupError' && error.errors.some(item => item.message === 'destroy failed'));
   assert.ok(diagnostics.some(entry => entry[0] === 'subtitle.destroy' && entry[1].message === 'destroy failed'));
   assert.equal(await controller.select(1), false);
   refs.dom.window.close();
