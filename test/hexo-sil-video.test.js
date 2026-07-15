@@ -419,8 +419,12 @@ test('video demand registry seeds cached Front Matter and raw video tags per gen
   demand.seed([{ _content: '正文 {% video file=demo.mp4 %}' }]);
   assert.equal(demand.hasDemand(), true);
   demand.reset();
-  demand.seed([{ _content: '普通正文' }]);
+  demand.seed([{ _content: '```nunjucks\n{% video file=demo.mp4 %}\n```\n<!-- {% video file=demo.mp4 %} -->' }]);
   assert.equal(demand.hasDemand(), false);
+  demand.seed([{ _content: '正文\n<!--\n{% video file=commented.mp4 %}\n-->\n~~~html\n{% video file=fenced.mp4 %}\n~~~' }]);
+  assert.equal(demand.hasDemand(), false);
+  demand.seed([{ _content: '<!-- ignored --> 正文 {% video file=visible.mp4 %}' }]);
+  assert.equal(demand.hasDemand(), true);
 });
 
 test('plugin registers skin, runtime assets, tag, and duplicate-safe post injection', async () => {
@@ -626,6 +630,67 @@ test('browser runtime synchronises accessible values, omits empty subtitle relat
     assert.equal(video.controls, true);
     assert.equal(player.dataset.silVideoReady, undefined);
     assert.equal(player.dataset.silVideoEnhanced, undefined);
+  } finally {
+    dom.window.close();
+  }
+});
+
+test('browser runtime deduplicates scoped refreshes and avoids full-document scans for unrelated mutations', async () => {
+  const fixture = await browserPlayer();
+  const { dom, window, document, player } = fixture;
+  try {
+    await wait(0);
+    await wait(0);
+    const nativeMatches = player.matches.bind(player);
+    let matchCalls = 0;
+    player.matches = value => {
+      matchCalls += 1;
+      return nativeMatches(value);
+    };
+    const event = () => new window.CustomEvent('inside', { detail: { root: player } });
+    document.dispatchEvent(event());
+    document.dispatchEvent(event());
+    await Promise.resolve();
+    assert.equal(matchCalls, 3);
+
+    const nativeQuerySelectorAll = document.querySelectorAll.bind(document);
+    let documentScans = 0;
+    document.querySelectorAll = value => {
+      documentScans += 1;
+      return nativeQuerySelectorAll(value);
+    };
+    document.body.append(document.createElement('div'));
+    await wait(0);
+    await wait(0);
+    assert.equal(documentScans, 0);
+  } finally {
+    dom.window.close();
+  }
+});
+
+test('Inside root refresh recovers only players in the declared subtree', async () => {
+  const markup = renderVideoPlayer({
+    title: 'Scoped recovery', source: '/video.mp4', type: 'video/mp4', poster: '', preload: 'metadata',
+    aspectRatio: '16/9', subtitles: [], fonts: {}, fallbackFont: '',
+    runtime: { subtitles: '/subtitles.js', worker: '/worker.js', wasm: '/worker.wasm', modernWasm: '/modern.wasm', defaultFont: '/font.woff2' }
+  });
+  const dom = new JSDOM(`<!doctype html><body><section id="first">${markup}</section><section id="second">${markup}</section></body>`, {
+    runScripts: 'outside-only', pretendToBeVisual: true, url: 'https://example.test/'
+  });
+  try {
+    dom.window.TextDecoder = TextDecoder;
+    dom.window.console.error = () => {};
+    const players = Array.from(dom.window.document.querySelectorAll('[data-sil-video-player]'));
+    const models = players.map(player => player.dataset.silVideoModel);
+    players.forEach(player => { player.dataset.silVideoModel = 'invalid'; });
+    dom.window.eval((await buildBrowserBundle(path.join(__dirname, '..', 'plugins', 'hexo-sil-video', 'runtime', 'player.js'), 'iife')).toString('utf8'));
+    assert.ok(players.every(player => player.dataset.silVideoReady === undefined));
+    players.forEach((player, index) => { player.dataset.silVideoModel = models[index]; });
+    const root = dom.window.document.querySelector('#first');
+    dom.window.document.dispatchEvent(new dom.window.CustomEvent('inside', { detail: { root } }));
+    await wait(0);
+    assert.equal(players[0].dataset.silVideoReady, 'true');
+    assert.equal(players[1].dataset.silVideoReady, undefined);
   } finally {
     dom.window.close();
   }

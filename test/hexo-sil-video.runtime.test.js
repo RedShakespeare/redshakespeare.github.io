@@ -76,6 +76,29 @@ function rendererFactory(log, behaviour = {}) {
   };
 }
 
+test('runtime and CommonJS state coordinators share the same channel semantics', async () => {
+  const common = require('../plugins/hexo-sil-video/lib/player-state');
+  const runtime = await loadRuntime('state-coordinator.js');
+  const runScenario = createCoordinator => {
+    const player = { dataset: {} };
+    const status = { textContent: '' };
+    const state = createCoordinator({ player, status });
+    state.set('media', '媒体信息');
+    state.set('subtitles', '字幕加载中', { level: 'loading' });
+    state.set('fullscreen', '无法进入全屏。', { error: true });
+    state.set('media', '新媒体信息');
+    const errorState = [status.textContent, player.dataset.silVideoError, state.snapshot()];
+    state.clear('fullscreen');
+    const restoredState = [status.textContent, player.dataset.silVideoError, state.snapshot()];
+    return JSON.parse(JSON.stringify({ errorState, restoredState }));
+  };
+
+  assert.deepEqual(runScenario(runtime.createStateCoordinator), runScenario(common.createStateCoordinator));
+  assert.deepEqual(runtime.STATE_CHANNELS, common.STATE_CHANNELS);
+  assert.equal(runtime.VOLUME_CLOSE_DELAY, common.VOLUME_CLOSE_DELAY);
+  assert.equal(runtime.FULLSCREEN_UI_HIDE_DELAY, common.FULLSCREEN_UI_HIDE_DELAY);
+});
+
 test('subtitle module import failure is retryable and successful selection commits atomically', async () => {
   const { createSubtitleController } = await loadRuntime('subtitle-controller.js');
   const refs = subtitleDom();
@@ -243,6 +266,40 @@ test('subtitle rollback failure destroys the renderer and clears selection', asy
   refs.dom.window.close();
 });
 
+test('subtitle rollback clears a renderer even when its own destroy fails, allowing a fresh retry', async () => {
+  const { createSubtitleController } = await loadRuntime('subtitle-controller.js');
+  const refs = subtitleDom();
+  let creation = 0;
+  const diagnostics = [];
+  const controller = createSubtitleController({
+    ...refs,
+    model: model(),
+    moduleLoader: async () => moduleRuntime({ 中文: 'A', English: 'B' }),
+    diagnostics: { report: (...args) => diagnostics.push(args) },
+    rendererFactory: () => {
+      creation += 1;
+      const current = creation;
+      return {
+        ready: Promise.resolve(),
+        renderer: {
+          async setTrack() { if (current === 1) throw new Error('set failed'); },
+          async freeTrack() {}
+        },
+        async destroy() { if (current === 1) throw new Error('destroy failed'); },
+        async resize() {}
+      };
+    }
+  });
+  assert.equal(await controller.select(0), true);
+  assert.equal(await controller.select(1), false);
+  assert.equal(refs.button.getAttribute('aria-pressed'), 'false');
+  assert.equal(await controller.select(1), true);
+  assert.equal(creation, 2);
+  assert.ok(diagnostics.some(entry => entry[0] === 'subtitle.destroy'));
+  await controller.destroy();
+  refs.dom.window.close();
+});
+
 test('subtitle destroy waits for an in-flight renderer operation', async () => {
   const { createSubtitleController } = await loadRuntime('subtitle-controller.js');
   const refs = subtitleDom();
@@ -270,6 +327,29 @@ test('subtitle destroy waits for an in-flight renderer operation', async () => {
   release();
   await Promise.all([selection, destroying]);
   assert.deepEqual(log, ['set-done', 'set-done', 'destroy']);
+  refs.dom.window.close();
+});
+
+test('subtitle destroy reports renderer cleanup failures through its aggregate result', async () => {
+  const { createSubtitleController } = await loadRuntime('subtitle-controller.js');
+  const refs = subtitleDom();
+  const diagnostics = [];
+  const controller = createSubtitleController({
+    ...refs,
+    model: model(),
+    moduleLoader: async () => moduleRuntime({ 中文: 'A', English: 'B' }),
+    diagnostics: { report: (...args) => diagnostics.push(args) },
+    rendererFactory: () => ({
+      ready: Promise.resolve(),
+      renderer: { async setTrack() {}, async freeTrack() {} },
+      async destroy() { throw new Error('destroy failed'); },
+      async resize() {}
+    })
+  });
+  assert.equal(await controller.select(0), true);
+  await assert.rejects(controller.destroy(), error => error instanceof AggregateError && error.errors.some(item => item.message === 'destroy failed'));
+  assert.ok(diagnostics.some(entry => entry[0] === 'subtitle.destroy' && entry[1].message === 'destroy failed'));
+  assert.equal(await controller.select(1), false);
   refs.dom.window.close();
 });
 
@@ -319,5 +399,101 @@ test('fullscreen actions serialize opposite toggles and destroy waits for the qu
   assert.equal(await exiting, true);
   await destroying;
   assert.deepEqual(calls, ['enter', 'exit']);
+  dom.window.close();
+});
+
+test('fullscreen actions fail safely when fullscreenchange never confirms the target state', async () => {
+  const { createFullscreenController } = await loadRuntime('fullscreen-controller.js');
+  const dom = new JSDOM('<!doctype html><body><aside><div data-stage><video></video><button></button></div></aside></body>', {
+    pretendToBeVisual: true,
+    url: 'https://example.test/'
+  });
+  const { document } = dom.window;
+  const player = document.querySelector('aside');
+  const stage = document.querySelector('[data-stage]');
+  const video = document.querySelector('video');
+  const fullscreen = document.querySelector('button');
+  Object.defineProperty(document, 'fullscreenElement', { configurable: true, value: null });
+  stage.requestFullscreen = async () => {};
+  let timeoutHandler;
+  const states = [];
+  const diagnostics = [];
+  const clock = {
+    setTimeout(handler) { timeoutHandler = handler; return 1; },
+    clearTimeout() {},
+    requestAnimationFrame(handler) { handler(); return null; },
+    cancelAnimationFrame() {}
+  };
+  const controller = createFullscreenController({
+    player,
+    video,
+    stage,
+    fullscreen,
+    clock,
+    state: { set: (...args) => states.push(args), clear() {} },
+    diagnostics: { report: (...args) => diagnostics.push(args) }
+  });
+  const toggling = controller.toggle();
+  await new Promise(resolve => setImmediate(resolve));
+  timeoutHandler();
+  assert.equal(await toggling, false);
+  assert.equal(states[0][1], '无法进入全屏。');
+  assert.equal(diagnostics[0][1].code, 'SIL_VIDEO_FULLSCREEN_TIMEOUT');
+  await controller.destroy();
+  dom.window.close();
+});
+
+test('fullscreen waits for a state event that arrives after the native promise resolves', async () => {
+  const { createFullscreenController } = await loadRuntime('fullscreen-controller.js');
+  const dom = new JSDOM('<!doctype html><body><aside><div data-stage><video></video><button></button></div></aside></body>', {
+    pretendToBeVisual: true,
+    url: 'https://example.test/'
+  });
+  const { document } = dom.window;
+  const player = document.querySelector('aside');
+  const stage = document.querySelector('[data-stage]');
+  const video = document.querySelector('video');
+  const fullscreen = document.querySelector('button');
+  Object.defineProperty(document, 'fullscreenElement', { configurable: true, get: () => document.__fullscreenElement || null });
+  stage.requestFullscreen = async () => {};
+  const controller = createFullscreenController({ player, video, stage, fullscreen });
+  const entering = controller.toggle();
+  await new Promise(resolve => setImmediate(resolve));
+  document.__fullscreenElement = stage;
+  document.dispatchEvent(new dom.window.Event('fullscreenchange'));
+  assert.equal(await entering, true);
+  await controller.destroy();
+  dom.window.close();
+});
+
+test('fullscreen destroy cancels state confirmation without reporting a false timeout', async () => {
+  const { createFullscreenController } = await loadRuntime('fullscreen-controller.js');
+  const dom = new JSDOM('<!doctype html><body><aside><div data-stage><video></video><button></button></div></aside></body>', {
+    pretendToBeVisual: true,
+    url: 'https://example.test/'
+  });
+  const { document } = dom.window;
+  const player = document.querySelector('aside');
+  const stage = document.querySelector('[data-stage]');
+  const video = document.querySelector('video');
+  const fullscreen = document.querySelector('button');
+  Object.defineProperty(document, 'fullscreenElement', { configurable: true, value: null });
+  stage.requestFullscreen = async () => {};
+  const states = [];
+  const diagnostics = [];
+  const controller = createFullscreenController({
+    player,
+    video,
+    stage,
+    fullscreen,
+    state: { set: (...args) => states.push(args), clear() {} },
+    diagnostics: { report: (...args) => diagnostics.push(args) }
+  });
+  const entering = controller.toggle();
+  await new Promise(resolve => setImmediate(resolve));
+  await controller.destroy();
+  assert.equal(await entering, false);
+  assert.deepEqual(states, []);
+  assert.deepEqual(diagnostics, []);
   dom.window.close();
 });

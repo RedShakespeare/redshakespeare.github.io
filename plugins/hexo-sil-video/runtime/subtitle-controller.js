@@ -1,6 +1,5 @@
 import { createListenerScope } from './shared.js';
-
-let menuSequence = 0;
+import { createSubtitleMenu } from './subtitle-menu.js';
 
 export function createSubtitleController({
   player,
@@ -18,13 +17,11 @@ export function createSubtitleController({
 }) {
   const tracks = Array.isArray(model.subtitles) ? model.subtitles : [];
   const scope = createListenerScope();
-  const documentRef = player.ownerDocument;
   let renderer = null;
   let activeContent = '';
   let abortController = null;
   let requestToken = 0;
   let selectedIndex = -1;
-  let focusedIndex = -1;
   let pendingIndex = tracks.findIndex(track => track.default);
   let modulePromise = null;
   let candidateRenderer = null;
@@ -33,43 +30,7 @@ export function createSubtitleController({
   let renderQueue = Promise.resolve();
   let renderError = null;
   let destroyed = false;
-
-  menuSequence += 1;
-  menu.id = `sil-video-subtitle-menu-${menuSequence}`;
-  menu.setAttribute('role', 'menu');
-  button.disabled = false;
-  button.setAttribute('aria-haspopup', 'menu');
-  button.setAttribute('aria-controls', menu.id);
-  button.setAttribute('aria-expanded', 'false');
-  button.setAttribute('aria-pressed', 'false');
-
-  function focusOption(index) {
-    focusedIndex = index;
-    menu.querySelectorAll('[data-sil-video-track]').forEach(option => {
-      option.tabIndex = Number(option.dataset.silVideoTrack) === focusedIndex ? 0 : -1;
-    });
-    menu.querySelector(`[data-sil-video-track="${focusedIndex}"]`)?.focus();
-  }
-
-  function setMenuOpen(open, returnFocus = true) {
-    menu.hidden = !open;
-    ui?.setSubtitleMenuOpen(open);
-    button.setAttribute('aria-expanded', open ? 'true' : 'false');
-    showFullscreenUi();
-    if (open) queueMicrotask(() => focusOption(selectedIndex));
-    else if (returnFocus) {
-      button.focus();
-      queueMicrotask(() => { if (menu.hidden) button.focus(); });
-    }
-  }
-
-  function syncButtons() {
-    menu.querySelectorAll('[data-sil-video-track]').forEach(option => {
-      option.setAttribute('aria-checked', Number(option.dataset.silVideoTrack) === selectedIndex ? 'true' : 'false');
-      option.tabIndex = Number(option.dataset.silVideoTrack) === focusedIndex ? 0 : -1;
-    });
-    button.setAttribute('aria-pressed', selectedIndex >= 0 ? 'true' : 'false');
-  }
+  let menuView = null;
 
   async function loadModule() {
     if (!modulePromise) {
@@ -111,25 +72,26 @@ export function createSubtitleController({
 
   async function applyTrack(runtime, content, oldContent, token) {
     if (renderer) {
-      await renderer.ready;
+      const activeRenderer = renderer;
+      await activeRenderer.ready;
       try {
-        await renderer.renderer.setTrack(content);
+        await activeRenderer.renderer.setTrack(content);
         if (!isCurrent(token)) {
-          if (oldContent) await renderer.renderer.setTrack(oldContent);
-          else await renderer.renderer.freeTrack();
+          if (oldContent) await activeRenderer.renderer.setTrack(oldContent);
+          else await activeRenderer.renderer.freeTrack();
           return null;
         }
-        return renderer;
+        return activeRenderer;
       } catch (error) {
         if (oldContent) {
-          try { await renderer.renderer.setTrack(oldContent); } catch (rollbackError) {
-            await destroyCandidate(renderer);
-            renderer = null;
+          try { await activeRenderer.renderer.setTrack(oldContent); } catch (rollbackError) {
+            if (renderer === activeRenderer) renderer = null;
+            try { await destroyCandidate(activeRenderer); } catch (destroyError) { error.destroyError = destroyError; }
             throw Object.assign(error, { rollbackError });
           }
         } else {
-          await destroyCandidate(renderer);
-          renderer = null;
+          if (renderer === activeRenderer) renderer = null;
+          try { await destroyCandidate(activeRenderer); } catch (destroyError) { error.destroyError = destroyError; }
         }
         throw error;
       }
@@ -172,12 +134,13 @@ export function createSubtitleController({
   }
 
   async function select(index) {
+    if (destroyed) return false;
     const token = ++requestToken;
     pendingIndex = -1;
     abortController?.abort();
     const controller = new AbortController();
     abortController = controller;
-    setMenuOpen(false);
+    menuView.setOpen(false);
     const previousIndex = selectedIndex;
     const previousContent = activeContent;
     try {
@@ -201,7 +164,7 @@ export function createSubtitleController({
         if (!isCurrent(token)) return false;
         selectedIndex = -1;
         activeContent = '';
-        syncButtons();
+        menuView.sync(selectedIndex);
         state?.clear('subtitles');
         if (!state) setStatus();
         return true;
@@ -229,7 +192,7 @@ export function createSubtitleController({
       if (!isCurrent(token)) return false;
       selectedIndex = index;
       activeContent = content;
-      syncButtons();
+      menuView.sync(selectedIndex);
       state?.clear('subtitles');
       if (!state) setStatus();
       return true;
@@ -237,7 +200,7 @@ export function createSubtitleController({
       if (error?.name === 'AbortError' || !isCurrent(token)) return false;
       selectedIndex = error?.rollbackError ? -1 : previousIndex;
       activeContent = error?.rollbackError ? '' : previousContent;
-      syncButtons();
+      menuView.sync(selectedIndex);
       const message = error?.code === 'SIL_VIDEO_SUBTITLE_CAPABILITY'
         ? '当前浏览器不支持高级字幕渲染。'
         : `字幕加载失败：${error.message}`;
@@ -255,52 +218,14 @@ export function createSubtitleController({
     void select(index);
   }
 
-  function buildMenu() {
-    menu.replaceChildren();
-    const choices = [{ label: '关闭字幕', index: -1 }, ...tracks.map((track, index) => ({ label: track.label, index, lang: track.srclang }))];
-    for (const choice of choices) {
-      const option = documentRef.createElement('button');
-      option.type = 'button';
-      option.className = 'sil-video-player__subtitle-option';
-      option.dataset.silVideoTrack = String(choice.index);
-      option.setAttribute('role', 'menuitemradio');
-      option.tabIndex = choice.index === -1 ? 0 : -1;
-      option.setAttribute('aria-checked', choice.index === -1 ? 'true' : 'false');
-      if (choice.lang) option.lang = choice.lang;
-      option.textContent = choice.label;
-      scope.listen(option, 'click', () => { void select(choice.index); });
-      menu.append(option);
-    }
-  }
-
-  scope.listen(button, 'click', () => setMenuOpen(menu.hidden));
-  scope.listen(menu, 'keydown', event => {
-    const options = Array.from(menu.querySelectorAll('[data-sil-video-track]'));
-    if (event.key === 'Escape') {
-      event.preventDefault();
-      setMenuOpen(false);
-      return;
-    }
-    if (event.key === 'Tab') {
-      setMenuOpen(false, false);
-      return;
-    }
-    if (event.key === 'ArrowDown' || event.key === 'ArrowUp' || event.key === 'Home' || event.key === 'End') {
-      event.preventDefault();
-      const current = Math.max(0, options.findIndex(option => Number(option.dataset.silVideoTrack) === focusedIndex));
-      const next = event.key === 'Home' ? 0
-        : event.key === 'End' ? options.length - 1
-          : (current + (event.key === 'ArrowDown' ? 1 : -1) + options.length) % options.length;
-      focusOption(Number(options[next].dataset.silVideoTrack));
-      return;
-    }
-    if (event.key === 'Enter' || event.key === ' ') {
-      event.preventDefault();
-      void select(focusedIndex);
-    }
-  });
-  scope.listen(player.ownerDocument, 'pointerdown', event => {
-    if (!menu.hidden && !menu.contains(event.target) && event.target !== button) setMenuOpen(false, false);
+  menuView = createSubtitleMenu({
+    player,
+    button,
+    menu,
+    tracks,
+    onSelect: index => { void select(index); },
+    showFullscreenUi,
+    ui
   });
   if (pendingIndex >= 0) {
     scope.listen(player, 'focusin', activatePending);
@@ -308,11 +233,10 @@ export function createSubtitleController({
     scope.listen(player, 'pointerdown', activatePending);
     scope.listen(player, 'wheel', activatePending);
   }
-  buildMenu();
 
   return {
     activatePending,
-    async resize() { if (renderer) await renderer.resize(true); },
+    async resize() { if (!destroyed && renderer) await renderer.resize(true); },
     select,
     async destroy() {
       if (destroyed) return;
@@ -321,6 +245,7 @@ export function createSubtitleController({
       abortController?.abort();
       const errors = [];
       try { scope.destroy(); } catch (error) { errors.push(error); }
+      try { menuView.destroy(); } catch (error) { errors.push(error); }
       try { await cancelCandidate(); } catch (error) { errors.push(error); }
       try { await renderQueue; } catch (error) { errors.push(error); }
       if (renderError) { errors.push(renderError); renderError = null; }

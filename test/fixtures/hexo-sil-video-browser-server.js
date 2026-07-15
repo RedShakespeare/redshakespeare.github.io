@@ -82,7 +82,7 @@ function page(pathname) {
   if (pathname === '/video-two-subtitles') return documentHtml(`${player({ subtitles: true, title: 'First' })}${player({ subtitles: true, title: 'Second' })}`);
   if (pathname === '/dynamic') {
     const encoded = Buffer.from(player()).toString('base64');
-    return documentHtml('<main id="mount"><h1>Dynamic page</h1></main>', `<script>window.insertVideo=()=>{const box=document.createElement('div');box.innerHTML=atob('${encoded}');document.querySelector('#mount').append(...box.childNodes);window.__instrumentVideoPlayers();document.dispatchEvent(new Event('inside'));};</script>`);
+    return documentHtml('<main id="mount"><h1>Dynamic page</h1></main>', `<script>window.insertVideo=()=>{const box=document.createElement('div');box.innerHTML=atob('${encoded}');const root=document.querySelector('#mount');root.append(...box.childNodes);window.__instrumentVideoPlayers();document.dispatchEvent(new CustomEvent('inside',{detail:{root}}));};</script>`);
   }
   return '';
 }

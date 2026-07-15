@@ -4,6 +4,8 @@ import {
   focusWithoutScroll
 } from './shared.js';
 
+const FULLSCREEN_CHANGE_TIMEOUT = 2000;
+
 export function createFullscreenController({
   player,
   video,
@@ -30,6 +32,7 @@ export function createFullscreenController({
   let actionQueue = null;
   let destroying = false;
   let destroyed = false;
+  const stateWaiters = new Set();
 
   function active() {
     return documentRef.fullscreenElement === stage;
@@ -63,9 +66,37 @@ export function createFullscreenController({
     else delete stage.dataset.silVideoUiHidden;
   }
 
-  async function request(action, message) {
+  function waitForState(target) {
+    if (active() === target) return Promise.resolve(true);
+    return new Promise(resolve => {
+      let timer = null;
+      const finish = value => {
+        if (timer !== null) clearTimer(timer);
+        documentRef.removeEventListener('fullscreenchange', onChange);
+        stateWaiters.delete(waiter);
+        resolve(value);
+      };
+      const onChange = () => {
+        if (active() === target) finish(true);
+      };
+      const waiter = { cancel: () => finish(false) };
+      stateWaiters.add(waiter);
+      documentRef.addEventListener('fullscreenchange', onChange);
+      timer = setTimer(() => finish(false), FULLSCREEN_CHANGE_TIMEOUT);
+    });
+  }
+
+  async function request(action, message, target) {
     try {
       await action();
+      if (!await waitForState(target)) {
+        if (destroying || destroyed) return false;
+        const error = new Error(`全屏状态变更超时：${target ? '进入' : '退出'}`);
+        error.code = 'SIL_VIDEO_FULLSCREEN_TIMEOUT';
+        state?.set('fullscreen', message, { error: true });
+        diagnostics?.report('fullscreen', error);
+        return false;
+      }
       return true;
     } catch (error) {
       state?.set('fullscreen', message, { error: true });
@@ -145,8 +176,8 @@ export function createFullscreenController({
       if (destroyed) return false;
       const target = !active();
       return target
-        ? request(() => stage.requestFullscreen(), '无法进入全屏。')
-        : request(() => documentRef.exitFullscreen(), '无法退出全屏。');
+        ? request(() => stage.requestFullscreen(), '无法进入全屏。', true)
+        : request(() => documentRef.exitFullscreen(), '无法退出全屏。', false);
     });
   }
 
@@ -171,6 +202,7 @@ export function createFullscreenController({
     async destroy() {
       if (destroyed) return;
       destroying = true;
+      stateWaiters.forEach(waiter => waiter.cancel());
       if (actionQueue) await actionQueue;
       destroyed = true;
       clearUiTimer();
