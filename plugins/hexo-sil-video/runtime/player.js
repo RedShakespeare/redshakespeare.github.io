@@ -2,9 +2,7 @@ import { selector } from './shared.js';
 import { createRuntimeServices } from './runtime-services.js';
 import { createPlayerInstance } from './player-instance.js';
 
-const instances = new Map();
-const destroying = new WeakMap();
-const failures = new WeakMap();
+const records = new Map();
 const dirtyPlayers = new Set();
 const diagnostics = createRuntimeServices().diagnostics;
 let runtimeDestroyed = false;
@@ -19,25 +17,26 @@ function showFallbackError(player, message) {
 }
 
 function recordFailure(player, source, scope, error, message = error.message) {
-  const previous = failures.get(player);
+  const previous = records.get(player)?.error;
   if (previous && previous.source === source) return;
-  failures.set(player, { source, scope, message });
+  records.set(player, { ...(records.get(player) || {}), source, status: 'failed', error: { source, scope, message } });
   showFallbackError(player, message);
   diagnostics.report(scope, error);
 }
 
 function initialise(player) {
-  if (instances.has(player) || destroying.has(player) || player.dataset.silVideoReady === 'true') return;
+  const record = records.get(player);
+  if (record?.status === 'initialising' || record?.status === 'ready' || record?.status === 'destroying' || player.dataset.silVideoReady === 'true') return;
   const source = player.dataset.silVideoModel || '';
-  const previousFailure = failures.get(player);
+  const previousFailure = record?.error;
   if (previousFailure && previousFailure.source === source) return;
-  if (previousFailure) failures.delete(player);
+  if (previousFailure) records.delete(player);
+  records.set(player, { source, status: 'initialising', instance: null, promise: null, error: null });
   let instance = null;
   try {
     instance = createPlayerInstance({ player, services: createRuntimeServices({ player, windowRef: player.ownerDocument.defaultView }) });
     instance.mount();
-    instances.set(player, instance);
-    failures.delete(player);
+    records.set(player, { source, status: 'ready', instance, promise: null, error: null });
     instance.refreshTheme();
   } catch (error) {
     const cleanup = instance?.destroy?.() || Promise.resolve();
@@ -49,7 +48,7 @@ function initialise(player) {
 function refreshPlayer(player) {
   if (!player?.matches?.(selector)) return;
   initialise(player);
-  instances.get(player)?.refreshTheme();
+  records.get(player)?.instance?.refreshTheme();
 }
 
 function playersWithin(root) {
@@ -80,12 +79,12 @@ function schedulePlayers(players) {
 function refresh(root = document) {
   playersWithin(root).forEach(player => {
     initialise(player);
-    instances.get(player)?.refreshTheme();
+    records.get(player)?.instance?.refreshTheme();
   });
 }
 
 function refreshThemes() {
-  for (const instance of instances.values()) instance.refreshTheme();
+  for (const record of records.values()) record.instance?.refreshTheme();
 }
 
 function handleInside(event) {
@@ -98,14 +97,15 @@ function destroyRemoved(node) {
   if (!(node instanceof Element)) return;
   const players = node.matches(selector) ? [node] : Array.from(node.querySelectorAll(selector));
   for (const player of players) {
-    const instance = instances.get(player);
+    const record = records.get(player);
+    const instance = record?.instance;
     if (!instance) continue;
+    if (record.status === 'destroying') continue;
     const pending = instance.destroy();
-    instances.delete(player);
-    destroying.set(player, pending);
+    records.set(player, { ...record, status: 'destroying', promise: pending });
     pending.then(() => {
-      if (destroying.get(player) !== pending) return;
-      destroying.delete(player);
+      if (records.get(player)?.promise !== pending) return;
+      records.delete(player);
       if (!runtimeDestroyed && player.isConnected) initialise(player);
     }, error => console.error(error));
   }
@@ -135,7 +135,7 @@ if (window.__hexoSilVideoRuntime) {
       window.removeEventListener('resize', refreshThemes);
       document.removeEventListener('inside', handleInside);
       document.removeEventListener('inside:theme', refreshThemes);
-      const pending = Array.from(instances.values(), instance => instance.destroy());
+      const pending = Array.from(records.values(), record => record.instance ? record.instance.destroy() : record.promise).filter(Boolean);
       await Promise.allSettled(pending);
       delete window.__hexoSilVideoRefresh;
       delete window.__hexoSilVideoRuntime;
