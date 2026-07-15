@@ -34,6 +34,8 @@ const fixtureRoot = fsSync.mkdtempSync(path.join(os.tmpdir(), 'hexo-sil-video-')
 const sourceRoot = path.join(fixtureRoot, 'source');
 const fixtureFiles = {
   'files/video/demo.mp4': Buffer.from('video'),
+  'files/video/demo.ogv': Buffer.from('ogv-video'),
+  'files/video/demo.mpeg': Buffer.from('mpeg-video'),
   'files/video/poster.webp': Buffer.from('poster'),
   'files/video/zh.ass': Buffer.from('[Script Info]\nScriptType: v4.00+\n\n[V4+ Styles]\nFormat: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding\nStyle: Default,Arial,24,&H00FFFFFF,&H00FFFFFF,&H00000000,&H00000000,0,0,0,0,100,100,0,0,1,1,0,2,10,10,10,1\n\n[Events]\nFormat: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text\nDialogue: 0,0:00:00.00,0:00:01.00,Default,,0,0,0,,你好'),
   'files/video/en.srt': Buffer.from('1\n00:00:00,000 --> 00:00:01,000\nHello\n'),
@@ -48,6 +50,8 @@ test.after(() => fsSync.rmSync(fixtureRoot, { recursive: true, force: true }));
 
 const manifestEntries = {
   'files/video/demo.mp4': { size: 5, type: 'video/mp4' },
+  'files/video/demo.ogv': { size: 9, type: 'video/ogg' },
+  'files/video/demo.mpeg': { size: 10, type: 'video/mpeg' },
   'files/video/poster.webp': { size: 6, type: 'image/webp' },
   'files/video/zh.ass': { size: 10, type: 'text/x-ssa; charset=utf-8' },
   'files/video/en.srt': { size: 10, type: 'application/x-subrip; charset=utf-8' },
@@ -307,6 +311,15 @@ test('manifest-backed video resolves media, ASS/SRT tracks, poster, and fonts', 
   assert.equal(value.fonts.Fixture, '/files/video/font.woff2');
   assert.equal(value.runtime.subtitles, '/js/hexo-sil-video-subtitles.js');
   assert.equal(value.runtime.worker, '/js/hexo-sil-video-worker.js');
+});
+
+test('manifest-backed video accepts additional local OGG and MPEG containers', async () => {
+  const ogv = await normaliseVideo(post(), videoData({ file: 'video/demo.ogv', subtitles: [] }), runtime);
+  assert.equal(ogv.source, '/files/video/demo.ogv');
+  assert.equal(ogv.type, 'video/ogg');
+  const mpeg = await normaliseVideo(post(), videoData({ file: 'video/demo.mpeg', subtitles: [] }), runtime);
+  assert.equal(mpeg.source, '/files/video/demo.mpeg');
+  assert.equal(mpeg.type, 'video/mpeg');
 });
 
 test('legacy mode validates local files and external video URLs stay HTTPS-only', async () => {
