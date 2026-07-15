@@ -6,6 +6,7 @@ const selector = '.sil-video-player[data-sil-video-player]';
 const rates = [1, 1.25, 1.5, 1.75, 2, 0.5, 0.75];
 const VIEWPORT_CLICK_DELAY = 300;
 const FEEDBACK_HIDE_DELAY = 900;
+const PLAYBACK_FEEDBACK_HIDE_DELAY = 600;
 const TOUCH_GESTURE_THRESHOLD = 12;
 const TOUCH_SEEK_SECONDS = 60;
 const GESTURE_CLICK_SUPPRESS_DELAY = 500;
@@ -245,17 +246,19 @@ function initialise(player) {
     });
   }
 
-  async function togglePlay() {
+  async function togglePlay(showPlayback = false) {
     if (video.paused || video.ended) {
       if (video.ended) video.currentTime = 0;
       try {
         await video.play();
         setStatus();
+        if (showPlayback) showPlaybackFeedback('play');
       } catch {
         setStatus('视频播放失败，请使用下载链接。', true);
       }
     } else {
       video.pause();
+      if (showPlayback) showPlaybackFeedback('pause');
     }
   }
 
@@ -279,20 +282,27 @@ function initialise(player) {
     }
     viewportClickTimer = window.setTimeout(() => {
       viewportClickTimer = null;
-      togglePlay();
+      togglePlay(true);
     }, VIEWPORT_CLICK_DELAY);
   }
 
-  function showFeedback(kind, message) {
+  function showFeedback(kind, message, delay = FEEDBACK_HIDE_DELAY, label = '') {
     if (feedbackTimer !== null) window.clearTimeout(feedbackTimer);
     feedbackTimer = null;
     feedback.dataset.silVideoFeedbackKind = kind;
     feedback.dataset.silVideoFeedbackVisible = 'true';
     feedbackText.textContent = message;
+    if (label) feedback.setAttribute('aria-label', label);
+    else feedback.removeAttribute('aria-label');
     feedbackTimer = window.setTimeout(() => {
       feedbackTimer = null;
       delete feedback.dataset.silVideoFeedbackVisible;
-    }, FEEDBACK_HIDE_DELAY);
+    }, delay);
+  }
+
+  function showPlaybackFeedback(action) {
+    const playing = action === 'play';
+    showFeedback(`playback-${action}`, '', PLAYBACK_FEEDBACK_HIDE_DELAY, playing ? '播放' : '暂停');
   }
 
   function showVolumeFeedback() {
@@ -548,7 +558,7 @@ function initialise(player) {
     if (defaultIndex >= 0) selectSubtitle(defaultIndex);
   }
 
-  listen(play, 'click', togglePlay);
+  listen(play, 'click', () => togglePlay());
   listen(viewport, 'click', handleViewportClick);
   listen(viewport, 'dblclick', event => event.preventDefault());
   listen(viewport, 'pointerdown', startGesture);

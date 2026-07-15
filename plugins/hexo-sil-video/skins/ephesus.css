@@ -47,6 +47,8 @@
 .sil-video-player__feedback .sil-video-player__icon { display:none;width:1.15em;height:1.15em;flex:none }
 .sil-video-player__feedback[data-sil-video-feedback-kind="volume"] .sil-video-player__icon--feedback-volume { display:block }
 .sil-video-player__feedback[data-sil-video-feedback-kind="brightness"] .sil-video-player__icon--feedback-brightness { display:block }
+.sil-video-player__feedback[data-sil-video-feedback-kind="playback-play"],.sil-video-player__feedback[data-sil-video-feedback-kind="playback-pause"] { width:4rem;height:4rem;max-width:none;padding:0;border-radius:50%;justify-content:center;gap:0;background:rgba(0,0,0,.58) }
+.sil-video-player__feedback[data-sil-video-feedback-kind="playback-play"] .sil-video-player__icon--feedback-play,.sil-video-player__feedback[data-sil-video-feedback-kind="playback-pause"] .sil-video-player__icon--feedback-pause { display:block;width:1.75rem;height:1.75rem }
 .sil-video-player__progress-row { display:none;grid-template-columns:3.25rem minmax(0,1fr) 3.25rem;align-items:center;gap:.65rem;min-height:2.5rem;margin-top:.65rem }
 .sil-video-player[data-sil-video-enhanced="true"] .sil-video-player__progress-row { display:grid }
 .sil-video-player__time { color:var(--sil-video-ink);font-size:.78rem;font-variant-numeric:tabular-nums;text-align:center }

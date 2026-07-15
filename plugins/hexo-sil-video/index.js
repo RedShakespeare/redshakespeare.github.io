@@ -338,13 +338,15 @@ function renderVideoPlayer(video) {
     icon('repeat', '<path d="M7 7h10l-2.5-2.5L16 3l5 5-5 5-1.5-1.5L17 9H7a3 3 0 0 0-3 3v1H2v-1a5 5 0 0 1 5-5zm10 8H7l2.5 2.5L8 19l-5-5 5-5 1.5 1.5L7 13h10a3 3 0 0 0 3-3V9h2v1a5 5 0 0 1-5 5z"/>');
   const feedbackIcon = icon('feedback-volume', `${speaker}<path d="M14.5 9.5a3.5 3.5 0 0 1 0 5m2-7a6.5 6.5 0 0 1 0 9" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.8"/>`);
   const brightnessIcon = icon('feedback-brightness', '<circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M4.9 4.9l1.4 1.4m11.4 11.4 1.4 1.4M19.1 4.9l-1.4 1.4M6.3 17.7l-1.4 1.4" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.8"/>');
+  const feedbackPlayIcon = icon('feedback-play', '<path d="M8 5v14l11-7z"/>');
+  const feedbackPauseIcon = icon('feedback-pause', '<path d="M7 5h4v14H7zm6 0h4v14h-4z"/>');
   return `${PLAYER_START}
 <aside class="sil-video-player" data-sil-video-player data-sil-video-model="${model}" tabindex="0" aria-label="视频播放器" style="--sil-video-aspect-ratio:${escapeHtml(video.aspectRatio)}">
   <div class="sil-video-player__stage" data-sil-video-stage tabindex="-1">
     <header class="sil-video-player__header"><span class="sil-video-player__title">${escapeHtml(video.title)}</span><span class="sil-video-player__status" data-sil-video-status role="status" aria-live="polite"></span></header>
     <div class="sil-video-player__viewport" data-sil-video-viewport>
       <div class="sil-video-player__media-layer" data-sil-video-media-layer style="--sil-video-brightness:1"><video class="sil-video-player__video" controls preload="${escapeHtml(video.preload)}"${poster}><source src="${escapeHtml(video.source)}"${type}>你的浏览器不支持 HTML5 视频播放。</video></div>
-      <div class="sil-video-player__feedback" data-sil-video-feedback role="status" aria-live="polite" aria-atomic="true">${feedbackIcon}${brightnessIcon}<span data-sil-video-feedback-text></span></div>
+      <div class="sil-video-player__feedback" data-sil-video-feedback role="status" aria-live="polite" aria-atomic="true">${feedbackIcon}${brightnessIcon}${feedbackPlayIcon}${feedbackPauseIcon}<span data-sil-video-feedback-text></span></div>
     </div>
     <div class="sil-video-player__progress-row">
       <span class="sil-video-player__time" data-sil-video-current>0:00</span>

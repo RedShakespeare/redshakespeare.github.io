@@ -109,6 +109,7 @@ async function browserPlayer(options = {}) {
   const viewport = document.querySelector('[data-sil-video-viewport]');
   const mediaLayer = document.querySelector('[data-sil-video-media-layer]');
   const video = document.querySelector('video');
+  const play = document.querySelector('[data-sil-video-action="play"]');
   const fullscreen = document.querySelector('[data-sil-video-action="fullscreen"]');
   const mute = document.querySelector('[data-sil-video-action="mute"]');
   const volume = document.querySelector('[data-sil-video-volume]');
@@ -131,6 +132,7 @@ async function browserPlayer(options = {}) {
   });
   video.play = async () => {
     playCalls += 1;
+    if (options.playReject) throw new Error('play rejected');
     video.paused = false;
     video.dispatchEvent(new window.Event('play'));
   };
@@ -176,6 +178,7 @@ async function browserPlayer(options = {}) {
     viewport,
     mediaLayer,
     video,
+    play,
     fullscreen,
     mute,
     volume,
@@ -300,6 +303,8 @@ test('rendered player exposes native fallback, custom controls, downloads, and r
   assert.match(html, /data-sil-video-feedback/);
   assert.match(html, /data-sil-video-feedback-text/);
   assert.match(html, /sil-video-player__icon--feedback-brightness/);
+  assert.match(html, /sil-video-player__icon--feedback-play/);
+  assert.match(html, /sil-video-player__icon--feedback-pause/);
   assert.match(html, /sil-video-player__icon--once/);
   assert.match(html, /sil-video-player__icon--repeat/);
   assert.match(html, /sil-video-player__icon--volume-low/);
@@ -375,6 +380,8 @@ test('Ephesus skin and runtime retain the specified palette and interaction cont
   assert.match(css, /data-sil-video-feedback-visible/);
   assert.match(css, /sil-video-player__media-layer \{[^}]*filter:brightness/);
   assert.match(css, /data-sil-video-feedback-kind="brightness"/);
+  assert.match(css, /data-sil-video-feedback-kind="playback-play"[^}]*border-radius:50%/);
+  assert.match(css, /data-sil-video-feedback-kind="playback-pause"[^}]*background:rgba\(0,0,0,\.58\)/);
   assert.match(css, /@media \(pointer:coarse\) \{[\s\S]*touch-action:none/);
   assert.match(css, /data-sil-video-fullscreen="true"[^}]*sil-video-player__subtitle-control/);
   assert.doesNotMatch(css, /@media screen and \(max-width:430px\) \{\s*\.sil-video-player__toolbar/);
@@ -389,6 +396,7 @@ test('Ephesus skin and runtime retain the specified palette and interaction cont
   assert.match(runtimeSource, /window\.setTimeout\([\s\S]*FULLSCREEN_UI_HIDE_DELAY/);
   assert.match(runtimeSource, /const VIEWPORT_CLICK_DELAY = 300/);
   assert.match(runtimeSource, /const FEEDBACK_HIDE_DELAY = 900/);
+  assert.match(runtimeSource, /const PLAYBACK_FEEDBACK_HIDE_DELAY = 600/);
   assert.match(runtimeSource, /const TOUCH_GESTURE_THRESHOLD = 12/);
   assert.match(runtimeSource, /const TOUCH_SEEK_SECONDS = 60/);
   assert.match(runtimeSource, /const WHEEL_PIXEL_STEP = 100/);
@@ -487,6 +495,66 @@ test('browser runtime distinguishes viewport single clicks from double clicks', 
     assert.equal(document.fullscreenElement, null);
   } finally {
     dom.window.close();
+  }
+});
+
+test('browser runtime shows circular play and pause feedback only for viewport single clicks', async () => {
+  const fixture = await browserPlayer();
+  const { dom, window, viewport, feedback, feedbackText, calls } = fixture;
+  try {
+    viewport.dispatchEvent(new window.MouseEvent('click', { bubbles: true, button: 0 }));
+    await wait(350);
+    assert.equal(calls.play, 1);
+    assert.equal(feedback.dataset.silVideoFeedbackKind, 'playback-play');
+    assert.equal(feedback.dataset.silVideoFeedbackVisible, 'true');
+    assert.equal(feedbackText.textContent, '');
+    assert.equal(feedback.getAttribute('aria-label'), '播放');
+    await wait(650);
+    assert.equal(feedback.dataset.silVideoFeedbackVisible, undefined);
+
+    viewport.dispatchEvent(new window.MouseEvent('click', { bubbles: true, button: 0 }));
+    await wait(350);
+    assert.equal(calls.pause, 1);
+    assert.equal(feedback.dataset.silVideoFeedbackKind, 'playback-pause');
+    assert.equal(feedback.dataset.silVideoFeedbackVisible, 'true');
+    assert.equal(feedbackText.textContent, '');
+    assert.equal(feedback.getAttribute('aria-label'), '暂停');
+  } finally {
+    dom.window.close();
+  }
+});
+
+test('browser runtime omits playback feedback for failures, controls, keyboard, and double clicks', async () => {
+  const failed = await browserPlayer({ playReject: true });
+  try {
+    failed.viewport.dispatchEvent(new failed.window.MouseEvent('click', { bubbles: true, button: 0 }));
+    await wait(350);
+    assert.equal(failed.calls.play, 1);
+    assert.equal(failed.player.dataset.silVideoError, 'true');
+    assert.equal(failed.feedback.dataset.silVideoFeedbackVisible, undefined);
+  } finally {
+    failed.dom.window.close();
+  }
+
+  const controls = await browserPlayer();
+  try {
+    controls.play.click();
+    await Promise.resolve();
+    assert.equal(controls.calls.play, 1);
+    assert.equal(controls.feedback.dataset.silVideoFeedbackVisible, undefined);
+    controls.player.focus();
+    controls.player.dispatchEvent(new controls.window.KeyboardEvent('keydown', { key: ' ', bubbles: true }));
+    assert.equal(controls.calls.pause, 1);
+    assert.equal(controls.feedback.dataset.silVideoFeedbackVisible, undefined);
+
+    controls.viewport.dispatchEvent(new controls.window.MouseEvent('click', { bubbles: true, button: 0 }));
+    controls.viewport.dispatchEvent(new controls.window.MouseEvent('click', { bubbles: true, button: 0 }));
+    controls.viewport.dispatchEvent(new controls.window.MouseEvent('dblclick', { bubbles: true, button: 0 }));
+    await wait(350);
+    assert.equal(controls.calls.fullscreenRequests, 1);
+    assert.equal(controls.feedback.dataset.silVideoFeedbackVisible, undefined);
+  } finally {
+    controls.dom.window.close();
   }
 });
 
