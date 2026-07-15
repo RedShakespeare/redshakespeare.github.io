@@ -68,7 +68,17 @@ function wait(milliseconds) {
   return new Promise(resolve => setTimeout(resolve, milliseconds));
 }
 
-async function browserPlayer() {
+function touchPointer(window, type, x, y, pointerId = 1) {
+  const event = new window.MouseEvent(type, { bubbles: true, cancelable: true, clientX: x, clientY: y });
+  Object.defineProperties(event, {
+    pointerId: { value: pointerId },
+    pointerType: { value: 'touch' },
+    isPrimary: { value: true }
+  });
+  return event;
+}
+
+async function browserPlayer(options = {}) {
   const html = renderVideoPlayer({
     title: 'Browser Fixture',
     source: '/files/video/demo.mp4',
@@ -97,6 +107,7 @@ async function browserPlayer() {
   const player = document.querySelector('[data-sil-video-player]');
   const stage = document.querySelector('[data-sil-video-stage]');
   const viewport = document.querySelector('[data-sil-video-viewport]');
+  const mediaLayer = document.querySelector('[data-sil-video-media-layer]');
   const video = document.querySelector('video');
   const fullscreen = document.querySelector('[data-sil-video-action="fullscreen"]');
   const mute = document.querySelector('[data-sil-video-action="mute"]');
@@ -108,6 +119,8 @@ async function browserPlayer() {
   let pauseCalls = 0;
   let fullscreenRequests = 0;
   let fullscreenExits = 0;
+  const orientationLocks = [];
+  let orientationUnlocks = 0;
   Object.defineProperties(video, {
     volume: { value: 0.8, writable: true },
     muted: { value: false, writable: true },
@@ -127,6 +140,21 @@ async function browserPlayer() {
     video.dispatchEvent(new window.Event('pause'));
   };
   Object.defineProperty(document, 'fullscreenElement', { value: null, writable: true });
+  if (options.orientation !== 'missing') {
+    Object.defineProperty(window.screen, 'orientation', {
+      configurable: true,
+      value: {
+        async lock(value) {
+          orientationLocks.push(value);
+          if (options.orientation === 'reject') throw new Error('orientation lock rejected');
+        },
+        unlock() { orientationUnlocks += 1; }
+      }
+    });
+  }
+  viewport.getBoundingClientRect = () => ({ x: 0, y: 0, top: 0, left: 0, right: 300, bottom: 200, width: 300, height: 200 });
+  viewport.setPointerCapture = () => {};
+  viewport.releasePointerCapture = () => {};
   stage.requestFullscreen = async () => {
     fullscreenRequests += 1;
     document.fullscreenElement = stage;
@@ -146,6 +174,7 @@ async function browserPlayer() {
     player,
     stage,
     viewport,
+    mediaLayer,
     video,
     fullscreen,
     mute,
@@ -157,7 +186,9 @@ async function browserPlayer() {
       get play() { return playCalls; },
       get pause() { return pauseCalls; },
       get fullscreenRequests() { return fullscreenRequests; },
-      get fullscreenExits() { return fullscreenExits; }
+      get fullscreenExits() { return fullscreenExits; },
+      get orientationLocks() { return orientationLocks; },
+      get orientationUnlocks() { return orientationUnlocks; }
     }
   };
 }
@@ -265,8 +296,10 @@ test('rendered player exposes native fallback, custom controls, downloads, and r
   assert.match(html, /data-sil-video-action="repeat"/);
   assert.match(html, /data-sil-video-action="fullscreen"/);
   assert.match(html, /data-sil-video-stage tabindex="-1"/);
+  assert.match(html, /data-sil-video-media-layer/);
   assert.match(html, /data-sil-video-feedback/);
   assert.match(html, /data-sil-video-feedback-text/);
+  assert.match(html, /sil-video-player__icon--feedback-brightness/);
   assert.match(html, /sil-video-player__icon--once/);
   assert.match(html, /sil-video-player__icon--repeat/);
   assert.match(html, /sil-video-player__icon--volume-low/);
@@ -340,6 +373,11 @@ test('Ephesus skin and runtime retain the specified palette and interaction cont
   assert.match(css, /sil-video-player__stage:fullscreen/);
   assert.match(css, /sil-video-player__feedback \{[^}]*color:var\(--sil-video-ink\)/);
   assert.match(css, /data-sil-video-feedback-visible/);
+  assert.match(css, /sil-video-player__media-layer \{[^}]*filter:brightness/);
+  assert.match(css, /data-sil-video-feedback-kind="brightness"/);
+  assert.match(css, /@media \(pointer:coarse\) \{[\s\S]*touch-action:none/);
+  assert.match(css, /data-sil-video-fullscreen="true"[^}]*sil-video-player__subtitle-control/);
+  assert.doesNotMatch(css, /@media screen and \(max-width:430px\) \{\s*\.sil-video-player__toolbar/);
   assert.match(css, /data-sil-video-ui-hidden/);
   assert.doesNotMatch(css, /sil-video-player:fullscreen/);
   assert.match(runtimeSource, /const rates = \[1, 1\.25, 1\.5, 1\.75, 2, 0\.5, 0\.75\]/);
@@ -351,6 +389,11 @@ test('Ephesus skin and runtime retain the specified palette and interaction cont
   assert.match(runtimeSource, /window\.setTimeout\([\s\S]*FULLSCREEN_UI_HIDE_DELAY/);
   assert.match(runtimeSource, /const VIEWPORT_CLICK_DELAY = 300/);
   assert.match(runtimeSource, /const FEEDBACK_HIDE_DELAY = 900/);
+  assert.match(runtimeSource, /const TOUCH_GESTURE_THRESHOLD = 12/);
+  assert.match(runtimeSource, /const TOUCH_SEEK_SECONDS = 60/);
+  assert.match(runtimeSource, /const WHEEL_PIXEL_STEP = 100/);
+  assert.match(runtimeSource, /const WHEEL_RESET_DELAY = 250/);
+  assert.match(runtimeSource, /orientation\?\.lock\?\.\('landscape'\)/);
   assert.match(runtimeSource, /focusWithoutScroll\(stage\)/);
   assert.match(runtimeSource, /focusWithoutScroll\(player\)/);
   assert.match(runtimeSource, /event\.key === 'Enter'/);
@@ -374,6 +417,7 @@ test('browser runtime keeps shortcuts focused through fullscreen entry and exit'
     await Promise.resolve();
     assert.equal(document.fullscreenElement, stage);
     assert.equal(document.activeElement, stage);
+    assert.deepEqual(calls.orientationLocks, ['landscape']);
     stage.dispatchEvent(new window.KeyboardEvent('keydown', { key: 'ArrowUp', bubbles: true }));
     assert.ok(Math.abs(video.volume - 0.85) < Number.EPSILON * 2);
     assert.equal(feedback.dataset.silVideoFeedbackKind, 'volume');
@@ -385,6 +429,7 @@ test('browser runtime keeps shortcuts focused through fullscreen entry and exit'
     assert.equal(calls.fullscreenExits, 1);
     assert.equal(document.fullscreenElement, null);
     assert.equal(document.activeElement, player);
+    assert.equal(calls.orientationUnlocks, 1);
 
     player.dispatchEvent(new window.KeyboardEvent('keydown', { key: 'ArrowRight', bubbles: true }));
     assert.equal(video.currentTime, 25);
@@ -392,6 +437,24 @@ test('browser runtime keeps shortcuts focused through fullscreen entry and exit'
     assert.equal(feedbackText.textContent, '0:25/1:40');
   } finally {
     dom.window.close();
+  }
+});
+
+test('browser runtime degrades cleanly when orientation locking is unavailable or rejected', async () => {
+  for (const orientation of ['missing', 'reject']) {
+    const fixture = await browserPlayer({ orientation });
+    const { dom, document, stage, fullscreen, calls } = fixture;
+    try {
+      fullscreen.click();
+      await Promise.resolve();
+      await Promise.resolve();
+      assert.equal(document.fullscreenElement, stage);
+      if (orientation === 'reject') assert.deepEqual(calls.orientationLocks, ['landscape']);
+      await document.exitFullscreen();
+      assert.equal(document.fullscreenElement, null);
+    } finally {
+      dom.window.close();
+    }
   }
 });
 
@@ -455,6 +518,104 @@ test('browser runtime shows feedback for every user volume and progress adjustme
     assert.equal(feedback.dataset.silVideoFeedbackVisible, 'true');
     await wait(950);
     assert.equal(feedback.dataset.silVideoFeedbackVisible, undefined);
+  } finally {
+    dom.window.close();
+  }
+});
+
+test('browser runtime handles touch progress, brightness, and volume gestures in and out of fullscreen', async () => {
+  const fixture = await browserPlayer();
+  const { dom, window, document, stage, viewport, mediaLayer, video, fullscreen, feedback, feedbackText, calls } = fixture;
+  try {
+    viewport.dispatchEvent(touchPointer(window, 'pointerdown', 150, 100));
+    viewport.dispatchEvent(touchPointer(window, 'pointermove', 300, 103));
+    assert.equal(video.currentTime, 20);
+    assert.equal(feedback.dataset.silVideoFeedbackKind, 'progress');
+    assert.equal(feedbackText.textContent, '0:50/1:40');
+    viewport.dispatchEvent(touchPointer(window, 'pointerup', 300, 103));
+    assert.equal(video.currentTime, 50);
+
+    viewport.dispatchEvent(touchPointer(window, 'pointerdown', 150, 100, 4));
+    viewport.dispatchEvent(touchPointer(window, 'pointermove', 0, 100, 4));
+    assert.equal(feedbackText.textContent, '0:20/1:40');
+    viewport.dispatchEvent(touchPointer(window, 'pointercancel', 0, 100, 4));
+    assert.equal(video.currentTime, 50);
+
+    viewport.dispatchEvent(new window.MouseEvent('click', { bubbles: true, button: 0 }));
+    await wait(350);
+    assert.equal(calls.play, 0);
+
+    viewport.dispatchEvent(touchPointer(window, 'pointerdown', 50, 100, 2));
+    viewport.dispatchEvent(touchPointer(window, 'pointermove', 50, 50, 2));
+    assert.equal(mediaLayer.style.getPropertyValue('--sil-video-brightness'), '1.5');
+    assert.equal(feedback.dataset.silVideoFeedbackKind, 'brightness');
+    assert.equal(feedbackText.textContent, '150%');
+    viewport.dispatchEvent(touchPointer(window, 'pointerup', 50, 50, 2));
+
+    viewport.dispatchEvent(touchPointer(window, 'pointerdown', 50, 100, 5));
+    viewport.dispatchEvent(touchPointer(window, 'pointermove', 50, 0, 5));
+    assert.equal(mediaLayer.style.getPropertyValue('--sil-video-brightness'), '2');
+    assert.equal(feedbackText.textContent, '200%');
+    viewport.dispatchEvent(touchPointer(window, 'pointerup', 50, 0, 5));
+
+    viewport.dispatchEvent(touchPointer(window, 'pointerdown', 50, 100, 6));
+    viewport.dispatchEvent(touchPointer(window, 'pointermove', 50, 300, 6));
+    assert.equal(mediaLayer.style.getPropertyValue('--sil-video-brightness'), '0');
+    assert.equal(feedbackText.textContent, '0%');
+    viewport.dispatchEvent(touchPointer(window, 'pointerup', 50, 300, 6));
+
+    fullscreen.click();
+    await Promise.resolve();
+    assert.equal(document.fullscreenElement, stage);
+    viewport.dispatchEvent(touchPointer(window, 'pointerdown', 250, 100, 3));
+    viewport.dispatchEvent(touchPointer(window, 'pointermove', 250, 200, 3));
+    assert.ok(Math.abs(video.volume - 0.3) < Number.EPSILON * 4);
+    assert.equal(feedback.dataset.silVideoFeedbackKind, 'volume');
+    assert.equal(feedbackText.textContent, '30%');
+    viewport.dispatchEvent(touchPointer(window, 'pointerup', 250, 200, 3));
+  } finally {
+    dom.window.close();
+  }
+});
+
+test('browser runtime gates mouse-wheel volume by focus and normalises trackpad deltas', async () => {
+  const fixture = await browserPlayer();
+  const { dom, window, stage, viewport, video, fullscreen, feedbackText } = fixture;
+  try {
+    stage.focus();
+    const upward = new window.WheelEvent('wheel', { bubbles: true, cancelable: true, deltaY: -100, deltaMode: 0 });
+    viewport.dispatchEvent(upward);
+    assert.equal(upward.defaultPrevented, true);
+    assert.ok(Math.abs(video.volume - 0.85) < Number.EPSILON * 4);
+    assert.equal(feedbackText.textContent, '85%');
+
+    const trackpadOne = new window.WheelEvent('wheel', { bubbles: true, cancelable: true, deltaY: -50, deltaMode: 0 });
+    viewport.dispatchEvent(trackpadOne);
+    assert.ok(Math.abs(video.volume - 0.85) < Number.EPSILON * 4);
+    const trackpadTwo = new window.WheelEvent('wheel', { bubbles: true, cancelable: true, deltaY: -50, deltaMode: 0 });
+    viewport.dispatchEvent(trackpadTwo);
+    assert.ok(Math.abs(video.volume - 0.9) < Number.EPSILON * 4);
+
+    await wait(300);
+    viewport.dispatchEvent(new window.WheelEvent('wheel', { bubbles: true, cancelable: true, deltaY: -50, deltaMode: 0 }));
+    await wait(300);
+    viewport.dispatchEvent(new window.WheelEvent('wheel', { bubbles: true, cancelable: true, deltaY: -50, deltaMode: 0 }));
+    assert.ok(Math.abs(video.volume - 0.9) < Number.EPSILON * 4);
+
+    const lineDown = new window.WheelEvent('wheel', { bubbles: true, cancelable: true, deltaY: 1, deltaMode: 1 });
+    viewport.dispatchEvent(lineDown);
+    assert.ok(Math.abs(video.volume - 0.85) < Number.EPSILON * 4);
+
+    const horizontal = new window.WheelEvent('wheel', { bubbles: true, cancelable: true, deltaX: 100, deltaY: 10, deltaMode: 0 });
+    viewport.dispatchEvent(horizontal);
+    assert.equal(horizontal.defaultPrevented, false);
+    assert.ok(Math.abs(video.volume - 0.85) < Number.EPSILON * 4);
+
+    fullscreen.focus();
+    const unfocused = new window.WheelEvent('wheel', { bubbles: true, cancelable: true, deltaY: -100, deltaMode: 0 });
+    viewport.dispatchEvent(unfocused);
+    assert.equal(unfocused.defaultPrevented, false);
+    assert.ok(Math.abs(video.volume - 0.85) < Number.EPSILON * 4);
   } finally {
     dom.window.close();
   }

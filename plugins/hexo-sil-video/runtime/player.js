@@ -6,8 +6,17 @@ const selector = '.sil-video-player[data-sil-video-player]';
 const rates = [1, 1.25, 1.5, 1.75, 2, 0.5, 0.75];
 const VIEWPORT_CLICK_DELAY = 300;
 const FEEDBACK_HIDE_DELAY = 900;
+const TOUCH_GESTURE_THRESHOLD = 12;
+const TOUCH_SEEK_SECONDS = 60;
+const GESTURE_CLICK_SUPPRESS_DELAY = 500;
+const WHEEL_PIXEL_STEP = 100;
+const WHEEL_RESET_DELAY = 250;
 const { FULLSCREEN_UI_HIDE_DELAY, VOLUME_CLOSE_DELAY, volumeLevel } = playerState;
 const instances = new Map();
+
+function clamp(value, minimum, maximum) {
+  return Math.max(minimum, Math.min(maximum, value));
+}
 
 function formatTime(value) {
   const seconds = Math.max(0, Math.floor(Number(value) || 0));
@@ -52,6 +61,7 @@ function initialise(player) {
   const video = player.querySelector('.sil-video-player__video');
   const stage = player.querySelector('[data-sil-video-stage]');
   const viewport = player.querySelector('[data-sil-video-viewport]');
+  const mediaLayer = player.querySelector('[data-sil-video-media-layer]');
   const feedback = player.querySelector('[data-sil-video-feedback]');
   const feedbackText = player.querySelector('[data-sil-video-feedback-text]');
   const progress = player.querySelector('[data-sil-video-progress]');
@@ -67,7 +77,7 @@ function initialise(player) {
   const subtitleMenu = player.querySelector('[data-sil-video-subtitle-menu]');
   const fullscreen = player.querySelector('[data-sil-video-action="fullscreen"]');
   const volumeControl = player.querySelector('.sil-video-player__volume-control');
-  if (!video || !stage || !viewport || !feedback || !feedbackText || !progress || !volume || !current || !duration || !status || !play || !mute || !rate || !repeat || !subtitles || !subtitleMenu || !fullscreen || !volumeControl) return;
+  if (!video || !stage || !viewport || !mediaLayer || !feedback || !feedbackText || !progress || !volume || !current || !duration || !status || !play || !mute || !rate || !repeat || !subtitles || !subtitleMenu || !fullscreen || !volumeControl) return;
 
   let model;
   try {
@@ -88,6 +98,11 @@ function initialise(player) {
   let fullscreenUiTimer = null;
   let viewportClickTimer = null;
   let feedbackTimer = null;
+  let wheelResetTimer = null;
+  let wheelPixelDelta = 0;
+  let gesture = null;
+  let suppressViewportClickUntil = 0;
+  let brightness = 1;
   let wasFullscreen = false;
 
   function listen(target, event, handler, options) {
@@ -111,6 +126,27 @@ function initialise(player) {
 
   function fullscreenActive() {
     return document.fullscreenElement === stage;
+  }
+
+  function shortcutSurfaceFocused() {
+    const focused = document.activeElement;
+    return focused === player || focused === stage || focused === video || focused === viewport;
+  }
+
+  async function lockLandscape() {
+    try {
+      await window.screen?.orientation?.lock?.('landscape');
+    } catch {
+      // Orientation locking is best-effort and commonly unavailable outside Android fullscreen.
+    }
+  }
+
+  function unlockOrientation() {
+    try {
+      window.screen?.orientation?.unlock?.();
+    } catch {
+      // The browser may expose orientation information without allowing explicit unlocks.
+    }
   }
 
   function controlsKeepFullscreenUiOpen() {
@@ -193,12 +229,14 @@ function initialise(player) {
     if (active) {
       wasFullscreen = true;
       focusWithoutScroll(stage);
+      lockLandscape();
       scheduleFullscreenUiHide();
     } else {
       clearFullscreenUiTimer();
       delete stage.dataset.silVideoUiHidden;
       if (wasFullscreen) {
         wasFullscreen = false;
+        unlockOrientation();
         focusWithoutScroll(player);
       }
     }
@@ -232,6 +270,7 @@ function initialise(player) {
   }
 
   function handleViewportClick() {
+    if (Date.now() < suppressViewportClickUntil) return;
     focusWithoutScroll(stage);
     if (viewportClickTimer !== null) {
       clearViewportClickTimer();
@@ -261,9 +300,15 @@ function initialise(player) {
     showFeedback('volume', `${Math.round(effectiveVolume * 100)}%`);
   }
 
-  function showProgressFeedback() {
+  function showProgressFeedback(position = video.currentTime) {
     if (!Number.isFinite(video.duration) || video.duration <= 0) return;
-    showFeedback('progress', `${formatTime(video.currentTime)}/${formatTime(video.duration)}`);
+    showFeedback('progress', `${formatTime(position)}/${formatTime(video.duration)}`);
+  }
+
+  function setBrightness(value, announce = true) {
+    brightness = clamp(value, 0, 2);
+    mediaLayer.style.setProperty('--sil-video-brightness', String(brightness));
+    if (announce) showFeedback('brightness', `${Math.round(brightness * 100)}%`);
   }
 
   function toggleMute() {
@@ -285,11 +330,109 @@ function initialise(player) {
     showVolumeFeedback();
   }
 
+  function setGestureVolume(value) {
+    video.volume = clamp(value, 0, 1);
+    video.muted = video.volume === 0;
+    if (video.volume > 0) lastVolume = video.volume;
+    syncVolume();
+    showVolumeFeedback();
+  }
+
   function seek(delta) {
     if (!Number.isFinite(video.duration)) return;
     video.currentTime = Math.max(0, Math.min(video.duration, video.currentTime + delta));
     syncTime();
     showProgressFeedback();
+  }
+
+  function pointerIsPrimaryTouch(event) {
+    return event.pointerType === 'touch' && event.isPrimary !== false;
+  }
+
+  function startGesture(event) {
+    if (!pointerIsPrimaryTouch(event) || gesture) return;
+    const bounds = viewport.getBoundingClientRect();
+    if (bounds.width <= 0 || bounds.height <= 0) return;
+    gesture = {
+      pointerId: event.pointerId,
+      bounds,
+      startX: event.clientX,
+      startY: event.clientY,
+      startTime: Number.isFinite(video.currentTime) ? video.currentTime : 0,
+      targetTime: Number.isFinite(video.currentTime) ? video.currentTime : 0,
+      startVolume: video.muted ? 0 : video.volume,
+      startBrightness: brightness,
+      mode: ''
+    };
+    try { viewport.setPointerCapture(event.pointerId); } catch { /* Pointer capture is optional. */ }
+  }
+
+  function moveGesture(event) {
+    if (!gesture || event.pointerId !== gesture.pointerId || !pointerIsPrimaryTouch(event)) return;
+    const deltaX = event.clientX - gesture.startX;
+    const deltaY = event.clientY - gesture.startY;
+    if (!gesture.mode) {
+      if (Math.max(Math.abs(deltaX), Math.abs(deltaY)) < TOUCH_GESTURE_THRESHOLD) return;
+      gesture.mode = Math.abs(deltaX) >= Math.abs(deltaY)
+        ? 'progress'
+        : gesture.startX - gesture.bounds.left < gesture.bounds.width / 2 ? 'brightness' : 'volume';
+      clearViewportClickTimer();
+      suppressViewportClickUntil = Date.now() + GESTURE_CLICK_SUPPRESS_DELAY;
+    }
+    if (event.cancelable) event.preventDefault();
+    if (gesture.mode === 'progress') {
+      if (!Number.isFinite(video.duration) || video.duration <= 0) return;
+      gesture.targetTime = clamp(gesture.startTime + deltaX / gesture.bounds.width * TOUCH_SEEK_SECONDS, 0, video.duration);
+      showProgressFeedback(gesture.targetTime);
+    } else if (gesture.mode === 'brightness') {
+      setBrightness(gesture.startBrightness - deltaY / gesture.bounds.height * 2);
+    } else if (gesture.mode === 'volume') {
+      setGestureVolume(gesture.startVolume - deltaY / gesture.bounds.height);
+    }
+  }
+
+  function finishGesture(event, commit) {
+    if (!gesture || event.pointerId !== gesture.pointerId) return;
+    const completed = gesture;
+    gesture = null;
+    try { viewport.releasePointerCapture(completed.pointerId); } catch { /* Pointer capture may already be lost. */ }
+    if (!completed.mode) return;
+    suppressViewportClickUntil = Date.now() + GESTURE_CLICK_SUPPRESS_DELAY;
+    if (commit && completed.mode === 'progress' && Number.isFinite(video.duration) && video.duration > 0) {
+      video.currentTime = completed.targetTime;
+      syncTime();
+      showProgressFeedback(completed.targetTime);
+    }
+  }
+
+  function clearWheelResetTimer() {
+    if (wheelResetTimer !== null) window.clearTimeout(wheelResetTimer);
+    wheelResetTimer = null;
+  }
+
+  function scheduleWheelReset() {
+    clearWheelResetTimer();
+    wheelResetTimer = window.setTimeout(() => {
+      wheelResetTimer = null;
+      wheelPixelDelta = 0;
+    }, WHEEL_RESET_DELAY);
+  }
+
+  function handleWheel(event) {
+    if (!shortcutSurfaceFocused() || Math.abs(event.deltaX) > Math.abs(event.deltaY) || event.deltaY === 0) return;
+    event.preventDefault();
+    let steps = 0;
+    if (event.deltaMode === 0) {
+      wheelPixelDelta += event.deltaY;
+      steps = Math.trunc(wheelPixelDelta / WHEEL_PIXEL_STEP);
+      wheelPixelDelta -= steps * WHEEL_PIXEL_STEP;
+      scheduleWheelReset();
+    } else {
+      clearWheelResetTimer();
+      wheelPixelDelta = 0;
+      steps = Math.sign(event.deltaY);
+    }
+    if (steps !== 0) adjustVolume(-steps * 0.05);
   }
 
   function setVolumeOpen(open) {
@@ -408,6 +551,12 @@ function initialise(player) {
   listen(play, 'click', togglePlay);
   listen(viewport, 'click', handleViewportClick);
   listen(viewport, 'dblclick', event => event.preventDefault());
+  listen(viewport, 'pointerdown', startGesture);
+  listen(viewport, 'pointermove', moveGesture);
+  listen(viewport, 'pointerup', event => finishGesture(event, true));
+  listen(viewport, 'pointercancel', event => finishGesture(event, false));
+  listen(viewport, 'lostpointercapture', event => finishGesture(event, false));
+  listen(viewport, 'wheel', handleWheel, { passive: false });
   listen(mute, 'click', event => {
     if (event.pointerType === 'touch') setVolumeOpen(player.dataset.silVideoVolumeOpen !== 'true');
     toggleMute();
@@ -498,6 +647,7 @@ function initialise(player) {
   syncTime();
   syncDuration();
   syncVolume();
+  setBrightness(1, false);
   syncRepeat();
   syncFullscreen();
 
@@ -509,6 +659,7 @@ function initialise(player) {
       if (volumeCloseTimer !== null) window.clearTimeout(volumeCloseTimer);
       clearViewportClickTimer();
       if (feedbackTimer !== null) window.clearTimeout(feedbackTimer);
+      clearWheelResetTimer();
       clearFullscreenUiTimer();
       for (const cleanup of cleanups) cleanup();
       if (subtitleRenderer) {
