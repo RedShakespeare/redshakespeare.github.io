@@ -1,7 +1,8 @@
 .sil-video-player {
   --sil-video-surface:#fff;
   --sil-video-ink:#8064a2;
-  --sil-video-buffered:rgba(128,100,162,.8);
+  --sil-video-buffered:rgba(128,100,162,.24);
+  --sil-video-buffered:color-mix(in srgb,var(--sil-video-ink) 24%,transparent);
   --sil-video-border:#8064a2;
   --sil-video-rail:#eee8f5;
   --sil-video-hover:#f5f1fa;
@@ -21,7 +22,8 @@
 .sil-video-player[data-sil-video-theme="dark"] {
   --sil-video-surface:#000;
   --sil-video-ink:#673ab7;
-  --sil-video-buffered:rgba(103,58,183,.8);
+  --sil-video-buffered:rgba(103,58,183,.34);
+  --sil-video-buffered:color-mix(in srgb,var(--sil-video-ink) 34%,transparent);
   --sil-video-border:#673ab7;
   --sil-video-rail:rgba(103,58,183,.24);
   --sil-video-hover:rgba(103,58,183,.14);
@@ -104,7 +106,7 @@
 .sil-video-player__subtitle-downloads { display:flex;flex-wrap:wrap;gap:.35rem .75rem;margin-top:.5rem;font-size:.72rem }
 .sil-video-player__subtitle-downloads:empty { display:none }
 .sil-video-player__subtitle-downloads a { color:var(--sil-video-ink) }
-.sil-video-player__stage:fullscreen { --sil-video-surface:#000;--sil-video-ink:#673ab7;--sil-video-border:#673ab7;--sil-video-rail:rgba(103,58,183,.32);--sil-video-hover:rgba(103,58,183,.2);--sil-video-focus:#673ab7;width:100vw;height:100vh;overflow:hidden;background:#000;color:#673ab7;color-scheme:dark }
+.sil-video-player__stage:fullscreen { --sil-video-surface:#000;--sil-video-ink:#673ab7;--sil-video-buffered:rgba(103,58,183,.42);--sil-video-buffered:color-mix(in srgb,var(--sil-video-ink) 42%,transparent);--sil-video-border:#673ab7;--sil-video-rail:rgba(103,58,183,.32);--sil-video-hover:rgba(103,58,183,.2);--sil-video-focus:#673ab7;width:100vw;height:100vh;overflow:hidden;background:#000;color:#673ab7;color-scheme:dark }
 .sil-video-player__stage:fullscreen .sil-video-player__viewport { position:absolute;inset:0;width:100%;height:100%;aspect-ratio:auto;border:0;border-radius:0 }
 .sil-video-player__stage:fullscreen .sil-video-player__video { width:100vw;height:100vh }
 .sil-video-player__stage:fullscreen .sil-video-player__header { position:absolute;z-index:4;top:0;right:0;left:0;box-sizing:border-box;min-height:3.25rem;margin:0;padding:.75rem 1rem;background:rgba(0,0,0,.82);color:#673ab7;transition:opacity .18s ease-in-out }

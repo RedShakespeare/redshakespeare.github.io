@@ -182,8 +182,10 @@ test('Ephesus skin owns the player appearance while the core retains interaction
   assert.match(css, /--sil-audio-surface:#fff/);
   assert.match(css, /--sil-audio-surface:#000/);
   assert.match(css, /--sil-audio-ink:#8064a2/);
-  assert.match(css, /--sil-audio-buffered:rgba\(128,100,162,\.8\)/);
-  assert.match(css, /--sil-audio-buffered:var\(--inside-accent-color-08,rgba\(103,58,183,\.8\)\)/);
+  assert.match(css, /--sil-audio-buffered:rgba\(128,100,162,\.24\)/);
+  assert.match(css, /--sil-audio-buffered:color-mix\(in srgb,var\(--sil-audio-ink\) 24%,transparent\)/);
+  assert.match(css, /--sil-audio-buffered:rgba\(103,58,183,\.3\)/);
+  assert.match(css, /--sil-audio-buffered:color-mix\(in srgb,var\(--sil-audio-ink\) 30%,transparent\)/);
   assert.match(css, /--sil-audio-stack-gap:1rem/);
   assert.match(css, /--sil-audio-coordinate-inset-left:calc\(var\(--sil-audio-stack-gap\) \+ var\(--sil-audio-accent-border-width\)\)/);
   assert.match(css, /--sil-audio-coordinate-inset-right:calc\(var\(--sil-audio-stack-gap\) \+ var\(--sil-audio-border-width\)\)/);

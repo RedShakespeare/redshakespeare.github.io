@@ -45,7 +45,7 @@
     "hexo-server": "^3.0.0",
     "hexo-sil-archive": "^0.1.0",
     "hexo-sil-assets": "^0.1.1",
-    "hexo-sil-audio": "^0.1.2",
+    "hexo-sil-audio": "^0.1.3",
     "hexo-sil-podcast": "^0.1.0",
     "hexo-sil-podcast-inside": "^0.1.0",
     "hexo-theme-inside": "2.7.0",
