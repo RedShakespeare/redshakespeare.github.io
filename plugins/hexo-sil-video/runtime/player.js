@@ -12,6 +12,7 @@ import contract from '../lib/player-contract.js';
 
 const instances = new Map();
 const destroying = new WeakMap();
+const failures = new WeakMap();
 const diagnostics = createDiagnostics();
 let runtimeDestroyed = false;
 
@@ -34,14 +35,25 @@ function showFallbackError(player, message) {
   if (status) status.textContent = message;
 }
 
+function recordFailure(player, source, scope, error, message = error.message) {
+  const previous = failures.get(player);
+  if (previous && previous.source === source) return;
+  failures.set(player, { source, scope, message });
+  showFallbackError(player, message);
+  diagnostics.report(scope, error);
+}
+
 function initialise(player) {
   if (instances.has(player) || destroying.has(player) || player.dataset.silVideoReady === 'true') return;
+  const source = player.dataset.silVideoModel || '';
+  const previousFailure = failures.get(player);
+  if (previousFailure && previousFailure.source === source) return;
+  if (previousFailure) failures.delete(player);
   let refs;
   try {
     refs = createPlayerView(player);
   } catch (error) {
-    showFallbackError(player, error.message);
-    diagnostics.report('view', error);
+    recordFailure(player, source, 'view', error);
     return;
   }
 
@@ -49,8 +61,7 @@ function initialise(player) {
   try {
     model = parseModel(player);
   } catch (error) {
-    showFallbackError(player, error.message);
-    diagnostics.report('model', error);
+    recordFailure(player, source, 'model', error);
     return;
   }
 
@@ -156,6 +167,7 @@ function initialise(player) {
       }
     };
     instances.set(player, instance);
+    failures.delete(player);
     instance.refreshTheme();
   } catch (error) {
     for (const controller of controllers.reverse()) Promise.resolve(controller.destroy()).catch(destroyError => {
@@ -164,7 +176,7 @@ function initialise(player) {
     refs.video.controls = true;
     state.destroy();
     ui.destroy();
-    showFallbackError(player, `播放器初始化失败：${error.message}`);
+    recordFailure(player, source, 'initialise', error, `播放器初始化失败：${error.message}`);
   }
 }
 

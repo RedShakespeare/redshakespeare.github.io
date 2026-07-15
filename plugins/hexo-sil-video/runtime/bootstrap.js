@@ -14,6 +14,18 @@
   const loadedStyles = new Set();
   let loadedCore = false;
 
+  function report(error) {
+    try { console.error('[hexo-sil-video:bootstrap]', error); } catch { /* Diagnostics must not block fallback. */ }
+  }
+
+  function resourceError(kind, url) {
+    const error = new Error(`播放器${kind}加载失败：${url}`);
+    error.code = 'SIL_VIDEO_BOOTSTRAP_RESOURCE';
+    error.kind = kind;
+    error.url = url;
+    return error;
+  }
+
   function fallback(message) {
     document.querySelectorAll(selector).forEach(player => {
       player.dataset.silVideoError = 'true';
@@ -32,7 +44,7 @@
       link.href = url;
       link.dataset.silVideoStyle = 'true';
       link.onload = resolve;
-      link.onerror = () => { link.remove(); reject(new Error('style')); };
+      link.onerror = () => { link.remove(); reject(resourceError('样式', url)); };
       link.addEventListener('load', () => loadedStyles.add(url), { once: true });
       document.head.append(link);
     });
@@ -46,7 +58,7 @@
       script.defer = true;
       script.dataset.silVideoCore = 'true';
       script.onload = resolve;
-      script.onerror = () => { script.remove(); reject(new Error('script')); };
+      script.onerror = () => { script.remove(); reject(resourceError('核心脚本', config.script)); };
       script.addEventListener('load', () => { loadedCore = true; }, { once: true });
       document.head.append(script);
     });
@@ -56,8 +68,9 @@
     if (pending) return pending;
     pending = config.styles.reduce((promise, url) => promise.then(() => loadStyle(url)), Promise.resolve())
       .then(loadCore)
-      .catch(() => {
+      .catch(error => {
         pending = null;
+        report(error);
         fallback('播放器资源加载失败，请使用原生控件。');
       });
     return pending;

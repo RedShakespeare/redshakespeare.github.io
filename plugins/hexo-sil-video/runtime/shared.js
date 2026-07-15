@@ -1,4 +1,6 @@
-import playerState from '../lib/player-state.js';
+import { FULLSCREEN_UI_HIDE_DELAY, VOLUME_CLOSE_DELAY, volumeLevel } from './state-values.js';
+
+export { FULLSCREEN_UI_HIDE_DELAY, VOLUME_CLOSE_DELAY, volumeLevel };
 
 export const selector = '.sil-video-player[data-sil-video-player]';
 export const rates = [1, 1.25, 1.5, 1.75, 2, 0.5, 0.75];
@@ -12,7 +14,6 @@ export const TOUCH_CLICK_FALLBACK_DELAY = 750;
 export const GESTURE_CLICK_SUPPRESS_DELAY = 500;
 export const WHEEL_PIXEL_STEP = 100;
 export const WHEEL_RESET_DELAY = 250;
-export const { FULLSCREEN_UI_HIDE_DELAY, VOLUME_CLOSE_DELAY, volumeLevel } = playerState;
 
 export function clamp(value, minimum, maximum) {
   return Math.max(minimum, Math.min(maximum, value));

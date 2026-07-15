@@ -8,7 +8,11 @@ function createVideoConfig({ builtinSkins, fontMimeTypes, runtimeRoutes }) {
   }
 
   function normaliseRelativeDirectory(value, fallback, field) {
-    const directory = String(value == null ? fallback : value).trim().replace(/\\/g, '/').replace(/^\/+|\/+$/g, '');
+    const raw = String(value == null ? fallback : value).trim();
+    if (!raw || raw.startsWith('/') || /[^\x21-\x7E]/.test(raw) || raw.includes('\\') || raw.includes('?') || raw.includes('#')) {
+      throw new Error(`Video configuration error: ${field} must be an ASCII relative directory.`);
+    }
+    const directory = raw.replace(/^\/+|\/+$/g, '');
     const segments = directory.split('/');
     if (!directory || segments.some(segment => !segment || segment === '.' || segment === '..')) {
       throw new Error(`Video configuration error: ${field} must be a non-empty relative directory.`);
@@ -85,6 +89,17 @@ function createVideoConfig({ builtinSkins, fontMimeTypes, runtimeRoutes }) {
       fonts[name] = file;
     }
     return fonts;
+  }
+
+  function normaliseRoutes(value) {
+    if (!isObject(value)) throw new Error('Video configuration error: runtime.routes must be a mapping.');
+    const names = ['script', 'subtitles', 'worker', 'wasm', 'modernWasm', 'defaultFont'];
+    return Object.fromEntries(names.map(name => {
+      if (typeof value[name] !== 'string' || !value[name].trim()) {
+        throw new Error(`Video configuration error: runtime.routes.${name} must be a relative path.`);
+      }
+      return [name, normaliseRelativeFile(value[name], `runtime.routes.${name}`)];
+    }));
   }
 
   function toVideoConfig(siteConfig = {}) {
@@ -170,7 +185,7 @@ function createVideoConfig({ builtinSkins, fontMimeTypes, runtimeRoutes }) {
       preload,
       aspectRatio,
       subtitles: { fonts, fallbackFont },
-      routes: runtime.routes || runtimeRoutes
+      routes: normaliseRoutes(runtime.routes || runtimeRoutes)
     };
   }
 

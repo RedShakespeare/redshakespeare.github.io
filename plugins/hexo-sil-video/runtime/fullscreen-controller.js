@@ -27,8 +27,9 @@ export function createFullscreenController({
   let wasFullscreen = false;
   let hidden = false;
   let pointerActivityGuard = () => false;
-  let togglePromise = null;
-  let toggleTarget = null;
+  let actionQueue = null;
+  let destroying = false;
+  let destroyed = false;
 
   function active() {
     return documentRef.fullscreenElement === stage;
@@ -128,15 +129,25 @@ export function createFullscreenController({
     }) ?? null;
   }
 
-  async function toggle() {
-    const target = !active();
-    if (togglePromise && toggleTarget === target) return togglePromise;
-    toggleTarget = target;
-    togglePromise = (target
-      ? request(() => stage.requestFullscreen(), '无法进入全屏。')
-      : request(() => documentRef.exitFullscreen(), '无法退出全屏。'))
-      .finally(() => { togglePromise = null; toggleTarget = null; });
-    return togglePromise;
+  function enqueueAction(action) {
+    let result;
+    if (actionQueue) result = actionQueue.then(action, action);
+    else {
+      try { result = Promise.resolve(action()); } catch (error) { result = Promise.reject(error); }
+    }
+    actionQueue = result.catch(() => {});
+    return result;
+  }
+
+  function toggle() {
+    if (destroyed || destroying) return Promise.resolve(false);
+    return enqueueAction(async () => {
+      if (destroyed) return false;
+      const target = !active();
+      return target
+        ? request(() => stage.requestFullscreen(), '无法进入全屏。')
+        : request(() => documentRef.exitFullscreen(), '无法退出全屏。');
+    });
   }
 
   function handlePointerActivity(event) {
@@ -158,7 +169,10 @@ export function createFullscreenController({
     syncPlayback,
     toggle,
     async destroy() {
-      if (togglePromise) await togglePromise;
+      if (destroyed) return;
+      destroying = true;
+      if (actionQueue) await actionQueue;
+      destroyed = true;
       clearUiTimer();
       projectUiHidden(false);
       if (resizeFrame !== null) cancelFrame(resizeFrame);

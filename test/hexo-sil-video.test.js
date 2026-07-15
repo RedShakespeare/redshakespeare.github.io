@@ -9,6 +9,7 @@ const path = require('node:path');
 const test = require('node:test');
 const { JSDOM } = require('jsdom');
 const subsrt = require('subsrt');
+const { createVideoDemandRegistry } = require('../plugins/hexo-sil-video/lib/video-demand');
 const {
   BUILTIN_SKINS,
   BOOTSTRAP_MAX_BYTES,
@@ -286,6 +287,9 @@ test('video configuration follows the shared prefix and safe legacy fallback con
   assert.equal(config.aspectRatio, '4/3');
   assert.throws(() => toVideoConfig({ video: { media: { object_prefix: 'files' } } }), /media\.prefix/);
   assert.throws(() => toVideoConfig({ video: { media: { url: 'http://example.test/files' } } }), /HTTPS/);
+  assert.throws(() => toVideoConfig({ video: { media: { prefix: '/files' } } }), /ASCII relative directory/);
+  assert.throws(() => toVideoConfig({ video: { media: { prefix: 'files?cache' } } }), /ASCII relative directory/);
+  assert.throws(() => toVideoConfig({ video: { media: { source_dir: 'files#media' } } }), /ASCII relative directory/);
   assert.throws(() => toVideoConfig({ video: { subtitles: { fonts: { Bad: '../bad.ttf' } } } }), /parent path/);
   assert.throws(() => toVideoConfig({ video: { subtitles: { fallback_font: 'Missing' } } }), /must name an entry/);
 });
@@ -320,6 +324,10 @@ test('legacy mode validates local files and external video URLs stay HTTPS-only'
   assert.equal(external.type, 'video/webm');
   await assert.rejects(normaliseVideo(post(), { url: 'http://media.example.test/demo.mp4' }, runtime), /must use HTTPS/);
   await assert.rejects(normaliseVideo(post(), { file: '../demo.mp4' }, runtime), /parent path/);
+  await assert.rejects(normaliseVideo(post(), videoData({ subtitles: [] }), {
+    ...runtime,
+    routes: { ...RUNTIME_ROUTES, script: '/absolute.js' }
+  }), /plain relative path/);
   await assert.rejects(normaliseVideo(post(), videoData({ subtitles: [
     { file: 'video/zh.ass', srclang: 'zh-Hans', label: '中文', default: true },
     { file: 'video/en.srt', srclang: 'en', label: 'English', default: true }
@@ -403,6 +411,18 @@ test('status coordinator preserves channel errors and restores lower-priority st
   assert.throws(() => state.clear('unknown'), /未知视频状态频道/);
 });
 
+test('video demand registry seeds cached Front Matter and raw video tags per generation', () => {
+  const demand = createVideoDemandRegistry();
+  demand.seed([{ video: { file: 'demo.mp4' } }]);
+  assert.equal(demand.hasDemand(), true);
+  demand.reset();
+  demand.seed([{ _content: '正文 {% video file=demo.mp4 %}' }]);
+  assert.equal(demand.hasDemand(), true);
+  demand.reset();
+  demand.seed([{ _content: '普通正文' }]);
+  assert.equal(demand.hasDemand(), false);
+});
+
 test('plugin registers skin, runtime assets, tag, and duplicate-safe post injection', async () => {
   const hexo = mockHexo();
   registerVideoPlugin(hexo);
@@ -433,6 +453,18 @@ test('plugin registers skin, runtime assets, tag, and duplicate-safe post inject
     `${RUNTIME_ROUTES.worker}.map`
   ]);
   assert.ok(routes.every(route => route.data.length > 0));
+  hexo.model = name => ({ toArray: () => name === 'Post' ? [{ video: videoData() }] : [] });
+  hexo.calls.filters.find(call => call.name === 'before_generate').fn();
+  assert.ok((await hexo.calls.generators[1].fn()).length > 0);
+  hexo.model = undefined;
+  hexo.calls.filters.find(call => call.name === 'before_generate').fn();
+  assert.deepEqual(await hexo.calls.generators[0].fn(), []);
+  assert.deepEqual(await hexo.calls.generators[1].fn(), []);
+
+  const tagHexo = mockHexo();
+  registerVideoPlugin(tagHexo);
+  await tagHexo.calls.tags[0].fn.call(post({ video: videoData() }), []);
+  assert.ok((await tagHexo.calls.generators[1].fn()).length > 0);
 });
 
 test('inline bootstrap stays idle without players and loads skin then core only once', async () => {
@@ -491,6 +523,8 @@ test('bootstrap stylesheet failure preserves native controls and exposes fallbac
   const source = bootstrap.match(/^<script>([\s\S]*)<\/script>$/)[1];
   const dom = new JSDOM(`<!doctype html><body>${html}</body>`, { runScripts: 'outside-only', url: 'https://example.test/' });
   try {
+    const diagnostics = [];
+    dom.window.console.error = (...args) => diagnostics.push(args);
     dom.window.eval(source);
     await wait(0);
     const link = dom.window.document.querySelector('link[data-sil-video-style]');
@@ -502,9 +536,15 @@ test('bootstrap stylesheet failure preserves native controls and exposes fallbac
     assert.equal(player.querySelector('[data-sil-video-fallback-status]').hidden, false);
     assert.match(player.querySelector('[data-sil-video-status]').textContent, /原生控件/);
     assert.equal(dom.window.document.querySelectorAll('script[data-sil-video-core]').length, 0);
+    assert.match(String(diagnostics[0]?.[1]?.url), /missing\.css/);
     dom.window.document.dispatchEvent(new dom.window.Event('inside'));
     await wait(0);
     assert.equal(dom.window.document.querySelectorAll('link[data-sil-video-style]').length, 1);
+    dom.window.console.error = () => { throw new Error('logger failed'); };
+    const retry = dom.window.document.querySelector('link[data-sil-video-style]');
+    assert.doesNotThrow(() => retry.dispatchEvent(new dom.window.Event('error')));
+    await wait(0);
+    assert.equal(player.dataset.silVideoError, 'true');
   } finally {
     dom.window.close();
   }
@@ -601,11 +641,32 @@ test('browser runtime reports missing view fields and preserves native controls'
   });
   try {
     dom.window.TextDecoder = TextDecoder;
+    const diagnostics = [];
+    dom.window.console.error = (...args) => diagnostics.push(args);
     dom.window.eval((await buildBrowserBundle(path.join(__dirname, '..', 'plugins', 'hexo-sil-video', 'runtime', 'player.js'), 'iife')).toString('utf8'));
     const player = dom.window.document.querySelector('[data-sil-video-player]');
     assert.equal(dom.window.document.querySelector('video').controls, true);
     assert.equal(player.dataset.silVideoError, 'true');
     assert.match(player.querySelector('[data-sil-video-status]').textContent, /volume/);
+    assert.equal(diagnostics.length, 1);
+    const replacement = dom.window.document.createElement('input');
+    replacement.className = 'sil-video-player__range sil-video-player__volume';
+    replacement.dataset.silVideoVolume = '';
+    player.querySelector('.sil-video-player__volume-control').append(replacement);
+    dom.window.document.dispatchEvent(new dom.window.Event('inside'));
+    await wait(0);
+    assert.equal(player.dataset.silVideoReady, undefined);
+    assert.equal(player.dataset.silVideoError, 'true');
+    assert.equal(diagnostics.length, 1);
+    const recovered = new JSDOM(renderVideoPlayer({
+      title: 'Recovered', source: '/video.mp4', type: 'video/mp4', poster: '', preload: 'metadata',
+      aspectRatio: '16/9', subtitles: [], fonts: {}, fallbackFont: '',
+      runtime: { subtitles: '/subtitles.js', worker: '/worker.js', wasm: '/worker.wasm', modernWasm: '/modern.wasm', defaultFont: '/font.woff2' }
+    })).window.document.querySelector('[data-sil-video-player]').dataset.silVideoModel;
+    player.dataset.silVideoModel = recovered;
+    dom.window.document.dispatchEvent(new dom.window.Event('inside'));
+    await wait(0);
+    assert.equal(player.dataset.silVideoReady, 'true');
   } finally {
     dom.window.close();
   }
@@ -628,7 +689,7 @@ test('browser runtime keeps shortcuts focused through fullscreen entry and exit'
     assert.equal(feedbackText.textContent, '85%');
 
     stage.dispatchEvent(new window.KeyboardEvent('keydown', { key: 'Escape', bubbles: true }));
-    await Promise.resolve();
+    await new Promise(resolve => setImmediate(resolve));
     assert.equal(calls.fullscreenExits, 1);
     assert.equal(document.fullscreenElement, null);
     assert.equal(document.activeElement, player);
@@ -991,6 +1052,14 @@ test('browser runtime gates mouse-wheel volume by focus and normalises trackpad 
 test('runtime route builder emits split core/subtitle bundles, module worker, WASM variants, and fallback font', async () => {
   const routes = await runtimeRouteData();
   const sizes = Object.fromEntries(routes.map(route => [route.path, route.data.length]));
+  const budgets = {
+    [RUNTIME_ROUTES.script]: 36000,
+    [RUNTIME_ROUTES.subtitles]: 42000,
+    [RUNTIME_ROUTES.worker]: 130000,
+    [RUNTIME_ROUTES.wasm]: 2300000,
+    [RUNTIME_ROUTES.modernWasm]: 2400000,
+    [RUNTIME_ROUTES.defaultFont]: 180000
+  };
   assert.ok(routes.every(route => Buffer.isBuffer(route.data)));
   assert.doesNotMatch(routes[0].data.subarray(0, 24).toString('utf8'), /^\{"0":/);
   assert.ok(sizes[RUNTIME_ROUTES.script] > 10000);
@@ -1001,6 +1070,7 @@ test('runtime route builder emits split core/subtitle bundles, module worker, WA
   assert.ok(sizes[RUNTIME_ROUTES.wasm] > 1000000);
   assert.ok(sizes[RUNTIME_ROUTES.modernWasm] > 1000000);
   assert.ok(sizes[RUNTIME_ROUTES.defaultFont] > 10000);
+  for (const [route, budget] of Object.entries(budgets)) assert.ok(sizes[route] <= budget, `${route} exceeds ${budget} bytes`);
   for (const route of [RUNTIME_ROUTES.script, RUNTIME_ROUTES.subtitles, RUNTIME_ROUTES.worker]) {
     const script = routes.find(entry => entry.path === route).data.toString('utf8');
     const mapRoute = routes.find(entry => entry.path === `${route}.map`);
