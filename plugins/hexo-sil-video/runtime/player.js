@@ -1,10 +1,10 @@
 import { selector } from './shared.js';
-import { createRuntimeServices } from './runtime-services.js';
+import { createDiagnostics } from './diagnostics.js';
 import { createPlayerInstance } from './player-instance.js';
 
 const records = new Map();
 const dirtyPlayers = new Set();
-const diagnostics = createRuntimeServices().diagnostics;
+const diagnostics = createDiagnostics();
 let runtimeDestroyed = false;
 let refreshScheduled = false;
 
@@ -34,7 +34,7 @@ function initialise(player) {
   records.set(player, { source, status: 'initialising', instance: null, promise: null, error: null });
   let instance = null;
   try {
-    instance = createPlayerInstance({ player, services: createRuntimeServices({ player, windowRef: player.ownerDocument.defaultView }) });
+    instance = createPlayerInstance({ player });
     instance.mount();
     records.set(player, { source, status: 'ready', instance, promise: null, error: null });
     instance.refreshTheme();
