@@ -1,6 +1,7 @@
 'use strict';
 
 const assert = require('node:assert/strict');
+const crypto = require('node:crypto');
 const fsSync = require('node:fs');
 const fs = require('node:fs/promises');
 const os = require('node:os');
@@ -10,11 +11,14 @@ const { JSDOM } = require('jsdom');
 const subsrt = require('subsrt');
 const {
   BUILTIN_SKINS,
+  BOOTSTRAP_MAX_BYTES,
   FULLSCREEN_UI_HIDE_DELAY,
   PLAYER_START,
   RUNTIME_ROUTES,
   VOLUME_CLOSE_DELAY,
   buildBrowserBundle,
+  bootstrapCspHash,
+  createStateCoordinator,
   mergeVideo,
   normaliseVideo,
   parseVideoTagArgs,
@@ -185,11 +189,13 @@ async function browserPlayer(options = {}) {
   viewport.releasePointerCapture = () => {};
   stage.requestFullscreen = async () => {
     fullscreenRequests += 1;
+    if (options.fullscreenReject === 'enter') throw new Error('enter rejected');
     document.fullscreenElement = stage;
     document.dispatchEvent(new window.Event('fullscreenchange'));
   };
   document.exitFullscreen = async () => {
     fullscreenExits += 1;
+    if (options.fullscreenReject === 'exit') throw new Error('exit rejected');
     document.fullscreenElement = null;
     document.dispatchEvent(new window.Event('fullscreenchange'));
   };
@@ -377,19 +383,42 @@ test('volume levels expose muted and one-to-three-wave thresholds', () => {
   assert.equal(volumeLevel(1, true), 'muted');
 });
 
+test('status coordinator preserves channel errors and restores lower-priority state', () => {
+  const player = { dataset: {} };
+  const status = { textContent: '' };
+  const state = createStateCoordinator({ player, status });
+  state.set('media', '媒体信息');
+  state.set('subtitles', '字幕加载中', { level: 'loading' });
+  assert.equal(status.textContent, '字幕加载中');
+  state.set('fullscreen', '无法进入全屏。', { error: true });
+  state.set('media', '新媒体信息');
+  assert.equal(status.textContent, '无法进入全屏。');
+  assert.equal(player.dataset.silVideoError, 'true');
+  state.clear('fullscreen');
+  assert.equal(status.textContent, '字幕加载中');
+  assert.equal(player.dataset.silVideoError, undefined);
+  state.clear('subtitles');
+  assert.equal(status.textContent, '新媒体信息');
+});
+
 test('plugin registers skin, runtime assets, tag, and duplicate-safe post injection', async () => {
   const hexo = mockHexo();
   registerVideoPlugin(hexo);
   assert.deepEqual(hexo.calls.generators.map(call => call.name), ['hexo-sil-video-skin', 'hexo-sil-video-runtime']);
   assert.deepEqual(hexo.calls.injectors.map(call => call.position), ['body_end']);
-  assert.match(hexo.calls.injectors[0].value, /<script>\(\(\)=>/);
+  assert.match(hexo.calls.injectors[0].value, /^<script>[\s\S]+<\/script>$/);
   assert.match(hexo.calls.injectors[0].value, /\/css\/hexo-sil-video\.css/);
   assert.match(hexo.calls.injectors[0].value, /\/js\/hexo-sil-video\.js/);
   assert.doesNotMatch(hexo.calls.injectors[0].value, /<link rel="stylesheet"/);
   assert.equal(hexo.calls.tags[0].name, 'video');
   assert.equal(hexo.calls.tags[0].options.async, true);
   const routes = await hexo.calls.generators[1].fn();
-  assert.deepEqual(routes.map(route => route.path), Object.values(RUNTIME_ROUTES));
+  assert.deepEqual(routes.filter(route => !route.internal).map(route => route.path), Object.values(RUNTIME_ROUTES));
+  assert.deepEqual(routes.filter(route => route.internal).map(route => route.path), [
+    `${RUNTIME_ROUTES.script}.map`,
+    `${RUNTIME_ROUTES.subtitles}.map`,
+    `${RUNTIME_ROUTES.worker}.map`
+  ]);
   assert.ok(routes.every(route => route.data.length > 0));
 
   const article = post({ video: videoData(), content: '<p>Body</p>' });
@@ -402,7 +431,10 @@ test('plugin registers skin, runtime assets, tag, and duplicate-safe post inject
 
 test('inline bootstrap stays idle without players and loads skin then core only once', async () => {
   const bootstrap = renderBootstrapScript({ styles: ['/video.css'], script: '/video.js' });
-  const source = bootstrap.match(/^<script>([\s\S]*)<\/script>$/)[1];
+  assert.ok(Buffer.byteLength(bootstrap) <= BOOTSTRAP_MAX_BYTES);
+  const inline = bootstrap.match(/^<script>([\s\S]*)<\/script>$/)[1];
+  assert.equal(bootstrapCspHash({ styles: ['/video.css'], script: '/video.js' }), `sha256-${crypto.createHash('sha256').update(inline).digest('base64')}`);
+  const source = inline;
   const dom = new JSDOM('<!doctype html><body><main>Plain</main></body>', {
     runScripts: 'outside-only',
     url: 'https://example.test/'
@@ -477,6 +509,9 @@ test('Ephesus skin and runtime retain the specified palette and interaction cont
     'shared.js',
     'media-controller.js',
     'interaction-controller.js',
+    'pointer-controller.js',
+    'keyboard-controller.js',
+    'volume-overlay-controller.js',
     'fullscreen-controller.js',
     'subtitle-controller.js'
   ].map(file => fs.readFile(path.join(runtimeDirectory, file), 'utf8')))).join('\n');
@@ -514,8 +549,6 @@ test('Ephesus skin and runtime retain the specified palette and interaction cont
   assert.doesNotMatch(runtimeSource, /player\.requestFullscreen\(\)/);
   assert.match(runtimeSource, /documentRef\.fullscreenElement === stage/);
   assert.match(runtimeSource, /renderer\.resize\(true\)/);
-  assert.match(runtimeSource, /windowRef\.setTimeout\([\s\S]*VOLUME_CLOSE_DELAY/);
-  assert.match(runtimeSource, /windowRef\.setTimeout\([\s\S]*FULLSCREEN_UI_HIDE_DELAY/);
   assert.match(runtimeSource, /const VIEWPORT_CLICK_DELAY = 300/);
   assert.match(runtimeSource, /const FEEDBACK_HIDE_DELAY = 900/);
   assert.match(runtimeSource, /const PLAYBACK_FEEDBACK_HIDE_DELAY = 600/);
@@ -594,6 +627,26 @@ test('browser runtime synchronises accessible values, omits empty subtitle relat
   }
 });
 
+test('browser runtime reports missing view fields and preserves native controls', async () => {
+  const html = renderVideoPlayer({
+    title: 'Broken view', source: '/video.mp4', type: 'video/mp4', poster: '', preload: 'metadata',
+    aspectRatio: '16/9', subtitles: [], fonts: {}, fallbackFont: '', runtime: {}
+  }).replace(/<input class="sil-video-player__range sil-video-player__volume"[^>]+>/, '');
+  const dom = new JSDOM(`<!doctype html><body>${html}</body>`, {
+    runScripts: 'outside-only', pretendToBeVisual: true, url: 'https://example.test/'
+  });
+  try {
+    dom.window.TextDecoder = TextDecoder;
+    dom.window.eval((await buildBrowserBundle(path.join(__dirname, '..', 'plugins', 'hexo-sil-video', 'runtime', 'player.js'), 'iife')).toString('utf8'));
+    const player = dom.window.document.querySelector('[data-sil-video-player]');
+    assert.equal(dom.window.document.querySelector('video').controls, true);
+    assert.equal(player.dataset.silVideoError, 'true');
+    assert.match(player.querySelector('[data-sil-video-status]').textContent, /volume/);
+  } finally {
+    dom.window.close();
+  }
+});
+
 test('browser runtime keeps shortcuts focused through fullscreen entry and exit', async () => {
   const fixture = await browserPlayer();
   const { dom, window, document, player, stage, video, fullscreen, feedback, feedbackText, calls } = fixture;
@@ -641,6 +694,20 @@ test('browser runtime degrades cleanly when orientation locking is unavailable o
     } finally {
       dom.window.close();
     }
+  }
+});
+
+test('browser runtime contains fullscreen rejections and exposes stable status', async () => {
+  const fixture = await browserPlayer({ fullscreenReject: 'enter' });
+  const { dom, document, fullscreen, player } = fixture;
+  try {
+    fullscreen.click();
+    await wait(0);
+    assert.equal(document.fullscreenElement, null);
+    assert.equal(player.dataset.silVideoError, 'true');
+    assert.equal(document.querySelector('[data-sil-video-status]').textContent, '无法进入全屏。');
+  } finally {
+    dom.window.close();
   }
 });
 
@@ -965,4 +1032,13 @@ test('runtime route builder emits split core/subtitle bundles, module worker, WA
   assert.ok(sizes[RUNTIME_ROUTES.wasm] > 1000000);
   assert.ok(sizes[RUNTIME_ROUTES.modernWasm] > 1000000);
   assert.ok(sizes[RUNTIME_ROUTES.defaultFont] > 10000);
+  for (const route of [RUNTIME_ROUTES.script, RUNTIME_ROUTES.subtitles, RUNTIME_ROUTES.worker]) {
+    const script = routes.find(entry => entry.path === route).data.toString('utf8');
+    const mapRoute = routes.find(entry => entry.path === `${route}.map`);
+    assert.equal(mapRoute.internal, true);
+    assert.match(script, new RegExp(`sourceMappingURL=${path.basename(route).replace(/\./g, '\\.') }\\.map`));
+    const sourceMap = JSON.parse(mapRoute.data.toString('utf8'));
+    assert.ok(sourceMap.sourcesContent.length > 0);
+    assert.equal(sourceMap.sources.some(source => path.isAbsolute(source)), false);
+  }
 });

@@ -1,8 +1,12 @@
 import { createFullscreenController } from './fullscreen-controller.js';
+import { createFeedbackController } from './feedback-controller.js';
 import { createInteractionController } from './interaction-controller.js';
 import { createMediaController } from './media-controller.js';
 import { isDarkTheme, selector } from './shared.js';
 import { createSubtitleController } from './subtitle-controller.js';
+import { createStateCoordinator } from './state-coordinator.js';
+import { createPlayerView } from './view.js';
+import { createUiCoordinator } from './ui-coordinator.js';
 
 const instances = new Map();
 const destroying = new WeakMap();
@@ -12,35 +16,6 @@ function parseModel(player) {
   if (!source) throw new Error('播放器配置缺失。');
   const bytes = Uint8Array.from(atob(source), character => character.charCodeAt(0));
   return JSON.parse(new TextDecoder('utf-8', { fatal: true }).decode(bytes));
-}
-
-function elements(player) {
-  return {
-    player,
-    video: player.querySelector('.sil-video-player__video'),
-    stage: player.querySelector('[data-sil-video-stage]'),
-    viewport: player.querySelector('[data-sil-video-viewport]'),
-    mediaLayer: player.querySelector('[data-sil-video-media-layer]'),
-    feedback: player.querySelector('[data-sil-video-feedback]'),
-    feedbackText: player.querySelector('[data-sil-video-feedback-text]'),
-    progress: player.querySelector('[data-sil-video-progress]'),
-    volume: player.querySelector('[data-sil-video-volume]'),
-    current: player.querySelector('[data-sil-video-current]'),
-    duration: player.querySelector('[data-sil-video-duration]'),
-    status: player.querySelector('[data-sil-video-status]'),
-    play: player.querySelector('[data-sil-video-action="play"]'),
-    mute: player.querySelector('[data-sil-video-action="mute"]'),
-    rate: player.querySelector('[data-sil-video-action="rate"]'),
-    repeat: player.querySelector('[data-sil-video-action="repeat"]'),
-    subtitles: player.querySelector('[data-sil-video-action="subtitles"]'),
-    subtitleMenu: player.querySelector('[data-sil-video-subtitle-menu]'),
-    fullscreen: player.querySelector('[data-sil-video-action="fullscreen"]'),
-    volumeControl: player.querySelector('.sil-video-player__volume-control')
-  };
-}
-
-function complete(elements) {
-  return Object.values(elements).every(Boolean);
 }
 
 function showFallbackError(player, message) {
@@ -53,8 +28,14 @@ function showFallbackError(player, message) {
 
 function initialise(player) {
   if (instances.has(player) || destroying.has(player) || player.dataset.silVideoReady === 'true') return;
-  const refs = elements(player);
-  if (!complete(refs)) return;
+  let refs;
+  try {
+    refs = createPlayerView(player);
+  } catch (error) {
+    showFallbackError(player, error.message);
+    console.error('[hexo-sil-video]', error);
+    return;
+  }
 
   let model;
   try {
@@ -67,21 +48,33 @@ function initialise(player) {
   const controllers = [];
   let subtitleController = null;
   let interactionController = null;
+  const state = createStateCoordinator({
+    player,
+    status: refs.status,
+    fallback: player.querySelector('[data-sil-video-fallback-status]')
+  });
+  const ui = createUiCoordinator({ player });
   try {
+    const feedbackController = createFeedbackController(refs);
+    controllers.push(feedbackController);
     const fullscreenController = createFullscreenController({
       player,
       video: refs.video,
       stage: refs.stage,
       subtitleMenu: refs.subtitleMenu,
       fullscreen: refs.fullscreen,
-      resizeSubtitles: async () => subtitleController?.resize()
+      resizeSubtitles: async () => subtitleController?.resize(),
+      state,
+      ui
     });
     controllers.push(fullscreenController);
 
     const mediaController = createMediaController({
       ...refs,
       onPlaybackStateChange: fullscreenController.syncPlayback,
-      onPlayInteraction: () => subtitleController?.activatePending()
+      onPlayInteraction: () => subtitleController?.activatePending(),
+      state,
+      feedbackController
     });
     controllers.push(mediaController);
 
@@ -94,7 +87,9 @@ function initialise(player) {
         menu: refs.subtitleMenu,
         model,
         setStatus: mediaController.setStatus,
-        showFullscreenUi: fullscreenController.showUi
+        showFullscreenUi: fullscreenController.showUi,
+        state,
+        ui
       });
       controllers.push(subtitleController);
     } else {
@@ -110,7 +105,9 @@ function initialise(player) {
     interactionController = createInteractionController({
       ...refs,
       media: mediaController,
-      fullscreen: fullscreenController
+      fullscreen: fullscreenController,
+      state,
+      ui
     });
     controllers.push(interactionController);
     fullscreenController.setPointerActivityGuard(event => interactionController.pendingHiddenTouchTap(event));
@@ -129,6 +126,11 @@ function initialise(player) {
         const pending = Promise.allSettled(controllers.reverse().map(controller => {
           try { return controller.destroy(); } catch (error) { return Promise.reject(error); }
         }));
+        pending.then(results => results.filter(result => result.status === 'rejected').forEach(result => {
+          console.error('[hexo-sil-video] controller destroy failed', result.reason);
+        }));
+        state.destroy();
+        ui.destroy();
         refs.video.controls = true;
         delete player.dataset.silVideoReady;
         delete player.dataset.silVideoEnhanced;
@@ -145,8 +147,12 @@ function initialise(player) {
     instances.set(player, instance);
     instance.refreshTheme();
   } catch (error) {
-    for (const controller of controllers.reverse()) Promise.resolve(controller.destroy()).catch(() => {});
+    for (const controller of controllers.reverse()) Promise.resolve(controller.destroy()).catch(destroyError => {
+      console.error('[hexo-sil-video] controller destroy failed during initialization', destroyError);
+    });
     refs.video.controls = true;
+    state.destroy();
+    ui.destroy();
     showFallbackError(player, `播放器初始化失败：${error.message}`);
   }
 }

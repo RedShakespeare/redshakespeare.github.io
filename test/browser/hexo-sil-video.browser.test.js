@@ -105,10 +105,13 @@ test('default subtitles remain pending until interaction and Chromium starts Wor
     await expect.poll(() => requests.includes('/js/hexo-sil-video-worker.js')).toBe(true);
     await expect.poll(() => requests.some(pathname => pathname === '/wasm/hexo-sil-video.wasm' || pathname === '/wasm/hexo-sil-video-modern.wasm')).toBe(true);
   } else {
+    const capable = await page.evaluate(() => typeof Worker !== 'undefined'
+      && typeof WebAssembly !== 'undefined'
+      && typeof HTMLCanvasElement.prototype.transferControlToOffscreen === 'function');
     await expect.poll(async () => {
       const pressed = await page.locator('[data-sil-video-action="subtitles"]').getAttribute('aria-pressed');
       const status = await page.locator('[data-sil-video-status]').textContent();
-      return pressed === 'true' || /字幕加载失败/.test(status || '');
+      return capable ? pressed === 'true' : status === '当前浏览器不支持高级字幕渲染。';
     }).toBe(true);
   }
 });

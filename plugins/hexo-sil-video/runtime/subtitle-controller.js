@@ -8,17 +8,23 @@ export function createSubtitleController({
   button,
   menu,
   model,
-  setStatus,
-  showFullscreenUi
+  setStatus = () => {},
+  showFullscreenUi = () => {},
+  state = null,
+  ui = null,
+  moduleLoader = url => import(url),
+  rendererFactory = null
 }) {
   const tracks = Array.isArray(model.subtitles) ? model.subtitles : [];
   const scope = createListenerScope();
   let renderer = null;
+  let activeContent = '';
   let abortController = null;
   let requestToken = 0;
   let selectedIndex = -1;
   let pendingIndex = tracks.findIndex(track => track.default);
   let modulePromise = null;
+  let renderQueue = Promise.resolve();
   let destroyed = false;
 
   menuSequence += 1;
@@ -32,6 +38,7 @@ export function createSubtitleController({
 
   function setMenuOpen(open) {
     menu.hidden = !open;
+    ui?.setSubtitleMenuOpen(open);
     button.setAttribute('aria-expanded', open ? 'true' : 'false');
     showFullscreenUi();
   }
@@ -43,61 +50,140 @@ export function createSubtitleController({
     button.setAttribute('aria-pressed', selectedIndex >= 0 ? 'true' : 'false');
   }
 
-  function loadModule() {
-    if (!modulePromise) modulePromise = import(model.runtime.subtitles);
+  async function loadModule() {
+    if (!modulePromise) {
+      // The production path remains a dynamic import(model.runtime.subtitles); tests may inject a loader.
+      modulePromise = Promise.resolve().then(() => moduleLoader(model.runtime.subtitles)).catch(error => {
+        // A rejected import must not poison later explicit selections.
+        modulePromise = null;
+        throw error;
+      });
+    }
     return modulePromise;
+  }
+
+  function isCurrent(token) { return !destroyed && token === requestToken; }
+
+  function enqueueRender(task) {
+    const pending = renderQueue.then(task, task);
+    renderQueue = pending.catch(() => {});
+    return pending;
+  }
+
+  async function destroyCandidate(candidate) {
+    if (!candidate) return;
+    try { await candidate.destroy?.(); } catch (error) { console.error('[hexo-sil-video] subtitle renderer cleanup failed', error); }
+  }
+
+  async function applyTrack(runtime, content, oldContent, token) {
+    if (renderer) {
+      await renderer.ready;
+      try {
+        await renderer.renderer.setTrack(content);
+        if (!isCurrent(token)) {
+          if (oldContent) await renderer.renderer.setTrack(oldContent);
+          else await renderer.renderer.freeTrack();
+          return null;
+        }
+        return renderer;
+      } catch (error) {
+        if (oldContent) {
+          try { await renderer.renderer.setTrack(oldContent); } catch (rollbackError) {
+            await destroyCandidate(renderer);
+            renderer = null;
+            throw Object.assign(error, { rollbackError });
+          }
+        } else {
+          await destroyCandidate(renderer);
+          renderer = null;
+        }
+        throw error;
+      }
+    }
+    const candidate = (rendererFactory || runtime.createSubtitleRenderer)({
+      video,
+      content,
+      runtime: model.runtime,
+      fonts: model.fonts,
+      fallbackFont: model.fallbackFont
+    });
+    try {
+      await candidate.ready;
+      if (!isCurrent(token)) {
+        await destroyCandidate(candidate);
+        return null;
+      }
+      renderer = candidate;
+      return candidate;
+    } catch (error) {
+      await destroyCandidate(candidate);
+      throw error;
+    }
   }
 
   async function select(index) {
     const token = ++requestToken;
     pendingIndex = -1;
     abortController?.abort();
-    abortController = new AbortController();
+    const controller = new AbortController();
+    abortController = controller;
     setMenuOpen(false);
+    const previousIndex = selectedIndex;
+    const previousContent = activeContent;
     if (index < 0) {
-      selectedIndex = -1;
-      syncButtons();
-      if (renderer) {
-        try {
+      try {
+        await enqueueRender(async () => {
+          if (!isCurrent(token) || !renderer) return;
           await renderer.ready;
           await renderer.renderer.freeTrack();
-        } catch {
-          // Renderer creation failures are reported by the selection that created it.
+        });
+        if (!isCurrent(token)) return false;
+        selectedIndex = -1;
+        activeContent = '';
+        syncButtons();
+        state?.clear('subtitles');
+        if (!state) setStatus();
+        return true;
+      } catch (error) {
+        if (isCurrent(token)) {
+          const message = `字幕关闭失败：${error.message}`;
+          if (state) state.set('subtitles', message, { error: true });
+          else setStatus(message, true);
         }
+        return false;
       }
-      setStatus();
-      return;
     }
     const track = tracks[index];
-    if (!track) return;
-    setStatus(`正在加载${track.label}字幕…`);
+    if (!track) return false;
+    state?.set('subtitles', `正在加载${track.label}字幕…`, { level: 'loading' });
     try {
-      const subtitleRuntime = await loadModule();
-      if (destroyed || token !== requestToken) return;
-      const content = await subtitleRuntime.loadSubtitleText(track, abortController.signal);
-      if (destroyed || token !== requestToken) return;
-      if (renderer) {
-        await renderer.ready;
-        await renderer.renderer.setTrack(content);
-      } else {
-        renderer = subtitleRuntime.createSubtitleRenderer({
-          video,
-          content,
-          runtime: model.runtime,
-          fonts: model.fonts,
-          fallbackFont: model.fallbackFont
-        });
-        await renderer.ready;
-      }
-      if (destroyed || token !== requestToken) return;
+      const runtime = await loadModule();
+      if (!isCurrent(token)) return false;
+      const content = await runtime.loadSubtitleText(track, controller.signal);
+      if (!isCurrent(token)) return false;
+      await enqueueRender(async () => {
+        if (!isCurrent(token)) return;
+        await applyTrack(runtime, content, previousContent, token);
+      });
+      if (!isCurrent(token)) return false;
       selectedIndex = index;
+      activeContent = content;
       syncButtons();
-      setStatus();
+      state?.clear('subtitles');
+      if (!state) setStatus();
+      return true;
     } catch (error) {
-      if (error.name === 'AbortError' || destroyed || token !== requestToken) return;
-      selectedIndex = -1;
+      if (error?.name === 'AbortError' || !isCurrent(token)) return false;
+      selectedIndex = error?.rollbackError ? -1 : previousIndex;
+      activeContent = error?.rollbackError ? '' : previousContent;
       syncButtons();
-      setStatus(`字幕加载失败：${error.message}`, true);
+      const message = error?.code === 'SIL_VIDEO_SUBTITLE_CAPABILITY'
+        ? '当前浏览器不支持高级字幕渲染。'
+        : `字幕加载失败：${error.message}`;
+      console.error('[hexo-sil-video] subtitle selection failed', error);
+      state?.set('subtitles', message, { error: true });
+      if (!state) setStatus(message, true);
+      return false;
     }
   }
 
@@ -105,7 +191,7 @@ export function createSubtitleController({
     if (pendingIndex < 0) return;
     const index = pendingIndex;
     pendingIndex = -1;
-    select(index);
+    void select(index);
   }
 
   function buildMenu() {
@@ -120,7 +206,7 @@ export function createSubtitleController({
       option.setAttribute('aria-checked', choice.index === -1 ? 'true' : 'false');
       if (choice.lang) option.lang = choice.lang;
       option.textContent = choice.label;
-      scope.listen(option, 'click', () => select(choice.index));
+      scope.listen(option, 'click', () => { void select(choice.index); });
       menu.append(option);
     }
   }
@@ -141,9 +227,7 @@ export function createSubtitleController({
 
   return {
     activatePending,
-    async resize() {
-      if (renderer) await renderer.resize(true);
-    },
+    async resize() { if (renderer) await renderer.resize(true); },
     select,
     async destroy() {
       destroyed = true;
@@ -151,7 +235,9 @@ export function createSubtitleController({
       abortController?.abort();
       scope.destroy();
       if (renderer) {
-        try { await renderer.destroy(); } catch { /* The page is already being discarded. */ }
+        const current = renderer;
+        renderer = null;
+        await destroyCandidate(current);
       }
     }
   };

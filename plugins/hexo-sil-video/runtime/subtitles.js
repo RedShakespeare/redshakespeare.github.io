@@ -10,6 +10,13 @@ export async function loadSubtitleText(track, signal) {
 }
 
 export function createSubtitleRenderer({ video, content, runtime, fonts, fallbackFont }) {
+  const canvasSupported = typeof HTMLCanvasElement !== 'undefined'
+    && typeof HTMLCanvasElement.prototype.transferControlToOffscreen === 'function';
+  if (typeof Worker === 'undefined' || typeof WebAssembly === 'undefined' || !canvasSupported) {
+    const error = new Error('当前浏览器不支持高级字幕渲染。');
+    error.code = 'SIL_VIDEO_SUBTITLE_CAPABILITY';
+    throw error;
+  }
   const availableFonts = { 'liberation sans': runtime.defaultFont, ...(fonts || {}) };
   return new JASSUB({
     video,

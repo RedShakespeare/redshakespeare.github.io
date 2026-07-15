@@ -1,6 +1,4 @@
 import {
-  FEEDBACK_HIDE_DELAY,
-  PLAYBACK_FEEDBACK_HIDE_DELAY,
   clamp,
   createListenerScope,
   formatTime,
@@ -26,53 +24,36 @@ export function createMediaController({
   rate,
   repeat,
   onPlaybackStateChange = () => {},
-  onPlayInteraction = () => {}
+  onPlayInteraction = () => {},
+  state = null,
+  feedbackController
 }) {
   const scope = createListenerScope();
-  const windowRef = video.ownerDocument.defaultView;
-  let feedbackTimer = null;
   let lastVolume = video.volume || 0.8;
-  let brightness = 1;
 
   function setStatus(message = '', error = false) {
-    status.textContent = message;
-    if (error) player.dataset.silVideoError = 'true';
-    else delete player.dataset.silVideoError;
-  }
-
-  function showFeedback(kind, message, delay = FEEDBACK_HIDE_DELAY, label = '') {
-    if (feedbackTimer !== null) windowRef?.clearTimeout(feedbackTimer);
-    feedbackTimer = null;
-    feedback.dataset.silVideoFeedbackKind = kind;
-    feedback.dataset.silVideoFeedbackVisible = 'true';
-    feedbackText.textContent = message;
-    if (label) feedback.setAttribute('aria-label', label);
-    else feedback.removeAttribute('aria-label');
-    feedbackTimer = windowRef.setTimeout(() => {
-      feedbackTimer = null;
-      delete feedback.dataset.silVideoFeedbackVisible;
-    }, delay);
+    if (state) state.set('media', message, { error, level: error ? 'error' : (/加载/.test(message) ? 'loading' : 'info') });
+    else {
+      status.textContent = message;
+      if (error) player.dataset.silVideoError = 'true';
+      else delete player.dataset.silVideoError;
+    }
   }
 
   function showPlaybackFeedback(action) {
-    const playing = action === 'play';
-    showFeedback(`playback-${action}`, '', PLAYBACK_FEEDBACK_HIDE_DELAY, playing ? '播放' : '暂停');
+    feedbackController.showPlayback(action);
   }
 
   function showVolumeFeedback() {
-    const effectiveVolume = video.muted ? 0 : video.volume;
-    showFeedback('volume', `${Math.round(effectiveVolume * 100)}%`);
+    feedbackController.showVolume();
   }
 
   function showProgressFeedback(position = video.currentTime) {
-    if (!Number.isFinite(video.duration) || video.duration <= 0) return;
-    showFeedback('progress', `${formatTime(position)}/${formatTime(video.duration)}`);
+    feedbackController.showProgress(position);
   }
 
   function setBrightness(value, announce = true) {
-    brightness = clamp(value, 0, 2);
-    mediaLayer.style.setProperty('--sil-video-brightness', String(brightness));
-    if (announce) showFeedback('brightness', `${Math.round(brightness * 100)}%`);
+    feedbackController.setBrightness(value, announce);
   }
 
   function syncPlaying() {
@@ -234,13 +215,12 @@ export function createMediaController({
   syncTime();
   syncDuration();
   syncVolume();
-  setBrightness(1, false);
   syncRepeat();
 
   return {
     adjustVolume,
     cycleRate,
-    getBrightness: () => brightness,
+    getBrightness: feedbackController.getBrightness,
     seek,
     setBrightness,
     setCurrentTime,
@@ -252,7 +232,6 @@ export function createMediaController({
     togglePlay,
     toggleRepeat,
     destroy() {
-      if (feedbackTimer !== null) windowRef?.clearTimeout(feedbackTimer);
       scope.destroy();
     }
   };

@@ -10,11 +10,18 @@ export function createFullscreenController({
   stage,
   subtitleMenu,
   fullscreen,
-  resizeSubtitles = () => Promise.resolve()
+  resizeSubtitles = () => Promise.resolve(),
+  state = null,
+  ui = null,
+  clock = null
 }) {
   const scope = createListenerScope();
   const documentRef = stage.ownerDocument;
   const windowRef = documentRef.defaultView;
+  const setTimer = clock?.setTimeout || ((handler, delay) => windowRef.setTimeout(handler, delay));
+  const clearTimer = clock?.clearTimeout || (timer => windowRef?.clearTimeout(timer));
+  const requestFrame = clock?.requestAnimationFrame || (handler => windowRef?.requestAnimationFrame(handler));
+  const cancelFrame = clock?.cancelAnimationFrame || (frame => windowRef?.cancelAnimationFrame(frame));
   let fullscreenUiTimer = null;
   let resizeFrame = null;
   let wasFullscreen = false;
@@ -43,11 +50,22 @@ export function createFullscreenController({
   function controlsKeepUiOpen() {
     const focused = documentRef.activeElement;
     const controlFocused = focused && focused !== video && focused !== stage && stage.contains(focused) && focused.matches(':focus-visible');
-    return player.dataset.silVideoVolumeOpen === 'true' || !subtitleMenu.hidden || controlFocused;
+    return (ui ? ui.controlsOpen() : !subtitleMenu.hidden) || controlFocused;
+  }
+
+  async function request(action, message) {
+    try {
+      await action();
+      return true;
+    } catch (error) {
+      state?.set('fullscreen', message, { error: true });
+      console.error('[hexo-sil-video] fullscreen operation failed', error);
+      return false;
+    }
   }
 
   function clearUiTimer() {
-    if (fullscreenUiTimer !== null) windowRef?.clearTimeout(fullscreenUiTimer);
+    if (fullscreenUiTimer !== null) clearTimer(fullscreenUiTimer);
     fullscreenUiTimer = null;
   }
 
@@ -55,7 +73,7 @@ export function createFullscreenController({
     clearUiTimer();
     delete stage.dataset.silVideoUiHidden;
     if (!active() || video.paused || video.ended || controlsKeepUiOpen()) return;
-    fullscreenUiTimer = windowRef.setTimeout(() => {
+    fullscreenUiTimer = setTimer(() => {
       fullscreenUiTimer = null;
       if (active() && !video.paused && !video.ended && !controlsKeepUiOpen()) stage.dataset.silVideoUiHidden = 'true';
     }, FULLSCREEN_UI_HIDE_DELAY);
@@ -79,6 +97,7 @@ export function createFullscreenController({
     player.dataset.silVideoFullscreen = isActive ? 'true' : 'false';
     fullscreen.setAttribute('aria-label', isActive ? '退出全屏' : '进入全屏');
     if (isActive) {
+      state?.clear('fullscreen');
       wasFullscreen = true;
       focusWithoutScroll(stage);
       lockLandscape();
@@ -91,24 +110,26 @@ export function createFullscreenController({
         unlockOrientation();
         focusWithoutScroll(player);
       }
+      state?.clear('fullscreen');
     }
-    if (resizeFrame !== null) windowRef?.cancelAnimationFrame(resizeFrame);
-    resizeFrame = windowRef?.requestAnimationFrame(() => {
+    if (resizeFrame !== null) cancelFrame(resizeFrame);
+    resizeFrame = requestFrame(() => {
       resizeFrame = null;
-      resizeSubtitles().catch(() => {});
+      resizeSubtitles().catch(error => console.error('[hexo-sil-video] subtitle resize failed', error));
     }) ?? null;
   }
 
   async function toggle() {
-    if (active()) await documentRef.exitFullscreen();
-    else await stage.requestFullscreen();
+    return active()
+      ? request(() => documentRef.exitFullscreen(), '无法退出全屏。')
+      : request(() => stage.requestFullscreen(), '无法进入全屏。');
   }
 
   function handlePointerActivity(event) {
     if (!pointerActivityGuard(event)) showUi();
   }
 
-  scope.listen(fullscreen, 'click', toggle);
+  scope.listen(fullscreen, 'click', () => { void toggle(); });
   scope.listen(stage, 'pointermove', handlePointerActivity);
   scope.listen(stage, 'pointerdown', handlePointerActivity);
   scope.listen(stage, 'focusin', showUi);
@@ -123,7 +144,7 @@ export function createFullscreenController({
     toggle,
     destroy() {
       clearUiTimer();
-      if (resizeFrame !== null) windowRef?.cancelAnimationFrame(resizeFrame);
+      if (resizeFrame !== null) cancelFrame(resizeFrame);
       resizeFrame = null;
       if (active()) unlockOrientation();
       scope.destroy();
