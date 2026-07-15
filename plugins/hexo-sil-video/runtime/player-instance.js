@@ -27,10 +27,11 @@ function createPlayerInstance({ player, services }) {
   const controllers = [];
   let destroyed = false;
   let destroyPromise = null;
-  let subtitleController = null;
-  let interactionController = null;
-  let resizeSubtitles = () => Promise.resolve();
-  let activatePendingSubtitles = () => {};
+  const subtitleBinding = {
+    controller: null,
+    resize() { return this.controller ? this.controller.resize() : Promise.resolve(); },
+    activatePending() { this.controller?.activatePending(); }
+  };
 
   function addController(controller) {
     controllers.push(controller);
@@ -54,20 +55,20 @@ function createPlayerInstance({ player, services }) {
       video: refs.video,
       stage: refs.stage,
       fullscreen: refs.fullscreen,
-      resizeSubtitles: () => resizeSubtitles(),
+      resizeSubtitles: () => subtitleBinding.resize(),
       services
     }));
 
     const mediaController = addController(createMediaController({
       ...refs,
       onPlaybackStateChange: fullscreenController.syncPlayback,
-      onPlayInteraction: () => activatePendingSubtitles(),
+      onPlayInteraction: () => subtitleBinding.activatePending(),
       feedbackController: controllers[0],
       services
     }));
 
     if (model.subtitles.length > 0) {
-      subtitleController = addController(createSubtitleController({
+      subtitleBinding.controller = addController(createSubtitleController({
         player,
         video: refs.video,
         button: refs.subtitles,
@@ -76,13 +77,11 @@ function createPlayerInstance({ player, services }) {
         showFullscreenUi: fullscreenController.showUi,
         services
       }));
-      resizeSubtitles = () => subtitleController.resize();
-      activatePendingSubtitles = () => subtitleController.activatePending();
     } else {
       disableSubtitles();
     }
 
-    interactionController = addController(createInteractionController({
+    const interactionController = addController(createInteractionController({
       controls: { play: refs.play, progress: refs.progress, rate: refs.rate, repeat: refs.repeat },
       surfaces: { player, stage: refs.stage, viewport: refs.viewport, video: refs.video },
       volume: refs.volume,
