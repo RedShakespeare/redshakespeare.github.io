@@ -9,6 +9,8 @@ const FEEDBACK_HIDE_DELAY = 900;
 const PLAYBACK_FEEDBACK_HIDE_DELAY = 600;
 const TOUCH_GESTURE_THRESHOLD = 12;
 const TOUCH_SEEK_SECONDS = 60;
+const TOUCH_DOUBLE_SEEK_SECONDS = 15;
+const TOUCH_CLICK_FALLBACK_DELAY = 750;
 const GESTURE_CLICK_SUPPRESS_DELAY = 500;
 const WHEEL_PIXEL_STEP = 100;
 const WHEEL_RESET_DELAY = 250;
@@ -98,6 +100,9 @@ function initialise(player) {
   let volumeCloseTimer = null;
   let fullscreenUiTimer = null;
   let viewportClickTimer = null;
+  let viewportClickTouch = false;
+  let viewportClickWakeOnly = false;
+  let recentTouchTap = null;
   let feedbackTimer = null;
   let wheelResetTimer = null;
   let wheelPixelDelta = 0;
@@ -270,19 +275,52 @@ function initialise(player) {
   function clearViewportClickTimer() {
     if (viewportClickTimer !== null) window.clearTimeout(viewportClickTimer);
     viewportClickTimer = null;
+    viewportClickTouch = false;
+    viewportClickWakeOnly = false;
   }
 
-  function handleViewportClick() {
+  function takeTouchTap(event) {
+    const recent = recentTouchTap && Date.now() - recentTouchTap.time <= TOUCH_CLICK_FALLBACK_DELAY ? recentTouchTap : null;
+    if (!recent) recentTouchTap = null;
+    const touch = event.pointerType === 'touch' || Boolean(recent);
+    if (!touch) return null;
+    recentTouchTap = null;
+    return {
+      x: Number.isFinite(event.clientX) ? event.clientX : recent?.x || 0,
+      uiWasHidden: recent?.uiWasHidden || false
+    };
+  }
+
+  function handleViewportClick(event) {
     if (Date.now() < suppressViewportClickUntil) return;
-    focusWithoutScroll(stage);
+    const touchTap = takeTouchTap(event);
     if (viewportClickTimer !== null) {
+      const doubleTouch = viewportClickTouch && Boolean(touchTap);
       clearViewportClickTimer();
-      toggleFullscreen();
+      if (doubleTouch) {
+        if (!touchTap.uiWasHidden) focusWithoutScroll(stage);
+        const bounds = viewport.getBoundingClientRect();
+        seek(touchTap.x - bounds.left < bounds.width / 2 ? -TOUCH_DOUBLE_SEEK_SECONDS : TOUCH_DOUBLE_SEEK_SECONDS);
+      } else {
+        focusWithoutScroll(stage);
+        toggleFullscreen();
+      }
       return;
     }
+    viewportClickTouch = Boolean(touchTap);
+    viewportClickWakeOnly = Boolean(touchTap?.uiWasHidden && fullscreenActive());
+    if (!viewportClickWakeOnly) focusWithoutScroll(stage);
     viewportClickTimer = window.setTimeout(() => {
+      const wakeOnly = viewportClickWakeOnly;
       viewportClickTimer = null;
-      togglePlay(true);
+      viewportClickTouch = false;
+      viewportClickWakeOnly = false;
+      if (wakeOnly) {
+        focusWithoutScroll(stage);
+        showFullscreenUi();
+      } else {
+        togglePlay(true);
+      }
     }, VIEWPORT_CLICK_DELAY);
   }
 
@@ -360,7 +398,12 @@ function initialise(player) {
   }
 
   function startGesture(event) {
-    if (!pointerIsPrimaryTouch(event) || gesture) return;
+    if (!pointerIsPrimaryTouch(event)) {
+      recentTouchTap = null;
+      return;
+    }
+    if (gesture) return;
+    recentTouchTap = null;
     const bounds = viewport.getBoundingClientRect();
     if (bounds.width <= 0 || bounds.height <= 0) return;
     gesture = {
@@ -372,6 +415,7 @@ function initialise(player) {
       targetTime: Number.isFinite(video.currentTime) ? video.currentTime : 0,
       startVolume: video.muted ? 0 : video.volume,
       startBrightness: brightness,
+      uiWasHidden: fullscreenActive() && stage.dataset.silVideoUiHidden === 'true',
       mode: ''
     };
     try { viewport.setPointerCapture(event.pointerId); } catch { /* Pointer capture is optional. */ }
@@ -406,7 +450,10 @@ function initialise(player) {
     const completed = gesture;
     gesture = null;
     try { viewport.releasePointerCapture(completed.pointerId); } catch { /* Pointer capture may already be lost. */ }
-    if (!completed.mode) return;
+    if (!completed.mode) {
+      recentTouchTap = { time: Date.now(), x: event.clientX, uiWasHidden: completed.uiWasHidden };
+      return;
+    }
     suppressViewportClickUntil = Date.now() + GESTURE_CLICK_SUPPRESS_DELAY;
     if (commit && completed.mode === 'progress' && Number.isFinite(video.duration) && video.duration > 0) {
       video.currentTime = completed.targetTime;
@@ -443,6 +490,11 @@ function initialise(player) {
       steps = Math.sign(event.deltaY);
     }
     if (steps !== 0) adjustVolume(-steps * 0.05);
+  }
+
+  function handleStagePointerActivity(event) {
+    const pendingHiddenTouchTap = pointerIsPrimaryTouch(event) && gesture && gesture.pointerId === event.pointerId && gesture.uiWasHidden && !gesture.mode;
+    if (!pendingHiddenTouchTap) showFullscreenUi();
   }
 
   function setVolumeOpen(open) {
@@ -602,8 +654,8 @@ function initialise(player) {
     subtitles.focus();
   });
   listen(fullscreen, 'click', toggleFullscreen);
-  listen(stage, 'pointermove', showFullscreenUi);
-  listen(stage, 'pointerdown', showFullscreenUi);
+  listen(stage, 'pointermove', handleStagePointerActivity);
+  listen(stage, 'pointerdown', handleStagePointerActivity);
   listen(stage, 'focusin', showFullscreenUi);
   listen(document, 'pointerdown', event => {
     if (player.dataset.silVideoVolumeOpen === 'true' && !volumeControl.contains(event.target)) setVolumeOpen(false);

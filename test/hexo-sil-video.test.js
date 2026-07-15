@@ -78,6 +78,14 @@ function touchPointer(window, type, x, y, pointerId = 1) {
   return event;
 }
 
+function touchTap(window, viewport, x, y, pointerId = 1) {
+  viewport.dispatchEvent(touchPointer(window, 'pointerdown', x, y, pointerId));
+  viewport.dispatchEvent(touchPointer(window, 'pointerup', x, y, pointerId));
+  const click = new window.MouseEvent('click', { bubbles: true, cancelable: true, button: 0, clientX: x, clientY: y });
+  viewport.dispatchEvent(click);
+  return click;
+}
+
 async function browserPlayer(options = {}) {
   const html = renderVideoPlayer({
     title: 'Browser Fixture',
@@ -120,6 +128,9 @@ async function browserPlayer(options = {}) {
   let pauseCalls = 0;
   let fullscreenRequests = 0;
   let fullscreenExits = 0;
+  let currentTimeValue = 20;
+  let currentTimeSets = 0;
+  let loadCalls = 0;
   const orientationLocks = [];
   let orientationUnlocks = 0;
   Object.defineProperties(video, {
@@ -128,8 +139,12 @@ async function browserPlayer(options = {}) {
     paused: { value: true, writable: true },
     ended: { value: false, writable: true },
     duration: { value: 100, writable: true },
-    currentTime: { value: 20, writable: true }
+    currentTime: {
+      get() { return currentTimeValue; },
+      set(value) { currentTimeSets += 1; currentTimeValue = value; }
+    }
   });
+  video.load = () => { loadCalls += 1; };
   video.play = async () => {
     playCalls += 1;
     if (options.playReject) throw new Error('play rejected');
@@ -190,6 +205,8 @@ async function browserPlayer(options = {}) {
       get pause() { return pauseCalls; },
       get fullscreenRequests() { return fullscreenRequests; },
       get fullscreenExits() { return fullscreenExits; },
+      get currentTimeSets() { return currentTimeSets; },
+      get load() { return loadCalls; },
       get orientationLocks() { return orientationLocks; },
       get orientationUnlocks() { return orientationUnlocks; }
     }
@@ -399,6 +416,7 @@ test('Ephesus skin and runtime retain the specified palette and interaction cont
   assert.match(runtimeSource, /const PLAYBACK_FEEDBACK_HIDE_DELAY = 600/);
   assert.match(runtimeSource, /const TOUCH_GESTURE_THRESHOLD = 12/);
   assert.match(runtimeSource, /const TOUCH_SEEK_SECONDS = 60/);
+  assert.match(runtimeSource, /const TOUCH_DOUBLE_SEEK_SECONDS = 15/);
   assert.match(runtimeSource, /const WHEEL_PIXEL_STEP = 100/);
   assert.match(runtimeSource, /const WHEEL_RESET_DELAY = 250/);
   assert.match(runtimeSource, /orientation\?\.lock\?\.\('landscape'\)/);
@@ -493,6 +511,91 @@ test('browser runtime distinguishes viewport single clicks from double clicks', 
     assert.equal(calls.pause, 0);
     assert.equal(calls.fullscreenExits, 1);
     assert.equal(document.fullscreenElement, null);
+  } finally {
+    dom.window.close();
+  }
+});
+
+test('browser runtime maps touch double taps to left and right fifteen-second seeks', async () => {
+  const fixture = await browserPlayer();
+  const { dom, window, document, stage, viewport, video, fullscreen, feedback, feedbackText, calls } = fixture;
+  try {
+    touchTap(window, viewport, 50, 100, 1);
+    touchTap(window, viewport, 50, 100, 2);
+    assert.equal(video.currentTime, 5);
+    assert.equal(calls.currentTimeSets, 1);
+    assert.equal(calls.load, 0);
+    assert.equal(calls.play, 0);
+    assert.equal(calls.fullscreenRequests, 0);
+    assert.equal(feedback.dataset.silVideoFeedbackKind, 'progress');
+    assert.equal(feedbackText.textContent, '0:05/1:40');
+
+    touchTap(window, viewport, 250, 100, 3);
+    touchTap(window, viewport, 250, 100, 4);
+    assert.equal(video.currentTime, 20);
+    assert.equal(calls.currentTimeSets, 2);
+    assert.equal(calls.load, 0);
+    assert.equal(video.paused, true);
+
+    video.currentTime = 0;
+    const beforeStartClamp = calls.currentTimeSets;
+    touchTap(window, viewport, 50, 100, 7);
+    touchTap(window, viewport, 50, 100, 8);
+    assert.equal(video.currentTime, 0);
+    assert.equal(calls.currentTimeSets, beforeStartClamp + 1);
+
+    video.currentTime = 100;
+    const beforeEndClamp = calls.currentTimeSets;
+    touchTap(window, viewport, 250, 100, 9);
+    touchTap(window, viewport, 250, 100, 10);
+    assert.equal(video.currentTime, 100);
+    assert.equal(calls.currentTimeSets, beforeEndClamp + 1);
+
+    video.currentTime = 20;
+
+    fullscreen.click();
+    await Promise.resolve();
+    assert.equal(document.fullscreenElement, stage);
+    stage.dataset.silVideoUiHidden = 'true';
+    touchTap(window, viewport, 250, 100, 5);
+    touchTap(window, viewport, 250, 100, 6);
+    assert.equal(video.currentTime, 35);
+    assert.equal(calls.currentTimeSets, beforeEndClamp + 3);
+    assert.equal(calls.fullscreenExits, 0);
+    assert.equal(stage.dataset.silVideoUiHidden, 'true');
+    assert.equal(feedback.dataset.silVideoFeedbackKind, 'progress');
+    assert.equal(feedbackText.textContent, '0:35/1:40');
+    await wait(950);
+    assert.equal(feedback.dataset.silVideoFeedbackVisible, undefined);
+    assert.equal(stage.dataset.silVideoUiHidden, 'true');
+  } finally {
+    dom.window.close();
+  }
+});
+
+test('browser runtime delays hidden fullscreen controls for touch single taps', async () => {
+  const fixture = await browserPlayer();
+  const { dom, window, document, stage, viewport, fullscreen, feedback, calls } = fixture;
+  try {
+    fullscreen.click();
+    await Promise.resolve();
+    assert.equal(document.fullscreenElement, stage);
+    stage.dataset.silVideoUiHidden = 'true';
+
+    touchTap(window, viewport, 150, 100, 1);
+    assert.equal(stage.dataset.silVideoUiHidden, 'true');
+    assert.equal(calls.play, 0);
+    await wait(200);
+    assert.equal(stage.dataset.silVideoUiHidden, 'true');
+    await wait(150);
+    assert.equal(stage.dataset.silVideoUiHidden, undefined);
+    assert.equal(calls.play, 0);
+    assert.notEqual(feedback.dataset.silVideoFeedbackKind, 'playback-play');
+
+    touchTap(window, viewport, 150, 100, 2);
+    await wait(350);
+    assert.equal(calls.play, 1);
+    assert.equal(feedback.dataset.silVideoFeedbackKind, 'playback-play');
   } finally {
     dom.window.close();
   }
