@@ -4,3 +4,5 @@ node_modules/
 .DS_Store
 db.json
 .assets-workspace.json
+playwright-report/
+test-results/

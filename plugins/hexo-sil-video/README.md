@@ -66,5 +66,13 @@ video:
 隐藏时双击不会将其唤出，单击则在双击判定结束后只唤出控制层。原画亮度为 100%。PC 上播放器获得
 焦点后，在视频区域滚动鼠标滚轮也会以 5% 调整音量。亮度、音量和手势进度均使用画面中央提示。
 
-浏览器运行时依赖 JASSUB 2.5.7、subsrt 1.1.1，并由 esbuild 在 Hexo 生成阶段打包。播放器不使用
-CDN；JASSUB Worker、WASM 和默认字体均生成到站点自身路径。
+普通页面只注入一个很小的内联 bootstrap；只有初始 HTML 或 Inside 动态内容中实际出现播放器时，
+浏览器才加载皮肤和播放器核心。核心增强成功前保留原生 `video controls`，皮肤或脚本失败时也继续使用
+原生控件。
+
+浏览器运行时依赖 JASSUB 2.5.7、subsrt 1.1.1，并由 esbuild 在 Hexo 生成阶段拆成核心和字幕 ESM 包。
+默认字幕在首次 focus、keydown、pointerdown、wheel 或 play 后才激活；没有字幕或从未交互的播放器不会
+请求字幕包、Worker、WASM 或字体。播放器不使用 CDN；这些资源均生成到站点自身路径。
+
+运行 `npm run test:hexo-sil-video` 执行 JSDOM 回归测试，运行
+`npm run test:hexo-sil-video:browser` 执行 Chromium 与 WebKit Playwright 门禁。

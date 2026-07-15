@@ -19,6 +19,7 @@ const {
   normaliseVideo,
   parseVideoTagArgs,
   registerVideoPlugin,
+  renderBootstrapScript,
   renderVideoPlayer,
   runtimeRouteData,
   toVideoConfig,
@@ -106,6 +107,7 @@ async function browserPlayer(options = {}) {
     fonts: {},
     fallbackFont: '',
     runtime: {
+      subtitles: '/js/hexo-sil-video-subtitles.js',
       worker: '/js/hexo-sil-video-worker.js',
       wasm: '/js/hexo-sil-video-worker.wasm',
       modernWasm: '/js/hexo-sil-video-worker-modern.wasm',
@@ -293,6 +295,7 @@ test('manifest-backed video resolves media, ASS/SRT tracks, poster, and fonts', 
     ['srt', '/files/video/en.srt', false]
   ]);
   assert.equal(value.fonts.Fixture, '/files/video/font.woff2');
+  assert.equal(value.runtime.subtitles, '/js/hexo-sil-video-subtitles.js');
   assert.equal(value.runtime.worker, '/js/hexo-sil-video-worker.js');
 });
 
@@ -328,6 +331,9 @@ test('rendered player exposes native fallback, custom controls, downloads, and r
   assert.match(html, /data-sil-video-media-layer/);
   assert.match(html, /data-sil-video-feedback/);
   assert.match(html, /data-sil-video-feedback-text/);
+  assert.match(html, /data-sil-video-controls[^>]*hidden/);
+  assert.match(html, /aria-valuetext="0:00\/--:--"/);
+  assert.match(html, /aria-valuetext="100%"/);
   assert.match(html, /sil-video-player__icon--feedback-brightness/);
   assert.match(html, /sil-video-player__icon--feedback-play/);
   assert.match(html, /sil-video-player__icon--feedback-pause/);
@@ -341,6 +347,7 @@ test('rendered player exposes native fallback, custom controls, downloads, and r
   assert.match(html, /data-sil-video-model="[A-Za-z0-9+/=]+"/);
   assert.doesNotMatch(html, /<script class="sil-video-player__model"/);
   assert.doesNotMatch(html, /<track/);
+  assert.doesNotMatch(html, /playsinline/i);
 });
 
 test('tag arguments position the default player and source overrides drop its subtitles', () => {
@@ -374,7 +381,11 @@ test('plugin registers skin, runtime assets, tag, and duplicate-safe post inject
   const hexo = mockHexo();
   registerVideoPlugin(hexo);
   assert.deepEqual(hexo.calls.generators.map(call => call.name), ['hexo-sil-video-skin', 'hexo-sil-video-runtime']);
-  assert.deepEqual(hexo.calls.injectors.map(call => call.position), ['head_end', 'body_end']);
+  assert.deepEqual(hexo.calls.injectors.map(call => call.position), ['body_end']);
+  assert.match(hexo.calls.injectors[0].value, /<script>\(\(\)=>/);
+  assert.match(hexo.calls.injectors[0].value, /\/css\/hexo-sil-video\.css/);
+  assert.match(hexo.calls.injectors[0].value, /\/js\/hexo-sil-video\.js/);
+  assert.doesNotMatch(hexo.calls.injectors[0].value, /<link rel="stylesheet"/);
   assert.equal(hexo.calls.tags[0].name, 'video');
   assert.equal(hexo.calls.tags[0].options.async, true);
   const routes = await hexo.calls.generators[1].fn();
@@ -389,9 +400,86 @@ test('plugin registers skin, runtime assets, tag, and duplicate-safe post inject
   assert.equal((article.content.match(/hexo-sil-video:start/g) || []).length, 1);
 });
 
+test('inline bootstrap stays idle without players and loads skin then core only once', async () => {
+  const bootstrap = renderBootstrapScript({ styles: ['/video.css'], script: '/video.js' });
+  const source = bootstrap.match(/^<script>([\s\S]*)<\/script>$/)[1];
+  const dom = new JSDOM('<!doctype html><body><main>Plain</main></body>', {
+    runScripts: 'outside-only',
+    url: 'https://example.test/'
+  });
+  try {
+    dom.window.eval(source);
+    assert.equal(dom.window.document.querySelectorAll('link[data-sil-video-style]').length, 0);
+    assert.equal(dom.window.document.querySelectorAll('script[data-sil-video-core]').length, 0);
+
+    const player = dom.window.document.createElement('aside');
+    player.dataset.silVideoPlayer = '';
+    dom.window.document.body.append(player);
+    await wait(0);
+    const link = dom.window.document.querySelector('link[data-sil-video-style]');
+    assert.equal(link.getAttribute('href'), '/video.css');
+    assert.equal(dom.window.document.querySelectorAll('link[data-sil-video-style]').length, 1);
+    link.dispatchEvent(new dom.window.Event('load'));
+    await wait(0);
+    assert.equal(dom.window.document.querySelector('script[data-sil-video-core]').getAttribute('src'), '/video.js');
+    dom.window.eval(source);
+
+    const second = dom.window.document.createElement('aside');
+    second.dataset.silVideoPlayer = '';
+    dom.window.document.body.append(second);
+    dom.window.document.dispatchEvent(new dom.window.Event('inside'));
+    await wait(0);
+    assert.equal(dom.window.document.querySelectorAll('link[data-sil-video-style]').length, 1);
+    assert.equal(dom.window.document.querySelectorAll('script[data-sil-video-core]').length, 1);
+  } finally {
+    dom.window.close();
+  }
+});
+
+test('bootstrap stylesheet failure preserves native controls and exposes fallback status', async () => {
+  const html = renderVideoPlayer({
+    title: 'Fallback',
+    source: '/video.mp4',
+    type: 'video/mp4',
+    poster: '',
+    preload: 'metadata',
+    aspectRatio: '16/9',
+    subtitles: [],
+    fonts: {},
+    fallbackFont: '',
+    runtime: { subtitles: '/subtitles.js' }
+  });
+  const bootstrap = renderBootstrapScript({ styles: ['/missing.css'], script: '/video.js' });
+  const source = bootstrap.match(/^<script>([\s\S]*)<\/script>$/)[1];
+  const dom = new JSDOM(`<!doctype html><body>${html}</body>`, { runScripts: 'outside-only', url: 'https://example.test/' });
+  try {
+    dom.window.eval(source);
+    await wait(0);
+    const link = dom.window.document.querySelector('link[data-sil-video-style]');
+    link.dispatchEvent(new dom.window.Event('error'));
+    await wait(0);
+    const player = dom.window.document.querySelector('[data-sil-video-player]');
+    assert.equal(dom.window.document.querySelector('video').controls, true);
+    assert.equal(player.dataset.silVideoError, 'true');
+    assert.equal(player.querySelector('[data-sil-video-fallback-status]').hidden, false);
+    assert.match(player.querySelector('[data-sil-video-status]').textContent, /原生控件/);
+    assert.equal(dom.window.document.querySelectorAll('script[data-sil-video-core]').length, 0);
+  } finally {
+    dom.window.close();
+  }
+});
+
 test('Ephesus skin and runtime retain the specified palette and interaction contract', async () => {
   const css = await fs.readFile(BUILTIN_SKINS.ephesus.sourcePath, 'utf8');
-  const runtimeSource = await fs.readFile(path.join(__dirname, '..', 'plugins', 'hexo-sil-video', 'runtime', 'player.js'), 'utf8');
+  const runtimeDirectory = path.join(__dirname, '..', 'plugins', 'hexo-sil-video', 'runtime');
+  const runtimeSource = (await Promise.all([
+    'player.js',
+    'shared.js',
+    'media-controller.js',
+    'interaction-controller.js',
+    'fullscreen-controller.js',
+    'subtitle-controller.js'
+  ].map(file => fs.readFile(path.join(runtimeDirectory, file), 'utf8')))).join('\n');
   assert.match(css, /--sil-video-surface:#fff/);
   assert.match(css, /--sil-video-ink:#8064a2/);
   assert.match(css, /--sil-video-buffered:rgba\(128,100,162,\.24\)/);
@@ -418,15 +506,16 @@ test('Ephesus skin and runtime retain the specified palette and interaction cont
   assert.match(css, /data-sil-video-fullscreen="true"[^}]*sil-video-player__subtitle-control/);
   assert.doesNotMatch(css, /@media screen and \(max-width:430px\) \{\s*\.sil-video-player__toolbar/);
   assert.match(css, /data-sil-video-ui-hidden/);
+  assert.match(css, /data-sil-video-controls\]\[hidden\] \{ display:none \}/);
   assert.match(css, /--sil-video-range-buffered,var\(--sil-video-rail\)/);
   assert.doesNotMatch(css, /sil-video-player:fullscreen/);
   assert.match(runtimeSource, /const rates = \[1, 1\.25, 1\.5, 1\.75, 2, 0\.5, 0\.75\]/);
   assert.match(runtimeSource, /stage\.requestFullscreen\(\)/);
   assert.doesNotMatch(runtimeSource, /player\.requestFullscreen\(\)/);
-  assert.match(runtimeSource, /document\.fullscreenElement === stage/);
-  assert.match(runtimeSource, /subtitleRenderer\.resize\(true\)/);
-  assert.match(runtimeSource, /window\.setTimeout\([\s\S]*VOLUME_CLOSE_DELAY/);
-  assert.match(runtimeSource, /window\.setTimeout\([\s\S]*FULLSCREEN_UI_HIDE_DELAY/);
+  assert.match(runtimeSource, /documentRef\.fullscreenElement === stage/);
+  assert.match(runtimeSource, /renderer\.resize\(true\)/);
+  assert.match(runtimeSource, /windowRef\.setTimeout\([\s\S]*VOLUME_CLOSE_DELAY/);
+  assert.match(runtimeSource, /windowRef\.setTimeout\([\s\S]*FULLSCREEN_UI_HIDE_DELAY/);
   assert.match(runtimeSource, /const VIEWPORT_CLICK_DELAY = 300/);
   assert.match(runtimeSource, /const FEEDBACK_HIDE_DELAY = 900/);
   assert.match(runtimeSource, /const PLAYBACK_FEEDBACK_HIDE_DELAY = 600/);
@@ -440,7 +529,7 @@ test('Ephesus skin and runtime retain the specified palette and interaction cont
   assert.match(runtimeSource, /focusWithoutScroll\(player\)/);
   assert.match(runtimeSource, /event\.key === 'Enter'/);
   assert.match(runtimeSource, /event\.key === 'Escape'/);
-  assert.match(runtimeSource, /document\.exitFullscreen\(\)/);
+  assert.match(runtimeSource, /documentRef\.exitFullscreen\(\)/);
   assert.match(runtimeSource, /adjustVolume\(0\.05\)/);
   assert.match(runtimeSource, /adjustVolume\(-0\.05\)/);
   assert.match(runtimeSource, /seek\(-5\)/);
@@ -448,7 +537,12 @@ test('Ephesus skin and runtime retain the specified palette and interaction cont
   assert.match(runtimeSource, /key === 'm'/);
   assert.match(runtimeSource, /video\.loop = !video\.loop/);
   assert.match(runtimeSource, /function setBufferedRanges\(input, media, maximum\)/);
-  assert.match(runtimeSource, /listen\(video, 'progress', syncBuffered\)/);
+  assert.match(runtimeSource, /scope\.listen\(video, 'progress', syncBuffered\)/);
+  assert.match(runtimeSource, /import\(model\.runtime\.subtitles\)/);
+  assert.match(runtimeSource, /function createMediaController/);
+  assert.match(runtimeSource, /function createInteractionController/);
+  assert.match(runtimeSource, /function createFullscreenController/);
+  assert.match(runtimeSource, /function createSubtitleController/);
   assert.doesNotMatch(runtimeSource, /video\.pause\(\);\s*video\.currentTime = 0/);
 });
 
@@ -470,6 +564,31 @@ test('browser runtime marks every buffered video range and clears stale loading 
     video.dispatchEvent(new window.Event('progress'));
     video.dispatchEvent(new window.Event('loadstart'));
     assert.equal(progress.style.getPropertyValue('--sil-video-range-buffered'), '');
+  } finally {
+    dom.window.close();
+  }
+});
+
+test('browser runtime synchronises accessible values, omits empty subtitle relations, and destroys cleanly', async () => {
+  const fixture = await browserPlayer();
+  const { dom, document, player, video, progress, volume } = fixture;
+  try {
+    const subtitles = document.querySelector('[data-sil-video-action="subtitles"]');
+    assert.equal(progress.getAttribute('aria-valuetext'), '0:20/1:40');
+    assert.equal(volume.getAttribute('aria-valuetext'), '80%');
+    assert.equal(subtitles.disabled, true);
+    assert.equal(subtitles.hasAttribute('aria-haspopup'), false);
+    assert.equal(subtitles.hasAttribute('aria-controls'), false);
+    assert.equal(subtitles.hasAttribute('aria-expanded'), false);
+    assert.equal(video.controls, false);
+    assert.ok(Array.from(player.querySelectorAll('[data-sil-video-controls]')).every(control => control.hidden === false));
+
+    player.remove();
+    await wait(0);
+    await wait(0);
+    assert.equal(video.controls, true);
+    assert.equal(player.dataset.silVideoReady, undefined);
+    assert.equal(player.dataset.silVideoEnhanced, undefined);
   } finally {
     dom.window.close();
   }
@@ -833,12 +952,15 @@ test('browser runtime gates mouse-wheel volume by focus and normalises trackpad 
   }
 });
 
-test('runtime route builder emits browser script, module worker, WASM variants, and fallback font', async () => {
+test('runtime route builder emits split core/subtitle bundles, module worker, WASM variants, and fallback font', async () => {
   const routes = await runtimeRouteData();
   const sizes = Object.fromEntries(routes.map(route => [route.path, route.data.length]));
   assert.ok(routes.every(route => Buffer.isBuffer(route.data)));
   assert.doesNotMatch(routes[0].data.subarray(0, 24).toString('utf8'), /^\{"0":/);
   assert.ok(sizes[RUNTIME_ROUTES.script] > 10000);
+  assert.ok(sizes[RUNTIME_ROUTES.subtitles] > 10000);
+  assert.equal(routes.find(route => route.path === RUNTIME_ROUTES.script).data.includes(Buffer.from('JASSUB')), false);
+  assert.equal(routes.find(route => route.path === RUNTIME_ROUTES.script).data.includes(Buffer.from('import(')), true);
   assert.ok(sizes[RUNTIME_ROUTES.worker] > 10000);
   assert.ok(sizes[RUNTIME_ROUTES.wasm] > 1000000);
   assert.ok(sizes[RUNTIME_ROUTES.modernWasm] > 1000000);

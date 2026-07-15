@@ -30,6 +30,7 @@ const BUILTIN_SKINS = Object.freeze({
 });
 const RUNTIME_ROUTES = Object.freeze({
   script: 'js/hexo-sil-video.js',
+  subtitles: 'js/hexo-sil-video-subtitles.js',
   worker: 'js/hexo-sil-video-worker.js',
   wasm: 'wasm/hexo-sil-video.wasm',
   modernWasm: 'wasm/hexo-sil-video-modern.wasm',
@@ -340,29 +341,30 @@ function renderVideoPlayer(video) {
   const brightnessIcon = icon('feedback-brightness', '<circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M4.9 4.9l1.4 1.4m11.4 11.4 1.4 1.4M19.1 4.9l-1.4 1.4M6.3 17.7l-1.4 1.4" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.8"/>');
   const feedbackPlayIcon = icon('feedback-play', '<path d="M8 5v14l11-7z"/>');
   const feedbackPauseIcon = icon('feedback-pause', '<path d="M7 5h4v14H7zm6 0h4v14h-4z"/>');
+  const subtitleButtonState = video.subtitles.length === 0 ? ' disabled' : ' aria-expanded="false"';
   return `${PLAYER_START}
 <aside class="sil-video-player" data-sil-video-player data-sil-video-model="${model}" tabindex="0" aria-label="视频播放器" style="--sil-video-aspect-ratio:${escapeHtml(video.aspectRatio)}">
   <div class="sil-video-player__stage" data-sil-video-stage tabindex="-1">
-    <header class="sil-video-player__header"><span class="sil-video-player__title">${escapeHtml(video.title)}</span><span class="sil-video-player__status" data-sil-video-status role="status" aria-live="polite"></span></header>
+    <header class="sil-video-player__header" data-sil-video-controls data-sil-video-fallback-status hidden><span class="sil-video-player__title">${escapeHtml(video.title)}</span><span class="sil-video-player__status" data-sil-video-status role="status" aria-live="polite"></span></header>
     <div class="sil-video-player__viewport" data-sil-video-viewport>
       <div class="sil-video-player__media-layer" data-sil-video-media-layer style="--sil-video-brightness:1"><video class="sil-video-player__video" controls preload="${escapeHtml(video.preload)}"${poster}><source src="${escapeHtml(video.source)}"${type}>你的浏览器不支持 HTML5 视频播放。</video></div>
-      <div class="sil-video-player__feedback" data-sil-video-feedback role="status" aria-live="polite" aria-atomic="true">${feedbackIcon}${brightnessIcon}${feedbackPlayIcon}${feedbackPauseIcon}<span data-sil-video-feedback-text></span></div>
+      <div class="sil-video-player__feedback" data-sil-video-controls data-sil-video-feedback role="status" aria-live="polite" aria-atomic="true" hidden>${feedbackIcon}${brightnessIcon}${feedbackPlayIcon}${feedbackPauseIcon}<span data-sil-video-feedback-text></span></div>
     </div>
-    <div class="sil-video-player__progress-row">
+    <div class="sil-video-player__progress-row" data-sil-video-controls hidden>
       <span class="sil-video-player__time" data-sil-video-current>0:00</span>
-      <input class="sil-video-player__range sil-video-player__progress" data-sil-video-progress type="range" min="0" max="100" step="0.1" value="0" aria-label="播放进度" aria-valuetext="0:00">
+      <input class="sil-video-player__range sil-video-player__progress" data-sil-video-progress type="range" min="0" max="100" step="0.1" value="0" aria-label="播放进度" aria-valuetext="0:00/--:--">
       <span class="sil-video-player__time" data-sil-video-duration>--:--</span>
     </div>
-    <div class="sil-video-player__toolbar" role="group" aria-label="视频控制">
+    <div class="sil-video-player__toolbar" data-sil-video-controls role="group" aria-label="视频控制" hidden>
       <button class="sil-video-player__button" data-sil-video-action="play" type="button" aria-label="播放" aria-pressed="false">${playIcon}</button>
       <div class="sil-video-player__volume-control">
         <button class="sil-video-player__button" data-sil-video-action="mute" type="button" aria-label="静音" aria-pressed="false">${volumeIcon}</button>
-        <div class="sil-video-player__volume-popover"><input class="sil-video-player__range sil-video-player__volume" data-sil-video-volume type="range" min="0" max="1" step="0.05" value="1" aria-label="音量" orient="vertical"></div>
+        <div class="sil-video-player__volume-popover"><input class="sil-video-player__range sil-video-player__volume" data-sil-video-volume type="range" min="0" max="1" step="0.05" value="1" aria-label="音量" aria-valuetext="100%" orient="vertical"></div>
       </div>
       <button class="sil-video-player__button sil-video-player__rate" data-sil-video-action="rate" type="button" aria-label="播放速度 1 倍">1×</button>
       <button class="sil-video-player__button" data-sil-video-action="repeat" type="button" aria-label="播放一次" aria-pressed="false">${repeatIcon}</button>
       <div class="sil-video-player__subtitle-control">
-        <button class="sil-video-player__button" data-sil-video-action="subtitles" type="button" aria-label="字幕" aria-expanded="false">${icon('subtitles', '<path d="M3 5h18v14H3zm2 2v10h14V7zm1 6h5v2H6zm7 0h5v2h-5zM6 9h8v2H6z"/>')}</button>
+        <button class="sil-video-player__button" data-sil-video-action="subtitles" type="button" aria-label="字幕"${subtitleButtonState}>${icon('subtitles', '<path d="M3 5h18v14H3zm2 2v10h14V7zm1 6h5v2H6zm7 0h5v2h-5zM6 9h8v2H6z"/>')}</button>
         <div class="sil-video-player__subtitle-menu" data-sil-video-subtitle-menu hidden></div>
       </div>
       <span class="sil-video-player__toolbar-spacer"></span>
@@ -421,6 +423,7 @@ async function runtimeRouteData() {
   const jassubRoot = path.dirname(require.resolve('jassub/package.json'));
   return [
     { path: RUNTIME_ROUTES.script, data: await buildBrowserBundle(path.join(__dirname, 'runtime', 'player.js'), 'iife') },
+    { path: RUNTIME_ROUTES.subtitles, data: await buildBrowserBundle(path.join(__dirname, 'runtime', 'subtitles.js'), 'esm') },
     { path: RUNTIME_ROUTES.worker, data: await buildBrowserBundle(path.join(jassubRoot, 'dist', 'worker', 'worker.js'), 'esm') },
     { path: RUNTIME_ROUTES.wasm, data: await fs.readFile(path.join(jassubRoot, 'dist', 'wasm', 'jassub-worker.wasm')) },
     { path: RUNTIME_ROUTES.modernWasm, data: await fs.readFile(path.join(jassubRoot, 'dist', 'wasm', 'jassub-worker-modern.wasm')) },
@@ -428,8 +431,13 @@ async function runtimeRouteData() {
   ];
 }
 
-function renderStylesheetLink(url) {
-  return `<link rel="stylesheet" href="${escapeHtml(url)}">`;
+function serialiseInlineJson(value) {
+  return JSON.stringify(value).replace(/</g, '\\u003c').replace(/\u2028/g, '\\u2028').replace(/\u2029/g, '\\u2029');
+}
+
+function renderBootstrapScript({ styles = [], script }) {
+  const config = serialiseInlineJson({ styles, script });
+  return `<script>(()=>{'use strict';const k='__hexoSilVideoBootstrap',o=window[k];if(o){o.scan();return;}const c=${config},s='[data-sil-video-player]',sE='[data-sil-video-fallback-status]',sS='[data-sil-video-status]';let p,f=false;const e=m=>{document.querySelectorAll(s).forEach(x=>{x.dataset.silVideoError='true';const h=x.querySelector(sE),t=x.querySelector(sS);if(h)h.hidden=false;if(t)t.textContent=m;});},l=u=>new Promise((a,r)=>{const x=document.createElement('link');x.rel='stylesheet';x.href=u;x.dataset.silVideoStyle='true';x.onload=a;x.onerror=()=>r(new Error('style'));document.head.append(x);}),j=()=>new Promise((a,r)=>{const x=document.createElement('script');x.src=c.script;x.defer=true;x.dataset.silVideoCore='true';x.onload=a;x.onerror=()=>r(new Error('script'));document.head.append(x);}),g=()=>{if(f)return e('播放器资源加载失败，请使用原生控件。');if(p)return;p=c.styles.reduce((a,u)=>a.then(()=>l(u)),Promise.resolve()).then(j).catch(()=>{f=true;e('播放器资源加载失败，请使用原生控件。');});},q=n=>{if(n instanceof Element&&(n.matches(s)||n.querySelector(s)))g();},scan=()=>document.querySelector(s)&&g();window[k]={scan};scan();document.addEventListener('inside',scan);new MutationObserver(rs=>rs.forEach(r=>r.addedNodes.forEach(q))).observe(document.documentElement,{childList:true,subtree:true});})();</script>`;
 }
 
 function registerVideoPlugin(hexo) {
@@ -452,14 +460,18 @@ function registerVideoPlugin(hexo) {
     subtitles: config.subtitles,
     routes: RUNTIME_ROUTES
   };
+  const styles = [];
   if (config.skin.builtin) {
     const skin = BUILTIN_SKINS[config.skin.builtin];
     hexo.extend.generator.register('hexo-sil-video-skin', async () => ({ path: skin.outputPath, data: await fs.readFile(skin.sourcePath) }));
-    hexo.extend.injector.register('head_end', renderStylesheetLink(rootPublicPath(runtime.root, skin.outputPath)));
+    styles.push(rootPublicPath(runtime.root, skin.outputPath));
   }
-  if (config.skin.override) hexo.extend.injector.register('head_end', renderStylesheetLink(rootPublicPath(runtime.root, config.skin.override)));
+  if (config.skin.override) styles.push(rootPublicPath(runtime.root, config.skin.override));
   hexo.extend.generator.register('hexo-sil-video-runtime', runtimeRouteData);
-  hexo.extend.injector.register('body_end', `<script src="${escapeHtml(rootPublicPath(runtime.root, RUNTIME_ROUTES.script))}" defer></script>`);
+  hexo.extend.injector.register('body_end', renderBootstrapScript({
+    styles,
+    script: rootPublicPath(runtime.root, RUNTIME_ROUTES.script)
+  }));
   hexo.extend.tag.register('video', async function (args) {
     return renderVideoPlayer(await normaliseVideo(this, mergeVideo(this.video, parseVideoTagArgs(args)), runtime));
   }, { async: true });
@@ -485,6 +497,7 @@ module.exports = {
   normaliseVideo,
   parseVideoTagArgs,
   registerVideoPlugin,
+  renderBootstrapScript,
   renderVideoPlayer,
   rootPublicPath,
   runtimeRouteData,
