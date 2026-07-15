@@ -303,6 +303,7 @@ test('manifest-backed video resolves media, ASS/SRT tracks, poster, and fonts', 
     ['ass', '/files/video/zh.ass', true],
     ['srt', '/files/video/en.srt', false]
   ]);
+  assert.deepEqual(Object.keys(value.subtitles[0]).sort(), ['default', 'file', 'format', 'label', 'srclang', 'url']);
   assert.equal(value.fonts.Fixture, '/files/video/font.woff2');
   assert.equal(value.runtime.subtitles, '/js/hexo-sil-video-subtitles.js');
   assert.equal(value.runtime.worker, '/js/hexo-sil-video-worker.js');

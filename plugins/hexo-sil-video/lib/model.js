@@ -107,7 +107,7 @@ function createVideoModel({
       localType: track.localType,
       description: 'subtitle'
     })));
-    return tracks.map(({ acceptedTypes, ...track }) => track);
+    return tracks.map(({ acceptedTypes, localType, ...track }) => track);
   }
 
   async function normaliseVideo(post, data, runtime = {}) {

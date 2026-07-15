@@ -102,7 +102,7 @@ function createVideoConfig({ builtinSkins, fontMimeTypes, runtimeRoutes }) {
     }));
   }
 
-  function normaliseRuntimeFields({ media: rawMedia = {}, preload: rawPreload, aspectRatio: rawAspectRatio, subtitles: rawSubtitles, routes = runtimeRoutes }) {
+  function normaliseRuntimeFields({ media: rawMedia = {}, preload: rawPreload, aspectRatio: rawAspectRatio, subtitles: rawSubtitles }) {
     const media = isObject(rawMedia) ? rawMedia : {};
     const subtitles = rawSubtitles == null ? {} : rawSubtitles;
     if (!isObject(subtitles)) throw new Error('Video configuration error: subtitles must be a mapping.');
@@ -122,8 +122,7 @@ function createVideoConfig({ builtinSkins, fontMimeTypes, runtimeRoutes }) {
       },
       preload,
       aspectRatio: normaliseAspectRatio(rawAspectRatio),
-      subtitles: { fonts, fallbackFont },
-      routes: normaliseRoutes(routes)
+      subtitles: { fonts, fallbackFont }
     };
   }
 
@@ -198,7 +197,7 @@ function createVideoConfig({ builtinSkins, fontMimeTypes, runtimeRoutes }) {
       preload: common.preload,
       aspectRatio: common.aspectRatio,
       subtitles: common.subtitles,
-      routes: common.routes
+      routes: normaliseRoutes(runtime.routes || runtimeRoutes)
     };
   }
 
