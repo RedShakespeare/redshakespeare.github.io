@@ -101,45 +101,56 @@ function createVideoModel({
     return tracks.map(({ acceptedTypes, localType, ...track }) => track);
   }
 
-  async function normaliseVideo(post, data, runtime = {}) {
-    if (!isObject(data)) throw videoError(post, '`video` must be a mapping.');
-    const options = runtimeOptions(runtime);
+  async function normaliseSource(post, data, options) {
     const hasFile = Object.prototype.hasOwnProperty.call(data, 'file') && String(data.file || '').trim() !== '';
     const hasUrl = Object.prototype.hasOwnProperty.call(data, 'url') && String(data.url || '').trim() !== '';
     if (hasFile === hasUrl) throw videoError(post, '`video` must define exactly one of `file` or `url`.');
-    let source;
-    let type = '';
-    let file = '';
-    if (hasFile) {
-      file = normaliseRelativeFile(data.file, '`file`', message => videoError(post, message));
-      type = videoMimeTypes.get(path.extname(file).toLowerCase());
-      if (!type) throw videoError(post, '`file` must use MP4, M4V, WebM, OGG, OGV, MPEG, or MPG.');
-      await localEntry(post, file, options, { type, localType: type, description: 'video' });
-      source = mediaFileUrl(options.root, options.media, file);
-    } else {
-      source = normaliseHttpsUrl(data.url, '`url`', message => videoError(post, message));
-      type = videoMimeTypes.get(path.extname(new URL(source).pathname).toLowerCase()) || '';
+    if (!hasFile) {
+      const source = normaliseHttpsUrl(data.url, '`url`', message => videoError(post, message));
+      return {
+        file: '',
+        source,
+        type: videoMimeTypes.get(path.extname(new URL(source).pathname).toLowerCase()) || ''
+      };
     }
-    let poster = '';
-    if (data.poster != null && String(data.poster).trim()) {
-      const posterFile = normaliseRelativeFile(data.poster, '`poster`', message => videoError(post, message));
-      const posterType = posterMimeTypes.get(path.extname(posterFile).toLowerCase());
-      if (!posterType) throw videoError(post, '`poster` must use AVIF, GIF, JPEG, PNG, or WebP.');
-      await localEntry(post, posterFile, options, {
-        test: value => /^image\//.test(value),
-        localType: posterType,
-        description: 'an image MIME type'
-      });
-      poster = mediaFileUrl(options.root, options.media, posterFile);
-    }
-    const fontEntries = Object.entries(options.subtitles.fonts || {});
-    const subtitlePromise = normaliseSubtitles(post, data.subtitles, options);
-    const fontsPromise = Promise.all(fontEntries.map(([, fontFile]) => {
-      const type = fontMimeTypes.get(path.extname(fontFile).toLowerCase());
-      return localEntry(post, fontFile, options, { type, localType: type, description: 'font' });
+    const file = normaliseRelativeFile(data.file, '`file`', message => videoError(post, message));
+    const type = videoMimeTypes.get(path.extname(file).toLowerCase());
+    if (!type) throw videoError(post, '`file` must use MP4, M4V, WebM, OGG, OGV, MPEG, or MPG.');
+    await localEntry(post, file, options, { type, localType: type, description: 'video' });
+    return { file, source: mediaFileUrl(options.root, options.media, file), type };
+  }
+
+  async function normalisePoster(post, value, options) {
+    if (value == null || !String(value).trim()) return '';
+    const file = normaliseRelativeFile(value, '`poster`', message => videoError(post, message));
+    const localType = posterMimeTypes.get(path.extname(file).toLowerCase());
+    if (!localType) throw videoError(post, '`poster` must use AVIF, GIF, JPEG, PNG, or WebP.');
+    await localEntry(post, file, options, {
+      test: type => /^image\//.test(type),
+      localType,
+      description: 'an image MIME type'
+    });
+    return mediaFileUrl(options.root, options.media, file);
+  }
+
+  async function normaliseFonts(post, options) {
+    const entries = Object.entries(options.subtitles.fonts || {});
+    await Promise.all(entries.map(([, file]) => {
+      const type = fontMimeTypes.get(path.extname(file).toLowerCase());
+      return localEntry(post, file, options, { type, localType: type, description: 'font' });
     }));
-    const [subtitles] = await Promise.all([subtitlePromise, fontsPromise]);
-    const fonts = Object.fromEntries(fontEntries.map(([name, fontFile]) => [name, mediaFileUrl(options.root, options.media, fontFile)]));
+    return Object.fromEntries(entries.map(([name, file]) => [name, mediaFileUrl(options.root, options.media, file)]));
+  }
+
+  async function normaliseVideo(post, data, runtime = {}) {
+    if (!isObject(data)) throw videoError(post, '`video` must be a mapping.');
+    const options = runtimeOptions(runtime);
+    const { file, source, type } = await normaliseSource(post, data, options);
+    const poster = await normalisePoster(post, data.poster, options);
+    const [subtitles, fonts] = await Promise.all([
+      normaliseSubtitles(post, data.subtitles, options),
+      normaliseFonts(post, options)
+    ]);
     const title = String(data.title || post && post.title || (file && path.basename(file, path.extname(file))) || '视频').trim();
     return {
       title,
