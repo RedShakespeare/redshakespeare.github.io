@@ -1,6 +1,6 @@
 # hexo-sil-video（本地开发版）
 
-为 Ephesus 提供支持 R2 资产清单的 MP4、M4V、WebM、OGG/OGV、MPEG 视频播放器，以及由 JASSUB 渲染的
+为 Ephesus 提供支持 R2 资产清单的 MP4、M4V、WebM、OGG/OGV、MPEG、MOV、3GP/3G2 视频播放器，以及由 JASSUB 渲染的
 ASS/SRT 字幕。插件当前由 `scripts/hexo-sil-video.js` 加载；稳定后再提取到 npm workspace。
 
 ## 配置

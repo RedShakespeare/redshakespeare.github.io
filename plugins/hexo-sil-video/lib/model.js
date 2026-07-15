@@ -115,7 +115,7 @@ function createVideoModel({
     }
     const file = normaliseRelativeFile(data.file, '`file`', message => videoError(post, message));
     const type = videoMimeTypes.get(path.extname(file).toLowerCase());
-    if (!type) throw videoError(post, '`file` must use MP4, M4V, WebM, OGG, OGV, MPEG, or MPG.');
+    if (!type) throw videoError(post, '`file` must use MP4, M4V, WebM, OGG, OGV, MPEG, MPG, MOV, 3GP, or 3G2.');
     await localEntry(post, file, options, { type, localType: type, description: 'video' });
     return { file, source: mediaFileUrl(options.root, options.media, file), type };
   }

@@ -7,7 +7,10 @@ const VIDEO_MIME_TYPES = new Map([
   ['.ogv', 'video/ogg'],
   ['.ogg', 'video/ogg'],
   ['.mpeg', 'video/mpeg'],
-  ['.mpg', 'video/mpeg']
+  ['.mpg', 'video/mpeg'],
+  ['.mov', 'video/quicktime'],
+  ['.3gp', 'video/3gpp'],
+  ['.3g2', 'video/3gpp2']
 ]);
 
 const SUBTITLE_MIME_TYPES = new Map([
