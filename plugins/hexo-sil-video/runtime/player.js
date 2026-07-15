@@ -4,6 +4,8 @@ import playerState from '../lib/player-state.js';
 
 const selector = '.sil-video-player[data-sil-video-player]';
 const rates = [1, 1.25, 1.5, 1.75, 2, 0.5, 0.75];
+const VIEWPORT_CLICK_DELAY = 300;
+const FEEDBACK_HIDE_DELAY = 900;
 const { FULLSCREEN_UI_HIDE_DELAY, VOLUME_CLOSE_DELAY, volumeLevel } = playerState;
 const instances = new Map();
 
@@ -50,6 +52,8 @@ function initialise(player) {
   const video = player.querySelector('.sil-video-player__video');
   const stage = player.querySelector('[data-sil-video-stage]');
   const viewport = player.querySelector('[data-sil-video-viewport]');
+  const feedback = player.querySelector('[data-sil-video-feedback]');
+  const feedbackText = player.querySelector('[data-sil-video-feedback-text]');
   const progress = player.querySelector('[data-sil-video-progress]');
   const volume = player.querySelector('[data-sil-video-volume]');
   const current = player.querySelector('[data-sil-video-current]');
@@ -63,7 +67,7 @@ function initialise(player) {
   const subtitleMenu = player.querySelector('[data-sil-video-subtitle-menu]');
   const fullscreen = player.querySelector('[data-sil-video-action="fullscreen"]');
   const volumeControl = player.querySelector('.sil-video-player__volume-control');
-  if (!video || !stage || !viewport || !progress || !volume || !current || !duration || !status || !play || !mute || !rate || !repeat || !subtitles || !subtitleMenu || !fullscreen || !volumeControl) return;
+  if (!video || !stage || !viewport || !feedback || !feedbackText || !progress || !volume || !current || !duration || !status || !play || !mute || !rate || !repeat || !subtitles || !subtitleMenu || !fullscreen || !volumeControl) return;
 
   let model;
   try {
@@ -82,6 +86,9 @@ function initialise(player) {
   let lastVolume = video.volume || 0.8;
   let volumeCloseTimer = null;
   let fullscreenUiTimer = null;
+  let viewportClickTimer = null;
+  let feedbackTimer = null;
+  let wasFullscreen = false;
 
   function listen(target, event, handler, options) {
     target.addEventListener(event, handler, options);
@@ -92,6 +99,14 @@ function initialise(player) {
     status.textContent = message;
     if (error) player.dataset.silVideoError = 'true';
     else delete player.dataset.silVideoError;
+  }
+
+  function focusWithoutScroll(target) {
+    try {
+      target.focus({ preventScroll: true });
+    } catch {
+      target.focus();
+    }
   }
 
   function fullscreenActive() {
@@ -175,10 +190,17 @@ function initialise(player) {
     const active = fullscreenActive();
     player.dataset.silVideoFullscreen = active ? 'true' : 'false';
     fullscreen.setAttribute('aria-label', active ? '退出全屏' : '进入全屏');
-    if (active) scheduleFullscreenUiHide();
-    else {
+    if (active) {
+      wasFullscreen = true;
+      focusWithoutScroll(stage);
+      scheduleFullscreenUiHide();
+    } else {
       clearFullscreenUiTimer();
       delete stage.dataset.silVideoUiHidden;
+      if (wasFullscreen) {
+        wasFullscreen = false;
+        focusWithoutScroll(player);
+      }
     }
     window.requestAnimationFrame(() => {
       if (subtitleRenderer) subtitleRenderer.resize(true).catch(() => {});
@@ -199,6 +221,51 @@ function initialise(player) {
     }
   }
 
+  async function toggleFullscreen() {
+    if (fullscreenActive()) await document.exitFullscreen();
+    else await stage.requestFullscreen();
+  }
+
+  function clearViewportClickTimer() {
+    if (viewportClickTimer !== null) window.clearTimeout(viewportClickTimer);
+    viewportClickTimer = null;
+  }
+
+  function handleViewportClick() {
+    focusWithoutScroll(stage);
+    if (viewportClickTimer !== null) {
+      clearViewportClickTimer();
+      toggleFullscreen();
+      return;
+    }
+    viewportClickTimer = window.setTimeout(() => {
+      viewportClickTimer = null;
+      togglePlay();
+    }, VIEWPORT_CLICK_DELAY);
+  }
+
+  function showFeedback(kind, message) {
+    if (feedbackTimer !== null) window.clearTimeout(feedbackTimer);
+    feedbackTimer = null;
+    feedback.dataset.silVideoFeedbackKind = kind;
+    feedback.dataset.silVideoFeedbackVisible = 'true';
+    feedbackText.textContent = message;
+    feedbackTimer = window.setTimeout(() => {
+      feedbackTimer = null;
+      delete feedback.dataset.silVideoFeedbackVisible;
+    }, FEEDBACK_HIDE_DELAY);
+  }
+
+  function showVolumeFeedback() {
+    const effectiveVolume = video.muted ? 0 : video.volume;
+    showFeedback('volume', `${Math.round(effectiveVolume * 100)}%`);
+  }
+
+  function showProgressFeedback() {
+    if (!Number.isFinite(video.duration) || video.duration <= 0) return;
+    showFeedback('progress', `${formatTime(video.currentTime)}/${formatTime(video.duration)}`);
+  }
+
   function toggleMute() {
     if (video.muted || video.volume === 0) {
       video.muted = false;
@@ -207,6 +274,7 @@ function initialise(player) {
       lastVolume = video.volume;
       video.muted = true;
     }
+    showVolumeFeedback();
   }
 
   function adjustVolume(delta) {
@@ -214,12 +282,14 @@ function initialise(player) {
     video.volume = Math.max(0, Math.min(1, video.volume + delta));
     if (video.volume > 0) lastVolume = video.volume;
     video.muted = video.volume === 0;
+    showVolumeFeedback();
   }
 
   function seek(delta) {
     if (!Number.isFinite(video.duration)) return;
     video.currentTime = Math.max(0, Math.min(video.duration, video.currentTime + delta));
     syncTime();
+    showProgressFeedback();
   }
 
   function setVolumeOpen(open) {
@@ -336,7 +406,8 @@ function initialise(player) {
   }
 
   listen(play, 'click', togglePlay);
-  listen(viewport, 'click', event => { if (event.target === video || event.target === viewport) togglePlay(); });
+  listen(viewport, 'click', handleViewportClick);
+  listen(viewport, 'dblclick', event => event.preventDefault());
   listen(mute, 'click', event => {
     if (event.pointerType === 'touch') setVolumeOpen(player.dataset.silVideoVolumeOpen !== 'true');
     toggleMute();
@@ -350,10 +421,12 @@ function initialise(player) {
     video.muted = false;
     video.volume = Number(volume.value);
     if (video.volume > 0) lastVolume = video.volume;
+    showVolumeFeedback();
   });
   listen(progress, 'input', () => {
     if (Number.isFinite(video.duration)) video.currentTime = Math.max(0, Math.min(video.duration, Number(progress.value)));
     syncTime();
+    showProgressFeedback();
   });
   listen(rate, 'click', () => {
     const index = rates.findIndex(value => Math.abs(value - video.playbackRate) < 0.001);
@@ -369,10 +442,7 @@ function initialise(player) {
     setSubtitleMenuOpen(false);
     subtitles.focus();
   });
-  listen(fullscreen, 'click', async () => {
-    if (fullscreenActive()) await document.exitFullscreen();
-    else await stage.requestFullscreen();
-  });
+  listen(fullscreen, 'click', toggleFullscreen);
   listen(stage, 'pointermove', showFullscreenUi);
   listen(stage, 'pointerdown', showFullscreenUi);
   listen(stage, 'focusin', showFullscreenUi);
@@ -381,7 +451,7 @@ function initialise(player) {
   });
   listen(player, 'keydown', event => {
     if (fullscreenActive()) showFullscreenUi();
-    const shortcutTarget = event.target === player || event.target === video || event.target === viewport;
+    const shortcutTarget = event.target === player || event.target === stage || event.target === video || event.target === viewport;
     if (!shortcutTarget) return;
     const key = event.key.toLowerCase();
     if (event.key === ' ' || key === 'spacebar') {
@@ -389,7 +459,7 @@ function initialise(player) {
       togglePlay();
     } else if (event.key === 'Enter') {
       event.preventDefault();
-      if (!fullscreenActive()) stage.requestFullscreen();
+      if (!fullscreenActive()) toggleFullscreen();
     } else if (event.key === 'Escape') {
       if (fullscreenActive()) document.exitFullscreen();
     } else if (event.key === 'ArrowUp') {
@@ -437,6 +507,8 @@ function initialise(player) {
       subtitleToken += 1;
       subtitleAbort?.abort();
       if (volumeCloseTimer !== null) window.clearTimeout(volumeCloseTimer);
+      clearViewportClickTimer();
+      if (feedbackTimer !== null) window.clearTimeout(feedbackTimer);
       clearFullscreenUiTimer();
       for (const cleanup of cleanups) cleanup();
       if (subtitleRenderer) {

@@ -54,6 +54,7 @@
     "subsrt": "1.1.1"
   },
   "devDependencies": {
-    "esbuild": "0.25.12"
+    "esbuild": "0.25.12",
+    "jsdom": "20.0.3"
   }
 }

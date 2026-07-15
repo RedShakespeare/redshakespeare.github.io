@@ -336,12 +336,14 @@ function renderVideoPlayer(video) {
     icon('muted', `${speaker}<path d="m14 9 6 6m0-6-6 6" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2"/>`);
   const repeatIcon = icon('once', '<path d="M4 11h12.2l-3.6-3.6L14 6l6 6-6 6-1.4-1.4 3.6-3.6H4z"/>') +
     icon('repeat', '<path d="M7 7h10l-2.5-2.5L16 3l5 5-5 5-1.5-1.5L17 9H7a3 3 0 0 0-3 3v1H2v-1a5 5 0 0 1 5-5zm10 8H7l2.5 2.5L8 19l-5-5 5-5 1.5 1.5L7 13h10a3 3 0 0 0 3-3V9h2v1a5 5 0 0 1-5 5z"/>');
+  const feedbackIcon = icon('feedback-volume', `${speaker}<path d="M14.5 9.5a3.5 3.5 0 0 1 0 5m2-7a6.5 6.5 0 0 1 0 9" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.8"/>`);
   return `${PLAYER_START}
 <aside class="sil-video-player" data-sil-video-player data-sil-video-model="${model}" tabindex="0" aria-label="视频播放器" style="--sil-video-aspect-ratio:${escapeHtml(video.aspectRatio)}">
-  <div class="sil-video-player__stage" data-sil-video-stage>
+  <div class="sil-video-player__stage" data-sil-video-stage tabindex="-1">
     <header class="sil-video-player__header"><span class="sil-video-player__title">${escapeHtml(video.title)}</span><span class="sil-video-player__status" data-sil-video-status role="status" aria-live="polite"></span></header>
     <div class="sil-video-player__viewport" data-sil-video-viewport>
       <video class="sil-video-player__video" controls preload="${escapeHtml(video.preload)}"${poster}><source src="${escapeHtml(video.source)}"${type}>你的浏览器不支持 HTML5 视频播放。</video>
+      <div class="sil-video-player__feedback" data-sil-video-feedback role="status" aria-live="polite" aria-atomic="true">${feedbackIcon}<span data-sil-video-feedback-text></span></div>
     </div>
     <div class="sil-video-player__progress-row">
       <span class="sil-video-player__time" data-sil-video-current>0:00</span>

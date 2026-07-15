@@ -6,6 +6,7 @@ const fs = require('node:fs/promises');
 const os = require('node:os');
 const path = require('node:path');
 const test = require('node:test');
+const { JSDOM } = require('jsdom');
 const subsrt = require('subsrt');
 const {
   BUILTIN_SKINS,
@@ -13,6 +14,7 @@ const {
   PLAYER_START,
   RUNTIME_ROUTES,
   VOLUME_CLOSE_DELAY,
+  buildBrowserBundle,
   mergeVideo,
   normaliseVideo,
   parseVideoTagArgs,
@@ -59,6 +61,106 @@ const runtime = {
   subtitles: { fonts: { Fixture: 'video/font.woff2' }, fallbackFont: 'Fixture' },
   routes: RUNTIME_ROUTES
 };
+
+let browserBundlePromise;
+
+function wait(milliseconds) {
+  return new Promise(resolve => setTimeout(resolve, milliseconds));
+}
+
+async function browserPlayer() {
+  const html = renderVideoPlayer({
+    title: 'Browser Fixture',
+    source: '/files/video/demo.mp4',
+    type: 'video/mp4',
+    poster: '',
+    preload: 'metadata',
+    aspectRatio: '16/9',
+    subtitles: [],
+    fonts: {},
+    fallbackFont: '',
+    runtime: {
+      worker: '/js/hexo-sil-video-worker.js',
+      wasm: '/js/hexo-sil-video-worker.wasm',
+      modernWasm: '/js/hexo-sil-video-worker-modern.wasm',
+      defaultFont: '/fonts/hexo-sil-video-default.woff2'
+    }
+  });
+  const dom = new JSDOM(`<!doctype html><body>${html}</body>`, {
+    runScripts: 'outside-only',
+    pretendToBeVisual: true,
+    url: 'https://example.test/'
+  });
+  const { window } = dom;
+  const { document } = window;
+  window.TextDecoder = TextDecoder;
+  const player = document.querySelector('[data-sil-video-player]');
+  const stage = document.querySelector('[data-sil-video-stage]');
+  const viewport = document.querySelector('[data-sil-video-viewport]');
+  const video = document.querySelector('video');
+  const fullscreen = document.querySelector('[data-sil-video-action="fullscreen"]');
+  const mute = document.querySelector('[data-sil-video-action="mute"]');
+  const volume = document.querySelector('[data-sil-video-volume]');
+  const progress = document.querySelector('[data-sil-video-progress]');
+  const feedback = document.querySelector('[data-sil-video-feedback]');
+  const feedbackText = document.querySelector('[data-sil-video-feedback-text]');
+  let playCalls = 0;
+  let pauseCalls = 0;
+  let fullscreenRequests = 0;
+  let fullscreenExits = 0;
+  Object.defineProperties(video, {
+    volume: { value: 0.8, writable: true },
+    muted: { value: false, writable: true },
+    paused: { value: true, writable: true },
+    ended: { value: false, writable: true },
+    duration: { value: 100, writable: true },
+    currentTime: { value: 20, writable: true }
+  });
+  video.play = async () => {
+    playCalls += 1;
+    video.paused = false;
+    video.dispatchEvent(new window.Event('play'));
+  };
+  video.pause = () => {
+    pauseCalls += 1;
+    video.paused = true;
+    video.dispatchEvent(new window.Event('pause'));
+  };
+  Object.defineProperty(document, 'fullscreenElement', { value: null, writable: true });
+  stage.requestFullscreen = async () => {
+    fullscreenRequests += 1;
+    document.fullscreenElement = stage;
+    document.dispatchEvent(new window.Event('fullscreenchange'));
+  };
+  document.exitFullscreen = async () => {
+    fullscreenExits += 1;
+    document.fullscreenElement = null;
+    document.dispatchEvent(new window.Event('fullscreenchange'));
+  };
+  browserBundlePromise ||= buildBrowserBundle(path.join(__dirname, '..', 'plugins', 'hexo-sil-video', 'runtime', 'player.js'), 'iife');
+  window.eval((await browserBundlePromise).toString('utf8'));
+  return {
+    dom,
+    window,
+    document,
+    player,
+    stage,
+    viewport,
+    video,
+    fullscreen,
+    mute,
+    volume,
+    progress,
+    feedback,
+    feedbackText,
+    calls: {
+      get play() { return playCalls; },
+      get pause() { return pauseCalls; },
+      get fullscreenRequests() { return fullscreenRequests; },
+      get fullscreenExits() { return fullscreenExits; }
+    }
+  };
+}
 
 function post(overrides = {}) {
   return { source: 'source/_posts/video.md', path: '2026/video/', title: 'Video Article', ...overrides };
@@ -162,7 +264,9 @@ test('rendered player exposes native fallback, custom controls, downloads, and r
   assert.match(html, /data-sil-video-action="rate"[^>]*>1×/);
   assert.match(html, /data-sil-video-action="repeat"/);
   assert.match(html, /data-sil-video-action="fullscreen"/);
-  assert.match(html, /data-sil-video-stage/);
+  assert.match(html, /data-sil-video-stage tabindex="-1"/);
+  assert.match(html, /data-sil-video-feedback/);
+  assert.match(html, /data-sil-video-feedback-text/);
   assert.match(html, /sil-video-player__icon--once/);
   assert.match(html, /sil-video-player__icon--repeat/);
   assert.match(html, /sil-video-player__icon--volume-low/);
@@ -234,6 +338,8 @@ test('Ephesus skin and runtime retain the specified palette and interaction cont
   assert.match(css, /sil-video-player__volume \{[^}]*writing-mode:vertical-lr/);
   assert.doesNotMatch(css, /volume-control:focus-within/);
   assert.match(css, /sil-video-player__stage:fullscreen/);
+  assert.match(css, /sil-video-player__feedback \{[^}]*color:var\(--sil-video-ink\)/);
+  assert.match(css, /data-sil-video-feedback-visible/);
   assert.match(css, /data-sil-video-ui-hidden/);
   assert.doesNotMatch(css, /sil-video-player:fullscreen/);
   assert.match(runtimeSource, /const rates = \[1, 1\.25, 1\.5, 1\.75, 2, 0\.5, 0\.75\]/);
@@ -243,6 +349,10 @@ test('Ephesus skin and runtime retain the specified palette and interaction cont
   assert.match(runtimeSource, /subtitleRenderer\.resize\(true\)/);
   assert.match(runtimeSource, /window\.setTimeout\([\s\S]*VOLUME_CLOSE_DELAY/);
   assert.match(runtimeSource, /window\.setTimeout\([\s\S]*FULLSCREEN_UI_HIDE_DELAY/);
+  assert.match(runtimeSource, /const VIEWPORT_CLICK_DELAY = 300/);
+  assert.match(runtimeSource, /const FEEDBACK_HIDE_DELAY = 900/);
+  assert.match(runtimeSource, /focusWithoutScroll\(stage\)/);
+  assert.match(runtimeSource, /focusWithoutScroll\(player\)/);
   assert.match(runtimeSource, /event\.key === 'Enter'/);
   assert.match(runtimeSource, /event\.key === 'Escape'/);
   assert.match(runtimeSource, /document\.exitFullscreen\(\)/);
@@ -253,6 +363,101 @@ test('Ephesus skin and runtime retain the specified palette and interaction cont
   assert.match(runtimeSource, /key === 'm'/);
   assert.match(runtimeSource, /video\.loop = !video\.loop/);
   assert.doesNotMatch(runtimeSource, /video\.pause\(\);\s*video\.currentTime = 0/);
+});
+
+test('browser runtime keeps shortcuts focused through fullscreen entry and exit', async () => {
+  const fixture = await browserPlayer();
+  const { dom, window, document, player, stage, video, fullscreen, feedback, feedbackText, calls } = fixture;
+  try {
+    fullscreen.focus();
+    fullscreen.click();
+    await Promise.resolve();
+    assert.equal(document.fullscreenElement, stage);
+    assert.equal(document.activeElement, stage);
+    stage.dispatchEvent(new window.KeyboardEvent('keydown', { key: 'ArrowUp', bubbles: true }));
+    assert.ok(Math.abs(video.volume - 0.85) < Number.EPSILON * 2);
+    assert.equal(feedback.dataset.silVideoFeedbackKind, 'volume');
+    assert.equal(feedback.dataset.silVideoFeedbackVisible, 'true');
+    assert.equal(feedbackText.textContent, '85%');
+
+    stage.dispatchEvent(new window.KeyboardEvent('keydown', { key: 'Escape', bubbles: true }));
+    await Promise.resolve();
+    assert.equal(calls.fullscreenExits, 1);
+    assert.equal(document.fullscreenElement, null);
+    assert.equal(document.activeElement, player);
+
+    player.dispatchEvent(new window.KeyboardEvent('keydown', { key: 'ArrowRight', bubbles: true }));
+    assert.equal(video.currentTime, 25);
+    assert.equal(feedback.dataset.silVideoFeedbackKind, 'progress');
+    assert.equal(feedbackText.textContent, '0:25/1:40');
+  } finally {
+    dom.window.close();
+  }
+});
+
+test('browser runtime distinguishes viewport single clicks from double clicks', async () => {
+  const fixture = await browserPlayer();
+  const { dom, window, document, stage, viewport, calls } = fixture;
+  try {
+    viewport.dispatchEvent(new window.MouseEvent('click', { bubbles: true, button: 0 }));
+    assert.equal(document.activeElement, stage);
+    await wait(350);
+    assert.equal(calls.play, 1);
+    assert.equal(calls.pause, 0);
+
+    viewport.dispatchEvent(new window.MouseEvent('click', { bubbles: true, button: 0 }));
+    viewport.dispatchEvent(new window.MouseEvent('click', { bubbles: true, button: 0 }));
+    viewport.dispatchEvent(new window.MouseEvent('dblclick', { bubbles: true, button: 0 }));
+    await wait(350);
+    assert.equal(calls.play, 1);
+    assert.equal(calls.pause, 0);
+    assert.equal(calls.fullscreenRequests, 1);
+    assert.equal(document.fullscreenElement, stage);
+
+    viewport.dispatchEvent(new window.MouseEvent('click', { bubbles: true, button: 0 }));
+    viewport.dispatchEvent(new window.MouseEvent('click', { bubbles: true, button: 0 }));
+    viewport.dispatchEvent(new window.MouseEvent('dblclick', { bubbles: true, button: 0 }));
+    await wait(350);
+    assert.equal(calls.play, 1);
+    assert.equal(calls.pause, 0);
+    assert.equal(calls.fullscreenExits, 1);
+    assert.equal(document.fullscreenElement, null);
+  } finally {
+    dom.window.close();
+  }
+});
+
+test('browser runtime shows feedback for every user volume and progress adjustment', async () => {
+  const fixture = await browserPlayer();
+  const { dom, window, player, video, mute, volume, progress, feedback, feedbackText } = fixture;
+  try {
+    player.focus();
+    player.dispatchEvent(new window.KeyboardEvent('keydown', { key: 'm', bubbles: true }));
+    assert.equal(video.muted, true);
+    assert.equal(feedbackText.textContent, '0%');
+
+    volume.value = '0.3';
+    volume.dispatchEvent(new window.Event('input', { bubbles: true }));
+    assert.equal(video.muted, false);
+    assert.equal(video.volume, 0.3);
+    assert.equal(feedback.dataset.silVideoFeedbackKind, 'volume');
+    assert.equal(feedbackText.textContent, '30%');
+
+    progress.value = '50';
+    progress.dispatchEvent(new window.Event('input', { bubbles: true }));
+    assert.equal(video.currentTime, 50);
+    assert.equal(feedback.dataset.silVideoFeedbackKind, 'progress');
+    assert.equal(feedbackText.textContent, '0:50/1:40');
+
+    mute.click();
+    assert.equal(video.muted, true);
+    assert.equal(feedbackText.textContent, '0%');
+    assert.equal(feedback.dataset.silVideoFeedbackVisible, 'true');
+    await wait(950);
+    assert.equal(feedback.dataset.silVideoFeedbackVisible, undefined);
+  } finally {
+    dom.window.close();
+  }
 });
 
 test('runtime route builder emits browser script, module worker, WASM variants, and fallback font', async () => {
