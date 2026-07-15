@@ -12,6 +12,8 @@ function serialiseInlineJson(value) {
 function createBrowserBuild({ pluginDir, routes }) {
   const bootstrapSource = fsSync.readFileSync(path.join(pluginDir, 'runtime', 'bootstrap.js'), 'utf8');
   let runtimeArtifactsPromise = null;
+  let runtimeRouteDataPromise = null;
+  const esbuild = require('esbuild');
 
   function buildOptions(entryPoint, format, outputName, sourcemap = false) {
     return {
@@ -28,15 +30,17 @@ function createBrowserBuild({ pluginDir, routes }) {
     };
   }
 
+  async function runEsbuild(entryPoint, { format, outputName, sourcemap = false }) {
+    return esbuild.build(buildOptions(entryPoint, format, outputName, sourcemap));
+  }
+
   async function buildBrowserBundle(entryPoint, format) {
-    const esbuild = require('esbuild');
-    const result = await esbuild.build(buildOptions(entryPoint, format, 'bundle.js'));
+    const result = await runEsbuild(entryPoint, { format, outputName: 'bundle.js' });
     return Buffer.from(result.outputFiles[0].contents);
   }
 
   async function buildBrowserArtifacts(entryPoint, format = 'iife', outputName = 'bundle.js') {
-    const esbuild = require('esbuild');
-    const result = await esbuild.build(buildOptions(entryPoint, format, outputName, true));
+    const result = await runEsbuild(entryPoint, { format, outputName, sourcemap: true });
     const js = result.outputFiles.find(file => file.path.endsWith('.js'));
     const map = result.outputFiles.find(file => file.path.endsWith('.js.map'));
     return {
@@ -67,18 +71,22 @@ function createBrowserBuild({ pluginDir, routes }) {
   }
 
   async function runtimeRouteData() {
+    if (runtimeRouteDataPromise) return runtimeRouteDataPromise;
     const jassubRoot = path.dirname(require.resolve('jassub/package.json'));
-    return [
+    runtimeRouteDataPromise = Promise.all([
       ...await runtimeRouteArtifacts(),
-      { path: routes.wasm, data: await fs.readFile(path.join(jassubRoot, 'dist', 'wasm', 'jassub-worker.wasm')) },
-      { path: routes.modernWasm, data: await fs.readFile(path.join(jassubRoot, 'dist', 'wasm', 'jassub-worker-modern.wasm')) },
-      { path: routes.defaultFont, data: await fs.readFile(path.join(jassubRoot, 'dist', 'default.woff2')) }
-    ];
+      { path: routes.wasm, data: fs.readFile(path.join(jassubRoot, 'dist', 'wasm', 'jassub-worker.wasm')) },
+      { path: routes.modernWasm, data: fs.readFile(path.join(jassubRoot, 'dist', 'wasm', 'jassub-worker-modern.wasm')) },
+      { path: routes.defaultFont, data: fs.readFile(path.join(jassubRoot, 'dist', 'default.woff2')) }
+    ]).then(entries => Promise.all(entries.map(async entry => ({ ...entry, data: await entry.data })))).catch(error => {
+      runtimeRouteDataPromise = null;
+      throw error;
+    });
+    return runtimeRouteDataPromise;
   }
 
   function renderBootstrapScript({ styles = [], script }) {
     const config = serialiseInlineJson({ styles, script });
-    const esbuild = require('esbuild');
     const output = esbuild.transformSync(bootstrapSource, {
       define: { __SIL_VIDEO_BOOTSTRAP_CONFIG__: config },
       minify: true,
