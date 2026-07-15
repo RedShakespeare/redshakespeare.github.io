@@ -1,12 +1,12 @@
 import { selector } from './shared.js';
-import { createDiagnostics } from './diagnostics.js';
+import { createRuntimeServices } from './runtime-services.js';
 import { createPlayerInstance } from './player-instance.js';
 
 const instances = new Map();
 const destroying = new WeakMap();
 const failures = new WeakMap();
 const dirtyPlayers = new Set();
-const diagnostics = createDiagnostics();
+const diagnostics = createRuntimeServices().diagnostics;
 let runtimeDestroyed = false;
 let refreshScheduled = false;
 
@@ -34,14 +34,14 @@ function initialise(player) {
   if (previousFailure) failures.delete(player);
   let instance = null;
   try {
-    instance = createPlayerInstance({ player, diagnostics });
+    instance = createPlayerInstance({ player, services: createRuntimeServices({ player, windowRef: player.ownerDocument.defaultView }) });
     instance.mount();
     instances.set(player, instance);
     failures.delete(player);
     instance.refreshTheme();
   } catch (error) {
     const cleanup = instance?.destroy?.() || Promise.resolve();
-    cleanup.catch(destroyError => diagnostics.report('destroy', destroyError));
+    cleanup.catch(destroyError => console.error(destroyError));
     recordFailure(player, source, 'initialise', error, `播放器初始化失败：${error.message}`);
   }
 }
@@ -107,7 +107,7 @@ function destroyRemoved(node) {
       if (destroying.get(player) !== pending) return;
       destroying.delete(player);
       if (!runtimeDestroyed && player.isConnected) initialise(player);
-    }, error => diagnostics.report('destroy', error));
+    }, error => console.error(error));
   }
 }
 

@@ -11,14 +11,14 @@ import {
   createListenerScope,
   focusWithoutScroll
 } from './shared.js';
+import { createTestRuntimeServices } from './runtime-services.js';
 
-export function createPointerController({ player, video, stage, viewport, media, fullscreen, clock = null }) {
+export function createPointerController({ player, video, stage, viewport, media, fullscreen, services }) {
+  services ||= createTestRuntimeServices({ windowRef: player.ownerDocument.defaultView });
   const scope = createListenerScope();
   const documentRef = player.ownerDocument;
   const windowRef = documentRef.defaultView;
-  const now = clock?.now || (() => Date.now());
-  const setTimer = clock?.setTimeout || ((handler, delay) => windowRef.setTimeout(handler, delay));
-  const clearTimer = clock?.clearTimeout || (timer => windowRef?.clearTimeout(timer));
+  const { now, setTimeout: setTimer, clearTimeout: clearTimer } = services.clock;
   let viewportClickTimer = null;
   let viewportClickTouch = false;
   let viewportClickWakeOnly = false;

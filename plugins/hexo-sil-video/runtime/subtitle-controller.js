@@ -1,7 +1,7 @@
 import { createCleanupError, createListenerScope } from './shared.js';
 import { createSubtitleMenu } from './subtitle-menu.js';
 import { createSubtitleRendererManager } from './subtitle-renderer-manager.js';
-import { createStateCoordinator } from './state-coordinator.js';
+import { createTestRuntimeServices } from './runtime-services.js';
 
 export function createSubtitleController({
   player,
@@ -10,15 +10,17 @@ export function createSubtitleController({
   menu,
   model,
   showFullscreenUi = () => {},
-  state: suppliedState = null,
-  ui = null,
   moduleLoader = url => import(url),
   rendererFactory = null,
-  diagnostics = null
+  services,
+  state: legacyState,
+  ui: legacyUi,
+  diagnostics: legacyDiagnostics
 }) {
+  services ||= createTestRuntimeServices({ windowRef: player.ownerDocument.defaultView, state: legacyState, ui: legacyUi, diagnostics: legacyDiagnostics });
   const tracks = Array.isArray(model.subtitles) ? model.subtitles : [];
   const scope = createListenerScope();
-  const state = suppliedState || createStateCoordinator({ player });
+  const { state, ui, diagnostics } = services;
   let activeContent = '';
   let abortController = null;
   let requestToken = 0;
@@ -64,7 +66,7 @@ export function createSubtitleController({
     } catch (error) {
       if (isCurrent(token)) {
         const message = index < 0 ? `字幕关闭失败：${error.message}` : `字幕加载失败：${error.message}`;
-        diagnostics?.report('subtitle.select', error);
+        diagnostics.report('subtitle.select', error);
         state.set('subtitles', message, { error: true });
       }
       return false;
@@ -115,7 +117,7 @@ export function createSubtitleController({
       const message = error?.code === 'SIL_VIDEO_SUBTITLE_CAPABILITY'
         ? '当前浏览器不支持高级字幕渲染。'
         : `字幕加载失败：${error.message}`;
-      diagnostics?.report('subtitle.select', error);
+      diagnostics.report('subtitle.select', error);
       state.set('subtitles', message, { error: true });
       return false;
     }

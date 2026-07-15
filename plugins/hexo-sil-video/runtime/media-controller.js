@@ -7,7 +7,7 @@ import {
   setRangeFill,
   volumeLevel
 } from './shared.js';
-import { createStateCoordinator } from './state-coordinator.js';
+import { createTestRuntimeServices } from './runtime-services.js';
 
 export function createMediaController({
   player,
@@ -26,12 +26,14 @@ export function createMediaController({
   repeat,
   onPlaybackStateChange = () => {},
   onPlayInteraction = () => {},
-  state: suppliedState = null,
   feedbackController,
-  diagnostics = null
+  services,
+  state: legacyState,
+  diagnostics: legacyDiagnostics
 }) {
+  services ||= createTestRuntimeServices({ windowRef: player.ownerDocument.defaultView, state: legacyState, diagnostics: legacyDiagnostics });
   const scope = createListenerScope();
-  const state = suppliedState || createStateCoordinator({ player, status });
+  const { state, diagnostics } = services;
   let lastVolume = video.volume || 0.8;
 
   function setStatus(message = '', error = false, level = error ? 'error' : 'info') {
@@ -119,7 +121,7 @@ export function createMediaController({
         setStatus();
         if (showPlayback) showPlaybackFeedback('play');
       } catch (error) {
-        diagnostics?.report('media.play', error);
+        diagnostics.report('media.play', error);
         setStatus('视频播放失败，请使用下载链接。', true);
       }
     } else {

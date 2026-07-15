@@ -1,11 +1,12 @@
 import { VOLUME_CLOSE_DELAY, createListenerScope } from './shared.js';
+import { createTestRuntimeServices } from './runtime-services.js';
 
-export function createVolumeOverlayController({ player, volume, mute, volumeControl, media, fullscreen, ui = null, clock = null }) {
+export function createVolumeOverlayController({ player, volume, mute, volumeControl, media, fullscreen, services }) {
+  services ||= createTestRuntimeServices({ windowRef: player.ownerDocument.defaultView });
   const scope = createListenerScope();
   const documentRef = player.ownerDocument;
-  const windowRef = documentRef.defaultView;
-  const setTimer = clock?.setTimeout || ((handler, delay) => windowRef.setTimeout(handler, delay));
-  const clearTimer = clock?.clearTimeout || (value => windowRef?.clearTimeout(value));
+  const { ui, clock } = services;
+  const { setTimeout: setTimer, clearTimeout: clearTimer } = clock;
   let closeTimer = null;
   let open = false;
 
@@ -29,7 +30,7 @@ export function createVolumeOverlayController({ player, volume, mute, volumeCont
   }
 
   scope.listen(mute, 'click', event => {
-    if (event.pointerType === 'touch') setOpen(ui ? !ui.volumeOpen() : !open);
+    if (event.pointerType === 'touch') setOpen(!ui.volumeOpen());
     media.toggleMute();
   });
   scope.listen(volumeControl, 'pointerenter', () => setOpen(true));
@@ -41,7 +42,7 @@ export function createVolumeOverlayController({ player, volume, mute, volumeCont
     media.setVolume(Number(volume.value));
   });
   scope.listen(documentRef, 'pointerdown', event => {
-    if ((ui ? ui.volumeOpen() : open) && !volumeControl.contains(event.target)) setOpen(false);
+    if (ui.volumeOpen() && !volumeControl.contains(event.target)) setOpen(false);
   });
 
   return {

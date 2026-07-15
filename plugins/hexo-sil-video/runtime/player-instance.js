@@ -4,9 +4,8 @@ import { createInteractionController } from './interaction-controller.js';
 import { createMediaController } from './media-controller.js';
 import { isDarkTheme } from './shared.js';
 import { createSubtitleController } from './subtitle-controller.js';
-import { createStateCoordinator } from './state-coordinator.js';
 import { createPlayerView } from './view.js';
-import { createUiCoordinator } from './ui-coordinator.js';
+import { createRuntimeServices } from './runtime-services.js';
 import contract from '../lib/player-contract.js';
 
 function parseModel(player) {
@@ -20,11 +19,11 @@ function parseModel(player) {
   return model;
 }
 
-function createPlayerInstance({ player, diagnostics }) {
+function createPlayerInstance({ player, services }) {
   const refs = createPlayerView(player);
   const model = parseModel(player);
-  const state = createStateCoordinator({ player, status: refs.status });
-  const ui = createUiCoordinator({ player });
+  services ||= createRuntimeServices({ player, status: refs.status, windowRef: player.ownerDocument.defaultView });
+  const { state, ui, diagnostics } = services;
   const controllers = [];
   let destroyed = false;
   let destroyPromise = null;
@@ -49,25 +48,22 @@ function createPlayerInstance({ player, diagnostics }) {
   }
 
   function mount() {
-    addController(createFeedbackController(refs));
+    addController(createFeedbackController({ ...refs, services }));
     const fullscreenController = addController(createFullscreenController({
       player,
       video: refs.video,
       stage: refs.stage,
       fullscreen: refs.fullscreen,
       resizeSubtitles: () => resizeSubtitles(),
-      state,
-      ui,
-      diagnostics
+      services
     }));
 
     const mediaController = addController(createMediaController({
       ...refs,
       onPlaybackStateChange: fullscreenController.syncPlayback,
       onPlayInteraction: () => activatePendingSubtitles(),
-      state,
       feedbackController: controllers[0],
-      diagnostics
+      services
     }));
 
     if (model.subtitles.length > 0) {
@@ -78,9 +74,7 @@ function createPlayerInstance({ player, diagnostics }) {
         menu: refs.subtitleMenu,
         model,
         showFullscreenUi: fullscreenController.showUi,
-        state,
-        ui,
-        diagnostics
+        services
       }));
       resizeSubtitles = () => subtitleController.resize();
       activatePendingSubtitles = () => subtitleController.activatePending();
@@ -91,7 +85,8 @@ function createPlayerInstance({ player, diagnostics }) {
     interactionController = addController(createInteractionController({
       ...refs,
       media: mediaController,
-      fullscreen: fullscreenController
+      fullscreen: fullscreenController,
+      services
     }));
     fullscreenController.setPointerActivityGuard(event => interactionController.pendingHiddenTouchTap(event));
 

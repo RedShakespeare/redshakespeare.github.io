@@ -4,11 +4,12 @@ import {
   clamp,
   formatTime
 } from './shared.js';
+import { createTestRuntimeServices } from './runtime-services.js';
 
-export function createFeedbackController({ video, mediaLayer, feedback, feedbackText, clock = null }) {
-  const windowRef = video.ownerDocument.defaultView;
-  const setTimer = clock?.setTimeout || ((handler, delay) => windowRef.setTimeout(handler, delay));
-  const clearTimer = clock?.clearTimeout || (value => windowRef?.clearTimeout(value));
+export function createFeedbackController({ video, mediaLayer, feedback, feedbackText, services }) {
+  services ||= createTestRuntimeServices({ windowRef: video.ownerDocument.defaultView });
+  const { clock } = services;
+  const { setTimeout: setTimer, clearTimeout: clearTimer } = clock;
   let timer = null;
   let brightness = 1;
 

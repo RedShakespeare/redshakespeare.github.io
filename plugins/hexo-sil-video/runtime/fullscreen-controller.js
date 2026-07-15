@@ -3,7 +3,7 @@ import {
   createListenerScope,
   focusWithoutScroll
 } from './shared.js';
-import { createStateCoordinator } from './state-coordinator.js';
+import { createTestRuntimeServices } from './runtime-services.js';
 
 const FULLSCREEN_CHANGE_TIMEOUT = 2000;
 
@@ -13,19 +13,18 @@ export function createFullscreenController({
   stage,
   fullscreen,
   resizeSubtitles = () => Promise.resolve(),
-  state: suppliedState = null,
-  ui = null,
-  clock = null,
-  diagnostics = null
+  services,
+  state: legacyState,
+  ui: legacyUi,
+  diagnostics: legacyDiagnostics,
+  clock: legacyClock
 }) {
+  services ||= createTestRuntimeServices({ windowRef: stage.ownerDocument.defaultView, clock: legacyClock, state: legacyState, ui: legacyUi, diagnostics: legacyDiagnostics });
   const scope = createListenerScope();
   const documentRef = stage.ownerDocument;
   const windowRef = documentRef.defaultView;
-  const state = suppliedState || createStateCoordinator({ player });
-  const setTimer = clock?.setTimeout || ((handler, delay) => windowRef.setTimeout(handler, delay));
-  const clearTimer = clock?.clearTimeout || (timer => windowRef?.clearTimeout(timer));
-  const requestFrame = clock?.requestAnimationFrame || (handler => windowRef?.requestAnimationFrame(handler));
-  const cancelFrame = clock?.cancelAnimationFrame || (frame => windowRef?.cancelAnimationFrame(frame));
+  const { state, ui, diagnostics, clock } = services;
+  const { setTimeout: setTimer, clearTimeout: clearTimer, requestAnimationFrame: requestFrame, cancelAnimationFrame: cancelFrame } = clock;
   let fullscreenUiTimer = null;
   let resizeFrame = null;
   let wasFullscreen = false;
@@ -96,13 +95,13 @@ export function createFullscreenController({
         const error = new Error(`全屏状态变更超时：${target ? '进入' : '退出'}`);
         error.code = 'SIL_VIDEO_FULLSCREEN_TIMEOUT';
         state.set('fullscreen', message, { error: true });
-        diagnostics?.report('fullscreen', error);
+        diagnostics.report('fullscreen', error);
         return false;
       }
       return true;
     } catch (error) {
       state.set('fullscreen', message, { error: true });
-      diagnostics?.report('fullscreen', error);
+      diagnostics.report('fullscreen', error);
       return false;
     }
   }
@@ -158,7 +157,7 @@ export function createFullscreenController({
     if (resizeFrame !== null) cancelFrame(resizeFrame);
     resizeFrame = requestFrame(() => {
       resizeFrame = null;
-      resizeSubtitles().catch(error => diagnostics?.report('subtitle.resize', error));
+      resizeSubtitles().catch(error => diagnostics.report('subtitle.resize', error));
     }) ?? null;
   }
 

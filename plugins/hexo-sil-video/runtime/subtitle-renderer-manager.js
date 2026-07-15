@@ -29,7 +29,7 @@ export function createSubtitleRendererManager({
     try {
       await candidate.destroy?.();
     } catch (error) {
-      diagnostics?.report('subtitle.destroy', error);
+      diagnostics.report('subtitle.destroy', error);
       throw error;
     }
   }
