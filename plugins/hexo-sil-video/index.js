@@ -26,7 +26,14 @@ const FONT_MIME_TYPES = new Map([
   ['.ttf', 'font/ttf'],
   ['.otf', 'font/otf']
 ]);
-const POSTER_EXTENSIONS = new Set(['.avif', '.gif', '.jpg', '.jpeg', '.png', '.webp']);
+const POSTER_MIME_TYPES = new Map([
+  ['.avif', 'image/avif'],
+  ['.gif', 'image/gif'],
+  ['.jpg', 'image/jpeg'],
+  ['.jpeg', 'image/jpeg'],
+  ['.png', 'image/png'],
+  ['.webp', 'image/webp']
+]);
 const BUILTIN_SKINS = Object.freeze({
   ephesus: Object.freeze({
     outputPath: 'css/hexo-sil-video.css',
@@ -61,7 +68,7 @@ const {
 } = createVideoConfig({ builtinSkins: BUILTIN_SKINS, fontMimeTypes: FONT_MIME_TYPES, runtimeRoutes: RUNTIME_ROUTES });
 const { normaliseVideo } = createVideoModel({
   fontMimeTypes: FONT_MIME_TYPES,
-  posterExtensions: POSTER_EXTENSIONS,
+  posterMimeTypes: POSTER_MIME_TYPES,
   subtitleMimeTypes: SUBTITLE_MIME_TYPES,
   videoMimeTypes: VIDEO_MIME_TYPES,
   isObject,

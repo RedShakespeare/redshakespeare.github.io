@@ -5,7 +5,7 @@ const path = require('node:path');
 
 function createVideoModel({
   fontMimeTypes,
-  posterExtensions,
+  posterMimeTypes,
   subtitleMimeTypes,
   videoMimeTypes,
   isObject,
@@ -15,15 +15,6 @@ function createVideoModel({
   rootPublicPath,
   runtimeOptions
 }) {
-  const imageMimeTypes = new Map([
-    ['.avif', 'image/avif'],
-    ['.gif', 'image/gif'],
-    ['.jpg', 'image/jpeg'],
-    ['.jpeg', 'image/jpeg'],
-    ['.png', 'image/png'],
-    ['.webp', 'image/webp']
-  ]);
-
   function videoError(post, message) {
     const identifier = post && (post.source || post.path || post.title) || 'unknown post';
     return new Error(`Video metadata error in ${identifier}: ${message}`);
@@ -132,10 +123,11 @@ function createVideoModel({
     let poster = '';
     if (data.poster != null && String(data.poster).trim()) {
       const posterFile = normaliseRelativeFile(data.poster, '`poster`', message => videoError(post, message));
-      if (!posterExtensions.has(path.extname(posterFile).toLowerCase())) throw videoError(post, '`poster` must use AVIF, GIF, JPEG, PNG, or WebP.');
+      const posterType = posterMimeTypes.get(path.extname(posterFile).toLowerCase());
+      if (!posterType) throw videoError(post, '`poster` must use AVIF, GIF, JPEG, PNG, or WebP.');
       await localEntry(post, posterFile, options, {
         test: value => /^image\//.test(value),
-        localType: imageMimeTypes.get(path.extname(posterFile).toLowerCase()),
+        localType: posterType,
         description: 'an image MIME type'
       });
       poster = mediaFileUrl(options.root, options.media, posterFile);
