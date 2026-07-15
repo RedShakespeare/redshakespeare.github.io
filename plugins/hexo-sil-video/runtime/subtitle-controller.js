@@ -1,5 +1,6 @@
 import { createListenerScope } from './shared.js';
 import { createSubtitleMenu } from './subtitle-menu.js';
+import { createSubtitleRendererManager } from './subtitle-renderer-manager.js';
 
 export function createSubtitleController({
   player,
@@ -17,18 +18,12 @@ export function createSubtitleController({
 }) {
   const tracks = Array.isArray(model.subtitles) ? model.subtitles : [];
   const scope = createListenerScope();
-  let renderer = null;
   let activeContent = '';
   let abortController = null;
   let requestToken = 0;
   let selectedIndex = -1;
   let pendingIndex = tracks.findIndex(track => track.default);
   let modulePromise = null;
-  let candidateRenderer = null;
-  const destroyedRenderers = new WeakSet();
-  const candidateCancellations = new WeakMap();
-  let renderQueue = Promise.resolve();
-  let renderError = null;
   let destroyed = false;
   let menuView = null;
 
@@ -45,93 +40,13 @@ export function createSubtitleController({
   }
 
   function isCurrent(token) { return !destroyed && token === requestToken; }
-
-  function enqueueRender(task) {
-    const pending = renderQueue.then(task, task);
-    renderQueue = pending.catch(error => {
-      if (destroyed) renderError = error;
-    });
-    return pending;
-  }
-
-  async function destroyCandidate(candidate) {
-    if (!candidate || destroyedRenderers.has(candidate)) return;
-    destroyedRenderers.add(candidate);
-    try { await candidate.destroy?.(); } catch (error) { diagnostics?.report('subtitle.destroy', error); throw error; }
-  }
-
-  async function cancelCandidate() {
-    const candidate = candidateRenderer;
-    if (!candidate) return;
-    candidateRenderer = null;
-    const cancellation = candidateCancellations.get(candidate);
-    const cleanup = destroyCandidate(candidate);
-    if (cancellation) cleanup.then(cancellation.resolve, cancellation.reject);
-    await cleanup;
-  }
-
-  async function applyTrack(runtime, content, oldContent, token) {
-    if (renderer) {
-      const activeRenderer = renderer;
-      await activeRenderer.ready;
-      try {
-        await activeRenderer.renderer.setTrack(content);
-        if (!isCurrent(token)) {
-          if (oldContent) await activeRenderer.renderer.setTrack(oldContent);
-          else await activeRenderer.renderer.freeTrack();
-          return null;
-        }
-        return activeRenderer;
-      } catch (error) {
-        if (oldContent) {
-          try { await activeRenderer.renderer.setTrack(oldContent); } catch (rollbackError) {
-            if (renderer === activeRenderer) renderer = null;
-            try { await destroyCandidate(activeRenderer); } catch (destroyError) { error.destroyError = destroyError; }
-            throw Object.assign(error, { rollbackError });
-          }
-        } else {
-          if (renderer === activeRenderer) renderer = null;
-          try { await destroyCandidate(activeRenderer); } catch (destroyError) { error.destroyError = destroyError; }
-        }
-        throw error;
-      }
-    }
-    const candidate = (rendererFactory || runtime.createSubtitleRenderer)({
-      video,
-      content,
-      runtime: model.runtime,
-      fonts: model.fonts,
-      fallbackFont: model.fallbackFont
-    });
-    candidateRenderer = candidate;
-    let resolveCancellation;
-    let rejectCancellation;
-    candidateCancellations.set(candidate, {
-      promise: new Promise((resolve, reject) => {
-        resolveCancellation = resolve;
-        rejectCancellation = reject;
-      }),
-      resolve: resolveCancellation,
-      reject: rejectCancellation
-    });
-    try {
-      await Promise.race([candidate.ready, candidateCancellations.get(candidate).promise]);
-      if (candidateRenderer !== candidate || !isCurrent(token)) {
-        await destroyCandidate(candidate);
-        candidateCancellations.delete(candidate);
-        return null;
-      }
-      renderer = candidate;
-      candidateRenderer = null;
-      candidateCancellations.delete(candidate);
-      return candidate;
-    } catch (error) {
-      if (candidateRenderer === candidate) candidateRenderer = null;
-      candidateCancellations.delete(candidate);
-      await destroyCandidate(candidate);
-      throw error;
-    }
-  }
+  const rendererManager = createSubtitleRendererManager({
+    video,
+    model,
+    rendererFactory,
+    diagnostics,
+    isCurrent
+  });
 
   async function select(index) {
     if (destroyed) return false;
@@ -144,7 +59,7 @@ export function createSubtitleController({
     const previousIndex = selectedIndex;
     const previousContent = activeContent;
     try {
-      await cancelCandidate();
+      await rendererManager.cancelCandidate();
     } catch (error) {
       if (isCurrent(token)) {
         const message = index < 0 ? `字幕关闭失败：${error.message}` : `字幕加载失败：${error.message}`;
@@ -156,10 +71,9 @@ export function createSubtitleController({
     }
     if (index < 0) {
       try {
-        await enqueueRender(async () => {
-          if (!isCurrent(token) || !renderer) return;
-          await renderer.ready;
-          await renderer.renderer.freeTrack();
+        await rendererManager.enqueue(async () => {
+          if (!isCurrent(token)) return;
+          await rendererManager.freeTrack();
         });
         if (!isCurrent(token)) return false;
         selectedIndex = -1;
@@ -185,9 +99,9 @@ export function createSubtitleController({
       if (!isCurrent(token)) return false;
       const content = await runtime.loadSubtitleText(track, controller.signal);
       if (!isCurrent(token)) return false;
-      await enqueueRender(async () => {
+      await rendererManager.enqueue(async () => {
         if (!isCurrent(token)) return;
-        await applyTrack(runtime, content, previousContent, token);
+        await rendererManager.applyTrack({ runtime, content, oldContent: previousContent, token });
       });
       if (!isCurrent(token)) return false;
       selectedIndex = index;
@@ -236,7 +150,7 @@ export function createSubtitleController({
 
   return {
     activatePending,
-    async resize() { if (!destroyed && renderer) await renderer.resize(true); },
+    async resize() { await rendererManager.resize(); },
     select,
     async destroy() {
       if (destroyed) return;
@@ -246,14 +160,7 @@ export function createSubtitleController({
       const errors = [];
       try { scope.destroy(); } catch (error) { errors.push(error); }
       try { menuView.destroy(); } catch (error) { errors.push(error); }
-      try { await cancelCandidate(); } catch (error) { errors.push(error); }
-      try { await renderQueue; } catch (error) { errors.push(error); }
-      if (renderError) { errors.push(renderError); renderError = null; }
-      if (renderer) {
-        const current = renderer;
-        renderer = null;
-        try { await destroyCandidate(current); } catch (error) { errors.push(error); }
-      }
+      try { await rendererManager.destroy(); } catch (error) { errors.push(error); }
       if (errors.length) throw new AggregateError(errors, 'Subtitle controller cleanup failed.');
     }
   };
