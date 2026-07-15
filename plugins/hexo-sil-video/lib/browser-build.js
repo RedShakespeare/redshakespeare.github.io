@@ -10,27 +10,13 @@ function serialiseInlineJson(value) {
 }
 
 function createBrowserBuild({ pluginDir, routes }) {
-  async function buildBrowserBundle(entryPoint, format) {
-    const esbuild = require('esbuild');
-    const result = await esbuild.build({
-      entryPoints: [entryPoint],
-      outfile: 'bundle.js',
-      bundle: true,
-      write: false,
-      format,
-      platform: 'browser',
-      target: ['es2020'],
-      minify: true,
-      legalComments: 'eof'
-    });
-    return Buffer.from(result.outputFiles[0].contents);
-  }
+  const bootstrapSource = fsSync.readFileSync(path.join(pluginDir, 'runtime', 'bootstrap.js'), 'utf8');
+  let runtimeArtifactsPromise = null;
 
-  async function buildBrowserArtifacts(entryPoint, format = 'iife', outputName = 'bundle.js') {
-    const esbuild = require('esbuild');
-    const result = await esbuild.build({
+  function buildOptions(entryPoint, format, outputName, sourcemap = false) {
+    return {
       entryPoints: [entryPoint],
-      outfile: outputName,
+      ...(outputName ? { outfile: outputName } : {}),
       bundle: true,
       write: false,
       format,
@@ -38,10 +24,19 @@ function createBrowserBuild({ pluginDir, routes }) {
       target: ['es2020'],
       minify: true,
       legalComments: 'eof',
-      sourcemap: 'external',
-      sourcesContent: true,
-      sourceRoot: ''
-    });
+      ...(sourcemap ? { sourcemap: 'external', sourcesContent: true, sourceRoot: '' } : {})
+    };
+  }
+
+  async function buildBrowserBundle(entryPoint, format) {
+    const esbuild = require('esbuild');
+    const result = await esbuild.build(buildOptions(entryPoint, format, 'bundle.js'));
+    return Buffer.from(result.outputFiles[0].contents);
+  }
+
+  async function buildBrowserArtifacts(entryPoint, format = 'iife', outputName = 'bundle.js') {
+    const esbuild = require('esbuild');
+    const result = await esbuild.build(buildOptions(entryPoint, format, outputName, true));
     const js = result.outputFiles.find(file => file.path.endsWith('.js'));
     const map = result.outputFiles.find(file => file.path.endsWith('.js.map'));
     return {
@@ -51,18 +46,24 @@ function createBrowserBuild({ pluginDir, routes }) {
   }
 
   async function runtimeRouteArtifacts() {
+    if (runtimeArtifactsPromise) return runtimeArtifactsPromise;
     const jassubRoot = path.dirname(require.resolve('jassub/package.json'));
-    const core = await buildBrowserArtifacts(path.join(pluginDir, 'runtime', 'player.js'), 'iife', path.basename(routes.script));
-    const subtitles = await buildBrowserArtifacts(path.join(pluginDir, 'runtime', 'subtitles.js'), 'esm', path.basename(routes.subtitles));
-    const worker = await buildBrowserArtifacts(path.join(jassubRoot, 'dist', 'worker', 'worker.js'), 'esm', path.basename(routes.worker));
-    return [
+    runtimeArtifactsPromise = Promise.all([
+      buildBrowserArtifacts(path.join(pluginDir, 'runtime', 'player.js'), 'iife', path.basename(routes.script)),
+      buildBrowserArtifacts(path.join(pluginDir, 'runtime', 'subtitles.js'), 'esm', path.basename(routes.subtitles)),
+      buildBrowserArtifacts(path.join(jassubRoot, 'dist', 'worker', 'worker.js'), 'esm', path.basename(routes.worker))
+    ]).then(([core, subtitles, worker]) => [
       { path: routes.script, data: core.js },
       { path: `${routes.script}.map`, data: core.map, internal: true },
       { path: routes.subtitles, data: subtitles.js },
       { path: `${routes.subtitles}.map`, data: subtitles.map, internal: true },
       { path: routes.worker, data: worker.js },
       { path: `${routes.worker}.map`, data: worker.map, internal: true }
-    ];
+    ]).catch(error => {
+      runtimeArtifactsPromise = null;
+      throw error;
+    });
+    return runtimeArtifactsPromise;
   }
 
   async function runtimeRouteData() {
@@ -77,19 +78,13 @@ function createBrowserBuild({ pluginDir, routes }) {
 
   function renderBootstrapScript({ styles = [], script }) {
     const config = serialiseInlineJson({ styles, script });
-    const source = fsSync.readFileSync(path.join(pluginDir, 'runtime', 'bootstrap.js'), 'utf8');
-    let output = source;
-    try {
-      const esbuild = require('esbuild');
-      output = esbuild.transformSync(source, {
-        define: { __SIL_VIDEO_BOOTSTRAP_CONFIG__: config },
-        minify: true,
-        target: 'es2020',
-        legalComments: 'none'
-      }).code.trim();
-    } catch {
-      output = source.replace('__SIL_VIDEO_BOOTSTRAP_CONFIG__', config);
-    }
+    const esbuild = require('esbuild');
+    const output = esbuild.transformSync(bootstrapSource, {
+      define: { __SIL_VIDEO_BOOTSTRAP_CONFIG__: config },
+      minify: true,
+      target: 'es2020',
+      legalComments: 'none'
+    }).code.trim();
     return `<script>${output}</script>`;
   }
 

@@ -75,6 +75,16 @@ const { normaliseVideo } = createVideoModel({
 function registerVideoPlugin(hexo) {
   const config = toVideoConfig(hexo.config);
   let warnedMissingAssets = false;
+  let used = false;
+  const markUsed = () => { used = true; };
+  const siteContainsVideo = () => {
+    if (used) return true;
+    const collections = ['posts', 'pages'];
+    return collections.some(name => {
+      const collection = hexo.locals?.get?.(name);
+      return collection?.toArray?.().some(item => String(item.content || '').includes(PLAYER_START) || String(item.content || '').includes('data-sil-video-player'));
+    });
+  };
   const runtime = {
     baseDir: hexo.base_dir || process.cwd(),
     sourceRoot: hexo.source_dir || path.join(hexo.base_dir || process.cwd(), hexo.config.source_dir || 'source'),
@@ -95,21 +105,33 @@ function registerVideoPlugin(hexo) {
   const styles = [];
   if (config.skin.builtin) {
     const skin = BUILTIN_SKINS[config.skin.builtin];
-    hexo.extend.generator.register('hexo-sil-video-skin', async () => ({ path: skin.outputPath, data: await fs.readFile(skin.sourcePath) }));
+    hexo.extend.generator.register('hexo-sil-video-skin', async () => {
+      if (!siteContainsVideo()) return [];
+      return { path: skin.outputPath, data: await fs.readFile(skin.sourcePath) };
+    });
     styles.push(rootPublicPath(runtime.root, skin.outputPath));
   }
   if (config.skin.override) styles.push(rootPublicPath(runtime.root, config.skin.override));
-  hexo.extend.generator.register('hexo-sil-video-runtime', runtimeRouteData);
+  hexo.extend.generator.register('hexo-sil-video-runtime', async () => {
+    if (!siteContainsVideo()) return [];
+    return runtimeRouteData();
+  });
   hexo.extend.injector.register('body_end', renderBootstrapScript({
     styles,
     script: rootPublicPath(runtime.root, RUNTIME_ROUTES.script)
   }));
   hexo.extend.tag.register('video', async function (args) {
-    return renderVideoPlayer(await normaliseVideo(this, mergeVideo(this.video, parseVideoTagArgs(args)), runtime));
+    const output = renderVideoPlayer(await normaliseVideo(this, mergeVideo(this.video, parseVideoTagArgs(args)), runtime));
+    markUsed();
+    return output;
   }, { async: true });
+  hexo.extend.filter.register('before_generate', () => {
+    used = false;
+  }, 0);
   hexo.extend.filter.register('after_post_render', async function (data) {
     if (!data || data.video === undefined || data.video === false || String(data.content || '').includes(PLAYER_START)) return data;
     data.content = `${renderVideoPlayer(await normaliseVideo(data, data.video, runtime))}\n\n${data.content || ''}`;
+    markUsed();
     return data;
   });
 }

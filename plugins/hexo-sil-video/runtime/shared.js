@@ -97,7 +97,11 @@ export function createListenerScope() {
       cleanups.push(() => target.removeEventListener(event, handler, options));
     },
     destroy() {
-      for (const cleanup of cleanups.splice(0)) cleanup();
+      const errors = [];
+      for (const cleanup of cleanups.splice(0)) {
+        try { cleanup(); } catch (error) { errors.push(error); }
+      }
+      if (errors.length) throw new AggregateError(errors, 'Listener scope cleanup failed.');
     }
   };
 }

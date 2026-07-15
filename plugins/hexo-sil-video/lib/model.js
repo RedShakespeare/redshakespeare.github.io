@@ -20,7 +20,8 @@ function createVideoModel({
     return new Error(`Video metadata error in ${identifier}: ${message}`);
   }
 
-  async function localEntry(post, file, options, expected, field) {
+  async function localEntry(post, file, options, expectation) {
+    const field = expectation.description;
     const key = `${options.media.prefix}/${file}`;
     const capability = options.assetsEnabled ? options.assetCapability : null;
     if (options.assetsEnabled && !capability && typeof options.onMissingAssets === 'function') options.onMissingAssets();
@@ -30,9 +31,9 @@ function createVideoModel({
         throw videoError(post, error.message.replace(/^Asset manifest error:\s*/, ''));
       }
       if (!entry) throw videoError(post, `asset manifest does not contain ${key}. Refresh or publish the asset manifest after adding the file.`);
-      if (typeof expected === 'string' && entry.type !== expected) throw videoError(post, `asset manifest MIME type for ${key} is ${entry.type}, expected ${expected}.`);
-      if (expected instanceof Set && !expected.has(entry.type)) throw videoError(post, `asset manifest MIME type for ${key} is ${entry.type}, expected ${Array.from(expected).join(' or ')}.`);
-      if (typeof expected === 'function' && !expected(entry.type)) throw videoError(post, `asset manifest MIME type for ${key} is ${entry.type}, expected ${field}.`);
+      if (expectation.type && entry.type !== expectation.type) throw videoError(post, `asset manifest MIME type for ${key} is ${entry.type}, expected ${expectation.type}.`);
+      if (expectation.types && !expectation.types.has(entry.type)) throw videoError(post, `asset manifest MIME type for ${key} is ${entry.type}, expected ${Array.from(expectation.types).join(' or ')}.`);
+      if (expectation.test && !expectation.test(entry.type)) throw videoError(post, `asset manifest MIME type for ${key} is ${entry.type}, expected ${field}.`);
       return entry;
     }
     const mediaRoot = path.resolve(options.sourceRoot, options.media.sourceDir);
@@ -53,9 +54,7 @@ function createVideoModel({
     if (value == null) return [];
     if (!Array.isArray(value)) throw videoError(post, '`video.subtitles` must be a list.');
     let defaults = 0;
-    const tracks = [];
-    for (let index = 0; index < value.length; index += 1) {
-      const raw = value[index];
+    const tracks = value.map((raw, index) => {
       if (!isObject(raw)) throw videoError(post, `subtitle ${index + 1} must be a mapping.`);
       const file = normaliseRelativeFile(raw.file, `subtitle ${index + 1}.file`, message => videoError(post, message));
       const extension = path.extname(file).toLowerCase();
@@ -67,11 +66,11 @@ function createVideoModel({
       if (!/^[A-Za-z0-9]+(?:-[A-Za-z0-9]+)*$/.test(srclang)) throw videoError(post, `subtitle ${index + 1}.srclang must be a language tag.`);
       const isDefault = raw.default === true;
       if (isDefault) defaults += 1;
-      await localEntry(post, file, options, acceptedTypes, 'subtitle');
-      tracks.push({ file, format: extension.slice(1), label, srclang, default: isDefault, url: mediaFileUrl(options.root, options.media, file) });
-    }
+      return { file, format: extension.slice(1), label, srclang, default: isDefault, url: mediaFileUrl(options.root, options.media, file), acceptedTypes };
+    });
     if (defaults > 1) throw videoError(post, '`video.subtitles` may define only one default track.');
-    return tracks;
+    await Promise.all(tracks.map(track => localEntry(post, track.file, options, { types: track.acceptedTypes, description: 'subtitle' })));
+    return tracks.map(({ acceptedTypes, ...track }) => track);
   }
 
   async function normaliseVideo(post, data, runtime = {}) {
@@ -87,7 +86,7 @@ function createVideoModel({
       file = normaliseRelativeFile(data.file, '`file`', message => videoError(post, message));
       type = videoMimeTypes.get(path.extname(file).toLowerCase());
       if (!type) throw videoError(post, '`file` must use MP4, M4V, or WebM.');
-      await localEntry(post, file, options, type, 'video');
+      await localEntry(post, file, options, { type, description: 'video' });
       source = mediaFileUrl(options.root, options.media, file);
     } else {
       source = normaliseHttpsUrl(data.url, '`url`', message => videoError(post, message));
@@ -97,14 +96,14 @@ function createVideoModel({
     if (data.poster != null && String(data.poster).trim()) {
       const posterFile = normaliseRelativeFile(data.poster, '`poster`', message => videoError(post, message));
       if (!posterExtensions.has(path.extname(posterFile).toLowerCase())) throw videoError(post, '`poster` must use AVIF, GIF, JPEG, PNG, or WebP.');
-      await localEntry(post, posterFile, options, value => /^image\//.test(value), 'an image MIME type');
+      await localEntry(post, posterFile, options, { test: value => /^image\//.test(value), description: 'an image MIME type' });
       poster = mediaFileUrl(options.root, options.media, posterFile);
     }
-    const fonts = {};
-    for (const [name, fontFile] of Object.entries(options.subtitles.fonts || {})) {
-      await localEntry(post, fontFile, options, fontMimeTypes.get(path.extname(fontFile).toLowerCase()), 'font');
-      fonts[name] = mediaFileUrl(options.root, options.media, fontFile);
-    }
+    const fontEntries = Object.entries(options.subtitles.fonts || {});
+    const subtitlePromise = normaliseSubtitles(post, data.subtitles, options);
+    const fontsPromise = Promise.all(fontEntries.map(([, fontFile]) => localEntry(post, fontFile, options, { type: fontMimeTypes.get(path.extname(fontFile).toLowerCase()), description: 'font' })));
+    const [subtitles] = await Promise.all([subtitlePromise, fontsPromise]);
+    const fonts = Object.fromEntries(fontEntries.map(([name, fontFile]) => [name, mediaFileUrl(options.root, options.media, fontFile)]));
     const title = String(data.title || post && post.title || (file && path.basename(file, path.extname(file))) || '视频').trim();
     return {
       title,
@@ -113,7 +112,7 @@ function createVideoModel({
       poster,
       preload: options.preload,
       aspectRatio: options.aspectRatio,
-      subtitles: await normaliseSubtitles(post, data.subtitles, options),
+      subtitles,
       fonts,
       fallbackFont: options.subtitles.fallbackFont || '',
       runtime: Object.fromEntries(Object.entries(options.routes).map(([name, route]) => [name, rootPublicPath(options.root, route)]))

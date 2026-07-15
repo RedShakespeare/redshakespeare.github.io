@@ -35,5 +35,5 @@ export function createKeyboardController({ player, video, stage, viewport, media
   }
 
   scope.listen(player, 'keydown', handleKeydown);
-  return { destroy: () => scope.destroy() };
+  return { async destroy() { scope.destroy(); } };
 }

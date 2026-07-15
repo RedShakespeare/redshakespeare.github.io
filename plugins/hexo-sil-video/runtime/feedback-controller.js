@@ -47,7 +47,7 @@ export function createFeedbackController({ video, mediaLayer, feedback, feedback
       const effectiveVolume = video.muted ? 0 : video.volume;
       show('volume', `${Math.round(effectiveVolume * 100)}%`);
     },
-    destroy() {
+    async destroy() {
       if (timer !== null) clearTimer(timer);
       timer = null;
     }

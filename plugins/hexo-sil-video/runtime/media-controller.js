@@ -26,13 +26,14 @@ export function createMediaController({
   onPlaybackStateChange = () => {},
   onPlayInteraction = () => {},
   state = null,
-  feedbackController
+  feedbackController,
+  diagnostics = null
 }) {
   const scope = createListenerScope();
   let lastVolume = video.volume || 0.8;
 
-  function setStatus(message = '', error = false) {
-    if (state) state.set('media', message, { error, level: error ? 'error' : (/加载/.test(message) ? 'loading' : 'info') });
+  function setStatus(message = '', error = false, level = error ? 'error' : 'info') {
+    if (state) state.set('media', message, { error, level });
     else {
       status.textContent = message;
       if (error) player.dataset.silVideoError = 'true';
@@ -120,7 +121,8 @@ export function createMediaController({
         await video.play();
         setStatus();
         if (showPlayback) showPlaybackFeedback('play');
-      } catch {
+      } catch (error) {
+        diagnostics?.report('media.play', error);
         setStatus('视频播放失败，请使用下载链接。', true);
       }
     } else {
@@ -195,7 +197,7 @@ export function createMediaController({
   scope.listen(video, 'loadstart', () => {
     progress.style.removeProperty('--sil-video-range-buffered');
     duration.textContent = '--:--';
-    setStatus('正在加载视频…');
+    setStatus('正在加载视频…', false, 'loading');
   });
   scope.listen(video, 'emptied', () => progress.style.removeProperty('--sil-video-range-buffered'));
   scope.listen(video, 'loadedmetadata', () => { syncDuration(); setStatus(); });
@@ -231,7 +233,7 @@ export function createMediaController({
     toggleMute,
     togglePlay,
     toggleRepeat,
-    destroy() {
+    async destroy() {
       scope.destroy();
     }
   };

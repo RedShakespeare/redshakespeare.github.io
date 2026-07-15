@@ -2,6 +2,7 @@
 
 const VOLUME_CLOSE_DELAY = 800;
 const FULLSCREEN_UI_HIDE_DELAY = 2500;
+const STATE_CHANNELS = Object.freeze(['media', 'subtitles', 'fullscreen']);
 
 function volumeLevel(volume, muted = false) {
   const value = Math.max(0, Math.min(1, Number(volume) || 0));
@@ -30,8 +31,13 @@ function createStateCoordinator({ player, status } = {}) {
     return current || null;
   }
 
-  function clear(channel) { channels.delete(channel); project(); }
+  function clear(channel) {
+    if (!STATE_CHANNELS.includes(channel)) throw new Error(`未知视频状态频道：${channel}`);
+    channels.delete(channel);
+    project();
+  }
   function set(channel, message = '', options = {}) {
+    if (!STATE_CHANNELS.includes(channel)) throw new Error(`未知视频状态频道：${channel}`);
     if (!message) { clear(channel); return null; }
     const entry = {
       channel,
@@ -57,6 +63,7 @@ function createStateCoordinator({ player, status } = {}) {
 
 module.exports = {
   FULLSCREEN_UI_HIDE_DELAY,
+  STATE_CHANNELS,
   VOLUME_CLOSE_DELAY,
   createStateCoordinator,
   volumeLevel

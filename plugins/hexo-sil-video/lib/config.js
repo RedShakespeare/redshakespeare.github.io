@@ -88,7 +88,13 @@ function createVideoConfig({ builtinSkins, fontMimeTypes, runtimeRoutes }) {
   }
 
   function toVideoConfig(siteConfig = {}) {
+    if (Object.prototype.hasOwnProperty.call(siteConfig, 'video') && siteConfig.video != null && !isObject(siteConfig.video)) {
+      throw new Error('Video configuration error: video must be a mapping.');
+    }
     const raw = isObject(siteConfig.video) ? siteConfig.video : {};
+    if (Object.prototype.hasOwnProperty.call(raw, 'media') && raw.media != null && !isObject(raw.media)) {
+      throw new Error('Video configuration error: media must be a mapping.');
+    }
     const media = isObject(raw.media) ? raw.media : {};
     const assets = raw.assets == null ? {} : raw.assets;
     const subtitles = raw.subtitles == null ? {} : raw.subtitles;
@@ -138,8 +144,17 @@ function createVideoConfig({ builtinSkins, fontMimeTypes, runtimeRoutes }) {
   }
 
   function runtimeOptions(runtime = {}) {
+    if (runtime.media != null && !isObject(runtime.media)) throw new Error('Video configuration error: runtime.media must be a mapping.');
     const media = isObject(runtime.media) ? runtime.media : {};
     const prefix = normaliseRelativeDirectory(media.prefix, 'files', 'media.prefix');
+    const preload = runtime.preload == null ? 'metadata' : String(runtime.preload).trim();
+    if (!['none', 'metadata', 'auto'].includes(preload)) throw new Error('Video configuration error: preload must be none, metadata, or auto.');
+    const aspectRatio = normaliseAspectRatio(runtime.aspectRatio);
+    const subtitles = runtime.subtitles == null ? { fonts: {}, fallbackFont: '' } : runtime.subtitles;
+    if (!isObject(subtitles)) throw new Error('Video configuration error: subtitles must be a mapping.');
+    const fonts = normaliseFonts(subtitles.fonts);
+    const fallbackFont = String(subtitles.fallbackFont || '').trim();
+    if (fallbackFont && !Object.prototype.hasOwnProperty.call(fonts, fallbackFont)) throw new Error('Video configuration error: subtitles.fallbackFont must name an entry in subtitles.fonts.');
     return {
       baseDir: runtime.baseDir || process.cwd(),
       sourceRoot: path.resolve(runtime.sourceRoot || path.join(runtime.baseDir || process.cwd(), 'source')),
@@ -152,9 +167,9 @@ function createVideoConfig({ builtinSkins, fontMimeTypes, runtimeRoutes }) {
         sourceDir: normaliseRelativeDirectory(media.sourceDir, prefix, 'media.source_dir'),
         url: normaliseHttpsUrl(media.url, 'media.url', undefined, true)
       },
-      preload: runtime.preload || 'metadata',
-      aspectRatio: runtime.aspectRatio || '16/9',
-      subtitles: runtime.subtitles || { fonts: {}, fallbackFont: '' },
+      preload,
+      aspectRatio,
+      subtitles: { fonts, fallbackFont },
       routes: runtime.routes || runtimeRoutes
     };
   }

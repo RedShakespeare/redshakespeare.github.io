@@ -107,7 +107,7 @@ export function createPointerController({ player, video, stage, viewport, media,
       targetTime: Number.isFinite(video.currentTime) ? video.currentTime : 0,
       startVolume: video.muted ? 0 : video.volume,
       startBrightness: media.getBrightness(),
-      uiWasHidden: fullscreen.active() && stage.dataset.silVideoUiHidden === 'true',
+      uiWasHidden: fullscreen.active() && fullscreen.uiHidden(),
       mode: ''
     };
     try { viewport.setPointerCapture(event.pointerId); } catch { /* Pointer capture is optional. */ }
@@ -191,7 +191,7 @@ export function createPointerController({ player, video, stage, viewport, media,
     pendingHiddenTouchTap(event) {
       return pointerIsPrimaryTouch(event) && gesture && gesture.pointerId === event.pointerId && gesture.uiWasHidden && !gesture.mode;
     },
-    destroy() {
+    async destroy() {
       clearViewportClickTimer();
       clearWheelResetTimer();
       scope.destroy();

@@ -11,7 +11,8 @@
   const config = __SIL_VIDEO_BOOTSTRAP_CONFIG__;
   const selector = '[data-sil-video-player]';
   let pending = null;
-  let failed = false;
+  const loadedStyles = new Set();
+  let loadedCore = false;
 
   function fallback(message) {
     document.querySelectorAll(selector).forEach(player => {
@@ -24,36 +25,39 @@
   }
 
   function loadStyle(url) {
+    if (loadedStyles.has(url)) return Promise.resolve();
     return new Promise((resolve, reject) => {
       const link = document.createElement('link');
       link.rel = 'stylesheet';
       link.href = url;
       link.dataset.silVideoStyle = 'true';
       link.onload = resolve;
-      link.onerror = () => reject(new Error('style'));
+      link.onerror = () => { link.remove(); reject(new Error('style')); };
+      link.addEventListener('load', () => loadedStyles.add(url), { once: true });
       document.head.append(link);
     });
   }
 
   function loadCore() {
+    if (loadedCore) return Promise.resolve();
     return new Promise((resolve, reject) => {
       const script = document.createElement('script');
       script.src = config.script;
       script.defer = true;
       script.dataset.silVideoCore = 'true';
       script.onload = resolve;
-      script.onerror = () => reject(new Error('script'));
+      script.onerror = () => { script.remove(); reject(new Error('script')); };
+      script.addEventListener('load', () => { loadedCore = true; }, { once: true });
       document.head.append(script);
     });
   }
 
   function load() {
-    if (failed) return fallback('播放器资源加载失败，请使用原生控件。');
     if (pending) return pending;
     pending = config.styles.reduce((promise, url) => promise.then(() => loadStyle(url)), Promise.resolve())
       .then(loadCore)
       .catch(() => {
-        failed = true;
+        pending = null;
         fallback('播放器资源加载失败，请使用原生控件。');
       });
     return pending;

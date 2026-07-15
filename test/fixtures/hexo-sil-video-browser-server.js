@@ -2,6 +2,7 @@
 
 const http = require('node:http');
 const fs = require('node:fs/promises');
+const path = require('node:path');
 
 const {
   BUILTIN_SKINS,
@@ -24,13 +25,13 @@ Style: Default,liberation sans,24,&H00FFFFFF,&H00FFFFFF,&H00000000,&H00000000,0,
 [Events]
 Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
 Dialogue: 0,0:00:00.00,0:00:05.00,Default,,0,0,0,,Browser subtitle`;
-const tinyMp4 = Buffer.from('000000186674797069736f6d0000020069736f6d69736f32', 'hex');
+let mediaFixturePromise;
 
 function player({ subtitles = false, title = 'Browser Fixture' } = {}) {
   return renderVideoPlayer({
     title,
-    source: '/test/tiny.mp4',
-    type: 'video/mp4',
+    source: '/test/hexo-sil-video-fixture.webm',
+    type: 'video/webm',
     poster: '',
     preload: 'metadata',
     aspectRatio: '16/9',
@@ -56,22 +57,7 @@ function instrumentScript() {
     window.__instrumentVideoPlayers=()=>document.querySelectorAll('[data-sil-video-player]').forEach(root=>{
       if(root.dataset.fixtureInstrumented==='true')return;
       root.dataset.fixtureInstrumented='true';
-      const video=root.querySelector('video'),stage=root.querySelector('[data-sil-video-stage]');
-      let paused=true,ended=false,currentTime=20,volume=.8,muted=false;
-      Object.defineProperties(video,{
-        paused:{configurable:true,get:()=>paused},
-        ended:{configurable:true,get:()=>ended,set:value=>{ended=value;}},
-        duration:{configurable:true,get:()=>100},
-        currentTime:{configurable:true,get:()=>currentTime,set:value=>{currentTime=Number(value);}},
-        volume:{configurable:true,get:()=>volume,set:value=>{volume=Number(value);video.dispatchEvent(new Event('volumechange'));}},
-        muted:{configurable:true,get:()=>muted,set:value=>{muted=Boolean(value);video.dispatchEvent(new Event('volumechange'));}},
-        buffered:{configurable:true,get:()=>({length:2,start:index=>index===0?0:50,end:index=>index===0?25:75})},
-        videoWidth:{configurable:true,get:()=>320},
-        videoHeight:{configurable:true,get:()=>180}
-      });
-      video.play=async()=>{paused=false;ended=false;video.dispatchEvent(new Event('play'));};
-      video.pause=()=>{paused=true;video.dispatchEvent(new Event('pause'));};
-      video.load=()=>{};
+      const stage=root.querySelector('[data-sil-video-stage]');
       Object.defineProperty(stage,'requestFullscreen',{configurable:true,value:async()=>{fullscreenElement=stage;document.dispatchEvent(new Event('fullscreenchange'));}});
     });
     window.__instrumentVideoPlayers();
@@ -112,7 +98,7 @@ function contentType(route) {
 async function main() {
   const routes = new Map((await runtimeRouteData()).map(route => [`/${route.path}`, route.data]));
   routes.set('/css/hexo-sil-video.css', await fs.readFile(BUILTIN_SKINS.ephesus.sourcePath));
-  const server = http.createServer((request, response) => {
+  const server = http.createServer(async (request, response) => {
     const pathname = new URL(request.url, ROOT).pathname;
     const html = page(pathname);
     let body;
@@ -126,19 +112,37 @@ async function main() {
     } else if (pathname === '/test/default.ass') {
       body = Buffer.from(subtitleSource);
       type = 'text/x-ssa; charset=utf-8';
-    } else if (pathname === '/test/tiny.mp4') {
-      body = tinyMp4;
-      type = 'video/mp4';
+    } else if (pathname === '/test/hexo-sil-video-fixture.webm') {
+      mediaFixturePromise ||= fs.readFile(path.join(__dirname, 'hexo-sil-video-fixture.webm'));
+      body = await mediaFixturePromise;
+      type = 'video/webm';
     } else {
       response.writeHead(404, { 'Content-Type': 'text/plain; charset=utf-8' });
       response.end('Not Found');
       return;
     }
-    response.writeHead(200, {
+    let status = 200;
+    const headers = {
       'Content-Type': type,
       'Content-Length': body.length,
       'Cache-Control': 'no-store'
-    });
+    };
+    if (pathname === '/test/hexo-sil-video-fixture.webm') {
+      headers['Accept-Ranges'] = 'bytes';
+      const totalLength = body.length;
+      const match = String(request.headers.range || '').match(/^bytes=(\d+)-(\d*)$/);
+      if (match) {
+        const start = Number(match[1]);
+        const end = match[2] ? Number(match[2]) : body.length - 1;
+        if (start < body.length && start <= end) {
+          body = body.subarray(start, Math.min(end + 1, body.length));
+          status = 206;
+          headers['Content-Range'] = `bytes ${start}-${start + body.length - 1}/${totalLength}`;
+          headers['Content-Length'] = body.length;
+        }
+      }
+    }
+    response.writeHead(status, headers);
     response.end(request.method === 'HEAD' ? undefined : body);
   });
   server.listen(PORT, '127.0.0.1');

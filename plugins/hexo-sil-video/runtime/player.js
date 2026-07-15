@@ -7,15 +7,23 @@ import { createSubtitleController } from './subtitle-controller.js';
 import { createStateCoordinator } from './state-coordinator.js';
 import { createPlayerView } from './view.js';
 import { createUiCoordinator } from './ui-coordinator.js';
+import { createDiagnostics } from './diagnostics.js';
+import contract from '../lib/player-contract.js';
 
 const instances = new Map();
 const destroying = new WeakMap();
+const diagnostics = createDiagnostics();
+let runtimeDestroyed = false;
 
 function parseModel(player) {
   const source = player.dataset.silVideoModel;
   if (!source) throw new Error('播放器配置缺失。');
   const bytes = Uint8Array.from(atob(source), character => character.charCodeAt(0));
-  return JSON.parse(new TextDecoder('utf-8', { fatal: true }).decode(bytes));
+  const model = JSON.parse(new TextDecoder('utf-8', { fatal: true }).decode(bytes));
+  if (model.version !== contract.MODEL_VERSION || !Array.isArray(model.subtitles) || !model.runtime?.subtitles) {
+    throw new Error('播放器配置版本不受支持。');
+  }
+  return model;
 }
 
 function showFallbackError(player, message) {
@@ -33,7 +41,7 @@ function initialise(player) {
     refs = createPlayerView(player);
   } catch (error) {
     showFallbackError(player, error.message);
-    console.error('[hexo-sil-video]', error);
+    diagnostics.report('view', error);
     return;
   }
 
@@ -42,6 +50,7 @@ function initialise(player) {
     model = parseModel(player);
   } catch (error) {
     showFallbackError(player, error.message);
+    diagnostics.report('model', error);
     return;
   }
 
@@ -61,11 +70,11 @@ function initialise(player) {
       player,
       video: refs.video,
       stage: refs.stage,
-      subtitleMenu: refs.subtitleMenu,
       fullscreen: refs.fullscreen,
       resizeSubtitles: async () => subtitleController?.resize(),
       state,
-      ui
+      ui,
+      diagnostics
     });
     controllers.push(fullscreenController);
 
@@ -74,7 +83,8 @@ function initialise(player) {
       onPlaybackStateChange: fullscreenController.syncPlayback,
       onPlayInteraction: () => subtitleController?.activatePending(),
       state,
-      feedbackController
+      feedbackController,
+      diagnostics
     });
     controllers.push(mediaController);
 
@@ -89,7 +99,8 @@ function initialise(player) {
         setStatus: mediaController.setStatus,
         showFullscreenUi: fullscreenController.showUi,
         state,
-        ui
+        ui,
+        diagnostics
       });
       controllers.push(subtitleController);
     } else {
@@ -127,19 +138,19 @@ function initialise(player) {
           try { return controller.destroy(); } catch (error) { return Promise.reject(error); }
         }));
         pending.then(results => results.filter(result => result.status === 'rejected').forEach(result => {
-          console.error('[hexo-sil-video] controller destroy failed', result.reason);
+          diagnostics.report('destroy', result.reason);
         }));
-        state.destroy();
-        ui.destroy();
         refs.video.controls = true;
         delete player.dataset.silVideoReady;
         delete player.dataset.silVideoEnhanced;
         instances.delete(player);
         destroying.set(player, pending);
         pending.finally(() => {
+          state.destroy();
+          ui.destroy();
           if (destroying.get(player) !== pending) return;
           destroying.delete(player);
-          if (player.isConnected) initialise(player);
+          if (!runtimeDestroyed && player.isConnected) initialise(player);
         });
         return pending;
       }
@@ -148,7 +159,7 @@ function initialise(player) {
     instance.refreshTheme();
   } catch (error) {
     for (const controller of controllers.reverse()) Promise.resolve(controller.destroy()).catch(destroyError => {
-      console.error('[hexo-sil-video] controller destroy failed during initialization', destroyError);
+      diagnostics.report('destroy', destroyError);
     });
     refs.video.controls = true;
     state.destroy();
@@ -179,9 +190,29 @@ function observeMutations(records) {
   if (added) refresh();
 }
 
-window.addEventListener('resize', refresh);
-document.addEventListener('inside', refresh);
-document.addEventListener('inside:theme', refresh);
-new MutationObserver(observeMutations).observe(document.body, { childList: true, subtree: true });
-window.__hexoSilVideoRefresh = refresh;
-refresh();
+if (window.__hexoSilVideoRuntime) {
+  window.__hexoSilVideoRuntime.refresh();
+} else {
+  const observer = new MutationObserver(observeMutations);
+  const runtime = {
+    refresh,
+    async destroy() {
+      runtimeDestroyed = true;
+      observer.disconnect();
+      window.removeEventListener('resize', refresh);
+      document.removeEventListener('inside', refresh);
+      document.removeEventListener('inside:theme', refresh);
+      const pending = Array.from(instances.values(), instance => instance.destroy());
+      await Promise.allSettled(pending);
+      delete window.__hexoSilVideoRefresh;
+      delete window.__hexoSilVideoRuntime;
+    }
+  };
+  window.__hexoSilVideoRuntime = runtime;
+  window.__hexoSilVideoRefresh = refresh;
+  window.addEventListener('resize', refresh);
+  document.addEventListener('inside', refresh);
+  document.addEventListener('inside:theme', refresh);
+  observer.observe(document.body, { childList: true, subtree: true });
+  refresh();
+}

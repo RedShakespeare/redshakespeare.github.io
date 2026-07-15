@@ -8,12 +8,12 @@ export function createFullscreenController({
   player,
   video,
   stage,
-  subtitleMenu,
   fullscreen,
   resizeSubtitles = () => Promise.resolve(),
   state = null,
   ui = null,
-  clock = null
+  clock = null,
+  diagnostics = null
 }) {
   const scope = createListenerScope();
   const documentRef = stage.ownerDocument;
@@ -25,7 +25,10 @@ export function createFullscreenController({
   let fullscreenUiTimer = null;
   let resizeFrame = null;
   let wasFullscreen = false;
+  let hidden = false;
   let pointerActivityGuard = () => false;
+  let togglePromise = null;
+  let toggleTarget = null;
 
   function active() {
     return documentRef.fullscreenElement === stage;
@@ -50,7 +53,13 @@ export function createFullscreenController({
   function controlsKeepUiOpen() {
     const focused = documentRef.activeElement;
     const controlFocused = focused && focused !== video && focused !== stage && stage.contains(focused) && focused.matches(':focus-visible');
-    return (ui ? ui.controlsOpen() : !subtitleMenu.hidden) || controlFocused;
+    return Boolean(ui?.controlsOpen()) || controlFocused;
+  }
+
+  function projectUiHidden(value) {
+    hidden = Boolean(value);
+    if (hidden) stage.dataset.silVideoUiHidden = 'true';
+    else delete stage.dataset.silVideoUiHidden;
   }
 
   async function request(action, message) {
@@ -59,7 +68,7 @@ export function createFullscreenController({
       return true;
     } catch (error) {
       state?.set('fullscreen', message, { error: true });
-      console.error('[hexo-sil-video] fullscreen operation failed', error);
+      diagnostics?.report('fullscreen', error);
       return false;
     }
   }
@@ -71,16 +80,16 @@ export function createFullscreenController({
 
   function scheduleUiHide() {
     clearUiTimer();
-    delete stage.dataset.silVideoUiHidden;
+    projectUiHidden(false);
     if (!active() || video.paused || video.ended || controlsKeepUiOpen()) return;
     fullscreenUiTimer = setTimer(() => {
       fullscreenUiTimer = null;
-      if (active() && !video.paused && !video.ended && !controlsKeepUiOpen()) stage.dataset.silVideoUiHidden = 'true';
+      if (active() && !video.paused && !video.ended && !controlsKeepUiOpen()) projectUiHidden(true);
     }, FULLSCREEN_UI_HIDE_DELAY);
   }
 
   function showUi() {
-    delete stage.dataset.silVideoUiHidden;
+    projectUiHidden(false);
     scheduleUiHide();
   }
 
@@ -88,7 +97,7 @@ export function createFullscreenController({
     if (!video.paused && !video.ended) scheduleUiHide();
     else {
       clearUiTimer();
-      delete stage.dataset.silVideoUiHidden;
+      projectUiHidden(false);
     }
   }
 
@@ -104,7 +113,7 @@ export function createFullscreenController({
       scheduleUiHide();
     } else {
       clearUiTimer();
-      delete stage.dataset.silVideoUiHidden;
+      projectUiHidden(false);
       if (wasFullscreen) {
         wasFullscreen = false;
         unlockOrientation();
@@ -115,14 +124,19 @@ export function createFullscreenController({
     if (resizeFrame !== null) cancelFrame(resizeFrame);
     resizeFrame = requestFrame(() => {
       resizeFrame = null;
-      resizeSubtitles().catch(error => console.error('[hexo-sil-video] subtitle resize failed', error));
+      resizeSubtitles().catch(error => diagnostics?.report('subtitle.resize', error));
     }) ?? null;
   }
 
   async function toggle() {
-    return active()
-      ? request(() => documentRef.exitFullscreen(), '无法退出全屏。')
-      : request(() => stage.requestFullscreen(), '无法进入全屏。');
+    const target = !active();
+    if (togglePromise && toggleTarget === target) return togglePromise;
+    toggleTarget = target;
+    togglePromise = (target
+      ? request(() => stage.requestFullscreen(), '无法进入全屏。')
+      : request(() => documentRef.exitFullscreen(), '无法退出全屏。'))
+      .finally(() => { togglePromise = null; toggleTarget = null; });
+    return togglePromise;
   }
 
   function handlePointerActivity(event) {
@@ -138,12 +152,15 @@ export function createFullscreenController({
 
   return {
     active,
+    uiHidden: () => hidden,
     setPointerActivityGuard(value) { pointerActivityGuard = value; },
     showUi,
     syncPlayback,
     toggle,
-    destroy() {
+    async destroy() {
+      if (togglePromise) await togglePromise;
       clearUiTimer();
+      projectUiHidden(false);
       if (resizeFrame !== null) cancelFrame(resizeFrame);
       resizeFrame = null;
       if (active()) unlockOrientation();

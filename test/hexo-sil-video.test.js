@@ -399,12 +399,15 @@ test('status coordinator preserves channel errors and restores lower-priority st
   assert.equal(player.dataset.silVideoError, undefined);
   state.clear('subtitles');
   assert.equal(status.textContent, '新媒体信息');
+  assert.throws(() => state.set('unknown', '无效'), /未知视频状态频道/);
+  assert.throws(() => state.clear('unknown'), /未知视频状态频道/);
 });
 
 test('plugin registers skin, runtime assets, tag, and duplicate-safe post injection', async () => {
   const hexo = mockHexo();
   registerVideoPlugin(hexo);
   assert.deepEqual(hexo.calls.generators.map(call => call.name), ['hexo-sil-video-skin', 'hexo-sil-video-runtime']);
+  assert.deepEqual(hexo.calls.filters.map(call => call.name), ['before_generate', 'after_post_render']);
   assert.deepEqual(hexo.calls.injectors.map(call => call.position), ['body_end']);
   assert.match(hexo.calls.injectors[0].value, /^<script>[\s\S]+<\/script>$/);
   assert.match(hexo.calls.injectors[0].value, /\/css\/hexo-sil-video\.css/);
@@ -412,6 +415,16 @@ test('plugin registers skin, runtime assets, tag, and duplicate-safe post inject
   assert.doesNotMatch(hexo.calls.injectors[0].value, /<link rel="stylesheet"/);
   assert.equal(hexo.calls.tags[0].name, 'video');
   assert.equal(hexo.calls.tags[0].options.async, true);
+  assert.deepEqual(await hexo.calls.generators[0].fn(), []);
+  assert.deepEqual(await hexo.calls.generators[1].fn(), []);
+  const article = post({ video: videoData(), content: '<p>Body</p>' });
+  const renderFilter = hexo.calls.filters.find(call => call.name === 'after_post_render').fn;
+  await renderFilter(article);
+  assert.match(article.content, /^<!-- hexo-sil-video:start -->/);
+  assert.match(article.content, /<p>Body<\/p>$/);
+  await renderFilter(article);
+  assert.equal((article.content.match(/hexo-sil-video:start/g) || []).length, 1);
+
   const routes = await hexo.calls.generators[1].fn();
   assert.deepEqual(routes.filter(route => !route.internal).map(route => route.path), Object.values(RUNTIME_ROUTES));
   assert.deepEqual(routes.filter(route => route.internal).map(route => route.path), [
@@ -420,13 +433,6 @@ test('plugin registers skin, runtime assets, tag, and duplicate-safe post inject
     `${RUNTIME_ROUTES.worker}.map`
   ]);
   assert.ok(routes.every(route => route.data.length > 0));
-
-  const article = post({ video: videoData(), content: '<p>Body</p>' });
-  await hexo.calls.filters[0].fn(article);
-  assert.match(article.content, /^<!-- hexo-sil-video:start -->/);
-  assert.match(article.content, /<p>Body<\/p>$/);
-  await hexo.calls.filters[0].fn(article);
-  assert.equal((article.content.match(/hexo-sil-video:start/g) || []).length, 1);
 });
 
 test('inline bootstrap stays idle without players and loads skin then core only once', async () => {
@@ -496,6 +502,9 @@ test('bootstrap stylesheet failure preserves native controls and exposes fallbac
     assert.equal(player.querySelector('[data-sil-video-fallback-status]').hidden, false);
     assert.match(player.querySelector('[data-sil-video-status]').textContent, /原生控件/);
     assert.equal(dom.window.document.querySelectorAll('script[data-sil-video-core]').length, 0);
+    dom.window.document.dispatchEvent(new dom.window.Event('inside'));
+    await wait(0);
+    assert.equal(dom.window.document.querySelectorAll('link[data-sil-video-style]').length, 1);
   } finally {
     dom.window.close();
   }
@@ -503,18 +512,6 @@ test('bootstrap stylesheet failure preserves native controls and exposes fallbac
 
 test('Ephesus skin and runtime retain the specified palette and interaction contract', async () => {
   const css = await fs.readFile(BUILTIN_SKINS.ephesus.sourcePath, 'utf8');
-  const runtimeDirectory = path.join(__dirname, '..', 'plugins', 'hexo-sil-video', 'runtime');
-  const runtimeSource = (await Promise.all([
-    'player.js',
-    'shared.js',
-    'media-controller.js',
-    'interaction-controller.js',
-    'pointer-controller.js',
-    'keyboard-controller.js',
-    'volume-overlay-controller.js',
-    'fullscreen-controller.js',
-    'subtitle-controller.js'
-  ].map(file => fs.readFile(path.join(runtimeDirectory, file), 'utf8')))).join('\n');
   assert.match(css, /--sil-video-surface:#fff/);
   assert.match(css, /--sil-video-ink:#8064a2/);
   assert.match(css, /--sil-video-buffered:rgba\(128,100,162,\.24\)/);
@@ -544,39 +541,6 @@ test('Ephesus skin and runtime retain the specified palette and interaction cont
   assert.match(css, /data-sil-video-controls\]\[hidden\] \{ display:none \}/);
   assert.match(css, /--sil-video-range-buffered,var\(--sil-video-rail\)/);
   assert.doesNotMatch(css, /sil-video-player:fullscreen/);
-  assert.match(runtimeSource, /const rates = \[1, 1\.25, 1\.5, 1\.75, 2, 0\.5, 0\.75\]/);
-  assert.match(runtimeSource, /stage\.requestFullscreen\(\)/);
-  assert.doesNotMatch(runtimeSource, /player\.requestFullscreen\(\)/);
-  assert.match(runtimeSource, /documentRef\.fullscreenElement === stage/);
-  assert.match(runtimeSource, /renderer\.resize\(true\)/);
-  assert.match(runtimeSource, /const VIEWPORT_CLICK_DELAY = 300/);
-  assert.match(runtimeSource, /const FEEDBACK_HIDE_DELAY = 900/);
-  assert.match(runtimeSource, /const PLAYBACK_FEEDBACK_HIDE_DELAY = 600/);
-  assert.match(runtimeSource, /const TOUCH_GESTURE_THRESHOLD = 12/);
-  assert.match(runtimeSource, /const TOUCH_SEEK_SECONDS = 60/);
-  assert.match(runtimeSource, /const TOUCH_DOUBLE_SEEK_SECONDS = 15/);
-  assert.match(runtimeSource, /const WHEEL_PIXEL_STEP = 100/);
-  assert.match(runtimeSource, /const WHEEL_RESET_DELAY = 250/);
-  assert.match(runtimeSource, /orientation\?\.lock\?\.\('landscape'\)/);
-  assert.match(runtimeSource, /focusWithoutScroll\(stage\)/);
-  assert.match(runtimeSource, /focusWithoutScroll\(player\)/);
-  assert.match(runtimeSource, /event\.key === 'Enter'/);
-  assert.match(runtimeSource, /event\.key === 'Escape'/);
-  assert.match(runtimeSource, /documentRef\.exitFullscreen\(\)/);
-  assert.match(runtimeSource, /adjustVolume\(0\.05\)/);
-  assert.match(runtimeSource, /adjustVolume\(-0\.05\)/);
-  assert.match(runtimeSource, /seek\(-5\)/);
-  assert.match(runtimeSource, /seek\(5\)/);
-  assert.match(runtimeSource, /key === 'm'/);
-  assert.match(runtimeSource, /video\.loop = !video\.loop/);
-  assert.match(runtimeSource, /function setBufferedRanges\(input, media, maximum\)/);
-  assert.match(runtimeSource, /scope\.listen\(video, 'progress', syncBuffered\)/);
-  assert.match(runtimeSource, /import\(model\.runtime\.subtitles\)/);
-  assert.match(runtimeSource, /function createMediaController/);
-  assert.match(runtimeSource, /function createInteractionController/);
-  assert.match(runtimeSource, /function createFullscreenController/);
-  assert.match(runtimeSource, /function createSubtitleController/);
-  assert.doesNotMatch(runtimeSource, /video\.pause\(\);\s*video\.currentTime = 0/);
 });
 
 test('browser runtime marks every buffered video range and clears stale loading state', async () => {
@@ -780,10 +744,12 @@ test('browser runtime maps touch double taps to left and right fifteen-second se
 
     video.currentTime = 20;
 
+    video.paused = false;
     fullscreen.click();
     await Promise.resolve();
     assert.equal(document.fullscreenElement, stage);
-    stage.dataset.silVideoUiHidden = 'true';
+    await wait(FULLSCREEN_UI_HIDE_DELAY + 50);
+    assert.equal(stage.dataset.silVideoUiHidden, 'true');
     touchTap(window, viewport, 250, 100, 5);
     touchTap(window, viewport, 250, 100, 6);
     assert.equal(video.currentTime, 35);
@@ -802,12 +768,15 @@ test('browser runtime maps touch double taps to left and right fifteen-second se
 
 test('browser runtime delays hidden fullscreen controls for touch single taps', async () => {
   const fixture = await browserPlayer();
-  const { dom, window, document, stage, viewport, fullscreen, feedback, calls } = fixture;
+  const { dom, window, document, stage, viewport, video, fullscreen, feedback, calls } = fixture;
   try {
+    video.paused = false;
     fullscreen.click();
     await Promise.resolve();
     assert.equal(document.fullscreenElement, stage);
-    stage.dataset.silVideoUiHidden = 'true';
+    await wait(FULLSCREEN_UI_HIDE_DELAY + 50);
+    assert.equal(stage.dataset.silVideoUiHidden, 'true');
+    video.paused = true;
 
     touchTap(window, viewport, 150, 100, 1);
     assert.equal(stage.dataset.silVideoUiHidden, 'true');

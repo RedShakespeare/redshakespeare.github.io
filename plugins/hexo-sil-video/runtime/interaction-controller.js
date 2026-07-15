@@ -18,11 +18,11 @@ export function createInteractionController(refs) {
 
   return {
     pendingHiddenTouchTap(event) { return controllers[0].pendingHiddenTouchTap(event); },
-    destroy() {
-      scope.destroy();
+    async destroy() {
       const errors = [];
+      try { scope.destroy(); } catch (error) { errors.push(error); }
       for (const controller of controllers.reverse()) {
-        try { controller.destroy(); } catch (error) { errors.push(error); }
+        try { await controller.destroy(); } catch (error) { errors.push(error); }
       }
       if (errors.length) throw new AggregateError(errors, 'Interaction controller cleanup failed.');
     }

@@ -25,6 +25,18 @@ function count(paths, pathname) {
 
 async function waitEnhanced(page, count = 1) {
   await expect(page.locator('[data-sil-video-player][data-sil-video-enhanced="true"]')).toHaveCount(count);
+  await page.locator('video').first().evaluate(video => video.readyState >= 1
+    ? undefined
+    : new Promise(resolve => video.addEventListener('loadedmetadata', resolve, { once: true })));
+  await page.locator('video').first().evaluate(video => new Promise(resolve => {
+    const seek = () => resolve();
+    video.addEventListener('seeked', seek, { once: true });
+    video.currentTime = 20;
+  }));
+  await page.locator('video').first().evaluate(video => {
+    video.volume = 0.8;
+    video.muted = false;
+  });
 }
 
 async function dispatchTouch(locator, type, x, y, pointerId = 1) {
@@ -88,6 +100,28 @@ test('players without subtitles never initialise subtitle resources or menu sema
   for (const pathname of SUBTITLE_PATHS) expect(requests).not.toContain(pathname);
 });
 
+test('real WebM media exposes native metadata, playback clock, seek, and buffered ranges', async ({ page }) => {
+  await page.goto('/video-no-subtitles');
+  await waitEnhanced(page);
+  const state = await page.locator('video').evaluate(video => ({
+    duration: video.duration,
+    currentTime: video.currentTime,
+    buffered: video.buffered.length
+  }));
+  expect(state.duration).toBeGreaterThan(100);
+  expect(state.currentTime).toBeGreaterThan(19);
+  expect(state.buffered).toBeGreaterThan(0);
+
+  await page.locator('video').evaluate(video => video.play());
+  await page.waitForFunction(() => document.querySelector('video').currentTime > 20.1);
+  await page.locator('video').evaluate(video => video.pause());
+  await page.locator('video').evaluate(video => new Promise(resolve => {
+    video.addEventListener('seeked', resolve, { once: true });
+    video.currentTime = 60;
+  }));
+  await expect.poll(() => page.locator('video').evaluate(video => video.currentTime)).toBeGreaterThan(59);
+});
+
 test('default subtitles remain pending until interaction and Chromium starts Worker/WASM lazily', async ({ page, browserName }) => {
   const requests = observeRequests(page);
   await page.goto('/video-subtitles');
@@ -142,14 +176,15 @@ test('subtitle relationships are unique while Tab, arrows, and Escape keep nativ
   await first.focus();
   await page.keyboard.press('Enter');
   await expect(page.locator(`#${firstMenu}`)).toBeVisible();
-  await page.keyboard.press('Tab');
   const option = page.locator(`#${firstMenu} [data-sil-video-track="-1"]`);
   await expect(option).toBeFocused();
   await page.keyboard.press('ArrowDown');
+  await expect(page.locator(`#${firstMenu} [data-sil-video-track="0"]`)).toBeFocused();
+  await page.keyboard.press('ArrowUp');
   await expect(option).toBeFocused();
   await page.keyboard.press('Escape');
   await expect(page.locator(`#${firstMenu}`)).toBeHidden();
-  await expect(first).not.toBeFocused();
+  await expect(first).toBeFocused();
 });
 
 test('desktop shortcuts, wheel input, fullscreen focus, and HUD hiding retain their timing', async ({ page }) => {
@@ -163,7 +198,7 @@ test('desktop shortcuts, wheel input, fullscreen focus, and HUD hiding retain th
 
   await expect(feedback).toHaveAttribute('role', 'status');
   await expect(feedback).toHaveAttribute('aria-live', 'polite');
-  await expect(page.locator('[data-sil-video-progress]')).toHaveAttribute('aria-valuetext', '0:20/1:40');
+  await expect(page.locator('[data-sil-video-progress]')).toHaveAttribute('aria-valuetext', '0:20/2:00');
   await expect(page.locator('[data-sil-video-volume]')).toHaveAttribute('aria-valuetext', '80%');
 
   await player.focus();
@@ -195,11 +230,11 @@ test('touch previews, brightness updates, and double taps preserve every HUD upd
 
   await dispatchTouch(viewport, 'pointerdown', centerX, centerY, 1);
   await dispatchTouch(viewport, 'pointermove', centerX + box.width / 4, centerY, 1);
-  await expect(feedbackText).toHaveText('0:35/1:40');
+  await expect(feedbackText).toHaveText('0:35/2:00');
   await dispatchTouch(viewport, 'pointermove', centerX + box.width / 2, centerY, 1);
-  await expect(feedbackText).toHaveText('0:50/1:40');
+  await expect(feedbackText).toHaveText('0:50/2:00');
   await dispatchTouch(viewport, 'pointerup', centerX + box.width / 2, centerY, 1);
-  await expect(feedbackText).toHaveText('0:50/1:40');
+  await expect(feedbackText).toHaveText('0:50/2:00');
 
   await dispatchTouch(viewport, 'pointerdown', box.x + box.width / 4, centerY, 2);
   await dispatchTouch(viewport, 'pointermove', box.x + box.width / 4, centerY - box.height / 4, 2);
@@ -218,5 +253,5 @@ test('touch previews, brightness updates, and double taps preserve every HUD upd
     tap(3);
     tap(4);
   }, { x: box.x + box.width * 0.8, y: centerY });
-  await expect(feedbackText).toHaveText('1:05/1:40');
+  await expect(feedbackText).toHaveText('1:05/2:00');
 });

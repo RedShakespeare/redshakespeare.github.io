@@ -10,7 +10,7 @@
     "server": "hexo server",
     "test:hexo-sil-audio": "node --test test/hexo-sil-audio.test.js",
     "test:hexo-sil-archive": "node --test test/hexo-sil-archive.test.js",
-    "test:hexo-sil-video": "node --test test/hexo-sil-video.test.js",
+    "test:hexo-sil-video": "node --test test/hexo-sil-video.test.js test/hexo-sil-video.runtime.test.js",
     "test:hexo-sil-video:browser": "playwright test --config=playwright.video.config.js",
     "test:assets": "node --test test/assets.test.js",
     "test:hexo-sil-podcast-inside": "node --test test/hexo-sil-podcast-inside.test.js",

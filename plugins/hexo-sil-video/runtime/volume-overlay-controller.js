@@ -7,10 +7,12 @@ export function createVolumeOverlayController({ player, volume, mute, volumeCont
   const setTimer = clock?.setTimeout || ((handler, delay) => windowRef.setTimeout(handler, delay));
   const clearTimer = clock?.clearTimeout || (value => windowRef?.clearTimeout(value));
   let closeTimer = null;
+  let open = false;
 
-  function setOpen(open) {
+  function setOpen(value) {
     if (closeTimer !== null) clearTimer(closeTimer);
     closeTimer = null;
+    open = Boolean(value);
     if (ui) ui.setVolumeOpen(open);
     else player.dataset.silVideoVolumeOpen = open ? 'true' : 'false';
     fullscreen.showUi();
@@ -27,7 +29,7 @@ export function createVolumeOverlayController({ player, volume, mute, volumeCont
   }
 
   scope.listen(mute, 'click', event => {
-    if (event.pointerType === 'touch') setOpen(ui ? !ui.volumeOpen() : player.dataset.silVideoVolumeOpen !== 'true');
+    if (event.pointerType === 'touch') setOpen(ui ? !ui.volumeOpen() : !open);
     media.toggleMute();
   });
   scope.listen(volumeControl, 'pointerenter', () => setOpen(true));
@@ -39,11 +41,11 @@ export function createVolumeOverlayController({ player, volume, mute, volumeCont
     media.setVolume(Number(volume.value));
   });
   scope.listen(documentRef, 'pointerdown', event => {
-    if ((ui ? ui.volumeOpen() : player.dataset.silVideoVolumeOpen === 'true') && !volumeControl.contains(event.target)) setOpen(false);
+    if ((ui ? ui.volumeOpen() : open) && !volumeControl.contains(event.target)) setOpen(false);
   });
 
   return {
-    destroy() {
+    async destroy() {
       if (closeTimer !== null) clearTimer(closeTimer);
       scope.destroy();
     }
