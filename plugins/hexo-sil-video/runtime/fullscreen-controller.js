@@ -3,6 +3,7 @@ import {
   createListenerScope,
   focusWithoutScroll
 } from './shared.js';
+import { createStateCoordinator } from './state-coordinator.js';
 
 const FULLSCREEN_CHANGE_TIMEOUT = 2000;
 
@@ -12,7 +13,7 @@ export function createFullscreenController({
   stage,
   fullscreen,
   resizeSubtitles = () => Promise.resolve(),
-  state = null,
+  state: suppliedState = null,
   ui = null,
   clock = null,
   diagnostics = null
@@ -20,6 +21,7 @@ export function createFullscreenController({
   const scope = createListenerScope();
   const documentRef = stage.ownerDocument;
   const windowRef = documentRef.defaultView;
+  const state = suppliedState || createStateCoordinator({ player });
   const setTimer = clock?.setTimeout || ((handler, delay) => windowRef.setTimeout(handler, delay));
   const clearTimer = clock?.clearTimeout || (timer => windowRef?.clearTimeout(timer));
   const requestFrame = clock?.requestAnimationFrame || (handler => windowRef?.requestAnimationFrame(handler));
@@ -93,13 +95,13 @@ export function createFullscreenController({
         if (destroying || destroyed) return false;
         const error = new Error(`全屏状态变更超时：${target ? '进入' : '退出'}`);
         error.code = 'SIL_VIDEO_FULLSCREEN_TIMEOUT';
-        state?.set('fullscreen', message, { error: true });
+        state.set('fullscreen', message, { error: true });
         diagnostics?.report('fullscreen', error);
         return false;
       }
       return true;
     } catch (error) {
-      state?.set('fullscreen', message, { error: true });
+      state.set('fullscreen', message, { error: true });
       diagnostics?.report('fullscreen', error);
       return false;
     }
@@ -138,7 +140,7 @@ export function createFullscreenController({
     player.dataset.silVideoFullscreen = isActive ? 'true' : 'false';
     fullscreen.setAttribute('aria-label', isActive ? '退出全屏' : '进入全屏');
     if (isActive) {
-      state?.clear('fullscreen');
+      state.clear('fullscreen');
       wasFullscreen = true;
       focusWithoutScroll(stage);
       lockLandscape();
@@ -151,7 +153,7 @@ export function createFullscreenController({
         unlockOrientation();
         focusWithoutScroll(player);
       }
-      state?.clear('fullscreen');
+      state.clear('fullscreen');
     }
     if (resizeFrame !== null) cancelFrame(resizeFrame);
     resizeFrame = requestFrame(() => {

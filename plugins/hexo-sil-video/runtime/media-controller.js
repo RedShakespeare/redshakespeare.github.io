@@ -7,6 +7,7 @@ import {
   setRangeFill,
   volumeLevel
 } from './shared.js';
+import { createStateCoordinator } from './state-coordinator.js';
 
 export function createMediaController({
   player,
@@ -25,20 +26,16 @@ export function createMediaController({
   repeat,
   onPlaybackStateChange = () => {},
   onPlayInteraction = () => {},
-  state = null,
+  state: suppliedState = null,
   feedbackController,
   diagnostics = null
 }) {
   const scope = createListenerScope();
+  const state = suppliedState || createStateCoordinator({ player, status });
   let lastVolume = video.volume || 0.8;
 
   function setStatus(message = '', error = false, level = error ? 'error' : 'info') {
-    if (state) state.set('media', message, { error, level });
-    else {
-      status.textContent = message;
-      if (error) player.dataset.silVideoError = 'true';
-      else delete player.dataset.silVideoError;
-    }
+    state.set('media', message, { error, level });
   }
 
   function showPlaybackFeedback(action) {
@@ -227,7 +224,6 @@ export function createMediaController({
     setBrightness,
     setCurrentTime,
     setGestureVolume,
-    setStatus,
     setVolume,
     showProgressFeedback,
     toggleMute,
