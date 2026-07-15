@@ -19,6 +19,7 @@
   color-scheme:light;
   line-height:1.5;
 }
+.sil-video-player [data-sil-video-controls][hidden] { display:none }
 .sil-video-player[data-sil-video-theme="dark"] {
   --sil-video-surface:#000;
   --sil-video-ink:#673ab7;
