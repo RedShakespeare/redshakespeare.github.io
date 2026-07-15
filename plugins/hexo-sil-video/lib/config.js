@@ -102,27 +102,43 @@ function createVideoConfig({ builtinSkins, fontMimeTypes, runtimeRoutes }) {
     }));
   }
 
-  function normaliseRuntimeFields({ media: rawMedia = {}, preload: rawPreload, aspectRatio: rawAspectRatio, subtitles: rawSubtitles }) {
-    const media = isObject(rawMedia) ? rawMedia : {};
-    const subtitles = rawSubtitles == null ? {} : rawSubtitles;
-    if (!isObject(subtitles)) throw new Error('Video configuration error: subtitles must be a mapping.');
-    const prefix = normaliseRelativeDirectory(media.prefix, 'files', 'media.prefix');
+  function normaliseMedia(media, prefix) {
+    return {
+      prefix,
+      sourceDir: normaliseRelativeDirectory(media.sourceDir, prefix, 'media.source_dir'),
+      url: normaliseHttpsUrl(media.url, 'media.url', undefined, true)
+    };
+  }
+
+  function normaliseSubtitlesConfig(subtitles) {
     const fonts = normaliseFonts(subtitles.fonts);
     const fallbackFont = String(subtitles.fallbackFont || '').trim();
     if (fallbackFont && !Object.prototype.hasOwnProperty.call(fonts, fallbackFont)) {
       throw new Error('Video configuration error: subtitles.fallbackFont must name an entry in subtitles.fonts.');
     }
-    const preload = rawPreload == null ? 'metadata' : String(rawPreload).trim();
-    if (!['none', 'metadata', 'auto'].includes(preload)) throw new Error('Video configuration error: preload must be none, metadata, or auto.');
+    return { fonts, fallbackFont };
+  }
+
+  function normalisePreload(value) {
+    const preload = value == null ? 'metadata' : String(value).trim();
+    if (!['none', 'metadata', 'auto'].includes(preload)) {
+      throw new Error('Video configuration error: preload must be none, metadata, or auto.');
+    }
+    return preload;
+  }
+
+  function normaliseRuntimeFields({ media: rawMedia = {}, preload: rawPreload, aspectRatio: rawAspectRatio, subtitles: rawSubtitles }) {
+    const media = isObject(rawMedia) ? rawMedia : {};
+    const subtitles = rawSubtitles == null ? {} : rawSubtitles;
+    if (!isObject(subtitles)) throw new Error('Video configuration error: subtitles must be a mapping.');
+    const prefix = normaliseRelativeDirectory(media.prefix, 'files', 'media.prefix');
+    const subtitleConfig = normaliseSubtitlesConfig(subtitles);
+    const preload = normalisePreload(rawPreload);
     return {
-      media: {
-        prefix,
-        sourceDir: normaliseRelativeDirectory(media.sourceDir, prefix, 'media.source_dir'),
-        url: normaliseHttpsUrl(media.url, 'media.url', undefined, true)
-      },
+      media: normaliseMedia(media, prefix),
       preload,
       aspectRatio: normaliseAspectRatio(rawAspectRatio),
-      subtitles: { fonts, fallbackFont }
+      subtitles: subtitleConfig
     };
   }
 
