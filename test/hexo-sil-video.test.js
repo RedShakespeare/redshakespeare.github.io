@@ -322,6 +322,14 @@ test('legacy mode validates local files and external video URLs stay HTTPS-only'
   assert.ok(warnings >= 1);
   const external = await normaliseVideo(post(), { url: 'https://media.example.test/demo.webm' }, runtime);
   assert.equal(external.type, 'video/webm');
+  for (const [url, type] of [
+    ['https://media.example.test/demo.ogv', 'video/ogg'],
+    ['https://media.example.test/demo.ogg', 'video/ogg'],
+    ['https://media.example.test/demo.mpeg', 'video/mpeg'],
+    ['https://media.example.test/demo.mpg', 'video/mpeg']
+  ]) {
+    assert.equal((await normaliseVideo(post(), { url }, runtime)).type, type);
+  }
   await assert.rejects(normaliseVideo(post(), { url: 'http://media.example.test/demo.mp4' }, runtime), /must use HTTPS/);
   await assert.rejects(normaliseVideo(post(), { file: '../demo.mp4' }, runtime), /parent path/);
   await assert.rejects(normaliseVideo(post(), videoData({ subtitles: [] }), {

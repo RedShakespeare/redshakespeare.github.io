@@ -14,7 +14,11 @@ const PLAYER_END = '<!-- hexo-sil-video:end -->';
 const VIDEO_MIME_TYPES = new Map([
   ['.mp4', 'video/mp4'],
   ['.m4v', 'video/mp4'],
-  ['.webm', 'video/webm']
+  ['.webm', 'video/webm'],
+  ['.ogv', 'video/ogg'],
+  ['.ogg', 'video/ogg'],
+  ['.mpeg', 'video/mpeg'],
+  ['.mpg', 'video/mpeg']
 ]);
 const SUBTITLE_MIME_TYPES = new Map([
   ['.ass', new Set(['text/x-ssa', 'text/x-ssa; charset=utf-8', 'text/plain', 'text/plain; charset=utf-8'])],
