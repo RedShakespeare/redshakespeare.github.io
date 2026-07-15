@@ -3,7 +3,8 @@ import { createPointerController } from './pointer-controller.js';
 import { createCleanupError, createListenerScope } from './shared.js';
 import { createVolumeOverlayController } from './volume-overlay-controller.js';
 
-export function createInteractionController(refs) {
+export function createInteractionController({ controls, surfaces, media, fullscreen, volume, mute, volumeControl, services }) {
+  const refs = { ...surfaces, ...controls, media, fullscreen, volume, mute, volumeControl, services };
   const scope = createListenerScope();
   const controllers = [
     createPointerController(refs),

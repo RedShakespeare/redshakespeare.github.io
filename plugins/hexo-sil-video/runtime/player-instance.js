@@ -83,7 +83,11 @@ function createPlayerInstance({ player, services }) {
     }
 
     interactionController = addController(createInteractionController({
-      ...refs,
+      controls: { play: refs.play, progress: refs.progress, rate: refs.rate, repeat: refs.repeat },
+      surfaces: { player, stage: refs.stage, viewport: refs.viewport, video: refs.video },
+      volume: refs.volume,
+      mute: refs.mute,
+      volumeControl: refs.volumeControl,
       media: mediaController,
       fullscreen: fullscreenController,
       services
