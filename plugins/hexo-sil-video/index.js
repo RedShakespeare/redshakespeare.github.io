@@ -36,6 +36,7 @@ const {
   buildBrowserArtifacts,
   buildBrowserBundle,
   renderBootstrapScript,
+  resetRuntimeCache,
   runtimeRouteArtifacts,
   runtimeRouteData
 } = createBrowserBuild({ pluginDir: __dirname, routes: RUNTIME_ROUTES });
@@ -110,6 +111,7 @@ function registerVideoPlugin(hexo) {
   hexo.extend.filter.register('before_generate', () => {
     demand.reset();
     runtime.resourceCache.clear();
+    resetRuntimeCache();
     for (const name of ['Post', 'Page']) demand.seed(hexo.model?.(name)?.toArray?.() || []);
   }, 0);
   hexo.extend.filter.register('after_post_render', async function (data) {
@@ -144,6 +146,7 @@ module.exports = {
   registerVideoPlugin,
   renderBootstrapScript,
   renderVideoPlayer,
+  resetRuntimeCache,
   rootPublicPath,
   runtimeRouteData,
   runtimeRouteArtifacts,

@@ -15,6 +15,10 @@ function createBrowserBuild({ pluginDir, routes }) {
   let runtimeRouteDataPromise = null;
   const esbuild = require('esbuild');
 
+  function cloneRoutes(entries) {
+    return entries.map(entry => ({ ...entry, data: Buffer.from(entry.data) }));
+  }
+
   function buildOptions(entryPoint, format, outputName, sourcemap = false) {
     return {
       entryPoints: [entryPoint],
@@ -50,7 +54,7 @@ function createBrowserBuild({ pluginDir, routes }) {
   }
 
   async function runtimeRouteArtifacts() {
-    if (runtimeArtifactsPromise) return runtimeArtifactsPromise;
+    if (runtimeArtifactsPromise) return cloneRoutes(await runtimeArtifactsPromise);
     const jassubRoot = path.dirname(require.resolve('jassub/package.json'));
     runtimeArtifactsPromise = Promise.all([
       buildBrowserArtifacts(path.join(pluginDir, 'runtime', 'browser-entry.js'), 'iife', path.basename(routes.script)),
@@ -67,11 +71,11 @@ function createBrowserBuild({ pluginDir, routes }) {
       runtimeArtifactsPromise = null;
       throw error;
     });
-    return runtimeArtifactsPromise;
+    return cloneRoutes(await runtimeArtifactsPromise);
   }
 
   async function runtimeRouteData() {
-    if (runtimeRouteDataPromise) return runtimeRouteDataPromise;
+    if (runtimeRouteDataPromise) return cloneRoutes(await runtimeRouteDataPromise);
     const jassubRoot = path.dirname(require.resolve('jassub/package.json'));
     runtimeRouteDataPromise = Promise.all([
       ...await runtimeRouteArtifacts(),
@@ -82,7 +86,12 @@ function createBrowserBuild({ pluginDir, routes }) {
       runtimeRouteDataPromise = null;
       throw error;
     });
-    return runtimeRouteDataPromise;
+    return cloneRoutes(await runtimeRouteDataPromise);
+  }
+
+  function resetRuntimeCache() {
+    runtimeArtifactsPromise = null;
+    runtimeRouteDataPromise = null;
   }
 
   function renderBootstrapScript({ styles = [], script }) {
@@ -107,6 +116,7 @@ function createBrowserBuild({ pluginDir, routes }) {
     buildBrowserArtifacts,
     buildBrowserBundle,
     renderBootstrapScript,
+    resetRuntimeCache,
     runtimeRouteArtifacts,
     runtimeRouteData
   };

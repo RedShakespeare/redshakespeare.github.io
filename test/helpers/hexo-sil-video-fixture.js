@@ -25,6 +25,7 @@ const {
   registerVideoPlugin,
   renderBootstrapScript,
   renderVideoPlayer,
+  resetRuntimeCache,
   runtimeRouteData,
   toVideoConfig,
   volumeLevel
@@ -144,6 +145,7 @@ module.exports = {
   registerVideoPlugin,
   renderBootstrapScript,
   renderVideoPlayer,
+  resetRuntimeCache,
   runtimeRouteData,
   toVideoConfig,
   volumeLevel,

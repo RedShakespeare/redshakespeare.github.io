@@ -1,6 +1,6 @@
 'use strict';
 
-const { assert, path, RUNTIME_ROUTES, runtimeRouteData, test } = require('./helpers/hexo-sil-video-fixture');
+const { assert, path, resetRuntimeCache, RUNTIME_ROUTES, runtimeRouteData, test } = require('./helpers/hexo-sil-video-fixture');
 
 test('runtime route builder emits split core/subtitle bundles, module worker, WASM variants, and fallback font', async () => {
   const routes = await runtimeRouteData();
@@ -33,4 +33,22 @@ test('runtime route builder emits split core/subtitle bundles, module worker, WA
     assert.ok(sourceMap.sourcesContent.length > 0);
     assert.equal(sourceMap.sources.some(source => path.isAbsolute(source)), false);
   }
+});
+
+test('runtime route cache returns defensive copies and resets between generations', async () => {
+  const first = await runtimeRouteData();
+  const original = Buffer.from(first[0].data);
+  first[0].path = 'mutated.js';
+  first[0].data.fill(0);
+  const cached = await runtimeRouteData();
+  assert.equal(cached[0].path, RUNTIME_ROUTES.script);
+  assert.deepEqual(cached[0].data, original);
+  assert.notEqual(cached[0], first[0]);
+  assert.notEqual(cached[0].data, first[0].data);
+
+  resetRuntimeCache();
+  const rebuilt = await runtimeRouteData();
+  assert.deepEqual(rebuilt.map(entry => entry.path), cached.map(entry => entry.path));
+  assert.notEqual(rebuilt[0], cached[0]);
+  assert.notEqual(rebuilt[0].data, cached[0].data);
 });
