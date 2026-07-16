@@ -1,8 +1,8 @@
 import { VOLUME_CLOSE_DELAY, createListenerScope } from './shared.js';
-import { createTestRuntimeServices } from './runtime-services.js';
+import { resolveRuntimeServices } from './runtime-services.js';
 
 export function createVolumeOverlayController({ player, volume, mute, volumeControl, media, fullscreen, services }) {
-  services ||= createTestRuntimeServices({ windowRef: player.ownerDocument.defaultView });
+  services = resolveRuntimeServices(services, { windowRef: player.ownerDocument.defaultView });
   const scope = createListenerScope();
   const documentRef = player.ownerDocument;
   const { ui, clock } = services;

@@ -39,3 +39,7 @@ export function createRuntimeServices({ player, status, windowRef, overrides = {
     ui: overrides.ui || createUiCoordinator({ player })
   };
 }
+
+export function resolveRuntimeServices(services, overrides = {}) {
+  return services || createTestRuntimeServices(overrides);
+}

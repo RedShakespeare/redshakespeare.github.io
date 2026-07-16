@@ -3,7 +3,7 @@ import {
   createListenerScope,
   focusWithoutScroll
 } from './shared.js';
-import { createTestRuntimeServices } from './runtime-services.js';
+import { resolveRuntimeServices } from './runtime-services.js';
 
 const FULLSCREEN_CHANGE_TIMEOUT = 2000;
 
@@ -19,7 +19,13 @@ export function createFullscreenController({
   diagnostics: legacyDiagnostics,
   clock: legacyClock
 }) {
-  services ||= createTestRuntimeServices({ windowRef: stage.ownerDocument.defaultView, clock: legacyClock, state: legacyState, ui: legacyUi, diagnostics: legacyDiagnostics });
+  services = resolveRuntimeServices(services, {
+    windowRef: stage.ownerDocument.defaultView,
+    clock: legacyClock,
+    state: legacyState,
+    ui: legacyUi,
+    diagnostics: legacyDiagnostics
+  });
   const scope = createListenerScope();
   const documentRef = stage.ownerDocument;
   const windowRef = documentRef.defaultView;

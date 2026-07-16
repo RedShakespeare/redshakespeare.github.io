@@ -7,7 +7,7 @@ import {
   setRangeFill,
   volumeLevel
 } from './shared.js';
-import { createTestRuntimeServices } from './runtime-services.js';
+import { resolveRuntimeServices } from './runtime-services.js';
 
 export function createMediaController({
   player,
@@ -27,7 +27,11 @@ export function createMediaController({
   state: legacyState,
   diagnostics: legacyDiagnostics
 }) {
-  services ||= createTestRuntimeServices({ windowRef: player.ownerDocument.defaultView, state: legacyState, diagnostics: legacyDiagnostics });
+  services = resolveRuntimeServices(services, {
+    windowRef: player.ownerDocument.defaultView,
+    state: legacyState,
+    diagnostics: legacyDiagnostics
+  });
   const scope = createListenerScope();
   const { state, diagnostics } = services;
   let lastVolume = video.volume || 0.8;

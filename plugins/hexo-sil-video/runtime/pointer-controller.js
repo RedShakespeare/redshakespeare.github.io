@@ -11,10 +11,10 @@ import {
   createListenerScope,
   focusWithoutScroll
 } from './shared.js';
-import { createTestRuntimeServices } from './runtime-services.js';
+import { resolveRuntimeServices } from './runtime-services.js';
 
 export function createPointerController({ player, video, stage, viewport, media, fullscreen, services }) {
-  services ||= createTestRuntimeServices({ windowRef: player.ownerDocument.defaultView });
+  services = resolveRuntimeServices(services, { windowRef: player.ownerDocument.defaultView });
   const scope = createListenerScope();
   const documentRef = player.ownerDocument;
   const windowRef = documentRef.defaultView;
