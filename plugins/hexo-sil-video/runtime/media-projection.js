@@ -2,12 +2,23 @@ import { formatTime, setBufferedRanges, setRangeFill, volumeLevel } from './shar
 
 export function createMediaProjection({ player, video, progress, volume, current, duration, play, mute, onPlaybackStateChange }) {
   function playing() {
-    const active = !video.paused && !video.ended;
+    const failed = mediaErrorActive();
+    const active = !failed && !video.paused && !video.ended;
     player.dataset.silVideoPlaying = active ? 'true' : 'false';
     player.dataset.silVideoEnded = video.ended ? 'true' : 'false';
-    play.setAttribute('aria-label', video.ended ? '重播' : active ? '暂停' : '播放');
+    play.setAttribute('aria-label', failed ? '重新加载' : video.ended ? '重播' : active ? '暂停' : '播放');
     play.setAttribute('aria-pressed', active ? 'true' : 'false');
     onPlaybackStateChange();
+  }
+
+  function mediaErrorActive() {
+    return player.dataset.silVideoMediaError === 'true';
+  }
+
+  function mediaError(value) {
+    if (value) player.dataset.silVideoMediaError = 'true';
+    else delete player.dataset.silVideoMediaError;
+    playing();
   }
 
   function time() {
@@ -51,5 +62,5 @@ export function createMediaProjection({ player, video, progress, volume, current
     setRangeFill(volume, Number(volume.value), 1);
   }
 
-  return { playing, time, buffered, duration: mediaDuration, volume: mediaVolume };
+  return { playing, time, buffered, duration: mediaDuration, volume: mediaVolume, mediaError, mediaErrorActive };
 }

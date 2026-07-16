@@ -135,7 +135,7 @@ function createPlayerInstance({ player, services }) {
       await destroyControllersInReverse(controllers, diagnostics);
       refs.video.controls = initialNativeControls;
       for (const { control, hidden } of initialControls) control.hidden = hidden;
-      for (const key of ['silVideoPlaying', 'silVideoEnded', 'silVideoMuted', 'silVideoVolumeLevel', 'silVideoTheme']) delete player.dataset[key];
+      for (const key of ['silVideoPlaying', 'silVideoEnded', 'silVideoMuted', 'silVideoVolumeLevel', 'silVideoMediaError', 'silVideoTheme']) delete player.dataset[key];
       delete player.dataset.silVideoReady;
       delete player.dataset.silVideoEnhanced;
       state.destroy();

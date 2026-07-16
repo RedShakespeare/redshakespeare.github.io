@@ -3,6 +3,7 @@ import { createListenerScope } from './shared.js';
 export function bindMediaEvents({ video, progress, duration, projection, setStatus, onPlayInteraction, loadingHud }) {
   const scope = createListenerScope();
   scope.listen(video, 'loadstart', () => {
+    projection.mediaError(false);
     loadingHud.hide();
     progress.style.removeProperty('--sil-video-range-buffered');
     duration.textContent = '--:--';
@@ -27,6 +28,10 @@ export function bindMediaEvents({ video, progress, duration, projection, setStat
   scope.listen(video, 'pause', () => { loadingHud.hide(); projection.playing(); });
   scope.listen(video, 'ended', () => { loadingHud.hide(); projection.playing(); });
   scope.listen(video, 'volumechange', projection.volume);
-  scope.listen(video, 'error', () => { loadingHud.hide(); setStatus('视频加载失败，请使用下载链接。', true); });
+  scope.listen(video, 'error', () => {
+    loadingHud.hide();
+    projection.mediaError(true);
+    setStatus('视频加载失败，请使用下载链接。', true);
+  });
   return scope;
 }

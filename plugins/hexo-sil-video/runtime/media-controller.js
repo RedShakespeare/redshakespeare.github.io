@@ -48,7 +48,18 @@ export function createMediaController({
   let playToken = 0;
   let destroyed = false;
 
+  function reload() {
+    playToken += 1;
+    projection.mediaError(false);
+    setStatus('正在加载视频…', false, 'loading');
+    video.load();
+  }
+
   async function togglePlay(showPlayback = false) {
+    if (projection.mediaErrorActive()) {
+      reload();
+      return;
+    }
     if (video.paused || video.ended) {
       const token = ++playToken;
       if (video.ended) video.currentTime = 0;

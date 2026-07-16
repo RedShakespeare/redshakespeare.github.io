@@ -58,6 +58,23 @@ test('browser runtime shows and clears the loading HUD around playback stalls', 
   }
 });
 
+test('browser runtime turns media failures into a manual reload action', async () => {
+  const fixture = await browserPlayer();
+  const { dom, window, player, video, play, calls } = fixture;
+  try {
+    video.dispatchEvent(new window.Event('error'));
+    assert.equal(player.dataset.silVideoMediaError, 'true');
+    assert.equal(play.getAttribute('aria-label'), '重新加载');
+    play.click();
+    assert.equal(calls.load, 1);
+    assert.equal(player.dataset.silVideoMediaError, undefined);
+    assert.equal(play.getAttribute('aria-label'), '播放');
+    assert.equal(player.querySelector('[data-sil-video-status]').textContent, '正在加载视频…');
+  } finally {
+    dom.window.close();
+  }
+});
+
 test('browser runtime synchronises accessible values, omits empty subtitle relations, and destroys cleanly', async () => {
   const fixture = await browserPlayer();
   const { dom, document, player, video, progress, volume } = fixture;

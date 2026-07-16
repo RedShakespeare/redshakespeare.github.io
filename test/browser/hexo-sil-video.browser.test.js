@@ -122,6 +122,28 @@ test('real WebM media exposes native metadata, playback clock, seek, and buffere
   await expect.poll(() => page.locator('video').evaluate(video => video.currentTime)).toBeGreaterThan(59);
 });
 
+test('media errors expose a visible reload action that invokes the native loader', async ({ page }) => {
+  await page.goto('/video-no-subtitles');
+  await waitEnhanced(page);
+  const player = page.locator('[data-sil-video-player]');
+  const play = page.locator('[data-sil-video-action="play"]');
+  const reloadIcon = page.locator('.sil-video-player__icon--reload');
+  await page.locator('video').evaluate(video => {
+    const nativeLoad = video.load.bind(video);
+    video.load = () => {
+      video.dataset.reloadCalls = String(Number(video.dataset.reloadCalls || 0) + 1);
+      nativeLoad();
+    };
+    video.dispatchEvent(new Event('error'));
+  });
+  await expect(player).toHaveAttribute('data-sil-video-media-error', 'true');
+  await expect(play).toHaveAttribute('aria-label', '重新加载');
+  await expect(reloadIcon).toBeVisible();
+  await play.click();
+  await expect(page.locator('video')).toHaveAttribute('data-reload-calls', '1');
+  await expect(player).not.toHaveAttribute('data-sil-video-media-error', /.+/);
+});
+
 test('default subtitles remain pending until interaction and Chromium starts Worker/WASM lazily', async ({ page, browserName }) => {
   const requests = observeRequests(page);
   await page.goto('/video-subtitles');
