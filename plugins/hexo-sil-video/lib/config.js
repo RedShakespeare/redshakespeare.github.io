@@ -45,6 +45,7 @@ function createVideoConfig({ builtinSkins, fontMimeTypes, runtimeRoutes }) {
     for (const [rawName, rawFile] of Object.entries(value)) {
       const name = String(rawName).trim();
       if (!name || /[\r\n]/.test(name)) throw new Error('Video configuration error: subtitle font names must be non-empty single-line strings.');
+      if (Object.prototype.hasOwnProperty.call(fonts, name)) throw new Error(`Video configuration error: duplicate subtitle font name after trimming: ${name}.`);
       const file = normaliseRelativeFile(rawFile, `subtitles.fonts.${name}`);
       if (!fontMimeTypes.has(path.extname(file).toLowerCase())) {
         throw new Error(`Video configuration error: subtitles.fonts.${name} must use WOFF, WOFF2, TTF, or OTF.`);

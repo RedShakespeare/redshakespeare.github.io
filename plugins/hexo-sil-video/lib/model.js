@@ -104,7 +104,9 @@ function createVideoModel({
       normaliseSubtitles(post, data.subtitles, options),
       normaliseFonts(post, options)
     ]);
-    const title = String(data.title || post && post.title || (file && path.basename(file, path.extname(file))) || '视频').trim();
+    const title = [data.title, post?.title, file && path.basename(file, path.extname(file)), '视频']
+      .map(value => String(value || '').trim())
+      .find(Boolean);
     return {
       title,
       source,

@@ -22,5 +22,6 @@ test('video configuration follows the shared prefix and safe legacy fallback con
   assert.throws(() => toVideoConfig({ video: { media: { source_dir: 'files#media' } } }), /ASCII relative directory/);
   assert.throws(() => toVideoConfig({ video: { skin: { override: '/css/%2e%2e/theme.css' } } }), /root-relative CSS path/);
   assert.throws(() => toVideoConfig({ video: { subtitles: { fonts: { Bad: '../bad.ttf' } } } }), /parent path/);
+  assert.throws(() => toVideoConfig({ video: { subtitles: { fonts: { ' Font': 'video/a.ttf', Font: 'video/b.ttf' } } } }), /duplicate subtitle font name/);
   assert.throws(() => toVideoConfig({ video: { subtitles: { fallback_font: 'Missing' } } }), /must name an entry/);
 });

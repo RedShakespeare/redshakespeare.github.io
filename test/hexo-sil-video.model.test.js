@@ -20,6 +20,10 @@ test('manifest-backed video resolves media, ASS/SRT tracks, poster, and fonts', 
   assert.equal(value.runtime.subtitles, '/js/hexo-sil-video-subtitles.js');
   assert.equal(value.runtime.worker, '/js/hexo-sil-video-worker.js');
 });
+test('blank video titles fall back to the article title', async () => {
+  const value = await normaliseVideo(post({ title: 'Article title' }), videoData({ title: '   ' }), runtime);
+  assert.equal(value.title, 'Article title');
+});
 test('manifest-backed video accepts additional local OGG, MPEG, and QuickTime containers', async () => {
   const ogv = await normaliseVideo(post(), videoData({ file: 'video/demo.ogv', subtitles: [] }), runtime);
   assert.equal(ogv.source, '/files/video/demo.ogv');
