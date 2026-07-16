@@ -41,3 +41,17 @@ test('runtime functions stay below their decision-complexity budget', () => {
     }
   }
 });
+
+test('complexity metrics include declarations, methods, and arrow functions', () => {
+  const source = `
+    function declared(value) { if (value) return true; }
+    const object = { method(value) { while (value) value -= 1; } };
+    const namedArrow = value => { if (value && value.ready) return value; };
+    values.map(value => { if (value) return value; });
+  `;
+  const functions = functionBodies(source);
+  assert.ok(functions.some(fn => fn.name === 'declared' && decisionCount(fn.body) === 1));
+  assert.ok(functions.some(fn => fn.name === 'method' && decisionCount(fn.body) === 1));
+  assert.ok(functions.some(fn => fn.name === 'namedArrow' && decisionCount(fn.body) === 2));
+  assert.ok(functions.some(fn => fn.name.startsWith('<arrow@') && decisionCount(fn.body) === 1));
+});

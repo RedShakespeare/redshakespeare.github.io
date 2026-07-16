@@ -20,9 +20,17 @@ function maskNonCode(source) {
 
 function functionBodies(source) {
   const code = maskNonCode(source);
-  const ranges = [];
-  const pattern = /\b(?:async\s+)?function\s+([A-Za-z_$][\w$]*)\s*\([^)]*\)\s*\{/g;
-  for (const match of code.matchAll(pattern)) {
+  const rangesByStart = new Map();
+  const patterns = [
+    { pattern: /\b(?:async\s+)?function\s+([A-Za-z_$][\w$]*)\s*\([^)]*\)\s*\{/g, name: match => match[1] },
+    { pattern: /\b(?:async\s+)?([A-Za-z_$][\w$]*)\s*\([^)]*\)\s*\{/g, name: match => match[1] },
+    { pattern: /\b(?:const|let|var)\s+([A-Za-z_$][\w$]*)\s*=\s*(?:async\s*)?(?:\([^)]*\)|[A-Za-z_$][\w$]*)\s*=>\s*\{/g, name: match => match[1] },
+    { pattern: /(?:async\s*)?(?:\([^)]*\)|[A-Za-z_$][\w$]*)\s*=>\s*\{/g, name: match => `<arrow@${code.slice(0, match.index).split('\n').length}>` }
+  ];
+  const controls = new Set(['catch', 'for', 'if', 'switch', 'while', 'with']);
+
+  function addRange(match, name) {
+    if (controls.has(name)) return;
     const bodyStart = match.index + match[0].length;
     let depth = 1;
     let index = bodyStart;
@@ -31,8 +39,14 @@ function functionBodies(source) {
       else if (code[index] === '}') depth -= 1;
       index += 1;
     }
-    ranges.push({ name: match[1], start: bodyStart, end: index - 1 });
+    if (!rangesByStart.has(bodyStart)) rangesByStart.set(bodyStart, { name, start: bodyStart, end: index - 1 });
   }
+
+  for (const { pattern, name } of patterns) {
+    for (const match of code.matchAll(pattern)) addRange(match, name(match));
+  }
+
+  const ranges = Array.from(rangesByStart.values());
   return ranges.map(range => {
     const characters = Array.from(code.slice(range.start, range.end));
     for (const nested of ranges) {
