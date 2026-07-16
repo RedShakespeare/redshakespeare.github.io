@@ -4,6 +4,7 @@ import {
   focusWithoutScroll
 } from './shared.js';
 import { resolveRuntimeServices } from './runtime-services.js';
+import { createOrientationController } from './orientation-controller.js';
 
 const FULLSCREEN_CHANGE_TIMEOUT = 2000;
 
@@ -29,6 +30,7 @@ export function createFullscreenController({
   const scope = createListenerScope();
   const documentRef = stage.ownerDocument;
   const windowRef = documentRef.defaultView;
+  const orientation = createOrientationController(windowRef);
   const { state, ui, diagnostics, clock } = services;
   const { setTimeout: setTimer, clearTimeout: clearTimer, requestAnimationFrame: requestFrame, cancelAnimationFrame: cancelFrame } = clock;
   let fullscreenUiTimer = null;
@@ -43,22 +45,6 @@ export function createFullscreenController({
 
   function active() {
     return documentRef.fullscreenElement === stage;
-  }
-
-  async function lockLandscape() {
-    try {
-      await windowRef?.screen?.orientation?.lock?.('landscape');
-    } catch {
-      // Orientation locking is best-effort and commonly unavailable outside Android fullscreen.
-    }
-  }
-
-  function unlockOrientation() {
-    try {
-      windowRef?.screen?.orientation?.unlock?.();
-    } catch {
-      // The browser may expose orientation information without allowing explicit unlocks.
-    }
   }
 
   function controlsKeepUiOpen() {
@@ -148,14 +134,14 @@ export function createFullscreenController({
       state.clear('fullscreen');
       wasFullscreen = true;
       focusWithoutScroll(stage);
-      lockLandscape();
+      void orientation.lockLandscape();
       scheduleUiHide();
     } else {
       clearUiTimer();
       projectUiHidden(false);
       if (wasFullscreen) {
         wasFullscreen = false;
-        unlockOrientation();
+        orientation.unlock();
         focusWithoutScroll(player);
       }
       state.clear('fullscreen');
@@ -216,7 +202,7 @@ export function createFullscreenController({
       projectUiHidden(false);
       if (resizeFrame !== null) cancelFrame(resizeFrame);
       resizeFrame = null;
-      if (active()) unlockOrientation();
+      if (active()) orientation.unlock();
       scope.destroy();
     }
   };
