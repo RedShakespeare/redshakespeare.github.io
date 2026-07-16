@@ -10,11 +10,11 @@ export function createSubtitleRendererManager({
 }) {
   let renderer = null;
   let candidateRenderer = null;
+  let candidateCancellation = null;
   let renderQueue = Promise.resolve();
   let renderError = null;
   let destroyed = false;
   const destroyedRenderers = new WeakSet();
-  const candidateCancellations = new WeakMap();
 
   function enqueue(task) {
     const pending = renderQueue.then(task, task);
@@ -39,7 +39,8 @@ export function createSubtitleRendererManager({
     const candidate = candidateRenderer;
     if (!candidate) return;
     candidateRenderer = null;
-    const cancellation = candidateCancellations.get(candidate);
+    const cancellation = candidateCancellation;
+    candidateCancellation = null;
     const cleanup = destroyRenderer(candidate);
     if (cancellation) cleanup.then(cancellation.resolve, cancellation.reject);
     await cleanup;
@@ -84,28 +85,29 @@ export function createSubtitleRendererManager({
     candidateRenderer = candidate;
     let resolveCancellation;
     let rejectCancellation;
-    candidateCancellations.set(candidate, {
+    const cancellation = {
       promise: new Promise((resolve, reject) => {
         resolveCancellation = resolve;
         rejectCancellation = reject;
       }),
       resolve: resolveCancellation,
       reject: rejectCancellation
-    });
+    };
+    candidateCancellation = cancellation;
     try {
-      await Promise.race([candidate.ready, candidateCancellations.get(candidate).promise]);
+      await Promise.race([candidate.ready, cancellation.promise]);
       if (candidateRenderer !== candidate || !isCurrent(token)) {
         await destroyRenderer(candidate);
-        candidateCancellations.delete(candidate);
+        if (candidateCancellation === cancellation) candidateCancellation = null;
         return null;
       }
       renderer = candidate;
       candidateRenderer = null;
-      candidateCancellations.delete(candidate);
+      candidateCancellation = null;
       return candidate;
     } catch (error) {
       if (candidateRenderer === candidate) candidateRenderer = null;
-      candidateCancellations.delete(candidate);
+      if (candidateCancellation === cancellation) candidateCancellation = null;
       await destroyRenderer(candidate);
       throw error;
     }
