@@ -182,6 +182,74 @@ test('video runtime destroy is idempotent and reports instance cleanup failures'
   dom.window.close();
 });
 
+test('runtime destroy prevents refresh from orphaning instances created during teardown', async () => {
+  const { createVideoRuntime } = await loadRuntime('player.js');
+  const dom = new JSDOM('<!doctype html><body><aside class="sil-video-player" data-sil-video-player data-sil-video-model="one"></aside></body>');
+  const firstPlayer = dom.window.document.querySelector('aside');
+  const secondPlayer = dom.window.document.createElement('aside');
+  secondPlayer.className = 'sil-video-player';
+  secondPlayer.dataset.silVideoPlayer = '';
+  secondPlayer.dataset.silVideoModel = 'two';
+  let release;
+  let instances = 0;
+  class Observer { observe() {} disconnect() {} }
+  const runtime = createVideoRuntime({
+    windowRef: dom.window,
+    documentRef: dom.window.document,
+    ElementRef: dom.window.Element,
+    MutationObserverRef: Observer,
+    queueMicrotaskRef: queueMicrotask,
+    createInstance: ({ player }) => {
+      instances += 1;
+      return {
+      mount() {},
+      refreshTheme() {},
+      destroy() {
+        if (player === firstPlayer) return new Promise(resolve => { release = resolve; });
+        return Promise.resolve();
+      }
+      };
+    }
+  });
+  const destroying = runtime.destroy();
+  dom.window.document.body.append(secondPlayer);
+  runtime.refresh();
+  release();
+  await destroying;
+  assert.equal(instances, 1);
+  assert.equal(dom.window.__hexoSilVideoRuntime, undefined);
+  dom.window.close();
+});
+
+test('a player removed before its scheduled refresh is never initialised', async () => {
+  const { createVideoRuntime } = await loadRuntime('player.js');
+  const dom = new JSDOM('<!doctype html><body></body>');
+  let observeMutations;
+  let instances = 0;
+  class Observer {
+    constructor(callback) { observeMutations = callback; }
+    observe() {}
+    disconnect() {}
+  }
+  const runtime = createVideoRuntime({
+    windowRef: dom.window,
+    documentRef: dom.window.document,
+    ElementRef: dom.window.Element,
+    MutationObserverRef: Observer,
+    queueMicrotaskRef: queueMicrotask,
+    createInstance: () => { instances += 1; return { mount() {}, refreshTheme() {}, async destroy() {} }; }
+  });
+  const player = dom.window.document.createElement('aside');
+  player.className = 'sil-video-player';
+  player.dataset.silVideoPlayer = '';
+  player.dataset.silVideoModel = 'model';
+  observeMutations([{ removedNodes: [player], addedNodes: [player] }]);
+  await new Promise(resolve => setImmediate(resolve));
+  assert.equal(instances, 0);
+  await runtime.destroy();
+  dom.window.close();
+});
+
 test('removed player recovers when destroy fails and the node reconnects', async () => {
   const { createVideoRuntime } = await loadRuntime('player.js');
   const dom = new JSDOM('<!doctype html><body><aside class="sil-video-player" data-sil-video-player data-sil-video-model="model"></aside></body>');

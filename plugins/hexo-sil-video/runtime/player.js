@@ -17,26 +17,44 @@ function refreshBlocked(player, record) {
   return true;
 }
 
-function recordInitialisationFailure({ player, records, source, instance, diagnostics, error }) {
-  const cleanup = instance?.destroy?.() || Promise.resolve();
-  cleanup.catch(destroyError => diagnostics.report('initialise.cleanup', destroyError));
+function recordInitialisationFailure({ player, records, source, instance, diagnostics, error, retry }) {
+  const cleanup = Promise.resolve()
+    .then(() => instance?.destroy?.())
+    .catch(destroyError => diagnostics.report('initialise.cleanup', destroyError));
   const message = `播放器初始化失败：${error.message}`;
-  records.set(player, {
+  const failed = {
     ...(records.get(player) || {}),
     source,
-    status: 'failed',
+    status: 'destroying',
+    instance: null,
+    promise: cleanup,
     error: { source, scope: 'initialise', message }
-  });
+  };
+  records.set(player, failed);
   showFallbackError(player, message);
   diagnostics.report('initialise', error);
+  cleanup.then(() => {
+    const current = records.get(player);
+    if (current?.promise !== cleanup) return;
+    if (!player.isConnected) {
+      records.delete(player);
+      return;
+    }
+    records.set(player, { ...failed, status: 'failed', promise: null, retryRequested: false });
+    if (current.retryRequested) retry();
+  });
 }
 
 export function refreshOnePlayer({ player, records, diagnostics, createInstance = createPlayerInstance }) {
-  if (!player?.matches?.(selector)) return;
+  if (!player?.isConnected || !player.matches?.(selector)) return;
   const record = records.get(player);
+  const source = player.dataset.silVideoModel || '';
+  if (record?.status === 'destroying') {
+    if (record.source !== source && !record.retryRequested) records.set(player, { ...record, retryRequested: true });
+    return;
+  }
   if (refreshBlocked(player, record)) return;
 
-  const source = player.dataset.silVideoModel || '';
   const previousFailure = record?.error;
   if (previousFailure?.source === source) return;
   if (previousFailure) records.delete(player);
@@ -48,7 +66,15 @@ export function refreshOnePlayer({ player, records, diagnostics, createInstance 
     records.set(player, { source, status: 'ready', instance, promise: null, error: null });
     instance.refreshTheme();
   } catch (error) {
-    recordInitialisationFailure({ player, records, source, instance, diagnostics, error });
+    recordInitialisationFailure({
+      player,
+      records,
+      source,
+      instance,
+      diagnostics,
+      error,
+      retry: () => refreshOnePlayer({ player, records, diagnostics, createInstance })
+    });
   }
 }
 
@@ -90,6 +116,7 @@ export function createVideoRuntime({
   }
 
   function schedulePlayers(players) {
+    if (runtimeDestroyed) return;
     for (const player of players) dirtyPlayers.add(player);
     if (refreshScheduled || dirtyPlayers.size === 0) return;
     refreshScheduled = true;
@@ -97,10 +124,12 @@ export function createVideoRuntime({
   }
 
   function refresh(root = documentRef) {
+    if (runtimeDestroyed) return;
     playersWithin(root).forEach(refreshPlayer);
   }
 
   function refreshThemes() {
+    if (runtimeDestroyed) return;
     for (const record of records.values()) record.instance?.refreshTheme();
   }
 
@@ -116,7 +145,11 @@ export function createVideoRuntime({
     for (const player of players) {
       const record = records.get(player);
       const instance = record?.instance;
-      if (!instance || record.status === 'destroying') continue;
+      if (!instance) {
+        if (record?.status !== 'destroying') records.delete(player);
+        continue;
+      }
+      if (record.status === 'destroying') continue;
       const pending = instance.destroy();
       records.set(player, { ...record, status: 'destroying', promise: pending });
       const settle = error => {
@@ -141,8 +174,9 @@ export function createVideoRuntime({
   }
 
   if (windowRef.__hexoSilVideoRuntime) {
-    windowRef.__hexoSilVideoRuntime.refresh();
-    return windowRef.__hexoSilVideoRuntime;
+    const existing = windowRef.__hexoSilVideoRuntime;
+    existing.refresh();
+    return existing;
   }
   const observer = new MutationObserverRef(observeMutations);
   const runtime = {
@@ -151,6 +185,8 @@ export function createVideoRuntime({
       if (destroyPromise) return destroyPromise;
       destroyPromise = (async () => {
         runtimeDestroyed = true;
+        delete windowRef.__hexoSilVideoRefresh;
+        delete windowRef.__hexoSilVideoRuntime;
         observer.disconnect();
         dirtyPlayers.clear();
         windowRef.removeEventListener('resize', refreshThemes);
@@ -164,8 +200,6 @@ export function createVideoRuntime({
           if (result.status === 'rejected') diagnostics.report('runtime.destroy', result.reason);
         }
         records.clear();
-        delete windowRef.__hexoSilVideoRefresh;
-        delete windowRef.__hexoSilVideoRuntime;
       })();
       return destroyPromise;
     }
