@@ -97,7 +97,7 @@ function registerVideoPlugin(hexo) {
   if (config.skin.override) styles.push(rootPublicPath(runtime.root, config.skin.override));
   hexo.extend.generator.register('hexo-sil-video-runtime', async () => {
     if (!demand.hasDemand()) return [];
-    return runtimeRouteData();
+    return runtimeRouteData({ clone: false });
   });
   hexo.extend.injector.register('body_end', renderBootstrapScript({
     styles,

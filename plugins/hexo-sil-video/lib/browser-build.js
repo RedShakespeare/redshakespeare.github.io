@@ -15,8 +15,8 @@ function createBrowserBuild({ pluginDir, routes, esbuildRef = require('esbuild')
   let runtimeRouteDataPromise = null;
   const esbuild = esbuildRef;
 
-  function cloneRoutes(entries) {
-    return entries.map(entry => ({ ...entry }));
+  function cloneRoutes(entries, cloneData = true) {
+    return entries.map(entry => ({ ...entry, data: cloneData ? Buffer.from(entry.data) : entry.data }));
   }
 
   function buildOptions(entryPoint, format, outputName, sourcemap = false) {
@@ -74,11 +74,12 @@ function createBrowserBuild({ pluginDir, routes, esbuildRef = require('esbuild')
     return cloneRoutes(await runtimeArtifactsPromise);
   }
 
-  async function runtimeRouteData() {
-    if (runtimeRouteDataPromise) return cloneRoutes(await runtimeRouteDataPromise);
+  async function runtimeRouteData({ clone = true } = {}) {
+    if (runtimeRouteDataPromise) return cloneRoutes(await runtimeRouteDataPromise, clone);
+    if (!runtimeArtifactsPromise) await runtimeRouteArtifacts();
     const jassubRoot = path.dirname(require.resolve('jassub/package.json'));
     runtimeRouteDataPromise = Promise.all([
-      ...await runtimeRouteArtifacts(),
+      ...await runtimeArtifactsPromise,
       { path: routes.wasm, data: fs.readFile(path.join(jassubRoot, 'dist', 'wasm', 'jassub-worker.wasm')) },
       { path: routes.modernWasm, data: fs.readFile(path.join(jassubRoot, 'dist', 'wasm', 'jassub-worker-modern.wasm')) },
       { path: routes.defaultFont, data: fs.readFile(path.join(jassubRoot, 'dist', 'default.woff2')) }
@@ -86,7 +87,7 @@ function createBrowserBuild({ pluginDir, routes, esbuildRef = require('esbuild')
       runtimeRouteDataPromise = null;
       throw error;
     });
-    return cloneRoutes(await runtimeRouteDataPromise);
+    return cloneRoutes(await runtimeRouteDataPromise, clone);
   }
 
   function resetRuntimeCache() {

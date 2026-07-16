@@ -42,7 +42,7 @@ test('runtime route cache returns defensive copies and resets between generation
   const cached = await runtimeRouteData();
   assert.equal(cached[0].path, RUNTIME_ROUTES.script);
   assert.notEqual(cached[0], first[0]);
-  assert.equal(cached[0].data, first[0].data);
+  assert.notEqual(cached[0].data, first[0].data);
 
   resetRuntimeCache();
   const rebuilt = await runtimeRouteData();
