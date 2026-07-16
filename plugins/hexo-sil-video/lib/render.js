@@ -38,11 +38,10 @@ function createRenderer({ playerStart, playerEnd }) {
     return `<div class="sil-video-player__toolbar" data-sil-video-controls role="group" aria-label="视频控制" hidden>
       <button class="sil-video-player__button" data-sil-video-action="${PLAYER_ACTIONS.play}" type="button" aria-label="播放" aria-pressed="false">${icons.playIcon}</button>
       <div class="sil-video-player__volume-control">
-        <button class="sil-video-player__button" data-sil-video-action="${PLAYER_ACTIONS.mute}" type="button" aria-label="静音" aria-pressed="false">${icons.volumeIcon}</button>
+      <button class="sil-video-player__button" data-sil-video-action="${PLAYER_ACTIONS.mute}" type="button" aria-label="静音" aria-pressed="false">${icons.volumeIcon}</button>
         <div class="sil-video-player__volume-popover"><input class="sil-video-player__range sil-video-player__volume" data-sil-video-volume type="range" min="0" max="1" step="0.05" value="1" aria-label="音量" aria-valuetext="100%" orient="vertical"></div>
       </div>
       <button class="sil-video-player__button sil-video-player__rate" data-sil-video-action="${PLAYER_ACTIONS.rate}" type="button" aria-label="播放速度 1 倍">1×</button>
-      <button class="sil-video-player__button" data-sil-video-action="${PLAYER_ACTIONS.repeat}" type="button" aria-label="播放一次" aria-pressed="false">${icons.repeatIcon}</button>
       ${renderSubtitleControl(video, icons)}
       <span class="sil-video-player__toolbar-spacer"></span>
       <a class="sil-video-player__button" href="${escapeHtml(video.source)}" target="_blank" rel="noopener" aria-label="下载视频" title="下载视频">${icons.icon('download', '<path d="M11 3h2v10.2l3.6-3.6L18 11l-6 6-6-6 1.4-1.4 3.6 3.6zM5 19h14v2H5z"/>')}</a>

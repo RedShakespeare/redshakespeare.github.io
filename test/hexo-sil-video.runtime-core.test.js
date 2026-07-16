@@ -98,30 +98,30 @@ test('production runtime services expose the complete non-optional contract', as
   dom.window.close();
 });
 
-test('media projection directly maps volume and repeat state to UI', async () => {
+test('media projection directly maps volume and replay state to UI', async () => {
   const { createMediaProjection } = await loadRuntime('media-projection.js');
-  const dom = new JSDOM('<!doctype html><body><aside><video></video><input><span data-current></span><span data-duration></span><button data-play></button><button data-mute></button><button data-repeat></button></aside></body>');
+  const dom = new JSDOM('<!doctype html><body><aside><video></video><input><span data-current></span><span data-duration></span><button data-play></button><button data-mute></button></aside></body>');
   const document = dom.window.document;
   const player = document.querySelector('aside');
   const video = document.querySelector('video');
   const progress = document.querySelector('input');
   const volume = document.createElement('input');
   video.volume = 0.4;
-  video.loop = true;
+  Object.defineProperty(video, 'ended', { value: true, writable: true, configurable: true });
   const projection = createMediaProjection({
     player, video, progress, volume,
     current: document.querySelector('[data-current]'),
     duration: document.querySelector('[data-duration]'),
     play: document.querySelector('[data-play]'),
     mute: document.querySelector('[data-mute]'),
-    repeat: document.querySelector('[data-repeat]'),
     onPlaybackStateChange() {}
   });
   projection.volume();
-  projection.repeat();
+  projection.playing();
   assert.equal(player.dataset.silVideoVolumeLevel, 'medium');
   assert.equal(volume.getAttribute('aria-valuetext'), '40%');
-  assert.equal(player.dataset.silVideoLoop, 'true');
+  assert.equal(player.dataset.silVideoEnded, 'true');
+  assert.equal(document.querySelector('[data-play]').getAttribute('aria-label'), '重播');
   dom.window.close();
 });
 

@@ -1,6 +1,6 @@
 import { formatTime, setBufferedRanges, setRangeFill, volumeLevel } from './shared.js';
 
-export function createMediaProjection({ player, video, progress, volume, current, duration, play, mute, repeat, onPlaybackStateChange }) {
+export function createMediaProjection({ player, video, progress, volume, current, duration, play, mute, onPlaybackStateChange }) {
   function playing() {
     const active = !video.paused && !video.ended;
     player.dataset.silVideoPlaying = active ? 'true' : 'false';
@@ -51,11 +51,5 @@ export function createMediaProjection({ player, video, progress, volume, current
     setRangeFill(volume, Number(volume.value), 1);
   }
 
-  function repeatMode() {
-    repeat.setAttribute('aria-pressed', video.loop ? 'true' : 'false');
-    repeat.setAttribute('aria-label', video.loop ? '循环播放' : '播放一次');
-    player.dataset.silVideoLoop = video.loop ? 'true' : 'false';
-  }
-
-  return { playing, time, buffered, duration: mediaDuration, volume: mediaVolume, repeat: repeatMode };
+  return { playing, time, buffered, duration: mediaDuration, volume: mediaVolume };
 }

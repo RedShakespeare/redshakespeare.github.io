@@ -4,7 +4,7 @@ import { appendCleanupError, createCleanupError, createListenerScope } from './s
 import { createVolumeOverlayController } from './volume-overlay-controller.js';
 
 export function createInteractionController({ controls, surfaces, media, fullscreen, volume, mute, volumeControl, services }) {
-  const { play, progress, rate, repeat } = controls;
+  const { play, progress, rate } = controls;
   const { player, stage, viewport, video } = surfaces;
   const scope = createListenerScope();
   const pointerController = createPointerController({ player, video, stage, viewport, media, fullscreen, services });
@@ -17,7 +17,6 @@ export function createInteractionController({ controls, surfaces, media, fullscr
   scope.listen(play, 'click', () => { void media.togglePlay(); });
   scope.listen(progress, 'input', () => media.setCurrentTime(Number(progress.value)));
   scope.listen(rate, 'click', media.cycleRate);
-  scope.listen(repeat, 'click', media.toggleRepeat);
 
   return {
     pendingHiddenTouchTap(event) { return pointerController.pendingHiddenTouchTap(event); },

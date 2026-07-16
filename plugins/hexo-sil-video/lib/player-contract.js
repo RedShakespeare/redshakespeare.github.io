@@ -5,7 +5,6 @@ const PLAYER_ACTIONS = Object.freeze({
   play: 'play',
   mute: 'mute',
   rate: 'rate',
-  repeat: 'repeat',
   subtitles: 'subtitles',
   fullscreen: 'fullscreen'
 });
@@ -24,7 +23,6 @@ const PLAYER_VIEW_SELECTORS = Object.freeze({
   play: `[data-sil-video-action="${PLAYER_ACTIONS.play}"]`,
   mute: `[data-sil-video-action="${PLAYER_ACTIONS.mute}"]`,
   rate: `[data-sil-video-action="${PLAYER_ACTIONS.rate}"]`,
-  repeat: `[data-sil-video-action="${PLAYER_ACTIONS.repeat}"]`,
   subtitles: `[data-sil-video-action="${PLAYER_ACTIONS.subtitles}"]`,
   subtitleMenu: '[data-sil-video-subtitle-menu]',
   fullscreen: `[data-sil-video-action="${PLAYER_ACTIONS.fullscreen}"]`,

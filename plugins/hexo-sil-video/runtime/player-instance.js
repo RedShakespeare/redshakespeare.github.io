@@ -83,7 +83,6 @@ function createPlayerInstance({ player, services }) {
       play: refs.play,
       mute: refs.mute,
       rate: refs.rate,
-      repeat: refs.repeat,
       onPlaybackStateChange: fullscreenController.syncPlayback,
       onPlayInteraction: () => subtitleBinding.activatePending(),
       feedbackController,
@@ -105,7 +104,7 @@ function createPlayerInstance({ player, services }) {
     }
 
     const interactionController = addController(createInteractionController({
-      controls: { play: refs.play, progress: refs.progress, rate: refs.rate, repeat: refs.repeat },
+      controls: { play: refs.play, progress: refs.progress, rate: refs.rate },
       surfaces: { player, stage: refs.stage, viewport: refs.viewport, video: refs.video },
       volume: refs.volume,
       mute: refs.mute,
@@ -128,7 +127,7 @@ function createPlayerInstance({ player, services }) {
       await destroyControllersInReverse(controllers, diagnostics);
       refs.video.controls = initialNativeControls;
       for (const { control, hidden } of initialControls) control.hidden = hidden;
-      for (const key of ['silVideoPlaying', 'silVideoEnded', 'silVideoMuted', 'silVideoVolumeLevel', 'silVideoLoop', 'silVideoTheme']) delete player.dataset[key];
+      for (const key of ['silVideoPlaying', 'silVideoEnded', 'silVideoMuted', 'silVideoVolumeLevel', 'silVideoTheme']) delete player.dataset[key];
       delete player.dataset.silVideoReady;
       delete player.dataset.silVideoEnhanced;
       state.destroy();

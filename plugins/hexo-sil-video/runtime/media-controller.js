@@ -15,7 +15,6 @@ export function createMediaController({
   play,
   mute,
   rate,
-  repeat,
   onPlaybackStateChange = () => {},
   onPlayInteraction = () => {},
   feedbackController,
@@ -44,7 +43,7 @@ export function createMediaController({
     feedbackController.setBrightness(value, announce);
   }
 
-  const projection = createMediaProjection({ player, video, progress, volume, current, duration, play, mute, repeat, onPlaybackStateChange });
+  const projection = createMediaProjection({ player, video, progress, volume, current, duration, play, mute, onPlaybackStateChange });
   let playToken = 0;
   let destroyed = false;
 
@@ -126,17 +125,11 @@ export function createMediaController({
     rate.setAttribute('aria-label', `播放速度 ${video.playbackRate} 倍`);
   }
 
-  function toggleRepeat() {
-    video.loop = !video.loop;
-    projection.repeat();
-  }
-
   const scope = bindMediaEvents({ video, progress, duration, projection, setStatus, onPlayInteraction });
   projection.playing();
   projection.time();
   projection.duration();
   projection.volume();
-  projection.repeat();
 
   return {
     adjustVolume,
@@ -150,7 +143,6 @@ export function createMediaController({
     showProgressFeedback,
     toggleMute,
     togglePlay,
-    toggleRepeat,
     async destroy() {
       destroyed = true;
       playToken += 1;

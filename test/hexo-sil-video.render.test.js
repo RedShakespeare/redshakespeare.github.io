@@ -24,7 +24,7 @@ test('rendered player exposes native fallback, custom controls, downloads, and r
   assert.match(html, new RegExp(PLAYER_START));
   assert.match(html, /<video[^>]+controls[^>]+preload="metadata"/);
   assert.match(html, /data-sil-video-action="rate"[^>]*>1×/);
-  assert.match(html, /data-sil-video-action="repeat"/);
+  assert.doesNotMatch(html, /data-sil-video-action="repeat"/);
   assert.match(html, /data-sil-video-action="fullscreen"/);
   assert.match(html, /data-sil-video-stage tabindex="-1"/);
   assert.match(html, /data-sil-video-media-layer/);
@@ -36,8 +36,8 @@ test('rendered player exposes native fallback, custom controls, downloads, and r
   assert.match(html, /sil-video-player__icon--feedback-brightness/);
   assert.match(html, /sil-video-player__icon--feedback-play/);
   assert.match(html, /sil-video-player__icon--feedback-pause/);
-  assert.match(html, /sil-video-player__icon--once/);
-  assert.match(html, /sil-video-player__icon--repeat/);
+  assert.doesNotMatch(html, /sil-video-player__icon--once/);
+  assert.doesNotMatch(html, /sil-video-player__icon--repeat/);
   assert.match(html, /sil-video-player__icon--volume-low/);
   assert.match(html, /sil-video-player__icon--volume-medium/);
   assert.match(html, /sil-video-player__icon--volume-high/);
