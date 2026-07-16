@@ -5,33 +5,24 @@ import {
   TOUCH_GESTURE_THRESHOLD,
   TOUCH_SEEK_SECONDS,
   VIEWPORT_CLICK_DELAY,
-  WHEEL_PIXEL_STEP,
-  WHEEL_RESET_DELAY,
   clamp,
   createListenerScope,
   focusWithoutScroll
 } from './shared.js';
 import { resolveRuntimeServices } from './runtime-services.js';
+import { createWheelVolumeController } from './wheel-volume-controller.js';
 
 export function createPointerController({ player, video, stage, viewport, media, fullscreen, services }) {
   services = resolveRuntimeServices(services, { windowRef: player.ownerDocument.defaultView });
   const scope = createListenerScope();
-  const documentRef = player.ownerDocument;
-  const windowRef = documentRef.defaultView;
   const { now, setTimeout: setTimer, clearTimeout: clearTimer } = services.clock;
+  const wheelController = createWheelVolumeController({ player, video, stage, viewport, media, services });
   let viewportClickTimer = null;
   let viewportClickTouch = false;
   let viewportClickWakeOnly = false;
   let recentTouchTap = null;
-  let wheelResetTimer = null;
-  let wheelPixelDelta = 0;
   let gesture = null;
   let suppressViewportClickUntil = 0;
-
-  function shortcutSurfaceFocused() {
-    const focused = documentRef.activeElement;
-    return focused === player || focused === stage || focused === video || focused === viewport;
-  }
 
   function clearViewportClickTimer() {
     if (viewportClickTimer !== null) clearTimer(viewportClickTimer);
@@ -152,32 +143,6 @@ export function createPointerController({ player, video, stage, viewport, media,
     }
   }
 
-  function clearWheelResetTimer() {
-    if (wheelResetTimer !== null) clearTimer(wheelResetTimer);
-    wheelResetTimer = null;
-  }
-
-  function handleWheel(event) {
-    if (!shortcutSurfaceFocused() || Math.abs(event.deltaX) > Math.abs(event.deltaY) || event.deltaY === 0) return;
-    event.preventDefault();
-    let steps = 0;
-    if (event.deltaMode === 0) {
-      wheelPixelDelta += event.deltaY;
-      steps = Math.trunc(wheelPixelDelta / WHEEL_PIXEL_STEP);
-      wheelPixelDelta -= steps * WHEEL_PIXEL_STEP;
-      clearWheelResetTimer();
-      wheelResetTimer = setTimer(() => {
-        wheelResetTimer = null;
-        wheelPixelDelta = 0;
-      }, WHEEL_RESET_DELAY);
-    } else {
-      clearWheelResetTimer();
-      wheelPixelDelta = 0;
-      steps = Math.sign(event.deltaY);
-    }
-    if (steps !== 0) media.adjustVolume(-steps * 0.05);
-  }
-
   scope.listen(viewport, 'click', handleViewportClick);
   scope.listen(viewport, 'dblclick', event => event.preventDefault());
   scope.listen(viewport, 'pointerdown', startGesture);
@@ -185,7 +150,7 @@ export function createPointerController({ player, video, stage, viewport, media,
   scope.listen(viewport, 'pointerup', event => finishGesture(event, true));
   scope.listen(viewport, 'pointercancel', event => finishGesture(event, false));
   scope.listen(viewport, 'lostpointercapture', event => finishGesture(event, false));
-  scope.listen(viewport, 'wheel', handleWheel, { passive: false });
+  scope.listen(viewport, 'wheel', wheelController.handle, { passive: false });
 
   return {
     pendingHiddenTouchTap(event) {
@@ -193,7 +158,7 @@ export function createPointerController({ player, video, stage, viewport, media,
     },
     async destroy() {
       clearViewportClickTimer();
-      clearWheelResetTimer();
+      wheelController.destroy();
       scope.destroy();
     }
   };
