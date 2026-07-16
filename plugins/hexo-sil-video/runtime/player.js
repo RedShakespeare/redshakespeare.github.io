@@ -2,11 +2,17 @@ import { selector } from './shared.js';
 import { createDiagnostics } from './diagnostics.js';
 import { createPlayerInstance } from './player-instance.js';
 
-const records = new Map();
-const dirtyPlayers = new Set();
-const diagnostics = createDiagnostics();
-let runtimeDestroyed = false;
-let refreshScheduled = false;
+export function createVideoRuntime({
+  windowRef = window,
+  documentRef = document,
+  ElementRef = Element,
+  MutationObserverRef = MutationObserver
+} = {}) {
+  const records = new Map();
+  const dirtyPlayers = new Set();
+  const diagnostics = createDiagnostics();
+  let runtimeDestroyed = false;
+  let refreshScheduled = false;
 
 function showFallbackError(player, message) {
   player.dataset.silVideoError = 'true';
@@ -76,7 +82,7 @@ function schedulePlayers(players) {
   queueMicrotask(flushDirtyPlayers);
 }
 
-function refresh(root = document) {
+function refresh(root = documentRef) {
   playersWithin(root).forEach(player => {
     initialise(player);
     records.get(player)?.instance?.refreshTheme();
@@ -94,7 +100,7 @@ function handleInside(event) {
 }
 
 function destroyRemoved(node) {
-  if (!(node instanceof Element)) return;
+  if (!(node instanceof ElementRef)) return;
   const players = node.matches(selector) ? [node] : Array.from(node.querySelectorAll(selector));
   for (const player of players) {
     const record = records.get(player);
@@ -116,36 +122,40 @@ function observeMutations(records) {
   for (const record of records) {
     for (const node of record.removedNodes) destroyRemoved(node);
     for (const node of record.addedNodes) {
-      if (node instanceof Element) added.push(...playersWithin(node));
+      if (node instanceof ElementRef) added.push(...playersWithin(node));
     }
   }
   schedulePlayers(added);
 }
 
-if (window.__hexoSilVideoRuntime) {
-  window.__hexoSilVideoRuntime.refresh();
-} else {
-  const observer = new MutationObserver(observeMutations);
+  if (windowRef.__hexoSilVideoRuntime) {
+    windowRef.__hexoSilVideoRuntime.refresh();
+    return windowRef.__hexoSilVideoRuntime;
+  }
+  const observer = new MutationObserverRef(observeMutations);
   const runtime = {
     refresh,
     async destroy() {
       runtimeDestroyed = true;
       observer.disconnect();
       dirtyPlayers.clear();
-      window.removeEventListener('resize', refreshThemes);
-      document.removeEventListener('inside', handleInside);
-      document.removeEventListener('inside:theme', refreshThemes);
+      windowRef.removeEventListener('resize', refreshThemes);
+      documentRef.removeEventListener('inside', handleInside);
+      documentRef.removeEventListener('inside:theme', refreshThemes);
       const pending = Array.from(records.values(), record => record.instance ? record.instance.destroy() : record.promise).filter(Boolean);
       await Promise.allSettled(pending);
-      delete window.__hexoSilVideoRefresh;
-      delete window.__hexoSilVideoRuntime;
+      delete windowRef.__hexoSilVideoRefresh;
+      delete windowRef.__hexoSilVideoRuntime;
     }
   };
-  window.__hexoSilVideoRuntime = runtime;
-  window.__hexoSilVideoRefresh = refresh;
-  window.addEventListener('resize', refreshThemes);
-  document.addEventListener('inside', handleInside);
-  document.addEventListener('inside:theme', refreshThemes);
-  observer.observe(document.body, { childList: true, subtree: true });
+  windowRef.__hexoSilVideoRuntime = runtime;
+  windowRef.__hexoSilVideoRefresh = refresh;
+  windowRef.addEventListener('resize', refreshThemes);
+  documentRef.addEventListener('inside', handleInside);
+  documentRef.addEventListener('inside:theme', refreshThemes);
+  observer.observe(documentRef.body, { childList: true, subtree: true });
   refresh();
+  return runtime;
 }
+
+createVideoRuntime();
