@@ -30,7 +30,7 @@ function createBrowserBuild({ pluginDir, routes, esbuildRef = require('esbuild')
       target: ['es2020'],
       minify: true,
       legalComments: 'eof',
-      ...(sourcemap ? { sourcemap: 'external', sourcesContent: true, sourceRoot: '' } : {})
+      ...(sourcemap ? { sourcemap: 'external', sourcesContent: false, sourceRoot: '' } : {})
     };
   }
 

@@ -31,7 +31,7 @@ test('runtime route builder emits split core/subtitle bundles, module worker, WA
     assert.equal(mapRoute.internal, true);
     assert.match(script, new RegExp(`sourceMappingURL=${path.basename(route).replace(/\./g, '\\.') }\\.map`));
     const sourceMap = JSON.parse(mapRoute.data.toString('utf8'));
-    assert.ok(sourceMap.sourcesContent.length > 0);
+    assert.equal(sourceMap.sourcesContent, undefined);
     assert.equal(sourceMap.sources.some(source => path.isAbsolute(source)), false);
   }
 });
