@@ -103,6 +103,10 @@ export function createVideoRuntime({
 
   function refreshPlayer(player) {
     const record = records.get(player);
+    if (record?.status === 'ready' && record.instance?.isHealthy?.() === false) {
+      destroyPlayer(player, record, true);
+      return;
+    }
     if (record?.status === 'ready' && record.source !== (player.dataset.silVideoModel || '')) {
       destroyPlayer(player, record, true);
       return;
@@ -181,6 +185,8 @@ export function createVideoRuntime({
       for (const node of mutation.addedNodes) {
         if (node instanceof ElementRef) added.push(...playersWithin(node));
       }
+      const owner = mutation.target?.closest?.(selector);
+      if (owner && records.get(owner)?.instance?.isHealthy?.() === false) added.push(owner);
     }
     schedulePlayers(added);
   }

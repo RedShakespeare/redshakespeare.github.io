@@ -141,6 +141,7 @@ function createPlayerInstance({ player, services }) {
   return {
     mount,
     destroy,
+    isHealthy() { return player.contains(refs.video) && player.contains(refs.stage) && player.contains(refs.viewport); },
     refreshTheme(theme) { player.dataset.silVideoTheme = theme || (isDarkTheme() ? 'dark' : 'light'); }
   };
 }
