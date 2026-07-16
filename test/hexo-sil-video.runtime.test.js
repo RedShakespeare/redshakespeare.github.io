@@ -113,6 +113,36 @@ test('cleanup errors preserve their causes without requiring AggregateError', as
   assert.deepEqual(flattened, causes);
 });
 
+test('player runtime module imports without browser globals or startup side effects', async () => {
+  const runtime = await loadRuntime('player.js');
+  assert.equal(typeof runtime.createVideoRuntime, 'function');
+  assert.equal(typeof runtime.refreshOnePlayer, 'function');
+});
+
+test('refreshOnePlayer shares initialise and theme refresh projection', async () => {
+  const { refreshOnePlayer } = await loadRuntime('player.js');
+  const dom = new JSDOM('<!doctype html><body><aside class="sil-video-player" data-sil-video-player data-sil-video-model="model"></aside></body>');
+  const player = dom.window.document.querySelector('aside');
+  const records = new Map();
+  const calls = [];
+  const instance = {
+    mount() { calls.push('mount'); },
+    refreshTheme() { calls.push('theme'); },
+    async destroy() {}
+  };
+  const options = {
+    player,
+    records,
+    diagnostics: { report() {} },
+    createInstance: () => instance
+  };
+  refreshOnePlayer(options);
+  refreshOnePlayer(options);
+  assert.deepEqual(calls, ['mount', 'theme', 'theme']);
+  assert.equal(records.get(player).status, 'ready');
+  dom.window.close();
+});
+
 test('subtitle module import failure is retryable and successful selection commits atomically', async () => {
   const { createSubtitleController } = await loadRuntime('subtitle-controller.js');
   const refs = subtitleDom();

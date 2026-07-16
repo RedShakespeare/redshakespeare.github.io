@@ -53,7 +53,7 @@ function createBrowserBuild({ pluginDir, routes }) {
     if (runtimeArtifactsPromise) return runtimeArtifactsPromise;
     const jassubRoot = path.dirname(require.resolve('jassub/package.json'));
     runtimeArtifactsPromise = Promise.all([
-      buildBrowserArtifacts(path.join(pluginDir, 'runtime', 'player.js'), 'iife', path.basename(routes.script)),
+      buildBrowserArtifacts(path.join(pluginDir, 'runtime', 'browser-entry.js'), 'iife', path.basename(routes.script)),
       buildBrowserArtifacts(path.join(pluginDir, 'runtime', 'subtitles.js'), 'esm', path.basename(routes.subtitles)),
       buildBrowserArtifacts(path.join(jassubRoot, 'dist', 'worker', 'worker.js'), 'esm', path.basename(routes.worker))
     ]).then(([core, subtitles, worker]) => [

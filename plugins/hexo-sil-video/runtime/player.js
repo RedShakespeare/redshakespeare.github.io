@@ -2,18 +2,6 @@ import { selector } from './shared.js';
 import { createDiagnostics } from './diagnostics.js';
 import { createPlayerInstance } from './player-instance.js';
 
-export function createVideoRuntime({
-  windowRef = window,
-  documentRef = document,
-  ElementRef = Element,
-  MutationObserverRef = MutationObserver
-} = {}) {
-  const records = new Map();
-  const dirtyPlayers = new Set();
-  const diagnostics = createDiagnostics();
-  let runtimeDestroyed = false;
-  let refreshScheduled = false;
-
 function showFallbackError(player, message) {
   player.dataset.silVideoError = 'true';
   const header = player.querySelector('[data-sil-video-fallback-status]');
@@ -22,111 +10,124 @@ function showFallbackError(player, message) {
   if (status) status.textContent = message;
 }
 
-function recordFailure(player, source, scope, error, message = error.message) {
-  const previous = records.get(player)?.error;
-  if (previous && previous.source === source) return;
-  records.set(player, { ...(records.get(player) || {}), source, status: 'failed', error: { source, scope, message } });
-  showFallbackError(player, message);
-  diagnostics.report(scope, error);
-}
-
-function initialise(player) {
+export function refreshOnePlayer({ player, records, diagnostics, createInstance = createPlayerInstance }) {
+  if (!player?.matches?.(selector)) return;
   const record = records.get(player);
-  if (record?.status === 'initialising' || record?.status === 'ready' || record?.status === 'destroying' || player.dataset.silVideoReady === 'true') return;
+  if (record?.status === 'initialising' || record?.status === 'destroying') return;
+  if (record?.status === 'ready' || player.dataset.silVideoReady === 'true') {
+    record?.instance?.refreshTheme();
+    return;
+  }
+
   const source = player.dataset.silVideoModel || '';
   const previousFailure = record?.error;
-  if (previousFailure && previousFailure.source === source) return;
+  if (previousFailure?.source === source) return;
   if (previousFailure) records.delete(player);
   records.set(player, { source, status: 'initialising', instance: null, promise: null, error: null });
   let instance = null;
   try {
-    instance = createPlayerInstance({ player });
+    instance = createInstance({ player });
     instance.mount();
     records.set(player, { source, status: 'ready', instance, promise: null, error: null });
     instance.refreshTheme();
   } catch (error) {
     const cleanup = instance?.destroy?.() || Promise.resolve();
     cleanup.catch(destroyError => diagnostics.report('initialise.cleanup', destroyError));
-    recordFailure(player, source, 'initialise', error, `播放器初始化失败：${error.message}`);
+    records.set(player, {
+      ...(records.get(player) || {}),
+      source,
+      status: 'failed',
+      error: { source, scope: 'initialise', message: `播放器初始化失败：${error.message}` }
+    });
+    showFallbackError(player, `播放器初始化失败：${error.message}`);
+    diagnostics.report('initialise', error);
   }
 }
 
-function refreshPlayer(player) {
-  if (!player?.matches?.(selector)) return;
-  initialise(player);
-  records.get(player)?.instance?.refreshTheme();
-}
+export function createVideoRuntime({
+  windowRef,
+  documentRef,
+  ElementRef,
+  MutationObserverRef,
+  queueMicrotaskRef,
+  diagnostics = createDiagnostics(),
+  createInstance = createPlayerInstance
+}) {
+  const records = new Map();
+  const dirtyPlayers = new Set();
+  let runtimeDestroyed = false;
+  let refreshScheduled = false;
 
-function playersWithin(root) {
-  if (!root) return [];
-  const players = root.matches?.(selector) ? [root] : [];
-  if (root.querySelectorAll) players.push(...root.querySelectorAll(selector));
-  return players;
-}
+  function playersWithin(root) {
+    if (!root) return [];
+    const players = root.matches?.(selector) ? [root] : [];
+    if (root.querySelectorAll) players.push(...root.querySelectorAll(selector));
+    return players;
+  }
 
-function flushDirtyPlayers() {
-  refreshScheduled = false;
-  if (runtimeDestroyed) {
+  function refreshPlayer(player) {
+    refreshOnePlayer({ player, records, diagnostics, createInstance });
+  }
+
+  function flushDirtyPlayers() {
+    refreshScheduled = false;
+    if (runtimeDestroyed) {
+      dirtyPlayers.clear();
+      return;
+    }
+    const pending = Array.from(dirtyPlayers);
     dirtyPlayers.clear();
-    return;
+    pending.forEach(refreshPlayer);
   }
-  const pending = Array.from(dirtyPlayers);
-  dirtyPlayers.clear();
-  pending.forEach(refreshPlayer);
-}
 
-function schedulePlayers(players) {
-  for (const player of players) dirtyPlayers.add(player);
-  if (refreshScheduled || dirtyPlayers.size === 0) return;
-  refreshScheduled = true;
-  queueMicrotask(flushDirtyPlayers);
-}
-
-function refresh(root = documentRef) {
-  playersWithin(root).forEach(player => {
-    initialise(player);
-    records.get(player)?.instance?.refreshTheme();
-  });
-}
-
-function refreshThemes() {
-  for (const record of records.values()) record.instance?.refreshTheme();
-}
-
-function handleInside(event) {
-  const root = event?.detail?.root;
-  if (root?.querySelectorAll || root?.matches) schedulePlayers(playersWithin(root));
-  else refresh();
-}
-
-function destroyRemoved(node) {
-  if (!(node instanceof ElementRef)) return;
-  const players = node.matches(selector) ? [node] : Array.from(node.querySelectorAll(selector));
-  for (const player of players) {
-    const record = records.get(player);
-    const instance = record?.instance;
-    if (!instance) continue;
-    if (record.status === 'destroying') continue;
-    const pending = instance.destroy();
-    records.set(player, { ...record, status: 'destroying', promise: pending });
-    pending.then(() => {
-      if (records.get(player)?.promise !== pending) return;
-      records.delete(player);
-      if (!runtimeDestroyed && player.isConnected) initialise(player);
-    }, error => diagnostics.report('destroy', error));
+  function schedulePlayers(players) {
+    for (const player of players) dirtyPlayers.add(player);
+    if (refreshScheduled || dirtyPlayers.size === 0) return;
+    refreshScheduled = true;
+    queueMicrotaskRef(flushDirtyPlayers);
   }
-}
 
-function observeMutations(records) {
-  const added = [];
-  for (const record of records) {
-    for (const node of record.removedNodes) destroyRemoved(node);
-    for (const node of record.addedNodes) {
-      if (node instanceof ElementRef) added.push(...playersWithin(node));
+  function refresh(root = documentRef) {
+    playersWithin(root).forEach(refreshPlayer);
+  }
+
+  function refreshThemes() {
+    for (const record of records.values()) record.instance?.refreshTheme();
+  }
+
+  function handleInside(event) {
+    const root = event?.detail?.root;
+    if (root?.querySelectorAll || root?.matches) schedulePlayers(playersWithin(root));
+    else refresh();
+  }
+
+  function destroyRemoved(node) {
+    if (!(node instanceof ElementRef)) return;
+    const players = node.matches(selector) ? [node] : Array.from(node.querySelectorAll(selector));
+    for (const player of players) {
+      const record = records.get(player);
+      const instance = record?.instance;
+      if (!instance || record.status === 'destroying') continue;
+      const pending = instance.destroy();
+      records.set(player, { ...record, status: 'destroying', promise: pending });
+      pending.then(() => {
+        if (records.get(player)?.promise !== pending) return;
+        records.delete(player);
+        if (!runtimeDestroyed && player.isConnected) refreshPlayer(player);
+      }, error => diagnostics.report('destroy', error));
     }
   }
-  schedulePlayers(added);
-}
+
+  function observeMutations(mutations) {
+    const added = [];
+    for (const mutation of mutations) {
+      for (const node of mutation.removedNodes) destroyRemoved(node);
+      for (const node of mutation.addedNodes) {
+        if (node instanceof ElementRef) added.push(...playersWithin(node));
+      }
+    }
+    schedulePlayers(added);
+  }
 
   if (windowRef.__hexoSilVideoRuntime) {
     windowRef.__hexoSilVideoRuntime.refresh();
@@ -157,5 +158,3 @@ function observeMutations(records) {
   refresh();
   return runtime;
 }
-
-createVideoRuntime();

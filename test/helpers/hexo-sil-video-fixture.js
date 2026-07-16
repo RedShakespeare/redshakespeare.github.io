@@ -205,7 +205,7 @@ async function browserPlayer(options = {}) {
     document.fullscreenElement = null;
     document.dispatchEvent(new window.Event('fullscreenchange'));
   };
-  browserBundlePromise ||= buildBrowserBundle(path.join(__dirname, '..', '..', 'plugins', 'hexo-sil-video', 'runtime', 'player.js'), 'iife');
+  browserBundlePromise ||= buildBrowserBundle(path.join(__dirname, '..', '..', 'plugins', 'hexo-sil-video', 'runtime', 'browser-entry.js'), 'iife');
   window.eval((await browserBundlePromise).toString('utf8'));
   return {
     dom,

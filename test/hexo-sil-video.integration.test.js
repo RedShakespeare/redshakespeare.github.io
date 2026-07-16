@@ -175,7 +175,7 @@ test('Inside root refresh recovers only players in the declared subtree', async 
     const players = Array.from(dom.window.document.querySelectorAll('[data-sil-video-player]'));
     const models = players.map(player => player.dataset.silVideoModel);
     players.forEach(player => { player.dataset.silVideoModel = 'invalid'; });
-    dom.window.eval((await buildBrowserBundle(path.join(__dirname, '..', 'plugins', 'hexo-sil-video', 'runtime', 'player.js'), 'iife')).toString('utf8'));
+    dom.window.eval((await buildBrowserBundle(path.join(__dirname, '..', 'plugins', 'hexo-sil-video', 'runtime', 'browser-entry.js'), 'iife')).toString('utf8'));
     assert.ok(players.every(player => player.dataset.silVideoReady === undefined));
     players.forEach((player, index) => { player.dataset.silVideoModel = models[index]; });
     const root = dom.window.document.querySelector('#first');
@@ -200,7 +200,7 @@ test('browser runtime reports missing view fields and preserves native controls'
     dom.window.TextDecoder = TextDecoder;
     const diagnostics = [];
     dom.window.console.error = (...args) => diagnostics.push(args);
-    dom.window.eval((await buildBrowserBundle(path.join(__dirname, '..', 'plugins', 'hexo-sil-video', 'runtime', 'player.js'), 'iife')).toString('utf8'));
+    dom.window.eval((await buildBrowserBundle(path.join(__dirname, '..', 'plugins', 'hexo-sil-video', 'runtime', 'browser-entry.js'), 'iife')).toString('utf8'));
     const player = dom.window.document.querySelector('[data-sil-video-player]');
     assert.equal(dom.window.document.querySelector('video').controls, true);
     assert.equal(player.dataset.silVideoError, 'true');
