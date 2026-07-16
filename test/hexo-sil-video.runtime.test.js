@@ -106,6 +106,9 @@ test('cleanup errors preserve their causes without requiring AggregateError', as
   assert.equal(error.name, 'CleanupError');
   assert.equal(error.message, 'cleanup failed');
   assert.deepEqual(error.errors, causes);
+  const flattened = [];
+  runtime.appendCleanupError(flattened, error);
+  assert.deepEqual(flattened, causes);
 });
 
 test('subtitle module import failure is retryable and successful selection commits atomically', async () => {
@@ -356,7 +359,9 @@ test('subtitle destroy reports renderer cleanup failures through its aggregate r
     })
   });
   assert.equal(await controller.select(0), true);
-  await assert.rejects(controller.destroy(), error => error.name === 'CleanupError' && error.errors.some(item => item.message === 'destroy failed'));
+  await assert.rejects(controller.destroy(), error => error.name === 'CleanupError' &&
+    error.errors.some(item => item.message === 'destroy failed') &&
+    error.errors.every(item => item.name !== 'CleanupError'));
   assert.ok(diagnostics.some(entry => entry[0] === 'subtitle.destroy' && entry[1].message === 'destroy failed'));
   assert.equal(await controller.select(1), false);
   refs.dom.window.close();

@@ -29,7 +29,7 @@ export function createSubtitleMenu({ player, button, menu, tracks, onSelect, sho
 
   function setOpen(open, returnFocus = true) {
     menu.hidden = !open;
-    ui?.setSubtitleMenuOpen(open);
+    ui.setSubtitleMenuOpen(open);
     button.setAttribute('aria-expanded', open ? 'true' : 'false');
     showFullscreenUi();
     if (open) queueMicrotask(() => focusOption(selectedIndex));
@@ -101,7 +101,7 @@ export function createSubtitleMenu({ player, button, menu, tracks, onSelect, sho
       scope.destroy();
       menu.replaceChildren();
       menu.hidden = true;
-      ui?.setSubtitleMenuOpen(false);
+      ui.setSubtitleMenuOpen(false);
     }
   };
 }

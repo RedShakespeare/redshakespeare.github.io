@@ -114,6 +114,11 @@ export function createCleanupError(message, errors) {
   return error;
 }
 
+export function appendCleanupError(errors, error) {
+  if (error?.name === 'CleanupError' && Array.isArray(error.errors)) errors.push(...error.errors);
+  else errors.push(error);
+}
+
 export function focusWithoutScroll(target) {
   try {
     target.focus({ preventScroll: true });

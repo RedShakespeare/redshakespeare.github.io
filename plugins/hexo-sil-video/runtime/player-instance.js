@@ -25,7 +25,6 @@ function createPlayerInstance({ player, services }) {
   services ||= createRuntimeServices({ player, status: refs.status, windowRef: player.ownerDocument.defaultView });
   const { state, ui, diagnostics } = services;
   const controllers = [];
-  let destroyed = false;
   let destroyPromise = null;
   const subtitleBinding = {
     controller: null,
@@ -49,7 +48,13 @@ function createPlayerInstance({ player, services }) {
   }
 
   function mount() {
-    addController(createFeedbackController({ ...refs, services }));
+    const feedbackController = addController(createFeedbackController({
+      video: refs.video,
+      mediaLayer: refs.mediaLayer,
+      feedback: refs.feedback,
+      feedbackText: refs.feedbackText,
+      services
+    }));
     const fullscreenController = addController(createFullscreenController({
       player,
       video: refs.video,
@@ -60,10 +65,19 @@ function createPlayerInstance({ player, services }) {
     }));
 
     const mediaController = addController(createMediaController({
-      ...refs,
+      player,
+      video: refs.video,
+      progress: refs.progress,
+      volume: refs.volume,
+      current: refs.current,
+      duration: refs.duration,
+      play: refs.play,
+      mute: refs.mute,
+      rate: refs.rate,
+      repeat: refs.repeat,
       onPlaybackStateChange: fullscreenController.syncPlayback,
       onPlayInteraction: () => subtitleBinding.activatePending(),
-      feedbackController: controllers[0],
+      feedbackController,
       services
     }));
 
@@ -101,7 +115,6 @@ function createPlayerInstance({ player, services }) {
 
   async function destroy() {
     if (destroyPromise) return destroyPromise;
-    destroyed = true;
     destroyPromise = (async () => {
       const pending = [];
       for (const controller of controllers.slice().reverse()) {

@@ -1,4 +1,4 @@
-import { createCleanupError, createListenerScope } from './shared.js';
+import { appendCleanupError, createCleanupError, createListenerScope } from './shared.js';
 import { createSubtitleMenu } from './subtitle-menu.js';
 import { createSubtitleRendererManager } from './subtitle-renderer-manager.js';
 import { createTestRuntimeServices } from './runtime-services.js';
@@ -156,9 +156,9 @@ export function createSubtitleController({
       requestToken += 1;
       abortController?.abort();
       const errors = [];
-      try { scope.destroy(); } catch (error) { errors.push(error); }
-      try { menuView.destroy(); } catch (error) { errors.push(error); }
-      try { await rendererManager.destroy(); } catch (error) { errors.push(error); }
+      try { scope.destroy(); } catch (error) { appendCleanupError(errors, error); }
+      try { menuView.destroy(); } catch (error) { appendCleanupError(errors, error); }
+      try { await rendererManager.destroy(); } catch (error) { appendCleanupError(errors, error); }
       if (errors.length) throw createCleanupError('Subtitle controller cleanup failed.', errors);
     }
   };
