@@ -2,18 +2,8 @@
 
 const {
   assert,
-  buildBrowserBundle,
-  createVideoDemandRegistry,
   FULLSCREEN_UI_HIDE_DELAY,
-  JSDOM,
-  mockHexo,
-  path,
-  post,
-  registerVideoPlugin,
-  renderVideoPlayer,
-  RUNTIME_ROUTES,
   test,
-  videoData,
   wait
 } = require('./helpers/hexo-sil-video-fixture');
 const { browserPlayer, touchPointer, touchTap } = require('./helpers/hexo-sil-video-browser-fixture');

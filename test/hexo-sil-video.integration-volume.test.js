@@ -1,22 +1,7 @@
 'use strict';
 
-const {
-  assert,
-  buildBrowserBundle,
-  createVideoDemandRegistry,
-  FULLSCREEN_UI_HIDE_DELAY,
-  JSDOM,
-  mockHexo,
-  path,
-  post,
-  registerVideoPlugin,
-  renderVideoPlayer,
-  RUNTIME_ROUTES,
-  test,
-  videoData,
-  wait
-} = require('./helpers/hexo-sil-video-fixture');
-const { browserPlayer, touchPointer, touchTap } = require('./helpers/hexo-sil-video-browser-fixture');
+const { assert, test, wait } = require('./helpers/hexo-sil-video-fixture');
+const { browserPlayer } = require('./helpers/hexo-sil-video-browser-fixture');
 
 test('browser runtime gates mouse-wheel volume by focus and normalises trackpad deltas', async () => {
   const fixture = await browserPlayer();

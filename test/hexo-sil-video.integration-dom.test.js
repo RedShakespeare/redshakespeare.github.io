@@ -3,20 +3,13 @@
 const {
   assert,
   buildBrowserBundle,
-  createVideoDemandRegistry,
-  FULLSCREEN_UI_HIDE_DELAY,
   JSDOM,
-  mockHexo,
   path,
-  post,
-  registerVideoPlugin,
   renderVideoPlayer,
-  RUNTIME_ROUTES,
   test,
-  videoData,
   wait
 } = require('./helpers/hexo-sil-video-fixture');
-const { browserPlayer, touchPointer, touchTap } = require('./helpers/hexo-sil-video-browser-fixture');
+const { browserPlayer } = require('./helpers/hexo-sil-video-browser-fixture');
 
 test('browser runtime marks every buffered video range and clears stale loading state', async () => {
   const fixture = await browserPlayer();

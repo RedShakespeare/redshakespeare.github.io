@@ -2,21 +2,15 @@
 
 const {
   assert,
-  buildBrowserBundle,
   createVideoDemandRegistry,
-  FULLSCREEN_UI_HIDE_DELAY,
-  JSDOM,
   mockHexo,
   path,
   post,
   registerVideoPlugin,
-  renderVideoPlayer,
   RUNTIME_ROUTES,
   test,
-  videoData,
-  wait
+  videoData
 } = require('./helpers/hexo-sil-video-fixture');
-const { browserPlayer, touchPointer, touchTap } = require('./helpers/hexo-sil-video-browser-fixture');
 
 test('video demand registry seeds cached Front Matter and raw video tags per generation', () => {
   const demand = createVideoDemandRegistry();
