@@ -17,6 +17,27 @@ test('subtitle downloads reject oversized responses before conversion', async ()
   }
 });
 
+test('subtitle stream reader stops before buffering oversized bodies', async () => {
+  const { loadSubtitleText, MAX_SUBTITLE_BYTES } = await loadRuntime('subtitles.js');
+  const previousFetch = global.fetch;
+  let cancelled = false;
+  global.fetch = async () => ({
+    ok: true,
+    headers: new Headers(),
+    body: { getReader: () => ({
+      async read() { return { done: false, value: new Uint8Array(MAX_SUBTITLE_BYTES + 1) }; },
+      async cancel() { cancelled = true; },
+      releaseLock() {}
+    }) }
+  });
+  try {
+    await assert.rejects(loadSubtitleText({ url: '/large.srt', format: 'srt' }), /4 MiB/);
+    assert.equal(cancelled, true);
+  } finally {
+    global.fetch = previousFetch;
+  }
+});
+
 test('subtitle module import failure is retryable and successful selection commits atomically', async () => {
   const { createSubtitleController } = await loadRuntime('subtitle-controller.js');
   const refs = subtitleDom();
