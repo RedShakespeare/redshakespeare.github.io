@@ -4,19 +4,20 @@ import { appendCleanupError, createCleanupError, createListenerScope } from './s
 import { createVolumeOverlayController } from './volume-overlay-controller.js';
 
 export function createInteractionController({ controls, surfaces, media, fullscreen, volume, mute, volumeControl, services }) {
-  const refs = { ...surfaces, ...controls, media, fullscreen, volume, mute, volumeControl, services };
+  const { play, progress, rate, repeat } = controls;
+  const { player, stage, viewport, video } = surfaces;
   const scope = createListenerScope();
-  const pointerController = createPointerController(refs);
+  const pointerController = createPointerController({ player, video, stage, viewport, media, fullscreen, services });
   const controllers = [
     pointerController,
-    createKeyboardController(refs),
-    createVolumeOverlayController(refs)
+    createKeyboardController({ player, video, stage, viewport, progress, media, fullscreen }),
+    createVolumeOverlayController({ player, volume, mute, volumeControl, media, fullscreen, services })
   ];
 
-  scope.listen(refs.play, 'click', () => { void refs.media.togglePlay(); });
-  scope.listen(refs.progress, 'input', () => refs.media.setCurrentTime(Number(refs.progress.value)));
-  scope.listen(refs.rate, 'click', refs.media.cycleRate);
-  scope.listen(refs.repeat, 'click', refs.media.toggleRepeat);
+  scope.listen(play, 'click', () => { void media.togglePlay(); });
+  scope.listen(progress, 'input', () => media.setCurrentTime(Number(progress.value)));
+  scope.listen(rate, 'click', media.cycleRate);
+  scope.listen(repeat, 'click', media.toggleRepeat);
 
   return {
     pendingHiddenTouchTap(event) { return pointerController.pendingHiddenTouchTap(event); },
