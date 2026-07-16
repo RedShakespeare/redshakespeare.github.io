@@ -1,4 +1,4 @@
-import { appendCleanupError, createCleanupError, createListenerScope } from './shared.js';
+import { appendCleanupError, createCleanupError, createListenerScope, errorMessage } from './shared.js';
 import { createSubtitleMenu } from './subtitle-menu.js';
 import { createSubtitleRendererManager } from './subtitle-renderer-manager.js';
 
@@ -56,7 +56,10 @@ export function createSubtitleController({
       state.clear('subtitles');
       return true;
     } catch (error) {
-      if (isCurrent(token)) state.set('subtitles', `字幕关闭失败：${error.message}`, { error: true });
+      if (isCurrent(token)) {
+        diagnostics.report('subtitle.disable', error);
+        state.set('subtitles', `字幕关闭失败：${errorMessage(error)}`, { error: true });
+      }
       return false;
     }
   }
@@ -68,7 +71,7 @@ export function createSubtitleController({
     menuView.sync(selectedIndex);
     const message = error?.code === 'SIL_VIDEO_SUBTITLE_CAPABILITY'
       ? '当前浏览器不支持高级字幕渲染。'
-      : `字幕加载失败：${error.message}`;
+      : `字幕加载失败：${errorMessage(error)}`;
     diagnostics.report('subtitle.select', error);
     state.set('subtitles', message, { error: true });
     return false;

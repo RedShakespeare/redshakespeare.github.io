@@ -119,13 +119,18 @@ export function createFullscreenController({
       destroying = true;
       stateWaiter.cancelAll();
       await actions.wait();
+      if (active()) {
+        try { await documentRef.exitFullscreen(); } catch (error) { diagnostics.report('fullscreen.destroy', error); }
+      }
       destroyed = true;
       hud.clear();
       hud.project(false);
       if (resizeFrame !== null) cancelFrame(resizeFrame);
       resizeFrame = null;
-      if (active()) orientation.unlock();
+      orientation.unlock();
       scope.destroy();
+      delete player.dataset.silVideoFullscreen;
+      fullscreen.setAttribute('aria-label', '进入全屏');
     }
   };
 }

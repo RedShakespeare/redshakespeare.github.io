@@ -1,10 +1,15 @@
 import JASSUB from 'jassub';
 import subsrt from 'subsrt';
 
+export const MAX_SUBTITLE_BYTES = 4 * 1024 * 1024;
+
 export async function loadSubtitleText(track, signal) {
   const response = await fetch(track.url, { signal, credentials: 'same-origin' });
   if (!response.ok) throw new Error(`字幕请求返回 ${response.status}`);
+  const declaredSize = Number(response.headers.get('content-length'));
+  if (Number.isFinite(declaredSize) && declaredSize > MAX_SUBTITLE_BYTES) throw new Error('字幕文件超过 4 MiB 限制。');
   const bytes = await response.arrayBuffer();
+  if (bytes.byteLength > MAX_SUBTITLE_BYTES) throw new Error('字幕文件超过 4 MiB 限制。');
   const source = new TextDecoder('utf-8', { fatal: true }).decode(bytes).replace(/^\uFEFF/, '');
   return track.format === 'srt' ? subsrt.convert(source, { from: 'srt', to: 'ass' }) : source;
 }

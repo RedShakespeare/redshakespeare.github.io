@@ -2,6 +2,21 @@
 
 const { assert, test, createRuntimeServices, loadRuntime, subtitleDom, model, moduleRuntime, rendererFactory } = require('./helpers/hexo-sil-video-runtime-fixture');
 
+test('subtitle downloads reject oversized responses before conversion', async () => {
+  const { loadSubtitleText, MAX_SUBTITLE_BYTES } = await loadRuntime('subtitles.js');
+  const previousFetch = global.fetch;
+  global.fetch = async () => ({
+    ok: true,
+    headers: new Headers({ 'content-length': String(MAX_SUBTITLE_BYTES + 1) }),
+    async arrayBuffer() { throw new Error('body should not be read'); }
+  });
+  try {
+    await assert.rejects(loadSubtitleText({ url: '/large.srt', format: 'srt' }), /4 MiB/);
+  } finally {
+    global.fetch = previousFetch;
+  }
+});
+
 test('subtitle module import failure is retryable and successful selection commits atomically', async () => {
   const { createSubtitleController } = await loadRuntime('subtitle-controller.js');
   const refs = subtitleDom();

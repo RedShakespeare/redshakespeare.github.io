@@ -1,4 +1,4 @@
-import { selector } from './shared.js';
+import { errorMessage, selector } from './shared.js';
 import { createDiagnostics } from './diagnostics.js';
 import { createPlayerInstance } from './player-instance.js';
 
@@ -21,7 +21,7 @@ function recordInitialisationFailure({ player, records, source, instance, diagno
   const cleanup = Promise.resolve()
     .then(() => instance?.destroy?.())
     .catch(destroyError => diagnostics.report('initialise.cleanup', destroyError));
-  const message = `播放器初始化失败：${error.message}`;
+  const message = `播放器初始化失败：${errorMessage(error)}`;
   const failed = {
     ...(records.get(player) || {}),
     source,

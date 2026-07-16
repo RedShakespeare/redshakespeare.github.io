@@ -148,3 +148,23 @@ test('fullscreen destroy cancels state confirmation without reporting a false ti
   assert.deepEqual(diagnostics, []);
   dom.window.close();
 });
+
+test('fullscreen destroy exits native fullscreen and clears player projection', async () => {
+  const { createFullscreenController } = await loadRuntime('fullscreen-controller.js');
+  const dom = new JSDOM('<!doctype html><body><aside><div data-stage><video></video><button></button></div></aside></body>', { pretendToBeVisual: true });
+  const { document } = dom.window;
+  const player = document.querySelector('aside');
+  const stage = document.querySelector('[data-stage]');
+  const video = document.querySelector('video');
+  const fullscreen = document.querySelector('button');
+  Object.defineProperty(document, 'fullscreenElement', { configurable: true, get: () => document.__fullscreenElement || null });
+  document.__fullscreenElement = stage;
+  let exits = 0;
+  document.exitFullscreen = async () => { exits += 1; document.__fullscreenElement = null; document.dispatchEvent(new dom.window.Event('fullscreenchange')); };
+  const controller = createFullscreenController({ player, video, stage, fullscreen, services: createRuntimeServices(dom.window) });
+  assert.equal(player.dataset.silVideoFullscreen, 'true');
+  await controller.destroy();
+  assert.equal(exits, 1);
+  assert.equal(player.dataset.silVideoFullscreen, undefined);
+  dom.window.close();
+});

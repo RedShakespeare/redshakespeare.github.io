@@ -119,6 +119,12 @@ export function appendCleanupError(errors, error) {
   else errors.push(error);
 }
 
+export function errorMessage(error, fallback = '未知错误') {
+  if (error instanceof Error && error.message) return error.message;
+  if (typeof error === 'string' && error) return error;
+  return fallback;
+}
+
 export function focusWithoutScroll(target) {
   try {
     target.focus({ preventScroll: true });

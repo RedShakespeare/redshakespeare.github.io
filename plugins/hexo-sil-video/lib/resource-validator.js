@@ -1,6 +1,11 @@
 'use strict';
 
 function createResourceValidator({ fs, path, videoError }) {
+  function errorMessage(error, fallback = 'unknown error') {
+    if (error instanceof Error && error.message) return error.message;
+    if (typeof error === 'string' && error) return error;
+    return fallback;
+  }
   function cachedRead(cache, key, read) {
     const cached = cache.get(key);
     if (cached) return cached;
@@ -43,7 +48,7 @@ function createResourceValidator({ fs, path, videoError }) {
     try {
       entry = await cachedRead(options.resourceCache, `manifest:${key}`, () => options.assetCapability.getObject(key));
     } catch (error) {
-      throw videoError(post, error.message.replace(/^Asset manifest error:\s*/, ''));
+      throw videoError(post, errorMessage(error).replace(/^Asset manifest error:\s*/, ''));
     }
     if (!entry) throw videoError(post, `asset manifest does not contain ${key}. Refresh or publish the asset manifest after adding the file.`);
     validateManifestType(post, key, entry, expectation);
@@ -63,7 +68,7 @@ function createResourceValidator({ fs, path, videoError }) {
     try {
       stat = await cachedRead(options.resourceCache, `local:${localPath}`, () => fs.lstat(localPath));
     } catch (error) {
-      throw videoError(post, `local ${field} file does not exist: ${file} (${error.code || error.message}).`);
+      throw videoError(post, `local ${field} file does not exist: ${file} (${error?.code || errorMessage(error)}).`);
     }
     if (!stat.isFile() || stat.size <= 0) throw videoError(post, `local ${field} path must be a non-empty regular file: ${file}.`);
     const [realMediaRoot, realLocalPath] = await Promise.all([
