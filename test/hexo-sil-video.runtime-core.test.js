@@ -1,6 +1,6 @@
 'use strict';
 
-const { assert, test, JSDOM, createRuntimeServices, loadRuntime, subtitleDom, model, moduleRuntime, rendererFactory } = require('./helpers/hexo-sil-video-runtime-fixture');
+const { assert, test, JSDOM, loadRuntime } = require('./helpers/hexo-sil-video-runtime-fixture');
 
 test('runtime and CommonJS state coordinators share the same channel semantics', async () => {
   const common = require('../plugins/hexo-sil-video/lib/player-state');

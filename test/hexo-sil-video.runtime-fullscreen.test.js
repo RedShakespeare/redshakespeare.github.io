@@ -1,6 +1,6 @@
 'use strict';
 
-const { assert, test, JSDOM, createRuntimeServices, loadRuntime, subtitleDom, model, moduleRuntime, rendererFactory } = require('./helpers/hexo-sil-video-runtime-fixture');
+const { assert, test, JSDOM, createRuntimeServices, loadRuntime } = require('./helpers/hexo-sil-video-runtime-fixture');
 
 test('fullscreen actions serialize opposite toggles and destroy waits for the queue', async () => {
   const { createFullscreenController } = await loadRuntime('fullscreen-controller.js');

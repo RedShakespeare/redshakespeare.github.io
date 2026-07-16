@@ -1,6 +1,6 @@
 'use strict';
 
-const { assert, test, JSDOM, createRuntimeServices, loadRuntime, subtitleDom, model, moduleRuntime, rendererFactory } = require('./helpers/hexo-sil-video-runtime-fixture');
+const { assert, test, createRuntimeServices, loadRuntime, subtitleDom, model, moduleRuntime, rendererFactory } = require('./helpers/hexo-sil-video-runtime-fixture');
 
 test('subtitle module import failure is retryable and successful selection commits atomically', async () => {
   const { createSubtitleController } = await loadRuntime('subtitle-controller.js');

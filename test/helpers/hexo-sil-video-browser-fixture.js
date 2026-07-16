@@ -6,10 +6,6 @@ const { buildBrowserBundle, renderVideoPlayer } = require('../../plugins/hexo-si
 
 let browserBundlePromise;
 
-function wait(milliseconds) {
-  return new Promise(resolve => setTimeout(resolve, milliseconds));
-}
-
 function bufferedRanges(ranges) {
   return {
     length: ranges.length,
@@ -167,4 +163,4 @@ async function browserPlayer(options = {}) {
   };
 }
 
-module.exports = { browserPlayer, touchPointer, touchTap, wait };
+module.exports = { browserPlayer, touchPointer, touchTap };
