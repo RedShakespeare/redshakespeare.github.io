@@ -82,3 +82,11 @@ test('unused binding metrics distinguish declarations from property names', () =
   `;
   assert.deepEqual(unusedVariableBindings(source), [{ name: 'unused', line: 3 }]);
 });
+
+test('unused binding metrics keep same-name bindings isolated by scope', () => {
+  const source = `
+    function first() { const value = 1; return value; }
+    function second() { const value = 2; }
+  `;
+  assert.deepEqual(unusedVariableBindings(source), [{ name: 'value', line: 3 }]);
+});

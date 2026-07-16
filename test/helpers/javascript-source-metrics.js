@@ -52,29 +52,88 @@ function parse(source) {
 
 function unusedVariableBindings(source) {
   const ast = parse(source);
-  const declarations = new Map();
-  const used = new Set();
+  const unused = [];
 
-  function visit(node, parent = null) {
-    if (node.type === 'ExportNamedDeclaration' && node.declaration?.type === 'VariableDeclaration') {
-      for (const declaration of node.declaration.declarations) {
-        if (declaration.id.type === 'Identifier') used.add(declaration.id.name);
-      }
+  function createScope(parent) {
+    return { parent, bindings: new Map() };
+  }
+
+  function declare(scope, identifier, parameter = false) {
+    if (identifier?.type !== 'Identifier') return;
+    if (!scope.bindings.has(identifier.name)) scope.bindings.set(identifier.name, { name: identifier.name, line: identifier.loc.start.line, used: false, parameter });
+  }
+
+  function resolve(scope, name) {
+    for (let current = scope; current; current = current.parent) {
+      const binding = current.bindings.get(name);
+      if (binding) return binding;
     }
-    if (node.type === 'VariableDeclarator' && node.id.type === 'Identifier') {
-      declarations.set(node.id.name, node.id.loc.start.line);
-    } else if (node.type === 'Identifier') {
+    return null;
+  }
+
+  function visitPattern(pattern, scope, parameter = false) {
+    if (!pattern) return;
+    if (pattern.type === 'Identifier') declare(scope, pattern, parameter);
+    else if (pattern.type === 'AssignmentPattern') visitPattern(pattern.left, scope, parameter);
+    else if (pattern.type === 'RestElement') visitPattern(pattern.argument, scope, parameter);
+    else if (pattern.type === 'ArrayPattern') for (const element of pattern.elements) visitPattern(element, scope, parameter);
+    else if (pattern.type === 'ObjectPattern') for (const property of pattern.properties) visitPattern(property.value || property.argument, scope, parameter);
+  }
+
+  function markPatternUsed(pattern, scope) {
+    if (!pattern) return;
+    if (pattern.type === 'Identifier') {
+      const binding = resolve(scope, pattern.name);
+      if (binding) binding.used = true;
+    } else if (pattern.type === 'AssignmentPattern') markPatternUsed(pattern.left, scope);
+    else if (pattern.type === 'RestElement') markPatternUsed(pattern.argument, scope);
+    else if (pattern.type === 'ArrayPattern') for (const element of pattern.elements) markPatternUsed(element, scope);
+    else if (pattern.type === 'ObjectPattern') for (const property of pattern.properties) markPatternUsed(property.value || property.argument, scope);
+  }
+
+  function visit(node, parent, scope) {
+    if (node.type === 'ExportNamedDeclaration' && node.declaration?.type === 'VariableDeclaration') {
+      visit(node.declaration, node, scope);
+      for (const declaration of node.declaration.declarations) markPatternUsed(declaration.id, scope);
+      return;
+    }
+    if (node.type === 'FunctionDeclaration' || node.type === 'FunctionExpression' || node.type === 'ArrowFunctionExpression') {
+      const functionScope = createScope(scope);
+      for (const parameter of node.params) visitPattern(parameter, functionScope, true);
+      visit(node.body, node, functionScope);
+      for (const binding of functionScope.bindings.values()) if (!binding.used && !binding.parameter) unused.push(binding);
+      return;
+    }
+    if (node.type === 'BlockStatement') {
+      const blockScope = createScope(scope);
+      for (const statement of node.body) visit(statement, node, blockScope);
+      for (const binding of blockScope.bindings.values()) if (!binding.used && !binding.parameter) unused.push(binding);
+      return;
+    }
+    if (node.type === 'VariableDeclarator') {
+      visitPattern(node.id, scope);
+      if (node.init) visit(node.init, node, scope);
+      return;
+    }
+    if (node.type === 'Identifier') {
       const declaration = parent?.type === 'VariableDeclarator' && parent.id === node;
+      const parameter = parent && (parent.type === 'FunctionDeclaration' || parent.type === 'FunctionExpression' || parent.type === 'ArrowFunctionExpression');
       const propertyKey = (parent?.type === 'Property' || parent?.type === 'MethodDefinition') && parent.key === node && !parent.computed && !parent.shorthand;
       const memberKey = parent?.type === 'MemberExpression' && parent.property === node && !parent.computed;
       const label = ['BreakStatement', 'ContinueStatement', 'LabeledStatement'].includes(parent?.type);
-      if (!declaration && !propertyKey && !memberKey && !label) used.add(node.name);
+      if (!declaration && !parameter && !propertyKey && !memberKey && !label) {
+        const binding = resolve(scope, node.name);
+        if (binding) binding.used = true;
+      }
+      return;
     }
-    for (const child of childNodes(node)) visit(child, node);
+    for (const child of childNodes(node)) visit(child, node, scope);
   }
 
-  visit(ast);
-  return Array.from(declarations, ([name, line]) => ({ name, line })).filter(binding => !used.has(binding.name));
+  const programScope = createScope(null);
+  visit(ast, null, programScope);
+  for (const binding of programScope.bindings.values()) if (!binding.used) unused.push(binding);
+  return unused.map(({ name, line }) => ({ name, line }));
 }
 
 function decisionCount(body) {
