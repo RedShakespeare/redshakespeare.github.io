@@ -14,7 +14,7 @@ export function createKeyboardController({ player, video, stage, viewport, progr
       void media.togglePlay(true);
     } else if (event.key === 'Enter') {
       event.preventDefault();
-      if (!fullscreen.active()) void fullscreen.toggle();
+      void fullscreen.toggle();
     } else if (event.key === 'Escape') {
       if (fullscreen.active()) void fullscreen.toggle();
     } else if (event.key === 'ArrowUp') {

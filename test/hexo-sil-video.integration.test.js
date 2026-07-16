@@ -245,8 +245,10 @@ test('browser runtime keeps shortcuts focused through fullscreen entry and exit'
     assert.equal(feedback.dataset.silVideoFeedbackVisible, 'true');
     assert.equal(feedbackText.textContent, '85%');
 
-    stage.dispatchEvent(new window.KeyboardEvent('keydown', { key: 'Escape', bubbles: true }));
+    const enter = new window.KeyboardEvent('keydown', { key: 'Enter', bubbles: true, cancelable: true });
+    stage.dispatchEvent(enter);
     await new Promise(resolve => setImmediate(resolve));
+    assert.equal(enter.defaultPrevented, true);
     assert.equal(calls.fullscreenExits, 1);
     assert.equal(document.fullscreenElement, null);
     assert.equal(document.activeElement, player);

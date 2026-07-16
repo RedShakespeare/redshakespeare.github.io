@@ -226,7 +226,7 @@ test('desktop shortcuts, wheel input, fullscreen focus, and HUD hiding retain th
   await expect(stage).toHaveAttribute('data-sil-video-ui-hidden', 'true', { timeout: 3500 });
   await stage.dispatchEvent('pointermove', { pointerType: 'mouse' });
   await expect(stage).not.toHaveAttribute('data-sil-video-ui-hidden', /.+/);
-  await page.evaluate(() => document.exitFullscreen());
+  await page.keyboard.press('Enter');
   await expect(player).toBeFocused();
 });
 
