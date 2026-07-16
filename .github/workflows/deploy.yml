@@ -40,10 +40,10 @@ jobs:
           cache: npm
 
       - name: Install deps
-        run: npm ci || npm i
+        run: npm ci
 
       - name: Install video browser test engines
-        run: npx playwright install --with-deps chromium webkit
+        run: npx playwright install --with-deps chromium firefox webkit
 
       - name: Determine asset pipeline mode
         id: asset-pipeline

@@ -11,6 +11,7 @@
   const config = __SIL_VIDEO_BOOTSTRAP_CONFIG__;
   const selector = '[data-sil-video-player]';
   let pending = null;
+  let observer = null;
   const loadedStyles = new Set();
   let loadedCore = false;
 
@@ -57,9 +58,14 @@
       script.src = config.script;
       script.defer = true;
       script.dataset.silVideoCore = 'true';
-      script.onload = resolve;
+      script.onload = () => {
+        loadedCore = true;
+        observer?.disconnect();
+        observer = null;
+        document.removeEventListener('inside', scan);
+        resolve();
+      };
       script.onerror = () => { script.remove(); reject(resourceError('核心脚本', config.script)); };
-      script.addEventListener('load', () => { loadedCore = true; }, { once: true });
       document.head.append(script);
     });
   }
@@ -84,7 +90,8 @@
   window[key] = { scan };
   scan();
   document.addEventListener('inside', scan);
-  new MutationObserver(records => records.forEach(record => record.addedNodes.forEach(node => {
+  observer = new MutationObserver(records => records.forEach(record => record.addedNodes.forEach(node => {
     if (node instanceof Element && (node.matches(selector) || node.querySelector(selector))) load();
-  }))).observe(document.documentElement, { childList: true, subtree: true });
+  })));
+  observer.observe(document.documentElement, { childList: true, subtree: true });
 })();
