@@ -10,6 +10,7 @@
 
   const config = __SIL_VIDEO_BOOTSTRAP_CONFIG__;
   const selector = '[data-sil-video-player]';
+  const RESOURCE_TIMEOUT = 15000;
   let pending = null;
   let observer = null;
   const loadedStyles = new Set();
@@ -44,8 +45,9 @@
       link.rel = 'stylesheet';
       link.href = url;
       link.dataset.silVideoStyle = 'true';
-      link.onload = resolve;
-      link.onerror = () => { link.remove(); reject(resourceError('样式', url)); };
+      const timer = setTimeout(() => { link.remove(); reject(resourceError('样式', url)); }, RESOURCE_TIMEOUT);
+      link.onload = () => { clearTimeout(timer); resolve(); };
+      link.onerror = () => { clearTimeout(timer); link.remove(); reject(resourceError('样式', url)); };
       link.addEventListener('load', () => loadedStyles.add(url), { once: true });
       document.head.append(link);
     });
@@ -58,14 +60,16 @@
       script.src = config.script;
       script.defer = true;
       script.dataset.silVideoCore = 'true';
+      const timer = setTimeout(() => { script.remove(); reject(resourceError('核心脚本', config.script)); }, RESOURCE_TIMEOUT);
       script.onload = () => {
+        clearTimeout(timer);
         loadedCore = true;
         observer?.disconnect();
         observer = null;
         document.removeEventListener('inside', scan);
         resolve();
       };
-      script.onerror = () => { script.remove(); reject(resourceError('核心脚本', config.script)); };
+      script.onerror = () => { clearTimeout(timer); script.remove(); reject(resourceError('核心脚本', config.script)); };
       document.head.append(script);
     });
   }
