@@ -5,6 +5,7 @@ import {
 } from './shared.js';
 import { resolveRuntimeServices } from './runtime-services.js';
 import { createOrientationController } from './orientation-controller.js';
+import { createFullscreenStateWaiter } from './fullscreen-state-waiter.js';
 
 const FULLSCREEN_CHANGE_TIMEOUT = 2000;
 
@@ -33,6 +34,12 @@ export function createFullscreenController({
   const orientation = createOrientationController(windowRef);
   const { state, ui, diagnostics, clock } = services;
   const { setTimeout: setTimer, clearTimeout: clearTimer, requestAnimationFrame: requestFrame, cancelAnimationFrame: cancelFrame } = clock;
+  const stateWaiter = createFullscreenStateWaiter({
+    documentRef,
+    clock,
+    isActive: () => documentRef.fullscreenElement === stage,
+    timeout: FULLSCREEN_CHANGE_TIMEOUT
+  });
   let fullscreenUiTimer = null;
   let resizeFrame = null;
   let wasFullscreen = false;
@@ -41,7 +48,6 @@ export function createFullscreenController({
   let actionQueue = null;
   let destroying = false;
   let destroyed = false;
-  const stateWaiters = new Set();
 
   function active() {
     return documentRef.fullscreenElement === stage;
@@ -59,30 +65,10 @@ export function createFullscreenController({
     else delete stage.dataset.silVideoUiHidden;
   }
 
-  function waitForState(target) {
-    if (active() === target) return Promise.resolve(true);
-    return new Promise(resolve => {
-      let timer = null;
-      const finish = value => {
-        if (timer !== null) clearTimer(timer);
-        documentRef.removeEventListener('fullscreenchange', onChange);
-        stateWaiters.delete(waiter);
-        resolve(value);
-      };
-      const onChange = () => {
-        if (active() === target) finish(true);
-      };
-      const waiter = { cancel: () => finish(false) };
-      stateWaiters.add(waiter);
-      documentRef.addEventListener('fullscreenchange', onChange);
-      timer = setTimer(() => finish(false), FULLSCREEN_CHANGE_TIMEOUT);
-    });
-  }
-
   async function request(action, message, target) {
     try {
       await action();
-      if (!await waitForState(target)) {
+      if (!await stateWaiter.waitFor(target)) {
         if (destroying || destroyed) return false;
         const error = new Error(`全屏状态变更超时：${target ? '进入' : '退出'}`);
         error.code = 'SIL_VIDEO_FULLSCREEN_TIMEOUT';
@@ -195,7 +181,7 @@ export function createFullscreenController({
     async destroy() {
       if (destroyed) return;
       destroying = true;
-      stateWaiters.forEach(waiter => waiter.cancel());
+      stateWaiter.cancelAll();
       if (actionQueue) await actionQueue;
       destroyed = true;
       clearUiTimer();
