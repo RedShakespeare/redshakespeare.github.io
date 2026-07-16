@@ -1,12 +1,9 @@
 import {
   clamp,
-  createListenerScope,
-  formatTime,
-  rates,
-  setBufferedRanges,
-  setRangeFill,
-  volumeLevel
+  rates
 } from './shared.js';
+import { bindMediaEvents } from './media-event-binding.js';
+import { createMediaProjection } from './media-projection.js';
 
 export function createMediaController({
   player,
@@ -24,7 +21,6 @@ export function createMediaController({
   feedbackController,
   services
 }) {
-  const scope = createListenerScope();
   const { state, diagnostics } = services;
   let lastVolume = video.volume || 0.8;
 
@@ -48,62 +44,7 @@ export function createMediaController({
     feedbackController.setBrightness(value, announce);
   }
 
-  function syncPlaying() {
-    const playing = !video.paused && !video.ended;
-    player.dataset.silVideoPlaying = playing ? 'true' : 'false';
-    player.dataset.silVideoEnded = video.ended ? 'true' : 'false';
-    play.setAttribute('aria-label', video.ended ? '重播' : playing ? '暂停' : '播放');
-    play.setAttribute('aria-pressed', playing ? 'true' : 'false');
-    onPlaybackStateChange();
-  }
-
-  function syncTime() {
-    const durationKnown = Number.isFinite(video.duration) && video.duration > 0;
-    const maximum = durationKnown ? video.duration : 100;
-    const position = Number.isFinite(video.currentTime) ? Math.min(video.currentTime, maximum) : 0;
-    const totalText = durationKnown ? formatTime(video.duration) : '--:--';
-    progress.max = String(maximum);
-    progress.value = String(position);
-    current.textContent = formatTime(position);
-    progress.setAttribute('aria-valuetext', `${formatTime(position)}/${totalText}`);
-    setRangeFill(progress, position, durationKnown ? video.duration : 0);
-  }
-
-  function syncBuffered() {
-    const maximum = Number.isFinite(video.duration) && video.duration > 0 ? video.duration : 0;
-    setBufferedRanges(progress, video, maximum);
-  }
-
-  function syncDuration() {
-    if (!Number.isFinite(video.duration) || video.duration <= 0) {
-      duration.textContent = '--:--';
-      syncTime();
-      syncBuffered();
-      return;
-    }
-    progress.max = String(video.duration);
-    duration.textContent = formatTime(video.duration);
-    syncTime();
-    syncBuffered();
-  }
-
-  function syncVolume() {
-    const muted = video.muted || video.volume === 0;
-    const level = volumeLevel(video.volume, muted);
-    player.dataset.silVideoMuted = muted ? 'true' : 'false';
-    player.dataset.silVideoVolumeLevel = level;
-    mute.setAttribute('aria-label', muted ? '取消静音' : '静音');
-    mute.setAttribute('aria-pressed', muted ? 'true' : 'false');
-    volume.value = String(video.muted ? 0 : video.volume);
-    volume.setAttribute('aria-valuetext', `${Math.round(Number(volume.value) * 100)}%`);
-    setRangeFill(volume, Number(volume.value), 1);
-  }
-
-  function syncRepeat() {
-    repeat.setAttribute('aria-pressed', video.loop ? 'true' : 'false');
-    repeat.setAttribute('aria-label', video.loop ? '循环播放' : '播放一次');
-    player.dataset.silVideoLoop = video.loop ? 'true' : 'false';
-  }
+  const projection = createMediaProjection({ player, video, progress, volume, current, duration, play, mute, repeat, onPlaybackStateChange });
 
   async function togglePlay(showPlayback = false) {
     if (video.paused || video.ended) {
@@ -130,7 +71,7 @@ export function createMediaController({
       lastVolume = video.volume;
       video.muted = true;
     }
-    syncVolume();
+    projection.volume();
     showVolumeFeedback();
   }
 
@@ -139,7 +80,7 @@ export function createMediaController({
     video.volume = clamp(video.volume + delta, 0, 1);
     if (video.volume > 0) lastVolume = video.volume;
     video.muted = video.volume === 0;
-    syncVolume();
+    projection.volume();
     showVolumeFeedback();
   }
 
@@ -147,7 +88,7 @@ export function createMediaController({
     video.muted = false;
     video.volume = clamp(value, 0, 1);
     if (video.volume > 0) lastVolume = video.volume;
-    syncVolume();
+    projection.volume();
     showVolumeFeedback();
   }
 
@@ -155,21 +96,21 @@ export function createMediaController({
     video.volume = clamp(value, 0, 1);
     video.muted = video.volume === 0;
     if (video.volume > 0) lastVolume = video.volume;
-    syncVolume();
+    projection.volume();
     showVolumeFeedback();
   }
 
   function seek(delta) {
     if (!Number.isFinite(video.duration)) return;
     video.currentTime = clamp(video.currentTime + delta, 0, video.duration);
-    syncTime();
+    projection.time();
     showProgressFeedback();
   }
 
   function setCurrentTime(value) {
     if (!Number.isFinite(video.duration)) return;
     video.currentTime = clamp(value, 0, video.duration);
-    syncTime();
+    projection.time();
     showProgressFeedback();
   }
 
@@ -182,33 +123,15 @@ export function createMediaController({
 
   function toggleRepeat() {
     video.loop = !video.loop;
-    syncRepeat();
+    projection.repeat();
   }
 
-  scope.listen(video, 'loadstart', () => {
-    progress.style.removeProperty('--sil-video-range-buffered');
-    duration.textContent = '--:--';
-    setStatus('正在加载视频…', false, 'loading');
-  });
-  scope.listen(video, 'emptied', () => progress.style.removeProperty('--sil-video-range-buffered'));
-  scope.listen(video, 'loadedmetadata', () => { syncDuration(); setStatus(); });
-  scope.listen(video, 'durationchange', syncDuration);
-  scope.listen(video, 'progress', syncBuffered);
-  scope.listen(video, 'canplay', syncBuffered);
-  scope.listen(video, 'canplaythrough', syncBuffered);
-  scope.listen(video, 'suspend', syncBuffered);
-  scope.listen(video, 'timeupdate', syncTime);
-  scope.listen(video, 'play', () => { onPlayInteraction(); syncPlaying(); });
-  scope.listen(video, 'pause', syncPlaying);
-  scope.listen(video, 'ended', syncPlaying);
-  scope.listen(video, 'volumechange', syncVolume);
-  scope.listen(video, 'error', () => setStatus('视频加载失败，请使用下载链接。', true));
-
-  syncPlaying();
-  syncTime();
-  syncDuration();
-  syncVolume();
-  syncRepeat();
+  const scope = bindMediaEvents({ video, progress, duration, projection, setStatus, onPlayInteraction });
+  projection.playing();
+  projection.time();
+  projection.duration();
+  projection.volume();
+  projection.repeat();
 
   return {
     adjustVolume,
