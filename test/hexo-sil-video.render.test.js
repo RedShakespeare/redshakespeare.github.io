@@ -42,6 +42,10 @@ test('rendered player exposes native fallback, custom controls, downloads, and r
   assert.doesNotMatch(html, /sil-video-player__icon--once/);
   assert.doesNotMatch(html, /sil-video-player__icon--repeat/);
   assert.match(html, /sil-video-player__icon--reload/);
+  assert.notEqual(
+    html.match(/sil-video-player__icon--replay[\s\S]*?<path d="([^"]+)"/)[1],
+    html.match(/sil-video-player__icon--reload[\s\S]*?<path d="([^"]+)"/)[1]
+  );
   assert.match(html, /sil-video-player__icon--volume-low/);
   assert.match(html, /sil-video-player__icon--volume-medium/);
   assert.match(html, /sil-video-player__icon--volume-high/);

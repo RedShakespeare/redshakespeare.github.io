@@ -16,7 +16,7 @@ export function bindMediaEvents({ video, progress, duration, projection, setStat
   scope.listen(video, 'loadedmetadata', () => { projection.duration(); setStatus(); });
   scope.listen(video, 'durationchange', projection.duration);
   scope.listen(video, 'progress', projection.buffered);
-  scope.listen(video, 'canplay', projection.buffered);
+  scope.listen(video, 'canplay', () => { projection.buffered(); loadingHud.hide(); });
   scope.listen(video, 'canplaythrough', projection.buffered);
   scope.listen(video, 'suspend', projection.buffered);
   scope.listen(video, 'timeupdate', projection.time);
@@ -24,7 +24,6 @@ export function bindMediaEvents({ video, progress, duration, projection, setStat
   scope.listen(video, 'playing', () => { loadingHud.hide(); projection.playing(); });
   scope.listen(video, 'waiting', loadingHud.show);
   scope.listen(video, 'stalled', loadingHud.show);
-  scope.listen(video, 'canplay', loadingHud.hide);
   scope.listen(video, 'pause', () => { loadingHud.hide(); projection.playing(); });
   scope.listen(video, 'ended', () => { loadingHud.hide(); projection.playing(); });
   scope.listen(video, 'volumechange', projection.volume);

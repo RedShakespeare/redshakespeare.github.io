@@ -7,9 +7,10 @@ function icon(name, paths) {
 function createVideoIcons() {
   const speaker = '<path d="M3 10v4h4l5 4V6L7 10z"/>';
   const replayPath = '<path d="M12 5a7 7 0 1 1-6.3 4H3l4-4 4 4H7.8A5 5 0 1 0 12 7z"/>';
+  const reloadPath = '<path d="M12 4a8 8 0 1 0 7.4 5h-2.1a6 6 0 1 1-1.7-3.1L13 8h7V1l-2.1 2.1A8 8 0 0 0 12 4z"/>';
   return {
     icon,
-    playIcon: icon('play', '<path d="M8 5v14l11-7z"/>') + icon('pause', '<path d="M7 5h4v14H7zm6 0h4v14h-4z"/>') + icon('replay', replayPath) + icon('reload', replayPath),
+    playIcon: icon('play', '<path d="M8 5v14l11-7z"/>') + icon('pause', '<path d="M7 5h4v14H7zm6 0h4v14h-4z"/>') + icon('replay', replayPath) + icon('reload', reloadPath),
     volumeIcon: icon('volume-low', `${speaker}<path d="M14.5 9.5a3.5 3.5 0 0 1 0 5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.8"/>`) +
       icon('volume-medium', `${speaker}<path d="M14.5 9.5a3.5 3.5 0 0 1 0 5m2-7a6.5 6.5 0 0 1 0 9" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.8"/>`) +
       icon('volume-high', `${speaker}<path d="M14.5 9.5a3.5 3.5 0 0 1 0 5m2-7a6.5 6.5 0 0 1 0 9m2-11a9 9 0 0 1 0 13" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.8"/>`) +
