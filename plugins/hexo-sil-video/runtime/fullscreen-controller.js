@@ -19,7 +19,12 @@ export function createFullscreenController({
   const windowRef = documentRef.defaultView;
   const orientation = createOrientationController(windowRef);
   const { state, ui, diagnostics, clock } = services;
-  const { requestAnimationFrame: requestFrame, cancelAnimationFrame: cancelFrame } = clock;
+  const {
+    requestAnimationFrame: requestFrame,
+    cancelAnimationFrame: cancelFrame,
+    setTimeout: setTimer,
+    clearTimeout: clearTimer
+  } = clock;
   const stateWaiter = createFullscreenStateWaiter({
     documentRef,
     clock,
@@ -41,7 +46,19 @@ export function createFullscreenController({
 
   async function request(action, message, target) {
     try {
-      await action();
+      let timer;
+      let actionPromise;
+      try { actionPromise = Promise.resolve(action()); } catch (error) { actionPromise = Promise.reject(error); }
+      await Promise.race([
+        actionPromise,
+        new Promise((resolve, reject) => {
+          timer = setTimer(() => {
+            const error = new Error(`全屏原生操作超时：${target ? '进入' : '退出'}`);
+            error.code = 'SIL_VIDEO_FULLSCREEN_ACTION_TIMEOUT';
+            reject(error);
+          }, FULLSCREEN_CHANGE_TIMEOUT);
+        })
+      ]).finally(() => { if (timer !== undefined) clearTimer(timer); });
       if (!await stateWaiter.waitFor(target)) {
         if (destroying || destroyed) return false;
         const error = new Error(`全屏状态变更超时：${target ? '进入' : '退出'}`);
