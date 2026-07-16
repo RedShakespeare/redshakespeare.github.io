@@ -31,6 +31,7 @@ test('rendered player exposes native fallback, custom controls, downloads, and r
   assert.match(html, /data-sil-video-feedback/);
   assert.match(html, /data-sil-video-feedback-text/);
   assert.match(html, /data-sil-video-loading/);
+  assert.match(html, /data-sil-video-download="true"/);
   assert.match(html, /正在加载\.\.\./);
   assert.match(html, /data-sil-video-controls[^>]*hidden/);
   assert.match(html, /aria-valuetext="0:00\/--:--"/);
@@ -62,6 +63,7 @@ test('tag arguments position the default player and source overrides drop its su
 
 test('disabled video downloads omit only the video toolbar link', async () => {
   const html = renderVideoPlayer(await normaliseVideo(post(), videoData({ download: false }), runtime));
+  assert.match(html, /data-sil-video-download="false"/);
   assert.doesNotMatch(html, /aria-label="下载视频"/);
   assert.match(html, /下载简体中文字幕/);
 });

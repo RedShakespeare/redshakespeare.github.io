@@ -59,6 +59,7 @@ function createRenderer({ playerStart, playerEnd }) {
   }
 
   function renderVideoPlayer(video) {
+    const downloadAllowed = video.download !== false;
     const type = video.type ? ` type="${escapeHtml(video.type)}"` : '';
     const poster = video.poster ? ` poster="${escapeHtml(video.poster)}"` : '';
     const model = Buffer.from(JSON.stringify({
@@ -70,7 +71,7 @@ function createRenderer({ playerStart, playerEnd }) {
     }), 'utf8').toString('base64');
     const icons = createVideoIcons();
     return `${playerStart}
-<aside class="sil-video-player" data-sil-video-player data-sil-video-model="${model}" tabindex="0" aria-label="视频播放器" style="--sil-video-aspect-ratio:${escapeHtml(video.aspectRatio)}">
+<aside class="sil-video-player" data-sil-video-player data-sil-video-download="${downloadAllowed ? 'true' : 'false'}" data-sil-video-model="${model}" tabindex="0" aria-label="视频播放器" style="--sil-video-aspect-ratio:${escapeHtml(video.aspectRatio)}">
   <div class="sil-video-player__stage" data-sil-video-stage tabindex="-1">
     <header class="sil-video-player__header" data-sil-video-controls data-sil-video-fallback-status hidden><span class="sil-video-player__title">${escapeHtml(video.title)}</span><span class="sil-video-player__status" data-sil-video-status role="status" aria-live="polite"></span></header>
     <div class="sil-video-player__viewport" data-sil-video-viewport>

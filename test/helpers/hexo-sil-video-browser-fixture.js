@@ -38,6 +38,7 @@ async function browserPlayer(options = {}) {
     source: '/files/video/demo.mp4',
     type: 'video/mp4',
     poster: '',
+    download: options.download !== false,
     preload: 'metadata',
     aspectRatio: '16/9',
     subtitles: [],

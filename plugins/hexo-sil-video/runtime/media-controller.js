@@ -44,19 +44,30 @@ export function createMediaController({
     feedbackController.setBrightness(value, announce);
   }
 
+  function failureMessage(kind) {
+    const recovery = player.dataset.silVideoDownload === 'true' ? '请使用下载链接。' : '请稍后重试。';
+    return `视频${kind}失败，${recovery}`;
+  }
+
   const projection = createMediaProjection({ player, video, progress, volume, current, duration, play, mute, onPlaybackStateChange });
   let playToken = 0;
   let destroyed = false;
+  let mediaFailed = false;
+
+  function setMediaError(value) {
+    mediaFailed = Boolean(value);
+    projection.mediaError(mediaFailed);
+  }
 
   function reload() {
     playToken += 1;
-    projection.mediaError(false);
+    setMediaError(false);
     setStatus('正在加载视频…', false, 'loading');
     video.load();
   }
 
   async function togglePlay(showPlayback = false) {
-    if (projection.mediaErrorActive()) {
+    if (mediaFailed) {
       reload();
       return;
     }
@@ -71,7 +82,7 @@ export function createMediaController({
       } catch (error) {
         if (destroyed || token !== playToken) return;
         diagnostics.report('media.play', error);
-        setStatus('视频播放失败，请使用下载链接。', true);
+        setStatus(failureMessage('播放'), true);
       }
     } else {
       playToken += 1;
@@ -137,7 +148,17 @@ export function createMediaController({
     rate.setAttribute('aria-label', `播放速度 ${video.playbackRate} 倍`);
   }
 
-  const scope = bindMediaEvents({ video, progress, duration, projection, setStatus, onPlayInteraction, loadingHud });
+  const scope = bindMediaEvents({
+    video,
+    progress,
+    duration,
+    projection,
+    setStatus,
+    mediaErrorMessage: () => failureMessage('加载'),
+    onMediaError: setMediaError,
+    onPlayInteraction,
+    loadingHud
+  });
   projection.playing();
   projection.time();
   projection.duration();
@@ -158,7 +179,6 @@ export function createMediaController({
     async destroy() {
       destroyed = true;
       playToken += 1;
-      loadingHud.destroy();
       scope.destroy();
     }
   };

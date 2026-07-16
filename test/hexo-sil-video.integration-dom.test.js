@@ -75,6 +75,17 @@ test('browser runtime turns media failures into a manual reload action', async (
   }
 });
 
+test('disabled downloads use a retry message instead of a missing download link', async () => {
+  const fixture = await browserPlayer({ download: false });
+  const { dom, window, video, player } = fixture;
+  try {
+    video.dispatchEvent(new window.Event('error'));
+    assert.equal(player.querySelector('[data-sil-video-status]').textContent, '视频加载失败，请稍后重试。');
+  } finally {
+    dom.window.close();
+  }
+});
+
 test('browser runtime synchronises accessible values, omits empty subtitle relations, and destroys cleanly', async () => {
   const fixture = await browserPlayer();
   const { dom, document, player, video, progress, volume } = fixture;

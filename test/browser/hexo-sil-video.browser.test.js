@@ -144,6 +144,19 @@ test('media errors expose a visible reload action that invokes the native loader
   await expect(player).not.toHaveAttribute('data-sil-video-media-error', /.+/);
 });
 
+test('disabling downloads keeps the fullscreen control aligned to the toolbar edge', async ({ page }) => {
+  await page.goto('/video-no-subtitles');
+  await waitEnhanced(page);
+  const geometry = await page.locator('[data-sil-video-player]').evaluate(player => {
+    player.dataset.silVideoDownload = 'false';
+    player.querySelector('[aria-label="下载视频"]').remove();
+    const toolbar = player.querySelector('.sil-video-player__toolbar').getBoundingClientRect();
+    const fullscreen = player.querySelector('[data-sil-video-action="fullscreen"]').getBoundingClientRect();
+    return { rightGap: toolbar.right - fullscreen.right };
+  });
+  expect(geometry.rightGap).toBeLessThanOrEqual(1);
+});
+
 test('default subtitles remain pending until interaction and Chromium starts Worker/WASM lazily', async ({ page, browserName }) => {
   const requests = observeRequests(page);
   await page.goto('/video-subtitles');

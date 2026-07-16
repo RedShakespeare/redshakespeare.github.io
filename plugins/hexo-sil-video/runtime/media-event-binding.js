@@ -1,9 +1,9 @@
 import { createListenerScope } from './shared.js';
 
-export function bindMediaEvents({ video, progress, duration, projection, setStatus, onPlayInteraction, loadingHud }) {
+export function bindMediaEvents({ video, progress, duration, projection, setStatus, mediaErrorMessage, onMediaError, onPlayInteraction, loadingHud }) {
   const scope = createListenerScope();
   scope.listen(video, 'loadstart', () => {
-    projection.mediaError(false);
+    onMediaError(false);
     loadingHud.hide();
     progress.style.removeProperty('--sil-video-range-buffered');
     duration.textContent = '--:--';
@@ -30,8 +30,8 @@ export function bindMediaEvents({ video, progress, duration, projection, setStat
   scope.listen(video, 'volumechange', projection.volume);
   scope.listen(video, 'error', () => {
     loadingHud.hide();
-    projection.mediaError(true);
-    setStatus('视频加载失败，请使用下载链接。', true);
+    onMediaError(true);
+    setStatus(mediaErrorMessage(), true);
   });
   return scope;
 }
