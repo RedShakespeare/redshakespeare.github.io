@@ -139,7 +139,7 @@ function createPlayerInstance({ player, services }) {
   return {
     mount,
     destroy,
-    refreshTheme() { player.dataset.silVideoTheme = isDarkTheme() ? 'dark' : 'light'; }
+    refreshTheme(theme) { player.dataset.silVideoTheme = theme || (isDarkTheme() ? 'dark' : 'light'); }
   };
 }
 

@@ -1,4 +1,4 @@
-import { errorMessage, selector } from './shared.js';
+import { errorMessage, isDarkTheme, selector } from './shared.js';
 import { createDiagnostics } from './diagnostics.js';
 import { createPlayerInstance } from './player-instance.js';
 
@@ -130,7 +130,8 @@ export function createVideoRuntime({
 
   function refreshThemes() {
     if (runtimeDestroyed) return;
-    for (const record of records.values()) record.instance?.refreshTheme();
+    const theme = isDarkTheme() ? 'dark' : 'light';
+    for (const record of records.values()) record.instance?.refreshTheme(theme);
   }
 
   function handleInside(event) {
