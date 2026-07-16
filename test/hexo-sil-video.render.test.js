@@ -49,12 +49,18 @@ test('rendered player exposes native fallback, custom controls, downloads, and r
   assert.doesNotMatch(html, /playsinline/i);
 });
 test('tag arguments position the default player and source overrides drop its subtitles', () => {
-  assert.deepEqual(parseVideoTagArgs(['file=video/other.mp4', 'title=Other']), { file: 'video/other.mp4', title: 'Other' });
+  assert.deepEqual(parseVideoTagArgs(['file=video/other.mp4', 'title=Other', 'download=false']), { file: 'video/other.mp4', title: 'Other', download: 'false' });
   assert.deepEqual(mergeVideo(videoData(), { url: 'https://example.test/other.mp4' }), {
     url: 'https://example.test/other.mp4',
     poster: 'video/poster.webp'
   });
   assert.throws(() => parseVideoTagArgs(['subtitle=bad.ass']), /does not support/);
+});
+
+test('disabled video downloads omit only the video toolbar link', async () => {
+  const html = renderVideoPlayer(await normaliseVideo(post(), videoData({ download: false }), runtime));
+  assert.doesNotMatch(html, /aria-label="下载视频"/);
+  assert.match(html, /下载简体中文字幕/);
 });
 
 test('volume levels expose muted and one-to-three-wave thresholds', () => {

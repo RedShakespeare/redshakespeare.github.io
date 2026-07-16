@@ -35,6 +35,7 @@ function createRenderer({ playerStart, playerEnd }) {
   }
 
   function renderToolbar(video, icons) {
+    const download = video.download === false ? '' : `<a class="sil-video-player__button" href="${escapeHtml(video.source)}" target="_blank" rel="noopener" aria-label="下载视频" title="下载视频">${icons.icon('download', '<path d="M11 3h2v10.2l3.6-3.6L18 11l-6 6-6-6 1.4-1.4 3.6 3.6zM5 19h14v2H5z"/>')}</a>`;
     return `<div class="sil-video-player__toolbar" data-sil-video-controls role="group" aria-label="视频控制" hidden>
       <button class="sil-video-player__button" data-sil-video-action="${PLAYER_ACTIONS.play}" type="button" aria-label="播放" aria-pressed="false">${icons.playIcon}</button>
       <div class="sil-video-player__volume-control">
@@ -44,7 +45,7 @@ function createRenderer({ playerStart, playerEnd }) {
       <button class="sil-video-player__button sil-video-player__rate" data-sil-video-action="${PLAYER_ACTIONS.rate}" type="button" aria-label="播放速度 1 倍">1×</button>
       ${renderSubtitleControl(video, icons)}
       <span class="sil-video-player__toolbar-spacer"></span>
-      <a class="sil-video-player__button" href="${escapeHtml(video.source)}" target="_blank" rel="noopener" aria-label="下载视频" title="下载视频">${icons.icon('download', '<path d="M11 3h2v10.2l3.6-3.6L18 11l-6 6-6-6 1.4-1.4 3.6 3.6zM5 19h14v2H5z"/>')}</a>
+      ${download}
       <button class="sil-video-player__button" data-sil-video-action="${PLAYER_ACTIONS.fullscreen}" type="button" aria-label="进入全屏">${icons.icon('fullscreen', '<path d="M4 4h6v2H6v4H4zm10 0h6v6h-2V6h-4zM4 14h2v4h4v2H4zm14 0h2v6h-6v-2h4z"/>')}</button>
     </div>`;
   }
@@ -84,7 +85,7 @@ ${playerEnd}`;
 }
 
 function parseVideoTagArgs(args) {
-  const allowed = new Set(['file', 'url', 'title', 'poster']);
+  const allowed = new Set(['file', 'url', 'title', 'poster', 'download']);
   const values = {};
   for (const argument of args) {
     const separator = String(argument).indexOf('=');

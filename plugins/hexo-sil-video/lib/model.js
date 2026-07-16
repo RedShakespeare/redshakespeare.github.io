@@ -85,6 +85,17 @@ function createVideoModel({
     return { file, source: mediaFileUrl(options.root, options.media, file), type };
   }
 
+  function normaliseDownload(post, value) {
+    if (value == null) return true;
+    if (typeof value === 'boolean') return value;
+    if (typeof value === 'string') {
+      const normalized = value.trim().toLowerCase();
+      if (normalized === 'true') return true;
+      if (normalized === 'false') return false;
+    }
+    throw videoError(post, '`download` must be a boolean.');
+  }
+
   async function normalisePoster(post, value, options) {
     if (value == null || !String(value).trim()) return '';
     const file = normaliseRelativeFile(value, '`poster`', message => videoError(post, message));
@@ -123,6 +134,7 @@ function createVideoModel({
       title,
       source,
       type,
+      download: normaliseDownload(post, data.download),
       poster,
       preload: options.preload,
       aspectRatio: options.aspectRatio,

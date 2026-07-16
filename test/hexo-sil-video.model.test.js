@@ -9,6 +9,7 @@ test('manifest-backed video resolves media, ASS/SRT tracks, poster, and fonts', 
   const value = await normaliseVideo(post(), videoData(), runtime);
   assert.equal(value.source, '/files/video/demo.mp4');
   assert.equal(value.type, 'video/mp4');
+  assert.equal(value.download, true);
   assert.equal(value.poster, '/files/video/poster.webp');
   assert.equal(value.title, 'Video Article');
   assert.deepEqual(value.subtitles.map(track => [track.format, track.url, track.default]), [
@@ -23,6 +24,14 @@ test('manifest-backed video resolves media, ASS/SRT tracks, poster, and fonts', 
 test('blank video titles fall back to the article title', async () => {
   const value = await normaliseVideo(post({ title: 'Article title' }), videoData({ title: '   ' }), runtime);
   assert.equal(value.title, 'Article title');
+});
+
+test('video download permission is normalised from front matter and rejects invalid values', async () => {
+  const disabled = await normaliseVideo(post(), videoData({ download: false }), runtime);
+  assert.equal(disabled.download, false);
+  const enabled = await normaliseVideo(post(), videoData({ download: 'true' }), runtime);
+  assert.equal(enabled.download, true);
+  await assert.rejects(normaliseVideo(post(), videoData({ download: 'maybe' }), runtime), /download.*boolean/);
 });
 test('manifest-backed video accepts additional local OGG, MPEG, and QuickTime containers', async () => {
   const ogv = await normaliseVideo(post(), videoData({ file: 'video/demo.ogv', subtitles: [] }), runtime);

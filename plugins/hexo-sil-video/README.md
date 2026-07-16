@@ -35,6 +35,7 @@ video:
   file: video/demo.mp4
   title: 演示视频
   poster: video/demo.webp
+  download: false
   subtitles:
     - file: video/demo.ass
       srclang: zh-Hans
@@ -47,6 +48,9 @@ video:
 
 视频源可以将 `file` 替换成绝对 HTTPS `url`。`{% video %}` 可把 Front Matter 播放器放到正文指定位置；
 没有标签时插件自动将播放器放到文章开头。ASS/SRT 必须使用 UTF-8。
+
+`download` 默认为 `true`；设置为 `false`，或在标签中使用 `{% video file=video/demo.mp4 download=false %}`，
+会隐藏视频工具栏中的下载按钮。
 
 ## 操作
 
