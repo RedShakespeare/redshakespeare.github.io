@@ -119,6 +119,49 @@ test('player runtime module imports without browser globals or startup side effe
   assert.equal(typeof runtime.refreshOnePlayer, 'function');
 });
 
+test('production runtime services expose the complete non-optional contract', async () => {
+  const { createRuntimeServices } = await loadRuntime('runtime-services.js');
+  const dom = new JSDOM('<!doctype html><body><aside><p></p></aside></body>', { pretendToBeVisual: true });
+  const player = dom.window.document.querySelector('aside');
+  const status = dom.window.document.querySelector('p');
+  const services = createRuntimeServices({ player, status, windowRef: dom.window });
+  assert.deepEqual(Object.keys(services).sort(), ['clock', 'diagnostics', 'state', 'ui']);
+  assert.equal(typeof services.clock.requestAnimationFrame, 'function');
+  assert.equal(typeof services.diagnostics.report, 'function');
+  assert.equal(typeof services.state.set, 'function');
+  assert.equal(typeof services.ui.controlsOpen, 'function');
+  services.state.destroy();
+  services.ui.destroy();
+  dom.window.close();
+});
+
+test('media projection directly maps volume and repeat state to UI', async () => {
+  const { createMediaProjection } = await loadRuntime('media-projection.js');
+  const dom = new JSDOM('<!doctype html><body><aside><video></video><input><span data-current></span><span data-duration></span><button data-play></button><button data-mute></button><button data-repeat></button></aside></body>');
+  const document = dom.window.document;
+  const player = document.querySelector('aside');
+  const video = document.querySelector('video');
+  const progress = document.querySelector('input');
+  const volume = document.createElement('input');
+  video.volume = 0.4;
+  video.loop = true;
+  const projection = createMediaProjection({
+    player, video, progress, volume,
+    current: document.querySelector('[data-current]'),
+    duration: document.querySelector('[data-duration]'),
+    play: document.querySelector('[data-play]'),
+    mute: document.querySelector('[data-mute]'),
+    repeat: document.querySelector('[data-repeat]'),
+    onPlaybackStateChange() {}
+  });
+  projection.volume();
+  projection.repeat();
+  assert.equal(player.dataset.silVideoVolumeLevel, 'medium');
+  assert.equal(volume.getAttribute('aria-valuetext'), '40%');
+  assert.equal(player.dataset.silVideoLoop, 'true');
+  dom.window.close();
+});
+
 test('refreshOnePlayer shares initialise and theme refresh projection', async () => {
   const { refreshOnePlayer } = await loadRuntime('player.js');
   const dom = new JSDOM('<!doctype html><body><aside class="sil-video-player" data-sil-video-player data-sil-video-model="model"></aside></body>');
