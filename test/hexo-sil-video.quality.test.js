@@ -4,7 +4,7 @@ const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const path = require('node:path');
 const test = require('node:test');
-const { decisionCount, functionBodies } = require('./helpers/javascript-source-metrics');
+const { decisionCount, functionBodies, unusedVariableBindings } = require('./helpers/javascript-source-metrics');
 
 const pluginRoot = path.join(__dirname, '..', 'plugins', 'hexo-sil-video');
 const runtimeRoot = path.join(pluginRoot, 'runtime');
@@ -64,4 +64,21 @@ test('complexity metrics include declarations, methods, and arrow functions', ()
   assert.ok(functions.some(fn => fn.name.startsWith('<arrow@') && decisionCount(fn.body) === 1));
   assert.ok(functions.some(fn => fn.name === 'template' && decisionCount(fn.body) === 1));
   assert.ok(functions.some(fn => fn.name === 'regex' && decisionCount(fn.body) === 1));
+});
+
+test('plugin source contains no unused simple variable bindings', () => {
+  for (const filename of qualityFiles) {
+    const unused = unusedVariableBindings(fs.readFileSync(filename, 'utf8'));
+    assert.deepEqual(unused, [], `${path.relative(pluginRoot, filename)} has unused bindings: ${unused.map(binding => `${binding.name}:${binding.line}`).join(', ')}`);
+  }
+});
+
+test('unused binding metrics distinguish declarations from property names', () => {
+  const source = `
+    const used = 1;
+    const unused = 2;
+    const object = { used, method() { return this.unused; } };
+    consume(object);
+  `;
+  assert.deepEqual(unusedVariableBindings(source), [{ name: 'unused', line: 3 }]);
 });
