@@ -105,27 +105,32 @@ function createVideoConfig({ builtinSkins, fontMimeTypes, runtimeRoutes }) {
     };
   }
 
-  function toVideoConfig(siteConfig = {}) {
-    if (Object.prototype.hasOwnProperty.call(siteConfig, 'video') && siteConfig.video != null && !isObject(siteConfig.video)) {
-      throw new Error('Video configuration error: video must be a mapping.');
-    }
-    const raw = isObject(siteConfig.video) ? siteConfig.video : {};
-    if (Object.prototype.hasOwnProperty.call(raw, 'media') && raw.media != null && !isObject(raw.media)) {
-      throw new Error('Video configuration error: media must be a mapping.');
-    }
-    const media = isObject(raw.media) ? raw.media : {};
-    const assets = raw.assets == null ? {} : raw.assets;
-    const subtitles = raw.subtitles == null ? {} : raw.subtitles;
-    if (!isObject(assets)) throw new Error('Video configuration error: assets must be a mapping.');
-    if (!isObject(subtitles)) throw new Error('Video configuration error: subtitles must be a mapping.');
+  function optionalMapping(value, field) {
+    if (value == null) return {};
+    if (!isObject(value)) throw new Error(`Video configuration error: ${field} must be a mapping.`);
+    return value;
+  }
+
+  function rejectLegacyMediaFields(media) {
     for (const field of ['manifest', 'object_prefix', 'public_path']) {
-      if (Object.prototype.hasOwnProperty.call(media, field)) {
-        const replacement = field === 'manifest' ? 'assets.manifest' : 'media.prefix';
-        throw new Error(`Video configuration error: media.${field} was replaced by ${replacement}.`);
-      }
+      if (!Object.prototype.hasOwnProperty.call(media, field)) continue;
+      const replacement = field === 'manifest' ? 'assets.manifest' : 'media.prefix';
+      throw new Error(`Video configuration error: media.${field} was replaced by ${replacement}.`);
     }
-    const skin = raw.skin === false ? { builtin: false } : raw.skin == null ? {} : raw.skin;
+  }
+
+  function normaliseSkinConfig(value) {
+    const skin = value === false ? { builtin: false } : value == null ? {} : value;
     if (!isObject(skin)) throw new Error('Video configuration error: skin must be a mapping or false.');
+    return { builtin: normaliseBuiltinSkin(skin.builtin), override: normaliseSkinOverride(skin.override) };
+  }
+
+  function toVideoConfig(siteConfig = {}) {
+    const raw = optionalMapping(siteConfig.video, 'video');
+    const media = optionalMapping(raw.media, 'media');
+    const assets = optionalMapping(raw.assets, 'assets');
+    const subtitles = optionalMapping(raw.subtitles, 'subtitles');
+    rejectLegacyMediaFields(media);
     const common = normaliseRuntimeFields({
       media: { prefix: media.prefix, sourceDir: media.source_dir, url: media.url },
       preload: raw.preload,
@@ -138,7 +143,7 @@ function createVideoConfig({ builtinSkins, fontMimeTypes, runtimeRoutes }) {
       preload: common.preload,
       aspectRatio: common.aspectRatio,
       subtitles: common.subtitles,
-      skin: { builtin: normaliseBuiltinSkin(skin.builtin), override: normaliseSkinOverride(skin.override) }
+      skin: normaliseSkinConfig(raw.skin)
     };
   }
 

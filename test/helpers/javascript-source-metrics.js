@@ -1,66 +1,64 @@
 'use strict';
 
-function maskNonCode(source) {
-  let output = '';
-  let state = 'code';
-  for (let index = 0; index < source.length; index += 1) {
-    const character = source[index];
-    const next = source[index + 1];
-    if (state === 'code' && character === '/' && next === '/') { state = 'line'; output += '  '; index += 1; continue; }
-    if (state === 'code' && character === '/' && next === '*') { state = 'block'; output += '  '; index += 1; continue; }
-    if (state === 'code' && (character === '\'' || character === '"' || character === '`')) { state = character; output += ' '; continue; }
-    if (state === 'line' && character === '\n') { state = 'code'; output += '\n'; continue; }
-    if (state === 'block' && character === '*' && next === '/') { state = 'code'; output += '  '; index += 1; continue; }
-    if ((state === '\'' || state === '"' || state === '`') && character === '\\') { output += '  '; index += 1; continue; }
-    if (state === character && (state === '\'' || state === '"' || state === '`')) { state = 'code'; output += ' '; continue; }
-    output += state === 'code' ? character : character === '\n' ? '\n' : ' ';
+const acorn = require('acorn');
+
+const FUNCTION_TYPES = new Set(['ArrowFunctionExpression', 'FunctionDeclaration', 'FunctionExpression']);
+const DECISION_TYPES = new Set([
+  'CatchClause',
+  'ConditionalExpression',
+  'DoWhileStatement',
+  'ForInStatement',
+  'ForOfStatement',
+  'ForStatement',
+  'IfStatement',
+  'WhileStatement'
+]);
+
+function childNodes(node) {
+  const children = [];
+  for (const [key, value] of Object.entries(node)) {
+    if (key === 'loc' || key === 'start' || key === 'end') continue;
+    if (Array.isArray(value)) children.push(...value.filter(item => item && typeof item.type === 'string'));
+    else if (value && typeof value.type === 'string') children.push(value);
   }
-  return output;
+  return children;
+}
+
+function functionName(node, parent) {
+  if (node.id?.name) return node.id.name;
+  if (parent?.type === 'VariableDeclarator' && parent.id.type === 'Identifier') return parent.id.name;
+  if ((parent?.type === 'Property' || parent?.type === 'MethodDefinition') && !parent.computed) {
+    return parent.key.name || parent.key.value;
+  }
+  return `<arrow@${node.loc.start.line}>`;
 }
 
 function functionBodies(source) {
-  const code = maskNonCode(source);
-  const rangesByStart = new Map();
-  const patterns = [
-    { pattern: /\b(?:async\s+)?function\s+([A-Za-z_$][\w$]*)\s*\([^)]*\)\s*\{/g, name: match => match[1] },
-    { pattern: /\b(?:async\s+)?([A-Za-z_$][\w$]*)\s*\([^)]*\)\s*\{/g, name: match => match[1] },
-    { pattern: /\b(?:const|let|var)\s+([A-Za-z_$][\w$]*)\s*=\s*(?:async\s*)?(?:\([^)]*\)|[A-Za-z_$][\w$]*)\s*=>\s*\{/g, name: match => match[1] },
-    { pattern: /(?:async\s*)?(?:\([^)]*\)|[A-Za-z_$][\w$]*)\s*=>\s*\{/g, name: match => `<arrow@${code.slice(0, match.index).split('\n').length}>` }
-  ];
-  const controls = new Set(['catch', 'for', 'if', 'switch', 'while', 'with']);
+  const ast = acorn.parse(source, { ecmaVersion: 'latest', locations: true, sourceType: 'module' });
+  const functions = [];
 
-  function addRange(match, name) {
-    if (controls.has(name)) return;
-    const bodyStart = match.index + match[0].length;
-    let depth = 1;
-    let index = bodyStart;
-    while (index < code.length && depth > 0) {
-      if (code[index] === '{') depth += 1;
-      else if (code[index] === '}') depth -= 1;
-      index += 1;
-    }
-    if (!rangesByStart.has(bodyStart)) rangesByStart.set(bodyStart, { name, start: bodyStart, end: index - 1 });
+  function visit(node, parent = null) {
+    if (FUNCTION_TYPES.has(node.type)) functions.push({ name: functionName(node, parent), body: node.body });
+    for (const child of childNodes(node)) visit(child, node);
   }
 
-  for (const { pattern, name } of patterns) {
-    for (const match of code.matchAll(pattern)) addRange(match, name(match));
-  }
-
-  const ranges = Array.from(rangesByStart.values());
-  return ranges.map(range => {
-    const characters = Array.from(code.slice(range.start, range.end));
-    for (const nested of ranges) {
-      if (nested.start <= range.start || nested.end > range.end) continue;
-      const start = nested.start - range.start;
-      const end = nested.end - range.start;
-      characters.fill(' ', start, end);
-    }
-    return { name: range.name, body: characters.join('') };
-  });
+  visit(ast);
+  return functions;
 }
 
 function decisionCount(body) {
-  return (body.match(/\b(?:if|catch|for|while|case)\b|&&|\|\||\?\?/g) || []).length;
+  let count = 0;
+
+  function visit(node, root = false) {
+    if (!root && FUNCTION_TYPES.has(node.type)) return;
+    if (DECISION_TYPES.has(node.type)) count += 1;
+    if (node.type === 'SwitchCase' && node.test) count += 1;
+    if (node.type === 'LogicalExpression' && ['&&', '||', '??'].includes(node.operator)) count += 1;
+    for (const child of childNodes(node)) visit(child);
+  }
+
+  visit(body, true);
+  return count;
 }
 
 module.exports = { decisionCount, functionBodies };

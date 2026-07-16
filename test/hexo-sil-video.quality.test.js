@@ -6,8 +6,14 @@ const path = require('node:path');
 const test = require('node:test');
 const { decisionCount, functionBodies } = require('./helpers/javascript-source-metrics');
 
-const runtimeRoot = path.join(__dirname, '..', 'plugins', 'hexo-sil-video', 'runtime');
+const pluginRoot = path.join(__dirname, '..', 'plugins', 'hexo-sil-video');
+const runtimeRoot = path.join(pluginRoot, 'runtime');
 const runtimeFiles = fs.readdirSync(runtimeRoot).filter(name => name.endsWith('.js'));
+const qualityFiles = [
+  ...runtimeFiles.map(name => path.join(runtimeRoot, name)),
+  ...fs.readdirSync(path.join(pluginRoot, 'lib')).filter(name => name.endsWith('.js')).map(name => path.join(pluginRoot, 'lib', name)),
+  path.join(pluginRoot, 'index.js')
+];
 const read = name => fs.readFileSync(path.join(runtimeRoot, name), 'utf8');
 
 test('video runtime static contracts reject legacy dependencies and broad ref forwarding', () => {
@@ -32,12 +38,12 @@ test('subtitle controller only uses the renderer manager public transaction API'
   assert.deepEqual([...new Set(calls)].sort(), ['destroy', 'disableTrack', 'loadTrack', 'resize']);
 });
 
-test('runtime functions stay below their decision-complexity budget', () => {
+test('plugin functions stay below their decision-complexity budget', () => {
   const budget = 13;
-  for (const name of runtimeFiles) {
-    for (const fn of functionBodies(read(name))) {
+  for (const filename of qualityFiles) {
+    for (const fn of functionBodies(fs.readFileSync(filename, 'utf8'))) {
       const decisions = decisionCount(fn.body);
-      assert.ok(decisions <= budget, `${name}:${fn.name} complexity ${decisions} exceeds ${budget}`);
+      assert.ok(decisions <= budget, `${path.relative(pluginRoot, filename)}:${fn.name} complexity ${decisions} exceeds ${budget}`);
     }
   }
 });
@@ -48,10 +54,14 @@ test('complexity metrics include declarations, methods, and arrow functions', ()
     const object = { method(value) { while (value) value -= 1; } };
     const namedArrow = value => { if (value && value.ready) return value; };
     values.map(value => { if (value) return value; });
+    const template = value => \`prefix \${value ? 'yes' : 'no'}\`;
+    const regex = value => /[{()}]/.test(value) && value !== '';
   `;
   const functions = functionBodies(source);
   assert.ok(functions.some(fn => fn.name === 'declared' && decisionCount(fn.body) === 1));
   assert.ok(functions.some(fn => fn.name === 'method' && decisionCount(fn.body) === 1));
   assert.ok(functions.some(fn => fn.name === 'namedArrow' && decisionCount(fn.body) === 2));
   assert.ok(functions.some(fn => fn.name.startsWith('<arrow@') && decisionCount(fn.body) === 1));
+  assert.ok(functions.some(fn => fn.name === 'template' && decisionCount(fn.body) === 1));
+  assert.ok(functions.some(fn => fn.name === 'regex' && decisionCount(fn.body) === 1));
 });
