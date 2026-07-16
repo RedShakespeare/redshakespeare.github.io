@@ -46,6 +46,34 @@ export function createSubtitleController({
     isCurrent
   });
 
+  async function disableTrack(token) {
+    try {
+      const disabled = await rendererManager.disableTrack(token);
+      if (!disabled || !isCurrent(token)) return false;
+      selectedIndex = -1;
+      activeContent = '';
+      menuView.sync(selectedIndex);
+      state.clear('subtitles');
+      return true;
+    } catch (error) {
+      if (isCurrent(token)) state.set('subtitles', `字幕关闭失败：${error.message}`, { error: true });
+      return false;
+    }
+  }
+
+  function handleSelectionError(error, token, previousIndex, previousContent) {
+    if (error?.name === 'AbortError' || !isCurrent(token)) return false;
+    selectedIndex = error?.rollbackError ? -1 : previousIndex;
+    activeContent = error?.rollbackError ? '' : previousContent;
+    menuView.sync(selectedIndex);
+    const message = error?.code === 'SIL_VIDEO_SUBTITLE_CAPABILITY'
+      ? '当前浏览器不支持高级字幕渲染。'
+      : `字幕加载失败：${error.message}`;
+    diagnostics.report('subtitle.select', error);
+    state.set('subtitles', message, { error: true });
+    return false;
+  }
+
   async function select(index) {
     if (destroyed) return false;
     const token = ++requestToken;
@@ -56,23 +84,7 @@ export function createSubtitleController({
     menuView.setOpen(false);
     const previousIndex = selectedIndex;
     const previousContent = activeContent;
-    if (index < 0) {
-      try {
-        const disabled = await rendererManager.disableTrack(token);
-        if (!disabled || !isCurrent(token)) return false;
-        selectedIndex = -1;
-        activeContent = '';
-        menuView.sync(selectedIndex);
-        state.clear('subtitles');
-        return true;
-      } catch (error) {
-        if (isCurrent(token)) {
-          const message = `字幕关闭失败：${error.message}`;
-          state.set('subtitles', message, { error: true });
-        }
-        return false;
-      }
-    }
+    if (index < 0) return disableTrack(token);
     const track = tracks[index];
     if (!track) return false;
     state.set('subtitles', `正在加载${track.label}字幕…`, { level: 'loading' });
@@ -89,16 +101,7 @@ export function createSubtitleController({
       state.clear('subtitles');
       return true;
     } catch (error) {
-      if (error?.name === 'AbortError' || !isCurrent(token)) return false;
-      selectedIndex = error?.rollbackError ? -1 : previousIndex;
-      activeContent = error?.rollbackError ? '' : previousContent;
-      menuView.sync(selectedIndex);
-      const message = error?.code === 'SIL_VIDEO_SUBTITLE_CAPABILITY'
-        ? '当前浏览器不支持高级字幕渲染。'
-        : `字幕加载失败：${error.message}`;
-      diagnostics.report('subtitle.select', error);
-      state.set('subtitles', message, { error: true });
-      return false;
+      return handleSelectionError(error, token, previousIndex, previousContent);
     }
   }
 

@@ -102,19 +102,17 @@ export function createPointerController({ player, video, stage, viewport, media,
     try { viewport.setPointerCapture(event.pointerId); } catch { /* Pointer capture is optional. */ }
   }
 
-  function moveGesture(event) {
-    if (!gesture || event.pointerId !== gesture.pointerId || !pointerIsPrimaryTouch(event)) return;
-    const deltaX = event.clientX - gesture.startX;
-    const deltaY = event.clientY - gesture.startY;
-    if (!gesture.mode) {
-      if (Math.max(Math.abs(deltaX), Math.abs(deltaY)) < TOUCH_GESTURE_THRESHOLD) return;
-      gesture.mode = Math.abs(deltaX) >= Math.abs(deltaY)
-        ? 'progress'
-        : gesture.startX - gesture.bounds.left < gesture.bounds.width / 2 ? 'brightness' : 'volume';
-      clearViewportClickTimer();
-      suppressViewportClickUntil = now() + GESTURE_CLICK_SUPPRESS_DELAY;
-    }
-    if (event.cancelable) event.preventDefault();
+  function chooseGestureMode(deltaX, deltaY) {
+    if (Math.max(Math.abs(deltaX), Math.abs(deltaY)) < TOUCH_GESTURE_THRESHOLD) return false;
+    gesture.mode = Math.abs(deltaX) >= Math.abs(deltaY)
+      ? 'progress'
+      : gesture.startX - gesture.bounds.left < gesture.bounds.width / 2 ? 'brightness' : 'volume';
+    clearViewportClickTimer();
+    suppressViewportClickUntil = now() + GESTURE_CLICK_SUPPRESS_DELAY;
+    return true;
+  }
+
+  function projectGesture(deltaX, deltaY) {
     if (gesture.mode === 'progress') {
       if (!Number.isFinite(video.duration) || video.duration <= 0) return;
       gesture.targetTime = clamp(gesture.startTime + deltaX / gesture.bounds.width * TOUCH_SEEK_SECONDS, 0, video.duration);
@@ -124,6 +122,15 @@ export function createPointerController({ player, video, stage, viewport, media,
     } else if (gesture.mode === 'volume') {
       media.setGestureVolume(gesture.startVolume - deltaY / gesture.bounds.height);
     }
+  }
+
+  function moveGesture(event) {
+    if (!gesture || event.pointerId !== gesture.pointerId || !pointerIsPrimaryTouch(event)) return;
+    const deltaX = event.clientX - gesture.startX;
+    const deltaY = event.clientY - gesture.startY;
+    if (!gesture.mode && !chooseGestureMode(deltaX, deltaY)) return;
+    if (event.cancelable) event.preventDefault();
+    projectGesture(deltaX, deltaY);
   }
 
   function finishGesture(event, commit) {

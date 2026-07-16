@@ -2,37 +2,35 @@ import { createListenerScope } from './shared.js';
 
 export function createKeyboardController({ player, video, stage, viewport, progress, media, fullscreen }) {
   const scope = createListenerScope();
+  const commands = new Map([
+    ['space', () => media.togglePlay(true)],
+    ['enter', () => fullscreen.toggle()],
+    ['arrowup', () => media.adjustVolume(0.05)],
+    ['arrowdown', () => media.adjustVolume(-0.05)],
+    ['arrowleft', () => media.seek(-5)],
+    ['arrowright', () => media.seek(5)],
+    ['m', () => media.toggleMute()]
+  ]);
+
+  function normaliseKey(event) {
+    const key = event.key.toLowerCase();
+    return event.key === ' ' || key === 'spacebar' ? 'space' : key;
+  }
 
   function handleKeydown(event) {
     if (fullscreen.active()) fullscreen.showUi();
-    const key = event.key.toLowerCase();
-    const space = event.key === ' ' || key === 'spacebar';
+    const key = normaliseKey(event);
+    const space = key === 'space';
     const surfaceTarget = event.target === player || event.target === stage || event.target === video || event.target === viewport;
     if (!surfaceTarget && !(space && event.target === progress)) return;
-    if (space) {
-      event.preventDefault();
-      void media.togglePlay(true);
-    } else if (event.key === 'Enter') {
-      event.preventDefault();
-      void fullscreen.toggle();
-    } else if (event.key === 'Escape') {
+    if (key === 'escape') {
       if (fullscreen.active()) void fullscreen.toggle();
-    } else if (event.key === 'ArrowUp') {
-      event.preventDefault();
-      media.adjustVolume(0.05);
-    } else if (event.key === 'ArrowDown') {
-      event.preventDefault();
-      media.adjustVolume(-0.05);
-    } else if (event.key === 'ArrowLeft') {
-      event.preventDefault();
-      media.seek(-5);
-    } else if (event.key === 'ArrowRight') {
-      event.preventDefault();
-      media.seek(5);
-    } else if (key === 'm') {
-      event.preventDefault();
-      media.toggleMute();
+      return;
     }
+    const command = commands.get(key);
+    if (!command) return;
+    event.preventDefault();
+    void command();
   }
 
   scope.listen(player, 'keydown', handleKeydown);
