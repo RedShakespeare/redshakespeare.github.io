@@ -66,6 +66,13 @@ function createResourceValidator({ fs, path, videoError }) {
       throw videoError(post, `local ${field} file does not exist: ${file} (${error.code || error.message}).`);
     }
     if (!stat.isFile() || stat.size <= 0) throw videoError(post, `local ${field} path must be a non-empty regular file: ${file}.`);
+    const [realMediaRoot, realLocalPath] = await Promise.all([
+      cachedRead(options.resourceCache, `real:${mediaRoot}`, () => fs.realpath(mediaRoot)),
+      cachedRead(options.resourceCache, `real:${localPath}`, () => fs.realpath(localPath))
+    ]);
+    if (realLocalPath !== realMediaRoot && !realLocalPath.startsWith(`${realMediaRoot}${path.sep}`)) {
+      throw videoError(post, `${field} must resolve below video.media.source_dir without symbolic-link escapes.`);
+    }
     return { size: stat.size, type: expectation.localType || '' };
   }
 

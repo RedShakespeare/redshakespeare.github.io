@@ -23,7 +23,7 @@ function createVideoConfig({ builtinSkins, fontMimeTypes, runtimeRoutes }) {
     if (typeof value !== 'string') throw new Error('Video configuration error: skin.override must be a root-relative CSS path.');
     const override = value.trim();
     const segments = override.slice(1).split('/');
-    if (!override.startsWith('/') || override.startsWith('//') || !override.endsWith('.css') || override.includes('\\') || override.includes('?') || override.includes('#') || segments.some(segment => !segment || segment === '.' || segment === '..')) {
+    if (!override.startsWith('/') || override.startsWith('//') || !override.endsWith('.css') || /[\\%?#]/.test(override) || segments.some(segment => !segment || segment === '.' || segment === '..')) {
       throw new Error('Video configuration error: skin.override must be a root-relative CSS path without query strings or dot segments.');
     }
     return override;

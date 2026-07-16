@@ -3,7 +3,7 @@
 function createPathConfig() {
   function normaliseRelativeDirectory(value, fallback, field) {
     const raw = String(value == null ? fallback : value).trim();
-    if (!raw || raw.startsWith('/') || /[^\x21-\x7E]/.test(raw) || raw.includes('\\') || raw.includes('?') || raw.includes('#')) {
+    if (!raw || raw.startsWith('/') || /[^\x21-\x7E]/.test(raw) || /[\\%?#]/.test(raw)) {
       throw new Error(`Video configuration error: ${field} must be an ASCII relative directory.`);
     }
     const directory = raw.replace(/^\/+|\/+$/g, '');
@@ -18,7 +18,7 @@ function createPathConfig() {
     const file = String(value || '').trim();
     if (!file) throw errorFactory(`${field} must be a non-empty relative path.`);
     if (/[^\x21-\x7E]/.test(file)) throw errorFactory(`${field} must use an ASCII path.`);
-    if (file.includes('\\') || file.startsWith('/') || file.includes('?') || file.includes('#')) {
+    if (file.startsWith('/') || /[\\%?#]/.test(file)) {
       throw errorFactory(`${field} must be a plain relative path below video.media.prefix.`);
     }
     const segments = file.split('/');

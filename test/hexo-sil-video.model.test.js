@@ -1,6 +1,6 @@
 'use strict';
 
-const { assert, normaliseVideo, post, RUNTIME_ROUTES, runtime, subsrt, test, videoData } = require('./helpers/hexo-sil-video-fixture');
+const { assert, normaliseVideo, post, RUNTIME_ROUTES, runtime, sourceRoot, subsrt, test, videoData } = require('./helpers/hexo-sil-video-fixture');
 const { createResourceValidator } = require('../plugins/hexo-sil-video/lib/resource-validator');
 const fs = require('node:fs/promises');
 const path = require('node:path');
@@ -147,6 +147,29 @@ test('resource cache shares backend reads without sharing validation or post con
     /Font: asset manifest MIME type.*expected font\/woff2/
   );
   assert.equal(calls, 2);
+});
+
+test('local resource validation rejects intermediate symbolic-link escapes', async () => {
+  const outside = path.join(path.dirname(sourceRoot), 'outside');
+  const link = path.join(sourceRoot, 'files', 'escape');
+  await fs.mkdir(outside, { recursive: true });
+  await fs.writeFile(path.join(outside, 'demo.mp4'), 'outside');
+  await fs.symlink(outside, link, 'dir');
+  const { validateLocalEntry } = createResourceValidator({
+    fs,
+    path,
+    videoError: (article, message) => new Error(`${article.title}: ${message}`)
+  });
+  try {
+    await assert.rejects(validateLocalEntry(post(), 'escape/demo.mp4', {
+      assetsEnabled: false,
+      sourceRoot,
+      media: { prefix: 'files', sourceDir: 'files' },
+      resourceCache: new Map()
+    }, { type: 'video/mp4', localType: 'video/mp4', test: type => type === 'video/mp4', description: 'video' }), /symbolic-link escapes/);
+  } finally {
+    await fs.rm(link, { force: true });
+  }
 });
 
 test('SRT conversion produces an ASS track suitable for JASSUB', () => {

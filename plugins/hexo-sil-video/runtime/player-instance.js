@@ -14,7 +14,11 @@ function parseModel(player) {
   if (!source) throw new Error('播放器配置缺失。');
   const bytes = Uint8Array.from(atob(source), character => character.charCodeAt(0));
   const model = JSON.parse(new TextDecoder('utf-8', { fatal: true }).decode(bytes));
-  if (model.version !== contract.MODEL_VERSION || !Array.isArray(model.subtitles) || !model.runtime?.subtitles) {
+  const routes = ['subtitles', 'worker', 'wasm', 'modernWasm', 'defaultFont'];
+  const validRoutes = routes.every(name => typeof model.runtime?.[name] === 'string' && model.runtime[name]);
+  const validFonts = model.fonts && typeof model.fonts === 'object' && !Array.isArray(model.fonts)
+    && Object.values(model.fonts).every(value => typeof value === 'string' && value);
+  if (model.version !== contract.MODEL_VERSION || !Array.isArray(model.subtitles) || !validRoutes || !validFonts || typeof model.fallbackFont !== 'string') {
     throw new Error('播放器配置版本不受支持。');
   }
   return model;

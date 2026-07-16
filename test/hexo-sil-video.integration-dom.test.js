@@ -160,3 +160,25 @@ test('browser runtime reports missing view fields and preserves native controls'
     dom.window.close();
   }
 });
+
+test('browser runtime rejects incomplete resource routes before mounting controllers', async () => {
+  const html = renderVideoPlayer({
+    title: 'Incomplete routes', source: '/video.mp4', type: 'video/mp4', poster: '', preload: 'metadata',
+    aspectRatio: '16/9', subtitles: [], fonts: {}, fallbackFont: '',
+    runtime: { subtitles: '/subtitles.js', wasm: '/worker.wasm', modernWasm: '/modern.wasm', defaultFont: '/font.woff2' }
+  });
+  const dom = new JSDOM(`<!doctype html><body>${html}</body>`, {
+    runScripts: 'outside-only', pretendToBeVisual: true, url: 'https://example.test/'
+  });
+  try {
+    dom.window.TextDecoder = TextDecoder;
+    dom.window.console.error = () => {};
+    dom.window.eval((await buildBrowserBundle(path.join(__dirname, '..', 'plugins', 'hexo-sil-video', 'runtime', 'browser-entry.js'), 'iife')).toString('utf8'));
+    const player = dom.window.document.querySelector('[data-sil-video-player]');
+    assert.equal(player.dataset.silVideoReady, undefined);
+    assert.equal(player.dataset.silVideoError, 'true');
+    assert.equal(player.querySelector('video').controls, true);
+  } finally {
+    dom.window.close();
+  }
+});
