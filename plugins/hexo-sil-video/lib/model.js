@@ -2,6 +2,7 @@
 
 const fs = require('node:fs/promises');
 const path = require('node:path');
+const { createResourceValidator } = require('./resource-validator');
 
 function createVideoModel({
   fontMimeTypes,
@@ -20,6 +21,8 @@ function createVideoModel({
     return new Error(`Video metadata error in ${identifier}: ${message}`);
   }
 
+  const { validateLocalEntry } = createResourceValidator({ fs, path, videoError });
+
   async function localEntry(post, file, options, expectation) {
     const field = expectation.description;
     const key = `${options.media.prefix}/${file}`;
@@ -33,45 +36,6 @@ function createVideoModel({
       options.resourceCache.delete(key);
       throw error;
     }
-  }
-
-  async function validateLocalEntry(post, file, options, expectation) {
-    const field = expectation.description;
-    const key = `${options.media.prefix}/${file}`;
-    const capability = options.assetsEnabled ? options.assetCapability : null;
-    if (options.assetsEnabled && !capability && typeof options.onMissingAssets === 'function') options.onMissingAssets();
-    if (capability) {
-      let entry;
-      try { entry = capability.getObject(key); } catch (error) {
-        throw videoError(post, error.message.replace(/^Asset manifest error:\s*/, ''));
-      }
-      if (!entry) throw videoError(post, `asset manifest does not contain ${key}. Refresh or publish the asset manifest after adding the file.`);
-      if (expectation.type && entry.type !== expectation.type) throw videoError(post, `asset manifest MIME type for ${key} is ${entry.type}, expected ${expectation.type}.`);
-      if (expectation.types && !expectation.types.has(entry.type)) throw videoError(post, `asset manifest MIME type for ${key} is ${entry.type}, expected ${Array.from(expectation.types).join(' or ')}.`);
-      if (expectation.test && !expectation.test(entry.type)) throw videoError(post, `asset manifest MIME type for ${key} is ${entry.type}, expected ${field}.`);
-      return entry;
-    }
-    if (expectation.localType && expectation.type && expectation.localType !== expectation.type) {
-      throw videoError(post, `${field} extension does not match expected MIME type ${expectation.type}.`);
-    }
-    if (expectation.localType && expectation.types && !expectation.types.has(expectation.localType)) {
-      throw videoError(post, `${field} extension does not match an accepted MIME type.`);
-    }
-    if (expectation.localType && expectation.test && !expectation.test(expectation.localType)) {
-      throw videoError(post, `${field} extension does not match the expected type.`);
-    }
-    const mediaRoot = path.resolve(options.sourceRoot, options.media.sourceDir);
-    if (mediaRoot !== options.sourceRoot && !mediaRoot.startsWith(`${options.sourceRoot}${path.sep}`)) {
-      throw videoError(post, '`media.source_dir` must resolve below the Hexo source directory.');
-    }
-    const localPath = path.resolve(mediaRoot, file);
-    if (!localPath.startsWith(`${mediaRoot}${path.sep}`)) throw videoError(post, `${field} must resolve below video.media.source_dir.`);
-    let stat;
-    try { stat = await fs.lstat(localPath); } catch (error) {
-      throw videoError(post, `local ${field} file does not exist: ${file} (${error.code || error.message}).`);
-    }
-    if (!stat.isFile() || stat.size <= 0) throw videoError(post, `local ${field} path must be a non-empty regular file: ${file}.`);
-    return { size: stat.size, type: expectation.localType || '' };
   }
 
   async function normaliseSubtitles(post, value, options) {

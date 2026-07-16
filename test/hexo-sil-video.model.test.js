@@ -65,6 +65,28 @@ test('legacy mode validates local files and external video URLs stay HTTPS-only'
   ] }), runtime), /only one default/);
 });
 
+test('manifest resource failures preserve stable player-facing diagnostics', async () => {
+  const manifestRuntime = getObject => ({ ...runtime, assetCapability: { getObject } });
+  await assert.rejects(
+    normaliseVideo(post(), videoData({ subtitles: [] }), manifestRuntime(() => { throw new Error('Asset manifest error: broken manifest'); })),
+    /broken manifest/
+  );
+  await assert.rejects(
+    normaliseVideo(post(), videoData({ subtitles: [] }), manifestRuntime(() => null)),
+    /asset manifest does not contain files\/video\/demo\.mp4/
+  );
+  await assert.rejects(
+    normaliseVideo(post(), videoData({ subtitles: [] }), manifestRuntime(() => ({ type: 'video/webm' }))),
+    /expected video\/mp4/
+  );
+  await assert.rejects(
+    normaliseVideo(post(), videoData({ poster: 'video/poster.webp', subtitles: [] }), manifestRuntime(key => ({
+      type: key.endsWith('.mp4') ? 'video/mp4' : 'application/octet-stream'
+    }))),
+    /expected an image MIME type/
+  );
+});
+
 test('SRT conversion produces an ASS track suitable for JASSUB', () => {
   const converted = subsrt.convert('1\n00:00:00,000 --> 00:00:01,000\nHello\n', { from: 'srt', to: 'ass' });
   assert.match(converted, /ScriptType: v4\.00\+/);
