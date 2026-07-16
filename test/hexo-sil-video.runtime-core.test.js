@@ -181,3 +181,42 @@ test('video runtime destroy is idempotent and reports instance cleanup failures'
   assert.equal(dom.window.__hexoSilVideoRuntime, undefined);
   dom.window.close();
 });
+
+test('removed player recovers when destroy fails and the node reconnects', async () => {
+  const { createVideoRuntime } = await loadRuntime('player.js');
+  const dom = new JSDOM('<!doctype html><body><aside class="sil-video-player" data-sil-video-player data-sil-video-model="model"></aside></body>');
+  const player = dom.window.document.querySelector('aside');
+  const diagnostics = [];
+  let observeMutations;
+  let instances = 0;
+  class Observer {
+    constructor(callback) { observeMutations = callback; }
+    observe() {}
+    disconnect() {}
+  }
+  const runtime = createVideoRuntime({
+    windowRef: dom.window,
+    documentRef: dom.window.document,
+    ElementRef: dom.window.Element,
+    MutationObserverRef: Observer,
+    queueMicrotaskRef: queueMicrotask,
+    diagnostics: { report: (...args) => diagnostics.push(args) },
+    createInstance: () => {
+      const current = ++instances;
+      return {
+        mount() {},
+        refreshTheme() {},
+        async destroy() { if (current === 1) throw new Error('removed cleanup failed'); }
+      };
+    }
+  });
+  player.remove();
+  observeMutations([{ removedNodes: [player], addedNodes: [] }]);
+  dom.window.document.body.append(player);
+  await new Promise(resolve => setImmediate(resolve));
+  assert.equal(instances, 2);
+  assert.equal(diagnostics[0][0], 'destroy');
+  assert.equal(diagnostics[0][1].message, 'removed cleanup failed');
+  await runtime.destroy();
+  dom.window.close();
+});

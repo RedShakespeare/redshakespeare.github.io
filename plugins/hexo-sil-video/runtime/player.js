@@ -119,11 +119,13 @@ export function createVideoRuntime({
       if (!instance || record.status === 'destroying') continue;
       const pending = instance.destroy();
       records.set(player, { ...record, status: 'destroying', promise: pending });
-      pending.then(() => {
+      const settle = error => {
         if (records.get(player)?.promise !== pending) return;
         records.delete(player);
+        if (error) diagnostics.report('destroy', error);
         if (!runtimeDestroyed && player.isConnected) refreshPlayer(player);
-      }, error => diagnostics.report('destroy', error));
+      };
+      pending.then(() => settle(null), settle);
     }
   }
 
