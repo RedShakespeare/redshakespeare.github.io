@@ -193,6 +193,7 @@ test('desktop shortcuts, wheel input, fullscreen focus, and HUD hiding retain th
   const player = page.locator('[data-sil-video-player]');
   const stage = page.locator('[data-sil-video-stage]');
   const viewport = page.locator('[data-sil-video-viewport]');
+  const progress = page.locator('[data-sil-video-progress]');
   const feedback = page.locator('[data-sil-video-feedback]');
   const feedbackText = page.locator('[data-sil-video-feedback-text]');
 
@@ -200,6 +201,17 @@ test('desktop shortcuts, wheel input, fullscreen focus, and HUD hiding retain th
   await expect(feedback).toHaveAttribute('aria-live', 'polite');
   await expect(page.locator('[data-sil-video-progress]')).toHaveAttribute('aria-valuetext', '0:20/2:00');
   await expect(page.locator('[data-sil-video-volume]')).toHaveAttribute('aria-valuetext', '80%');
+
+  await progress.evaluate(element => {
+    element.value = '30';
+    element.dispatchEvent(new Event('input', { bubbles: true }));
+    element.focus();
+  });
+  await page.keyboard.press('Space');
+  await expect(progress).toBeFocused();
+  await expect(feedback).toHaveAttribute('data-sil-video-feedback-kind', 'playback-play');
+  await page.keyboard.press('Space');
+  await expect(feedback).toHaveAttribute('data-sil-video-feedback-kind', 'playback-pause');
 
   await player.focus();
   await page.keyboard.press('ArrowUp');

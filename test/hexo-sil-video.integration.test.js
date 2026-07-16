@@ -441,7 +441,7 @@ test('browser runtime shows circular play and pause feedback only for viewport s
   }
 });
 
-test('browser runtime omits playback feedback for failures, controls, keyboard, and double clicks', async () => {
+test('browser runtime omits playback feedback for failures, controls, and double clicks', async () => {
   const failed = await browserPlayer({ playReject: true });
   try {
     failed.viewport.dispatchEvent(new failed.window.MouseEvent('click', { bubbles: true, button: 0 }));
@@ -459,10 +459,6 @@ test('browser runtime omits playback feedback for failures, controls, keyboard, 
     await Promise.resolve();
     assert.equal(controls.calls.play, 1);
     assert.equal(controls.feedback.dataset.silVideoFeedbackVisible, undefined);
-    controls.player.focus();
-    controls.player.dispatchEvent(new controls.window.KeyboardEvent('keydown', { key: ' ', bubbles: true }));
-    assert.equal(controls.calls.pause, 1);
-    assert.equal(controls.feedback.dataset.silVideoFeedbackVisible, undefined);
 
     controls.viewport.dispatchEvent(new controls.window.MouseEvent('click', { bubbles: true, button: 0 }));
     controls.viewport.dispatchEvent(new controls.window.MouseEvent('click', { bubbles: true, button: 0 }));
@@ -472,6 +468,32 @@ test('browser runtime omits playback feedback for failures, controls, keyboard, 
     assert.equal(controls.feedback.dataset.silVideoFeedbackVisible, undefined);
   } finally {
     controls.dom.window.close();
+  }
+});
+
+test('browser runtime shows playback HUD for Space and handles it while progress retains focus', async () => {
+  const fixture = await browserPlayer();
+  const { dom, window, document, progress, feedback, calls } = fixture;
+  try {
+    progress.focus();
+    progress.value = '50';
+    progress.dispatchEvent(new window.Event('input', { bubbles: true }));
+    const playEvent = new window.KeyboardEvent('keydown', { key: ' ', bubbles: true, cancelable: true });
+    progress.dispatchEvent(playEvent);
+    await wait(0);
+    assert.equal(playEvent.defaultPrevented, true);
+    assert.equal(document.activeElement, progress);
+    assert.equal(calls.play, 1);
+    assert.equal(feedback.dataset.silVideoFeedbackKind, 'playback-play');
+    assert.equal(feedback.dataset.silVideoFeedbackVisible, 'true');
+
+    const pauseEvent = new window.KeyboardEvent('keydown', { key: ' ', bubbles: true, cancelable: true });
+    progress.dispatchEvent(pauseEvent);
+    assert.equal(pauseEvent.defaultPrevented, true);
+    assert.equal(calls.pause, 1);
+    assert.equal(feedback.dataset.silVideoFeedbackKind, 'playback-pause');
+  } finally {
+    dom.window.close();
   }
 });
 

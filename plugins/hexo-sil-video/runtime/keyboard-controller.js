@@ -1,16 +1,17 @@
 import { createListenerScope } from './shared.js';
 
-export function createKeyboardController({ player, video, stage, viewport, media, fullscreen }) {
+export function createKeyboardController({ player, video, stage, viewport, progress, media, fullscreen }) {
   const scope = createListenerScope();
 
   function handleKeydown(event) {
     if (fullscreen.active()) fullscreen.showUi();
-    const shortcutTarget = event.target === player || event.target === stage || event.target === video || event.target === viewport;
-    if (!shortcutTarget) return;
     const key = event.key.toLowerCase();
-    if (event.key === ' ' || key === 'spacebar') {
+    const space = event.key === ' ' || key === 'spacebar';
+    const surfaceTarget = event.target === player || event.target === stage || event.target === video || event.target === viewport;
+    if (!surfaceTarget && !(space && event.target === progress)) return;
+    if (space) {
       event.preventDefault();
-      void media.togglePlay();
+      void media.togglePlay(true);
     } else if (event.key === 'Enter') {
       event.preventDefault();
       if (!fullscreen.active()) void fullscreen.toggle();
