@@ -93,9 +93,7 @@ export function createSubtitleRendererManager({
   return {
     loadTrack,
     disableTrack,
-    async resize() {
-      if (!destroyed && renderer) await renderer.resize(true);
-    },
+    resize() { return enqueue(async () => { if (!destroyed && renderer) await renderer.resize(true); }); },
     async destroy() {
       if (destroyed) return;
       destroyed = true;

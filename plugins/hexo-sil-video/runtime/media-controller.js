@@ -45,19 +45,25 @@ export function createMediaController({
   }
 
   const projection = createMediaProjection({ player, video, progress, volume, current, duration, play, mute, repeat, onPlaybackStateChange });
+  let playToken = 0;
+  let destroyed = false;
 
   async function togglePlay(showPlayback = false) {
     if (video.paused || video.ended) {
+      const token = ++playToken;
       if (video.ended) video.currentTime = 0;
       try {
         await video.play();
+        if (destroyed || token !== playToken) return;
         setStatus();
         if (showPlayback) showPlaybackFeedback('play');
       } catch (error) {
+        if (destroyed || token !== playToken) return;
         diagnostics.report('media.play', error);
         setStatus('视频播放失败，请使用下载链接。', true);
       }
     } else {
+      playToken += 1;
       video.pause();
       if (showPlayback) showPlaybackFeedback('pause');
     }
@@ -146,6 +152,8 @@ export function createMediaController({
     togglePlay,
     toggleRepeat,
     async destroy() {
+      destroyed = true;
+      playToken += 1;
       scope.destroy();
     }
   };
