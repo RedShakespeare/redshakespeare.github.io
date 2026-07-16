@@ -77,6 +77,7 @@ function registerVideoPlugin(hexo) {
       warnedMissingAssets = true;
       if (hexo.log && hexo.log.warn) hexo.log.warn('hexo-sil-video: assets integration is enabled but hexo-sil-assets is not installed; using legacy local files.');
     },
+    resourceCache: new Map(),
     media: config.media,
     preload: config.preload,
     aspectRatio: config.aspectRatio,
@@ -108,6 +109,7 @@ function registerVideoPlugin(hexo) {
   }, { async: true });
   hexo.extend.filter.register('before_generate', () => {
     demand.reset();
+    runtime.resourceCache.clear();
     for (const name of ['Post', 'Page']) demand.seed(hexo.model?.(name)?.toArray?.() || []);
   }, 0);
   hexo.extend.filter.register('after_post_render', async function (data) {

@@ -87,6 +87,37 @@ test('manifest resource failures preserve stable player-facing diagnostics', asy
   );
 });
 
+test('generation resource cache deduplicates successful validation and retries failures', async () => {
+  const resourceCache = new Map();
+  let calls = 0;
+  const cachedRuntime = {
+    ...runtime,
+    resourceCache,
+    subtitles: { fonts: {}, fallbackFont: '' },
+    assetCapability: {
+      getObject() {
+        calls += 1;
+        return { type: 'video/mp4' };
+      }
+    }
+  };
+  const data = videoData({ poster: '', subtitles: [] });
+  await normaliseVideo(post(), data, cachedRuntime);
+  await normaliseVideo(post(), data, cachedRuntime);
+  assert.equal(calls, 1);
+
+  resourceCache.clear();
+  calls = 0;
+  cachedRuntime.assetCapability.getObject = () => {
+    calls += 1;
+    if (calls === 1) throw new Error('temporary manifest failure');
+    return { type: 'video/mp4' };
+  };
+  await assert.rejects(normaliseVideo(post(), data, cachedRuntime), /temporary manifest failure/);
+  await normaliseVideo(post(), data, cachedRuntime);
+  assert.equal(calls, 2);
+});
+
 test('SRT conversion produces an ASS track suitable for JASSUB', () => {
   const converted = subsrt.convert('1\n00:00:00,000 --> 00:00:01,000\nHello\n', { from: 'srt', to: 'ass' });
   assert.match(converted, /ScriptType: v4\.00\+/);

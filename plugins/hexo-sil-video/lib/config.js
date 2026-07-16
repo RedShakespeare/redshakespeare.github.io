@@ -208,7 +208,7 @@ function createVideoConfig({ builtinSkins, fontMimeTypes, runtimeRoutes }) {
       assetsEnabled: runtime.assetsEnabled === true,
       assetCapability: runtime.assetCapability || (typeof runtime.getAssetCapability === 'function' ? runtime.getAssetCapability() : null),
       onMissingAssets: runtime.onMissingAssets,
-      resourceCache: new Map(),
+      resourceCache: runtime.resourceCache instanceof Map ? runtime.resourceCache : new Map(),
       media: common.media,
       preload: common.preload,
       aspectRatio: common.aspectRatio,
