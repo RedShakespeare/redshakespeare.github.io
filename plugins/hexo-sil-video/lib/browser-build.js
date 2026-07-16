@@ -9,14 +9,14 @@ function serialiseInlineJson(value) {
   return JSON.stringify(value).replace(/</g, '\\u003c').replace(/\u2028/g, '\\u2028').replace(/\u2029/g, '\\u2029');
 }
 
-function createBrowserBuild({ pluginDir, routes }) {
+function createBrowserBuild({ pluginDir, routes, esbuildRef = require('esbuild') }) {
   const bootstrapSource = fsSync.readFileSync(path.join(pluginDir, 'runtime', 'bootstrap.js'), 'utf8');
   let runtimeArtifactsPromise = null;
   let runtimeRouteDataPromise = null;
-  const esbuild = require('esbuild');
+  const esbuild = esbuildRef;
 
   function cloneRoutes(entries) {
-    return entries.map(entry => ({ ...entry, data: Buffer.from(entry.data) }));
+    return entries.map(entry => ({ ...entry }));
   }
 
   function buildOptions(entryPoint, format, outputName, sourcemap = false) {

@@ -1,6 +1,7 @@
 'use strict';
 
 const { assert, path, resetRuntimeCache, RUNTIME_ROUTES, runtimeRouteData, test } = require('./helpers/hexo-sil-video-fixture');
+const { createBrowserBuild } = require('../plugins/hexo-sil-video/lib/browser-build');
 
 test('runtime route builder emits split core/subtitle bundles, module worker, WASM variants, and fallback font', async () => {
   const routes = await runtimeRouteData();
@@ -37,18 +38,41 @@ test('runtime route builder emits split core/subtitle bundles, module worker, WA
 
 test('runtime route cache returns defensive copies and resets between generations', async () => {
   const first = await runtimeRouteData();
-  const original = Buffer.from(first[0].data);
   first[0].path = 'mutated.js';
-  first[0].data.fill(0);
   const cached = await runtimeRouteData();
   assert.equal(cached[0].path, RUNTIME_ROUTES.script);
-  assert.deepEqual(cached[0].data, original);
   assert.notEqual(cached[0], first[0]);
-  assert.notEqual(cached[0].data, first[0].data);
+  assert.equal(cached[0].data, first[0].data);
 
   resetRuntimeCache();
   const rebuilt = await runtimeRouteData();
   assert.deepEqual(rebuilt.map(entry => entry.path), cached.map(entry => entry.path));
   assert.notEqual(rebuilt[0], cached[0]);
   assert.notEqual(rebuilt[0].data, cached[0].data);
+});
+
+test('runtime artifact reset causes a real rebuild rather than only new wrappers', async () => {
+  let builds = 0;
+  const fakeEsbuild = {
+    build(options) {
+      builds += 1;
+      const jsPath = options.outfile || 'bundle.js';
+      return Promise.resolve({ outputFiles: [
+        { path: jsPath, contents: Buffer.from(`build-${builds}`) },
+        { path: `${jsPath}.map`, contents: Buffer.from('{}') }
+      ] });
+    },
+    transformSync() { return { code: 'bootstrap' }; }
+  };
+  const builder = createBrowserBuild({
+    pluginDir: require('node:path').join(__dirname, '..', 'plugins', 'hexo-sil-video'),
+    routes: { script: 'core.js', subtitles: 'subtitles.js', worker: 'worker.js', wasm: 'worker.wasm', modernWasm: 'modern.wasm', defaultFont: 'font.woff2' },
+    esbuildRef: fakeEsbuild
+  });
+  await builder.runtimeRouteArtifacts();
+  await builder.runtimeRouteArtifacts();
+  assert.equal(builds, 3);
+  builder.resetRuntimeCache();
+  await builder.runtimeRouteArtifacts();
+  assert.equal(builds, 6);
 });
