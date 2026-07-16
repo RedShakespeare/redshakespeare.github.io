@@ -193,12 +193,14 @@ export function createVideoRuntime({
 
   if (windowRef.__hexoSilVideoRuntime) {
     const existing = windowRef.__hexoSilVideoRuntime;
+    if (existing.isDestroying?.()) windowRef.__hexoSilVideoRestart = () => createVideoRuntime({ windowRef, documentRef, ElementRef, MutationObserverRef, queueMicrotaskRef, diagnostics, createInstance });
     existing.refresh();
     return existing;
   }
   const observer = new MutationObserverRef(observeMutations);
   const runtime = {
     refresh,
+    isDestroying: () => runtimeDestroyed,
     destroy() {
       if (destroyPromise) return destroyPromise;
       destroyPromise = (async () => {
@@ -218,6 +220,9 @@ export function createVideoRuntime({
         records.clear();
         if (windowRef.__hexoSilVideoRuntime === runtime) delete windowRef.__hexoSilVideoRuntime;
         if (windowRef.__hexoSilVideoRefresh === refresh) delete windowRef.__hexoSilVideoRefresh;
+        const restart = windowRef.__hexoSilVideoRestart;
+        delete windowRef.__hexoSilVideoRestart;
+        if (restart) queueMicrotaskRef(restart);
       })();
       return destroyPromise;
     }

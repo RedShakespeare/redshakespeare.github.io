@@ -234,12 +234,14 @@ test('runtime singleton remains authoritative until asynchronous teardown finish
   const destroying = runtime.destroy();
   const same = createVideoRuntime({
     windowRef: dom.window, documentRef: dom.window.document, ElementRef: dom.window.Element,
-    MutationObserverRef: Observer, queueMicrotaskRef: queueMicrotask, createInstance: () => { throw new Error('new runtime created'); }
+    MutationObserverRef: Observer, queueMicrotaskRef: queueMicrotask, createInstance: () => ({ mount() {}, refreshTheme() {}, async destroy() {} })
   });
   assert.equal(same, runtime);
   release();
   await destroying;
-  assert.equal(dom.window.__hexoSilVideoRuntime, undefined);
+  await new Promise(resolve => setImmediate(resolve));
+  assert.notEqual(dom.window.__hexoSilVideoRuntime, undefined);
+  await dom.window.__hexoSilVideoRuntime.destroy();
   dom.window.close();
 });
 

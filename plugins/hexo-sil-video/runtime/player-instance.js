@@ -128,7 +128,6 @@ function createPlayerInstance({ player, services }) {
       await destroyControllersInReverse(controllers, diagnostics);
       refs.video.controls = initialNativeControls;
       for (const { control, hidden } of initialControls) control.hidden = hidden;
-      refs.mediaLayer.style.removeProperty('--sil-video-brightness');
       for (const key of ['silVideoPlaying', 'silVideoEnded', 'silVideoMuted', 'silVideoVolumeLevel', 'silVideoLoop', 'silVideoTheme']) delete player.dataset[key];
       delete player.dataset.silVideoReady;
       delete player.dataset.silVideoEnhanced;
