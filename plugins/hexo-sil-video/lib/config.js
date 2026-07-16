@@ -1,51 +1,14 @@
 'use strict';
 
 const path = require('node:path');
+const { createPathConfig } = require('./path-config');
+const { createRuntimeOptions } = require('./runtime-options');
 
 function createVideoConfig({ builtinSkins, fontMimeTypes, runtimeRoutes }) {
   function isObject(value) {
     return value !== null && typeof value === 'object' && !Array.isArray(value);
   }
-
-  function normaliseRelativeDirectory(value, fallback, field) {
-    const raw = String(value == null ? fallback : value).trim();
-    if (!raw || raw.startsWith('/') || /[^\x21-\x7E]/.test(raw) || raw.includes('\\') || raw.includes('?') || raw.includes('#')) {
-      throw new Error(`Video configuration error: ${field} must be an ASCII relative directory.`);
-    }
-    const directory = raw.replace(/^\/+|\/+$/g, '');
-    const segments = directory.split('/');
-    if (!directory || segments.some(segment => !segment || segment === '.' || segment === '..')) {
-      throw new Error(`Video configuration error: ${field} must be a non-empty relative directory.`);
-    }
-    return directory;
-  }
-
-  function normaliseRelativeFile(value, field, errorFactory = message => new Error(`Video configuration error: ${message}`)) {
-    const file = String(value || '').trim();
-    if (!file) throw errorFactory(`${field} must be a non-empty relative path.`);
-    if (/[^\x21-\x7E]/.test(file)) throw errorFactory(`${field} must use an ASCII path.`);
-    if (file.includes('\\') || file.startsWith('/') || file.includes('?') || file.includes('#')) {
-      throw errorFactory(`${field} must be a plain relative path below video.media.prefix.`);
-    }
-    const segments = file.split('/');
-    if (segments.some(segment => !segment || segment === '.' || segment === '..')) {
-      throw errorFactory(`${field} must not contain empty, dot, or parent path segments.`);
-    }
-    return file;
-  }
-
-  function normaliseHttpsUrl(value, field, errorFactory = message => new Error(`Video configuration error: ${message}`), trailingSlash = false) {
-    const source = String(value || '').trim();
-    if (!source) return '';
-    if (/[^\x21-\x7E]/.test(source)) throw errorFactory(`${field} must be an ASCII absolute HTTPS URL.`);
-    let url;
-    try { url = new URL(source); } catch { throw errorFactory(`${field} must be an ASCII absolute HTTPS URL.`); }
-    if (url.protocol !== 'https:') throw errorFactory(`${field} must use HTTPS.`);
-    if (url.username || url.password) throw errorFactory(`${field} must not contain credentials.`);
-    if (trailingSlash && (url.search || url.hash)) throw errorFactory(`${field} must not contain a query string or fragment.`);
-    if (trailingSlash) url.pathname = `${url.pathname.replace(/\/+$/, '')}/`;
-    return url.href;
-  }
+  const { mediaFileUrl, normaliseHttpsUrl, normaliseRelativeDirectory, normaliseRelativeFile, rootPublicPath } = createPathConfig();
 
   function normaliseBuiltinSkin(value) {
     if (value == null || value === true) return 'ephesus';
@@ -179,43 +142,7 @@ function createVideoConfig({ builtinSkins, fontMimeTypes, runtimeRoutes }) {
     };
   }
 
-  function rootPublicPath(root, file) {
-    const prefix = String(root || '/').replace(/\\/g, '/').replace(/^\/+|\/+$/g, '');
-    return `/${[prefix, String(file || '').replace(/^\/+/, '')].filter(Boolean).join('/')}`;
-  }
-
-  function mediaFileUrl(root, media, file) {
-    if (media.url) {
-      const encoded = file.split('/').map(segment => encodeURIComponent(segment)).join('/');
-      return new URL(encoded, media.url).href;
-    }
-    return rootPublicPath(root, `${media.prefix}/${file}`);
-  }
-
-  function runtimeOptions(runtime = {}) {
-    if (runtime.media != null && !isObject(runtime.media)) throw new Error('Video configuration error: runtime.media must be a mapping.');
-    const common = normaliseRuntimeFields({
-      media: runtime.media,
-      preload: runtime.preload,
-      aspectRatio: runtime.aspectRatio,
-      subtitles: runtime.subtitles,
-      routes: runtime.routes || runtimeRoutes
-    });
-    return {
-      baseDir: runtime.baseDir || process.cwd(),
-      sourceRoot: path.resolve(runtime.sourceRoot || path.join(runtime.baseDir || process.cwd(), 'source')),
-      root: runtime.root || '/',
-      assetsEnabled: runtime.assetsEnabled === true,
-      assetCapability: runtime.assetCapability || (typeof runtime.getAssetCapability === 'function' ? runtime.getAssetCapability() : null),
-      onMissingAssets: runtime.onMissingAssets,
-      resourceCache: runtime.resourceCache instanceof Map ? runtime.resourceCache : new Map(),
-      media: common.media,
-      preload: common.preload,
-      aspectRatio: common.aspectRatio,
-      subtitles: common.subtitles,
-      routes: normaliseRoutes(runtime.routes || runtimeRoutes)
-    };
-  }
+  const runtimeOptions = createRuntimeOptions({ isObject, normaliseRoutes, normaliseRuntimeFields, runtimeRoutes });
 
   return { isObject, mediaFileUrl, normaliseHttpsUrl, normaliseRelativeFile, rootPublicPath, runtimeOptions, toVideoConfig };
 }
