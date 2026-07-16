@@ -1,4 +1,6 @@
 import { createCleanupError } from './shared.js';
+import { applyActiveRendererTrack } from './subtitle-active-renderer-transaction.js';
+import { createCandidateRendererLifecycle } from './subtitle-candidate-renderer-lifecycle.js';
 
 export function createSubtitleRendererManager({
   video,
@@ -8,8 +10,6 @@ export function createSubtitleRendererManager({
   isCurrent = () => true
 }) {
   let renderer = null;
-  let candidateRenderer = null;
-  let candidateCancellation = null;
   let renderQueue = Promise.resolve();
   let renderError = null;
   let destroyed = false;
@@ -34,82 +34,37 @@ export function createSubtitleRendererManager({
     }
   }
 
-  async function cancelCandidate() {
-    const candidate = candidateRenderer;
-    if (!candidate) return;
-    candidateRenderer = null;
-    const cancellation = candidateCancellation;
-    candidateCancellation = null;
-    const cleanup = destroyRenderer(candidate);
-    if (cancellation) cleanup.then(cancellation.resolve, cancellation.reject);
-    await cleanup;
-  }
+  const candidates = createCandidateRendererLifecycle({
+    createRenderer: args => args.factory(args.options),
+    destroyRenderer,
+    isCurrent
+  });
 
   async function applyTrack({ runtime, content, oldContent, token }) {
     if (renderer) {
-      const activeRenderer = renderer;
-      await activeRenderer.ready;
-      try {
-        await activeRenderer.renderer.setTrack(content);
-        if (!isCurrent(token)) {
-          if (oldContent) await activeRenderer.renderer.setTrack(oldContent);
-          else await activeRenderer.renderer.freeTrack();
-          return null;
-        }
-        return activeRenderer;
-      } catch (error) {
-        if (oldContent) {
-          try {
-            await activeRenderer.renderer.setTrack(oldContent);
-          } catch (rollbackError) {
-            if (renderer === activeRenderer) renderer = null;
-            try { await destroyRenderer(activeRenderer); } catch (destroyError) { error.destroyError = destroyError; }
-            throw Object.assign(error, { rollbackError });
-          }
-        } else {
-          if (renderer === activeRenderer) renderer = null;
-          try { await destroyRenderer(activeRenderer); } catch (destroyError) { error.destroyError = destroyError; }
-        }
-        throw error;
-      }
+      return applyActiveRendererTrack({
+        renderer,
+        content,
+        oldContent,
+        isCurrent,
+        token,
+        clear: active => { if (renderer === active) renderer = null; },
+        destroy: destroyRenderer
+      });
     }
 
-    const candidate = (rendererFactory || runtime.createSubtitleRenderer)({
-      video,
-      content,
-      runtime: model.runtime,
-      fonts: model.fonts,
-      fallbackFont: model.fallbackFont
-    });
-    candidateRenderer = candidate;
-    let resolveCancellation;
-    let rejectCancellation;
-    const cancellation = {
-      promise: new Promise((resolve, reject) => {
-        resolveCancellation = resolve;
-        rejectCancellation = reject;
-      }),
-      resolve: resolveCancellation,
-      reject: rejectCancellation
-    };
-    candidateCancellation = cancellation;
-    try {
-      await Promise.race([candidate.ready, cancellation.promise]);
-      if (candidateRenderer !== candidate || !isCurrent(token)) {
-        await destroyRenderer(candidate);
-        if (candidateCancellation === cancellation) candidateCancellation = null;
-        return null;
+    const candidate = await candidates.create({
+      factory: rendererFactory || runtime.createSubtitleRenderer,
+      options: {
+        video,
+        content,
+        runtime: model.runtime,
+        fonts: model.fonts,
+        fallbackFont: model.fallbackFont
       }
-      renderer = candidate;
-      candidateRenderer = null;
-      candidateCancellation = null;
-      return candidate;
-    } catch (error) {
-      if (candidateRenderer === candidate) candidateRenderer = null;
-      if (candidateCancellation === cancellation) candidateCancellation = null;
-      await destroyRenderer(candidate);
-      throw error;
-    }
+    }, token);
+    if (candidate) renderer = candidate;
+    return candidate;
   }
 
   async function freeTrack() {
@@ -119,7 +74,7 @@ export function createSubtitleRendererManager({
   }
 
   async function loadTrack(args) {
-    await cancelCandidate();
+    await candidates.cancel();
     return enqueue(async () => {
       if (!isCurrent(args.token)) return null;
       return applyTrack(args);
@@ -127,7 +82,7 @@ export function createSubtitleRendererManager({
   }
 
   async function disableTrack(token) {
-    await cancelCandidate();
+    await candidates.cancel();
     return enqueue(async () => {
       if (!isCurrent(token)) return false;
       await freeTrack();
@@ -145,7 +100,7 @@ export function createSubtitleRendererManager({
       if (destroyed) return;
       destroyed = true;
       const errors = [];
-      try { await cancelCandidate(); } catch (error) { errors.push(error); }
+      try { await candidates.cancel(); } catch (error) { errors.push(error); }
       try { await renderQueue; } catch (error) { errors.push(error); }
       if (renderError) { errors.push(renderError); renderError = null; }
       if (renderer) {
