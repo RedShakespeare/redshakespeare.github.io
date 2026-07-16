@@ -70,3 +70,23 @@ test('plugin registers skin, runtime assets, tag, and duplicate-safe post inject
   await tagHexo.calls.tags[0].fn.call(post({ video: videoData() }), []);
   assert.ok((await tagHexo.calls.generators[1].fn()).length > 0);
 });
+
+test('plugin resource cache is shared within and reset between generations', async () => {
+  const hexo = mockHexo();
+  const calls = new Map();
+  hexo.sil.assets = {
+    getObject(key) {
+      calls.set(key, (calls.get(key) || 0) + 1);
+      return { type: key.endsWith('.woff2') ? 'font/woff2' : 'video/mp4' };
+    }
+  };
+  registerVideoPlugin(hexo);
+  const render = hexo.calls.filters.find(call => call.name === 'after_post_render').fn;
+  const data = () => post({ video: videoData({ poster: '', subtitles: [] }), content: '<p>Body</p>' });
+  await render(data());
+  await render(data());
+  assert.deepEqual([...calls.values()], [1, 1]);
+  hexo.calls.filters.find(call => call.name === 'before_generate').fn();
+  await render(data());
+  assert.deepEqual([...calls.values()], [2, 2]);
+});

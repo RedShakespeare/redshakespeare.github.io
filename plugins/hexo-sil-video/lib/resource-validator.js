@@ -1,6 +1,17 @@
 'use strict';
 
 function createResourceValidator({ fs, path, videoError }) {
+  function cachedRead(cache, key, read) {
+    const cached = cache.get(key);
+    if (cached) return cached;
+    const pending = Promise.resolve().then(read);
+    cache.set(key, pending);
+    pending.catch(() => {
+      if (cache.get(key) === pending) cache.delete(key);
+    });
+    return pending;
+  }
+
   function validateManifestType(post, key, entry, expectation) {
     const field = expectation.description;
     if (expectation.type && entry.type !== expectation.type) {
@@ -27,10 +38,10 @@ function createResourceValidator({ fs, path, videoError }) {
     }
   }
 
-  function manifestEntry(post, key, capability, expectation) {
+  async function manifestEntry(post, key, options, expectation) {
     let entry;
     try {
-      entry = capability.getObject(key);
+      entry = await cachedRead(options.resourceCache, `manifest:${key}`, () => options.assetCapability.getObject(key));
     } catch (error) {
       throw videoError(post, error.message.replace(/^Asset manifest error:\s*/, ''));
     }
@@ -50,7 +61,7 @@ function createResourceValidator({ fs, path, videoError }) {
     if (!localPath.startsWith(`${mediaRoot}${path.sep}`)) throw videoError(post, `${field} must resolve below video.media.source_dir.`);
     let stat;
     try {
-      stat = await fs.lstat(localPath);
+      stat = await cachedRead(options.resourceCache, `local:${localPath}`, () => fs.lstat(localPath));
     } catch (error) {
       throw videoError(post, `local ${field} file does not exist: ${file} (${error.code || error.message}).`);
     }
@@ -63,7 +74,7 @@ function createResourceValidator({ fs, path, videoError }) {
     const capability = options.assetsEnabled ? options.assetCapability : null;
     if (options.assetsEnabled && !capability && typeof options.onMissingAssets === 'function') options.onMissingAssets();
     return capability
-      ? manifestEntry(post, key, capability, expectation)
+      ? manifestEntry(post, key, options, expectation)
       : localFile(post, file, options, expectation);
   }
 

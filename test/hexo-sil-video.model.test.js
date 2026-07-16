@@ -1,6 +1,9 @@
 'use strict';
 
 const { assert, normaliseVideo, post, RUNTIME_ROUTES, runtime, subsrt, test, videoData } = require('./helpers/hexo-sil-video-fixture');
+const { createResourceValidator } = require('../plugins/hexo-sil-video/lib/resource-validator');
+const fs = require('node:fs/promises');
+const path = require('node:path');
 
 test('manifest-backed video resolves media, ASS/SRT tracks, poster, and fonts', async () => {
   const value = await normaliseVideo(post(), videoData(), runtime);
@@ -115,6 +118,34 @@ test('generation resource cache deduplicates successful validation and retries f
   };
   await assert.rejects(normaliseVideo(post(), data, cachedRuntime), /temporary manifest failure/);
   await normaliseVideo(post(), data, cachedRuntime);
+  assert.equal(calls, 2);
+});
+
+test('resource cache shares backend reads without sharing validation or post context', async () => {
+  const resourceCache = new Map();
+  let calls = 0;
+  const options = {
+    assetsEnabled: true,
+    assetCapability: { getObject() { calls += 1; return null; } },
+    media: { prefix: 'files' },
+    resourceCache
+  };
+  const { validateLocalEntry } = createResourceValidator({
+    fs,
+    path,
+    videoError: (article, message) => new Error(`${article.title}: ${message}`)
+  });
+  await assert.rejects(validateLocalEntry({ title: 'First' }, 'shared.mp4', options, { type: 'video/mp4', description: 'video' }), /First:/);
+  await assert.rejects(validateLocalEntry({ title: 'Second' }, 'shared.mp4', options, { type: 'video/mp4', description: 'video' }), /Second:/);
+  assert.equal(calls, 1);
+
+  resourceCache.clear();
+  options.assetCapability.getObject = () => { calls += 1; return { type: 'video/mp4' }; };
+  await validateLocalEntry({ title: 'Video' }, 'shared.mp4', options, { type: 'video/mp4', description: 'video' });
+  await assert.rejects(
+    validateLocalEntry({ title: 'Font' }, 'shared.mp4', options, { type: 'font/woff2', description: 'font' }),
+    /Font: asset manifest MIME type.*expected font\/woff2/
+  );
   assert.equal(calls, 2);
 });
 

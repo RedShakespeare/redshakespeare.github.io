@@ -24,18 +24,7 @@ function createVideoModel({
   const { validateLocalEntry } = createResourceValidator({ fs, path, videoError });
 
   async function localEntry(post, file, options, expectation) {
-    const field = expectation.description;
-    const key = `${options.media.prefix}/${file}`;
-    const cached = options.resourceCache.get(key);
-    if (cached) return cached;
-    const pending = validateLocalEntry(post, file, options, expectation);
-    options.resourceCache.set(key, pending);
-    try {
-      return await pending;
-    } catch (error) {
-      options.resourceCache.delete(key);
-      throw error;
-    }
+    return validateLocalEntry(post, file, options, expectation);
   }
 
   async function normaliseSubtitles(post, value, options) {
