@@ -40,7 +40,11 @@ export function createCandidateRendererLifecycle({ createRenderer, destroyRender
     } catch (error) {
       if (candidate === current) candidate = null;
       if (cancellation === currentCancellation) cancellation = null;
-      await destroyRenderer(current);
+      try {
+        await destroyRenderer(current);
+      } catch (cleanupError) {
+        error.cleanupError = cleanupError;
+      }
       throw error;
     }
   }

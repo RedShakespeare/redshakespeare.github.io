@@ -26,6 +26,8 @@ function parseModel(player) {
 
 function createPlayerInstance({ player, services }) {
   const refs = createPlayerView(player);
+  const initialControls = Array.from(player.querySelectorAll('[data-sil-video-controls]'), control => ({ control, hidden: control.hidden }));
+  const initialNativeControls = refs.video.controls;
   const model = parseModel(player);
   services = services
     ? assertRuntimeServices(services)
@@ -124,7 +126,8 @@ function createPlayerInstance({ player, services }) {
     if (destroyPromise) return destroyPromise;
     destroyPromise = (async () => {
       await destroyControllersInReverse(controllers, diagnostics);
-      refs.video.controls = true;
+      refs.video.controls = initialNativeControls;
+      for (const { control, hidden } of initialControls) control.hidden = hidden;
       delete player.dataset.silVideoReady;
       delete player.dataset.silVideoEnhanced;
       state.destroy();
