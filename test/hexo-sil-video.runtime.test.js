@@ -6,6 +6,7 @@ const path = require('node:path');
 const test = require('node:test');
 const { JSDOM } = require('jsdom');
 const esbuild = require('esbuild');
+const { createRuntimeServices } = require('./helpers/hexo-sil-video-runtime-services');
 
 const runtimeRoot = path.join(__dirname, '..', 'plugins', 'hexo-sil-video', 'runtime');
 
@@ -32,7 +33,8 @@ function subtitleDom() {
     player: document.querySelector('aside'),
     button: document.querySelector('[data-action]'),
     menu: document.querySelector('[data-menu]'),
-    video: document.querySelector('video')
+    video: document.querySelector('video'),
+    services: createRuntimeServices(dom.window)
   };
 }
 
@@ -287,7 +289,7 @@ test('subtitle rollback clears a renderer even when its own destroy fails, allow
     ...refs,
     model: model(),
     moduleLoader: async () => moduleRuntime({ 中文: 'A', English: 'B' }),
-    diagnostics: { report: (...args) => diagnostics.push(args) },
+    services: createRuntimeServices(refs.dom.window, { diagnostics: { report: (...args) => diagnostics.push(args) } }),
     rendererFactory: () => {
       creation += 1;
       const current = creation;
@@ -350,7 +352,7 @@ test('subtitle destroy reports renderer cleanup failures through its aggregate r
     ...refs,
     model: model(),
     moduleLoader: async () => moduleRuntime({ 中文: 'A', English: 'B' }),
-    diagnostics: { report: (...args) => diagnostics.push(args) },
+    services: createRuntimeServices(refs.dom.window, { diagnostics: { report: (...args) => diagnostics.push(args) } }),
     rendererFactory: () => ({
       ready: Promise.resolve(),
       renderer: { async setTrack() {}, async freeTrack() {} },
@@ -400,7 +402,10 @@ test('fullscreen actions serialize opposite toggles and destroy waits for the qu
     document.__fullscreenElement = null;
     document.dispatchEvent(new dom.window.Event('fullscreenchange'));
   };
-  const controller = createFullscreenController({ player, video, stage, fullscreen });
+  const controller = createFullscreenController({
+    player, video, stage, fullscreen,
+    services: createRuntimeServices(dom.window)
+  });
   const entering = controller.toggle();
   const exiting = controller.toggle();
   assert.deepEqual(calls, ['enter']);
@@ -443,9 +448,11 @@ test('fullscreen actions fail safely when fullscreenchange never confirms the ta
     video,
     stage,
     fullscreen,
-    clock,
-    state: { set: (...args) => states.push(args), clear() {} },
-    diagnostics: { report: (...args) => diagnostics.push(args) }
+    services: createRuntimeServices(dom.window, {
+      clock,
+      state: { set: (...args) => states.push(args), clear() {} },
+      diagnostics: { report: (...args) => diagnostics.push(args) }
+    })
   });
   const toggling = controller.toggle();
   await new Promise(resolve => setImmediate(resolve));
@@ -470,7 +477,10 @@ test('fullscreen waits for a state event that arrives after the native promise r
   const fullscreen = document.querySelector('button');
   Object.defineProperty(document, 'fullscreenElement', { configurable: true, get: () => document.__fullscreenElement || null });
   stage.requestFullscreen = async () => {};
-  const controller = createFullscreenController({ player, video, stage, fullscreen });
+  const controller = createFullscreenController({
+    player, video, stage, fullscreen,
+    services: createRuntimeServices(dom.window)
+  });
   const entering = controller.toggle();
   await new Promise(resolve => setImmediate(resolve));
   document.__fullscreenElement = stage;
@@ -500,8 +510,10 @@ test('fullscreen destroy cancels state confirmation without reporting a false ti
     video,
     stage,
     fullscreen,
-    state: { set: (...args) => states.push(args), clear() {} },
-    diagnostics: { report: (...args) => diagnostics.push(args) }
+    services: createRuntimeServices(dom.window, {
+      state: { set: (...args) => states.push(args), clear() {} },
+      diagnostics: { report: (...args) => diagnostics.push(args) }
+    })
   });
   const entering = controller.toggle();
   await new Promise(resolve => setImmediate(resolve));

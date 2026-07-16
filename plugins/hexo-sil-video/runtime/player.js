@@ -46,7 +46,7 @@ function initialise(player) {
     instance.refreshTheme();
   } catch (error) {
     const cleanup = instance?.destroy?.() || Promise.resolve();
-    cleanup.catch(destroyError => console.error(destroyError));
+    cleanup.catch(destroyError => diagnostics.report('initialise.cleanup', destroyError));
     recordFailure(player, source, 'initialise', error, `播放器初始化失败：${error.message}`);
   }
 }
@@ -113,7 +113,7 @@ function destroyRemoved(node) {
       if (records.get(player)?.promise !== pending) return;
       records.delete(player);
       if (!runtimeDestroyed && player.isConnected) initialise(player);
-    }, error => console.error(error));
+    }, error => diagnostics.report('destroy', error));
   }
 }
 

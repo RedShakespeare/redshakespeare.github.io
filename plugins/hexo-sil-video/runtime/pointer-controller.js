@@ -9,11 +9,9 @@ import {
   createListenerScope,
   focusWithoutScroll
 } from './shared.js';
-import { resolveRuntimeServices } from './runtime-services.js';
 import { createWheelVolumeController } from './wheel-volume-controller.js';
 
 export function createPointerController({ player, video, stage, viewport, media, fullscreen, services }) {
-  services = resolveRuntimeServices(services, { windowRef: player.ownerDocument.defaultView });
   const scope = createListenerScope();
   const { now, setTimeout: setTimer, clearTimeout: clearTimer } = services.clock;
   const wheelController = createWheelVolumeController({ player, video, stage, viewport, media, services });

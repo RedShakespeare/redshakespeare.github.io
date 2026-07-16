@@ -1,7 +1,6 @@
 import { appendCleanupError, createCleanupError, createListenerScope } from './shared.js';
 import { createSubtitleMenu } from './subtitle-menu.js';
 import { createSubtitleRendererManager } from './subtitle-renderer-manager.js';
-import { resolveRuntimeServices } from './runtime-services.js';
 
 export function createSubtitleController({
   player,
@@ -12,17 +11,8 @@ export function createSubtitleController({
   showFullscreenUi = () => {},
   moduleLoader = url => import(url),
   rendererFactory = null,
-  services,
-  state: legacyState,
-  ui: legacyUi,
-  diagnostics: legacyDiagnostics
+  services
 }) {
-  services = resolveRuntimeServices(services, {
-    windowRef: player.ownerDocument.defaultView,
-    state: legacyState,
-    ui: legacyUi,
-    diagnostics: legacyDiagnostics
-  });
   const tracks = Array.isArray(model.subtitles) ? model.subtitles : [];
   const scope = createListenerScope();
   const { state, ui, diagnostics } = services;

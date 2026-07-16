@@ -1,11 +1,10 @@
 import { createCleanupError } from './shared.js';
-import { createNoopDiagnostics } from './runtime-services.js';
 
 export function createSubtitleRendererManager({
   video,
   model,
   rendererFactory = null,
-  diagnostics = createNoopDiagnostics(),
+  diagnostics,
   isCurrent = () => true
 }) {
   let renderer = null;

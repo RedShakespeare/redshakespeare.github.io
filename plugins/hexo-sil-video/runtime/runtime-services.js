@@ -13,33 +13,11 @@ export function createRuntimeClock(windowRef = globalThis, overrides = {}) {
   };
 }
 
-export function createNoopDiagnostics() {
-  return { report() {} };
-}
-
-export function createTestRuntimeServices(overrides = {}) {
-  const clock = overrides.clock ? createRuntimeClock(overrides.windowRef || globalThis, overrides.clock) : createRuntimeClock(overrides.windowRef || globalThis);
-  return {
-    clock,
-    diagnostics: overrides.diagnostics || createNoopDiagnostics(),
-    state: overrides.state || { set() {}, clear() {}, destroy() {} },
-    ui: overrides.ui || {
-      setVolumeOpen() {}, setSubtitleMenuOpen() {}, controlsOpen: () => false,
-      volumeOpen: () => false, subtitleMenuOpen: () => false, destroy() {}
-    }
-  };
-}
-
 export function createRuntimeServices({ player, status, windowRef, overrides = {} } = {}) {
-  const base = createTestRuntimeServices({ windowRef, ...overrides });
   return {
-    clock: base.clock,
+    clock: overrides.clock ? createRuntimeClock(windowRef, overrides.clock) : createRuntimeClock(windowRef),
     diagnostics: overrides.diagnostics || createDiagnostics(),
     state: overrides.state || createStateCoordinator({ player, status }),
     ui: overrides.ui || createUiCoordinator({ player })
   };
-}
-
-export function resolveRuntimeServices(services, overrides = {}) {
-  return services || createTestRuntimeServices(overrides);
 }

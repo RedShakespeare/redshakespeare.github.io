@@ -4,10 +4,8 @@ import {
   clamp,
   formatTime
 } from './shared.js';
-import { resolveRuntimeServices } from './runtime-services.js';
 
 export function createFeedbackController({ video, mediaLayer, feedback, feedbackText, services }) {
-  services = resolveRuntimeServices(services, { windowRef: video.ownerDocument.defaultView });
   const { clock } = services;
   const { setTimeout: setTimer, clearTimeout: clearTimer } = clock;
   let timer = null;

@@ -1,8 +1,6 @@
 import { VOLUME_CLOSE_DELAY, createListenerScope } from './shared.js';
-import { resolveRuntimeServices } from './runtime-services.js';
 
 export function createVolumeOverlayController({ player, volume, mute, volumeControl, media, fullscreen, services }) {
-  services = resolveRuntimeServices(services, { windowRef: player.ownerDocument.defaultView });
   const scope = createListenerScope();
   const documentRef = player.ownerDocument;
   const { ui, clock } = services;
@@ -14,8 +12,7 @@ export function createVolumeOverlayController({ player, volume, mute, volumeCont
     if (closeTimer !== null) clearTimer(closeTimer);
     closeTimer = null;
     open = Boolean(value);
-    if (ui) ui.setVolumeOpen(open);
-    else player.dataset.silVideoVolumeOpen = open ? 'true' : 'false';
+    ui.setVolumeOpen(open);
     fullscreen.showUi();
   }
 

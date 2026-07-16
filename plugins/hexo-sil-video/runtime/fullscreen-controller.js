@@ -3,7 +3,6 @@ import {
   createListenerScope,
   focusWithoutScroll
 } from './shared.js';
-import { resolveRuntimeServices } from './runtime-services.js';
 import { createOrientationController } from './orientation-controller.js';
 import { createFullscreenStateWaiter } from './fullscreen-state-waiter.js';
 
@@ -15,19 +14,8 @@ export function createFullscreenController({
   stage,
   fullscreen,
   resizeSubtitles = () => Promise.resolve(),
-  services,
-  state: legacyState,
-  ui: legacyUi,
-  diagnostics: legacyDiagnostics,
-  clock: legacyClock
+  services
 }) {
-  services = resolveRuntimeServices(services, {
-    windowRef: stage.ownerDocument.defaultView,
-    clock: legacyClock,
-    state: legacyState,
-    ui: legacyUi,
-    diagnostics: legacyDiagnostics
-  });
   const scope = createListenerScope();
   const documentRef = stage.ownerDocument;
   const windowRef = documentRef.defaultView;
@@ -56,7 +44,7 @@ export function createFullscreenController({
   function controlsKeepUiOpen() {
     const focused = documentRef.activeElement;
     const controlFocused = focused && focused !== video && focused !== stage && stage.contains(focused) && focused.matches(':focus-visible');
-    return Boolean(ui?.controlsOpen()) || controlFocused;
+    return ui.controlsOpen() || controlFocused;
   }
 
   function projectUiHidden(value) {
