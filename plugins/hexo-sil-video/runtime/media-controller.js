@@ -63,6 +63,12 @@ export function createMediaController({
     }
   }
 
+  function finishVolumeUpdate() {
+    if (video.volume > 0) lastVolume = video.volume;
+    projection.volume();
+    showVolumeFeedback();
+  }
+
   function toggleMute() {
     if (video.muted || video.volume === 0) {
       video.muted = false;
@@ -71,33 +77,26 @@ export function createMediaController({
       lastVolume = video.volume;
       video.muted = true;
     }
-    projection.volume();
-    showVolumeFeedback();
+    finishVolumeUpdate();
   }
 
   function adjustVolume(delta) {
     if (delta > 0 && video.muted) video.muted = false;
     video.volume = clamp(video.volume + delta, 0, 1);
-    if (video.volume > 0) lastVolume = video.volume;
     video.muted = video.volume === 0;
-    projection.volume();
-    showVolumeFeedback();
+    finishVolumeUpdate();
   }
 
   function setVolume(value) {
     video.muted = false;
     video.volume = clamp(value, 0, 1);
-    if (video.volume > 0) lastVolume = video.volume;
-    projection.volume();
-    showVolumeFeedback();
+    finishVolumeUpdate();
   }
 
   function setGestureVolume(value) {
     video.volume = clamp(value, 0, 1);
     video.muted = video.volume === 0;
-    if (video.volume > 0) lastVolume = video.volume;
-    projection.volume();
-    showVolumeFeedback();
+    finishVolumeUpdate();
   }
 
   function seek(delta) {
