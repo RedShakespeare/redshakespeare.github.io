@@ -71,10 +71,14 @@ function createResourceValidator({ fs, path, videoError }) {
       throw videoError(post, `local ${field} file does not exist: ${file} (${error?.code || errorMessage(error)}).`);
     }
     if (!stat.isFile() || stat.size <= 0) throw videoError(post, `local ${field} path must be a non-empty regular file: ${file}.`);
-    const [realMediaRoot, realLocalPath] = await Promise.all([
+    const [realSourceRoot, realMediaRoot, realLocalPath] = await Promise.all([
+      cachedRead(options.resourceCache, `real:${options.sourceRoot}`, () => fs.realpath(options.sourceRoot)),
       cachedRead(options.resourceCache, `real:${mediaRoot}`, () => fs.realpath(mediaRoot)),
       cachedRead(options.resourceCache, `real:${localPath}`, () => fs.realpath(localPath))
     ]);
+    if (realMediaRoot !== realSourceRoot && !realMediaRoot.startsWith(`${realSourceRoot}${path.sep}`)) {
+      throw videoError(post, '`media.source_dir` must resolve below the real Hexo source directory without symbolic-link escapes.');
+    }
     if (realLocalPath !== realMediaRoot && !realLocalPath.startsWith(`${realMediaRoot}${path.sep}`)) {
       throw videoError(post, `${field} must resolve below video.media.source_dir without symbolic-link escapes.`);
     }

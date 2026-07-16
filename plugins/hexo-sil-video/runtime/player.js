@@ -101,7 +101,24 @@ export function createVideoRuntime({
   }
 
   function refreshPlayer(player) {
+    const record = records.get(player);
+    if (record?.status === 'ready' && record.source !== (player.dataset.silVideoModel || '')) {
+      destroyPlayer(player, record, true);
+      return;
+    }
     refreshOnePlayer({ player, records, diagnostics, createInstance });
+  }
+
+  function destroyPlayer(player, record, retry) {
+    const pending = Promise.resolve().then(() => record.instance.destroy());
+    records.set(player, { ...record, status: 'destroying', promise: pending });
+    pending.then(() => settle(null), settle);
+    function settle(error) {
+      if (records.get(player)?.promise !== pending) return;
+      records.delete(player);
+      if (error) diagnostics.report('destroy', error);
+      if (retry && !runtimeDestroyed && player.isConnected) refreshPlayer(player);
+    }
   }
 
   function flushDirtyPlayers() {
@@ -144,6 +161,7 @@ export function createVideoRuntime({
     if (!(node instanceof ElementRef)) return;
     const players = node.matches(selector) ? [node] : Array.from(node.querySelectorAll(selector));
     for (const player of players) {
+      if (player.isConnected) continue;
       const record = records.get(player);
       const instance = record?.instance;
       if (!instance) {
@@ -151,15 +169,7 @@ export function createVideoRuntime({
         continue;
       }
       if (record.status === 'destroying') continue;
-      const pending = instance.destroy();
-      records.set(player, { ...record, status: 'destroying', promise: pending });
-      const settle = error => {
-        if (records.get(player)?.promise !== pending) return;
-        records.delete(player);
-        if (error) diagnostics.report('destroy', error);
-        if (!runtimeDestroyed && player.isConnected) refreshPlayer(player);
-      };
-      pending.then(() => settle(null), settle);
+      destroyPlayer(player, record, true);
     }
   }
 
@@ -186,8 +196,6 @@ export function createVideoRuntime({
       if (destroyPromise) return destroyPromise;
       destroyPromise = (async () => {
         runtimeDestroyed = true;
-        delete windowRef.__hexoSilVideoRefresh;
-        delete windowRef.__hexoSilVideoRuntime;
         observer.disconnect();
         dirtyPlayers.clear();
         windowRef.removeEventListener('resize', refreshThemes);
@@ -201,6 +209,8 @@ export function createVideoRuntime({
           if (result.status === 'rejected') diagnostics.report('runtime.destroy', result.reason);
         }
         records.clear();
+        if (windowRef.__hexoSilVideoRuntime === runtime) delete windowRef.__hexoSilVideoRuntime;
+        if (windowRef.__hexoSilVideoRefresh === refresh) delete windowRef.__hexoSilVideoRefresh;
       })();
       return destroyPromise;
     }
@@ -210,7 +220,10 @@ export function createVideoRuntime({
   windowRef.addEventListener('resize', refreshThemes);
   documentRef.addEventListener('inside', handleInside);
   documentRef.addEventListener('inside:theme', refreshThemes);
-  observer.observe(documentRef.body, { childList: true, subtree: true });
+  observer.observe(documentRef.body, {
+    childList: true,
+    subtree: true
+  });
   refresh();
   return runtime;
 }

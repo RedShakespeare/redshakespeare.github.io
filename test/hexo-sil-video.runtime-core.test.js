@@ -221,6 +221,49 @@ test('runtime destroy prevents refresh from orphaning instances created during t
   dom.window.close();
 });
 
+test('runtime singleton remains authoritative until asynchronous teardown finishes', async () => {
+  const { createVideoRuntime } = await loadRuntime('player.js');
+  const dom = new JSDOM('<!doctype html><body><aside class="sil-video-player" data-sil-video-player data-sil-video-model="one"></aside></body>');
+  let release;
+  class Observer { observe() {} disconnect() {} }
+  const runtime = createVideoRuntime({
+    windowRef: dom.window, documentRef: dom.window.document, ElementRef: dom.window.Element,
+    MutationObserverRef: Observer, queueMicrotaskRef: queueMicrotask,
+    createInstance: () => ({ mount() {}, refreshTheme() {}, destroy() { return new Promise(resolve => { release = resolve; }); } })
+  });
+  const destroying = runtime.destroy();
+  const same = createVideoRuntime({
+    windowRef: dom.window, documentRef: dom.window.document, ElementRef: dom.window.Element,
+    MutationObserverRef: Observer, queueMicrotaskRef: queueMicrotask, createInstance: () => { throw new Error('new runtime created'); }
+  });
+  assert.equal(same, runtime);
+  release();
+  await destroying;
+  assert.equal(dom.window.__hexoSilVideoRuntime, undefined);
+  dom.window.close();
+});
+
+test('refresh replaces a ready instance when its model source changes', async () => {
+  const { createVideoRuntime } = await loadRuntime('player.js');
+  const dom = new JSDOM('<!doctype html><body><aside class="sil-video-player" data-sil-video-player data-sil-video-model="one"></aside></body>');
+  const player = dom.window.document.querySelector('aside');
+  const calls = [];
+  class Observer { observe() {} disconnect() {} }
+  let source = 'one';
+  const runtime = createVideoRuntime({
+    windowRef: dom.window, documentRef: dom.window.document, ElementRef: dom.window.Element,
+    MutationObserverRef: Observer, queueMicrotaskRef: queueMicrotask,
+    createInstance: () => { const created = source; return { mount() { calls.push(`mount:${created}`); }, refreshTheme() {}, async destroy() { calls.push(`destroy:${created}`); } }; }
+  });
+  player.dataset.silVideoModel = 'two';
+  source = 'two';
+  runtime.refresh();
+  await new Promise(resolve => setImmediate(resolve));
+  assert.deepEqual(calls, ['mount:one', 'destroy:one', 'mount:two']);
+  await runtime.destroy();
+  dom.window.close();
+});
+
 test('a player removed before its scheduled refresh is never initialised', async () => {
   const { createVideoRuntime } = await loadRuntime('player.js');
   const dom = new JSDOM('<!doctype html><body></body>');
