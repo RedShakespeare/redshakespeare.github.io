@@ -117,11 +117,26 @@ export function createSubtitleRendererManager({
     await renderer.renderer.freeTrack();
   }
 
+  async function loadTrack(args) {
+    await cancelCandidate();
+    return enqueue(async () => {
+      if (!isCurrent(args.token)) return null;
+      return applyTrack(args);
+    });
+  }
+
+  async function disableTrack(token) {
+    await cancelCandidate();
+    return enqueue(async () => {
+      if (!isCurrent(token)) return false;
+      await freeTrack();
+      return true;
+    });
+  }
+
   return {
-    enqueue,
-    cancelCandidate,
-    applyTrack,
-    freeTrack,
+    loadTrack,
+    disableTrack,
     async resize() {
       if (!destroyed && renderer) await renderer.resize(true);
     },

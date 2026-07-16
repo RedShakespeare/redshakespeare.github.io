@@ -61,23 +61,10 @@ export function createSubtitleController({
     menuView.setOpen(false);
     const previousIndex = selectedIndex;
     const previousContent = activeContent;
-    try {
-      await rendererManager.cancelCandidate();
-    } catch (error) {
-      if (isCurrent(token)) {
-        const message = index < 0 ? `字幕关闭失败：${error.message}` : `字幕加载失败：${error.message}`;
-        diagnostics.report('subtitle.select', error);
-        state.set('subtitles', message, { error: true });
-      }
-      return false;
-    }
     if (index < 0) {
       try {
-        await rendererManager.enqueue(async () => {
-          if (!isCurrent(token)) return;
-          await rendererManager.freeTrack();
-        });
-        if (!isCurrent(token)) return false;
+        const disabled = await rendererManager.disableTrack(token);
+        if (!disabled || !isCurrent(token)) return false;
         selectedIndex = -1;
         activeContent = '';
         menuView.sync(selectedIndex);
@@ -99,10 +86,7 @@ export function createSubtitleController({
       if (!isCurrent(token)) return false;
       const content = await runtime.loadSubtitleText(track, controller.signal);
       if (!isCurrent(token)) return false;
-      await rendererManager.enqueue(async () => {
-        if (!isCurrent(token)) return;
-        await rendererManager.applyTrack({ runtime, content, oldContent: previousContent, token });
-      });
+      await rendererManager.loadTrack({ runtime, content, oldContent: previousContent, token });
       if (!isCurrent(token)) return false;
       selectedIndex = index;
       activeContent = content;
