@@ -9,10 +9,8 @@
     "node": ">=20"
   },
   "dependencies": {
+    "esbuild": "0.25.12",
     "jassub": "2.5.7",
     "subsrt": "1.1.1"
-  },
-  "devDependencies": {
-    "esbuild": "0.25.12"
   }
 }

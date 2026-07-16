@@ -56,7 +56,7 @@ function createBrowserBuild({ pluginDir, routes, esbuildRef = require('esbuild')
   async function runtimeRouteArtifacts() {
     if (runtimeArtifactsPromise) return cloneRoutes(await runtimeArtifactsPromise);
     const jassubRoot = path.dirname(require.resolve('jassub/package.json'));
-    runtimeArtifactsPromise = Promise.all([
+    const buildPromise = Promise.all([
       buildBrowserArtifacts(path.join(pluginDir, 'runtime', 'browser-entry.js'), 'iife', path.basename(routes.script)),
       buildBrowserArtifacts(path.join(pluginDir, 'runtime', 'subtitles.js'), 'esm', path.basename(routes.subtitles)),
       buildBrowserArtifacts(path.join(jassubRoot, 'dist', 'worker', 'worker.js'), 'esm', path.basename(routes.worker))
@@ -67,10 +67,13 @@ function createBrowserBuild({ pluginDir, routes, esbuildRef = require('esbuild')
       { path: `${routes.subtitles}.map`, data: subtitles.map, internal: true },
       { path: routes.worker, data: worker.js },
       { path: `${routes.worker}.map`, data: worker.map, internal: true }
-    ]).catch(error => {
-      runtimeArtifactsPromise = null;
+    ]);
+    let artifactsPromise;
+    artifactsPromise = buildPromise.catch(error => {
+      if (runtimeArtifactsPromise === artifactsPromise) runtimeArtifactsPromise = null;
       throw error;
     });
+    runtimeArtifactsPromise = artifactsPromise;
     return cloneRoutes(await runtimeArtifactsPromise);
   }
 
@@ -78,15 +81,18 @@ function createBrowserBuild({ pluginDir, routes, esbuildRef = require('esbuild')
     if (runtimeRouteDataPromise) return cloneRoutes(await runtimeRouteDataPromise, clone);
     if (!runtimeArtifactsPromise) await runtimeRouteArtifacts();
     const jassubRoot = path.dirname(require.resolve('jassub/package.json'));
-    runtimeRouteDataPromise = Promise.all([
+    const dataPromise = Promise.all([
       ...await runtimeArtifactsPromise,
       { path: routes.wasm, data: fs.readFile(path.join(jassubRoot, 'dist', 'wasm', 'jassub-worker.wasm')) },
       { path: routes.modernWasm, data: fs.readFile(path.join(jassubRoot, 'dist', 'wasm', 'jassub-worker-modern.wasm')) },
       { path: routes.defaultFont, data: fs.readFile(path.join(jassubRoot, 'dist', 'default.woff2')) }
-    ]).then(entries => Promise.all(entries.map(async entry => ({ ...entry, data: await entry.data })))).catch(error => {
-      runtimeRouteDataPromise = null;
+    ]).then(entries => Promise.all(entries.map(async entry => ({ ...entry, data: await entry.data }))));
+    let routeDataPromise;
+    routeDataPromise = dataPromise.catch(error => {
+      if (runtimeRouteDataPromise === routeDataPromise) runtimeRouteDataPromise = null;
       throw error;
     });
+    runtimeRouteDataPromise = routeDataPromise;
     return cloneRoutes(await runtimeRouteDataPromise, clone);
   }
 
