@@ -16,6 +16,18 @@ function createVideoModel({
   rootPublicPath,
   runtimeOptions
 }) {
+  async function mapConcurrent(values, worker, limit = 8) {
+    const results = new Array(values.length);
+    let next = 0;
+    async function consume() {
+      while (next < values.length) {
+        const index = next++;
+        results[index] = await worker(values[index], index);
+      }
+    }
+    await Promise.all(Array.from({ length: Math.min(limit, values.length) }, consume));
+    return results;
+  }
   function videoError(post, message) {
     const identifier = post && (post.source || post.path || post.title) || 'unknown post';
     return new Error(`Video metadata error in ${identifier}: ${message}`);
@@ -46,11 +58,11 @@ function createVideoModel({
       return { file, format: extension.slice(1), label, srclang, default: isDefault, url: mediaFileUrl(options.root, options.media, file), acceptedTypes, localType: acceptedTypes.values().next().value };
     });
     if (defaults > 1) throw videoError(post, '`video.subtitles` may define only one default track.');
-    await Promise.all(tracks.map(track => localEntry(post, track.file, options, {
+    await mapConcurrent(tracks, track => localEntry(post, track.file, options, {
       types: track.acceptedTypes,
       localType: track.localType,
       description: 'subtitle'
-    })));
+    }));
     return tracks.map(({ acceptedTypes, localType, ...track }) => track);
   }
 
@@ -88,10 +100,10 @@ function createVideoModel({
 
   async function normaliseFonts(post, options) {
     const entries = Object.entries(options.subtitles.fonts || {});
-    await Promise.all(entries.map(([, file]) => {
+    await mapConcurrent(entries, ([, file]) => {
       const type = fontMimeTypes.get(path.extname(file).toLowerCase());
       return localEntry(post, file, options, { type, localType: type, description: 'font' });
-    }));
+    });
     return Object.fromEntries(entries.map(([name, file]) => [name, mediaFileUrl(options.root, options.media, file)]));
   }
 
