@@ -1,3 +1,5 @@
+import { normaliseError } from './shared.js';
+
 export function createCandidateRendererLifecycle({ createRenderer, destroyRenderer, isCurrent }) {
   let candidate = null;
   let cancellation = null;
@@ -38,6 +40,7 @@ export function createCandidateRendererLifecycle({ createRenderer, destroyRender
       cancellation = null;
       return current;
     } catch (error) {
+      error = normaliseError(error);
       if (candidate === current) candidate = null;
       if (cancellation === currentCancellation) cancellation = null;
       try {

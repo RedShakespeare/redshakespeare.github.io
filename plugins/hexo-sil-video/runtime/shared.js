@@ -125,6 +125,13 @@ export function errorMessage(error, fallback = '未知错误') {
   return fallback;
 }
 
+export function normaliseError(error) {
+  if (error instanceof Error) return error;
+  const normalised = new Error(errorMessage(error));
+  normalised.cause = error;
+  return normalised;
+}
+
 export function focusWithoutScroll(target) {
   try {
     target.focus({ preventScroll: true });

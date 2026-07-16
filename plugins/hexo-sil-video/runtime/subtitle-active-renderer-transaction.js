@@ -1,3 +1,5 @@
+import { normaliseError } from './shared.js';
+
 export async function applyActiveRendererTrack({ renderer, content, oldContent, isCurrent, token, clear, destroy }) {
   await renderer.ready;
   try {
@@ -9,6 +11,7 @@ export async function applyActiveRendererTrack({ renderer, content, oldContent, 
     }
     return renderer;
   } catch (error) {
+    error = normaliseError(error);
     if (oldContent) {
       try {
         await renderer.renderer.setTrack(oldContent);

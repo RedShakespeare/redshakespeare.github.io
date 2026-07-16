@@ -139,6 +139,7 @@ export function createPointerController({ player, video, stage, viewport, media,
     gesture = null;
     try { viewport.releasePointerCapture(completed.pointerId); } catch { /* Pointer capture may already be lost. */ }
     if (!completed.mode) {
+      if (!commit) { recentTouchTap = null; return; }
       recentTouchTap = { time: now(), x: event.clientX, uiWasHidden: completed.uiWasHidden };
       return;
     }

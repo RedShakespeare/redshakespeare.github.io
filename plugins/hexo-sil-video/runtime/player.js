@@ -40,6 +40,7 @@ function recordInitialisationFailure({ player, records, source, instance, diagno
       records.delete(player);
       return;
     }
+    showFallbackError(player, message);
     records.set(player, { ...failed, status: 'failed', promise: null, retryRequested: false });
     if (current.retryRequested) retry();
   });

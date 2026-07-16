@@ -10,6 +10,7 @@ export function createFeedbackController({ video, mediaLayer, feedback, feedback
   const { setTimeout: setTimer, clearTimeout: clearTimer } = clock;
   let timer = null;
   let brightness = 1;
+  const initialBrightness = mediaLayer.style.getPropertyValue('--sil-video-brightness');
 
   function show(kind, message, delay = FEEDBACK_HIDE_DELAY, label = '') {
     if (timer !== null) clearTimer(timer);
@@ -49,6 +50,9 @@ export function createFeedbackController({ video, mediaLayer, feedback, feedback
     async destroy() {
       if (timer !== null) clearTimer(timer);
       timer = null;
+      if (initialBrightness) mediaLayer.style.setProperty('--sil-video-brightness', initialBrightness);
+      else mediaLayer.style.removeProperty('--sil-video-brightness');
+      delete feedback.dataset.silVideoFeedbackVisible;
     }
   };
 }
