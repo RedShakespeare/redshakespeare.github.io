@@ -5,7 +5,8 @@ import { createMediaController } from './media-controller.js';
 import { isDarkTheme } from './shared.js';
 import { createSubtitleController } from './subtitle-controller.js';
 import { createPlayerView } from './view.js';
-import { createRuntimeServices } from './runtime-services.js';
+import { assertRuntimeServices, createRuntimeServices } from './runtime-services.js';
+import { destroyControllersInReverse } from './controller-lifecycle.js';
 import contract from '../lib/player-contract.js';
 
 function parseModel(player) {
@@ -22,7 +23,9 @@ function parseModel(player) {
 function createPlayerInstance({ player, services }) {
   const refs = createPlayerView(player);
   const model = parseModel(player);
-  services ||= createRuntimeServices({ player, status: refs.status, windowRef: player.ownerDocument.defaultView });
+  services = services
+    ? assertRuntimeServices(services)
+    : createRuntimeServices({ player, status: refs.status, windowRef: player.ownerDocument.defaultView });
   const { state, ui, diagnostics } = services;
   const controllers = [];
   let destroyPromise = null;
@@ -116,12 +119,7 @@ function createPlayerInstance({ player, services }) {
   async function destroy() {
     if (destroyPromise) return destroyPromise;
     destroyPromise = (async () => {
-      const pending = [];
-      for (const controller of controllers.slice().reverse()) {
-        try { pending.push(Promise.resolve(controller.destroy())); } catch (error) { pending.push(Promise.reject(error)); }
-      }
-      const results = await Promise.allSettled(pending);
-      results.filter(result => result.status === 'rejected').forEach(result => diagnostics.report('destroy', result.reason));
+      await destroyControllersInReverse(controllers, diagnostics);
       refs.video.controls = true;
       delete player.dataset.silVideoReady;
       delete player.dataset.silVideoEnhanced;
