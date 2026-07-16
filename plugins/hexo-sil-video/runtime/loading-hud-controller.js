@@ -15,9 +15,11 @@ function createDownloadedBytesReader(video) {
     if (!performanceRef?.getEntriesByName) return null;
     try {
       const entries = performanceRef.getEntriesByName(video.currentSrc || video.src || '');
-      const entry = entries[entries.length - 1];
-      const bytes = Number(entry?.transferSize || entry?.encodedBodySize || entry?.decodedBodySize);
-      return Number.isFinite(bytes) && bytes >= 0 ? bytes : null;
+      if (entries.length === 0) return null;
+      return entries.reduce((total, entry) => {
+        const bytes = Number(entry?.transferSize || entry?.encodedBodySize || entry?.decodedBodySize);
+        return total + (Number.isFinite(bytes) && bytes >= 0 ? bytes : 0);
+      }, 0);
     } catch {
       return null;
     }

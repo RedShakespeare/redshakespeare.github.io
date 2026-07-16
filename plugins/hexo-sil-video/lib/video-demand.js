@@ -5,9 +5,16 @@ function createVideoDemandRegistry() {
 
   function consumeFence(line, state) {
     const trimmed = line.trim();
-    if (state.comment || (!trimmed.startsWith('```') && !trimmed.startsWith('~~~'))) return false;
-    const marker = trimmed.slice(0, 3);
-    state.fence = state.fence === marker ? '' : (state.fence || marker);
+    if (state.comment) return false;
+    const marker = trimmed.match(/^(`{3,}|~{3,})/);
+    if (!state.fence) {
+      if (!marker) return false;
+      state.fence = { character: marker[1][0], length: marker[1].length };
+      return true;
+    }
+    if (marker && marker[1][0] === state.fence.character
+      && marker[1].length >= state.fence.length
+      && !trimmed.slice(marker[1].length).trim()) state.fence = null;
     return true;
   }
 

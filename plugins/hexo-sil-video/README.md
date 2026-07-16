@@ -82,4 +82,4 @@ video:
 请求字幕包、Worker、WASM 或字体。播放器不使用 CDN；这些资源均生成到站点自身路径。
 
 运行 `npm run test:hexo-sil-video` 执行 JSDOM 回归测试，运行
-`npm run test:hexo-sil-video:browser` 执行 Chromium 与 WebKit Playwright 门禁。
+`npm run test:hexo-sil-video:browser` 执行 Chromium、Firefox 与 WebKit Playwright 门禁。
