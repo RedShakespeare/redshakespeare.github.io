@@ -164,6 +164,11 @@ export function createPointerController({ player, video, stage, viewport, media,
     },
     async destroy() {
       clearViewportClickTimer();
+      if (gesture) {
+        try { viewport.releasePointerCapture(gesture.pointerId); } catch { /* Pointer capture may already be lost. */ }
+        gesture = null;
+      }
+      recentTouchTap = null;
       wheelController.destroy();
       scope.destroy();
     }
