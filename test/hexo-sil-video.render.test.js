@@ -30,6 +30,8 @@ test('rendered player exposes native fallback, custom controls, downloads, and r
   assert.match(html, /data-sil-video-media-layer/);
   assert.match(html, /data-sil-video-feedback/);
   assert.match(html, /data-sil-video-feedback-text/);
+  assert.match(html, /data-sil-video-loading/);
+  assert.match(html, /正在加载\.\.\./);
   assert.match(html, /data-sil-video-controls[^>]*hidden/);
   assert.match(html, /aria-valuetext="0:00\/--:--"/);
   assert.match(html, /aria-valuetext="100%"/);

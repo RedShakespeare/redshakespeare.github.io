@@ -18,6 +18,7 @@ export function createMediaController({
   onPlaybackStateChange = () => {},
   onPlayInteraction = () => {},
   feedbackController,
+  loadingHud,
   services
 }) {
   const { state, diagnostics } = services;
@@ -125,7 +126,7 @@ export function createMediaController({
     rate.setAttribute('aria-label', `播放速度 ${video.playbackRate} 倍`);
   }
 
-  const scope = bindMediaEvents({ video, progress, duration, projection, setStatus, onPlayInteraction });
+  const scope = bindMediaEvents({ video, progress, duration, projection, setStatus, onPlayInteraction, loadingHud });
   projection.playing();
   projection.time();
   projection.duration();
@@ -146,6 +147,7 @@ export function createMediaController({
     async destroy() {
       destroyed = true;
       playToken += 1;
+      loadingHud.destroy();
       scope.destroy();
     }
   };

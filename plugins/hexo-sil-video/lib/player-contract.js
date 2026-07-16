@@ -15,6 +15,8 @@ const PLAYER_VIEW_SELECTORS = Object.freeze({
   mediaLayer: '[data-sil-video-media-layer]',
   feedback: '[data-sil-video-feedback]',
   feedbackText: '[data-sil-video-feedback-text]',
+  loading: '[data-sil-video-loading]',
+  loadingSpeed: '[data-sil-video-loading-speed]',
   progress: '[data-sil-video-progress]',
   volume: '[data-sil-video-volume]',
   current: '[data-sil-video-current]',

@@ -7,7 +7,7 @@ test('runtime route builder emits split core/subtitle bundles, module worker, WA
   const routes = await runtimeRouteData();
   const sizes = Object.fromEntries(routes.map(route => [route.path, route.data.length]));
   const budgets = {
-    [RUNTIME_ROUTES.script]: 37600,
+    [RUNTIME_ROUTES.script]: 39000,
     [RUNTIME_ROUTES.subtitles]: 42000,
     [RUNTIME_ROUTES.worker]: 130000,
     [RUNTIME_ROUTES.wasm]: 2300000,

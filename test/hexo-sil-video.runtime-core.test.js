@@ -125,6 +125,37 @@ test('media projection directly maps volume and replay state to UI', async () =>
   dom.window.close();
 });
 
+test('loading HUD reports measured download speed only while playback is stalled', async () => {
+  const { createLoadingHudController } = await loadRuntime('loading-hud-controller.js');
+  const video = { paused: false, ended: false };
+  const loading = { hidden: true };
+  const loadingSpeed = { textContent: '' };
+  const timers = new Map();
+  let timerId = 0;
+  let now = 0;
+  let bytes = 0;
+  const clock = {
+    now: () => now,
+    setTimeout(handler) { const id = ++timerId; timers.set(id, handler); return id; },
+    clearTimeout(id) { timers.delete(id); }
+  };
+  const hud = createLoadingHudController({ video, loading, loadingSpeed, clock, readDownloadedBytes: () => bytes });
+  const runTimer = id => { const handler = timers.get(id); timers.delete(id); handler(); };
+  hud.show();
+  assert.equal(loading.hidden, false);
+  runTimer(1);
+  now = 500;
+  bytes = 51200;
+  runTimer(2);
+  now = 1000;
+  bytes = 102400;
+  runTimer(3);
+  assert.equal(loadingSpeed.textContent, '100KB/s');
+  hud.hide();
+  assert.equal(loading.hidden, true);
+  assert.equal(timers.size, 0);
+});
+
 test('refreshOnePlayer shares initialise and theme refresh projection', async () => {
   const { refreshOnePlayer } = await loadRuntime('player.js');
   const dom = new JSDOM('<!doctype html><body><aside class="sil-video-player" data-sil-video-player data-sil-video-model="model"></aside></body>');

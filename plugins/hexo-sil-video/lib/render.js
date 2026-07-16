@@ -18,6 +18,10 @@ function createRenderer({ playerStart, playerEnd }) {
     return `<div class="sil-video-player__feedback" data-sil-video-controls data-sil-video-feedback role="status" aria-live="polite" aria-atomic="true" hidden>${icons.feedbackIcon}${icons.brightnessIcon}${icons.feedbackPlayIcon}${icons.feedbackPauseIcon}<span data-sil-video-feedback-text></span></div>`;
   }
 
+  function renderLoadingHud() {
+    return '<div class="sil-video-player__loading" data-sil-video-loading role="status" aria-live="polite" aria-atomic="true" hidden><span>正在加载...</span><span data-sil-video-loading-speed>0KB/s</span></div>';
+  }
+
   function renderProgress() {
     return `<div class="sil-video-player__progress-row" data-sil-video-controls hidden>
       <span class="sil-video-player__time" data-sil-video-current>0:00</span>
@@ -72,6 +76,7 @@ function createRenderer({ playerStart, playerEnd }) {
     <div class="sil-video-player__viewport" data-sil-video-viewport>
       <div class="sil-video-player__media-layer" data-sil-video-media-layer style="--sil-video-brightness:1"><video class="sil-video-player__video" controls preload="${escapeHtml(video.preload)}"${poster}><source src="${escapeHtml(video.source)}"${type}>你的浏览器不支持 HTML5 视频播放。</video></div>
       ${renderFeedback(icons)}
+      ${renderLoadingHud()}
     </div>
     ${renderProgress()}
     ${renderToolbar(video, icons)}

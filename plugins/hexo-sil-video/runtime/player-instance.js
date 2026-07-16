@@ -1,6 +1,7 @@
 import { createFullscreenController } from './fullscreen-controller.js';
 import { createFeedbackController } from './feedback-controller.js';
 import { createInteractionController } from './interaction-controller.js';
+import { createLoadingHudController } from './loading-hud-controller.js';
 import { createMediaController } from './media-controller.js';
 import { isDarkTheme } from './shared.js';
 import { createSubtitleController } from './subtitle-controller.js';
@@ -64,6 +65,12 @@ function createPlayerInstance({ player, services }) {
       feedbackText: refs.feedbackText,
       services
     }));
+    const loadingHud = addController(createLoadingHudController({
+      video: refs.video,
+      loading: refs.loading,
+      loadingSpeed: refs.loadingSpeed,
+      clock: services.clock
+    }));
     const fullscreenController = addController(createFullscreenController({
       player,
       video: refs.video,
@@ -86,6 +93,7 @@ function createPlayerInstance({ player, services }) {
       onPlaybackStateChange: fullscreenController.syncPlayback,
       onPlayInteraction: () => subtitleBinding.activatePending(),
       feedbackController,
+      loadingHud,
       services
     }));
 

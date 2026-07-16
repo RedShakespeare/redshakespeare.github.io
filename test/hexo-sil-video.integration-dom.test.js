@@ -34,6 +34,30 @@ test('browser runtime marks every buffered video range and clears stale loading 
   }
 });
 
+test('browser runtime shows and clears the loading HUD around playback stalls', async () => {
+  const fixture = await browserPlayer();
+  const { dom, window, video, player } = fixture;
+  const loading = player.querySelector('[data-sil-video-loading]');
+  try {
+    video.paused = false;
+    video.dispatchEvent(new window.Event('waiting'));
+    assert.equal(loading.hidden, false);
+    assert.equal(loading.querySelector('span').textContent, '正在加载...');
+    video.dispatchEvent(new window.Event('playing'));
+    assert.equal(loading.hidden, true);
+    video.dispatchEvent(new window.Event('stalled'));
+    assert.equal(loading.hidden, false);
+    video.paused = true;
+    video.dispatchEvent(new window.Event('pause'));
+    assert.equal(loading.hidden, true);
+    video.paused = true;
+    video.dispatchEvent(new window.Event('waiting'));
+    assert.equal(loading.hidden, true);
+  } finally {
+    dom.window.close();
+  }
+});
+
 test('browser runtime synchronises accessible values, omits empty subtitle relations, and destroys cleanly', async () => {
   const fixture = await browserPlayer();
   const { dom, document, player, video, progress, volume } = fixture;
