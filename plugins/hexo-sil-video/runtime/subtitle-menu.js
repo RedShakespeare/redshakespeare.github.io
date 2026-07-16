@@ -7,6 +7,7 @@ export function createSubtitleMenu({ player, button, menu, tracks, onSelect, sho
   const documentRef = player.ownerDocument;
   let selectedIndex = -1;
   let focusedIndex = -1;
+  let destroyed = false;
 
   menuSequence += 1;
   menu.id = `sil-video-subtitle-menu-${menuSequence}`;
@@ -32,10 +33,10 @@ export function createSubtitleMenu({ player, button, menu, tracks, onSelect, sho
     ui.setSubtitleMenuOpen(open);
     button.setAttribute('aria-expanded', open ? 'true' : 'false');
     showFullscreenUi();
-    if (open) queueMicrotask(() => focusOption(selectedIndex));
+    if (open) queueMicrotask(() => { if (!destroyed) focusOption(selectedIndex); });
     else if (returnFocus) {
       button.focus();
-      queueMicrotask(() => { if (menu.hidden) button.focus(); });
+      queueMicrotask(() => { if (!destroyed && menu.hidden) button.focus(); });
     }
   }
 
@@ -98,6 +99,7 @@ export function createSubtitleMenu({ player, button, menu, tracks, onSelect, sho
     setOpen,
     sync,
     destroy() {
+      destroyed = true;
       scope.destroy();
       menu.replaceChildren();
       menu.hidden = true;
