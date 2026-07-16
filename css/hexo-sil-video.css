@@ -70,6 +70,7 @@
 .sil-video-player__icon { width:1rem;height:1rem;fill:currentColor }
 .sil-video-player__icon--pause,
 .sil-video-player__icon--replay,
+.sil-video-player__icon--reload,
 .sil-video-player__icon--muted,
 .sil-video-player__icon--volume-medium,
 .sil-video-player__icon--volume-high { display:none }
@@ -78,6 +79,10 @@
 .sil-video-player[data-sil-video-ended="true"] .sil-video-player__icon--play,
 .sil-video-player[data-sil-video-ended="true"] .sil-video-player__icon--pause { display:none }
 .sil-video-player[data-sil-video-ended="true"] .sil-video-player__icon--replay { display:block }
+.sil-video-player[data-sil-video-media-error="true"] .sil-video-player__icon--play,
+.sil-video-player[data-sil-video-media-error="true"] .sil-video-player__icon--pause,
+.sil-video-player[data-sil-video-media-error="true"] .sil-video-player__icon--replay { display:none }
+.sil-video-player[data-sil-video-media-error="true"] .sil-video-player__icon--reload { display:block }
 .sil-video-player[data-sil-video-volume-level="muted"] .sil-video-player__icon--volume-low,
 .sil-video-player[data-sil-video-volume-level="medium"] .sil-video-player__icon--volume-low,
 .sil-video-player[data-sil-video-volume-level="high"] .sil-video-player__icon--volume-low { display:none }
