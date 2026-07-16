@@ -6,6 +6,7 @@ tags:
 video:
   file: videos/3.mp4
   title: 本地 MP4 测试视频
+  download: false
 ---
 
 这是 `hexo-sil-video` 的本地测试文章。
