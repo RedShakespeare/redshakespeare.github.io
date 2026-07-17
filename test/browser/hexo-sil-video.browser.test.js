@@ -172,6 +172,23 @@ test('media errors expose a visible reload action that invokes the native loader
   await expect(play).toHaveAttribute('aria-pressed', 'false');
 });
 
+test('source failures completed before enhancement retain a visible reload action', async ({ page }) => {
+  await page.route(`**${STYLE_PATH}`, async route => {
+    await new Promise(resolve => setTimeout(resolve, 500));
+    await route.continue();
+  });
+  await page.goto('/video-missing', { waitUntil: 'domcontentloaded' });
+  const player = page.locator('[data-sil-video-player]');
+  const video = page.locator('video');
+  const play = page.locator('[data-sil-video-action="play"]');
+  await expect(player).toHaveAttribute('data-sil-video-enhanced', 'true');
+  await expect(player).toHaveAttribute('data-sil-video-media-error', 'true');
+  await expect(video).toHaveJSProperty('networkState', 3);
+  await expect(video).toHaveJSProperty('controls', false);
+  await expect(play).toHaveAttribute('aria-label', '重新加载');
+  await expect(player.locator('[data-sil-video-status]')).toContainText('视频加载失败');
+});
+
 test('disabling downloads keeps the fullscreen control aligned to the toolbar edge', async ({ page }) => {
   await page.goto('/video-no-subtitles');
   await waitEnhanced(page);

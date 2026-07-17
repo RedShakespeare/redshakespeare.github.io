@@ -1,7 +1,16 @@
 import { createListenerScope } from './shared.js';
 
+const NETWORK_NO_SOURCE = 3;
+
 export function bindMediaEvents({ video, progress, duration, projection, setStatus, mediaErrorMessage, onMediaError, onPlayInteraction, loadingHud }) {
   const scope = createListenerScope();
+
+  function reportMediaError() {
+    loadingHud.hide();
+    onMediaError(true);
+    setStatus(mediaErrorMessage(), true);
+  }
+
   scope.listen(video, 'loadstart', () => {
     onMediaError(false);
     loadingHud.hide();
@@ -27,10 +36,8 @@ export function bindMediaEvents({ video, progress, duration, projection, setStat
   scope.listen(video, 'pause', () => { loadingHud.hide(); projection.playing(); });
   scope.listen(video, 'ended', () => { loadingHud.hide(); projection.playing(); });
   scope.listen(video, 'volumechange', projection.volume);
-  scope.listen(video, 'error', () => {
-    loadingHud.hide();
-    onMediaError(true);
-    setStatus(mediaErrorMessage(), true);
-  });
+  scope.listen(video, 'error', reportMediaError);
+  video.querySelectorAll('source').forEach(source => scope.listen(source, 'error', reportMediaError));
+  if (video.error || video.networkState === NETWORK_NO_SOURCE) reportMediaError();
   return scope;
 }

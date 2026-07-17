@@ -87,6 +87,7 @@ async function browserPlayer(options = {}) {
     paused: { value: true, writable: true },
     ended: { value: false, writable: true },
     duration: { value: 100, writable: true },
+    networkState: { value: options.networkState ?? 1, writable: true },
     buffered: { value: bufferedRanges([[0, 25], [50, 75]]), writable: true },
     currentTime: {
       get() { return currentTimeValue; },

@@ -82,6 +82,7 @@ function documentHtml(content, extraScript = '') {
 function page(pathname) {
   if (pathname === '/plain') return documentHtml('<main><h1>Plain page</h1></main>');
   if (pathname === '/video-no-subtitles') return documentHtml(player());
+  if (pathname === '/video-missing') return documentHtml(player({ source: '/test/missing.webm', title: 'Missing Fixture' }));
   if (pathname === '/video-streaming') return documentHtml(player({ source: '/test/streaming.webm', title: 'Streaming Fixture' }));
   if (pathname === '/video-subtitles') return documentHtml(player({ subtitles: true }));
   if (pathname === '/video-two-subtitles') return documentHtml(`${player({ subtitles: true, title: 'First' })}${player({ subtitles: true, title: 'Second' })}`);

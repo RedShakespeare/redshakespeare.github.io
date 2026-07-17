@@ -77,6 +77,22 @@ test('browser runtime turns media failures into a manual reload action', async (
   }
 });
 
+test('browser runtime handles source-element failures and failures completed before mount', async () => {
+  for (const initialFailure of [false, true]) {
+    const fixture = await browserPlayer({ networkState: initialFailure ? 3 : 1 });
+    const { dom, window, player, video, play } = fixture;
+    try {
+      if (!initialFailure) video.querySelector('source').dispatchEvent(new window.Event('error'));
+      assert.equal(player.dataset.silVideoMediaError, 'true');
+      assert.equal(play.getAttribute('aria-label'), '重新加载');
+      assert.equal(play.hasAttribute('aria-pressed'), false);
+      assert.equal(player.querySelector('[data-sil-video-status]').textContent, '视频加载失败，请使用下载链接。');
+    } finally {
+      dom.window.close();
+    }
+  }
+});
+
 test('disabled downloads use a retry message instead of a missing download link', async () => {
   const fixture = await browserPlayer({ download: false });
   const { dom, window, video, player } = fixture;
