@@ -140,9 +140,6 @@
   .sil-video-player__stage:fullscreen .sil-video-player__progress-row { right:.5rem;bottom:6.75rem;left:.5rem }
 }
 .sil-video-player[data-sil-video-download="false"][data-sil-video-fullscreen="true"] .sil-video-player__toolbar { grid-template-columns:repeat(4,2.25rem) minmax(0,1fr) 2.25rem }
-@media screen and (max-width:430px) {
-  .sil-video-player[data-sil-video-download="false"][data-sil-video-fullscreen="true"] .sil-video-player__toolbar-spacer { grid-column:2/5 }
-}
 @media (pointer:coarse) {
   .sil-video-player__viewport { touch-action:none }
 }

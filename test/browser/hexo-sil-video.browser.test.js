@@ -157,6 +157,23 @@ test('disabling downloads keeps the fullscreen control aligned to the toolbar ed
   expect(geometry.rightGap).toBeLessThanOrEqual(1);
 });
 
+test('mobile fullscreen keeps the last control right-aligned without downloads', async ({ page }) => {
+  await page.setViewportSize({ width: 420, height: 720 });
+  await page.goto('/video-no-subtitles');
+  await waitEnhanced(page);
+  const geometry = await page.locator('[data-sil-video-player]').evaluate(player => {
+    player.dataset.silVideoDownload = 'false';
+    player.dataset.silVideoFullscreen = 'true';
+    player.querySelector('[aria-label="下载视频"]').remove();
+    const toolbar = player.querySelector('.sil-video-player__toolbar').getBoundingClientRect();
+    const fullscreen = player.querySelector('[data-sil-video-action="fullscreen"]').getBoundingClientRect();
+    const subtitle = player.querySelector('.sil-video-player__subtitle-control').getBoundingClientRect();
+    return { rightGap: toolbar.right - fullscreen.right, sameRow: subtitle.top === fullscreen.top };
+  });
+  expect(geometry.rightGap).toBeLessThanOrEqual(1);
+  expect(geometry.sameRow).toBe(true);
+});
+
 test('default subtitles remain pending until interaction and Chromium starts Worker/WASM lazily', async ({ page, browserName }) => {
   const requests = observeRequests(page);
   await page.goto('/video-subtitles');

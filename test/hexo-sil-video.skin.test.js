@@ -31,4 +31,5 @@ test('video skin keeps native fallback and reduced-motion contracts', () => {
   assert.match(skin, /@media \(pointer:coarse\)/);
   assert.match(skin, /touch-action:none/);
   assert.match(skin, /data-sil-video-download="false"[^}]*grid-template-columns:repeat\(4,2\.25rem\) minmax\(0,1fr\) 2\.25rem/);
+  assert.doesNotMatch(skin, /data-sil-video-download="false"[^}]*toolbar-spacer[^}]*grid-column:2\/5/);
 });
