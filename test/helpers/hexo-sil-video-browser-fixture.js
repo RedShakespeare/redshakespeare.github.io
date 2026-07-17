@@ -60,6 +60,8 @@ async function browserPlayer(options = {}) {
   const { window } = dom;
   const { document } = window;
   window.TextDecoder = TextDecoder;
+  const diagnostics = [];
+  window.console.error = (...args) => diagnostics.push(args);
   const player = document.querySelector('[data-sil-video-player]');
   const stage = document.querySelector('[data-sil-video-stage]');
   const viewport = document.querySelector('[data-sil-video-viewport]');
@@ -152,6 +154,7 @@ async function browserPlayer(options = {}) {
     progress,
     feedback,
     feedbackText,
+    diagnostics,
     calls: {
       get play() { return playCalls; },
       get pause() { return pauseCalls; },

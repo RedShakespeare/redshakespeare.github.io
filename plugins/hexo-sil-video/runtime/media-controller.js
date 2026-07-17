@@ -29,22 +29,6 @@ export function createMediaController({
     state.set('media', message, { error, level });
   }
 
-  function showPlaybackFeedback(action) {
-    feedbackController.showPlayback(action);
-  }
-
-  function showVolumeFeedback() {
-    feedbackController.showVolume();
-  }
-
-  function showProgressFeedback(position = video.currentTime) {
-    feedbackController.showProgress(position);
-  }
-
-  function setBrightness(value, announce = true) {
-    feedbackController.setBrightness(value, announce);
-  }
-
   function failureMessage(kind) {
     const recovery = downloadAllowed ? '请使用下载链接。' : '请稍后重试。';
     return `视频${kind}失败，${recovery}`;
@@ -66,8 +50,12 @@ export function createMediaController({
     onPlaybackStateChange
   });
 
-  function setMediaError(value) {
-    mediaFailed = Boolean(value);
+  function setMediaError(value, context) {
+    const failed = Boolean(value);
+    if (failed && !mediaFailed) {
+      diagnostics.report('media.load', failureMessage('加载'), context);
+    }
+    mediaFailed = failed;
     projection.playing();
   }
 
@@ -90,7 +78,7 @@ export function createMediaController({
         await video.play();
         if (destroyed || token !== playToken) return;
         setStatus();
-        if (showPlayback) showPlaybackFeedback('play');
+        if (showPlayback) feedbackController.showPlayback('play');
       } catch (error) {
         if (destroyed || token !== playToken) return;
         diagnostics.report('media.play', error);
@@ -99,14 +87,14 @@ export function createMediaController({
     } else {
       playToken += 1;
       video.pause();
-      if (showPlayback) showPlaybackFeedback('pause');
+      if (showPlayback) feedbackController.showPlayback('pause');
     }
   }
 
   function finishVolumeUpdate() {
     if (video.volume > 0) lastVolume = video.volume;
     projection.volume();
-    showVolumeFeedback();
+    feedbackController.showVolume();
   }
 
   function toggleMute() {
@@ -143,14 +131,14 @@ export function createMediaController({
     if (!Number.isFinite(video.duration)) return;
     video.currentTime = clamp(video.currentTime + delta, 0, video.duration);
     projection.time();
-    showProgressFeedback();
+    feedbackController.showProgress();
   }
 
   function setCurrentTime(value) {
     if (!Number.isFinite(video.duration)) return;
     video.currentTime = clamp(value, 0, video.duration);
     projection.time();
-    showProgressFeedback();
+    feedbackController.showProgress();
   }
 
   function cycleRate() {
@@ -181,11 +169,11 @@ export function createMediaController({
     cycleRate,
     getBrightness: feedbackController.getBrightness,
     seek,
-    setBrightness,
+    setBrightness: feedbackController.setBrightness,
     setCurrentTime,
     setGestureVolume,
     setVolume,
-    showProgressFeedback,
+    showProgressFeedback: feedbackController.showProgress,
     toggleMute,
     togglePlay,
     async destroy() {

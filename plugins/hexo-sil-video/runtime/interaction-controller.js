@@ -23,8 +23,8 @@ export function createInteractionController({ controls, surfaces, media, fullscr
     async destroy() {
       const errors = [];
       try { scope.destroy(); } catch (error) { appendCleanupError(errors, error); }
-      for (const controller of controllers.reverse()) {
-        try { await controller.destroy(); } catch (error) { appendCleanupError(errors, error); }
+      for (let index = controllers.length - 1; index >= 0; index -= 1) {
+        try { await controllers[index].destroy(); } catch (error) { appendCleanupError(errors, error); }
       }
       if (errors.length) throw createCleanupError('Interaction controller cleanup failed.', errors);
     }

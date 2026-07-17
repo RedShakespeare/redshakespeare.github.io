@@ -1,13 +1,16 @@
 import { createListenerScope } from './shared.js';
 
-const NETWORK_NO_SOURCE = 3;
-
 export function bindMediaEvents({ video, progress, duration, projection, setStatus, mediaErrorMessage, onMediaError, onPlayInteraction, loadingHud }) {
   const scope = createListenerScope();
 
-  function reportMediaError() {
+  function reportMediaError(event) {
     loadingHud.hide();
-    onMediaError(true);
+    const target = event?.target;
+    onMediaError(true, {
+      source: target?.src || video.currentSrc || video.querySelector('source')?.src || '',
+      errorCode: video.error?.code || null,
+      networkState: video.networkState
+    });
     setStatus(mediaErrorMessage(), true);
   }
 
@@ -38,6 +41,6 @@ export function bindMediaEvents({ video, progress, duration, projection, setStat
   scope.listen(video, 'volumechange', projection.volume);
   scope.listen(video, 'error', reportMediaError);
   video.querySelectorAll('source').forEach(source => scope.listen(source, 'error', reportMediaError));
-  if (video.error || video.networkState === NETWORK_NO_SOURCE) reportMediaError();
+  if (video.error || video.networkState === 3) reportMediaError({ target: video });
   return scope;
 }

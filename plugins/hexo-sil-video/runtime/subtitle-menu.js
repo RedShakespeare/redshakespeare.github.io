@@ -34,10 +34,7 @@ export function createSubtitleMenu({ player, button, menu, tracks, onSelect, sho
     button.setAttribute('aria-expanded', open ? 'true' : 'false');
     showFullscreenUi();
     if (open) queueMicrotask(() => { if (!destroyed) focusOption(selectedIndex); });
-    else if (returnFocus) {
-      button.focus();
-      queueMicrotask(() => { if (!destroyed && menu.hidden) button.focus(); });
-    }
+    else if (returnFocus) button.focus();
   }
 
   function sync(index) {

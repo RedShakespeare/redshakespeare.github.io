@@ -158,6 +158,30 @@ test('real WebM media exposes native metadata, playback clock, seek, and buffere
   await expect.poll(() => page.locator('video').evaluate(video => video.currentTime)).toBeGreaterThan(59);
 });
 
+test('the production MP4 fixture exposes native metadata in Chromium', async ({ page, browserName }) => {
+  test.skip(browserName !== 'chromium', 'The production incident and codec contract are Chrome-specific.');
+  await page.goto('/video-mp4');
+  const player = page.locator('[data-sil-video-player]');
+  const video = page.locator('video');
+  await expect(player).toHaveAttribute('data-sil-video-enhanced', 'true');
+  await video.evaluate(element => element.readyState >= 1
+    ? undefined
+    : new Promise((resolve, reject) => {
+      element.addEventListener('loadedmetadata', resolve, { once: true });
+      element.addEventListener('error', () => reject(new Error(`MP4 failed with ${element.error?.code || 'unknown error'}`)), { once: true });
+    }));
+  const state = await video.evaluate(element => ({
+    currentSrc: element.currentSrc,
+    duration: element.duration,
+    error: element.error?.code || null,
+    readyState: element.readyState
+  }));
+  expect(state.currentSrc).toMatch(/\/test\/fixture\.mp4$/);
+  expect(state.duration).toBeGreaterThan(0);
+  expect(state.error).toBeNull();
+  expect(state.readyState).toBeGreaterThanOrEqual(1);
+});
+
 test('loading HUD measures a throttled native media stream and keeps pause semantics', async ({ page }) => {
   await page.goto('/video-streaming', { waitUntil: 'domcontentloaded' });
   await expect(page.locator('[data-sil-video-player]')).toHaveAttribute('data-sil-video-enhanced', 'true');
