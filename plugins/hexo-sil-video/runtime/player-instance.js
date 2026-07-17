@@ -19,7 +19,8 @@ function parseModel(player) {
   const validRoutes = routes.every(name => typeof model.runtime?.[name] === 'string' && model.runtime[name]);
   const validFonts = model.fonts && typeof model.fonts === 'object' && !Array.isArray(model.fonts)
     && Object.values(model.fonts).every(value => typeof value === 'string' && value);
-  if (model.version !== contract.MODEL_VERSION || typeof model.downloadAllowed !== 'boolean' || !Array.isArray(model.subtitles) || !validRoutes || !validFonts || typeof model.fallbackFont !== 'string') {
+  const validSourceSize = model.sourceSize === null || (Number.isFinite(model.sourceSize) && model.sourceSize > 0);
+  if (model.version !== contract.MODEL_VERSION || typeof model.downloadAllowed !== 'boolean' || !validSourceSize || !Array.isArray(model.subtitles) || !validRoutes || !validFonts || typeof model.fallbackFont !== 'string') {
     throw new Error('播放器配置版本不受支持。');
   }
   return model;

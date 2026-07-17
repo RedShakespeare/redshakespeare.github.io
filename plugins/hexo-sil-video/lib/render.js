@@ -65,6 +65,7 @@ function createRenderer({ playerStart, playerEnd }) {
     const model = Buffer.from(JSON.stringify({
       version: MODEL_VERSION,
       downloadAllowed,
+      sourceSize: Number.isFinite(video.sourceSize) && video.sourceSize > 0 ? video.sourceSize : null,
       subtitles: video.subtitles,
       fonts: video.fonts,
       fallbackFont: video.fallbackFont,

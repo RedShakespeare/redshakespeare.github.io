@@ -8,6 +8,7 @@ const path = require('node:path');
 test('manifest-backed video resolves media, ASS/SRT tracks, poster, and fonts', async () => {
   const value = await normaliseVideo(post(), videoData(), runtime);
   assert.equal(value.source, '/files/video/demo.mp4');
+  assert.equal(value.sourceSize, 5);
   assert.equal(value.type, 'video/mp4');
   assert.equal(value.download, true);
   assert.equal(value.poster, '/files/video/poster.webp');
@@ -58,6 +59,7 @@ test('legacy mode validates local files and external video URLs stay HTTPS-only'
   assert.ok(warnings >= 1);
   const external = await normaliseVideo(post(), { url: 'https://media.example.test/demo.webm' }, runtime);
   assert.equal(external.type, 'video/webm');
+  assert.equal(external.sourceSize, null);
   for (const [url, type] of [
     ['https://media.example.test/demo.ogv', 'video/ogg'],
     ['https://media.example.test/demo.ogg', 'video/ogg'],

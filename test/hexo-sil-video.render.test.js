@@ -56,8 +56,9 @@ test('rendered player exposes native fallback, custom controls, downloads, and r
   assert.match(html, /下载简体中文字幕/);
   assert.match(html, /data-sil-video-model="[A-Za-z0-9+/=]+"/);
   const model = JSON.parse(Buffer.from(html.match(/data-sil-video-model="([A-Za-z0-9+/=]+)"/)[1], 'base64').toString('utf8'));
-  assert.equal(model.version, 2);
+  assert.equal(model.version, 3);
   assert.equal(model.downloadAllowed, true);
+  assert.equal(model.sourceSize, 5);
   assert.doesNotMatch(html, /<script class="sil-video-player__model"/);
   assert.doesNotMatch(html, /<track/);
   assert.doesNotMatch(html, /playsinline/i);

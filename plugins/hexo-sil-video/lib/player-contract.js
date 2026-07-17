@@ -1,6 +1,6 @@
 'use strict';
 
-const MODEL_VERSION = 2;
+const MODEL_VERSION = 3;
 const PLAYER_ACTIONS = Object.freeze({
   play: 'play',
   mute: 'mute',

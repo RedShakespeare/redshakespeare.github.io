@@ -246,8 +246,11 @@ test('browser runtime rejects stale models and missing reload view contracts', a
   const source = markup.match(/data-sil-video-model="([A-Za-z0-9+/=]+)"/)[1];
   const stale = JSON.parse(Buffer.from(source, 'base64').toString('utf8'));
   stale.version -= 1;
+  const invalidSize = JSON.parse(Buffer.from(source, 'base64').toString('utf8'));
+  invalidSize.sourceSize = 0;
   const variants = [
     markup.replace(source, Buffer.from(JSON.stringify(stale)).toString('base64')),
+    markup.replace(source, Buffer.from(JSON.stringify(invalidSize)).toString('base64')),
     markup.replace(/<svg class="sil-video-player__icon sil-video-player__icon--reload"[\s\S]*?<\/svg>/, '')
   ];
   const bundle = (await buildBrowserBundle(path.join(__dirname, '..', 'plugins', 'hexo-sil-video', 'runtime', 'browser-entry.js'), 'iife')).toString('utf8');

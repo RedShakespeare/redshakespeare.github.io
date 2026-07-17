@@ -75,14 +75,21 @@ function createVideoModel({
       return {
         file: '',
         source,
+        sourceSize: null,
         type: videoMimeTypes.get(path.extname(new URL(source).pathname).toLowerCase()) || ''
       };
     }
     const file = normaliseRelativeFile(data.file, '`file`', message => videoError(post, message));
     const type = videoMimeTypes.get(path.extname(file).toLowerCase());
     if (!type) throw videoError(post, '`file` must use MP4, M4V, WebM, OGG, OGV, MPEG, MPG, MOV, 3GP, or 3G2.');
-    await localEntry(post, file, options, { type, localType: type, description: 'video' });
-    return { file, source: mediaFileUrl(options.root, options.media, file), type };
+    const entry = await localEntry(post, file, options, { type, localType: type, description: 'video' });
+    const size = Number(entry?.size);
+    return {
+      file,
+      source: mediaFileUrl(options.root, options.media, file),
+      sourceSize: Number.isFinite(size) && size > 0 ? size : null,
+      type
+    };
   }
 
   function normaliseDownload(post, value) {
@@ -121,7 +128,7 @@ function createVideoModel({
   async function normaliseVideo(post, data, runtime = {}) {
     if (!isObject(data)) throw videoError(post, '`video` must be a mapping.');
     const options = runtimeOptions(runtime);
-    const { file, source, type } = await normaliseSource(post, data, options);
+    const { file, source, sourceSize, type } = await normaliseSource(post, data, options);
     const poster = await normalisePoster(post, data.poster, options);
     const [subtitles, fonts] = await Promise.all([
       normaliseSubtitles(post, data.subtitles, options),
@@ -133,6 +140,7 @@ function createVideoModel({
     return {
       title,
       source,
+      sourceSize,
       type,
       download: normaliseDownload(post, data.download),
       poster,
