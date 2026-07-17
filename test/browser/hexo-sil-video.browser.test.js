@@ -138,10 +138,12 @@ test('media errors expose a visible reload action that invokes the native loader
   });
   await expect(player).toHaveAttribute('data-sil-video-media-error', 'true');
   await expect(play).toHaveAttribute('aria-label', '重新加载');
+  await expect(play).not.toHaveAttribute('aria-pressed', /.+/);
   await expect(reloadIcon).toBeVisible();
   await play.click();
   await expect(page.locator('video')).toHaveAttribute('data-reload-calls', '1');
   await expect(player).not.toHaveAttribute('data-sil-video-media-error', /.+/);
+  await expect(play).toHaveAttribute('aria-pressed', 'false');
 });
 
 test('disabling downloads keeps the fullscreen control aligned to the toolbar edge', async ({ page }) => {

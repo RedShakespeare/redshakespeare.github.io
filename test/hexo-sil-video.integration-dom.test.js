@@ -65,10 +65,12 @@ test('browser runtime turns media failures into a manual reload action', async (
     video.dispatchEvent(new window.Event('error'));
     assert.equal(player.dataset.silVideoMediaError, 'true');
     assert.equal(play.getAttribute('aria-label'), '重新加载');
+    assert.equal(play.hasAttribute('aria-pressed'), false);
     play.click();
     assert.equal(calls.load, 1);
     assert.equal(player.dataset.silVideoMediaError, undefined);
     assert.equal(play.getAttribute('aria-label'), '播放');
+    assert.equal(play.getAttribute('aria-pressed'), 'false');
     assert.equal(player.querySelector('[data-sil-video-status]').textContent, '正在加载视频…');
   } finally {
     dom.window.close();

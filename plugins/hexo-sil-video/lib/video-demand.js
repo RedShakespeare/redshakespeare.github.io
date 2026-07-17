@@ -4,9 +4,10 @@ function createVideoDemandRegistry() {
   let demanded = false;
 
   function consumeFence(line, state) {
-    const trimmed = line.trim();
     if (state.comment) return false;
-    const marker = trimmed.match(/^(`{3,}|~{3,})/);
+    const indentation = line.match(/^ */)[0].length;
+    const candidate = indentation <= 3 ? line.slice(indentation).trimEnd() : '';
+    const marker = candidate.match(/^(`{3,}|~{3,})/);
     if (!state.fence) {
       if (!marker) return false;
       state.fence = { character: marker[1][0], length: marker[1].length };
@@ -14,7 +15,7 @@ function createVideoDemandRegistry() {
     }
     if (marker && marker[1][0] === state.fence.character
       && marker[1].length >= state.fence.length
-      && !trimmed.slice(marker[1].length).trim()) state.fence = null;
+      && !candidate.slice(marker[1].length).trim()) state.fence = null;
     return true;
   }
 

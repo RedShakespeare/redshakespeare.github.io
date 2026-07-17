@@ -16,10 +16,14 @@ function createDownloadedBytesReader(video) {
     try {
       const entries = performanceRef.getEntriesByName(video.currentSrc || video.src || '');
       if (entries.length === 0) return null;
-      return entries.reduce((total, entry) => {
+      let measured = false;
+      const total = entries.reduce((sum, entry) => {
         const bytes = Number(entry?.transferSize || entry?.encodedBodySize || entry?.decodedBodySize);
-        return total + (Number.isFinite(bytes) && bytes >= 0 ? bytes : 0);
+        if (!(Number.isFinite(bytes) && bytes > 0)) return sum;
+        measured = true;
+        return sum + bytes;
       }, 0);
+      return measured ? total : null;
     } catch {
       return null;
     }
@@ -34,6 +38,13 @@ export function createLoadingHudController({ video, loading, loadingSpeed, clock
     if (timer === null) return;
     const now = clock.now();
     const bytes = readDownloadedBytes();
+    if (bytes === null || (lastBytes !== null && bytes < lastBytes)) {
+      lastBytes = null;
+      lastSampleAt = null;
+      loadingSpeed.textContent = '--KB/s';
+      timer = clock.setTimeout(sample, SAMPLE_INTERVAL);
+      return;
+    }
     if (bytes !== null && lastBytes !== null && lastSampleAt !== null && now > lastSampleAt && bytes >= lastBytes) {
       loadingSpeed.textContent = formatSpeed((bytes - lastBytes) * 1000 / (now - lastSampleAt));
     }
@@ -49,7 +60,7 @@ export function createLoadingHudController({ video, loading, loadingSpeed, clock
     if (timer === null) {
       lastBytes = null;
       lastSampleAt = null;
-      loadingSpeed.textContent = '0KB/s';
+      loadingSpeed.textContent = '--KB/s';
       loading.hidden = false;
       timer = clock.setTimeout(sample, 0);
     }

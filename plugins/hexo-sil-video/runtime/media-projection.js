@@ -9,7 +9,8 @@ export function createMediaProjection({ player, video, progress, volume, current
     player.dataset.silVideoPlaying = active ? 'true' : 'false';
     player.dataset.silVideoEnded = video.ended ? 'true' : 'false';
     play.setAttribute('aria-label', failed ? '重新加载' : video.ended ? '重播' : active ? '暂停' : '播放');
-    play.setAttribute('aria-pressed', active ? 'true' : 'false');
+    if (failed || video.ended) play.removeAttribute('aria-pressed');
+    else play.setAttribute('aria-pressed', active ? 'true' : 'false');
     onPlaybackStateChange();
   }
 

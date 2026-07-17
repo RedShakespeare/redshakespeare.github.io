@@ -19,7 +19,7 @@ function createRenderer({ playerStart, playerEnd }) {
   }
 
   function renderLoadingHud() {
-    return '<div class="sil-video-player__loading" data-sil-video-loading role="status" aria-live="polite" aria-atomic="true" hidden><span>正在加载...</span><span data-sil-video-loading-speed>0KB/s</span></div>';
+    return '<div class="sil-video-player__loading" data-sil-video-loading role="status" aria-live="polite" aria-atomic="true" hidden><span>正在加载...</span><span data-sil-video-loading-speed>--KB/s</span></div>';
   }
 
   function renderProgress() {

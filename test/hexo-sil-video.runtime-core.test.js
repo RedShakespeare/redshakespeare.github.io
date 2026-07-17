@@ -124,11 +124,13 @@ test('media projection directly maps volume and replay state to UI', async () =>
   assert.equal(volume.getAttribute('aria-valuetext'), '40%');
   assert.equal(player.dataset.silVideoEnded, 'true');
   assert.equal(document.querySelector('[data-play]').getAttribute('aria-label'), '重播');
+  assert.equal(document.querySelector('[data-play]').hasAttribute('aria-pressed'), false);
   mediaFailed = true;
   projection.playing();
   assert.equal(player.dataset.silVideoMediaError, 'true');
   assert.equal(player.dataset.silVideoPlaying, 'false');
   assert.equal(document.querySelector('[data-play]').getAttribute('aria-label'), '重新加载');
+  assert.equal(document.querySelector('[data-play]').hasAttribute('aria-pressed'), false);
   mediaFailed = false;
   projection.playing();
   assert.equal(player.dataset.silVideoMediaError, undefined);
@@ -194,6 +196,33 @@ test('loading HUD accumulates completed media resource segments for speed', asyn
   entries = [{ transferSize: 51200 }, { transferSize: 51200 }];
   runTimer(2);
   assert.equal(loadingSpeed.textContent, '100KB/s');
+  hud.destroy();
+});
+
+test('loading HUD distinguishes unavailable timing data from zero throughput', async () => {
+  const { createLoadingHudController } = await loadRuntime('loading-hud-controller.js');
+  const video = {
+    paused: false,
+    ended: false,
+    currentSrc: 'https://media.example.test/video.mp4',
+    ownerDocument: { defaultView: { performance: { getEntriesByName: () => [{ transferSize: 0, encodedBodySize: 0 }] } } }
+  };
+  const loading = { hidden: true };
+  const loadingSpeed = { textContent: '' };
+  const timers = new Map();
+  let timerId = 0;
+  const clock = {
+    now: () => 500,
+    setTimeout(handler) { const id = ++timerId; timers.set(id, handler); return id; },
+    clearTimeout(id) { timers.delete(id); }
+  };
+  const hud = createLoadingHudController({ video, loading, loadingSpeed, clock });
+  hud.show();
+  assert.equal(loadingSpeed.textContent, '--KB/s');
+  const sample = timers.get(1);
+  timers.delete(1);
+  sample();
+  assert.equal(loadingSpeed.textContent, '--KB/s');
   hud.destroy();
 });
 

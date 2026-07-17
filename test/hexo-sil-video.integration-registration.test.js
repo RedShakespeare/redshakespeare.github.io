@@ -29,6 +29,12 @@ test('video demand registry seeds cached Front Matter and raw video tags per gen
   demand.reset();
   demand.seed([{ _content: '````markdown\n```\n{% video file=literal.mp4 %}\n```\n````' }]);
   assert.equal(demand.hasDemand(), false);
+  demand.reset();
+  demand.seed([{ _content: '    ```\n{% video file=visible.mp4 %}\n```' }]);
+  assert.equal(demand.hasDemand(), true);
+  demand.reset();
+  demand.seed([{ _content: '   ```\n{% video file=literal.mp4 %}\n   ```' }]);
+  assert.equal(demand.hasDemand(), false);
 });
 test('plugin registers skin, runtime assets, tag, and duplicate-safe post injection', async () => {
   const hexo = mockHexo();
