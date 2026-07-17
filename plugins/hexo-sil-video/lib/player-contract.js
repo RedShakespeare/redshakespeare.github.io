@@ -1,6 +1,6 @@
 'use strict';
 
-const MODEL_VERSION = 1;
+const MODEL_VERSION = 2;
 const PLAYER_ACTIONS = Object.freeze({
   play: 'play',
   mute: 'mute',
@@ -23,6 +23,7 @@ const PLAYER_VIEW_SELECTORS = Object.freeze({
   duration: '[data-sil-video-duration]',
   status: '[data-sil-video-status]',
   play: `[data-sil-video-action="${PLAYER_ACTIONS.play}"]`,
+  reloadIcon: '.sil-video-player__icon--reload',
   mute: `[data-sil-video-action="${PLAYER_ACTIONS.mute}"]`,
   rate: `[data-sil-video-action="${PLAYER_ACTIONS.rate}"]`,
   subtitles: `[data-sil-video-action="${PLAYER_ACTIONS.subtitles}"]`,

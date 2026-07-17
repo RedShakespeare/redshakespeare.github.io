@@ -1,20 +1,16 @@
 import { formatTime, setBufferedRanges, setRangeFill, volumeLevel } from './shared.js';
 
-export function createMediaProjection({ player, video, progress, volume, current, duration, play, mute, onPlaybackStateChange }) {
+export function createMediaProjection({ player, video, progress, volume, current, duration, play, mute, mediaErrorActive = () => false, onPlaybackStateChange }) {
   function playing() {
-    const failed = player.dataset.silVideoMediaError === 'true';
+    const failed = mediaErrorActive();
     const active = !failed && !video.paused && !video.ended;
+    if (failed) player.dataset.silVideoMediaError = 'true';
+    else delete player.dataset.silVideoMediaError;
     player.dataset.silVideoPlaying = active ? 'true' : 'false';
     player.dataset.silVideoEnded = video.ended ? 'true' : 'false';
     play.setAttribute('aria-label', failed ? '重新加载' : video.ended ? '重播' : active ? '暂停' : '播放');
     play.setAttribute('aria-pressed', active ? 'true' : 'false');
     onPlaybackStateChange();
-  }
-
-  function mediaError(value) {
-    if (value) player.dataset.silVideoMediaError = 'true';
-    else delete player.dataset.silVideoMediaError;
-    playing();
   }
 
   function time() {
@@ -58,5 +54,5 @@ export function createMediaProjection({ player, video, progress, volume, current
     setRangeFill(volume, Number(volume.value), 1);
   }
 
-  return { playing, time, buffered, duration: mediaDuration, volume: mediaVolume, mediaError };
+  return { playing, time, buffered, duration: mediaDuration, volume: mediaVolume };
 }

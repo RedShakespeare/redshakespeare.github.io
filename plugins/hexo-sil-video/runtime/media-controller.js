@@ -15,6 +15,7 @@ export function createMediaController({
   play,
   mute,
   rate,
+  downloadAllowed,
   onPlaybackStateChange = () => {},
   onPlayInteraction = () => {},
   feedbackController,
@@ -45,18 +46,29 @@ export function createMediaController({
   }
 
   function failureMessage(kind) {
-    const recovery = player.dataset.silVideoDownload === 'true' ? '请使用下载链接。' : '请稍后重试。';
+    const recovery = downloadAllowed ? '请使用下载链接。' : '请稍后重试。';
     return `视频${kind}失败，${recovery}`;
   }
 
-  const projection = createMediaProjection({ player, video, progress, volume, current, duration, play, mute, onPlaybackStateChange });
   let playToken = 0;
   let destroyed = false;
   let mediaFailed = false;
+  const projection = createMediaProjection({
+    player,
+    video,
+    progress,
+    volume,
+    current,
+    duration,
+    play,
+    mute,
+    mediaErrorActive: () => mediaFailed,
+    onPlaybackStateChange
+  });
 
   function setMediaError(value) {
     mediaFailed = Boolean(value);
-    projection.mediaError(mediaFailed);
+    projection.playing();
   }
 
   function reload() {

@@ -108,12 +108,14 @@ test('media projection directly maps volume and replay state to UI', async () =>
   const volume = document.createElement('input');
   video.volume = 0.4;
   Object.defineProperty(video, 'ended', { value: true, writable: true, configurable: true });
+  let mediaFailed = false;
   const projection = createMediaProjection({
     player, video, progress, volume,
     current: document.querySelector('[data-current]'),
     duration: document.querySelector('[data-duration]'),
     play: document.querySelector('[data-play]'),
     mute: document.querySelector('[data-mute]'),
+    mediaErrorActive: () => mediaFailed,
     onPlaybackStateChange() {}
   });
   projection.volume();
@@ -122,11 +124,13 @@ test('media projection directly maps volume and replay state to UI', async () =>
   assert.equal(volume.getAttribute('aria-valuetext'), '40%');
   assert.equal(player.dataset.silVideoEnded, 'true');
   assert.equal(document.querySelector('[data-play]').getAttribute('aria-label'), '重播');
-  projection.mediaError(true);
+  mediaFailed = true;
+  projection.playing();
   assert.equal(player.dataset.silVideoMediaError, 'true');
   assert.equal(player.dataset.silVideoPlaying, 'false');
   assert.equal(document.querySelector('[data-play]').getAttribute('aria-label'), '重新加载');
-  projection.mediaError(false);
+  mediaFailed = false;
+  projection.playing();
   assert.equal(player.dataset.silVideoMediaError, undefined);
   assert.equal(document.querySelector('[data-play]').getAttribute('aria-label'), '重播');
   dom.window.close();

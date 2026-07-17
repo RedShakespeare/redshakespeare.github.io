@@ -64,6 +64,7 @@ function createRenderer({ playerStart, playerEnd }) {
     const poster = video.poster ? ` poster="${escapeHtml(video.poster)}"` : '';
     const model = Buffer.from(JSON.stringify({
       version: MODEL_VERSION,
+      downloadAllowed,
       subtitles: video.subtitles,
       fonts: video.fonts,
       fallbackFont: video.fallbackFont,

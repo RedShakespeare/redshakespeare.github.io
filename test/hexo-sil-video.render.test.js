@@ -52,6 +52,9 @@ test('rendered player exposes native fallback, custom controls, downloads, and r
   assert.match(html, /orient="vertical"/);
   assert.match(html, /下载简体中文字幕/);
   assert.match(html, /data-sil-video-model="[A-Za-z0-9+/=]+"/);
+  const model = JSON.parse(Buffer.from(html.match(/data-sil-video-model="([A-Za-z0-9+/=]+)"/)[1], 'base64').toString('utf8'));
+  assert.equal(model.version, 2);
+  assert.equal(model.downloadAllowed, true);
   assert.doesNotMatch(html, /<script class="sil-video-player__model"/);
   assert.doesNotMatch(html, /<track/);
   assert.doesNotMatch(html, /playsinline/i);
@@ -68,6 +71,8 @@ test('tag arguments position the default player and source overrides drop its su
 test('disabled video downloads omit only the video toolbar link', async () => {
   const html = renderVideoPlayer(await normaliseVideo(post(), videoData({ download: false }), runtime));
   assert.match(html, /data-sil-video-download="false"/);
+  const model = JSON.parse(Buffer.from(html.match(/data-sil-video-model="([A-Za-z0-9+/=]+)"/)[1], 'base64').toString('utf8'));
+  assert.equal(model.downloadAllowed, false);
   assert.doesNotMatch(html, /aria-label="下载视频"/);
   assert.match(html, /下载简体中文字幕/);
 });

@@ -234,3 +234,35 @@ test('browser runtime rejects incomplete resource routes before mounting control
     dom.window.close();
   }
 });
+
+test('browser runtime rejects stale models and missing reload view contracts', async () => {
+  const markup = renderVideoPlayer({
+    title: 'Contract', source: '/video.mp4', type: 'video/mp4', poster: '', preload: 'metadata',
+    aspectRatio: '16/9', subtitles: [], fonts: {}, fallbackFont: '',
+    runtime: { subtitles: '/subtitles.js', worker: '/worker.js', wasm: '/worker.wasm', modernWasm: '/modern.wasm', defaultFont: '/font.woff2' }
+  });
+  const source = markup.match(/data-sil-video-model="([A-Za-z0-9+/=]+)"/)[1];
+  const stale = JSON.parse(Buffer.from(source, 'base64').toString('utf8'));
+  stale.version -= 1;
+  const variants = [
+    markup.replace(source, Buffer.from(JSON.stringify(stale)).toString('base64')),
+    markup.replace(/<svg class="sil-video-player__icon sil-video-player__icon--reload"[\s\S]*?<\/svg>/, '')
+  ];
+  const bundle = (await buildBrowserBundle(path.join(__dirname, '..', 'plugins', 'hexo-sil-video', 'runtime', 'browser-entry.js'), 'iife')).toString('utf8');
+  for (const html of variants) {
+    const dom = new JSDOM(`<!doctype html><body>${html}</body>`, {
+      runScripts: 'outside-only', pretendToBeVisual: true, url: 'https://example.test/'
+    });
+    try {
+      dom.window.TextDecoder = TextDecoder;
+      dom.window.console.error = () => {};
+      dom.window.eval(bundle);
+      const player = dom.window.document.querySelector('[data-sil-video-player]');
+      assert.equal(player.dataset.silVideoReady, undefined);
+      assert.equal(player.dataset.silVideoError, 'true');
+      assert.equal(player.querySelector('video').controls, true);
+    } finally {
+      dom.window.close();
+    }
+  }
+});
