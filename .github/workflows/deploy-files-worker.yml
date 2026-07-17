@@ -1,7 +1,16 @@
 name: Deploy files proxy Worker
 
 on:
+  push:
+    branches: [ "src" ]
+    paths:
+      - "workers/ephesus-files-proxy/**"
+      - ".github/workflows/deploy-files-worker.yml"
   workflow_dispatch:
+
+concurrency:
+  group: ephesus-files-proxy-deploy
+  cancel-in-progress: false
 
 permissions:
   contents: read
@@ -14,6 +23,15 @@ jobs:
         uses: actions/checkout@v4
         with:
           ref: src
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Test Worker
+        working-directory: workers/ephesus-files-proxy
+        run: node --test test/index.test.js
 
       - name: Deploy Worker
         working-directory: workers/ephesus-files-proxy

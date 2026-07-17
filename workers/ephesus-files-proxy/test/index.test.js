@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict';
+import fs from 'node:fs/promises';
 import test from 'node:test';
 
 import worker, { fallbackType, hxhCivPageUrl, objectKey } from '../src/index.js';
@@ -60,4 +61,13 @@ test('missing objects and hxh_civ redirects preserve existing behaviour', async 
   assert.equal(redirect.status, 302);
   const missing = await worker.fetch(new Request('https://www.ephesus.top/files/video/missing.mp4'), { EPHESUS_FILES: { get: async () => null } });
   assert.equal(missing.status, 404);
+});
+
+test('worker source changes trigger the dedicated deployment workflow', async () => {
+  const workflow = await fs.readFile(new URL('../../../.github/workflows/deploy-files-worker.yml', import.meta.url), 'utf8');
+  assert.match(workflow, /push:\s*\n\s*branches:\s*\[ "src" \]/);
+  assert.match(workflow, /workers\/ephesus-files-proxy\/\*\*/);
+  assert.match(workflow, /group: ephesus-files-proxy-deploy/);
+  assert.match(workflow, /cancel-in-progress: false/);
+  assert.ok(workflow.indexOf('run: node --test test/index.test.js') < workflow.indexOf('run: npx --yes wrangler@4 deploy'));
 });
