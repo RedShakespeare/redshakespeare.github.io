@@ -4,6 +4,7 @@ const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const path = require('node:path');
 const test = require('node:test');
+const esbuild = require('esbuild');
 const { decisionCount, functionBodies, unusedVariableBindings } = require('./helpers/javascript-source-metrics');
 
 const pluginRoot = path.join(__dirname, '..', 'plugins', 'hexo-sil-video');
@@ -15,6 +16,44 @@ const qualityFiles = [
   path.join(pluginRoot, 'index.js')
 ];
 const read = name => fs.readFileSync(path.join(runtimeRoot, name), 'utf8');
+
+function localDependencies(filename) {
+  const source = fs.readFileSync(filename, 'utf8');
+  const dependencies = [];
+  const imports = source.matchAll(/(?:require\(\s*|from\s+)["'](\.[^"']+)["']/g);
+  for (const match of imports) {
+    let dependency = path.resolve(path.dirname(filename), match[1]);
+    if (!path.extname(dependency)) dependency += '.js';
+    if (qualityFiles.includes(dependency)) dependencies.push(dependency);
+  }
+  return dependencies;
+}
+
+function dependencyCycles() {
+  const graph = new Map(qualityFiles.map(filename => [filename, localDependencies(filename)]));
+  const visited = new Set();
+  const active = new Set();
+  const stack = [];
+  const cycles = [];
+
+  function visit(filename) {
+    if (active.has(filename)) {
+      const start = stack.indexOf(filename);
+      cycles.push([...stack.slice(start), filename].map(entry => path.relative(pluginRoot, entry)));
+      return;
+    }
+    if (visited.has(filename)) return;
+    active.add(filename);
+    stack.push(filename);
+    for (const dependency of graph.get(filename)) visit(dependency);
+    stack.pop();
+    active.delete(filename);
+    visited.add(filename);
+  }
+
+  for (const filename of qualityFiles) visit(filename);
+  return cycles;
+}
 
 test('video runtime static contracts reject legacy dependencies and broad ref forwarding', () => {
   const sources = runtimeFiles.map(name => [name, read(name)]);
@@ -36,6 +75,43 @@ test('subtitle controller only uses the renderer manager public transaction API'
   const source = read('subtitle-controller.js');
   const calls = Array.from(source.matchAll(/rendererManager\.([A-Za-z0-9_]+)\s*\(/g), match => match[1]);
   assert.deepEqual([...new Set(calls)].sort(), ['destroy', 'disableTrack', 'loadTrack', 'resize']);
+});
+
+test('plugin local dependency graph remains acyclic', () => {
+  assert.deepEqual(dependencyCycles(), []);
+});
+
+test('runtime modules map to unit entrypoints or explicit browser boundaries', async () => {
+  const runtimeTests = fs.readdirSync(__dirname)
+    .filter(name => /^hexo-sil-video\.runtime-.*\.test\.js$/.test(name));
+  const entrypoints = new Set();
+  for (const name of runtimeTests) {
+    const source = fs.readFileSync(path.join(__dirname, name), 'utf8');
+    for (const match of source.matchAll(/loadRuntime\('([^']+)'\)/g)) entrypoints.add(match[1]);
+  }
+  const mapped = new Set();
+  const builds = await Promise.all([...entrypoints].map(name => esbuild.build({
+    entryPoints: [path.join(runtimeRoot, name)],
+    bundle: true,
+    write: false,
+    format: 'esm',
+    platform: 'browser',
+    target: ['es2020'],
+    metafile: true
+  })));
+  for (const build of builds) {
+    for (const input of Object.keys(build.metafile.inputs)) {
+      const filename = path.resolve(input);
+      if (filename.startsWith(`${runtimeRoot}${path.sep}`)) mapped.add(path.basename(filename));
+    }
+  }
+  const browserBoundaries = new Map([
+    ['bootstrap.js', 'hexo-sil-video.bootstrap.test.js'],
+    ['browser-entry.js', path.join('browser', 'hexo-sil-video.browser.test.js')]
+  ]);
+  for (const testFile of browserBoundaries.values()) assert.ok(fs.existsSync(path.join(__dirname, testFile)), `${testFile} is missing`);
+  const unmapped = runtimeFiles.filter(name => !mapped.has(name) && !browserBoundaries.has(name));
+  assert.deepEqual(unmapped, [], `runtime modules lack a test entrypoint mapping: ${unmapped.join(', ')}`);
 });
 
 test('plugin functions stay below their decision-complexity budget', () => {

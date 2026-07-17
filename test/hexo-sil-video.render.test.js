@@ -32,6 +32,8 @@ test('rendered player exposes native fallback, custom controls, downloads, and r
   assert.match(html, /data-sil-video-feedback-text/);
   assert.match(html, /data-sil-video-loading/);
   assert.match(html, /data-sil-video-download="true"/);
+  assert.match(html, /href="[^"]+" target="_blank" rel="noopener" aria-label="下载视频"/);
+  assert.doesNotMatch(html, /aria-label="下载视频"[^>]*\sdownload(?:[\s=>])/);
   assert.match(html, /正在加载\.\.\./);
   assert.match(html, />--KB\/s<\/span>/);
   assert.match(html, /data-sil-video-controls[^>]*hidden/);
