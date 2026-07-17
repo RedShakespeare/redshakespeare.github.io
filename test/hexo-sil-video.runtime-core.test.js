@@ -170,6 +170,22 @@ test('media transfer meter prefers native byte counters over buffered estimates'
   assert.equal(meter.readBytes(), 4096);
 });
 
+test('media transfer meter ignores a stagnant WebKit byte counter while buffering grows', async () => {
+  const { createMediaTransferMeter } = await loadRuntime('media-transfer-meter.js');
+  let ranges = [[0, 10]];
+  const video = {
+    webkitBytesReceived: 598,
+    duration: 100,
+    get buffered() {
+      return { length: ranges.length, start: index => ranges[index][0], end: index => ranges[index][1] };
+    }
+  };
+  const meter = createMediaTransferMeter({ video, sourceSize: 1024 * 1000 });
+  assert.equal(meter.readBytes(), 1024 * 100);
+  ranges = [[0, 15]];
+  assert.equal(meter.readBytes(), 1024 * 150);
+});
+
 test('loading HUD reports measured download speed only while playback is stalled', async () => {
   const { createLoadingHudController } = await loadRuntime('loading-hud-controller.js');
   const video = { paused: false, ended: false };

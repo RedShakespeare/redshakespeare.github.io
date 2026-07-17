@@ -25,12 +25,16 @@ Style: Default,liberation sans,24,&H00FFFFFF,&H00FFFFFF,&H00000000,&H00000000,0,
 [Events]
 Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
 Dialogue: 0,0:00:00.00,0:00:05.00,Default,,0,0,0,,Browser subtitle`;
-let mediaFixturePromise;
+let mediaFixture;
+const STREAM_INITIAL_BYTES = 16 * 1024;
+const STREAM_CHUNK_SIZE = 512;
+const STREAM_CHUNK_DELAY = 125;
 
-function player({ subtitles = false, title = 'Browser Fixture' } = {}) {
+function player({ source = '/test/hexo-sil-video-fixture.webm', subtitles = false, title = 'Browser Fixture' } = {}) {
   return renderVideoPlayer({
     title,
-    source: '/test/hexo-sil-video-fixture.webm',
+    source,
+    sourceSize: mediaFixture.length,
     type: 'video/webm',
     poster: '',
     preload: 'metadata',
@@ -78,6 +82,7 @@ function documentHtml(content, extraScript = '') {
 function page(pathname) {
   if (pathname === '/plain') return documentHtml('<main><h1>Plain page</h1></main>');
   if (pathname === '/video-no-subtitles') return documentHtml(player());
+  if (pathname === '/video-streaming') return documentHtml(player({ source: '/test/streaming.webm', title: 'Streaming Fixture' }));
   if (pathname === '/video-subtitles') return documentHtml(player({ subtitles: true }));
   if (pathname === '/video-two-subtitles') return documentHtml(`${player({ subtitles: true, title: 'First' })}${player({ subtitles: true, title: 'Second' })}`);
   if (pathname === '/dynamic') {
@@ -95,7 +100,26 @@ function contentType(route) {
   return 'application/octet-stream';
 }
 
+function streamResponse(response, body) {
+  let offset = Math.min(STREAM_INITIAL_BYTES, body.length);
+  let timer = null;
+  const stop = () => { if (timer !== null) clearTimeout(timer); timer = null; };
+  const write = () => {
+    if (response.destroyed) return stop();
+    const end = Math.min(offset + STREAM_CHUNK_SIZE, body.length);
+    response.write(body.subarray(offset, end));
+    offset = end;
+    if (offset >= body.length) response.end();
+    else timer = setTimeout(write, STREAM_CHUNK_DELAY);
+  };
+  response.once('close', stop);
+  response.write(body.subarray(0, offset));
+  if (offset >= body.length) response.end();
+  else timer = setTimeout(write, STREAM_CHUNK_DELAY);
+}
+
 async function main() {
+  mediaFixture = await fs.readFile(path.join(__dirname, 'hexo-sil-video-fixture.webm'));
   const routes = new Map((await runtimeRouteData()).map(route => [`/${route.path}`, route.data]));
   routes.set('/css/hexo-sil-video.css', await fs.readFile(BUILTIN_SKINS.ephesus.sourcePath));
   const server = http.createServer(async (request, response) => {
@@ -112,9 +136,8 @@ async function main() {
     } else if (pathname === '/test/default.ass') {
       body = Buffer.from(subtitleSource);
       type = 'text/x-ssa; charset=utf-8';
-    } else if (pathname === '/test/hexo-sil-video-fixture.webm') {
-      mediaFixturePromise ||= fs.readFile(path.join(__dirname, 'hexo-sil-video-fixture.webm'));
-      body = await mediaFixturePromise;
+    } else if (pathname === '/test/hexo-sil-video-fixture.webm' || pathname === '/test/streaming.webm') {
+      body = mediaFixture;
       type = 'video/webm';
     } else {
       response.writeHead(404, { 'Content-Type': 'text/plain; charset=utf-8' });
@@ -127,7 +150,7 @@ async function main() {
       'Content-Length': body.length,
       'Cache-Control': 'no-store'
     };
-    if (pathname === '/test/hexo-sil-video-fixture.webm') {
+    if (type === 'video/webm') {
       headers['Accept-Ranges'] = 'bytes';
       const totalLength = body.length;
       const match = String(request.headers.range || '').match(/^bytes=(\d+)-(\d*)$/);
@@ -143,7 +166,9 @@ async function main() {
       }
     }
     response.writeHead(status, headers);
-    response.end(request.method === 'HEAD' ? undefined : body);
+    if (request.method === 'HEAD') response.end();
+    else if (pathname === '/test/streaming.webm') streamResponse(response, body);
+    else response.end(body);
   });
   server.listen(PORT, '127.0.0.1');
   const close = () => server.close(() => process.exit(0));

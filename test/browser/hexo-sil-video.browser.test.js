@@ -23,6 +23,12 @@ function count(paths, pathname) {
   return paths.filter(value => value === pathname).length;
 }
 
+function displayedBytesPerSecond(value) {
+  const match = String(value).match(/^(\d+(?:\.\d+)?)(B|KB|MB)\/s$/);
+  if (!match) return 0;
+  return Number(match[1]) * { B: 1, KB: 1024, MB: 1024 * 1024 }[match[2]];
+}
+
 async function waitEnhanced(page, count = 1) {
   await expect(page.locator('[data-sil-video-player][data-sil-video-enhanced="true"]')).toHaveCount(count);
   await page.locator('video').first().evaluate(video => video.readyState >= 1
@@ -120,6 +126,26 @@ test('real WebM media exposes native metadata, playback clock, seek, and buffere
     video.currentTime = 60;
   }));
   await expect.poll(() => page.locator('video').evaluate(video => video.currentTime)).toBeGreaterThan(59);
+});
+
+test('loading HUD measures a throttled native media stream and keeps pause semantics', async ({ page }) => {
+  await page.goto('/video-streaming', { waitUntil: 'domcontentloaded' });
+  await expect(page.locator('[data-sil-video-player]')).toHaveAttribute('data-sil-video-enhanced', 'true');
+  const video = page.locator('video');
+  await video.evaluate(element => element.readyState >= 1
+    ? undefined
+    : new Promise(resolve => element.addEventListener('loadedmetadata', resolve, { once: true })));
+  await video.evaluate(async element => {
+    await element.play();
+    element.dispatchEvent(new Event('waiting'));
+  });
+  const loading = page.locator('[data-sil-video-loading]');
+  await expect(loading).toBeVisible({ timeout: 20000 });
+  await expect.poll(async () => displayedBytesPerSecond(await page.locator('[data-sil-video-loading-speed]').textContent()), {
+    timeout: 10000
+  }).toBeGreaterThan(1024);
+  await video.evaluate(element => element.pause());
+  await expect(loading).toBeHidden();
 });
 
 test('media errors expose a visible reload action that invokes the native loader', async ({ page }) => {

@@ -81,11 +81,31 @@ function bufferedBytesReader(video, sourceSize) {
   };
 }
 
+function counterIncrease(current, previous) {
+  return current !== null && previous !== null && current > previous ? current - previous : 0;
+}
+
 export function createMediaTransferMeter({ video, sourceSize }) {
   const native = nativeBytesReader(video);
   const size = Number(sourceSize);
   const fallback = Number.isFinite(size) && size > 0
     ? bufferedBytesReader(video, size)
     : performanceBytesReader(video);
-  return { readBytes: native || fallback };
+  let previousDirect = null;
+  let previousMeasured = null;
+  let transferred = null;
+  return {
+    readBytes() {
+      const directValue = native?.();
+      const measuredValue = fallback();
+      const direct = Number.isFinite(directValue) && directValue > 0 ? directValue : null;
+      const measured = Number.isFinite(measuredValue) && measuredValue >= 0 ? measuredValue : null;
+      if (direct === null && measured === null) return null;
+      if (transferred === null) transferred = Math.max(direct || 0, measured || 0);
+      else transferred += Math.max(counterIncrease(direct, previousDirect), counterIncrease(measured, previousMeasured));
+      if (direct !== null) previousDirect = direct;
+      if (measured !== null) previousMeasured = measured;
+      return transferred;
+    }
+  };
 }
