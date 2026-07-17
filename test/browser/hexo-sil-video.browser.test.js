@@ -90,6 +90,36 @@ test('initial and Inside-style inserted players load the skin and core once', as
   expect(dynamicRequests.indexOf(STYLE_PATH)).toBeLessThan(dynamicRequests.indexOf(CORE_PATH));
 });
 
+test('a transient skin request failure recovers without refresh or another Inside event', async ({ page }) => {
+  let styleRequests = 0;
+  await page.route(`**${STYLE_PATH}`, async route => {
+    styleRequests += 1;
+    if (styleRequests === 1) await route.abort('failed');
+    else await route.continue();
+  });
+  await page.goto('/video-no-subtitles', { waitUntil: 'domcontentloaded' });
+  const player = page.locator('[data-sil-video-player]');
+  await expect(player).toHaveAttribute('data-sil-video-enhanced', 'true');
+  await expect(player).not.toHaveAttribute('data-sil-video-bootstrap-error', /.+/);
+  expect(styleRequests).toBe(2);
+});
+
+test('a transient core request failure recovers without reloading the skin', async ({ page }) => {
+  const requests = observeRequests(page);
+  let coreRequests = 0;
+  await page.route(`**${CORE_PATH}`, async route => {
+    coreRequests += 1;
+    if (coreRequests === 1) await route.abort('failed');
+    else await route.continue();
+  });
+  await page.goto('/video-no-subtitles', { waitUntil: 'domcontentloaded' });
+  const player = page.locator('[data-sil-video-player]');
+  await expect(player).toHaveAttribute('data-sil-video-enhanced', 'true');
+  await expect(player).not.toHaveAttribute('data-sil-video-bootstrap-error', /.+/);
+  expect(coreRequests).toBe(2);
+  expect(count(requests, STYLE_PATH)).toBe(1);
+});
+
 test('players without subtitles never initialise subtitle resources or menu semantics', async ({ page }) => {
   const requests = observeRequests(page);
   await page.goto('/video-no-subtitles');

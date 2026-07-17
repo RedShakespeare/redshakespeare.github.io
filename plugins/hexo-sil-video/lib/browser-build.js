@@ -101,8 +101,14 @@ function createBrowserBuild({ pluginDir, routes, esbuildRef = require('esbuild')
     runtimeRouteDataPromise = null;
   }
 
+  function normaliseBootstrapStyles(styles) {
+    return styles.map(style => typeof style === 'string'
+      ? { url: style, required: true }
+      : { url: style.url, required: style.required !== false });
+  }
+
   function renderBootstrapScript({ styles = [], script }) {
-    const config = serialiseInlineJson({ styles, script });
+    const config = serialiseInlineJson({ styles: normaliseBootstrapStyles(styles), script });
     const output = esbuild.transformSync(bootstrapSource, {
       define: { __SIL_VIDEO_BOOTSTRAP_CONFIG__: config },
       minify: true,

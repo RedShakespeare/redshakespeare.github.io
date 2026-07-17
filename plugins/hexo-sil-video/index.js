@@ -92,9 +92,14 @@ function registerVideoPlugin(hexo) {
       if (!demand.hasDemand()) return [];
       return { path: skin.outputPath, data: await fs.readFile(skin.sourcePath) };
     });
-    styles.push(rootPublicPath(runtime.root, skin.outputPath));
+    styles.push({ url: rootPublicPath(runtime.root, skin.outputPath), required: true });
   }
-  if (config.skin.override) styles.push(rootPublicPath(runtime.root, config.skin.override));
+  if (config.skin.override) {
+    styles.push({
+      url: rootPublicPath(runtime.root, config.skin.override),
+      required: !config.skin.builtin
+    });
+  }
   hexo.extend.generator.register('hexo-sil-video-runtime', async () => {
     if (!demand.hasDemand()) return [];
     return runtimeRouteData({ clone: false });
