@@ -70,7 +70,8 @@ function createPlayerInstance({ player, services }) {
       video: refs.video,
       loading: refs.loading,
       loadingSpeed: refs.loadingSpeed,
-      clock: services.clock
+      clock: services.clock,
+      sourceSize: model.sourceSize
     }));
     const fullscreenController = addController(createFullscreenController({
       player,

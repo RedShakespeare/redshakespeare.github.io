@@ -1,4 +1,7 @@
+import { createMediaTransferMeter } from './media-transfer-meter.js';
+
 const SAMPLE_INTERVAL = 500;
+const SPEED_WINDOW = 2000;
 
 function formatSpeed(bytesPerSecond) {
   const value = Math.max(0, Number(bytesPerSecond) || 0);
@@ -7,59 +10,41 @@ function formatSpeed(bytesPerSecond) {
   return `${(value / (1024 * 1024)).toFixed(1)}MB/s`;
 }
 
-function createDownloadedBytesReader(video) {
-  return () => {
-    const direct = Number(video.bytesReceived ?? video.webkitBytesReceived);
-    if (Number.isFinite(direct) && direct >= 0) return direct;
-    const performanceRef = video.ownerDocument?.defaultView?.performance;
-    if (!performanceRef?.getEntriesByName) return null;
-    try {
-      const entries = performanceRef.getEntriesByName(video.currentSrc || video.src || '');
-      if (entries.length === 0) return null;
-      let measured = false;
-      const total = entries.reduce((sum, entry) => {
-        const bytes = Number(entry?.transferSize || entry?.encodedBodySize || entry?.decodedBodySize);
-        if (!(Number.isFinite(bytes) && bytes > 0)) return sum;
-        measured = true;
-        return sum + bytes;
-      }, 0);
-      return measured ? total : null;
-    } catch {
-      return null;
-    }
-  };
-}
-
-export function createLoadingHudController({ video, loading, loadingSpeed, clock, readDownloadedBytes = createDownloadedBytesReader(video) }) {
+export function createLoadingHudController({ video, loading, loadingSpeed, clock, sourceSize = null, readDownloadedBytes }) {
+  const readBytes = readDownloadedBytes || createMediaTransferMeter({ video, sourceSize }).readBytes;
   let timer = null;
-  let lastBytes = null;
-  let lastSampleAt = null;
+  let samples = [];
+
+  function resetSamples() {
+    samples = [];
+  }
+
+  function recordSample(now, bytes) {
+    const previous = samples[samples.length - 1];
+    if (previous && bytes < previous.bytes) resetSamples();
+    samples.push({ at: now, bytes });
+    const cutoff = now - SPEED_WINDOW;
+    while (samples.length > 2 && samples[1].at <= cutoff) samples.shift();
+    if (samples.length < 2) return;
+    const baseline = samples[0];
+    if (now > baseline.at) loadingSpeed.textContent = formatSpeed((bytes - baseline.bytes) * 1000 / (now - baseline.at));
+  }
+
   function sample() {
     if (timer === null) return;
     const now = clock.now();
-    const bytes = readDownloadedBytes();
-    if (bytes === null || (lastBytes !== null && bytes < lastBytes)) {
-      lastBytes = null;
-      lastSampleAt = null;
+    const bytes = readBytes();
+    if (!(Number.isFinite(bytes) && bytes >= 0)) {
+      resetSamples();
       loadingSpeed.textContent = '--KB/s';
-      timer = clock.setTimeout(sample, SAMPLE_INTERVAL);
-      return;
-    }
-    if (bytes !== null && lastBytes !== null && lastSampleAt !== null && now > lastSampleAt && bytes >= lastBytes) {
-      loadingSpeed.textContent = formatSpeed((bytes - lastBytes) * 1000 / (now - lastSampleAt));
-    }
-    if (bytes !== null) {
-      lastBytes = bytes;
-      lastSampleAt = now;
-    }
+    } else recordSample(now, bytes);
     timer = clock.setTimeout(sample, SAMPLE_INTERVAL);
   }
 
   function show() {
     if (video.paused || video.ended) return;
     if (timer === null) {
-      lastBytes = null;
-      lastSampleAt = null;
+      resetSamples();
       loadingSpeed.textContent = '--KB/s';
       loading.hidden = false;
       timer = clock.setTimeout(sample, 0);
@@ -69,8 +54,7 @@ export function createLoadingHudController({ video, loading, loadingSpeed, clock
   function hide() {
     if (timer !== null) clock.clearTimeout(timer);
     timer = null;
-    lastBytes = null;
-    lastSampleAt = null;
+    resetSamples();
     loading.hidden = true;
   }
 

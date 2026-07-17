@@ -138,6 +138,38 @@ test('media projection directly maps volume and replay state to UI', async () =>
   dom.window.close();
 });
 
+test('media transfer meter converts newly buffered ranges into monotonic transferred bytes', async () => {
+  const { createMediaTransferMeter } = await loadRuntime('media-transfer-meter.js');
+  let ranges = [[0, 10]];
+  const video = {
+    duration: 100,
+    get buffered() {
+      return {
+        length: ranges.length,
+        start: index => ranges[index][0],
+        end: index => ranges[index][1]
+      };
+    }
+  };
+  const meter = createMediaTransferMeter({ video, sourceSize: 1024 * 1000 });
+  assert.equal(meter.readBytes(), 1024 * 100);
+  ranges = [[0, 20]];
+  assert.equal(meter.readBytes(), 1024 * 200);
+  ranges = [[40, 50]];
+  assert.equal(meter.readBytes(), 1024 * 300);
+  ranges = [[45, 55]];
+  assert.equal(meter.readBytes(), 1024 * 350);
+});
+
+test('media transfer meter prefers native byte counters over buffered estimates', async () => {
+  const { createMediaTransferMeter } = await loadRuntime('media-transfer-meter.js');
+  const video = { bytesReceived: 2048, duration: 100, buffered: { length: 0 } };
+  const meter = createMediaTransferMeter({ video, sourceSize: 1024 * 1000 });
+  assert.equal(meter.readBytes(), 2048);
+  video.bytesReceived = 4096;
+  assert.equal(meter.readBytes(), 4096);
+});
+
 test('loading HUD reports measured download speed only while playback is stalled', async () => {
   const { createLoadingHudController } = await loadRuntime('loading-hud-controller.js');
   const video = { paused: false, ended: false };
@@ -164,9 +196,44 @@ test('loading HUD reports measured download speed only while playback is stalled
   bytes = 102400;
   runTimer(3);
   assert.equal(loadingSpeed.textContent, '100KB/s');
+  now = 1500;
+  runTimer(4);
+  assert.equal(loadingSpeed.textContent, '67KB/s');
   hud.hide();
   assert.equal(loading.hidden, true);
   assert.equal(timers.size, 0);
+});
+
+test('loading HUD measures native buffered growth when source size is known', async () => {
+  const { createLoadingHudController } = await loadRuntime('loading-hud-controller.js');
+  let ranges = [[0, 10]];
+  const video = {
+    paused: false,
+    ended: false,
+    duration: 100,
+    get buffered() {
+      return { length: ranges.length, start: index => ranges[index][0], end: index => ranges[index][1] };
+    }
+  };
+  const loading = { hidden: true };
+  const loadingSpeed = { textContent: '' };
+  const timers = new Map();
+  let timerId = 0;
+  let now = 0;
+  const clock = {
+    now: () => now,
+    setTimeout(handler) { const id = ++timerId; timers.set(id, handler); return id; },
+    clearTimeout(id) { timers.delete(id); }
+  };
+  const hud = createLoadingHudController({ video, loading, loadingSpeed, clock, sourceSize: 1024 * 1000 });
+  const runTimer = id => { const handler = timers.get(id); timers.delete(id); handler(); };
+  hud.show();
+  runTimer(1);
+  now = 500;
+  ranges = [[0, 15]];
+  runTimer(2);
+  assert.equal(loadingSpeed.textContent, '100KB/s');
+  hud.destroy();
 });
 
 test('loading HUD accumulates completed media resource segments for speed', async () => {
