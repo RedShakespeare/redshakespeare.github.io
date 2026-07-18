@@ -14,6 +14,7 @@ const {
 
 const PORT = 4173;
 const ROOT = `http://127.0.0.1:${PORT}`;
+const LFS_POINTER_HEADER = Buffer.from('version https://git-lfs.github.com/spec/v1');
 const runtimeUrls = Object.fromEntries(Object.entries(RUNTIME_ROUTES).map(([name, route]) => [name, `/${route}`]));
 const subtitleSource = `[Script Info]
 ScriptType: v4.00+
@@ -30,6 +31,16 @@ let mp4Fixture;
 const STREAM_INITIAL_BYTES = 16 * 1024;
 const STREAM_CHUNK_SIZE = 512;
 const STREAM_CHUNK_DELAY = 125;
+
+function ensureHydratedMediaFixture(fixturePath, data) {
+  if (!data.subarray(0, LFS_POINTER_HEADER.length).equals(LFS_POINTER_HEADER)) return data;
+  const relativePath = path.relative(process.cwd(), fixturePath) || fixturePath;
+  throw new Error(`Media fixture ${relativePath} is a Git LFS pointer; hydrate it before running browser tests.`);
+}
+
+async function readMediaFixture(fixturePath) {
+  return ensureHydratedMediaFixture(fixturePath, await fs.readFile(fixturePath));
+}
 
 function player({ source = '/test/hexo-sil-video-fixture.webm', sourceSize = mediaFixture.length, type = 'video/webm', subtitles = false, title = 'Browser Fixture' } = {}) {
   return renderVideoPlayer({
@@ -122,8 +133,8 @@ function streamResponse(response, body) {
 }
 
 async function main() {
-  mediaFixture = await fs.readFile(path.join(__dirname, 'hexo-sil-video-fixture.webm'));
-  mp4Fixture = await fs.readFile(path.join(__dirname, '..', '..', 'source', 'files', 'videos', '3.mp4'));
+  mediaFixture = await readMediaFixture(path.join(__dirname, 'hexo-sil-video-fixture.webm'));
+  mp4Fixture = await readMediaFixture(path.join(__dirname, '..', '..', 'source', 'files', 'videos', '3.mp4'));
   const routes = new Map((await runtimeRouteData()).map(route => [`/${route.path}`, route.data]));
   routes.set('/css/hexo-sil-video.css', await fs.readFile(BUILTIN_SKINS.ephesus.sourcePath));
   const server = http.createServer(async (request, response) => {
@@ -183,7 +194,11 @@ async function main() {
   process.on('SIGTERM', close);
 }
 
-main().catch(error => {
-  console.error(error);
-  process.exitCode = 1;
-});
+if (require.main === module) {
+  main().catch(error => {
+    console.error(error);
+    process.exitCode = 1;
+  });
+}
+
+module.exports = { ensureHydratedMediaFixture };
