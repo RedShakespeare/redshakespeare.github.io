@@ -49,9 +49,9 @@ jobs:
         id: asset-pipeline
         run: npm run assets:mode
 
-      - name: Hydrate Pages LFS asset
+      - name: Hydrate preflight LFS assets
         if: steps.asset-pipeline.outputs.mode == 'legacy'
-        run: git lfs pull --include="source/img/df.zip"
+        run: git lfs pull --include="source/img/df.zip,source/files/videos/3.mp4"
 
       - name: Refresh legacy asset manifest
         if: steps.asset-pipeline.outputs.mode == 'legacy'
